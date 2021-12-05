@@ -24,7 +24,7 @@ export function butlast(arr, n=1){
 // remove the first occurance of an item from an array if found
 export function remove_once(arr, item){
 	let ix = arr.indexOf(item);
-	if (ix != -1) arr.splice(ix, 1);
+	if (ix !==-1) arr.splice(ix, 1);
 }
 
 // tries to remove each item in a list once

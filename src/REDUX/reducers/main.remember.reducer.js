@@ -1,15 +1,15 @@
-import { INITIAL } from "../actions/main.actions";
+import { SET_THEME_COLOR } from "../actions/main.actions";
 
 let rememberState = {
-    initial: undefined,
+    theme: true,
 }
 
 export default (state = rememberState, action) => {
 
     switch (action.type) {
-        case INITIAL:
+        case SET_THEME_COLOR:
             return {
-                ...state, initial: action.payload
+                ...state, theme: action.payload
             }
         default:
             return state

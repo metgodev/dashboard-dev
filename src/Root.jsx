@@ -6,9 +6,9 @@ const Root = () => {
 
     let location = useLocation();
 
-    useLayoutEffect(() => {
-        let pageName = location.pathname.substring(1);
-    }, [location])
+    // useLayoutEffect(() => {
+    //     let pageName = location.pathname.substring(1);
+    // }, [location])
 
     return (
         <Routes>
