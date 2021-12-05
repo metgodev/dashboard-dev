@@ -1,7 +1,7 @@
-export const INITIAL = 'SET_SOUND';
+export const INITIAL = 'INITIAL';
 
 
-export const set_sound = (value) => ({
+export const set_initial = (value) => ({
     type: INITIAL,
     payload: value
 })
