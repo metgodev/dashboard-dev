@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom'
 import App from './App'
+import Error from './pages/error/Error';
 
 const Root = () => {
 
@@ -12,7 +13,8 @@ const Root = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<App />} />
+            <Route exact  path="/" element={<App />} />
+            <Route path='*' element={<Error/>} />
         </Routes>
     );
 }

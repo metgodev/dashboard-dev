@@ -13,7 +13,7 @@ import './index.css';
 
 const Main = () => {
   const { theme } = useSelector(s => s.mainRememberReducer)
-  let type = (t) => theme == false ? Themes.default : Themes.dark
+  let type = (t) => theme ? Themes.default : Themes.dark
   return (
     <ThemeProvider theme={type(theme)}>
       <CssBaseline />

@@ -1,10 +1,11 @@
 import tinycolor from "tinycolor2";
 
-const primary = "#536DFE";
+const primary = "#F58840";
 const secondary = "#FF5C93";
 const warning = "#FFC260";
 const success = "#3CD4A0";
 const info = "#9013FE";
+const bg = "#E8EAFC";
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -65,6 +66,19 @@ export default {
     background: {
       default: "#F6F7FF",
       light: "#F3F5FF",
+    },
+    bg: {
+      main: bg,
+      light: tinycolor(bg)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(bg)
+        .darken(darkenRate)
+        .toHexString(),
+    },
+    googleBtn: {
+      bg: "#F6F7FF",
+      color: '#4A4A4A',
     },
   },
   customShadows: {

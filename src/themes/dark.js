@@ -1,10 +1,11 @@
 import tinycolor from "tinycolor2";
 
-const primary = "#536DFE";
+const primary = "#F58840";
 const secondary = "#FF5C93";
 const warning = "#FFC260";
 const success = "#3CD4A0";
 const info = "#9013FE";
+const bg = "#334756";
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -28,7 +29,7 @@ export default {
       dark: tinycolor(secondary)
         .darken(darkenRate)
         .toHexString(),
-      contrastText: "#082032",
+      contrastText: "#F58840",
     },
     warning: {
       main: warning,
@@ -57,14 +58,31 @@ export default {
         .darken(darkenRate)
         .toHexString(),
     },
+    bg: {
+      main: bg,
+      light: tinycolor(bg)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(bg)
+        .darken(darkenRate)
+        .toHexString(),
+    },
     text: {
-      primary: "#B2B1B9",
-      secondary: "#87AAAA",
-      hint: "#C8E3D4",
+      primary: "#FFC260",
+      secondary: "#C8E3D4",
+      hint: "#87AAAA",
     },
     background: {
       default: "#334756",
       secondary: "#082032",
+    },
+    action: {
+      disabledBackground: '#87AAAA',
+      disabled: '#B9B9B9'
+    },
+    googleBtn: {
+      bg: "#87AAAA",
+      color: '#FFF',
     },
   },
   customShadows: {
@@ -84,7 +102,7 @@ export default {
     MuiMenu: {
       paper: {
         boxShadow:
-          "0px 3px 11px 0px #082032, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+          "0px 3px 11px 0px #B9B9B9, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
       },
     },
     MuiSelect: {
@@ -95,15 +113,15 @@ export default {
     MuiListItem: {
       root: {
         "&$selected": {
-          backgroundColor: "#082032 !important",
+          backgroundColor: "#C8E3D4 !important",
           "&:focus": {
-            backgroundColor: "#082032",
+            backgroundColor: "#C8E3D4",
           },
         },
       },
       button: {
         "&:hover, &:focus": {
-          backgroundColor: "#082032",
+          backgroundColor: "#334756",
         },
       },
     },

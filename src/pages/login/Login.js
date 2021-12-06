@@ -1,32 +1,16 @@
 import React, { useState } from "react";
-import {
-  Grid,
-  CircularProgress,
-  Typography,
-  Button,
-  Tabs,
-  Tab,
-  TextField,
-  Fade,
-} from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import { Grid, CircularProgress, Typography, Button, Tabs, Tab, TextField, Fade, } from "@material-ui/core";
 import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
 
 // logo
-import logo from "./logo.svg";
-import google from "../../images/google.svg";
-
-// context
-import { useUserDispatch, loginUser } from "../../context/UserContext";
+import logo from "../../Assets/svgs/MTN.svg";
+import google from "../../Assets/svgs/google.svg";
 
 function Login(props) {
   let classes = useStyles();
-
-  // global
-  let userDispatch = useUserDispatch();
 
   // local
   let [isLoading, setIsLoading] = useState(false);
@@ -36,11 +20,15 @@ function Login(props) {
   let [loginValue, setLoginValue] = useState("");
   let [passwordValue, setPasswordValue] = useState("");
 
+  const loginUser = () => {
+
+  }
+
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Material Admin</Typography>
+        <Typography className={classes.logotypeText}>Metro Travel</Typography>
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>
@@ -57,7 +45,7 @@ function Login(props) {
           {activeTabId === 0 && (
             <React.Fragment>
               <Typography variant="h1" className={classes.greeting}>
-                Good Morning, User
+                Metro Travel
               </Typography>
               <Button size="large" className={classes.googleButton}>
                 <img src={google} alt="google" className={classes.googleIcon} />
@@ -111,16 +99,7 @@ function Login(props) {
                     disabled={
                       loginValue.length === 0 || passwordValue.length === 0
                     }
-                    onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError,
-                      )
-                    }
+                    onClick={() => loginUser()}
                     variant="contained"
                     color="primary"
                     size="large"
@@ -201,16 +180,7 @@ function Login(props) {
                   <CircularProgress size={26} />
                 ) : (
                   <Button
-                    onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError,
-                      )
-                    }
+                    onClick={() => loginUser()}
                     disabled={
                       loginValue.length === 0 ||
                       passwordValue.length === 0 ||
@@ -244,12 +214,9 @@ function Login(props) {
             </React.Fragment>
           )}
         </div>
-        <Typography color="primary" className={classes.copyright}>
-          © 2014-2019 Flatlogic, LLC. All rights reserved.
-        </Typography>
       </div>
     </Grid>
   );
 }
 
-export default withRouter(Login);
+export default Login;

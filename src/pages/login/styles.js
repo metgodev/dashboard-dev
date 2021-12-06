@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
+import { em } from "../../utils/document";
 
 export default makeStyles(theme => ({
   container: {
@@ -12,7 +13,7 @@ export default makeStyles(theme => ({
     left: 0,
   },
   logotypeContainer: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.bg.light,
     width: "60%",
     height: "100%",
     display: "flex",
@@ -31,9 +32,9 @@ export default makeStyles(theme => ({
     marginBottom: theme.spacing(4),
   },
   logotypeText: {
-    color: "white",
-    fontWeight: 500,
-    fontSize: 84,
+    color: theme.palette.primary.main,
+    fontWeight: 300,
+    fontSize: em(6),
     [theme.breakpoints.down("md")]: {
       fontSize: 48,
     },
@@ -69,7 +70,8 @@ export default makeStyles(theme => ({
   googleButton: {
     marginTop: theme.spacing(6),
     boxShadow: theme.customShadows.widget,
-    backgroundColor: "white",
+    backgroundColor: theme.palette.googleBtn.bg,
+    color: theme.palette.googleBtn.color,
     width: "100%",
     textTransform: "none",
   },
