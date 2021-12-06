@@ -7,29 +7,15 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
-import {
-  ResponsiveContainer,
-  ComposedChart,
-  AreaChart,
-  LineChart,
-  Line,
-  Area,
-  PieChart,
-  Pie,
-  Cell,
-  YAxis,
-  XAxis,
-} from "recharts";
-
+import { ResponsiveContainer, ComposedChart, AreaChart, LineChart, Line, Area, PieChart, Pie, Cell, YAxis, XAxis, } from "recharts";
 // styles
 import useStyles from "./styles";
-
 // components
 import mock from "./mock";
 import Widget from "../../components/Widget/Widget";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { Typography } from "../../components/Wrappers/Wrappers";
-import Dot from "../../components/Sidebar/components/Dot";
+import Dot from "../../components/Dot/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 
@@ -41,7 +27,7 @@ const PieChartData = [
   { name: "Group D", value: 200, color: "success" },
 ];
 
-export default function Dashboard(props) {
+export default function Dashboard() {
   let classes = useStyles();
   let theme = useTheme();
 
@@ -51,7 +37,7 @@ export default function Dashboard(props) {
   return (
     <>
       <PageTitle title="Dashboard" switch="true" />
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"

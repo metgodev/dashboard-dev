@@ -5,7 +5,7 @@ import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
 
 // components
-import { Typography } from "../Wrappers";
+import { Typography } from "../Wrappers/Wrappers";
 
 export default function UserAvatar({ color = "primary", ...props }) {
   let classes = useStyles();

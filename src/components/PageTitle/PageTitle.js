@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@material-ui/core";
 import Switch from '@mui/material/Switch';
 import { useSelector, useDispatch } from "react-redux";

@@ -12,6 +12,7 @@ import { header } from './Headers';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
+//read
 const getAll = async (resource) => {
     let data = await fetch(`${BASE_URL}/${resource}`, header('GET'))
         .then((res) => res.json())
@@ -20,7 +21,7 @@ const getAll = async (resource) => {
     return data
 };
 
-
+//read
 const getSingle = async (resource, id) => {
     let data = await fetch(`${BASE_URL}/${resource}/${id}`, header('GET'))
         .then((res) => res.json())
@@ -29,7 +30,7 @@ const getSingle = async (resource, id) => {
     return data
 };
 
-
+//create
 const post = async (resource, body) => {
     let data = await fetch(`${BASE_URL}/${resource}`, header('POST', body))
         .then((res) => res.json())
@@ -38,7 +39,7 @@ const post = async (resource, body) => {
     return data
 };
 
-
+//ubdate
 const put = async (resource, body) => {
     let data = await fetch(`${BASE_URL}/${resource}`, header('PUT', body))
         .then((res) => res.json())
@@ -47,10 +48,10 @@ const put = async (resource, body) => {
     return data
 };
 
-
-const patch = (resource, body) => {
+//delete
+const del = (resource, id) => {
     let data = await
-    fetch(`${BASE_URL}/${resource}`, header('PATCH', body))
+    fetch(`${BASE_URL}/${resource}`, header('DELETE', id))
         .then((res) => res.json())
         .then(handleResponse)
         .catch(handleError);
@@ -62,5 +63,5 @@ export const apiProvider = {
     getSingle,
     post,
     put,
-    patch,
+    del,
 };
