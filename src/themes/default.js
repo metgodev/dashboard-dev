@@ -80,6 +80,19 @@ export default {
       bg: "#F6F7FF",
       color: '#4A4A4A',
     },
+    overrides: {
+      MuiCssBaseline: {
+        '@global': {
+          '*': {
+            'scrollbar-width': 'thin',
+          },
+          '*::-webkit-scrollbar': {
+            width: '4px',
+            height: '4px',
+          }
+        }
+      }
+    }
   },
   customShadows: {
     widget:
@@ -142,5 +155,29 @@ export default {
         fontSize: "0.95rem",
       },
     },
+    MuiPickersStaticWrapper: {
+      staticWrapperRoot: {
+        paddingTop: "5%",
+        backgroundColor: 'transparent',
+        minWidth: '100%',
+        maxWidth: '100%',
+      },
+    },
+    MuiPickersCalendarHeader: {
+      iconButton: {
+        backgroundColor: '#E8EAFC',
+      }
+    },
+    MuiIconButton: {
+      root: {
+        padding: 0
+      }
+    },
+    MuiPickersBasePicker: {
+      pickerView: {
+        minWidth: '70%',
+        maxWidth: '100%',
+      }
+    }
   },
 };

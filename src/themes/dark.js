@@ -1,10 +1,10 @@
 import tinycolor from "tinycolor2";
 
 const primary = "#F58840";
-const secondary = "#FF5C93";
+const secondary = "#DD4A48";
 const warning = "#FFC260";
 const success = "#3CD4A0";
-const info = "#9013FE";
+const info = "#CAF7E3";
 const bg = "#334756";
 
 const lightenRate = 7.5;
@@ -146,5 +146,42 @@ export default {
         fontSize: "0.95rem",
       },
     },
-  },
+    MuiPickersStaticWrapper: {
+      staticWrapperRoot: {
+        paddingTop: "5%",
+        backgroundColor: 'transparent',
+        minWidth: '100%',
+        maxWidth: '100%',
+      },
+    },
+    MuiPickersCalendarHeader: {
+      iconButton: {
+        backgroundColor: '#F58840',
+      }
+    },
+    MuiIconButton: {
+      root: {
+        padding: 0
+      }
+    },
+    MuiPickersBasePicker: {
+      pickerView: {
+        minWidth: '70%',
+        maxWidth: '100%',
+      }
+    },
+    MuiMenu: {
+      paper: {
+        boxShadow: '#082032',
+      }
+    },
+    MuiPaper: {
+      root: {
+        backgroundColor: '#082032',
+      }
+    }
+  }
 };
+
+
+// MuiPickerStaticWrapper-root

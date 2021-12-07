@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconButton, Menu, MenuItem, Fab, } from "@material-ui/core";
+import { IconButton, Menu, MenuItem, Fab, Avatar, } from "@material-ui/core";
 import {
     MailOutline as MailIcon,
     NotificationsNone as NotificationsIcon,
@@ -76,6 +76,7 @@ function SideBtns() {
     let [profileMenu, setProfileMenu] = useState(null);
 
     let classes = useStyles();
+    let avatar = 'https://i.pravatar.cc/'
 
     return (
         <>
@@ -120,7 +121,7 @@ function SideBtns() {
                 aria-controls="profile-menu"
                 onClick={e => setProfileMenu(e.currentTarget)}
             >
-                <AccountIcon classes={{ root: classes.headerIcon }} />
+                {avatar ? <Avatar alt="Remy Sharp" src={avatar} classes={{ root: classes.headerIcon }} /> : <AccountIcon classes={{ root: classes.headerIcon }} />}
             </IconButton>
             <Menu
                 id="mail-menu"
@@ -185,6 +186,27 @@ function SideBtns() {
                 className={classes.headerMenu}
                 disableAutoFocusItem
             >
+                {notifications.map(({ type, message, id, color }) => (
+                    <MenuItem
+                        key={id}
+                        onClick={() => setNotificationsMenu(null)}
+                        className={classes.headerMenuItem}
+                    >
+                        <div
+                            className={classNames(
+                                classes.messageNotificationSide,
+                                classes.messageNotificationBodySide,
+                            )}
+                        >
+                            <Typography weight="medium" gutterBottom>
+                                {type}
+                            </Typography>
+                            <Typography color="text" colorBrightness="secondary">
+                                {message}
+                            </Typography>
+                        </div>
+                    </MenuItem>
+                ))}
             </Menu>
             <Menu
                 id="profile-menu"
@@ -198,14 +220,6 @@ function SideBtns() {
                 <div className={classes.profileMenuUser}>
                     <Typography variant="h4" weight="medium">
                         John Smith
-                    </Typography>
-                    <Typography
-                        className={classes.profileMenuLink}
-                        component="a"
-                        color="primary"
-                        href="https://flatlogic.com"
-                    >
-                        Flalogic.com
                     </Typography>
                 </div>
                 <MenuItem
