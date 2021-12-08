@@ -27,7 +27,7 @@ export default {
   ],
   bigStat: [
     {
-      product: "Light Blue",
+      product: "Businesses",
       total: {
         monthly: 4232,
         weekly: 1465,
@@ -47,7 +47,7 @@ export default {
       }
     },
     {
-      product: "Sing App",
+      product: "Events",
       total: {
         monthly: 754,
         weekly: 180,
@@ -67,7 +67,7 @@ export default {
       }
     },
     {
-      product: "RNS",
+      product: "Points of interest",
       total: {
         monthly: 1025,
         weekly: 301,
@@ -87,7 +87,7 @@ export default {
       }
     },
     {
-      product: "RNS",
+      product: "Routes",
       total: {
         monthly: 1025,
         weekly: 301,

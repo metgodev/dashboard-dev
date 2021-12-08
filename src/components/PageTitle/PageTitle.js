@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
 import Switch from '@mui/material/Switch';
 import IconButton from '@mui/material/IconButton';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -15,7 +15,8 @@ import { Typography } from "../Wrappers/Wrappers";
 export default function PageTitle(props) {
   let classes = useStyles(),
     dispatch = useDispatch(),
-    { theme } = useSelector(state => state.mainRememberReducer)
+    { theme } = useSelector(state => state.mainRememberReducer);
+
 
   const ColorChange = () => {
     dispatch(set_theme_color(!theme))
@@ -24,8 +25,14 @@ export default function PageTitle(props) {
     dispatch(set_theme_color('en'))
   };
 
+
   return (
     <div className={classes.pageTitleContainer}>
+      <Box>
+        <Button variant="contained" disableElevation>Days</Button>
+        <Button color="error" variant="text" disableElevation color="primary">Weeks</Button>
+        <Button variant="outlined" disableElevation color="success">Months</Button>
+      </Box>
       <Typography className={classes.typo} variant="h1" size="sm">
         {props.title}
       </Typography>
