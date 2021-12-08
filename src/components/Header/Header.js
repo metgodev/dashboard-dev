@@ -9,6 +9,7 @@ import Logo from "../../Assets/images/metroLogo.png"
 import { Typography } from "../Wrappers/Wrappers";
 import SideBtns from "./SideBtns";
 import { em } from "../../utils/document";
+import term from "../../terms";
 
 
 
@@ -48,7 +49,7 @@ export default function Header() {
         </IconButton>
         <img src={Logo} alt="logo" className={classes.logotypeImage} width={em(2)} />
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Metro Travel
+          {term('metro_travel')}
         </Typography>
         <div className={classes.grow} />
         <SideBtns />

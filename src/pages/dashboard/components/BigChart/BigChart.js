@@ -79,13 +79,13 @@ export default function BigChart() {
                     <Line
                         type="monotone"
                         dataKey="pv"
-                        stroke={theme.palette.primary.main}
+                        stroke={theme.palette.graphlineorange.main}
                         activeDot={{ r: 8 }}
                     />
                     <Line
                         type="monotone"
                         dataKey="uv"
-                        stroke={theme.palette.info.main}
+                        stroke={theme.palette.graphlinegreen.main}
                     />
                 </LineChart>
             </ResponsiveContainer>

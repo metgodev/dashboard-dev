@@ -5,10 +5,6 @@ import Login from './pages/login/Login'
 import Error from './pages/error/Error'
 
 import { em } from './utils/document'
-import term from './terms';
-let t = term('hello_world')
-
-console.log(t)
 
 function App() {
   return (

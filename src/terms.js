@@ -5,6 +5,11 @@ const active_lexicon = {
         he: 'שלום עולם',
         ar: 'مرحبا بالعالم',
     },
+    metro_travel: {
+        en: 'Metro Travel',
+        he: '',
+        ar: 'مترو ترافيل',
+    },
 }
 
 
