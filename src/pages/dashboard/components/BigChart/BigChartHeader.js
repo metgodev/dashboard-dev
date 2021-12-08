@@ -5,6 +5,8 @@ import useStyles from "../../styles";
 // components
 import { Typography } from "../../../../components/Wrappers/Wrappers";
 import Dot from "../../../../components/Dot/Dot";
+import term from "../../../../terms";
+
 
 function BigChartHeader() {
     let classes = useStyles();
@@ -19,25 +21,25 @@ function BigChartHeader() {
                 color="text"
                 colorBrightness="secondary"
             >
-                Daily Line Chart
+                {term('daily_line_chart')}
             </Typography>
             <div className={classes.mainChartHeaderLabels}>
                 <div className={classes.mainChartHeaderLabel}>
                     <Dot color="warning" />
                     <Typography className={classes.mainChartLegentElement}>
-                        Tablet
+                        {term('tablet')}
                     </Typography>
                 </div>
                 <div className={classes.mainChartHeaderLabel}>
                     <Dot color="primary" />
                     <Typography className={classes.mainChartLegentElement}>
-                        Mobile
+                        {term('mobile')}
                     </Typography>
                 </div>
                 <div className={classes.mainChartHeaderLabel}>
                     <Dot color="primary" />
                     <Typography className={classes.mainChartLegentElement}>
-                        Desktop
+                        {term('desktop')}
                     </Typography>
                 </div>
             </div>
@@ -55,9 +57,9 @@ function BigChartHeader() {
                 }
                 autoWidth
             >
-                <MenuItem value="daily">Daily</MenuItem>
-                <MenuItem value="weekly">Weekly</MenuItem>
-                <MenuItem value="monthly">Monthly</MenuItem>
+                <MenuItem value="daily">{term('daily')}</MenuItem>
+                <MenuItem value="weekly">{term('weekly')}</MenuItem>
+                <MenuItem value="monthly">{term('monthly')}</MenuItem>
             </Select>
         </div>
     )
