@@ -7,6 +7,10 @@ const success = "#3CD4A0";
 const info = "#CAF7E3";
 const bg = "#334756";
 
+//graph lines
+const graphlinegreen = "#80C838";
+const graphlineorange = "#FF6633";
+
 const lightenRate = 7.5;
 const darkenRate = 15;
 
@@ -55,6 +59,24 @@ export default {
         .lighten(lightenRate)
         .toHexString(),
       dark: tinycolor(info)
+        .darken(darkenRate)
+        .toHexString(),
+    },
+    graphlinegreen: {
+      main: graphlinegreen,
+      light: tinycolor(graphlinegreen)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(graphlinegreen)
+        .darken(darkenRate)
+        .toHexString(),
+    },
+    graphlineorange: {
+      main: graphlineorange,
+      light: tinycolor(graphlineorange)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(graphlineorange)
         .darken(darkenRate)
         .toHexString(),
     },
