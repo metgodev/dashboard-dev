@@ -11,6 +11,8 @@ import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
+import term from "../../terms";
+
 
 export default function Widget({
   children,
@@ -69,16 +71,16 @@ export default function Widget({
         disableAutoFocusItem
       >
         <MenuItem>
-          <Typography>Edit</Typography>
+          <Typography>{term('edit')}</Typography>
         </MenuItem>
         <MenuItem>
-          <Typography>Copy</Typography>
+          <Typography>{term('copy')}</Typography>
         </MenuItem>
         <MenuItem>
-          <Typography>Delete</Typography>
+          <Typography>{term('delete')}</Typography>
         </MenuItem>
         <MenuItem>
-          <Typography>Print</Typography>
+          <Typography>{term('print')}</Typography>
         </MenuItem>
       </Menu>
     </div>

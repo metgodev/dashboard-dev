@@ -5,6 +5,8 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 import useStyles from "./styles";
 // logo
 import google from "../../Assets/svgs/google.svg";
+import term from "../../terms";
+
 
 function SignUp() {
     let classes = useStyles();
@@ -24,7 +26,7 @@ function SignUp() {
     return (
         <React.Fragment>
             <Typography variant="h1" className={classes.greeting}>
-                Metro Travel
+                {term('metro_travel')}
             </Typography>
             <Button size="large" className={classes.googleButton}>
                 <img src={google} alt="google" className={classes.googleIcon} />
@@ -32,12 +34,12 @@ function SignUp() {
             </Button>
             <div className={classes.formDividerContainer}>
                 <div className={classes.formDivider} />
-                <Typography className={classes.formDividerWord}>or</Typography>
+                <Typography className={classes.formDividerWord}>{term('or')}</Typography>
                 <div className={classes.formDivider} />
             </div>
             <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                    Something is wrong with your login or password :(
+                    {term('something_went_wrong')}
                 </Typography>
             </Fade>
             <TextField
@@ -51,7 +53,7 @@ function SignUp() {
                 value={loginValue}
                 onChange={e => setLoginValue(e.target.value)}
                 margin="normal"
-                placeholder="Email Adress"
+                placeholder={term('email_address')}
                 type="email"
                 fullWidth
             />
@@ -66,7 +68,7 @@ function SignUp() {
                 value={passwordValue}
                 onChange={e => setPasswordValue(e.target.value)}
                 margin="normal"
-                placeholder="Password"
+                placeholder={term('password')}
                 type="password"
                 fullWidth
             />
@@ -83,7 +85,7 @@ function SignUp() {
                         color="primary"
                         size="large"
                     >
-                        Login
+                        {term('log_in')}
                     </Button>
                 )}
                 <Button
@@ -91,7 +93,7 @@ function SignUp() {
                     size="large"
                     className={classes.forgetButton}
                 >
-                    Forget Password
+                    {term('forgot_password')}
                 </Button>
             </div>
         </React.Fragment>

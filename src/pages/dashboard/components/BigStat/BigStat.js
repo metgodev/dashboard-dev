@@ -4,6 +4,8 @@ import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
+import term from "../../../../terms";
+
 
 // styles
 import useStyles from "./styles";
@@ -37,9 +39,9 @@ export default function BigStat(props) {
             }
             className={classes.select}
           >
-            <MenuItem value="daily">Daily</MenuItem>
-            <MenuItem value="weekly">Weekly</MenuItem>
-            <MenuItem value="monthly">Monthly</MenuItem>
+            <MenuItem value="daily">{term('daily')}</MenuItem>
+            <MenuItem value="weekly">{term('weekly')}</MenuItem>
+            <MenuItem value="monthly">{term('monthly')}</MenuItem>
           </Select>
         </div>
       }

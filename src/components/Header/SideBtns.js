@@ -12,6 +12,7 @@ import useStyles from "./styles";
 // components
 import { Badge, Typography } from "../Wrappers/Wrappers";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import term from "../../terms";
 
 
 const messages = [
@@ -135,14 +136,14 @@ function SideBtns() {
             >
                 <div className={classes.profileMenuUser}>
                     <Typography variant="h4" weight="medium">
-                        New Messages
+                        {term('new_messages')}
                     </Typography>
                     <Typography
                         className={classes.profileMenuLink}
                         component="a"
                         color="secondary"
                     >
-                        {messages.length} New Messages
+                        {messages.length} {term('new_messages')}
                     </Typography>
                 </div>
                 {messages.map(message => (
@@ -174,7 +175,7 @@ function SideBtns() {
                     aria-label="Add"
                     className={classes.sendMessageButton}
                 >
-                    Send New Message
+                    {term('send_new_message')}
                     <SendIcon className={classes.sendButtonIcon} />
                 </Fab>
             </Menu>
@@ -228,7 +229,7 @@ function SideBtns() {
                         classes.headerMenuItem,
                     )}
                 >
-                    <AccountIcon className={classes.profileMenuIcon} /> Profile
+                    <AccountIcon className={classes.profileMenuIcon} /> {term('profile')}
                 </MenuItem>
                 <MenuItem
                     className={classNames(
@@ -236,7 +237,7 @@ function SideBtns() {
                         classes.headerMenuItem,
                     )}
                 >
-                    <AccountIcon className={classes.profileMenuIcon} /> Tasks
+                    <AccountIcon className={classes.profileMenuIcon} /> {term('tasks')}
                 </MenuItem>
                 <MenuItem
                     className={classNames(
@@ -244,7 +245,7 @@ function SideBtns() {
                         classes.headerMenuItem,
                     )}
                 >
-                    <AccountIcon className={classes.profileMenuIcon} /> Messages
+                    <AccountIcon className={classes.profileMenuIcon} /> {term('messages')}
                 </MenuItem>
                 <div className={classes.profileMenuUser}>
                     <Typography
@@ -252,7 +253,7 @@ function SideBtns() {
                         color="primary"
                         onClick={() => { }}
                     >
-                        Sign Out
+                        {term('sign_out')}
                     </Typography>
                 </div>
             </Menu>

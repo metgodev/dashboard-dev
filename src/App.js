@@ -9,9 +9,10 @@ import { em } from './utils/document'
 function App() {
   return (
     <div style={{ padding: em(1) }}>
-      <Dashboard />
+      {/* <Dashboard /> */}
        {/* <Error />  */}
       {/* <Login /> */}
+      <Error />
     </div>
   );
 }

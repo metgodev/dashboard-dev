@@ -8,6 +8,8 @@ import useStyles from "./styles";
 
 // logo
 import logo from "./logo.svg";
+import term from "../../terms";
+
 
 export default function Error() {
   let classes = useStyles();
@@ -41,7 +43,7 @@ export default function Error() {
           size="large"
           className={classes.backButton}
         >
-          Back to Home
+          {term('back_to_home')}
         </Button>
       </Paper>
     </Grid>
