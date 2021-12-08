@@ -85,6 +85,26 @@ export default {
         weekly: { value: 19.35, profit: false },
         daily: { value: 10.1, profit: true }
       }
+    },
+    {
+      product: "RNS",
+      total: {
+        monthly: 1025,
+        weekly: 301,
+        daily: 44,
+        percent: { value: 3.1, profit: true }
+      },
+      color: "secondary",
+      registrations: {
+        monthly: { value: 230, profit: true },
+        weekly: { value: 58, profit: false },
+        daily: { value: 15, profit: false }
+      },
+      bounce: {
+        monthly: { value: 21.5, profit: false },
+        weekly: { value: 19.35, profit: false },
+        daily: { value: 10.1, profit: true }
+      }
     }
   ],
   notifications: [

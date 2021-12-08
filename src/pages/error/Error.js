@@ -16,12 +16,6 @@ export default function Error() {
 
   return (
     <Grid container className={classes.container}>
-      <div className={classes.logotype}>
-        <img className={classes.logotypeIcon} src={logo} alt="logo" />
-        <Typography variant="h3" color="white" className={classes.logotypeText}>
-          Material Admin
-        </Typography>
-      </div>
       <Paper classes={{ root: classes.paperRoot }}>
         <Typography
           variant="h1"
