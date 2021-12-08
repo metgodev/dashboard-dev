@@ -6,6 +6,8 @@ import classnames from "classnames";
 import useStyles from "./styles";
 // logo
 import google from "../../Assets/svgs/google.svg";
+import term from "../../terms";
+
 
 function Register() {
     let navigate = useNavigate()
@@ -24,14 +26,14 @@ function Register() {
         <div>
             <React.Fragment>
                 <Typography variant="h1" className={classes.greeting}>
-                    Welcome!
+                    {term('welcome')}
                 </Typography>
                 <Typography variant="h2" className={classes.subGreeting}>
-                    Create your account
+                    {term('create_your_account')}
                 </Typography>
                 <Fade in={error}>
                     <Typography color="secondary" className={classes.errorMessage}>
-                        Something is wrong with your login or password :(
+                        {term('something_went_wrong')}
                     </Typography>
                 </Fade>
                 <TextField
@@ -96,7 +98,7 @@ function Register() {
                             fullWidth
                             className={classes.createAccountButton}
                         >
-                            Create your account
+                            {term('create_your_account')}
                         </Button>
                     )}
                 </div>

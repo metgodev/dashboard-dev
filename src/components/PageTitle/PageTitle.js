@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import Switch from '@mui/material/Switch';
+import IconButton from '@mui/material/IconButton';
+import TranslateIcon from '@mui/icons-material/Translate';
 import { useSelector, useDispatch } from "react-redux";
 import { set_theme_color } from "../../REDUX/actions/main.actions";
 
@@ -15,8 +17,11 @@ export default function PageTitle(props) {
     dispatch = useDispatch(),
     { theme } = useSelector(state => state.mainRememberReducer)
 
-  const handleChange = () => {
+  const ColorChange = () => {
     dispatch(set_theme_color(!theme))
+  };
+  const LangChange = () => {
+    dispatch(set_theme_color('en'))
   };
 
   return (
@@ -37,9 +42,14 @@ export default function PageTitle(props) {
       {props.switch && (
         <Switch
           checked={theme}
-          onChange={handleChange}
+          onChange={ColorChange}
           inputProps={{ 'aria-label': 'controlled' }}
         />
+      )}
+      {props.switch && (
+        <IconButton aria-label="delete" onClick={LangChange}>
+          <TranslateIcon />
+        </IconButton>
       )}
     </div>
   );

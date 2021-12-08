@@ -31,7 +31,7 @@ export default function Error() {
           size="large"
           className={classes.backButton}
         >
-          Back to Home
+          {term('back_to_home')}
         </Button>
       </div>
     </Grid>

@@ -12,8 +12,11 @@ import Themes from "./themes";
 import './index.css';
 
 const Main = () => {
+  //theme 
   const { theme } = useSelector(s => s.mainRememberReducer)
   let type = (t) => theme ? Themes.default : Themes.dark
+  //language
+
   return (
     <ThemeProvider theme={type(theme)}>
       <CssBaseline />

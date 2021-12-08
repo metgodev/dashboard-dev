@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import { MoreVert as MoreIcon } from "@material-ui/icons";
 import Typography from "@material-ui/core/es/Typography/Typography";
+import term from "../../terms";
+
 
 const Widget = ({
   classes,
@@ -62,16 +64,16 @@ const Widget = ({
       disableAutoFocusItem
     >
       <MenuItem>
-        <Typography>Edit</Typography>
+        <Typography>{term('edit')}</Typography>
       </MenuItem>
       <MenuItem>
-        <Typography>Copy</Typography>
+        <Typography>{term('copy')}</Typography>
       </MenuItem>
       <MenuItem>
-        <Typography>Delete</Typography>
+        <Typography>{term('delete')}</Typography>
       </MenuItem>
       <MenuItem>
-        <Typography>Print</Typography>
+        <Typography>{term('print')}</Typography>
       </MenuItem>
     </Menu>
   </div>
