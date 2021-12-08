@@ -4,10 +4,6 @@ import Maps from './pages/maps/Maps'
 import Login from './pages/login/Login'
 
 import { em } from './utils/document'
-import term from './terms';
-let t = term('hello_world')
-
-console.log(t)
 
 function App() {
   return (
