@@ -11,6 +11,10 @@ const bg = "#334756";
 const graphlinegreen = "#80C838";
 const graphlineorange = "#FF6633";
 
+
+//404 page 
+const notfoundpage = "#000"
+
 const lightenRate = 7.5;
 const darkenRate = 15;
 

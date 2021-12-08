@@ -72,11 +72,9 @@ function Button({ children, color, ...props }) {
   let Styled = createStyled({
     button: {
       backgroundColor: getColor(color, theme),
-      boxShadow: theme.customShadows.widget,
       color: "white",
       "&:hover": {
         backgroundColor: getColor(color, theme, "light"),
-        boxShadow: theme.customShadows.widgetWide,
       },
     },
   });
