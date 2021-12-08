@@ -50,10 +50,6 @@ export default function BigStat(props) {
           <Typography size="xxl" color="text" colorBrightness="secondary">
             {total[value]}
           </Typography>
-          <Typography color={total.percent.profit ? "success" : "secondary"}>
-            &nbsp;{total.percent.profit ? "+" : "-"}
-            {total.percent.value}%
-          </Typography>
         </div>
         <BarChart width={150} height={70} data={getRandomData()}>
           <Bar
@@ -67,44 +63,20 @@ export default function BigStat(props) {
       <div className={classes.bottomStatsContainer}>
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
-            <Typography variant="h6">{registrations[value].value}</Typography>
-            <ArrowForwardIcon
-              className={classnames(classes.profitArrow, {
-                [!registrations[value].profit]: classes.profitArrowDanger,
-              })}
-            />
-          </Grid>
-          <Typography size="sm" color="text" colorBrightness="secondary">
-            Registrations
+            <Typography color={total.percent.profit ? "secondary" : "success"}>
+            &nbsp;{total.percent.profit ? "+" : "-"}
+            {total.percent.value}%
           </Typography>
-        </div>
-        <div className={classes.statCell}>
-          <Grid container alignItems="center">
-            <Typography variant="h6">{bounce[value].value}%</Typography>
-            <ArrowForwardIcon
-              className={classnames(classes.profitArrow, {
-                [!registrations[value].profit]: classes.profitArrowDanger,
-              })}
-            />
-          </Grid>
-          <Typography size="sm" color="text" colorBrightness="secondary">
-            Bounce Rate
-          </Typography>
-        </div>
-        <div className={classnames(classes.statCell, classes.borderRight)}>
-          <Grid container alignItems="center">
-            <Typography variant="h6">
-              {registrations[value].value * 10}
-            </Typography>
             <ArrowForwardIcon
               className={classnames(classes.profitArrow, {
                 [classes.profitArrowDanger]: !registrations[value].profit,
               })}
             />
-          </Grid>
-          <Typography size="sm" color="text" colorBrightness="secondary">
-            Views
+            <Typography size="sm" color="text" colorBrightness="secondary">
+            Than last year
           </Typography>
+          </Grid>
+          
         </div>
       </div>
     </Widget>
