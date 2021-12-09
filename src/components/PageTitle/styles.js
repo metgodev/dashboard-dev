@@ -4,8 +4,8 @@ export default makeStyles(theme => ({
   pageTitleContainer: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(0),
+    marginTop: theme.spacing(2.5),
   },
   typo: {
     color: theme.palette.text.hint,

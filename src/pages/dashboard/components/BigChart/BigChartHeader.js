@@ -15,7 +15,7 @@ function BigChartHeader() {
     let [mainChartState, setMainChartState] = useState("monthly");
 
     return (
-        <div className={classes.mainChartHeader}>
+        <div className={classes.mainChartHeader} >
             <Typography
                 variant="h5"
                 color="text"

@@ -59,36 +59,38 @@ export default function BigChart() {
 
     return (
         <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />}>
-            <ResponsiveContainer width="100%" minWidth={150} height={350}>
-                <LineChart
-                    width={500}
-                    height={300}
-                    data={lineChartData}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="1 1" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                        type="monotone"
-                        dataKey="pv"
-                        stroke={theme.palette.graphlineorange.main}
-                        activeDot={{ r: 8 }}
-                    />
-                    <Line
-                        type="monotone"
-                        dataKey="uv"
-                        stroke={theme.palette.graphlinegreen.main}
-                    />
-                </LineChart>
-            </ResponsiveContainer>
+            <div style={{ direction: "ltr" }}>
+                <ResponsiveContainer width="100%" minWidth={150} height={350}>
+                    <LineChart
+                        width={500}
+                        height={300}
+                        data={lineChartData}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="1 1" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line
+                            type="monotone"
+                            dataKey="pv"
+                            stroke={theme.palette.graphlineorange.main}
+                            activeDot={{ r: 8 }}
+                        />
+                        <Line
+                            type="monotone"
+                            dataKey="uv"
+                            stroke={theme.palette.graphlinegreen.main}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+            </div>
         </Widget>
     )
 }

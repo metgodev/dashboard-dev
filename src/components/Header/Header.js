@@ -20,40 +20,42 @@ export default function Header() {
   let [layoutToggle, setlayoutToggle] = useState(false);
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
-        <IconButton
-          color="inherit"
-          onClick={() => setlayoutToggle(!layoutToggle)}
-          className={classNames(
-            classes.headerMenuButton,
-            classes.headerMenuButtonCollapse,
-          )}
-        >
-          {layoutToggle ? (
-            <ArrowBackIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }} />
-          ) : (
-            <MenuIcon
-              classes={{
-                root: classNames(
-                  classes.headerIcon,
-                  classes.headerIconCollapse,
-                ),
-              }} />)}
-        </IconButton>
-        <img src={Logo} alt="logo" className={classes.logotypeImage} width={em(2)} />
-        <Typography variant="h6" weight="medium" className={classes.logotype}>
-          {term('metro_travel')}
-        </Typography>
-        <div className={classes.grow} />
-        <SideBtns />
-      </Toolbar>
-    </AppBar>
+    <div style={{ direction: 'ltr' }}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar className={classes.toolbar}>
+          <img src={Logo} alt="logo" className={classes.logotype} width={em(2)} />
+          <Typography variant="h6" weight="medium" className={classes.logotype}>
+            {term('metro_travel')}
+          </Typography>
+          <div className={classes.grow} />
+          <SideBtns />
+          <IconButton
+            color="inherit"
+            onClick={() => setlayoutToggle(!layoutToggle)}
+            className={classNames(
+              classes.headerMenuButton,
+              classes.headerMenuButtonCollapse,
+            )}
+          >
+            {layoutToggle ? (
+              <ArrowBackIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }} />
+            ) : (
+              <MenuIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }} />)}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }

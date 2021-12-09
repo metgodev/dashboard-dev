@@ -7,6 +7,11 @@ const active_lexicon = {
         he: 'שפה',
         ar: 'يا الهي',
     },
+    dashboard: {
+        en: 'Dashboard',
+        he: 'לוח הבקרה',
+        ar: 'لوحة التحكم',
+    },
     metro_travel: {
         en: 'Metro Travel',
         he: 'מטרו נגב',

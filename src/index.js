@@ -7,8 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import rootReducer from '../src/REDUX/rootReducer/rootReducer';
 import { ThemeProvider } from "@material-ui/styles";
 import { CssBaseline } from "@material-ui/core";
-import setPageDirection from './utils/dir';
-
+import { setPageDirection } from './utils/dir';
 
 import Themes from "./themes";
 import './index.css';
@@ -16,17 +15,17 @@ import './index.css';
 
 const Main = () => {
   const { theme, lang } = useSelector(s => s.mainRememberReducer)
-  let type = (t) => theme ? Themes.default : Themes.dark
+  let type = () => theme ? Themes.default : Themes.dark
 
   useLayoutEffect(() => {
     setPageDirection(lang)
   }, [lang])
 
   return (
-    <ThemeProvider theme={type(theme)}>
+    <ThemeProvider theme={type(theme)} >
       <CssBaseline />
       <Root />
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
 

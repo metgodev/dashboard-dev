@@ -14,6 +14,7 @@ import StatsBoxGraph from "./components/SmallCharts/StatsBoxGraph";
 import StatsBoxPieChart from "./components/SmallCharts/StatsBoxPieChart";
 import Calendar from "./components/Calendar/Calendar";
 import BigChart from "./components/BigChart/BigChart";
+import term from "../../terms";
 
 
 export default function Dashboard() {
@@ -21,13 +22,13 @@ export default function Dashboard() {
 
   return (
     <>
-      <PageTitle title="Dashboard" switch="true" />
-      <Grid container spacing={2}>
-        <Grid item lg={8} md={7} sm={12} xs={12}>
-          <BigChart />
-        </Grid>
+      <PageTitle title={term('dashboard')} switch="true" />
+      <Grid container spacing={3}>
         <Grid item lg={4} md={5} sm={12} xs={12}>
           <Calendar />
+        </Grid>
+        <Grid item lg={8} md={7} sm={12} xs={12}>
+          <BigChart />
         </Grid>
 
         {mock.bigStat.map(stat => (
@@ -35,7 +36,7 @@ export default function Dashboard() {
             <BigStat {...stat} />
           </Grid>
         ))}
-        
+
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <StatsBox />
         </Grid>
