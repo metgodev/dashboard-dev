@@ -111,6 +111,9 @@ export default {
       color: '#FFF',
     },
   },
+  shape: {
+    borderRadius: 15,
+  },
   customShadows: {
     widget:
       "0px 3px 11px 0px #082032, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
@@ -200,7 +203,7 @@ export default {
       root: {
         backgroundColor: '#082032',
       }
-    }
+    },
   }
 };
 

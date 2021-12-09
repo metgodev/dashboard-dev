@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux"
+
 // local terms until remote config available
 const active_lexicon = {
     language: {
@@ -159,6 +161,11 @@ const active_lexicon = {
         en: 'Home Page',
         he: 'בחזרה לדף הבית',
         ar: 'العودة إلى الصفحة الرئيسية',
+    },
+    calendar: {
+        en: 'Calendar',
+        he: 'יומן',
+        ar: 'يوميات',
     },
 }
 

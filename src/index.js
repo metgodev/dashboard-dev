@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Root from './Root/Root';
 import { Provider, useSelector } from 'react-redux';
@@ -7,20 +7,21 @@ import reportWebVitals from './reportWebVitals';
 import rootReducer from '../src/REDUX/rootReducer/rootReducer';
 import { ThemeProvider } from "@material-ui/styles";
 import { CssBaseline } from "@material-ui/core";
+import setPageDirection from './utils/dir';
+
 
 import Themes from "./themes";
 import './index.css';
-import setPageDirection from './utils/dir';
 
 
 const Main = () => {
   const { theme, lang } = useSelector(s => s.mainRememberReducer)
-  //theme 
   let type = (t) => theme ? Themes.default : Themes.dark
-  //lang
-  // useEffect(() => {
-  //   setPageDirection(lang)
-  // }, [lang])
+
+  useLayoutEffect(() => {
+    setPageDirection(lang)
+  }, [lang])
+
   return (
     <ThemeProvider theme={type(theme)}>
       <CssBaseline />
