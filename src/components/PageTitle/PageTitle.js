@@ -1,8 +1,6 @@
 import React from "react";
-import { Button, Box } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Switch from '@mui/material/Switch';
-import IconButton from '@mui/material/IconButton';
-import TranslateIcon from '@mui/icons-material/Translate';
 import { useSelector, useDispatch } from "react-redux";
 import { set_theme_color } from "../../REDUX/actions/main.actions";
 
@@ -21,19 +19,10 @@ export default function PageTitle(props) {
   const ColorChange = () => {
     dispatch(set_theme_color(!theme))
   };
-  const LangChange = () => {
-    dispatch(set_theme_color('en'))
-  };
-
 
   return (
     <div className={classes.pageTitleContainer}>
-      <Box>
-        <Button variant="contained" disableElevation>Days</Button>
-        <Button color="error" variant="text" disableElevation color="primary">Weeks</Button>
-        <Button variant="outlined" disableElevation color="success">Months</Button>
-      </Box>
-      <Typography className={classes.typo} variant="h1" size="sm">
+      <Typography className={classes.typo} variant="h2" size="lg">
         {props.title}
       </Typography>
       {props.button && (
@@ -52,11 +41,6 @@ export default function PageTitle(props) {
           onChange={ColorChange}
           inputProps={{ 'aria-label': 'controlled' }}
         />
-      )}
-      {props.switch && (
-        <IconButton aria-label="delete" onClick={LangChange}>
-          <TranslateIcon />
-        </IconButton>
       )}
     </div>
   );

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
-import classnames from "classnames";
 // styles
 import useStyles from "./styles";
 // logo
-import google from "../../Assets/svgs/google.svg";
 import term from "../../terms";
 
 
@@ -102,21 +100,6 @@ function Register() {
                         </Button>
                     )}
                 </div>
-                <div className={classes.formDividerContainer}>
-                    <div className={classes.formDivider} />
-                    <Typography className={classes.formDividerWord}>or</Typography>
-                    <div className={classes.formDivider} />
-                </div>
-                <Button
-                    size="large"
-                    className={classnames(
-                        classes.googleButton,
-                        classes.googleButtonCreating,
-                    )}
-                >
-                    <img src={google} alt="google" className={classes.googleIcon} />
-                    &nbsp;Sign in with Google
-                </Button>
             </React.Fragment>
         </div>
     )

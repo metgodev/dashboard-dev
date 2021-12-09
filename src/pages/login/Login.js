@@ -6,7 +6,7 @@ import useStyles from "./styles";
 // logo
 import logo from "../../Assets/svgs/MTN.svg";
 import Register from "./Register";
-import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
 function Login() {
   let classes = useStyles();
@@ -32,7 +32,7 @@ function Login() {
             <Tab label="Login" classes={{ root: classes.tab }} />
             <Tab label="New User" classes={{ root: classes.tab }} />
           </Tabs>
-          {activeTabId === 0 && (<SignUp />)}
+          {activeTabId === 0 && (<SignIn />)}
           {activeTabId === 1 && (<Register />)}
         </div>
       </div>

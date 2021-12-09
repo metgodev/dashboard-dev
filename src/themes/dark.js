@@ -128,7 +128,7 @@ export default {
     MuiMenu: {
       paper: {
         boxShadow:
-          "0px 3px 11px 0px #B9B9B9, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+          "0px 3px 11px 0px #082032, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
       },
     },
     MuiSelect: {
@@ -139,9 +139,9 @@ export default {
     MuiListItem: {
       root: {
         "&$selected": {
-          backgroundColor: "#C8E3D4 !important",
+          backgroundColor: "#334756 !important",
           "&:focus": {
-            backgroundColor: "#C8E3D4",
+            backgroundColor: "#334756",
           },
         },
       },
@@ -194,11 +194,6 @@ export default {
       pickerView: {
         minWidth: '70%',
         maxWidth: '100%',
-      }
-    },
-    MuiMenu: {
-      paper: {
-        boxShadow: '#082032',
       }
     },
     MuiPaper: {

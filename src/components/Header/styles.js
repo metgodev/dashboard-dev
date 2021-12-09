@@ -106,6 +106,25 @@ export default makeStyles(theme => ({
       cursor: "pointer",
     },
   },
+  langMenuUser: {
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2),
+  },
+  langMenuItem: {
+    color: theme.palette.text.hint,
+  },
+  langMenuIcon: {
+    marginRight: theme.spacing(2),
+    color: theme.palette.text.hint,
+  },
+  langMenuLink: {
+    fontSize: 16,
+    textDecoration: "none",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
   messageNotification: {
     height: "auto",
     display: "flex",

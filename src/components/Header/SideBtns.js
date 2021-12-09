@@ -6,6 +6,7 @@ import {
     Person as AccountIcon,
     Send as SendIcon,
 } from "@material-ui/icons";
+import TranslateIcon from '@mui/icons-material/Translate';
 import classNames from "classnames";
 // styles
 import useStyles from "./styles";
@@ -13,6 +14,7 @@ import useStyles from "./styles";
 import { Badge, Typography } from "../Wrappers/Wrappers";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import term from "../../terms";
+import { useNavigate } from "react-router";
 
 
 const messages = [
@@ -68,8 +70,11 @@ const notifications = [
     },
 ];
 
+const languages = [{ lang: 'עברית', id: 0, short: 'he' }, { lang: 'English', id: 1, short: 'en' }, { lang: 'عربيه', id: 2, short: 'en' }]
+
 function SideBtns() {
     // local
+    let [langMenu, setLangMenu] = useState(null);
     let [mailMenu, setMailMenu] = useState(null);
     let [isMailsUnread, setIsMailsUnread] = useState(true);
     let [notificationsMenu, setNotificationsMenu] = useState(null);
@@ -78,9 +83,19 @@ function SideBtns() {
 
     let classes = useStyles();
     let avatar = 'https://i.pravatar.cc/'
+    let navigate = useNavigate()
 
     return (
         <>
+            <IconButton
+                color="inherit"
+                aria-haspopup="true"
+                aria-controls="lang-menu"
+                onClick={e => { setLangMenu(e.currentTarget); }}
+                className={classes.headerMenuButton}
+            >
+                <TranslateIcon classes={{ root: classes.headerIcon }} />
+            </IconButton >
             <IconButton
                 color="inherit"
                 aria-haspopup="true"
@@ -124,6 +139,37 @@ function SideBtns() {
             >
                 {avatar ? <Avatar alt="Remy Sharp" src={avatar} classes={{ root: classes.headerIcon }} /> : <AccountIcon classes={{ root: classes.headerIcon }} />}
             </IconButton>
+            {/* lang-menu */}
+            <Menu
+                id="lang-menu"
+                open={Boolean(langMenu)}
+                anchorEl={langMenu}
+                onClose={() => setLangMenu(null)}
+                MenuListProps={{ className: classes.headerMenuList }}
+                className={classes.headerMenu}
+                classes={{ paper: classes.langMenu }}
+                disableAutoFocusItem
+            >
+                <div className={classes.langMenuUser}>
+                    <Typography variant="h4" weight="medium">
+                        {term('language')}
+                    </Typography>
+                    <Typography
+                        className={classes.langMenuLink}
+                        component="a"
+                        color="secondary"
+                    >
+                        {languages.map(({ lang, id, short }) => (
+                            <MenuItem key={id} className={classes.messageNotification}>
+                                <Typography color="text" colorBrightness="secondary">
+                                    {lang}
+                                </Typography>
+                            </MenuItem>
+                        ))}
+                    </Typography>
+                </div>
+            </Menu>
+            {/* mail-menu*/}
             <Menu
                 id="mail-menu"
                 open={Boolean(mailMenu)}
@@ -179,6 +225,7 @@ function SideBtns() {
                     <SendIcon className={classes.sendButtonIcon} />
                 </Fab>
             </Menu>
+            {/*notifications-menu*/}
             <Menu
                 id="notifications-menu"
                 open={Boolean(notificationsMenu)}
@@ -209,6 +256,7 @@ function SideBtns() {
                     </MenuItem>
                 ))}
             </Menu>
+            {/*profile-menu*/}
             <Menu
                 id="profile-menu"
                 open={Boolean(profileMenu)}
@@ -251,7 +299,7 @@ function SideBtns() {
                     <Typography
                         className={classes.profileMenuLink}
                         color="primary"
-                        onClick={() => { }}
+                        onClick={() => { navigate('/login') }}
                     >
                         {term('sign_out')}
                     </Typography>

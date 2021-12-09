@@ -1,13 +1,13 @@
 // local terms until remote config available
 const active_lexicon = {
-    hello_world: {
-        en: 'hello world',
-        he: 'שלום עולם',
-        ar: 'مرحبا بالعالم',
+    language: {
+        en: 'Language',
+        he: 'שפה',
+        ar: 'يا الهي',
     },
     metro_travel: {
         en: 'Metro Travel',
-        he: 'מטרונגב',
+        he: 'מטרו נגב',
         ar: 'مترو ترافيل',
     },
     new_messages: {
@@ -140,11 +140,6 @@ const active_lexicon = {
         he: 'שם משתמש או סיסמא לא נכונים :(',
         ar: 'اسم المستخدم او الرقم السري غير صحيح :(',
     },
-    or: {
-        en: 'Or',
-        he: 'או',
-        ar: 'أو',
-    },
     email_address: {
         en: 'Email address',
         he: 'כתובת אימייל',
@@ -156,17 +151,21 @@ const active_lexicon = {
         ar: 'كلمه السر',
     },
     forgot_password: {
-        en: 'Forgot_Password',
+        en: 'Forgot Password',
         he: 'שכחתי סיסמא',
         ar: 'هل نسيت كلمة السر',
     },
-
-
+    back_to_home: {
+        en: 'Home Page',
+        he: 'בחזרה לדף הבית',
+        ar: 'العودة إلى الصفحة الرئيسية',
+    },
 }
 
+let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 
-export default function term(name, default_val, lang = 'he') {
-    return (name in active_lexicon ? active_lexicon[name][lang]
+export default function term(name, default_val, lng = lang || 'he') {
+    return (name in active_lexicon ? active_lexicon[name][lng]
         : (default_val === undefined ? name
             : default_val
         )
