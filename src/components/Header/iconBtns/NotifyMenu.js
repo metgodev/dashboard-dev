@@ -67,6 +67,7 @@ function NotifyMenu() {
                 onClose={() => setNotificationsMenu(null)}
                 className={classes.headerMenu}
                 disableAutoFocusItem
+                disableScrollLock={true}
             >
                 {notifications.map(({ type, message, id, color }) => (
                     <MenuItem

@@ -1,16 +1,21 @@
-import { INITIAL } from "../actions/main.actions";
+import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE } from "../actions/main.actions";
 
 let initialState = {
-    initial: false,
+    sidebar: false,
+    mobile: false,
 }
 
 export default (state = initialState, action) => {
 
     switch (action.type) {
 
-        case INITIAL:
+        case SET_SIDEBAR_TOGGLE:
             return {
-                ...state, initial: action.payload
+                ...state, sidebar: action.payload
+            }
+        case SET_MOBILE_TOGGLE:
+            return {
+                ...state, mobile: action.payload
             }
         default:
             return state

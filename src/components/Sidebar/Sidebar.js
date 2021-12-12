@@ -1,96 +1,124 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Drawer, IconButton, List } from "@material-ui/core";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+    Home as HomeIcon,
+    NotificationsNone as NotificationsIcon,
+    FormatSize as TypographyIcon,
+    FilterNone as UIElementsIcon,
+    BorderAll as TableIcon,
+    QuestionAnswer as SupportIcon,
+    LibraryBooks as LibraryIcon,
+    HelpOutline as FAQIcon,
+    ArrowForward as ArrowBackIcon,
+} from "@material-ui/icons";
+import { useTheme } from "@material-ui/styles";
+import classNames from "classnames";
+// styles
+import useStyles from "./styles";
+// components
+import SidebarLink from "./SidebarLink/SidebarLink";
+//global
+import { useSelector, useDispatch } from "react-redux";
+import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.actions";
 
-// Each logical "route" has two components, one for
-// the sidebar and one for the main area. We want to
-// render both of them in different places when the
-// path matches the current URL.
-
-// We are going to use this route config in 2
-// spots: once for the sidebar and once in the main
-// content section. All routes are in the same
-// order they would appear in a <Switch>.
-const routes = [
+const structure = [
+    { id: 0, label: "Dashboard", link: "/", icon: <HomeIcon /> },
     {
-        path: "/",
-        exact: true,
-        sidebar: () => <div>home!</div>,
-        main: () => <h2>Home</h2>
+        id: 1,
+        label: "Typography",
+        link: "/app/typography",
+        icon: <TypographyIcon />,
+    },
+    { id: 2, label: "Tables", link: "/app/tables", icon: <TableIcon /> },
+    {
+        id: 3,
+        label: "Notifications",
+        link: "/app/notifications",
+        icon: <NotificationsIcon />,
     },
     {
-        path: "/bubblegum",
-        sidebar: () => <div>bubblegum!</div>,
-        main: () => <h2>Bubblegum</h2>
+        id: 4,
+        label: "UI Elements",
+        link: "/app/ui",
+        icon: <UIElementsIcon />,
+        children: [
+            { label: "Icons", link: "/app/ui/icons" },
+            { label: "Charts", link: "/app/ui/charts" },
+            { label: "Maps", link: "/app/ui/maps" },
+        ],
     },
-    {
-        path: "/shoelaces",
-        sidebar: () => <div>shoelaces!</div>,
-        main: () => <h2>Shoelaces</h2>
-    }
+    { id: 5, type: "divider" },
+    { id: 6, type: "title", label: "HELP" },
+    { id: 7, label: "Library", link: "", icon: <LibraryIcon /> },
+    { id: 8, label: "Support", link: "", icon: <SupportIcon /> },
+    { id: 9, label: "FAQ", link: "", icon: <FAQIcon /> },
+    { id: 10, type: "divider" },
+    { id: 11, type: "title", label: "PROJECTS" },
 ];
 
-export default function SidebarExample() {
+function Sidebar({ location }) {
+    let classes = useStyles();
+    let theme = useTheme();
+    let dispatch = useDispatch()
+    //global
+    const { sidebar, mobile } = useSelector(s => s.mainReducer)
+    const toggleSideBar = () => dispatch(set_sidebar_toggle(!sidebar))
+
+    useEffect(() => {
+        window.addEventListener("resize", handleWindowWidthChange);
+        handleWindowWidthChange();
+        return function cleanup() {
+            window.removeEventListener("resize", handleWindowWidthChange);
+        };
+    });
+
     return (
-        <Router>
-            <div style={{ display: "flex" }}>
-                <div
-                    style={{
-                        padding: "10px",
-                        width: "40%",
-                        background: "#f0f0f0"
-                    }}
-                >
-                    <ul style={{ listStyleType: "none", padding: 0 }}>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/bubblegum">Bubblegum</Link>
-                        </li>
-                        <li>
-                            <Link to="/shoelaces">Shoelaces</Link>
-                        </li>
-                    </ul>
-
-                    <Switch>
-                        {routes.map((route, index) => (
-                            // You can render a <Route> in as many places
-                            // as you want in your app. It will render along
-                            // with any other <Route>s that also match the URL.
-                            // So, a sidebar or breadcrumbs or anything else
-                            // that requires you to render multiple things
-                            // in multiple places at the same URL is nothing
-                            // more than multiple <Route>s.
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                children={<route.sidebar />}
-                            />
-                        ))}
-                    </Switch>
-                </div>
-
-                <div style={{ flex: 1, padding: "10px" }}>
-                    <Switch>
-                        {routes.map((route, index) => (
-                            // Render more <Route>s with the same paths as
-                            // above, but different components this time.
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                children={<route.main />}
-                            />
-                        ))}
-                    </Switch>
-                </div>
+        <Drawer
+            variant={mobile ? "permanent" : "temporary"}
+            anchor={theme.direction === 'ltr' ? 'right' : 'left'}
+            classes={{
+                paper: classNames({
+                    [classes.drawerOpen]: sidebar,
+                    [classes.drawerClose]: !sidebar,
+                }),
+            }}
+            open={sidebar}
+        >
+            <div className={classes.toolbar} />
+            <div className={classes.mobileBackButton}>
+                <IconButton onClick={toggleSideBar}>
+                    <ArrowBackIcon
+                        classes={{
+                            root: classNames(classes.headerIcon, classes.headerIconCollapse),
+                        }}
+                    />
+                </IconButton>
             </div>
-        </Router>
+            <List className={classes.sidebarList}>
+                {structure.map(link => (
+                    <SidebarLink
+                        key={link.id}
+                        location={location}
+                        sidebar={sidebar}
+                        {...link}
+                    />
+                ))}
+            </List>
+        </Drawer>
     );
+
+    // ##################################################################
+    function handleWindowWidthChange() {
+        let windowWidth = window.innerWidth;
+        let breakpointWidth = theme.breakpoints.values.md;
+        let isSmallScreen = windowWidth < breakpointWidth;
+
+        if (isSmallScreen && mobile) {
+            dispatch(set_mobile_toggle(false))
+        } else if (!isSmallScreen && !mobile) {
+            dispatch(set_mobile_toggle(true))
+        }
+    }
 }
+
+export default Sidebar;

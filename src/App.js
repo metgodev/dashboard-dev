@@ -1,17 +1,29 @@
-import React from 'react';
-import Dashboard from './pages/dashboard/Dashboard'
-import Maps from './pages/maps/Maps'
-import Login from './pages/login/Login'
+import React, { useLayoutEffect } from 'react';
+import { ThemeProvider } from "@material-ui/styles";
+import { Box, CssBaseline } from "@material-ui/core";
+import { setPageDirection } from './utils/dir';
+import { useSelector } from 'react-redux';
+import Root from './Root/Root';
 
-import { em } from './utils/document'
+import Themes from "./themes";
+import { em } from './utils/document';
 
-function App() {
+const App = () => {
+  const { theme, lang } = useSelector(s => s.mainRememberReducer)
+  let type = () => theme ? Themes.default : Themes.dark
+
+  useLayoutEffect(() => {
+    setPageDirection(lang)
+  }, [lang])
+
   return (
-    <div style={{ padding: em(1) }}>
-      <Dashboard />
-      {/* <Login /> */}
-    </div>
-  );
+    <Box style={{ padding: em(.5) }}>
+      <ThemeProvider theme={type(theme)} >
+        <CssBaseline />
+        <Root />
+      </ThemeProvider >
+    </Box>
+  )
 }
 
 export default App;
