@@ -32,6 +32,7 @@ export default makeStyles(theme => ({
     color: theme.palette.text.secondary + "CC",
     transition: theme.transitions.create(["opacity", "color"]),
     fontSize: 16,
+    textAlign: theme.direction !== 'ltr' ? 'right' : 'left',
   },
   linkTextActive: {
     color: theme.palette.text.primary,
@@ -43,9 +44,12 @@ export default makeStyles(theme => ({
     paddingLeft: theme.spacing(2) + 30,
   },
   sectionTitle: {
-    marginLeft: theme.spacing(4.5),
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    justifyContent: "center",
+    textAlign: "center",
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    fontSize: 18,
+    fontWeight: 500
   },
   divider: {
     marginTop: theme.spacing(2),

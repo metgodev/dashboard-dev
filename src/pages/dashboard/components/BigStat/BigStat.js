@@ -66,19 +66,19 @@ export default function BigStat(props) {
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
             <Typography color={total.percent.profit ? "secondary" : "success"}>
-            &nbsp;{total.percent.profit ? "+" : "-"}
-            {total.percent.value}%
-          </Typography>
+              &nbsp;{total.percent.profit ? "+" : "-"}
+              {total.percent.value}%
+            </Typography>
             <ArrowForwardIcon
               className={classnames(classes.profitArrow, {
                 [classes.profitArrowDanger]: !registrations[value].profit,
               })}
             />
             <Typography size="sm" color="text" colorBrightness="secondary">
-            Than last year
-          </Typography>
+              {term('last_then_year')}
+            </Typography>
           </Grid>
-          
+
         </div>
       </div>
     </Widget>

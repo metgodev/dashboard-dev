@@ -30,14 +30,13 @@ export default function Dashboard() {
         <Grid item lg={8} md={7} sm={12} xs={12}>
           <BigChart />
         </Grid>
-
         {mock.bigStat.map(stat => (
           <Grid item lg={3} md={4} sm={6} xs={12} key={stat.product}>
             <BigStat {...stat} />
           </Grid>
         ))}
-
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        {/* show case */}
+        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
           <StatsBox />
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
@@ -58,7 +57,8 @@ export default function Dashboard() {
           >
             <Table data={mock.table} />
           </Widget>
-        </Grid>
+        </Grid> */}
+        {/* show case */}
       </Grid>
     </>
   );

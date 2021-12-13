@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
 import SideBar from '../components/SideBar/SideBar';
 import Main from '../components/AdjustHelpers/Main';
-import AppBar from '../components/AdjustHelpers/AppBar';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
@@ -25,14 +24,12 @@ const Root = () => {
 
     return (
         <div className={classes.Router}>
-            <Main open={sidebar} mobile={mobile}>
-                <AppBar open={sidebar}>
-                    {isLoggedIn && <Header />}
-                </AppBar>
+            <Main open={sidebar} mobile={mobile.toString()}>
+                {isLoggedIn && <Header />}
                 <SideBar location={location} />
                 <Routes>
                     <Route path="/login" element={<Login />} />
-                    <Route exact path="/" element={<Protecte auth={isLoggedIn}><Dashboard /></Protecte>} />
+                    <Route exact path="/dashboard" element={<Protecte auth={isLoggedIn}><Dashboard /></Protecte>} />
                     <Route path='*' element={<Error />} />
                 </Routes>
             </Main>

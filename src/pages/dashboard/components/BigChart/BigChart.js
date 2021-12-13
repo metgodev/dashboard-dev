@@ -60,7 +60,7 @@ export default function BigChart() {
     return (
         <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />}>
             <div style={{ direction: "ltr" }}>
-                <ResponsiveContainer width="100%" minWidth={150} height={350}>
+                <ResponsiveContainer width="100%" minWidth={150} height={330}>
                     <LineChart
                         width={500}
                         height={300}

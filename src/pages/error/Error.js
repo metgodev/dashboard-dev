@@ -28,7 +28,7 @@ export default function Error() {
           variant="contained"
           color="success"
           component={Link}
-          to="/"
+          to="/dashboard"
           size="large"
           className={classes.backButton}
         >

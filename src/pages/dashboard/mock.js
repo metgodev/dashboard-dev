@@ -1,3 +1,5 @@
+import term from "../../terms";
+
 export default {
   tasks: [
     {
@@ -27,7 +29,7 @@ export default {
   ],
   bigStat: [
     {
-      product: "Businesses",
+      product: term('businesses'),
       total: {
         monthly: 4232,
         weekly: 1465,
@@ -47,7 +49,7 @@ export default {
       }
     },
     {
-      product: "Events",
+      product: term('events'),
       total: {
         monthly: 754,
         weekly: 180,
@@ -67,7 +69,7 @@ export default {
       }
     },
     {
-      product: "Points of interest",
+      product: term('points'),
       total: {
         monthly: 1025,
         weekly: 301,
@@ -87,7 +89,7 @@ export default {
       }
     },
     {
-      product: "Routes",
+      product: term('routes'),
       total: {
         monthly: 1025,
         weekly: 301,

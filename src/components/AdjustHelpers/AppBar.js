@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 const sideBarSize = 240;
 const sideBarSmallSize = 100;
 
-const AppBar = styled('appbar', {
+const AppBar = styled('main', {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
     transition: theme.transitions.create(['margin', 'width'], {

@@ -172,7 +172,68 @@ const active_lexicon = {
         he: 'יומן',
         ar: 'يوميات',
     },
+    businesses: {
+        en: 'Businesses',
+        he: 'בתי עסק',
+        ar: 'الأعمال',
+    },
+    events: {
+        en: 'Events',
+        he: 'אירועים',
+        ar: 'الأحداث',
+    },
+    points: {
+        en: 'Points of interest',
+        he: 'נקודות עניין',
+        ar: 'النقاط المثيرة للاهتمام',
+    },
+    locations: {
+        en: 'Locations',
+        he: 'מסלולים',
+        ar: 'طرق',
+    },
+    routes: {
+        en: 'Routes',
+        he: 'מסלולים',
+        ar: 'طرق',
+    },
+    voucher: {
+        en: 'Metro Voucher',
+        he: 'תו הנגב',
+        ar: 'قسيمة مترو',
+    },
+    users: {
+        en: 'Users',
+        he: 'משתמשים',
+        ar: 'المستخدمون',
+    },
+    map: {
+        en: 'Map',
+        he: 'מפה',
+        ar: 'خريطة',
+    },
+    help: {
+        en: 'Help',
+        he: 'עזרים',
+        ar: 'يساعد',
+    },
+    support: {
+        en: 'Support',
+        he: 'תמיכה',
+        ar: 'دعم',
+    },
+    faq: {
+        en: 'FAQ',
+        he: 'שאלות נפוצות',
+        ar: 'التعليمات',
+    },
+    last_then_year: {
+        en: 'Than last year',
+        he: 'פחות משנה',
+        ar: 'من العام الماض',
+    },
 }
+
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 

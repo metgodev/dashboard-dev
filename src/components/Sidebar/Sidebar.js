@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Drawer, IconButton, List } from "@material-ui/core";
 import {
-    Home as HomeIcon,
-    NotificationsNone as NotificationsIcon,
-    FormatSize as TypographyIcon,
-    FilterNone as UIElementsIcon,
-    BorderAll as TableIcon,
-    QuestionAnswer as SupportIcon,
-    LibraryBooks as LibraryIcon,
-    HelpOutline as FAQIcon,
+    HomeOutlined as HomeIcon,
+    EventOutlined as Event,
+    LocalMallOutlined as Businesses,
+    LocationOnOutlined as Locations,
+    TimelineOutlined as Route,
+    LiveHelpOutlined as FAQIcon,
     ArrowForward as ArrowBackIcon,
+    CardGiftcard,
+    PeopleOutlined as People,
+    MapOutlined as Map,
+    HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -20,40 +22,29 @@ import SidebarLink from "./SidebarLink/SidebarLink";
 //global
 import { useSelector, useDispatch } from "react-redux";
 import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.actions";
+import term from "../../terms";
 
 const structure = [
-    { id: 0, label: "Dashboard", link: "/", icon: <HomeIcon /> },
+    { id: 0, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
+    { id: 1, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
+    { id: 2, label: term('events'), link: "/events", icon: <Event /> },
+    { id: 4, label: term('locations'), link: "/locations", icon: <Locations />, },
     {
-        id: 1,
-        label: "Typography",
-        link: "/app/typography",
-        icon: <TypographyIcon />,
-    },
-    { id: 2, label: "Tables", link: "/app/tables", icon: <TableIcon /> },
-    {
-        id: 3,
-        label: "Notifications",
-        link: "/app/notifications",
-        icon: <NotificationsIcon />,
-    },
-    {
-        id: 4,
-        label: "UI Elements",
-        link: "/app/ui",
-        icon: <UIElementsIcon />,
+        id: 5, label: term('routes'), link: "/routes", icon: <Route />,
         children: [
-            { label: "Icons", link: "/app/ui/icons" },
-            { label: "Charts", link: "/app/ui/charts" },
-            { label: "Maps", link: "/app/ui/maps" },
+            { label: "Icons", link: "/" },
+            { label: "Charts", link: "/" },
+            { label: "Maps", link: "/" },
         ],
     },
-    { id: 5, type: "divider" },
-    { id: 6, type: "title", label: "HELP" },
-    { id: 7, label: "Library", link: "", icon: <LibraryIcon /> },
-    { id: 8, label: "Support", link: "", icon: <SupportIcon /> },
-    { id: 9, label: "FAQ", link: "", icon: <FAQIcon /> },
-    { id: 10, type: "divider" },
-    { id: 11, type: "title", label: "PROJECTS" },
+    { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
+    { id: 7, label: term('users'), link: "/users", icon: <People />, },
+    { id: 8, label: term('map'), link: "/map", icon: <Map />, },
+    { id: 9, type: "divider" },
+    { id: 10, type: 'title', label: term('help') },
+    { id: 11, label: term('support'), link: "/support", icon: <Support />, },
+    { id: 13, label: term('faq'), link: "/FAQ", icon: <FAQIcon /> },
+    { id: 14, type: "divider" },
 ];
 
 function Sidebar({ location }) {
