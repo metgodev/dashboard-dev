@@ -29,6 +29,7 @@ export default makeStyles(theme => ({
   },
   linkText: {
     padding: 0,
+    margin: 0,
     color: theme.palette.text.secondary + "CC",
     transition: theme.transitions.create(["opacity", "color"]),
     fontSize: 16,
@@ -38,6 +39,7 @@ export default makeStyles(theme => ({
     color: theme.palette.text.primary,
   },
   linkTextHidden: {
+    display: "none",
     opacity: 0,
   },
   nestedList: {
@@ -53,7 +55,7 @@ export default makeStyles(theme => ({
   },
   divider: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(2),
     height: 1,
     backgroundColor: "#D8D8D880",
   },

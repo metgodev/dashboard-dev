@@ -204,6 +204,11 @@ export default {
         backgroundColor: '#082032',
       }
     },
+    MuiButton: {
+      root: {
+        borderRadius: 0
+      }
+    }
   }
 };
 

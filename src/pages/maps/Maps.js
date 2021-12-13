@@ -5,6 +5,8 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import term from "../../terms";
 import { em } from "../../utils/document";
 
 // styles
@@ -40,6 +42,7 @@ export default function Maps() {
 
   return (
     <div className={classes.mapContainer}>
+      <PageTitle title={term('map')} />
       <BasicMap
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: "inherit", width: "inherit" }} />}

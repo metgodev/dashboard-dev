@@ -15,16 +15,18 @@ export default makeStyles(theme => ({
   },
   drawerOpen: {
     width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    //animation
+    // transition: theme.transitions.create("width", {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    //animation
+    // transition: theme.transitions.create('width', {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
     overflowX: "hidden",
     width: theme.spacing(12),
     [theme.breakpoints.down("sm")]: {
@@ -42,6 +44,7 @@ export default makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   mobileBackButton: {
+    alignSelf: theme.direction !== 'ltr' ? 'end' : 'start',
     color: theme.palette.primary.main,
     marginTop: theme.spacing(2),
     marginLeft: theme.spacing(3),

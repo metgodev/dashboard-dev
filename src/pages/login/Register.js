@@ -17,7 +17,7 @@ function Register() {
     let [passwordValue, setPasswordValue] = useState("");
 
     const loginUser = () => {
-        navigate("/");
+        navigate("/dashboard");
     }
 
     return (

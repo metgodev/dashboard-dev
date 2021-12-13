@@ -2,12 +2,12 @@ import React from 'react'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import term from '../../terms'
 
-function Events() {
+function Tracks() {
     return (
         <div>
-            <PageTitle title={term('events')} />
+            <PageTitle title={term('routes')} />
         </div>
     )
 }
 
-export default Events
+export default Tracks

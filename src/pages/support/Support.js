@@ -2,12 +2,12 @@ import React from 'react'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import term from '../../terms'
 
-function Events() {
+function Support() {
     return (
         <div>
-            <PageTitle title={term('events')} />
+            <PageTitle title={term('support')} />
         </div>
     )
 }
 
-export default Events
+export default Support

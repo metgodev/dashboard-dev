@@ -203,6 +203,11 @@ export default {
         minWidth: '70%',
         maxWidth: '100%',
       }
+    },
+    MuiButton: {
+      root: {
+        borderRadius: 0
+      }
     }
   },
 };

@@ -11,17 +11,20 @@ import useStyles from "./styles";
 
 // components
 import { Typography } from "../Wrappers/Wrappers";
+import HeaderButtons from "../HeaderButtons/HeaderButtons";
 
 export default function PageTitle(props) {
   let classes = useStyles(),
     dispatch = useDispatch(),
     { theme } = useSelector(state => state.mainRememberReducer);
 
+  const findInProps = (key, propName) => {
+    return props[propName].find(p => p[key])
+  }
 
   const ColorChange = () => {
     dispatch(set_theme_color(!theme))
   };
-
   return (
     <div className={classes.pageTitleContainer}>
       <Typography className={classes.typo} variant="h2" size="sm">
@@ -45,6 +48,13 @@ export default function PageTitle(props) {
             inputProps={{ 'aria-label': 'controlled' }}
           />} label={theme ? 'light' : 'dark'} />
         </FormGroup>
+      )}
+      {props.buttonGroup && (
+        <HeaderButtons
+          color={findInProps('color', 'buttonGroup')}
+          btns={findInProps('btns', 'buttonGroup')}
+          size={findInProps('size', 'buttonGroup')} /
+        >
       )}
     </div>
   );

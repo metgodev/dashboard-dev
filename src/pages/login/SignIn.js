@@ -19,7 +19,7 @@ function SignIn() {
 
 
     const loginUser = () => {
-        navigate("/");
+        navigate("/dashboard");
     }
 
     return (

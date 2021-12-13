@@ -15,10 +15,18 @@ import StatsBoxPieChart from "./components/SmallCharts/StatsBoxPieChart";
 import Calendar from "./components/Calendar/Calendar";
 import BigChart from "./components/BigChart/BigChart";
 import term from "../../terms";
+import { Button } from "@mui/material";
 
 
 export default function Dashboard() {
   let classes = useStyles();
+
+  let headerBtns = [
+    { name: 'one', func: () => console.log('one') },
+    { name: 'two', func: () => console.log('two') },
+    { name: 'three', func: () => console.log('three') }
+  ]
+  // buttonGroup={[{ color: 'secondary' }, { btns: headerBtns }, { size: 'medium' }]}
 
   return (
     <>

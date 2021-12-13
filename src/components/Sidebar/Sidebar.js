@@ -28,14 +28,14 @@ const structure = [
     { id: 0, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
     { id: 1, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
     { id: 2, label: term('events'), link: "/events", icon: <Event /> },
-    { id: 4, label: term('locations'), link: "/locations", icon: <Locations />, },
+    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
     {
         id: 5, label: term('routes'), link: "/routes", icon: <Route />,
-        children: [
-            { label: "Icons", link: "/" },
-            { label: "Charts", link: "/" },
-            { label: "Maps", link: "/" },
-        ],
+        // children: [
+        //     { label: "Icons", link: "/" },
+        //     { label: "Charts", link: "/" },
+        //     { label: "Maps", link: "/" },
+        // ],
     },
     { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
     { id: 7, label: term('users'), link: "/users", icon: <People />, },
@@ -85,7 +85,7 @@ function Sidebar({ location }) {
                     />
                 </IconButton>
             </div>
-            <List className={classes.sidebarList}>
+            <List >
                 {structure.map(link => (
                     <SidebarLink
                         key={link.id}
