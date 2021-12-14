@@ -37,14 +37,14 @@ export default function Dashboard() {
           direction="row"
           justifyContent="space-evenly"
           alignItems="stretch" spacing={2}>
-          <Grid item lg={4} md={12} sm={12} xs={12}>
-            <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>DOWNLOAD</h1>
-          </Grid>
           {config.MetroStats.map(stat => (
             <Grid item lg={1} md={12} sm={12} xs={12} key={stat.product}>
               <MetroStats {...stat} />
             </Grid>
           ))}
+          <Grid item lg={4} md={12} sm={12} xs={12}>
+            <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>DOWNLOAD</h1>
+          </Grid>
         </Grid>
         {/* show case */}
         {/* <Grid item lg={3} md={4} sm={6} xs={12}>
