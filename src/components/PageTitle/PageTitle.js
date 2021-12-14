@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -16,17 +16,15 @@ import HeaderButtons from "../HeaderButtons/HeaderButtons";
 export default function PageTitle(props) {
   let classes = useStyles(),
     dispatch = useDispatch(),
-    { theme } = useSelector(state => state.mainRememberReducer);
-
-  const findInProps = (key, propName) => {
-    return props[propName].find(p => p[key])
-  }
+    { theme } = useSelector(s => s.mainRememberReducer),
+    { mobile } = useSelector(s => s.mainReducer)
 
   const ColorChange = () => {
     dispatch(set_theme_color(!theme))
   };
+
   return (
-    <div className={classes.pageTitleContainer}>
+    <Box className={classes.pageTitleContainer}>
       <Typography className={classes.typo} variant="h2" size="sm">
         {props.title}
       </Typography>
@@ -49,13 +47,9 @@ export default function PageTitle(props) {
           />} label={theme ? 'light' : 'dark'} />
         </FormGroup>
       )}
-      {props.buttonGroup && (
-        <HeaderButtons
-          color={findInProps('color', 'buttonGroup')}
-          btns={findInProps('btns', 'buttonGroup')}
-          size={findInProps('size', 'buttonGroup')} /
-        >
+      {props.buttonGroup && mobile && (
+        <HeaderButtons btns={props.buttonGroup.btns} />
       )}
-    </div>
+    </Box>
   );
 }

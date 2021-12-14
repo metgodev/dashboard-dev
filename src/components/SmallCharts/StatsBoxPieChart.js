@@ -3,11 +3,11 @@ import { Grid } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import { ResponsiveContainer, PieChart, Pie, Cell, } from "recharts";
 // styles
-import useStyles from "../../styles";
+import useStyles from ".styles";
 // components
-import Widget from "../../../../components/Widget/Widget";
-import { Typography } from "../../../../components/Wrappers/Wrappers";
-import Dot from "../../../../components/Dot/Dot";
+import Widget from "../components/Widget/Widget";
+import { Typography } from "../components/Wrappers/Wrappers";
+import Dot from "../components/Dot/Dot";
 
 const PieChartData = [
     { name: "Group A", value: 400, color: "primary" },

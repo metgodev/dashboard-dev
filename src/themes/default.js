@@ -98,10 +98,6 @@ export default {
         .darken(darkenRate)
         .toHexString(),
     },
-    googleBtn: {
-      bg: "#F6F7FF",
-      color: '#4A4A4A',
-    },
     overrides: {
       MuiCssBaseline: {
         '@global': {
@@ -117,7 +113,7 @@ export default {
     }
   },
   shape: {
-    borderRadius: 15,
+    borderRadius: 10,
   },
   customShadows: {
     widget:
@@ -206,8 +202,21 @@ export default {
     },
     MuiButton: {
       root: {
-        borderRadius: 0
+        borderRadius: 10,
+      },
+      contained: {
+        backgroundColor: '#F99600',
       }
-    }
+    },
+    MuiOutlinedInput: {
+      input: {
+        padding: 9,
+      }
+    },
+    MuiTypography: {
+      alignLeft: {
+        textAlign: 'center'
+      }
+    },
   },
 };

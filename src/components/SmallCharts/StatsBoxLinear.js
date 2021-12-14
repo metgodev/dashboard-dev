@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Grid, LinearProgress, Select, OutlinedInput, MenuItem, } from "@material-ui/core";
-import { useTheme } from "@material-ui/styles";
+import React from "react";
+import { LinearProgress } from "@material-ui/core";
 // styles
-import useStyles from "../../styles";
+import useStyles from ".styles";
 // components
-import Widget from "../../../../components/Widget/Widget";
-import { Typography } from "../../../../components/Wrappers/Wrappers";
-import Dot from "../../../../components/Dot/Dot";
+import Widget from "../components/Widget/Widget";
+import { Typography } from "../components/Wrappers/Wrappers";
+import Dot from "../components/Dot/Dot";
 
 
 function StatsBoxLinear() {

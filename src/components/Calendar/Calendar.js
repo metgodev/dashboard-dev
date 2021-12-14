@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { ThemeProvider } from "@material-ui/styles";
 import { useTheme } from "@material-ui/styles";
-import { isMobileDevice } from '../../../../utils/ismobile';
+import { isMobileDevice } from '../../utils/ismobile';
 import { ar, he } from "date-fns/locale";
 import { useSelector } from 'react-redux';
 //styles
-import useStyles from "../../styles";
+import useStyles from "./styles";
 // Component
-import Widget from "../../../../components/Widget/Widget";
-import term from '../../../../terms';
+import Widget from "../Widget/Widget";
+import term from '../../terms';
+import { Box } from '@mui/system';
 
 
-export default function Calendar() {
+export default function Calendar({ type, warp }) {
     const [date, changeDate] = useState(new Date());
+    const [datetwo, changeDateTwo] = useState(new Date());
     const { lang } = useSelector(state => state.mainRememberReducer)
     let classes = useStyles();
     let theme = useTheme();
@@ -30,10 +32,12 @@ export default function Calendar() {
         }
     }
 
+    const Warp = warp ? Widget : Box
+
     return (
-        <Widget title={term('calendar')} upperTitle className={classes.card} >
+        <Warp title={term('calendar')} upperTitle className={classes.card} >
             <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
-                <ThemeProvider theme={theme}>
+                {type == 1 && <ThemeProvider theme={theme}>
                     <DatePicker
                         autoOk
                         orientation={!isMobileDevice() && "landscape"}
@@ -43,8 +47,19 @@ export default function Calendar() {
                         onChange={changeDate}
                     />
                 </ThemeProvider>
+                }
+                {type == 2 && <KeyboardDatePicker
+                    autoOk
+                    variant="inline"
+                    inputVariant="outlined"
+                    label=""
+                    format="MM/dd/yyyy"
+                    value={datetwo}
+                    InputAdornmentProps={{ position: "end" }}
+                    onChange={date => changeDateTwo(date)}
+                />}
             </MuiPickersUtilsProvider>
-        </Widget>
+        </Warp>
     );
 }
 

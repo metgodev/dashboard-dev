@@ -2,9 +2,9 @@ import React from "react";
 import { useTheme } from "@material-ui/styles";
 import { ResponsiveContainer, Line, YAxis, XAxis, Tooltip, CartesianGrid, LineChart, Legend } from "recharts";
 // styles
-import useStyles from "../../styles";
+import useStyles from "./styles";
 // components
-import Widget from "../../../../components/Widget/Widget";
+import Widget from "../Widget/Widget";
 import BigChartHeader from "./BigChartHeader";
 
 const lineChartData = [

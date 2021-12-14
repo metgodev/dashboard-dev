@@ -109,6 +109,44 @@ export default {
       }
     }
   ],
+  MetroStats: [
+    {
+      product: term('lodging'),
+      places: Math.floor(Math.random() * 1000) + 1,
+      added: Math.floor(Math.random() * 10) + 1,
+      svg: 'lodging'
+    },
+    {
+      product: term('attraction'),
+      places: Math.floor(Math.random() * 1000) + 1,
+      added: Math.floor(Math.random() * 10) + 1,
+      svg: 'attraction'
+    },
+    {
+      product: term('culture'),
+      places: Math.floor(Math.random() * 1000) + 1,
+      added: Math.floor(Math.random() * 10) + 1,
+      svg: 'culture'
+    },
+    {
+      product: term('local'),
+      places: Math.floor(Math.random() * 1000) + 1,
+      added: Math.floor(Math.random() * 10) + 1,
+      svg: 'local'
+    },
+    {
+      product: term('travel'),
+      places: Math.floor(Math.random() * 1000) + 1,
+      added: Math.floor(Math.random() * 10) + 1,
+      svg: 'travel'
+    },
+    {
+      product: term('food'),
+      places: Math.floor(Math.random() * 1000) + 1,
+      added: Math.floor(Math.random() * 10) + 1,
+      svg: 'food'
+    },
+  ],
   notifications: [
     {
       id: 0,

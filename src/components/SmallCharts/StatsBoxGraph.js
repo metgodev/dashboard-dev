@@ -2,10 +2,10 @@ import React from "react";
 import { useTheme } from "@material-ui/styles";
 import { ResponsiveContainer, AreaChart, Area, } from "recharts";
 // styles
-import useStyles from "../../styles";
+import useStyles from ".styles";
 // components
-import Widget from "../../../../components/Widget/Widget";
-import { Typography } from "../../../../components/Wrappers/Wrappers";
+import Widget from "../components/Widget/Widget";
+import { Typography } from "../components/Wrappers/Wrappers";
 
 
 function getRandomData(length, min, max, multiplier = 10, maxDiff = 10) {

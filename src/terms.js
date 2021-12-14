@@ -95,17 +95,17 @@ const active_lexicon = {
     daily: {
         en: 'Daily',
         he: 'יומי',
-        ar: 'سطح المكتب',
+        ar: 'اليومي',
     },
     weekly: {
         en: 'Weekly',
         he: 'שבועי',
-        ar: 'سطح المكتب',
+        ar: 'أسبوعي',
     },
     monthly: {
         en: 'Monthly',
         he: 'חודשי',
-        ar: 'سطح المكتب',
+        ar: 'شهريا',
     },
     registrations: {
         en: 'Registrations',
@@ -231,6 +231,36 @@ const active_lexicon = {
         en: 'Than last year',
         he: 'פחות משנה',
         ar: 'من العام الماض',
+    },
+    lodging: {
+        en: 'lodging',
+        he: 'לינה',
+        ar: 'الإقامة',
+    },
+    attraction: {
+        en: 'Attraction',
+        he: 'אטרקציה',
+        ar: 'جاذبية',
+    },
+    culture: {
+        en: 'Culture',
+        he: 'תרבות',
+        ar: 'حضاره',
+    },
+    local: {
+        en: 'Local',
+        he: 'מקומי',
+        ar: 'تيار',
+    },
+    travel: {
+        en: 'Travel',
+        he: 'לטייל',
+        ar: 'أن يسافر',
+    },
+    food: {
+        en: 'Food',
+        he: 'אוכל',
+        ar: 'اكل',
     },
 }
 

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
 // styles
 import useStyles from "./styles";
-// logo
 import term from "../../terms";
 
 

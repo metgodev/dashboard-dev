@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  Table,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "@material-ui/core";
+import { Table, TableRow, TableHead, TableBody, TableCell } from "@material-ui/core";
 
 // components
-import { Button } from "../../../../components/Wrappers/Wrappers";
+import { Button } from "../components/Wrappers/Wrappers";
 
 const states = {
   sent: "success",

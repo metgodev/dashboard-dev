@@ -17,7 +17,7 @@ const App = () => {
   }, [lang])
 
   return (
-    <Box style={{ padding: em(.5) }}>
+    <Box style={{ padding: em(1) }}>
       <ThemeProvider theme={type(theme)} >
         <CssBaseline />
         <Root />

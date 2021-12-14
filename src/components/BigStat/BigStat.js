@@ -4,15 +4,13 @@ import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
-import term from "../../../../terms";
-
-
+import term from "../../terms";
 // styles
 import useStyles from "./styles";
 
 // components
-import { Typography } from "../../../../components/Wrappers/Wrappers";
-import Widget from "../../../../components/Widget/Widget";
+import { Typography } from "../Wrappers/Wrappers";
+import Widget from "../Widget/Widget";
 
 export default function BigStat(props) {
   let { product, total, color, registrations, bounce } = props;
@@ -53,7 +51,7 @@ export default function BigStat(props) {
             {total[value]}
           </Typography>
         </div>
-        <BarChart width={150} height={70} data={getRandomData()}>
+        <BarChart width={100} height={50} data={getRandomData()}>
           <Bar
             dataKey="value"
             fill={theme.palette[color].main}

@@ -106,13 +106,9 @@ export default {
       disabledBackground: '#87AAAA',
       disabled: '#B9B9B9'
     },
-    googleBtn: {
-      bg: "#87AAAA",
-      color: '#FFF',
-    },
   },
   shape: {
-    borderRadius: 15,
+    borderRadius: 10,
   },
   customShadows: {
     widget:
@@ -206,9 +202,22 @@ export default {
     },
     MuiButton: {
       root: {
-        borderRadius: 0
+        borderRadius: 10,
+      },
+      contained: {
+        backgroundColor: '#082032',
       }
-    }
+    },
+    MuiOutlinedInput: {
+      input: {
+        padding: 9
+      }
+    },
+    MuiTypography: {
+      alignLeft: {
+        textAlign: 'center'
+      }
+    },
   }
 };
 

@@ -3,10 +3,10 @@ import { Grid, } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import { LineChart, Line, } from "recharts";
 // styles
-import useStyles from "../../styles";
+import useStyles from ".styles";
 // components
-import Widget from "../../../../components/Widget/Widget";
-import { Typography } from "../../../../components/Wrappers/Wrappers";
+import Widget from "../components/Widget/Widget";
+import { Typography } from "../components/Wrappers/Wrappers";
 
 
 function StatsBox() {

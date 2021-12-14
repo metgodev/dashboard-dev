@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Select, OutlinedInput, MenuItem, } from "@material-ui/core";
 // styles
-import useStyles from "../../styles";
+import useStyles from "./styles";
 // components
-import { Typography } from "../../../../components/Wrappers/Wrappers";
-import Dot from "../../../../components/Dot/Dot";
-import term from "../../../../terms";
+import { Typography } from "../Wrappers/Wrappers";
+import Dot from "../Dot/Dot";
+import term from "../../terms";
 
 
 function BigChartHeader() {
