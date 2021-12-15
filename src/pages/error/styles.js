@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: '#E8EAFC',
     position: "absolute",
     top: 0,
     left: 0,
@@ -44,8 +44,10 @@ export default makeStyles(theme => ({
     fontWeight: 600,
   },
   backButton: {
+    position: 'absolute',
+    bottom: 30,
     textTransform: "none",
     fontSize: 22,
-    color: theme.palette.primary.main,
+    color: '#000',
   },
 }));

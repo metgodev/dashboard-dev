@@ -3,40 +3,51 @@ import { Grid } from "@material-ui/core";
 // styles
 import useStyles from "./styles";
 // components
-import mock from "./mock";
-import Widget from "../../components/Widget/Widget";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import Table from "./components/Table/Table";
-import BigStat from "./components/BigStat/BigStat";
-import StatsBox from "./components/SmallCharts/StatsBox";
-import StatsBoxLinear from "./components/SmallCharts/StatsBoxLinear";
-import StatsBoxGraph from "./components/SmallCharts/StatsBoxGraph";
-import StatsBoxPieChart from "./components/SmallCharts/StatsBoxPieChart";
-import Calendar from "./components/Calendar/Calendar";
-import BigChart from "./components/BigChart/BigChart";
-
+import Calendar from "../../components/Calendar/Calendar";
+import BigChart from "../../components/BigChart/BigChart";
+import BigStat from "../../components/BigStat/BigStat";
+import term from "../../terms";
+import config from "./config";
+import MetroStats from "../../components/MetroStats/MetroStats";
 
 export default function Dashboard() {
-  let classes = useStyles();
+  let headerBtns = [
+    { name: term('daily'), func: () => console.log('Days') },
+    { name: term('weekly'), func: () => console.log('Week') },
+    { name: term('monthly'), func: () => console.log('Months') },
+  ]
 
   return (
     <>
-      <PageTitle title="Dashboard" switch="true" />
+      <PageTitle title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
       <Grid container spacing={2}>
+        <Grid item lg={4} md={5} sm={12} xs={12}>
+          <Calendar type={1} warp={true} />
+        </Grid>
         <Grid item lg={8} md={7} sm={12} xs={12}>
           <BigChart />
         </Grid>
-        <Grid item lg={4} md={5} sm={12} xs={12}>
-          <Calendar />
-        </Grid>
-
-        {mock.bigStat.map(stat => (
-          <Grid item lg={3} md={4} sm={6} xs={12} key={stat.product}>
+        {config.bigStat.map(stat => (
+          <Grid item lg={3} md={3} sm={6} xs={12} key={stat.product}>
             <BigStat {...stat} />
           </Grid>
         ))}
-        
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid container
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="stretch" spacing={2}>
+          {config.MetroStats.map(stat => (
+            <Grid item lg={1} md={12} sm={12} xs={12} key={stat.product}>
+              <MetroStats {...stat} />
+            </Grid>
+          ))}
+          <Grid item lg={4} md={12} sm={12} xs={12}>
+            <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>DOWNLOAD</h1>
+          </Grid>
+        </Grid>
+        {/* show case */}
+        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
           <StatsBox />
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
@@ -55,9 +66,10 @@ export default function Dashboard() {
             noBodyPadding
             bodyClass={classes.tableWidget}
           >
-            <Table data={mock.table} />
+            <Table data={config.table} />
           </Widget>
-        </Grid>
+        </Grid> */}
+        {/* show case */}
       </Grid>
     </>
   );

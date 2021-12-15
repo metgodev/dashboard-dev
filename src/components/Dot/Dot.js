@@ -10,6 +10,7 @@ let useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.text.hint,
     borderRadius: "50%",
     transition: theme.transitions.create("background-color"),
+    margin: theme.spacing(1)
   },
   dotLarge: {
     width: 8,

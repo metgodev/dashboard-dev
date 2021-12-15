@@ -2,6 +2,8 @@ import defaultTheme from "./default";
 import dark from "./dark";
 
 import { createTheme } from "@material-ui/core";
+import { dir } from "../utils/dir";
+
 
 const overrides = {
   typography: {
@@ -26,7 +28,9 @@ const overrides = {
   },
 };
 
+let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
+
 export default {
-  default: createTheme({ ...defaultTheme, ...overrides }),
-  dark: createTheme({ ...dark, ...overrides }),
+  default: createTheme({ ...defaultTheme, ...overrides, direction: dir(lang), }),
+  dark: createTheme({ ...dark, ...overrides, direction: dir(lang), }),
 };

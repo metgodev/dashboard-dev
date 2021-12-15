@@ -67,21 +67,6 @@ export default makeStyles(theme => ({
     textAlign: "center",
     marginTop: theme.spacing(2),
   },
-  googleButton: {
-    marginTop: theme.spacing(6),
-    boxShadow: theme.customShadows.widget,
-    backgroundColor: theme.palette.googleBtn.bg,
-    color: theme.palette.googleBtn.color,
-    width: "100%",
-    textTransform: "none",
-  },
-  googleButtonCreating: {
-    marginTop: 0,
-  },
-  googleIcon: {
-    width: 30,
-    marginRight: theme.spacing(2),
-  },
   creatingButtonContainer: {
     marginTop: theme.spacing(2.5),
     height: 46,

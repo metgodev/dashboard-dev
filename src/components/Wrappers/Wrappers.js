@@ -68,7 +68,6 @@ function Typography({
 
 function Button({ children, color, ...props }) {
   let theme = useTheme();
-
   let Styled = createStyled({
     button: {
       backgroundColor: getColor(color, theme),
@@ -85,8 +84,9 @@ function Button({ children, color, ...props }) {
         <ButtonBase classes={{ root: classes.button }} {...props}>
           {children}
         </ButtonBase>
-      )}
-    </Styled>
+      )
+      }
+    </Styled >
   );
 }
 

@@ -8,6 +8,6 @@ export default makeStyles(theme => ({
   },
   Router: {
     position: "relative",
-    paddingTop: "2rem"
-  }
+    paddingTop: "3rem"
+  },
 }));

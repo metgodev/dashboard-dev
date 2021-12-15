@@ -1,32 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import App from '../App'
+import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
+import SideBar from '../components/SideBar/SideBar';
+import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
+import Dashboard from '../pages/dashboard/Dashboard';
 import useStyles from "./styles";
+import Businesses from '../pages/businesses/Businesses';
+import Events from '../pages/events/Events';
+import PointsOfInterest from '../pages/points/PointsOfInterest';
+import Tracks from '../pages/tracks/Tracks';
+import Voucher from '../pages/voucher/Voucher';
+import UsersTable from '../pages/userstable/UsersTable';
+import Maps from '../pages/maps/Maps';
+import Support from '../pages/support/Support';
+import FAQ from '../pages/FAQ/FAQ';
 
 
 const Root = () => {
     let classes = useStyles();
-    let isLoggedIn = true
+    let location = useLocation();
+    //local
+    let [isLoggedIn] = useState(location.pathname != '/login')
+    //global 
+    const { sidebar, mobile } = useSelector(s => s.mainReducer)
 
-    const Protecte = ({auth, children })=> {   
+    const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
     }
 
-    
     return (
-        <>
-        {isLoggedIn &&<Header/>}
         <div className={classes.Router}>
-        <Routes>
-            <Route path="/login" element={ <Login/>} />
-            <Route exact  path="/" element={<Protecte auth={isLoggedIn}><App /></Protecte>} />
-            <Route path='*' element={<Error/>} />
-        </Routes>
+            <Main open={sidebar} mobile={mobile.toString()}>
+                {isLoggedIn &&
+                    <>
+                        <Header />
+                        <SideBar location={location} />
+                    </>
+                }
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route exact path="/dashboard" element={<Protecte auth={isLoggedIn}><Dashboard /></Protecte>} />
+                    <Route exact path="/businesses" element={<Protecte auth={isLoggedIn}><Businesses /></Protecte>} />
+                    <Route exact path="/events" element={<Protecte auth={isLoggedIn}><Events /></ Protecte >} />
+                    <Route exact path="/locations" element={<Protecte auth={isLoggedIn}><PointsOfInterest /></Protecte>} />
+                    <Route exact path="/routes" element={<Protecte auth={isLoggedIn}><Tracks /></Protecte>} />
+                    <Route exact path="/voucher" element={<Protecte auth={isLoggedIn}><Voucher /></Protecte>} />
+                    <Route exact path="/users" element={<Protecte auth={isLoggedIn}><UsersTable /></Protecte>} />
+                    <Route exact path="/map" element={<Protecte auth={isLoggedIn}><Maps /></Protecte>} />
+                    <Route exact path="/support" element={<Protecte auth={isLoggedIn}><Support /></Protecte>} />
+                    <Route exact path="/FAQ" element={<Protecte auth={isLoggedIn}><FAQ /></Protecte>} />
+                    <Route path='*' element={<Error />} />
+                </Routes>
+            </Main>
         </div>
-        </>
     );
 }
 
