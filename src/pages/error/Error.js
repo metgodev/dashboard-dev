@@ -6,6 +6,8 @@ import Lottie from 'react-lottie';
 import animatedErr from '../../Assets/lottieFiles/AnimatedError404.json'
 // styles
 import useStyles from "./styles";
+import term from "../../terms";
+
 
 export default function Error() {
   let classes = useStyles();
@@ -31,7 +33,7 @@ export default function Error() {
           size="large"
           className={classes.backButton}
         >
-          {term('back_to_home')}
+          {term('back_home')}
         </Button>
       </div>
     </Grid>
