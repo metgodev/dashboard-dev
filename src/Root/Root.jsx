@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
-import SideBar from '../components/SideBar/SideBar';
+import SideBar from '../components/Sidebar/Sidebar';
 import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
