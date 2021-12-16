@@ -191,6 +191,7 @@ export default {
     },
     MuiIconButton: {
       root: {
+        color: primary,
         padding: 0
       }
     },

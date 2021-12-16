@@ -8,8 +8,9 @@ import Calendar from "../../components/Calendar/Calendar";
 import BigChart from "../../components/BigChart/BigChart";
 import BigStat from "../../components/BigStat/BigStat";
 import term from "../../terms";
-import config from "./config";
+import config from "../../config";
 import MetroStats from "../../components/MetroStats/MetroStats";
+import Download from "../../components/Download/Download";
 
 export default function Dashboard() {
   let headerBtns = [
@@ -20,7 +21,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <PageTitle title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
+      <PageTitle calendar title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
       <Grid container spacing={2}>
         <Grid item lg={4} md={5} sm={12} xs={12}>
           <Calendar type={1} warp={true} />
@@ -42,8 +43,8 @@ export default function Dashboard() {
               <MetroStats {...stat} />
             </Grid>
           ))}
-          <Grid item lg={4} md={12} sm={12} xs={12}>
-            <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>DOWNLOAD</h1>
+          <Grid item lg={2} md={12} sm={12} xs={12}>
+            <Download />
           </Grid>
         </Grid>
         {/* show case */}
@@ -59,16 +60,6 @@ export default function Dashboard() {
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <StatsBoxPieChart />
         </Grid>
-        <Grid item xs={12}>
-          <Widget
-            title="Support Requests"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={config.table} />
-          </Widget>
-        </Grid> */}
         {/* show case */}
       </Grid>
     </>

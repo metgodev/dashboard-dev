@@ -50,9 +50,10 @@ function LangMenu() {
                 disableAutoFocusItem
             >
                 <div className={classes.langMenuUser}>
-                    <Typography variant="h4" weight="medium">
+                    {/* header */}
+                    {/* <Typography variant="h4" weight="medium">
                         {term('language')}
-                    </Typography>
+                    </Typography> */}
                     <Typography
                         className={classes.langMenuLink}
                         component="a"

@@ -262,6 +262,11 @@ const active_lexicon = {
         he: 'אוכל',
         ar: 'اكل',
     },
+    download: {
+        en: 'Download',
+        he: 'הורדה',
+        ar: 'تحميل',
+    },
 }
 
 

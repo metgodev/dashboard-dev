@@ -11,7 +11,8 @@ function Register() {
     let classes = useStyles();
     let [isLoading, setIsLoading] = useState(false);
     let [error, setError] = useState(null);
-    let [nameValue, setNameValue] = useState("");
+    let [firstName, setFirstName] = useState("");
+    let [lastName, setLastName] = useState("");
     let [loginValue, setLoginValue] = useState("");
     let [passwordValue, setPasswordValue] = useState("");
 
@@ -34,17 +35,32 @@ function Register() {
                     </Typography>
                 </Fade>
                 <TextField
-                    id="name"
+                    id="first name"
                     InputProps={{
                         classes: {
                             underline: classes.textFieldUnderline,
                             input: classes.textField,
                         },
                     }}
-                    value={nameValue}
-                    onChange={e => setNameValue(e.target.value)}
+                    value={firstName}
+                    onChange={e => setFirstName(e.target.value)}
                     margin="normal"
-                    placeholder="Full Name"
+                    placeholder="FIrst Name"
+                    type="email"
+                    fullWidth
+                />
+                <TextField
+                    id="last name"
+                    InputProps={{
+                        classes: {
+                            underline: classes.textFieldUnderline,
+                            input: classes.textField,
+                        },
+                    }}
+                    value={lastName}
+                    onChange={e => setLastName(e.target.value)}
+                    margin="normal"
+                    placeholder="Last Name"
                     type="email"
                     fullWidth
                 />
@@ -87,7 +103,8 @@ function Register() {
                             disabled={
                                 loginValue.length === 0 ||
                                 passwordValue.length === 0 ||
-                                nameValue.length === 0
+                                firstName.length === 0 ||
+                                lastName.length === 0
                             }
                             size="large"
                             variant="contained"
@@ -99,8 +116,8 @@ function Register() {
                         </Button>
                     )}
                 </div>
-            </React.Fragment>
-        </div>
+            </React.Fragment >
+        </div >
     )
 }
 

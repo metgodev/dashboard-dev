@@ -18,4 +18,8 @@ export default makeStyles(theme => ({
       boxShadow: theme.customShadows.widgetWide,
     },
   },
+  boxWrapper: {
+    display: 'flex',
+    alignItems: 'end',
+  },
 }));

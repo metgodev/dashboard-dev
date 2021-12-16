@@ -13,9 +13,9 @@ import {
     MapOutlined as Map,
     HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
+// styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
-// styles
 import useStyles from "./styles";
 // components
 import SidebarLink from "./SidebarLink/SidebarLink";

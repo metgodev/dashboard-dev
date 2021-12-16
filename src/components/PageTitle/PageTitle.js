@@ -12,6 +12,7 @@ import useStyles from "./styles";
 // components
 import { Typography } from "../Wrappers/Wrappers";
 import HeaderButtons from "../HeaderButtons/HeaderButtons";
+import Calendar from "../Calendar/Calendar";
 
 export default function PageTitle(props) {
   let classes = useStyles(),
@@ -47,9 +48,14 @@ export default function PageTitle(props) {
           />} label={theme ? 'light' : 'dark'} />
         </FormGroup>
       )}
-      {props.buttonGroup && mobile && (
-        <HeaderButtons btns={props.buttonGroup.btns} />
-      )}
+      <Box className={classes.boxWrapper}>
+        {props.calendar && mobile &&
+          (<Calendar type={2} />)
+        }
+        {props.buttonGroup && mobile && (
+          <HeaderButtons btns={props.buttonGroup.btns} />
+        )}
+      </Box>
     </Box>
   );
 }
