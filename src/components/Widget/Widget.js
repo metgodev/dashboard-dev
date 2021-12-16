@@ -69,6 +69,7 @@ export default function Widget({
         anchorEl={moreref}
         onClose={() => setMoreMenuOpen(false)}
         disableAutoFocusItem
+        disableScrollLock={true}
       >
         <MenuItem>
           <Typography>{term('edit')}</Typography>
