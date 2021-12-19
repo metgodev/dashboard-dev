@@ -35,7 +35,7 @@ export default function Widget({
           {header ? (
             header
           ) : (
-            <React.Fragment>
+            <>
               <Typography variant="h5" color="textSecondary">
                 {title}
               </Typography>
@@ -51,7 +51,7 @@ export default function Widget({
                   <MoreIcon />
                 </IconButton>
               )}
-            </React.Fragment>
+            </>
           )}
         </div>
         <div
@@ -72,13 +72,7 @@ export default function Widget({
         disableScrollLock={true}
       >
         <MenuItem>
-          <Typography>{term('edit')}</Typography>
-        </MenuItem>
-        <MenuItem>
           <Typography>{term('copy')}</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography>{term('delete')}</Typography>
         </MenuItem>
         <MenuItem>
           <Typography>{term('print')}</Typography>

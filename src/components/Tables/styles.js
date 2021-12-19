@@ -1,10 +1,8 @@
 import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
-    paper: {
-        width: '100%',
-        overflow: 'hidden',
-        direction: theme.direction
+    tableHeader: {
+        marginBottom: theme.spacing(2)
     },
     tableContainer: {
         maxHeight: '76vh'

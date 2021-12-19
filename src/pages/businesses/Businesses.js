@@ -7,7 +7,9 @@ import term from '../../terms'
 import { ExportToExcel } from '../../hooks/ExportToExcel'
 import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import { useSelector } from 'react-redux'
-
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import TableHeader from '../../components/Tables/TableHeader'
 function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -16,16 +18,18 @@ function Businesses() {
     const { lang } = useSelector(s => s.mainRememberReducer)
 
     let headerBtns = [
+        //can get name, func, input, icon 
         { name: term('export'), func: () => ExportToExcel(config.table, 'test') },
         { name: term('import'), func: ReadFromExcel, input: true, },
         { name: term('', 'הוספה'), func: () => console.log('Popup') },
-        { name: term('', '<'), func: () => setPage((page < pages) ? (page + 1) : page) },
-        { name: term('', '>'), func: () => setPage((page >= pages) ? (page - 1) : page) },
+        { func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
+        { func: () => setPage((page >= pages) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
+            <TableHeader />
             <PaginationTable
                 lang={lang}
                 data={config.table}

@@ -7,7 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '../Wrappers/Wrappers';
-import { Paper } from '@mui/material';
 import term from '../../terms';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // styles
@@ -15,6 +14,7 @@ import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
 //healpers
 import { StyledTableRow, languages, states } from './TableRowHealpers';
+import Widget from '../Widget/Widget';
 
 
 
@@ -35,7 +35,7 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
 
 
     return (
-        <Paper className={classes.paper}>
+        <Widget disableWidgetMenu>
             <ThemeProvider theme={createTheme(theme, PaginationLanguage)}>
                 <TableContainer className={classes.tableContainer}>
                     <Table stickyHeader aria-label="sticky table" >
@@ -82,6 +82,6 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
                     onRowsPerPageChange={ChangeRowsPerPage}
                 />
             </ThemeProvider>
-        </Paper>
+        </Widget>
     );
 }

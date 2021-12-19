@@ -1,10 +1,15 @@
 import React from 'react'
+import Widget from '../Widget/Widget'
+// styles
+import useStyles from "./styles";
 
 function TableHeader() {
-    return (
-        <div>
+    let classes = useStyles();
 
-        </div>
+    return (
+        <Widget disableWidgetMenu bodyClass={classes.tableHeader}>
+
+        </Widget>
     )
 }
 

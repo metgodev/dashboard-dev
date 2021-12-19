@@ -1,7 +1,5 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-// styles
-import useStyles from "./styles";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Calendar from "../../components/Calendar/Calendar";
@@ -14,6 +12,7 @@ import Download from "../../components/Download/Download";
 
 export default function Dashboard() {
   let headerBtns = [
+    //can get name, func, input, icon 
     { name: term('daily'), func: () => console.log('Days') },
     { name: term('weekly'), func: () => console.log('Week') },
     { name: term('monthly'), func: () => console.log('Months') },
@@ -47,20 +46,6 @@ export default function Dashboard() {
             <Download />
           </Grid>
         </Grid>
-        {/* show case */}
-        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
-          <StatsBox />
-        </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
-          <StatsBoxLinear />
-        </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
-          <StatsBoxGraph />
-        </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-          <StatsBoxPieChart />
-        </Grid> */}
-        {/* show case */}
       </Grid>
     </>
   );
