@@ -16,7 +16,7 @@ function StatsBox() {
     return (
         <Widget
             title="Visits Today"
-            upperTitle
+            uppertitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
         >

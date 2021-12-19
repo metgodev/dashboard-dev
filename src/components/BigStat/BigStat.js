@@ -43,7 +43,7 @@ export default function BigStat(props) {
           </Select>
         </div>
       }
-      upperTitle
+      uppertitle
     >
       <div className={classes.totalValueContainer}>
         <div className={classes.totalValue}>

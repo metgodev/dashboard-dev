@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux"
 
 // local terms until remote config available
 const active_lexicon = {
@@ -267,8 +266,72 @@ const active_lexicon = {
         he: 'הורדה',
         ar: 'تحميل',
     },
+    status: {
+        en: 'status',
+        he: 'סטטוס',
+        ar: 'تحميل',
+    },
+    name: {
+        en: 'name',
+        he: 'שם העסק',
+        ar: 'اسم',
+    },
+    impact: {
+        en: 'impact',
+        he: 'אימפקט',
+        ar: 'تأثير',
+    },
+    category: {
+        en: 'category',
+        he: 'קטגוריה',
+        ar: 'الفئة',
+    },
+    tag: {
+        en: 'tag',
+        he: 'תגית',
+        ar: 'بطاقة شعار',
+    },
+    authority: {
+        en: 'authority',
+        he: 'רשות',
+        ar: 'السلطة',
+    },
+    address: {
+        en: 'address',
+        he: 'כתובת',
+        ar: 'تبوك',
+    },
+    edit: {
+        en: 'edit',
+        he: 'עריכה',
+        ar: 'تعديل',
+    },
+    private: {
+        en: 'private',
+        he: 'פרטי',
+        ar: 'نشر',
+    },
+    public: {
+        en: 'public',
+        he: 'ציבורי',
+        ar: 'عام',
+    },
+    pending: {
+        en: 'pending approval',
+        he: 'ממתין לאישור',
+        ar: 'ما زال يحتاج بتصدير',
+    },
+    export: {
+        en: 'export to .xslx',
+        he: 'יצוא לקובץ .xslx',
+        ar: 'تصدير إلى .xslx',
+    },
+    import: {
+        en: 'import from .xslx',
+        he: 'יבוא מקובץ .xslx',
+        ar: 'استيراد من .xslx',
+    },
 }
-
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 

@@ -23,7 +23,7 @@ const Root = () => {
     let classes = useStyles();
     let location = useLocation();
     //local
-    let [isLoggedIn] = useState(location.pathname != '/login')
+    let [isLoggedIn] = useState(location.pathname !== '/login')
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
 

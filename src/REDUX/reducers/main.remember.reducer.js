@@ -6,6 +6,10 @@ let rememberState = {
     lang: 'he'
 }
 
+//initial remember 
+let n = '@@remember-mainRememberReducer'
+if (localStorage.getItem(n) === null) localStorage.setItem(n, JSON.stringify(rememberState))
+
 export default (state = rememberState, action) => {
 
     switch (action.type) {

@@ -1,3 +1,4 @@
+import { Grid } from "@material-ui/core";
 import React, { useLayoutEffect, useState } from "react";
 import {
   withGoogleMap,
@@ -5,7 +6,9 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
+import MetroStats from "../../components/MetroStats/MetroStats";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import config from "../../config";
 import term from "../../terms";
 import { em } from "../../utils/document";
 
@@ -44,11 +47,21 @@ export default function Maps() {
     <div className={classes.mapContainer}>
       <PageTitle title={term('map')} />
       <BasicMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMoe_LmnA0wBSKsB9wQTfvA8xRZkajrS4&callback=initMap"
         loadingElement={<div style={{ height: "inherit", width: "inherit" }} />}
         containerElement={<div style={{ height: em(40), width: '100%', padding: em(1) }} />}
         mapElement={<div style={{ height: "100%" }} />}
       />
+      <Grid container
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="stretch" spacing={2}>
+        {config.MetroStats.map(stat => (
+          <Grid item lg={1} md={12} sm={12} xs={12} key={stat.product}>
+            <MetroStats {...stat} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }

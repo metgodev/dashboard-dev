@@ -35,9 +35,9 @@ export default function Calendar({ type, warp }) {
     const Warp = warp ? Widget : Box
 
     return (
-        <Warp title={term('calendar')} upperTitle className={classes.card} >
+        <Warp title={term('calendar')} uppertitle className={classes.card} >
             <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
-                {type == 1 && <ThemeProvider theme={theme}>
+                {type === 1 && <ThemeProvider theme={theme}>
                     <DatePicker
                         autoOk
                         orientation={!isMobileDevice() && "landscape"}
@@ -48,7 +48,7 @@ export default function Calendar({ type, warp }) {
                     />
                 </ThemeProvider>
                 }
-                {type == 2 && <KeyboardDatePicker
+                {type === 2 && <KeyboardDatePicker
                     autoOk
                     variant="inline"
                     inputVariant="outlined"

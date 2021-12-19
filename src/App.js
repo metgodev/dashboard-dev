@@ -9,12 +9,14 @@ import Themes from "./themes";
 import { em } from './utils/document';
 
 const App = () => {
+  //global
   const { theme, lang } = useSelector(s => s.mainRememberReducer)
   let type = () => theme ? Themes.default : Themes.dark
 
   useLayoutEffect(() => {
     setPageDirection(lang)
   }, [lang])
+
 
   return (
     <Box style={{ padding: em(1) }}>

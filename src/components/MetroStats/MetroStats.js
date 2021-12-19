@@ -24,7 +24,7 @@ function MetroStats({ product, places, added, svg }) {
                 <div className={classes.title}>
                     <Typography variant="h5">{product}</Typography>
                 </div>
-            } upperTitle >
+            } uppertitle >
             <img src={img[svg]} alt={svg} className={classes.logotype} />
             <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

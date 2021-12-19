@@ -59,7 +59,7 @@ export default function Dashboard() {
         </Grid>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <StatsBoxPieChart />
-        </Grid>
+        </Grid> */}
         {/* show case */}
       </Grid>
     </>
