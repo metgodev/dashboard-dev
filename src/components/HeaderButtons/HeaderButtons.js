@@ -20,28 +20,31 @@ function HeaderButtons({ btns }) {
                     return (
                         icon ?
                             <IconButton
+                                key={name}
                                 size="small"
                                 aria-label="move-between-screens"
                                 onClick={() => !input && click()}
                             >
                                 {icon}
                             </IconButton> :
-                            <Button
-                                classes={{ root: classes.button }}
-                                variant={variant === name ? 'contained' : 'outlined'}
-                                color="primary"
-                                key={name}
-                                onClick={() => !input && click()}
-                                component="label"
-                            >
-                                {name}
-                                {input && <input
-                                    name="files[]"
-                                    type="file"
-                                    hidden
-                                    onChange={(e) => func(e)}
-                                />}
-                            </Button>
+                            <>
+                                <Button
+                                    key={name}
+                                    classes={{ root: classes.button }}
+                                    variant={variant === name ? 'contained' : 'outlined'}
+                                    color="primary"
+                                    onClick={() => !input && click()}
+                                    component="label"
+                                >
+                                    {name}
+                                    {input && <input
+                                        name="files[]"
+                                        type="file"
+                                        hidden
+                                        onChange={(e) => func(e)}
+                                    />}
+                                </Button>
+                            </>
                     )
                 })}
             </Box >

@@ -9,7 +9,7 @@ import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import { useSelector } from 'react-redux'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
-import TableHeader from '../../components/Tables/TableHeader'
+
 function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -22,14 +22,13 @@ function Businesses() {
         { name: term('export'), func: () => ExportToExcel(config.table, 'test') },
         { name: term('import'), func: ReadFromExcel, input: true, },
         { name: term('', 'הוספה'), func: () => console.log('Popup') },
-        { func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
-        { func: () => setPage((page >= pages) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
+        { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
+        { name: 'back', func: () => setPage((page >= pages) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            <TableHeader />
             <PaginationTable
                 lang={lang}
                 data={config.table}

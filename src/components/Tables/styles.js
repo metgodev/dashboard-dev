@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
     tableHeader: {
-        marginBottom: theme.spacing(2)
+
     },
     tableContainer: {
-        maxHeight: '76vh'
+        maxHeight: '74vh'
     },
     statusBtns: {
         alignItems: 'center',
