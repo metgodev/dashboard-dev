@@ -47,7 +47,7 @@ function LangMenu() {
                 className={classes.headerMenu}
                 classes={{ paper: classes.langMenu }}
                 disableAutoFocusItem
-                disableScrollLock={true}
+                disablescrolllock={true.toString()}
             >
                 <div className={classes.langMenuUser}>
                     {/* header */}

@@ -12,7 +12,7 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 
 function Businesses() {
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(25);
     const pages = Math.ceil(config.table.length / rowsPerPage - 1)
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer)

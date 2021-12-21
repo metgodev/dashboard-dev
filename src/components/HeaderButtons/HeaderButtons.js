@@ -11,43 +11,39 @@ function HeaderButtons({ btns }) {
 
     return (
         <>
-            <Box className={classes.box}>
-                {btns && btns.map(({ name, func, input, icon }) => {
-                    const click = () => {
-                        func()
-                        setVariant(name)
-                    }
-                    return (
-                        icon ?
+            {btns && btns.map(({ name, func, input, icon }) => {
+                const click = () => {
+                    func()
+                    setVariant(name)
+                }
+                return (
+                    <Box className={classes.box} key={name}>
+                        {icon ?
                             <IconButton
-                                key={name}
                                 size="small"
                                 aria-label="move-between-screens"
                                 onClick={() => !input && click()}
                             >
                                 {icon}
                             </IconButton> :
-                            <>
-                                <Button
-                                    key={name}
-                                    classes={{ root: classes.button }}
-                                    variant={variant === name ? 'contained' : 'outlined'}
-                                    color="primary"
-                                    onClick={() => !input && click()}
-                                    component="label"
-                                >
-                                    {name}
-                                    {input && <input
-                                        name="files[]"
-                                        type="file"
-                                        hidden
-                                        onChange={(e) => func(e)}
-                                    />}
-                                </Button>
-                            </>
-                    )
-                })}
-            </Box >
+                            <Button
+                                classes={{ root: classes.button }}
+                                variant={variant === name ? 'contained' : 'outlined'}
+                                color="primary"
+                                onClick={() => !input && click()}
+                                component="label"
+                            >
+                                {name}
+                                {input && <input
+                                    name="files[]"
+                                    type="file"
+                                    hidden
+                                    onChange={(e) => func(e)}
+                                />}
+                            </Button>}
+                    </Box>
+                )
+            })}
         </>
     )
 }

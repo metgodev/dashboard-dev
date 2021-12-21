@@ -69,7 +69,7 @@ export default function Widget({
         anchorEl={moreref}
         onClose={() => setMoreMenuOpen(false)}
         disableAutoFocusItem
-        disableScrollLock={true}
+        disablescrolllock={true.toString()}
       >
         <MenuItem>
           <Typography>{term('copy')}</Typography>

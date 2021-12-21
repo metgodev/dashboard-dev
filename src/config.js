@@ -341,6 +341,9 @@ export default {
   tableCategories: {
     impact: ['1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
     status: ['private', 'public', 'pending'],
-    category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food']
+    category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
+    tag: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
+    authority: ['ashdod', 'askelon'],
+    edit: ['last week', 'last month']
   }
 };

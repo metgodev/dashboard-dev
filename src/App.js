@@ -17,7 +17,6 @@ const App = () => {
     setPageDirection(lang)
   }, [lang])
 
-
   return (
     <Box style={{ padding: em(1) }}>
       <ThemeProvider theme={type(theme)} >
