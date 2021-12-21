@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { StyledTableRow, languages, states, catParser } from './TableRowHealpers';
 import Widget from '../Widget/Widget';
 import TableHeader from './TableHeader';
-import { TableHead } from '@mui/material';
 
 
 export default function PaginationTable({ data, page, setPage, rowsPerPage, setRowsPerPage, lang }) {
@@ -36,14 +35,12 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
             <ThemeProvider theme={createTheme(theme, PaginationLanguage)}>
                 <TableContainer className={classes.tableContainer}>
                     <Table stickyHeader aria-label="sticky table"  >
-                        <TableHead>
-                            <TableHeader keys={keys} />
-                        </TableHead>
-                        <TableBody>
+                        <TableHeader keys={keys} />
+                        <TableBody >
                             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(({ id, status, name, impact, category, tag, authority, address, edit }) => (
                                     <StyledTableRow key={id}>
-                                        <TableCell size="small" align='center'>
+                                        <TableCell size="small" align='center' >
                                             <Button
                                                 color={states[status.toLowerCase()]}
                                                 size="small"
@@ -76,6 +73,6 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
                     onRowsPerPageChange={ChangeRowsPerPage}
                 />
             </ThemeProvider>
-        </Widget>
+        </Widget >
     );
 }

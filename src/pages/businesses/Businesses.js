@@ -9,11 +9,14 @@ import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import { useSelector } from 'react-redux'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import PopupDialog from '../../components/PopupDialog/PopupDialog'
 
 function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     const pages = Math.ceil(config.table.length / rowsPerPage - 1)
+    //dialog
+    const [open, setOpen] = useState(false);
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
 
@@ -21,7 +24,7 @@ function Businesses() {
         //can get name, func, input, icon 
         { name: term('export'), func: () => ExportToExcel(config.table, 'test') },
         { name: term('import'), func: ReadFromExcel, input: true, },
-        { name: term('', 'הוספה'), func: () => console.log('Popup') },
+        { name: term('', 'הוספה'), func: () => setOpen(true) },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
@@ -37,6 +40,7 @@ function Businesses() {
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}
             />
+            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} />
         </Box>
     )
 }

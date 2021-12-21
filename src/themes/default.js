@@ -155,6 +155,11 @@ export default {
         },
       },
     },
+    MuiList: {
+      padding: {
+        paddingTop: 0,
+      },
+    },
     MuiTouchRipple: {
       child: {
         backgroundColor: "white",
@@ -217,6 +222,21 @@ export default {
     MuiTypography: {
       alignLeft: {
         textAlign: 'center'
+      },
+    },
+    MuiDialogTitle: {
+      root: {
+        padding: 0,
+      }
+    },
+    MuiDialogContent: {
+      root: {
+        padding: 0,
+      }
+    },
+    MuiBox: {
+      root: {
+        padding: 8,
       }
     },
   },

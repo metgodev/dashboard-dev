@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Box } from '@mui/system';
+import BusinesPop from './PopupConfig/BusinesPop';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide({ description, btns, title, open, setOpen }) {
-    const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+export default function PopupDialog({ description, btns, tabs, title, open, setOpen }) {
 
     const handleClose = () => {
         setOpen(false);
@@ -25,26 +22,24 @@ export default function AlertDialogSlide({ description, btns, title, open, setOp
 
     return (
         <Box>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Slide in alert dialog
-            </Button>
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
+                fullWidth
+                maxWidth="md"
             >
                 <DialogTitle>{title}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
-                        {description}
-                    </DialogContentText>
-                </DialogContent>
+                {tabs === 'businesess' && <BusinesPop />}
+                <DialogContentText>
+                    {description}
+                </DialogContentText>
                 <DialogActions>
-                    {btns.map(b => (<Button onClick={b.func()}>{b.name}</Button>))}
+                    {btns && btns.map(b => (<Button onClick={b.func()}>{b.name}</Button>))}
                 </DialogActions>
             </Dialog>
-        </Box>
+        </Box >
     );
 }
