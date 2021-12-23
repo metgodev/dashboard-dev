@@ -8,9 +8,7 @@ import config from '../../config';
 
 
 function TableHeader({ keys }) {
-
     let cat = config.tableCategories;
-    let data = [...keys, 'btn']
     const [values, setValues] = useState({
         status: '',
         name: '',
@@ -25,14 +23,15 @@ function TableHeader({ keys }) {
     const handleChange = (e, key) => {
         setValues(prevState => ({ ...prevState, [key]: e.target.value }));
     };
+
     return (
         <TableHead >
             <TableRow>
-                {data.map((key) => (
+                {keys.map((key) => (
                     <TableCell size="small" align='center' key={key}>
                         <FormControl fullWidth style={{ minWidth: 130 }}>
                             {
-                                key !== 'btn' ? ['name', 'address'].indexOf(key) > -1 ?
+                                key !== 'contact' ? ['name', 'address'].indexOf(key) > -1 ?
                                     <>
                                         {term(key)}
                                         <TextField

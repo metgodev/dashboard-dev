@@ -14,7 +14,7 @@ import PopupDialog from '../../components/PopupDialog/PopupDialog'
 function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
-    const pages = Math.ceil(config.table.length / rowsPerPage - 1)
+    const pages = Math.ceil(config.businesses_table.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
     //global 
@@ -22,11 +22,11 @@ function Businesses() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(config.table, 'test') },
+        { name: term('export'), func: () => ExportToExcel(config.businesses_table, 'test') },
         { name: term('import'), func: ReadFromExcel, input: true, },
         { name: term('', 'הוספה'), func: () => setOpen(true) },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
-        { name: 'back', func: () => setPage((page >= pages) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
+        { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
     return (
@@ -34,7 +34,7 @@ function Businesses() {
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
             <PaginationTable
                 lang={lang}
-                data={config.table}
+                data={config.businesses_table}
                 page={page}
                 setPage={setPage}
                 rowsPerPage={rowsPerPage}
@@ -46,5 +46,4 @@ function Businesses() {
 }
 
 export default Businesses
-
 

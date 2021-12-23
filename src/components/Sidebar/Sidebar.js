@@ -47,7 +47,7 @@ const structure = [
     { id: 14, type: "divider" },
 ];
 
-function Sidebar({ location }) {
+function SideBar({ location }) {
     let classes = useStyles();
     let theme = useTheme();
     let dispatch = useDispatch()
@@ -112,4 +112,4 @@ function Sidebar({ location }) {
     }
 }
 
-export default Sidebar;
+export default SideBar;

@@ -6,7 +6,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Box } from '@mui/system';
-import BusinesPop from './PopupConfig/BusinesPop';
+import BusinessesPop from './PopupConfig/BusinessesPop';
+//style
+import { useTheme } from "@material-ui/styles";
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -15,6 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 export default function PopupDialog({ description, btns, tabs, title, open, setOpen }) {
+    const theme = useTheme();
 
     const handleClose = () => {
         setOpen(false);
@@ -23,6 +27,7 @@ export default function PopupDialog({ description, btns, tabs, title, open, setO
     return (
         <Box>
             <Dialog
+                PaperProps={{ style: { backgroundColor: theme.palette.bg.light } }}
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
@@ -32,7 +37,7 @@ export default function PopupDialog({ description, btns, tabs, title, open, setO
                 maxWidth="md"
             >
                 <DialogTitle>{title}</DialogTitle>
-                {tabs === 'businesess' && <BusinesPop />}
+                {tabs === 'businesess' && <BusinessesPop />}
                 <DialogContentText>
                     {description}
                 </DialogContentText>

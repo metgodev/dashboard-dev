@@ -1,11 +1,11 @@
 import tinycolor from "tinycolor2";
 
 const primary = "#F58840";
-const secondary = "#DD4A48";
-const warning = "#FFC260";
-const success = "#3CD4A0";
+const secondary = "#C84B31";
+const warning = "#9C3D54";
+const success = "#146356";
 const info = "#CAF7E3";
-const bg = "#334756";
+const bg = "#2D4263";
 
 //graph lines
 const graphlinegreen = "#80C838";
@@ -99,7 +99,7 @@ export default {
       hint: "#87AAAA",
     },
     background: {
-      default: "#334756",
+      default: "#2a3a46",
       secondary: "#082032",
     },
     action: {
@@ -138,15 +138,15 @@ export default {
     MuiListItem: {
       root: {
         "&$selected": {
-          backgroundColor: "#334756 !important",
+          backgroundColor: "#2D4263 !important",
           "&:focus": {
-            backgroundColor: "#334756",
+            backgroundColor: "#2D4263",
           },
         },
       },
       button: {
         "&:hover, &:focus": {
-          backgroundColor: "#334756",
+          backgroundColor: "#191919",
         },
       },
     },

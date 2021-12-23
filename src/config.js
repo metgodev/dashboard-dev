@@ -149,7 +149,7 @@ export default {
       svg: 'food'
     },
   ],
-  table: [
+  businesses_table: [
     {
       id: 0,
       status: statuses[Math.floor(Math.random() * statuses.length)],
@@ -160,6 +160,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 2,
@@ -171,6 +172,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 3,
@@ -182,6 +184,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 4,
@@ -193,6 +196,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 5,
@@ -204,6 +208,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 6,
@@ -215,6 +220,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 7,
@@ -226,6 +232,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 8,
@@ -237,6 +244,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 9,
@@ -248,6 +256,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 10,
@@ -259,6 +268,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 11,
@@ -270,6 +280,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 12,
@@ -281,6 +292,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 13,
@@ -292,6 +304,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 14,
@@ -303,6 +316,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 15,
@@ -314,6 +328,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 16,
@@ -325,6 +340,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
     {
       id: 17,
@@ -336,6 +352,196 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+  ],
+  events_table: [
+    {
+      id: 0,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 2,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 3,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 4,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 5,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 6,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 7,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 8,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 9,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 10,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 11,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 12,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 13,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 14,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 15,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 16,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
+    },
+    {
+      id: 17,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      name: "שם העסק",
+      impact: Math.floor(Math.random() * 100) + 1,
+      category: "אוכל",
+      tag: "מסעדות ובתי קפה",
+      address: "שדרות",
+      edit: new Date().toLocaleDateString(),
+      contact: '0535464645'
     },
   ],
   tableCategories: {

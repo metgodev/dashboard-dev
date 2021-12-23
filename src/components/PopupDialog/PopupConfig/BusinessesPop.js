@@ -24,7 +24,7 @@ let ModalInit = [
     { title: 'email', id: 12, label: 'email', rows: 1, maxRows: 4, func: () => { } },
 ]
 
-const BusinesPop = () => {
+const BusinessesPop = () => {
     const [tab, setTab] = useState(0);
 
     const handleTabs = (event, newValue) => {
@@ -75,4 +75,4 @@ const BusinesPop = () => {
     )
 }
 
-export default BusinesPop
+export default BusinessesPop

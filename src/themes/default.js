@@ -1,9 +1,9 @@
 import tinycolor from "tinycolor2";
 
 const primary = "#142F43";
-const secondary = "#EC255A";
-const warning = "#FFC260";
-const success = "#3CD4A0";
+const secondary = "#F0142F";
+const warning = "#FF9933";
+const success = "#80C838";
 const info = "#9013FE";
 const bg = "#E8EAFC";
 
@@ -86,8 +86,8 @@ export default {
       hint: "#B9B9B9",
     },
     background: {
-      default: "#F6F7FF",
-      light: "#F3F5FF",
+      default: "#FbFbFa",
+      light: "#ececf0",
     },
     bg: {
       main: bg,

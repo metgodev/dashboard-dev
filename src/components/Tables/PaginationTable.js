@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,15 +10,19 @@ import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //healpers
-import { StyledTableRow, languages, states, catParser } from './TableRowHealpers';
+import { StyledTableRow, languages, stats, addTableRow } from './TableRowHealpers';
 import Widget from '../Widget/Widget';
 import TableHeader from './TableHeader';
 
-
 export default function PaginationTable({ data, page, setPage, rowsPerPage, setRowsPerPage, lang }) {
     let keys = Object.keys(data[0]).map(i => i);
-    keys.shift(); // delete "id" key
+    keys.shift() // delete "id" key,
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
+    //local
+    const [TableCel, setTable] = useState({
+        columns: keys,
+        columnsToHide: ['id', 'status'],
+    })
     //style
     let classes = useStyles();
     let theme = useTheme();
@@ -38,26 +42,18 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
                         <TableHeader keys={keys} />
                         <TableBody >
                             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(({ id, status, name, impact, category, tag, authority, address, edit }) => (
+                                .map(({ id, status, ...data }) => (
                                     <StyledTableRow key={id}>
-                                        <TableCell size="small" align='center' >
+                                        {status && <TableCell size="small" align='center' >
                                             <Button
-                                                color={states[status.toLowerCase()]}
+                                                color={stats[status.toLowerCase()]}
                                                 size="small"
                                                 className={classes.statusBtns}
                                                 variant="contained"
-                                            >
-                                                {status}
+                                            >{status}
                                             </Button>
-                                        </TableCell>
-                                        <TableCell size="small" align='center' className="pl-3 fw-normal">{name}</TableCell>
-                                        <TableCell size="small" align='center'>{impact}</TableCell>
-                                        <TableCell size="small" align='center'>{category}</TableCell>
-                                        <TableCell size="small" align='center'>{tag}</TableCell>
-                                        <TableCell size="small" align='center'>{authority}</TableCell>
-                                        <TableCell size="small" align='center'>{address}</TableCell>
-                                        <TableCell size="small" align='center'>{edit}</TableCell>
-                                        <TableCell size="small" align='center'>btns , con , call</TableCell>
+                                        </TableCell>}
+                                        {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
                                     </StyledTableRow>
                                 ))}
                         </TableBody>
