@@ -22,7 +22,7 @@ function Register() {
 
     return (
         <div>
-            <React.Fragment>
+            <>
                 <Typography variant="h1" className={classes.greeting}>
                     {term('welcome')}
                 </Typography>
@@ -45,7 +45,7 @@ function Register() {
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)}
                     margin="normal"
-                    placeholder="FIrst Name"
+                    placeholder="שם"
                     type="email"
                     fullWidth
                 />
@@ -60,7 +60,7 @@ function Register() {
                     value={lastName}
                     onChange={e => setLastName(e.target.value)}
                     margin="normal"
-                    placeholder="Last Name"
+                    placeholder="שם משפחה"
                     type="email"
                     fullWidth
                 />
@@ -75,7 +75,7 @@ function Register() {
                     value={loginValue}
                     onChange={e => setLoginValue(e.target.value)}
                     margin="normal"
-                    placeholder="Email Adress"
+                    placeholder="כתובת אימייל"
                     type="email"
                     fullWidth
                 />
@@ -90,7 +90,7 @@ function Register() {
                     value={passwordValue}
                     onChange={e => setPasswordValue(e.target.value)}
                     margin="normal"
-                    placeholder="Password"
+                    placeholder="סיסמה"
                     type="password"
                     fullWidth
                 />
@@ -116,7 +116,7 @@ function Register() {
                         </Button>
                     )}
                 </div>
-            </React.Fragment >
+            </ >
         </div >
     )
 }

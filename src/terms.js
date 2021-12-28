@@ -331,6 +331,91 @@ const active_lexicon = {
         he: 'יבוא מקובץ .xslx',
         ar: 'استيراد من .xslx',
     },
+    search: {
+        en: "Search",
+        he: "חיפוש",
+        ar: "بحث",
+    },
+    add: {
+        en: "Add",
+        he: "הוספה",
+        ar: "يضيف",
+    },
+    edit: {
+        en: "Edit",
+        he: "עריכה",
+        ar: "تقييم",
+    },
+    businesse_name: {
+        en: "businesse Name",
+        he: "שם העסק",
+        ar: "الاسم التجاري",
+    },
+    for_whom: {
+        en: "For whom",
+        he: "למי מתאים",
+        ar: "لمن",
+    },
+    tags: {
+        en: "Tags",
+        he: "תגיות",
+        ar: "العلامات",
+    },
+    description: {
+        en: "Description",
+        he: "תיאור",
+        ar: "وصف",
+    },
+    opening_hours: {
+        en: "Opening hours",
+        he: "שעות פתיחה",
+        ar: "ساعات العمل",
+    },
+    contact: {
+        en: "Contact",
+        he: "איש קשר",
+        ar: "اتصل",
+    },
+    contact_number: {
+        en: "Contact number",
+        he: "טלפון איש קשר",
+        ar: "هاتف الاتصال",
+    },
+    business_number: {
+        en: "Business number",
+        he: "טלפון עסק",
+        ar: "هاتف العمل",
+    },
+    site_link: {
+        en: "Site link",
+        he: "לינק לאתר",
+        ar: "ارتباط بالموقع",
+    },
+    details: {
+        en: "Details",
+        he: "פרטים",
+        ar: "تفاصيل",
+    },
+    statistics: {
+        en: "Statistics",
+        he: "סטטיסטיקות",
+        ar: "إحصائيات",
+    },
+    gallery: {
+        en: "Gallery",
+        he: "גלריה",
+        ar: "رواق",
+    },
+    promotion: {
+        en: "Promotion",
+        he: "קידום",
+        ar: "ترويج",
+    },
+    calls: {
+        en: "Calls",
+        he: "שיחות",
+        ar: "محادثات",
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

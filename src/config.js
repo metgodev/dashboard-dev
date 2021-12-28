@@ -160,7 +160,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 2,
@@ -172,7 +172,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 3,
@@ -184,7 +184,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 4,
@@ -196,7 +196,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 5,
@@ -208,7 +208,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 6,
@@ -220,7 +220,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 7,
@@ -232,7 +232,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 8,
@@ -244,7 +244,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 9,
@@ -256,7 +256,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 10,
@@ -268,7 +268,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 11,
@@ -280,7 +280,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 12,
@@ -292,7 +292,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 13,
@@ -304,7 +304,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 14,
@@ -316,7 +316,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 15,
@@ -328,7 +328,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 16,
@@ -340,7 +340,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 17,
@@ -352,7 +352,7 @@ export default {
       authority: "שער הנגב",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
   ],
   events_table: [
@@ -365,7 +365,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 2,
@@ -376,7 +376,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 3,
@@ -387,7 +387,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 4,
@@ -398,7 +398,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 5,
@@ -409,7 +409,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 6,
@@ -420,7 +420,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 7,
@@ -431,7 +431,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 8,
@@ -442,7 +442,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 9,
@@ -453,7 +453,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 10,
@@ -464,7 +464,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 11,
@@ -475,7 +475,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 12,
@@ -486,7 +486,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 13,
@@ -497,7 +497,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 14,
@@ -508,7 +508,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 15,
@@ -519,7 +519,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 16,
@@ -530,7 +530,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
     {
       id: 17,
@@ -541,7 +541,7 @@ export default {
       tag: "מסעדות ובתי קפה",
       address: "שדרות",
       edit: new Date().toLocaleDateString(),
-      contact: '0535464645'
+      contact: ['whatsapp', 'phone', 'email']
     },
   ],
   tableCategories: {

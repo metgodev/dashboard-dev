@@ -3,6 +3,7 @@ import { em } from "../../utils/document";
 
 export default makeStyles(theme => ({
   container: {
+    direction: 'ltr',
     height: "100vh",
     width: "100vw",
     display: "flex",
@@ -32,8 +33,8 @@ export default makeStyles(theme => ({
     marginBottom: theme.spacing(4),
   },
   logotypeText: {
-    color: theme.palette.primary.main,
-    fontWeight: 300,
+    color: theme.palette.warning.main,
+    fontWeight: 400,
     fontSize: em(6),
     [theme.breakpoints.down("md")]: {
       fontSize: 48,

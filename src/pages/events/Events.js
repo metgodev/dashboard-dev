@@ -22,7 +22,7 @@ function Events() {
         //can get name, func, input, icon 
         { name: term('export'), func: () => ExportToExcel(config.events_table, 'test') },
         { name: term('import'), func: ReadFromExcel, input: true, },
-        { name: term('', 'הוספה'), func: () => setOpen(true) },
+        { name: term('add'), func: () => setOpen(true) },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]

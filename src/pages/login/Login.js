@@ -29,8 +29,8 @@ function Login() {
             textColor="primary"
             centered
           >
-            <Tab label="Login" classes={{ root: classes.tab }} />
-            <Tab label="New User" classes={{ root: classes.tab }} />
+            <Tab label="התחברות" classes={{ root: classes.tab }} />
+            <Tab label="הרשמה" classes={{ root: classes.tab }} />
           </Tabs>
           {activeTabId === 0 && (<SignIn />)}
           {activeTabId === 1 && (<Register />)}

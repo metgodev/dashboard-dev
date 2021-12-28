@@ -1,23 +1,25 @@
-import React from 'react';
-import Button from '@mui/material/Button';
+import React, { forwardRef } from 'react';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Box } from '@mui/system';
-import BusinessesPop from './PopupConfig/BusinessesPop';
+import { DialogContent, IconButton } from '@material-ui/core';
+import CloseIcon from '@mui/icons-material/Close';
+import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 //style
 import { useTheme } from "@material-ui/styles";
+import useStyles from "./styles";
 
 
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 
-export default function PopupDialog({ description, btns, tabs, title, open, setOpen }) {
+export default function PopupDialog({ description, tabs, title, open, setOpen, initialData, type }) {
+    const classes = useStyles()
     const theme = useTheme();
 
     const handleClose = () => {
@@ -27,23 +29,28 @@ export default function PopupDialog({ description, btns, tabs, title, open, setO
     return (
         <Box>
             <Dialog
-                PaperProps={{ style: { backgroundColor: theme.palette.bg.light } }}
+                PaperProps={{
+                    style: { backgroundColor: theme.palette.bg.light, minHeight: '84vh' }
+                }}
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
                 fullWidth
                 maxWidth="md"
             >
-                <DialogTitle>{title}</DialogTitle>
-                {tabs === 'businesess' && <BusinessesPop />}
+                <DialogTitle className={classes.dialogHeader}>
+                    {title}
+                    <IconButton onClick={handleClose}>
+                        < CloseIcon />
+                    </IconButton>
+                </DialogTitle>
+                <DialogContent dividers={true} className={classes.dialogContent}>
+                    {tabs === 'businesess' && <ModifyPop initialData={initialData} type={type} />}
+                </DialogContent>
                 <DialogContentText>
                     {description}
                 </DialogContentText>
-                <DialogActions>
-                    {btns && btns.map(b => (<Button onClick={b.func()}>{b.name}</Button>))}
-                </DialogActions>
             </Dialog>
         </Box >
     );

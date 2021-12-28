@@ -60,7 +60,7 @@ function TableHeader({ keys }) {
                                         style={{ marginTop: 20 }}
                                         color="primary"
                                         onClick={() => { console.log(values) }}>
-                                        Search
+                                        {term('search')}
                                     </Button>
                             }
                         </FormControl>

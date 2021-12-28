@@ -12,19 +12,31 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
 
 function Businesses() {
+    let tableData = config.businesses_table;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
-    const pages = Math.ceil(config.businesses_table.length / rowsPerPage - 1)
+    const pages = Math.ceil(tableData.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
+    const [dialogType, setDialogType] = useState('add');
+    const [initialDataDialog, setInitialDataDialog] = useState([]);
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
 
+    const openDialog = (data) => {
+        if (!data) setDialogType('add')
+        else {
+            setDialogType('edit')
+            setInitialDataDialog(data)
+        }
+        setOpen(!open)
+    }
+
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(config.businesses_table, 'test') },
+        { name: term('export'), func: () => ExportToExcel(tableData, 'test') },
         { name: term('import'), func: ReadFromExcel, input: true, },
-        { name: term('', 'הוספה'), func: () => setOpen(true) },
+        { name: term('add'), func: openDialog },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
@@ -34,13 +46,14 @@ function Businesses() {
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
             <PaginationTable
                 lang={lang}
-                data={config.businesses_table}
+                data={tableData}
                 page={page}
                 setPage={setPage}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}
+                openDialog={openDialog}
             />
-            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} />
+            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} initialData={initialDataDialog} type={dialogType} />
         </Box>
     )
 }

@@ -9,7 +9,7 @@ import metro from './metro';
 
 
 //read
-const getAll = async (resource) => {
+const getAll = async (resource, params = {}) => {
     try {
         const res = await metro
             .get(`/${resource}`);
@@ -31,10 +31,10 @@ const getSingle = async (resource, id) => {
 };
 
 //create
-const post = async (resource, body) => {
+const post = async (resource, payload) => {
     try {
         const res = await metro
-            .post(`/${resource}`, body);
+            .post(`/${resource}`, payload);
         return handleResponse(res);
     } catch (error) {
         return handleError(error);
@@ -42,10 +42,21 @@ const post = async (resource, body) => {
 };
 
 //ubdate
-const put = async (resource, body) => {
+const patch = async (resource, payload) => {
     try {
         const res = await metro
-            .put(`/${resource}`, body);
+            .put(`/${resource}`, payload);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+//ubdate
+const put = async (resource, payload) => {
+    try {
+        const res = await metro
+            .patch(`/${resource}`, payload);
         return handleResponse(res);
     } catch (error) {
         return handleError(error);
@@ -68,5 +79,6 @@ export const apiProvider = {
     getSingle,
     post,
     put,
+    patch,
     del,
 };

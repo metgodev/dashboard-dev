@@ -1,9 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
-    tableHeader: {
-        backgroundColor: '#000'
-    },
     tableContainer: {
         maxHeight: '74vh',
     },
@@ -11,5 +8,9 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
-    }
+    },
+    rowCell: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
 }));

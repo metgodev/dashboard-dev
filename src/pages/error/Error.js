@@ -25,7 +25,7 @@ export default function Error() {
         <Lottie width={'80%'} height={'75%'} options={options} autoplay={true} loop={true} />
         <Button
           variant="contained"
-          color="success"
+          color="secondary"
           component={Link}
           to="/dashboard"
           size="large"
