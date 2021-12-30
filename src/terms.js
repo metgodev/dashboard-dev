@@ -419,72 +419,72 @@ const active_lexicon = {
     monday_closing: {
         en: 'Monday Closing',
         he: 'שני סגירה',
-        ar: 'Monday Closing',
+        ar: 'الاثنين إغلاق',
     },
     monday_opening: {
         en: 'Monday Opening',
         he: 'שני פתיחה',
-        ar: 'Monday Opening',
+        ar: 'الاثنين افتتاح',
     },
     tuesday_closing: {
         en: 'Tuesday Closing',
         he: 'שלישי סגירה',
-        ar: 'Tuesday Closing',
+        ar: 'يوم الثلاثاء إغلاق',
     },
     tuesday_opening: {
         en: 'Tuesday Opening',
         he: 'שלישי פתיחה',
-        ar: 'Tuesday Opening',
+        ar: 'يوم الثلاثاء افتتاح',
     },
     wednesday_closing: {
         en: 'Wednesday Closing',
         he: 'רביעי סגירה',
-        ar: 'Wednesday Closing',
+        ar: 'الأربعاء إغلاق',
     },
     wednesday_opening: {
         en: 'Wednesday Opening',
         he: 'רביעי פתיחה',
-        ar: 'Wednesday Opening',
+        ar: 'الأربعاء افتتاح',
     },
     thursday_closing: {
         en: 'Thursday Closing',
         he: 'חמישי סגירה',
-        ar: 'Thursday Closing',
+        ar: 'يوم الخميس إغلاق',
     },
     thursday_opening: {
         en: 'Thursday Opening',
         he: 'חמישי פתיחה',
-        ar: 'Thursday Opening',
+        ar: 'يوم الخميس افتتاح',
     },
     friday_closing: {
         en: 'Friday Closing',
         he: 'שישי סגירה',
-        ar: 'Friday Closing',
+        ar: 'جمعة إغلاق',
     },
     friday_opening: {
         en: 'Friday Opening',
         he: 'שישי פתיחה',
-        ar: 'Friday Opening',
+        ar: 'جمعة افتتاح',
     },
     saturday_closing: {
         en: 'Saturday Closing',
         he: 'שבת סגירה',
-        ar: 'Saturday Closing',
+        ar: 'السبت إغلاق',
     },
     saturday_opening: {
         en: 'Saturday Opening',
         he: 'שבת פתיחה',
-        ar: 'Saturday Opening',
+        ar: 'السبت افتتاح',
     },
     sunday_closing: {
         en: 'Sunday Closing',
         he: 'ראשון סגירה',
-        ar: 'Sunday Closing',
+        ar: 'الأحد إغلاق',
     },
     sunday_opening: {
         en: 'Sunday Opening',
         he: 'ראשון פתיחה',
-        ar: 'Sunday Opening',
+        ar: 'الأحد افتتاح',
     },
 }
 

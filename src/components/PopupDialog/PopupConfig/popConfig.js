@@ -40,20 +40,20 @@ export const picker = {
 };
 
 export const TimePicker = [
-    term('sunday_opening'),
-    term('sunday_closing'),
-    term('monday_opening'),
-    term('monday_closing'),
-    term('tuesday_opening'),
-    term('tuesday_closing'),
-    term('wednesday_opening'),
-    term('wednesday_closing'),
-    term('thursday_opening'),
-    term('thursday_closing'),
-    term('friday_opening'),
-    term('friday_closing'),
-    term('saturday_opening'),
-    term('saturday_closing'),
+    {day:term('sunday_opening') , type: 1},
+    {day:term('sunday_closing'), type: 2},
+    {day:term('monday_opening'), type: 1},
+    {day:term('monday_closing'), type: 2},
+    {day:term('tuesday_opening'), type: 1},
+    {day:term('tuesday_closing'), type: 2},
+    {day:term('wednesday_opening'), type: 1},
+    {day:term('wednesday_closing'), type: 2},
+    {day:term('thursday_opening'), type: 1},
+    {day:term('thursday_closing'), type: 2},
+    {day:term('friday_opening'), type: 1},
+    {day:term('friday_closing'), type: 2},
+    {day:term('saturday_opening'), type: 1},
+    {day:term('saturday_closing'), type: 2},
 ];
 
 export const statisticsText = `מספר לחיצות על: טלפון, אתר, ניווט, שיתוף, מייל, שמירה, תמונות, דירוג

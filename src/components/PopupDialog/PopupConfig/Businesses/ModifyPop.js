@@ -5,7 +5,6 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from '../popConfig';
-import { DialogActions } from '@mui/material';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 

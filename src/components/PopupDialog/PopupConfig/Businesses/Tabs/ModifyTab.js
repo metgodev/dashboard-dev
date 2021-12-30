@@ -97,9 +97,8 @@ export const ModifyTab = ({ initialData, type }) => {
                                                 justifyContent="center"
                                                 alignItems="stretch" spacing={1}>
                                                 {TimePicker.map((s) => (
-                                                    <Grid item lg={6} key={s}>
-                                                        {console.log(s)}
-                                                        <TimeSelector label={s} />
+                                                    <Grid item lg={6} md={6} sm={6} key={s}>
+                                                        <TimeSelector label={s.day} type={s.type} />
                                                     </Grid>
                                                 ))}
                                             </Grid>

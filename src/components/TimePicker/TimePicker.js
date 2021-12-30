@@ -14,8 +14,8 @@ import term from '../../terms';
 import { Box } from '@mui/system';
 
 
-export default function TimeSelector({ warp, label }) {
-    const [selectedDate, handleDateChange] = useState(new Date());
+export default function TimeSelector({ warp, label , type}) {
+    const [selectedDate, handleDateChange] = useState(new Date().setHours(type === 1 ? 8 : 16,30,0,0));
     const { lang } = useSelector(state => state.mainRememberReducer)
     let classes = useStyles();
     let theme = useTheme();
@@ -38,6 +38,7 @@ export default function TimeSelector({ warp, label }) {
             <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
                 <ThemeProvider theme={theme}>
                     <TimePicker
+                        ampm={false}
                         inputVariant="outlined"
                         autoOk={true}
                         todayLabel={'היום'}
