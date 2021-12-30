@@ -31,6 +31,7 @@ function HeaderButtons({ btns }) {
                             {input && <input
                                 name="files[]"
                                 type="file"
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                 hidden
                                 onChange={(e) => func(e)}
                             />}

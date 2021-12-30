@@ -7,6 +7,7 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from '../popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
+import { UploadMediaTab } from './Tabs/UploadMediaTab';
 
 const ModifyPop = ({ initialData, type }) => {
     const [tab, setTab] = useState(0);
@@ -28,6 +29,9 @@ const ModifyPop = ({ initialData, type }) => {
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <StatisticsTab />
+                </TabPanel>
+                <TabPanel value={tab} index={2}>
+                    <UploadMediaTab />
                 </TabPanel>
             </DialogContent>
         </div >

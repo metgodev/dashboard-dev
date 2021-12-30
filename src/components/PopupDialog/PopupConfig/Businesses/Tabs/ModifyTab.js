@@ -109,6 +109,7 @@ export const ModifyTab = ({ initialData, type }) => {
                 </Grid>
             )}
             <Button
+                variant="contained"
                 style={{ marginTop: 10 }}
                 color="primary"
                 onClick={() => { console.log('edit') }}>
