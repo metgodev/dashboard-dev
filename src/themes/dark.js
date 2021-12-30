@@ -239,6 +239,11 @@ export default {
         padding: 8,
       }
     },
+    MuiPickersTimePickerToolbar: {
+      toolbarAmpmLeftPadding: {
+        justifyContent: 'space-between'
+      }
+    },
   }
 };
 

@@ -23,9 +23,9 @@ export default function TableMenuBtn({ status, stats }) {
             <Button
                 color={stats[status.toLowerCase()]}
                 size="small"
-                style={{ color: '#FFFFFF' }}
+                style={{ borderWidth: 2 }}
                 className={classes.statusBtns}
-                variant="contained"
+                variant="outlined"
                 id="basic-button"
                 aria-controls="basic-menu"
                 aria-haspopup="true"

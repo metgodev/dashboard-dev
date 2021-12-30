@@ -30,7 +30,7 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
         <Box>
             <Dialog
                 PaperProps={{
-                    style: { backgroundColor: theme.palette.bg.light, minHeight: '84vh' }
+                    style: { backgroundColor: theme.palette.bg.light, minHeight: '80vh' }
                 }}
                 open={open}
                 TransitionComponent={Transition}

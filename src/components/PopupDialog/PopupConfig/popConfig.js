@@ -1,4 +1,4 @@
-import term from "../../../../terms";
+import term from "../../../terms";
 
 
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
@@ -38,6 +38,23 @@ export const picker = {
     { value: 'אופקים' },
     { value: 'נתיבות' },]
 };
+
+export const TimePicker = [
+    term('sunday_opening'),
+    term('sunday_closing'),
+    term('monday_opening'),
+    term('monday_closing'),
+    term('tuesday_opening'),
+    term('tuesday_closing'),
+    term('wednesday_opening'),
+    term('wednesday_closing'),
+    term('thursday_opening'),
+    term('thursday_closing'),
+    term('friday_opening'),
+    term('friday_closing'),
+    term('saturday_opening'),
+    term('saturday_closing'),
+];
 
 export const statisticsText = `מספר לחיצות על: טלפון, אתר, ניווט, שיתוף, מייל, שמירה, תמונות, דירוג
 מספר צפיות בדף העסק, מסלולים, אירועים

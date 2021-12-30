@@ -4,7 +4,8 @@ export default makeStyles(theme => ({
     dialogHeader: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        // padding: '10px !important',
     },
     dialogContent: {
         // overflow: 'hidden',

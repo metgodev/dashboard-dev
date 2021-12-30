@@ -416,6 +416,76 @@ const active_lexicon = {
         he: "שיחות",
         ar: "محادثات",
     },
+    monday_closing: {
+        en: 'Monday Closing',
+        he: 'שני סגירה',
+        ar: 'Monday Closing',
+    },
+    monday_opening: {
+        en: 'Monday Opening',
+        he: 'שני פתיחה',
+        ar: 'Monday Opening',
+    },
+    tuesday_closing: {
+        en: 'Tuesday Closing',
+        he: 'שלישי סגירה',
+        ar: 'Tuesday Closing',
+    },
+    tuesday_opening: {
+        en: 'Tuesday Opening',
+        he: 'שלישי פתיחה',
+        ar: 'Tuesday Opening',
+    },
+    wednesday_closing: {
+        en: 'Wednesday Closing',
+        he: 'רביעי סגירה',
+        ar: 'Wednesday Closing',
+    },
+    wednesday_opening: {
+        en: 'Wednesday Opening',
+        he: 'רביעי פתיחה',
+        ar: 'Wednesday Opening',
+    },
+    thursday_closing: {
+        en: 'Thursday Closing',
+        he: 'חמישי סגירה',
+        ar: 'Thursday Closing',
+    },
+    thursday_opening: {
+        en: 'Thursday Opening',
+        he: 'חמישי פתיחה',
+        ar: 'Thursday Opening',
+    },
+    friday_closing: {
+        en: 'Friday Closing',
+        he: 'שישי סגירה',
+        ar: 'Friday Closing',
+    },
+    friday_opening: {
+        en: 'Friday Opening',
+        he: 'שישי פתיחה',
+        ar: 'Friday Opening',
+    },
+    saturday_closing: {
+        en: 'Saturday Closing',
+        he: 'שבת סגירה',
+        ar: 'Saturday Closing',
+    },
+    saturday_opening: {
+        en: 'Saturday Opening',
+        he: 'שבת פתיחה',
+        ar: 'Saturday Opening',
+    },
+    sunday_closing: {
+        en: 'Sunday Closing',
+        he: 'ראשון סגירה',
+        ar: 'Sunday Closing',
+    },
+    sunday_opening: {
+        en: 'Sunday Opening',
+        he: 'ראשון פתיחה',
+        ar: 'Sunday Opening',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

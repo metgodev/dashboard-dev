@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/system';
 import term from '../../../../../terms';
-import { Button } from '../../../../Wrappers/Wrappers';
-import { MenuItem } from '@material-ui/core';
-import { ModalInit, tags, picker } from '../popConfig';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import { Collapse, MenuItem } from '@material-ui/core';
+import { ModalInit, tags, picker, TimePicker } from '../../popConfig';
+import { Autocomplete, FormControl, Grid, IconButton, InputLabel, TextField } from '@mui/material';
+import TimeSelector from '../../../../TimePicker/TimePicker';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 export const ModifyTab = ({ initialData, type }) => {
+    const [open, setOpen] = useState(true);
     const [values, setValues] = useState({
         bussinesName: '',
         suitableFor: '',
@@ -22,20 +25,24 @@ export const ModifyTab = ({ initialData, type }) => {
         email: '',
     });
 
-
-    const handleChange = (e, key, tags) => {
+    const handleChange = (e, field, tags) => {
         if (tags) {
-            setValues(prevState => ({ ...prevState, [key]: Object.keys(tags).map(key => tags[key].id) }));
-        } else setValues(prevState => ({ ...prevState, [key]: e.target.value }));
+            setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
+        } else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
+    const openDrop = () => {
+        setOpen(!open);
+    };
+
+    console.log(values)
     return (
         <Grid container spacing={2}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {!(['tags', 'suitableFor', 'authority'].indexOf(field) > - 1) ?
+                        {!(['tags', 'suitableFor', 'authority', 'openingTimes'].indexOf(field) > - 1) ?
                             <TextField
                                 size={size}
                                 id={title}
@@ -47,10 +54,10 @@ export const ModifyTab = ({ initialData, type }) => {
                                 defaultValue={initialData[field]}
                                 onChange={(e) => handleChange(e, field)}
                             />
-                            : field !== 'tags' ?
+                            : !(['tags', 'openingTimes'].indexOf(field) > - 1) ?
                                 <TextField
                                     size={size}
-                                    id="outlined-select-currency"
+                                    id="select-field"
                                     select
                                     label={title}
                                     value={values[field]}
@@ -62,23 +69,42 @@ export const ModifyTab = ({ initialData, type }) => {
                                         </MenuItem>
                                     ))}
                                 </TextField>
-                                :
-                                <Autocomplete
-                                    size={size}
-                                    multiple
-                                    id="tags-outlined"
-                                    options={tags}
-                                    getOptionLabel={(o) => o.id}
-                                    filterSelectedOptions
-                                    onChange={(e, val) => handleChange(e, field, val)}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label={title}
-                                            placeholder="תגיות"
-                                        />
-                                    )}
-                                />
+                                : field !== 'openingTimes' ?
+                                    <Autocomplete
+                                        size={size}
+                                        multiple
+                                        id="tags-outlined"
+                                        options={tags}
+                                        getOptionLabel={(o) => o.id}
+                                        filterSelectedOptions
+                                        onChange={(e, val) => handleChange(e, field, val)}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                label={title}
+                                                placeholder="תגיות"
+                                            />
+                                        )}
+                                    />
+                                    :
+                                    <>
+                                        <Button variant="outlined" size={'large'} color="warning" onClick={openDrop} sx={{ mb: 1 }}>
+                                            {open ? <ExpandLess /> : <ExpandMore />}
+                                        </Button>
+                                        <Collapse in={open} timeout="auto" unmountOnExit>
+                                            <Grid container
+                                                direction="row"
+                                                justifyContent="center"
+                                                alignItems="stretch" spacing={1}>
+                                                {TimePicker.map((s) => (
+                                                    <Grid item lg={6} key={s}>
+                                                        {console.log(s)}
+                                                        <TimeSelector label={s} />
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </Collapse>
+                                    </>
                         }
                     </FormControl>
                 </Grid>
