@@ -1,10 +1,10 @@
 import React from 'react'
 import term from '../../../../../terms';
-import { Button } from '../../../../Wrappers/Wrappers';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { statisticsText } from '../../popConfig';
+import { Button } from '@material-ui/core';
 
 export const StatisticsTab = () => {
     return (
@@ -18,6 +18,7 @@ export const StatisticsTab = () => {
             <Button
                 style={{ marginTop: 5 }}
                 color="primary"
+                variant="contained"
                 onClick={() => { console.log('edit') }}>
                 {term('download_data', 'download data')}
             </Button>

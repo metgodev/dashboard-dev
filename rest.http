@@ -1,0 +1,23 @@
+
+
+POST https://metro-backend-ohx3vk2ipa-ew.a.run.app/authentication 
+content-type: application/json
+
+{
+"email": "test@test.com",
+"password": "12345678",
+"strategy": "tester"
+}
+
+###
+
+POST https://metro-backend-ohx3vk2ipa-ew.a.run.app/authentication
+content-type: application/json
+
+{
+"email": "test@test.com",
+"password": "12345678",
+"firstName": "tester",
+"lastName": "tester"
+}
+

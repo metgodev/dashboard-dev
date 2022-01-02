@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import term from '../../../../../terms';
-import Button from '@mui/material/Button';
+import { Button } from '@material-ui/core';
 import { Collapse, MenuItem } from '@material-ui/core';
 import { ModalInit, tags, picker, TimePicker } from '../../popConfig';
 import { Autocomplete, FormControl, Grid, IconButton, InputLabel, TextField } from '@mui/material';
@@ -9,7 +9,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 export const ModifyTab = ({ initialData, type }) => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         bussinesName: '',
         suitableFor: '',

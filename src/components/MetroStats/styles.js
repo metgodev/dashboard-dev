@@ -29,6 +29,7 @@ export default makeStyles(theme => ({
         borderColor: 'rgba(10, 10, 10,.5)',
         borderWidth: 1,
         backgroundColor: 'rgba(10, 10, 10,.1)',
-        padding: 5,
+        padding: 2,
+        marginInline: 20
     }
 }));
