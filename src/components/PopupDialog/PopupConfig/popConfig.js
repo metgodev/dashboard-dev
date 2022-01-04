@@ -24,7 +24,6 @@ export const tags = [
     { id: 'נגב - סדנאות והרצאות' },
     { id: "נגב - אירוח ביתי וארוחות שף" },
     { id: 'הרצליה - דירות נופש' },
-
 ]
 export const picker = {
     suitableFor: [{ value: 'לגיל הרך' },

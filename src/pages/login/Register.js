@@ -4,6 +4,7 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
+import { apiProvider } from '../../API/service';
 
 
 function Register() {
@@ -13,11 +14,18 @@ function Register() {
     let [error, setError] = useState(null);
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
-    let [loginValue, setLoginValue] = useState("");
-    let [passwordValue, setPasswordValue] = useState("");
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
 
-    const loginUser = () => {
-        navigate("/dashboard");
+    const loginUser = async () => {
+        setIsLoading(true)
+        let res = await  apiProvider.post('users' , {email , password , firstName , lastName})
+        console.log(res)
+      if (res.error) setError(res.error)
+      else { 
+         setIsLoading(false)
+         navigate("/dashboard")
+        }
     }
 
     return (
@@ -72,8 +80,8 @@ function Register() {
                             input: classes.textField,
                         },
                     }}
-                    value={loginValue}
-                    onChange={e => setLoginValue(e.target.value)}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     margin="normal"
                     placeholder="כתובת אימייל"
                     type="email"
@@ -87,8 +95,8 @@ function Register() {
                             input: classes.textField,
                         },
                     }}
-                    value={passwordValue}
-                    onChange={e => setPasswordValue(e.target.value)}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     margin="normal"
                     placeholder="סיסמה"
                     type="password"
@@ -101,8 +109,8 @@ function Register() {
                         <Button
                             onClick={() => loginUser()}
                             disabled={
-                                loginValue.length === 0 ||
-                                passwordValue.length === 0 ||
+                                email.length === 0 ||
+                                password.length === 0 ||
                                 firstName.length === 0 ||
                                 lastName.length === 0
                             }

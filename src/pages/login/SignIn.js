@@ -4,6 +4,7 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
+import { apiProvider } from "../../API/service";
 
 
 function SignIn() {
@@ -13,12 +14,19 @@ function SignIn() {
     // local
     let [isLoading, setIsLoading] = useState(false);
     let [error, setError] = useState(null);
-    let [loginValue, setLoginValue] = useState("");
-    let [passwordValue, setPasswordValue] = useState("");
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
 
+console.log(email , password,error )
 
-    const loginUser = () => {
-        navigate("/dashboard");
+    const loginUser = async () => {
+        setIsLoading(false)
+        let res = await  apiProvider.post('authentication' , {email , password})
+        if (res.error) setError(res.error)
+        else {
+        navigate("/dashboard")
+        setIsLoading(false)
+    }
     }
 
     return (
@@ -39,8 +47,8 @@ function SignIn() {
                         input: classes.textField,
                     },
                 }}
-                value={loginValue}
-                onChange={e => setLoginValue(e.target.value)}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 margin="normal"
                 placeholder={term('email_address')}
                 type="email"
@@ -54,8 +62,8 @@ function SignIn() {
                         input: classes.textField,
                     },
                 }}
-                value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 margin="normal"
                 placeholder={term('password')}
                 type="password"
@@ -67,7 +75,7 @@ function SignIn() {
                 ) : (
                     <Button
                         disabled={
-                            loginValue.length === 0 || passwordValue.length === 0
+                            email.length === 0 || password.length === 0
                         }
                         onClick={() => loginUser()}
                         variant="contained"

@@ -5,7 +5,7 @@ let token = ''
 let uri = 'https://metro-backend-ohx3vk2ipa-ew.a.run.app/'
 
 export default axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL: uri,
     headers: {
         Authorization: `Bearer ${token}`
     }

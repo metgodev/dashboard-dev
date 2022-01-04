@@ -3,18 +3,15 @@ import { em } from "../../utils/document";
 
 export default makeStyles(theme => ({
   container: {
+    overflow:'hidden', 
     direction: 'ltr',
-    height: "100vh",
+    height: "85vh",
     width: "100vw",
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    top: 0,
-    left: 0,
   },
   logotypeContainer: {
-    backgroundColor: theme.palette.bg.light,
+    backgroundColor: theme.palette.bg,
     width: "60%",
     height: "100%",
     display: "flex",

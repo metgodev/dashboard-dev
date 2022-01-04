@@ -17,6 +17,8 @@ export const resizeFile = (file) =>
     });
 
 
+// maltipart
+
 
 
 // Resizer.imageFileResizer(
