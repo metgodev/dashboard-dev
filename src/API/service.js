@@ -1,12 +1,11 @@
 
+import { metro } from './metro';
 import { handleError, handleResponse } from './response';
-import metro from './metro';
 
 //example for request
 // (async () => {
 //     apiProvider.getSingle('todos', 1).then(res => console.log(res));
 // })();
-
 
 //read
 const getAll = async (resource, params = {}) => {

@@ -1,41 +1,43 @@
 
 import axios from 'axios'
+import feathers from '@feathersjs/feathers';
+import rest from '@feathersjs/rest-client';
+import auth from '@feathersjs/authentication-client'
 
+
+let dev = false
 let token = ''
-let uri = 'https://metro-backend-ohx3vk2ipa-ew.a.run.app/'
+let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app'
 
-export default axios.create({
+const app = feathers()
+    .configure(auth())
+
+const restClient = rest(uri)
+
+export const Auth = async (email, password) =>
+    app.authenticate({
+        strategy: 'local',
+        email,
+        password
+    }).then((res) => {
+        return res;
+    }).catch(e => {
+        return { error: true, message: e };
+    });
+
+export const client = app.configure(restClient.axios(axios.create({
     baseURL: uri,
     headers: {
         Authorization: `Bearer ${token}`
     }
-})
+})));
+
+export const metro = axios.create({
+    baseURL: uri,
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+});
 
 
-// const feathers = require('@feathersjs/feathers');
-// const rest = require('@feathersjs/rest-client');
-
-// const app = feathers();
-
-// // Connect to a different URL
-// const restClient = rest(uri)
-
-// // Configure an AJAX library (see below) with that client
-// app.configure(restClient.axios(axios));
-
-// // Connect to the uri service
-// const messages = app.service('messages');
-
-// app.service('messages').create({
-//     text: 'A message from a REST client'
-// }, {
-//     headers: { 'X-Requested-With': 'FeathersJS' }
-// });
-
-// app.configure(restClient.request(request));
-
-// app.service('messages').get(1, {
-//     connection: {
-//         followRedirect: false
-//     }
-// });
+ // let res = await client.service('authentication').create({ email, password, strategy: "local" })

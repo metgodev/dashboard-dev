@@ -142,9 +142,9 @@ const active_lexicon = {
         ar: 'أنشئ حسابك',
     },
     something_went_wrong: {
-        en: 'Something is wrong with your login or password :(',
-        he: 'שם משתמש או סיסמא לא נכונים :(',
-        ar: 'اسم المستخدم او الرقم السري غير صحيح :(',
+        en: 'Something is wrong with your login or password',
+        he: 'שם משתמש או סיסמא לא נכונים',
+        ar: 'اسم المستخدم او الرقم السري غير صحيح',
     },
     email_address: {
         en: 'Email address',

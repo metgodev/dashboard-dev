@@ -4,7 +4,8 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
-import { apiProvider } from '../../API/service';
+import { client } from '../../API/metro';
+
 
 
 function Register() {
@@ -19,12 +20,12 @@ function Register() {
 
     const loginUser = async () => {
         setIsLoading(true)
-        let res = await  apiProvider.post('users' , {email , password , firstName , lastName})
+        let res = await client.service('users').create({ email, password, firstName, lastName })
         console.log(res)
-      if (res.error) setError(res.error)
-      else { 
-         setIsLoading(false)
-         navigate("/dashboard")
+        if (res.error) setError(res.error)
+        else {
+            setIsLoading(false)
+            navigate("/dashboard")
         }
     }
 

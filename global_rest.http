@@ -1,0 +1,108 @@
+
+@hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
+@contentType = application/json
+@authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDEzMDAzNjksImlhdCI6MTY0MTMwMDM2OCwiZXhwIjoxNjQxOTA1MTY4LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWQ0MzhhMzBhYWFhNWM0MWU2OTAwZDkiLCJqdGkiOiI5MmI2ZjQyOS1kYTgxLTRiNzQtYWEwYy0zOTY3M2I5OTIxYmMifQ.qsBZJBzEgZwkoigY5laVUqDnSt8ouuwZUMnIKp-WvgI'
+
+@email = "fiwenif509@wiicheat.com"
+@password = "12345678"
+
+###
+# login
+POST https://{{hostname}}/authentication 
+content-type: {{contentType}}
+
+{
+"email": {{email}},
+"password": {{password}},
+"strategy": "local"
+}
+###
+# register
+POST https://{{hostname}}/users
+content-type: {{contentType}}
+
+{
+"email": {{email}},
+"password": {{password}},
+"firstName": "firstName",
+"lastName": "lastName"
+}
+###
+# 2ways verification
+POST https://{{hostname}}/authmanagement
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{
+"action": "resendVerifySignup",
+"value": {"email": {{email}}}
+}
+###
+# 2ways verification send again
+POST https://{{hostname}}/authmanagement
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{
+"action": "resendVerifySignup",
+"value": { 
+    "user":{
+        "email": {{email}}
+        },
+         "token": "564703"
+  }
+}
+###
+# Reset Password
+POST https://{{hostname}}/authmanagement
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{
+   "action": "sendResetPwd",   
+   "value": { "email": {{email}}}
+}
+###
+# Create role
+POST https://{{hostname}}/roles
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{    
+    "name": "METRO_AREA_OWNER",    
+    "displayName": "Area Owner",    
+    "description": "Owner of the area"
+}
+###
+# Get all areas
+GET https://{{hostname}}/area
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{    
+    "email": {{email}},    
+    "password": {{password}},   
+    "firstName": "firstName",
+    "lastName": "lastName"
+}
+###
+# Create new area
+POST https://{{hostname}}/area
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{    
+    "name": "Herzelia"    
+}
+###
+# Get one area
+POST https://{{hostname}}/area
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{    
+ "email": "jedecen822@zoeyy.com",    
+ "password": "1a2a3a",    
+ "firstName": "Ran",   
+ "lastName": "Hassid"
+}

@@ -4,7 +4,7 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
-import { apiProvider } from "../../API/service";
+import { Auth } from "../../API/metro";
 
 
 function SignIn() {
@@ -17,16 +17,16 @@ function SignIn() {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
 
-console.log(email , password,error )
-
     const loginUser = async () => {
         setIsLoading(false)
-        let res = await  apiProvider.post('authentication' , {email , password})
-        if (res.error) setError(res.error)
-        else {
-        navigate("/dashboard")
-        setIsLoading(false)
-    }
+        Auth(email, password).then((res) => {
+            console.log(res)
+            if (res.error) setError(true);
+            else {
+                navigate("/dashboard")
+                setIsLoading(false)
+            }
+        })
     }
 
     return (

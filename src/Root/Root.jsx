@@ -23,10 +23,10 @@ const Root = () => {
     let classes = useStyles();
     let location = useLocation();
     //local
-    let [isLoggedIn] = useState(location.pathname !== '/login')
+    let [isLoggedIn] = useState(true)
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
-
+    console.log(isLoggedIn)
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
     }
