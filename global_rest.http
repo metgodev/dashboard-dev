@@ -1,9 +1,9 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDEzMDAzNjksImlhdCI6MTY0MTMwMDM2OCwiZXhwIjoxNjQxOTA1MTY4LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWQ0MzhhMzBhYWFhNWM0MWU2OTAwZDkiLCJqdGkiOiI5MmI2ZjQyOS1kYTgxLTRiNzQtYWEwYy0zOTY3M2I5OTIxYmMifQ.qsBZJBzEgZwkoigY5laVUqDnSt8ouuwZUMnIKp-WvgI'
+@authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDEzNjQ1MjYsImlhdCI6MTY0MTM2NDUyNiwiZXhwIjoxNjQxOTY5MzI2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWQ0NDYxNjBhYWFhNWM0MWU2OTAxMjEiLCJqdGkiOiIwMmIzN2ZlNi1jMzM2LTQxYWUtYjhjOS00MzhiNmU0MzJiZDYifQ.dQb7cjOvIwwaGybb09nXOPX17BAvY78d1mVEVDUTBLA'
 
-@email = "fiwenif509@wiicheat.com"
+@email = "velewa5868@vinopub.com"
 @password = "12345678"
 
 ###
@@ -35,7 +35,7 @@ Authorization: {{authorization}}
 
 {
 "action": "resendVerifySignup",
-"value": {"email": {{email}}}
+"value": {"email": {{email}} , "token":"656387"}
 }
 ###
 # 2ways verification send again

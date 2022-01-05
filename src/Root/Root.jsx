@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
@@ -23,18 +23,23 @@ const Root = () => {
     let classes = useStyles();
     let location = useLocation();
     //local
-    let [isLoggedIn] = useState(true)
+    let [isLoggedIn, setLoggedIn] = useState(false)
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
-    console.log(isLoggedIn)
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
     }
 
+    useEffect(() => {
+        let logged = localStorage.getItem('feathers-jwt')
+        if (logged !== null) setLoggedIn(true);
+        else setLoggedIn(false)
+    }, [location])
+
     return (
         <div className={classes.Router}>
             <Main open={sidebar} mobile={mobile.toString()}>
-                {isLoggedIn &&
+                {location.pathname !== '/login' &&
                     <>
                         <Header />
                         <SideBar location={location} />
