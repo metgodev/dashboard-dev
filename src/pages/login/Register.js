@@ -44,10 +44,10 @@ function Register() {
                     </Typography>
                 </Fade>
                 <TextField
+                    variant="outlined"
                     id="first name"
                     InputProps={{
                         classes: {
-                            underline: classes.textFieldUnderline,
                             input: classes.textField,
                         },
                     }}
@@ -59,10 +59,10 @@ function Register() {
                     fullWidth
                 />
                 <TextField
+                    variant="outlined"
                     id="last name"
                     InputProps={{
                         classes: {
-                            underline: classes.textFieldUnderline,
                             input: classes.textField,
                         },
                     }}
@@ -74,10 +74,10 @@ function Register() {
                     fullWidth
                 />
                 <TextField
+                    variant="outlined"
                     id="email"
                     InputProps={{
                         classes: {
-                            underline: classes.textFieldUnderline,
                             input: classes.textField,
                         },
                     }}
@@ -89,10 +89,10 @@ function Register() {
                     fullWidth
                 />
                 <TextField
+                    variant="outlined"
                     id="password"
                     InputProps={{
                         classes: {
-                            underline: classes.textFieldUnderline,
                             input: classes.textField,
                         },
                     }}

@@ -23,7 +23,7 @@ function SignIn() {
             console.log(res)
             if (res.error) setError(true);
             else {
-                navigate("/dashboard")
+                navigate("/verification")
                 setIsLoading(false)
             }
         })
@@ -40,10 +40,10 @@ function SignIn() {
                 </Typography>
             </Fade>
             <TextField
+                variant="outlined"
                 id="email"
                 InputProps={{
                     classes: {
-                        underline: classes.textFieldUnderline,
                         input: classes.textField,
                     },
                 }}
@@ -55,10 +55,10 @@ function SignIn() {
                 fullWidth
             />
             <TextField
+                variant="outlined"
                 id="password"
                 InputProps={{
                     classes: {
-                        underline: classes.textFieldUnderline,
                         input: classes.textField,
                     },
                 }}

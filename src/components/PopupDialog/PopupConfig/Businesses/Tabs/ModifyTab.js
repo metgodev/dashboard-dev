@@ -7,8 +7,11 @@ import { Autocomplete, FormControl, Grid, IconButton, InputLabel, TextField } fr
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+//styles
+import useStyles from '../../../styles'
 
 export const ModifyTab = ({ initialData, type }) => {
+    let classes = useStyles();
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         bussinesName: '',
@@ -35,7 +38,6 @@ export const ModifyTab = ({ initialData, type }) => {
         setOpen(!open);
     };
 
-    console.log(values)
     return (
         <Grid container spacing={2}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size }) =>
@@ -44,6 +46,11 @@ export const ModifyTab = ({ initialData, type }) => {
                     <FormControl fullWidth  >
                         {!(['tags', 'suitableFor', 'authority', 'openingTimes'].indexOf(field) > - 1) ?
                             <TextField
+                                InputProps={{
+                                    classes: {
+                                        input: classes.textField,
+                                    },
+                                }}
                                 size={size}
                                 id={title}
                                 label={title}
@@ -56,6 +63,11 @@ export const ModifyTab = ({ initialData, type }) => {
                             />
                             : !(['tags', 'openingTimes'].indexOf(field) > - 1) ?
                                 <TextField
+                                    InputProps={{
+                                        classes: {
+                                            input: classes.textField,
+                                        },
+                                    }}
                                     size={size}
                                     id="select-field"
                                     select
@@ -71,6 +83,11 @@ export const ModifyTab = ({ initialData, type }) => {
                                 </TextField>
                                 : field !== 'openingTimes' ?
                                     <Autocomplete
+                                        InputProps={{
+                                            classes: {
+                                                input: classes.textField,
+                                            },
+                                        }}
                                         size={size}
                                         multiple
                                         id="tags-outlined"

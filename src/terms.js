@@ -146,6 +146,11 @@ const active_lexicon = {
         he: 'שם משתמש או סיסמא לא נכונים',
         ar: 'اسم المستخدم او الرقم السري غير صحيح',
     },
+    incorrect_verification_code: {
+        en: 'incorrect verification code',
+        he: 'קוד אימות שגוי',
+        ar: 'رمز التحقق غير صحيح',
+    },
     email_address: {
         en: 'Email address',
         he: 'כתובת אימייל',

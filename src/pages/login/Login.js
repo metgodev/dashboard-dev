@@ -16,10 +16,6 @@ function Login() {
 
   return (
     <Grid container className={classes.container}>
-      <div className={classes.logotypeContainer}>
-        <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Metro Travel</Typography>
-      </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>
           <Tabs
@@ -35,6 +31,10 @@ function Login() {
           {activeTabId === 0 && (<SignIn />)}
           {activeTabId === 1 && (<Register />)}
         </div>
+      </div>
+      <div className={classes.logotypeContainer}>
+        <img src={logo} alt="logo" className={classes.logotypeImage} />
+        <Typography className={classes.logotypeText}>Metro Travel</Typography>
       </div>
     </Grid>
   );

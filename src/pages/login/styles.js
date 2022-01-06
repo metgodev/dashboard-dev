@@ -3,8 +3,7 @@ import { em } from "../../utils/document";
 
 export default makeStyles(theme => ({
   container: {
-    overflow:'hidden', 
-    direction: 'ltr',
+    overflow: 'hidden',
     height: "85vh",
     width: "100vw",
     justifyContent: "center",
@@ -129,5 +128,17 @@ export default makeStyles(theme => ({
       position: "absolute",
       bottom: theme.spacing(2),
     },
+  },
+  VerificationContainer: {
+    position: "fixed",
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50% , -50%)',
+    [theme.breakpoints.down("md")]: {
+      width: "90%",
+    },
+  },
+  VerificationWrapper: {
+    padding: theme.spacing(4),
   },
 }));

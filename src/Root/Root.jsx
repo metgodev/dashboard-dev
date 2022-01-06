@@ -6,6 +6,7 @@ import SideBar from '../components/SideBar/SideBar';
 import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
+import Verification from '../pages/login/Verification';
 import Dashboard from '../pages/dashboard/Dashboard';
 import useStyles from "./styles";
 import Businesses from '../pages/businesses/Businesses';
@@ -26,15 +27,16 @@ const Root = () => {
     let [isLoggedIn] = useState(true)
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
-    console.log(isLoggedIn)
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
     }
 
+    const shouldDisplay = location.pathname !== '/login' && location.pathname !== '/verification'
+
     return (
         <div className={classes.Router}>
             <Main open={sidebar} mobile={mobile.toString()}>
-                {isLoggedIn &&
+                {shouldDisplay &&
                     <>
                         <Header />
                         <SideBar location={location} />
@@ -42,6 +44,7 @@ const Root = () => {
                 }
                 <Routes>
                     <Route path="/login" element={<Login />} />
+                    <Route path="/verification" element={< Protecte auth={isLoggedIn}><Verification /></Protecte>} />
                     <Route exact path="/dashboard" element={<Protecte auth={isLoggedIn}><Dashboard /></Protecte>} />
                     <Route exact path="/businesses" element={<Protecte auth={isLoggedIn}><Businesses /></Protecte>} />
                     <Route exact path="/events" element={<Protecte auth={isLoggedIn}><Events /></ Protecte >} />
@@ -55,7 +58,7 @@ const Root = () => {
                     <Route path='*' element={<Error />} />
                 </Routes>
             </Main>
-        </div>
+        </div >
     );
 }
 
