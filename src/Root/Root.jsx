@@ -24,7 +24,7 @@ const Root = () => {
     let classes = useStyles();
     let location = useLocation();
     //local
-    let [isLoggedIn] = useState(true)
+    let [isLoggedIn] = useState(false)
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
     const Protecte = ({ auth, children }) => {
