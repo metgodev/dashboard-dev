@@ -1,10 +1,10 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE0ODI3NDYsImlhdCI6MTY0MTQ4Mjc0NiwiZXhwIjoxNjQyMDg3NTQ2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWQ3MDlmMWRmZmQ1MWQ2MTI1MmUyZTciLCJqdGkiOiIzMmU3NzVhNy0wN2JlLTRmNmItYjU1Ni04MTBhMGQyMTAwN2UifQ.5NqC3DmzI2AORHGqxrBNAhbub5s0jDcDTWSDIh3mrnU
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE4MjY4NDUsImlhdCI6MTY0MTgyNjg0NCwiZXhwIjoxNjQyNDMxNjQ0LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiJkYjVmYjFkYy0xMjVkLTRjMWUtYmQ4Ny1mYmE2Yzk3MTVhODEifQ.9EWVaFvNTXkGEZVjIYaWdioX0cwBzGDegnMIbIcXdw8
 
-@email = "vapev86956@upsdom.com"
-@password = "12345678"
+@email = "fixiv59040@rubygon.com"
+@password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
 
 # register
@@ -74,12 +74,6 @@ GET https://{{hostname}}/area
 content-type: {{contentType}}
 Authorization: {{authorization}}
 
-{    
-    "email": {{email}},    
-    "password": {{password}},   
-    "firstName": "firstName",
-    "lastName": "lastName"
-}
 ###
 # Create new area
 POST https://{{hostname}}/area
@@ -87,17 +81,105 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {    
-    "name": "Herzelia"    
+    "name": "Ashkelon"    
 }
 ###
 # Get one area
-POST https://{{hostname}}/area
+GET https://{{hostname}}/area/61d2e959927d2b5be84b2ce1
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
+# Get all area - paginate
+GET https://{{hostname}}/area?$limit=100&$skip=0
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
+# Get all autorities
+GET https://{{hostname}}/authorities?areaId=61d2e93c927d2b5be84b2cdb
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
+# Create new Authority
+POST https://{{hostname}}/authorities
 content-type: {{contentType}}
 Authorization: {{authorization}}
 
-{    
- "email": "jedecen822@zoeyy.com",    
- "password": "1a2a3a",    
- "firstName": "Ran",   
- "lastName": "Hassid"
+{  
+    "areaId": "61d2e93c927d2b5be84b2cdb",  
+    "name": "שומרון", 
+    "email": "contact@email.com", 
+    "address": "השונית 3"
+}
+###
+# Upload file 
+GET https://{{hostname}}/
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
+# Get all businesses in specific autority
+GET https://{{hostname}}/businesses?autorityId=61d2e959927d2b5be84b2ce1
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
+# Create new business
+POST  https://{{hostname}}/business
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{
+   "name":"Trakers",
+   "description":"travel around the beautiful area of the city",
+   "status":"PUBLIC",
+   "tagsIds":[
+      "sea",
+      "travel"
+   ],
+   "autorityId":"61d2eb2df58fa2f89374dbb7",
+   "address":"tel aviv",
+   "phoneNumber":"0566296634",
+   "contactPersonName":"avi",
+   "contactPersonPhoneNumber":"0566296634",
+   "emailAddress":"avi@gmail.com",
+   "relevantTo":"INFANCY",
+   "websiteUrl":"www.website.com",
+   "facebookPageUrl":"www.website.com",
+   "instagramPageUrl":"www.website.com",
+   "youtubePageUrl":"www.website.com",
+   "twitterPageUrl":"www.website.com",
+   "linkedInPageUrl":"www.website.com",
+   "galleryFileIds":[
+      "image1",
+      "image2"
+   ],
+   "openingHours":{
+      "sunday":{
+         "start":"08:00",
+         "end":"16:00"
+      },
+      "monday":{
+         "start":"08:00",
+         "end":"16:00"
+      },
+      "tuesday":{
+         "start":"08:00",
+         "end":"16:00"
+      },
+      "wednesday":{
+         "start":"08:00",
+         "end":"16:00"
+      },
+      "thursday":{
+         "start":"08:00",
+         "end":"16:00"
+      },
+      "friday":{
+         "start":"08:00",
+         "end":"16:00"
+      },
+      "saturday":{
+         "start":"08:00",
+         "end":"16:00"
+      }
+   },
+   "open24Hours":true
 }
