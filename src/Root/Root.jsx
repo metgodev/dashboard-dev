@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
@@ -18,23 +18,26 @@ import UsersTable from '../pages/userstable/UsersTable';
 import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
+import { Box } from '@material-ui/core';
+import { isLoggedIn } from '../API/metro';
 
 
 const Root = () => {
+    let logged = isLoggedIn()
     let classes = useStyles();
     let location = useLocation();
-    //local
-    let [isLoggedIn] = useState(false)
+    let { pathname } = location;
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
+
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
     }
 
-    const shouldDisplay = location.pathname !== '/login' && location.pathname !== '/verification'
-
+    const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
+    console.log(logged)
     return (
-        <div className={classes.Router}>
+        <Box className={classes.Router}>
             <Main open={sidebar} mobile={mobile.toString()}>
                 {shouldDisplay &&
                     <>
@@ -44,21 +47,21 @@ const Root = () => {
                 }
                 <Routes>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/verification" element={< Protecte auth={isLoggedIn}><Verification /></Protecte>} />
-                    <Route exact path="/dashboard" element={<Protecte auth={isLoggedIn}><Dashboard /></Protecte>} />
-                    <Route exact path="/businesses" element={<Protecte auth={isLoggedIn}><Businesses /></Protecte>} />
-                    <Route exact path="/events" element={<Protecte auth={isLoggedIn}><Events /></ Protecte >} />
-                    <Route exact path="/locations" element={<Protecte auth={isLoggedIn}><PointsOfInterest /></Protecte>} />
-                    <Route exact path="/routes" element={<Protecte auth={isLoggedIn}><Tracks /></Protecte>} />
-                    <Route exact path="/voucher" element={<Protecte auth={isLoggedIn}><Voucher /></Protecte>} />
-                    <Route exact path="/users" element={<Protecte auth={isLoggedIn}><UsersTable /></Protecte>} />
-                    <Route exact path="/map" element={<Protecte auth={isLoggedIn}><Maps /></Protecte>} />
-                    <Route exact path="/support" element={<Protecte auth={isLoggedIn}><Support /></Protecte>} />
-                    <Route exact path="/FAQ" element={<Protecte auth={isLoggedIn}><FAQ /></Protecte>} />
+                    <Route path="/verification" element={< Protecte auth={logged}><Verification /></Protecte>} />
+                    <Route exact path="/dashboard" element={<Protecte auth={logged}><Dashboard /></Protecte>} />
+                    <Route exact path="/businesses" element={<Protecte auth={logged}><Businesses /></Protecte>} />
+                    <Route exact path="/events" element={<Protecte auth={logged}><Events /></ Protecte >} />
+                    <Route exact path="/locations" element={<Protecte auth={logged}><PointsOfInterest /></Protecte>} />
+                    <Route exact path="/routes" element={<Protecte auth={logged}><Tracks /></Protecte>} />
+                    <Route exact path="/voucher" element={<Protecte auth={logged}><Voucher /></Protecte>} />
+                    <Route exact path="/users" element={<Protecte auth={logged}><UsersTable /></Protecte>} />
+                    <Route exact path="/map" element={<Protecte auth={logged}><Maps /></Protecte>} />
+                    <Route exact path="/support" element={<Protecte auth={logged}><Support /></Protecte>} />
+                    <Route exact path="/FAQ" element={<Protecte auth={logged}><FAQ /></Protecte>} />
                     <Route path='*' element={<Error />} />
                 </Routes>
             </Main>
-        </div >
+        </Box >
     );
 }
 

@@ -141,4 +141,10 @@ export default makeStyles(theme => ({
   VerificationWrapper: {
     padding: theme.spacing(4),
   },
+  VerificationLoader: {
+    paddingTop: theme.spacing(1),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));

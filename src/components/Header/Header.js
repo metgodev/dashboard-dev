@@ -26,7 +26,7 @@ export default function Header() {
 
 
   return (
-    <Box style={{ direction: 'ltr' }}>
+    <Box style={{ direction: 'ltr', paddingTop: em(1) }}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <img src={Logo} alt="logo" className={classes.logotype} width={em(2)} />

@@ -8,8 +8,9 @@ import classNames from "classnames";
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
-import term from "../../../terms";
+import { client } from "../../../API/metro";
 import { useNavigate } from "react-router";
+import term from "../../../terms";
 
 function ProfileMenu() {
     // local
@@ -18,6 +19,11 @@ function ProfileMenu() {
     let classes = useStyles();
     let avatar = 'https://i.pravatar.cc/'
     let navigate = useNavigate()
+
+    const logout = () => {
+        client.logout();
+        navigate('/login')
+    }
 
     return (
         <>
@@ -74,7 +80,7 @@ function ProfileMenu() {
                     <Typography
                         className={classes.profileMenuLink}
                         color="primary"
-                        onClick={() => { navigate('/login') }}
+                        onClick={() => logout()}
                     >
                         {term('sign_out')}
                     </Typography>

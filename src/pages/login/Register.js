@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
+import term from "../../terms";
+import { Auth, client } from '../../API/metro';
+import { useDispatch } from 'react-redux';
+import { utf8_to_b64 } from '../../utils/enode';
+import { set_user } from '../../REDUX/actions/main.actions';
 // styles
 import useStyles from "./styles";
-import term from "../../terms";
-import { client } from '../../API/metro';
 
 
 
 function Register() {
+    let dispatch = useDispatch()
+
     let navigate = useNavigate()
     let classes = useStyles();
     let [isLoading, setIsLoading] = useState(false);
@@ -18,14 +23,27 @@ function Register() {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
 
-    const loginUser = async () => {
+    const registerUser = async () => {
         setIsLoading(true)
         let res = await client.service('users').create({ email, password, firstName, lastName })
-        console.log(res)
         if (res.error) setError(res.error)
         else {
-            setIsLoading(false)
-            navigate("/dashboard")
+            Auth(email, password).then((res) => {
+                if (res.error) setError(true);
+                else {
+                    let user = {
+                        e: utf8_to_b64(res.email),
+                        fn: utf8_to_b64(res.firstName),
+                        ln: utf8_to_b64(res.lastName),
+                        rn: utf8_to_b64(res.roles.roleName),
+                        v: utf8_to_b64(res.isVerified)
+                    }
+                    dispatch(set_user(user))
+                    if (res.isVerified) navigate("/dashboard");
+                    else navigate("/verification");
+                    setIsLoading(false)
+                }
+            })
         }
     }
 
@@ -108,7 +126,7 @@ function Register() {
                         <CircularProgress size={26} />
                     ) : (
                         <Button
-                            onClick={() => loginUser()}
+                            onClick={() => registerUser()}
                             disabled={
                                 email.length === 0 ||
                                 password.length === 0 ||

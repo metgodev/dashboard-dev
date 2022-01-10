@@ -3,16 +3,32 @@ import axios from 'axios'
 import feathers from '@feathersjs/feathers';
 import rest from '@feathersjs/rest-client';
 import auth from '@feathersjs/authentication-client'
+import JWT from 'jwt-client'
 
 
 let dev = false
-let token = ''
+let token = localStorage.getItem('feathers-jwt')
 let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app'
 
 const app = feathers()
     .configure(auth())
 
 const restClient = rest(uri)
+
+// const reAuth = async () => {
+//     app.authentication.getFromLocation(token).then((res) => {
+//         console.log(res)
+//     }).then((err) => {
+//         console.log(err)
+//     })
+//     app.reAuthenticate().then((res) => {
+//         console.log(res)
+//     }).catch((e) => {
+//         console.log(e)
+//     });
+// }
+
+// reAuth()
 
 export const Auth = async (email, password) =>
     app.authenticate({
@@ -40,4 +56,16 @@ export const metro = axios.create({
 });
 
 
- // let res = await client.service('authentication').create({ email, password, strategy: "local" })
+JWT.defaults = {
+    key: '',
+    tokenPrefix: `Bearer ${token}`,
+    storage: global.localStorage,
+    padding: false
+};
+
+export const isLoggedIn = () => {
+    token = localStorage.getItem('feathers-jwt')
+    if (!token) return false
+    if (JWT.validate(token)) return JWT.validate(token)
+    else return false
+}

@@ -5,12 +5,14 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 import useStyles from "./styles";
 import term from "../../terms";
 import { Auth } from "../../API/metro";
-
+import { utf8_to_b64 } from "../../utils/enode";
+import { useDispatch } from "react-redux";
+import { set_user } from "../../REDUX/actions/main.actions";
 
 function SignIn() {
     let classes = useStyles();
-    let navigate = useNavigate()
-
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
     // local
     let [isLoading, setIsLoading] = useState(false);
     let [error, setError] = useState(null);
@@ -20,17 +22,25 @@ function SignIn() {
     const loginUser = async () => {
         setIsLoading(false)
         Auth(email, password).then((res) => {
-            console.log(res)
             if (res.error) setError(true);
             else {
-                navigate("/verification")
+                let user = {
+                    e: utf8_to_b64(res.email),
+                    fn: utf8_to_b64(res.firstName),
+                    ln: utf8_to_b64(res.lastName),
+                    rn: utf8_to_b64(res.roles.roleName),
+                    v: utf8_to_b64(res.isVerified)
+                }
+                dispatch(set_user(user))
+                if (res.isVerified) navigate("/dashboard");
+                else navigate("/verification");
                 setIsLoading(false)
             }
         })
     }
 
     return (
-        <React.Fragment>
+        <>
             <Typography variant="h1" className={classes.greeting}>
                 {term('metro_travel')}
             </Typography>
@@ -93,7 +103,7 @@ function SignIn() {
                     {term('forgot_password')}
                 </Button>
             </div>
-        </React.Fragment>
+        </>
     )
 }
 

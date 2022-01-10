@@ -3,7 +3,7 @@
 @contentType = application/json
 @authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE0ODI3NDYsImlhdCI6MTY0MTQ4Mjc0NiwiZXhwIjoxNjQyMDg3NTQ2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWQ3MDlmMWRmZmQ1MWQ2MTI1MmUyZTciLCJqdGkiOiIzMmU3NzVhNy0wN2JlLTRmNmItYjU1Ni04MTBhMGQyMTAwN2UifQ.5NqC3DmzI2AORHGqxrBNAhbub5s0jDcDTWSDIh3mrnU
 
-@email = "xidedix158@upsdom.com"
+@email = "vapev86956@upsdom.com"
 @password = "12345678"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
 
