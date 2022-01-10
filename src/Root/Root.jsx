@@ -19,11 +19,12 @@ import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 import { Box } from '@material-ui/core';
-import { isLoggedIn } from '../API/metro';
+import { isLoggedIn, isVerified } from '../API/metro';
 
 
 const Root = () => {
-    let logged = isLoggedIn()
+    let logged = isLoggedIn();
+    let verified = isVerified();
     let classes = useStyles();
     let location = useLocation();
     let { pathname } = location;
@@ -35,7 +36,7 @@ const Root = () => {
     }
 
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
-    console.log(logged)
+
     return (
         <Box className={classes.Router}>
             <Main open={sidebar} mobile={mobile.toString()}>
@@ -46,19 +47,20 @@ const Root = () => {
                     </>
                 }
                 <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/verification" element={< Protecte auth={logged}><Verification /></Protecte>} />
-                    <Route exact path="/dashboard" element={<Protecte auth={logged}><Dashboard /></Protecte>} />
-                    <Route exact path="/businesses" element={<Protecte auth={logged}><Businesses /></Protecte>} />
-                    <Route exact path="/events" element={<Protecte auth={logged}><Events /></ Protecte >} />
-                    <Route exact path="/locations" element={<Protecte auth={logged}><PointsOfInterest /></Protecte>} />
-                    <Route exact path="/routes" element={<Protecte auth={logged}><Tracks /></Protecte>} />
-                    <Route exact path="/voucher" element={<Protecte auth={logged}><Voucher /></Protecte>} />
-                    <Route exact path="/users" element={<Protecte auth={logged}><UsersTable /></Protecte>} />
-                    <Route exact path="/map" element={<Protecte auth={logged}><Maps /></Protecte>} />
-                    <Route exact path="/support" element={<Protecte auth={logged}><Support /></Protecte>} />
-                    <Route exact path="/FAQ" element={<Protecte auth={logged}><FAQ /></Protecte>} />
-                    <Route path='*' element={<Protecte auth={logged}><Error /></Protecte>} />
+                    <Route exact path="/" element={<Protecte auth={verified}><Navigate to="/dashboard" /></Protecte>} />
+                    <Route exact path="/dashboard" element={<Protecte auth={verified}><Dashboard /></Protecte>} />
+                    <Route exact path="/verification" element={< Protecte auth={logged}><Verification /></Protecte>} />
+                    <Route exact path="/businesses" element={<Protecte auth={verified}><Businesses /></Protecte>} />
+                    <Route exact path="/events" element={<Protecte auth={verified}><Events /></ Protecte >} />
+                    <Route exact path="/locations" element={<Protecte auth={verified}><PointsOfInterest /></Protecte>} />
+                    <Route exact path="/routes" element={<Protecte auth={verified}><Tracks /></Protecte>} />
+                    <Route exact path="/voucher" element={<Protecte auth={verified}><Voucher /></Protecte>} />
+                    <Route exact path="/users" element={<Protecte auth={verified}><UsersTable /></Protecte>} />
+                    <Route exact path="/map" element={<Protecte auth={verified}><Maps /></Protecte>} />
+                    <Route exact path="/support" element={<Protecte auth={verified}><Support /></Protecte>} />
+                    <Route exact path="/FAQ" element={<Protecte auth={verified}><FAQ /></Protecte>} />
+                    <Route exact path="/login" element={<Login />} />
+                    <Route path='*' element={<Protecte auth={verified}><Error /></Protecte>} />
                 </Routes>
             </Main>
         </Box >

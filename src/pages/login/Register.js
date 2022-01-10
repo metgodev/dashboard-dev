@@ -35,8 +35,8 @@ function Register() {
                         e: utf8_to_b64(res.email),
                         fn: utf8_to_b64(res.firstName),
                         ln: utf8_to_b64(res.lastName),
-                        rn: utf8_to_b64(res.roles.roleName),
-                        v: utf8_to_b64(res.isVerified)
+                        rn: utf8_to_b64(res.roles[0].roleName),
+                        v: res.isVerified
                     }
                     dispatch(set_user(user))
                     if (res.isVerified) navigate("/dashboard");

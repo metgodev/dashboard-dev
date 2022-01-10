@@ -4,10 +4,12 @@ import feathers from '@feathersjs/feathers';
 import rest from '@feathersjs/rest-client';
 import auth from '@feathersjs/authentication-client'
 import JWT from 'jwt-client'
+import { b64_to_utf8 } from '../utils/enode';
 
 
 let dev = false
-let token = localStorage.getItem('feathers-jwt')
+let token;
+let verified;
 let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app'
 
 const app = feathers()
@@ -63,9 +65,16 @@ JWT.defaults = {
     padding: false
 };
 
+export const isVerified = () => {
+    token = localStorage.getItem('feathers-jwt')
+    verified = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')).user.v
+    if (!token || !!!verified) return false
+    else if (JWT.validate(token)) return JWT.validate(token)
+    else return false
+}
 export const isLoggedIn = () => {
     token = localStorage.getItem('feathers-jwt')
     if (!token) return false
-    if (JWT.validate(token)) return JWT.validate(token)
+    else if (JWT.validate(token)) return JWT.validate(token)
     else return false
 }

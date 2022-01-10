@@ -57,7 +57,7 @@ export default makeStyles(theme => ({
   greeting: {
     fontWeight: 500,
     textAlign: "center",
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
   },
   subGreeting: {
     fontWeight: 500,

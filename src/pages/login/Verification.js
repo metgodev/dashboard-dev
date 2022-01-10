@@ -1,30 +1,34 @@
-import React, { useState, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { CircularProgress, Typography, Button, TextField, Fade } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import term from "../../terms";
-import { client } from "../../API/metro";
-// styles
-import useStyles from "./styles";
+import { set_user } from "../../REDUX/actions/main.actions";
+import { useSelector, useDispatch } from "react-redux";
+import { client, isVerified } from "../../API/metro";
 import Widget from "../../components/Widget/Widget";
 import { b64_to_utf8 } from "../../utils/enode";
+import { useNavigate } from "react-router-dom";
+import term from "../../terms";
+// styles
+import useStyles from "./styles";
 
 
 function Verification() {
+    let verified = isVerified();
     let classes = useStyles();
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
     // local
     let [isLoading, setIsLoading] = useState(false);
     let [error, setError] = useState({ err: false });
-    let [code, setCode] = useState("");
+    let [code, setCode] = useState('');
     let [msg, setMsg] = useState({ ismsg: false })
     //global 
     const { user } = useSelector(s => s.mainRememberReducer)
 
-    useLayoutEffect(() => {
-        console.log(user.v)
-        if (b64_to_utf8(user.v)) navigate("/dashboard")
+    useEffect(() => {
+        if (verified) navigate("/dashboard")
     }, [])
+
+
 
     const verifyCode = async () => {
         setIsLoading(true)
@@ -32,10 +36,16 @@ function Verification() {
             action: "verifySignupShort",
             value: { user: { email: b64_to_utf8(user.e) }, token: code }
         })
-        if (res.error) setError({ err: true, msg: res.message })
-        else if (res.isVerified) {
+        if (res.error) {
+            setError({ err: true, msg: res.message })
             setIsLoading(false)
-            navigate("/dashboard");
+            setCode('')
+        }
+        else {
+            setIsLoading(false)
+            setMsg({ ismsg: true, msg: res.email })
+            dispatch(set_user({ ...user, v: res.isVerified }))
+            if (res.isVerified) navigate("/dashboard")
         }
     }
 
@@ -45,10 +55,16 @@ function Verification() {
             action: "resendVerifySignup",
             value: { email: b64_to_utf8(user.e) }
         })
-        if (res.error) setError({ err: true, msg: res.message })
+        if (res.error) {
+            setError({ err: true, msg: res.message })
+            setIsLoading(false)
+            setCode('')
+        }
         else {
             setIsLoading(false)
             setMsg({ ismsg: true, msg: res.email })
+            dispatch(set_user({ ...user, v: res.isVerified }))
+            if (res.isVerified) navigate("/dashboard")
         }
     }
 
@@ -57,6 +73,9 @@ function Verification() {
             <Widget noBodyPadding disableWidgetMenu bodyClass={classes.VerificationWrapper}>
                 <Typography variant="h1" className={classes.greeting}>
                     {term('', 'Verification Page')}
+                </Typography>
+                <Typography variant="subtitle2" className={classes.greeting}>
+                    {term('', `an email has been sent to ${b64_to_utf8(user.e)}`)}
                 </Typography>
                 <Typography variant="h6" className={classes.greeting}>
                     {term('', 'please enter your verification code')}
@@ -108,8 +127,8 @@ function Verification() {
                     </Typography>
                 </Fade>
                 <Fade in={msg.ismsg}>
-                    <Typography color="secondary" className={classes.errorMessage}>
-                        {term('', 'email has been sent to') + msg.msg}
+                    <Typography color="textPrimary" className={classes.errorMessage}>
+                        {term('', 'verified') + msg.msg}
                     </Typography>
                 </Fade>
             </Widget>
