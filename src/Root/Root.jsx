@@ -58,7 +58,7 @@ const Root = () => {
                     <Route exact path="/map" element={<Protecte auth={logged}><Maps /></Protecte>} />
                     <Route exact path="/support" element={<Protecte auth={logged}><Support /></Protecte>} />
                     <Route exact path="/FAQ" element={<Protecte auth={logged}><FAQ /></Protecte>} />
-                    <Route path='*' element={<Error />} />
+                    <Route path='*' element={<Protecte auth={logged}><Error /></Protecte>} />
                 </Routes>
             </Main>
         </Box >
