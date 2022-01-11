@@ -4,11 +4,9 @@ import feathers from '@feathersjs/feathers';
 import rest from '@feathersjs/rest-client';
 import auth from '@feathersjs/authentication-client'
 import JWT from 'jwt-client'
-import { b64_to_utf8 } from '../utils/enode';
-
 
 let dev = false
-let token;
+let token = localStorage.getItem('feathers-jwt');
 let verified;
 let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app'
 
@@ -78,3 +76,11 @@ export const isLoggedIn = () => {
     else if (JWT.validate(token)) return JWT.validate(token)
     else return false
 }
+
+
+// .find()	GET	/messages
+// .get()	GET	/messages/1
+// .create()	POST	/messages
+// .update()	PUT	/messages/1
+// .patch()	PATCH	/messages/1
+// .remove()	DELETE	/messages/1

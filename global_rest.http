@@ -1,7 +1,7 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE4MjY4NDUsImlhdCI6MTY0MTgyNjg0NCwiZXhwIjoxNjQyNDMxNjQ0LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiJkYjVmYjFkYy0xMjVkLTRjMWUtYmQ4Ny1mYmE2Yzk3MTVhODEifQ.9EWVaFvNTXkGEZVjIYaWdioX0cwBzGDegnMIbIcXdw8
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE4OTExMzksImlhdCI6MTY0MTg5MTEzOSwiZXhwIjoxNjQyNDk1OTM5LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiI0NDc3OGVhOS04NTRjLTQ4MGEtOWIyMS0yZjgzMmQ1MmZjOTQifQ.Soj08WosqXCUX4YQzpxDm4_1lONw6sFvfaUCm8c19OE
 
 @email = "fixiv59040@rubygon.com"
 @password = "5656"
@@ -117,7 +117,7 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 ###
 # Get all businesses in specific autority
-GET https://{{hostname}}/businesses?autorityId=61d2e959927d2b5be84b2ce1
+GET https://{{hostname}}/business?autorityId=61d2eb2df58fa2f89374dbb7
 content-type: {{contentType}}
 Authorization: {{authorization}}
 ###

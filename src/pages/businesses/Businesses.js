@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
+import TableService from '../../hooks/DataService/TableService'
 
 function Businesses() {
     let tableData = config.businesses_table;
@@ -22,6 +23,9 @@ function Businesses() {
     const [initialDataDialog, setInitialDataDialog] = useState([]);
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
+
+    // let data = TableService(rowsPerPage, page).businesses
+    // console.log(data)
 
     const openDialog = (data) => {
         if (!data) setDialogType('add')
@@ -44,7 +48,7 @@ function Businesses() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            <PaginationTable
+            {tableData && <PaginationTable
                 lang={lang}
                 data={tableData}
                 page={page}
@@ -52,7 +56,7 @@ function Businesses() {
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}
                 openDialog={openDialog}
-            />
+            />}
             <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} initialData={initialDataDialog} type={dialogType} />
         </Box>
     )
