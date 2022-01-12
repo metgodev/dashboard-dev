@@ -18,13 +18,13 @@ let ModalInit = [
     { title: 'address', id: 2, label: 'address', rows: 1, maxRows: 4, func: () => { } },
     { title: 'description', id: 8, label: 'description', rows: 1, maxRows: 4, func: () => { } },
     { title: 'tags', id: 3, label: 'tags', rows: 4, maxRows: 4, func: () => { } },
-    { title: 'opening_times', id: 9, label: 'opening_times', rows: 1, maxRows: 4, func: () => { } },
+    { title: 'opening_hours', id: 9, label: 'opening_times', rows: 1, maxRows: 4, func: () => { } },
     { title: 'contact', id: 4, label: 'contact', rows: 1, maxRows: 4, func: () => { } },
     { title: 'contact_number', id: 10, label: 'contact_number', rows: 1, maxRows: 4, func: () => { } },
     { title: 'site_link', id: 5, label: 'site_link', rows: 1, maxRows: 4, func: () => { } },
     { title: 'business_number', id: 11, label: 'business_number', rows: 1, maxRows: 4, func: () => { } },
     { title: 'authority', id: 6, label: 'authority', rows: 1, maxRows: 4, func: () => { } },
-    { title: 'email', id: 12, label: 'email', rows: 1, maxRows: 4, func: () => { } },
+    { title: 'email_address', id: 12, label: 'email', rows: 1, maxRows: 4, func: () => { } },
 ]
 
 

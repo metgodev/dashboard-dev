@@ -7,6 +7,7 @@ import useStyles from ".styles";
 // components
 import Widget from "../components/Widget/Widget";
 import { Typography } from "../components/Wrappers/Wrappers";
+import term from "../../terms"
 
 
 function StatsBox() {
@@ -15,7 +16,7 @@ function StatsBox() {
 
     return (
         <Widget
-            title="Visits Today"
+            title={term("visits_today")}
             uppertitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}

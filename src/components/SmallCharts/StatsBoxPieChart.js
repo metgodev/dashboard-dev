@@ -8,6 +8,7 @@ import useStyles from ".styles";
 import Widget from "../components/Widget/Widget";
 import { Typography } from "../components/Wrappers/Wrappers";
 import Dot from "../components/Dot/Dot";
+import term from "../../terms";
 
 const PieChartData = [
     { name: "Group A", value: 400, color: "primary" },
@@ -21,7 +22,7 @@ function StatsBoxPieChart() {
     let theme = useTheme();
 
     return (
-        <Widget title="Revenue Breakdown" uppertitle className={classes.card}>
+        <Widget title={term(revenue_breakdown)} uppertitle className={classes.card}>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
                     <ResponsiveContainer width="100%" height={144}>

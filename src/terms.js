@@ -6,6 +6,11 @@ const active_lexicon = {
         he: 'שפה',
         ar: 'يا الهي',
     },
+    no_value : {
+        en: 'No Value',
+        he: 'אין ערך',
+        ar: 'لا قيمة',
+    },
     dashboard: {
         en: 'Dashboard',
         he: 'לוח הבקרה',
@@ -126,10 +131,15 @@ const active_lexicon = {
         he: 'צפיות',
         ar: 'الآراء',
     },
-    views: {
-        en: 'Views',
-        he: 'צפיות',
-        ar: 'الآراء',
+    visits_today : {
+        en: 'Visits Today',
+        he: 'ביקורים היום',
+        ar: 'زيارات اليوم',
+    },
+    today : {
+        en: 'Today',
+        he: 'היום',
+        ar: 'اليوم',
     },
     back_home: {
         en: 'Back To Home',
@@ -145,6 +155,16 @@ const active_lexicon = {
         en: 'Create your account',
         he: 'צור חשבון',
         ar: 'أنشئ حسابك',
+    },
+    app_performance : {
+        en: 'App Performance',
+        he: 'ביצועי אפליקציה',
+        ar: 'أداء التطبيق',
+    },
+    revenue_breakdown : {
+        en: 'Revenue Breakdown',
+        he: 'פירוט הכנסות',
+        ar: 'انهيار إيرادات',
     },
     something_went_wrong: {
         en: 'Something is wrong with your login or password',
@@ -235,6 +255,11 @@ const active_lexicon = {
         en: 'FAQ',
         he: 'שאלות נפוצות',
         ar: 'التعليمات',
+    },
+    server_overview : {
+        en: 'Server Overview',
+        he: 'סקירת שרת',
+        ar: 'نظرة عامة على الخادم',
     },
     last_then_year: {
         en: 'Than last year',
@@ -335,6 +360,16 @@ const active_lexicon = {
         en: 'export to .xslx',
         he: 'יצוא לקובץ .xslx',
         ar: 'تصدير إلى .xslx',
+    },
+    confirm: {
+        en: 'Confirm',
+        he: 'אישור',
+        ar: 'تأكيد',
+    },
+    cancel: {
+        en: 'Cancel',
+        he: 'ביטול',
+        ar: 'الغاء',
     },
     import: {
         en: 'import from .xslx',
@@ -516,6 +551,11 @@ const active_lexicon = {
         he: 'SDK',
         ar: 'SDK',
     },
+    suitable_for : {
+        en: 'suitable_for',
+        he: 'מתאים ל',
+        ar: 'مناسب ل',
+    }
     
 }
 

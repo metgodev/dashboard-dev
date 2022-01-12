@@ -41,12 +41,12 @@ export default function TimeSelector({ warp, label , type}) {
                         ampm={false}
                         inputVariant="outlined"
                         autoOk={true}
-                        todayLabel={'היום'}
-                        label={label || 'פתיחה יום ראשון'}
+                        todayLabel={term('today')}
+                        label={label || term("sunday_opening")}
                         value={selectedDate}
                         minutesStep={5}
-                        okLabel={'אישור'}
-                        cancelLabel={'ביטול'}
+                        okLabel={term('confirm')}
+                        cancelLabel={term('cancel')}
                         onChange={handleDateChange}
                     />
                 </ThemeProvider>
