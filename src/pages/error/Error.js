@@ -7,6 +7,14 @@ import animatedErr from '../../Assets/lottie/AnimatedError404.json'
 import useStyles from "./styles";
 import term from "../../terms";
 
+const options = {
+  loop: true,
+  autoplay: true,
+  animationData: animatedErr,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+};
 
 export default function Error() {
   let classes = useStyles();
