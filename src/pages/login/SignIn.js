@@ -4,25 +4,43 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
-
+import { Auth } from "../../API/metro";
+import { utf8_to_b64 } from "../../utils/enode";
+import { useDispatch } from "react-redux";
+import { set_user } from "../../REDUX/actions/main.actions";
 
 function SignIn() {
     let classes = useStyles();
-    let navigate = useNavigate()
-
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
     // local
     let [isLoading, setIsLoading] = useState(false);
     let [error, setError] = useState(null);
-    let [loginValue, setLoginValue] = useState("");
-    let [passwordValue, setPasswordValue] = useState("");
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
 
-
-    const loginUser = () => {
-        navigate("/dashboard");
+    const loginUser = async () => {
+        setIsLoading(false)
+        Auth(email, password).then((res) => {
+            if (res.error) setError(true);
+            else {
+                let user = {
+                    e: utf8_to_b64(res.email),
+                    fn: utf8_to_b64(res.firstName),
+                    ln: utf8_to_b64(res.lastName),
+                    rn: utf8_to_b64(res.roles[0].roleName),
+                    v: res.isVerified
+                }
+                dispatch(set_user(user))
+                if (res.isVerified) navigate("/dashboard");
+                else navigate("/verification");
+                setIsLoading(false)
+            }
+        })
     }
 
     return (
-        <React.Fragment>
+        <>
             <Typography variant="h1" className={classes.greeting}>
                 {term('metro_travel')}
             </Typography>
@@ -32,30 +50,30 @@ function SignIn() {
                 </Typography>
             </Fade>
             <TextField
+                variant="outlined"
                 id="email"
                 InputProps={{
                     classes: {
-                        underline: classes.textFieldUnderline,
                         input: classes.textField,
                     },
                 }}
-                value={loginValue}
-                onChange={e => setLoginValue(e.target.value)}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 margin="normal"
                 placeholder={term('email_address')}
                 type="email"
                 fullWidth
             />
             <TextField
+                variant="outlined"
                 id="password"
                 InputProps={{
                     classes: {
-                        underline: classes.textFieldUnderline,
                         input: classes.textField,
                     },
                 }}
-                value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 margin="normal"
                 placeholder={term('password')}
                 type="password"
@@ -67,7 +85,7 @@ function SignIn() {
                 ) : (
                     <Button
                         disabled={
-                            loginValue.length === 0 || passwordValue.length === 0
+                            email.length === 0 || password.length === 0
                         }
                         onClick={() => loginUser()}
                         variant="contained"
@@ -85,7 +103,7 @@ function SignIn() {
                     {term('forgot_password')}
                 </Button>
             </div>
-        </React.Fragment>
+        </>
     )
 }
 

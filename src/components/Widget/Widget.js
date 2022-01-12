@@ -35,7 +35,7 @@ export default function Widget({
           {header ? (
             header
           ) : (
-            <React.Fragment>
+            <>
               <Typography variant="h5" color="textSecondary">
                 {title}
               </Typography>
@@ -51,12 +51,12 @@ export default function Widget({
                   <MoreIcon />
                 </IconButton>
               )}
-            </React.Fragment>
+            </>
           )}
         </div>
         <div
-          className={classnames(classes.widgetBody, {
-            [classes.noPadding]: noBodyPadding,
+          className={classnames({
+            [classes.widgetBody]: !noBodyPadding,
             [bodyClass]: bodyClass,
           })}
         >
@@ -69,15 +69,10 @@ export default function Widget({
         anchorEl={moreref}
         onClose={() => setMoreMenuOpen(false)}
         disableAutoFocusItem
+        disablescrolllock={true.toString()}
       >
         <MenuItem>
-          <Typography>{term('edit')}</Typography>
-        </MenuItem>
-        <MenuItem>
           <Typography>{term('copy')}</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography>{term('delete')}</Typography>
         </MenuItem>
         <MenuItem>
           <Typography>{term('print')}</Typography>

@@ -19,7 +19,7 @@ export const rootReducer = createStore(
         // ...
         rememberEnhancer(
             window.localStorage, // or your own custom storage driver
-            rememberedKeys
+            rememberedKeys,
         )
     )
 );

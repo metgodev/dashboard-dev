@@ -80,6 +80,7 @@ function MailMenu() {
                 className={classes.headerMenu}
                 classes={{ paper: classes.profileMenu }}
                 disableAutoFocusItem
+                disablescrolllock={true.toString()}
             >
                 <div className={classes.profileMenuUser}>
                     <Typography variant="h4" weight="medium">

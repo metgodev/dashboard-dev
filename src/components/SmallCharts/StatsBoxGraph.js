@@ -36,7 +36,7 @@ function StatsBoxGraph() {
     return (
         <Widget
             title="Server Overview"
-            upperTitle
+            uppertitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
         >

@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 import Root from './Root/Root';
 
 import Themes from "./themes";
-import { em } from './utils/document';
 
 const App = () => {
+  //global
   const { theme, lang } = useSelector(s => s.mainRememberReducer)
   let type = () => theme ? Themes.default : Themes.dark
 
@@ -17,7 +17,7 @@ const App = () => {
   }, [lang])
 
   return (
-    <Box style={{ padding: em(1) }}>
+    <Box >
       <ThemeProvider theme={type(theme)} >
         <CssBaseline />
         <Root />

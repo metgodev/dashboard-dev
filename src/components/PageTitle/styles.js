@@ -5,7 +5,7 @@ export default makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-between",
     marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(2.5),
+    marginTop: theme.spacing(1),
   },
   typo: {
     color: theme.palette.text.hint,
@@ -17,5 +17,9 @@ export default makeStyles(theme => ({
     "&:active": {
       boxShadow: theme.customShadows.widgetWide,
     },
+  },
+  boxWrapper: {
+    display: 'flex',
+    alignItems: 'end',
   },
 }));

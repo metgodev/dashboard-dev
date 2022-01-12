@@ -8,16 +8,26 @@ import classNames from "classnames";
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
-import term from "../../../terms";
+import { client } from "../../../API/metro";
 import { useNavigate } from "react-router";
+import term from "../../../terms";
+import { useSelector } from "react-redux";
+import { b64_to_utf8 } from "../../../utils/enode";
 
 function ProfileMenu() {
     // local
     let [profileMenu, setProfileMenu] = useState(null);
+    //global 
+    const { user } = useSelector(state => state.mainRememberReducer)
 
     let classes = useStyles();
     let avatar = 'https://i.pravatar.cc/'
     let navigate = useNavigate()
+
+    const logout = () => {
+        client.logout();
+        navigate('/login')
+    }
 
     return (
         <>
@@ -39,13 +49,14 @@ function ProfileMenu() {
                 className={classes.headerMenu}
                 classes={{ paper: classes.profileMenu }}
                 disableAutoFocusItem
+                disablescrolllock={true.toString()}
             >
                 <div className={classes.profileMenuUser}>
                     <Typography variant="h4" weight="medium">
-                        John Smith
+                        {`${b64_to_utf8(user.fn)} ${b64_to_utf8(user.ln)}`}
                     </Typography>
                 </div>
-                <MenuItem
+                {/* <MenuItem
                     className={classNames(
                         classes.profileMenuItem,
                         classes.headerMenuItem,
@@ -68,12 +79,12 @@ function ProfileMenu() {
                     )}
                 >
                     <AccountIcon className={classes.profileMenuIcon} /> {term('messages')}
-                </MenuItem>
+                </MenuItem> */}
                 <div className={classes.profileMenuUser}>
                     <Typography
                         className={classes.profileMenuLink}
                         color="primary"
-                        onClick={() => { navigate('/login') }}
+                        onClick={() => logout()}
                     >
                         {term('sign_out')}
                     </Typography>

@@ -1,33 +1,43 @@
 import React, { useState } from "react";
-import { Box } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import { Button } from '../Wrappers/Wrappers'
-import Calendar from "../Calendar/Calendar";
+
 // styles
 import useStyles from "./styles";
 
 function HeaderButtons({ btns }) {
     let classes = useStyles()
-    const [variant, setVariant] = useState('')
-
 
     return (
         <>
-            <Box className={classes.boxWrapper} >
-                <Calendar type={2} />
-                <Box className={classes.box}>
-                    {btns && btns.map(({ name, func }) => {
-                        const click = () => setVariant(name)
-                        return (<Button
+            {btns && btns.map(({ name, func, input, icon }) =>
+                <Box className={classes.box} key={name}>
+                    {icon ?
+                        <IconButton
+                            size="small"
+                            aria-label="move-between-screens"
+                            onClick={() => !input && func()}
+                        >
+                            {icon}
+                        </IconButton> :
+                        <Button
                             classes={{ root: classes.button }}
-                            variant={variant === name ? 'contained' : 'outlined'}
+                            variant={'outlined'}
                             color="primary"
-                            key={name}
-                            onClick={() => click()}
-                        > {name}
-                        </Button>)
-                    })}
+                            onClick={() => !input && func()}
+                            component="label"
+                        >
+                            {name}
+                            {input && <input
+                                name="files[]"
+                                type="file"
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                hidden
+                                onChange={(e) => func(e)}
+                            />}
+                        </Button>}
                 </Box>
-            </Box >
+            )}
         </>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IconButton, Menu, MenuItem, } from "@material-ui/core";
-import TranslateIcon from '@mui/icons-material/Translate';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import { useDispatch } from "react-redux";
 import { set_language } from "../../../REDUX/actions/main.actions";
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
-import term from "../../../terms";
 
 const languages = [{ lang: 'עברית', id: 0, short: 'he' }, { lang: 'English', id: 1, short: 'en' }, { lang: 'عربيه', id: 2, short: 'ar' }]
 
@@ -36,7 +35,7 @@ function LangMenu() {
                 onClick={e => { setLangMenu(e.currentTarget); }}
                 className={classes.headerMenuButton}
             >
-                <TranslateIcon classes={{ root: classes.headerIcon }} />
+                <LanguageOutlinedIcon classes={{ root: classes.headerIcon }} />
             </IconButton >
             {/* lang-menu */}
             <Menu
@@ -48,11 +47,13 @@ function LangMenu() {
                 className={classes.headerMenu}
                 classes={{ paper: classes.langMenu }}
                 disableAutoFocusItem
+                disablescrolllock={true.toString()}
             >
                 <div className={classes.langMenuUser}>
-                    <Typography variant="h4" weight="medium">
+                    {/* header */}
+                    {/* <Typography variant="h4" weight="medium">
                         {term('language')}
-                    </Typography>
+                    </Typography> */}
                     <Typography
                         className={classes.langMenuLink}
                         component="a"

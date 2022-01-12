@@ -8,7 +8,6 @@ import rootReducer from '../src/REDUX/rootReducer/rootReducer';
 import './index.css';
 import App from './App';
 
-
 ReactDOM.render(
   <Provider store={rootReducer}>
     <BrowserRouter>

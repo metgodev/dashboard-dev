@@ -1,61 +1,76 @@
 
+import { metro } from './metro';
 import { handleError, handleResponse } from './response';
-import { header } from './Headers';
 
 //example for request
 // (async () => {
 //     apiProvider.getSingle('todos', 1).then(res => console.log(res));
 // })();
 
-
-
-
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
-
 //read
-const getAll = async (resource) => {
-    let data = await fetch(`${BASE_URL}/${resource}`, header('GET'))
-        .then((res) => res.json())
-        .then(handleResponse)
-        .catch(handleError)
-    return data
+const getAll = async (resource, params = {}) => {
+    try {
+        const res = await metro
+            .get(`/${resource}`);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
 };
 
 //read
 const getSingle = async (resource, id) => {
-    let data = await fetch(`${BASE_URL}/${resource}/${id}`, header('GET'))
-        .then((res) => res.json())
-        .then(handleResponse)
-        .catch(handleError);
-    return data
+    try {
+        const res = await metro
+            .get(`/${resource}/${id}`);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
 };
 
 //create
-const post = async (resource, body) => {
-    let data = await fetch(`${BASE_URL}/${resource}`, header('POST', body))
-        .then((res) => res.json())
-        .then(handleResponse)
-        .catch(handleError);
-    return data
+const post = async (resource, payload) => {
+    try {
+        const res = await metro
+            .post(`/${resource}`, payload);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
 };
 
 //ubdate
-const put = async (resource, body) => {
-    let data = await fetch(`${BASE_URL}/${resource}`, header('PUT', body))
-        .then((res) => res.json())
-        .then(handleResponse)
-        .catch(handleError);
-    return data
+const patch = async (resource, payload) => {
+    try {
+        const res = await metro
+            .put(`/${resource}`, payload);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+//ubdate
+const put = async (resource, payload) => {
+    try {
+        const res = await metro
+            .patch(`/${resource}`, payload);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
 };
 
 //delete
-const del = (resource, id) => {
-    let data = await
-    fetch(`${BASE_URL}/${resource}`, header('DELETE', id))
-        .then((res) => res.json())
-        .then(handleResponse)
-        .catch(handleError);
-    return data
+const del = async (resource, id) => {
+    try {
+        const res = await metro
+            .delete(`/${resource}`, id);
+        return handleResponse(res);
+    } catch (error) {
+        return handleError(error);
+    }
 };
 
 export const apiProvider = {
@@ -63,5 +78,6 @@ export const apiProvider = {
     getSingle,
     post,
     put,
+    patch,
     del,
 };

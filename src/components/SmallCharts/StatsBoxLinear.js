@@ -14,7 +14,7 @@ function StatsBoxLinear() {
     return (
         <Widget
             title="App Performance"
-            upperTitle
+            uppertitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
         >
