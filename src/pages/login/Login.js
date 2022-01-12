@@ -16,10 +16,6 @@ function Login() {
 
   return (
     <Grid container className={classes.container}>
-      <div className={classes.logotypeContainer}>
-        <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Metro Travel</Typography>
-      </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>
           <Tabs
@@ -29,12 +25,16 @@ function Login() {
             textColor="primary"
             centered
           >
-            <Tab label="Login" classes={{ root: classes.tab }} />
-            <Tab label="New User" classes={{ root: classes.tab }} />
+            <Tab label="התחברות" classes={{ root: classes.tab }} />
+            <Tab label="הרשמה" classes={{ root: classes.tab }} />
           </Tabs>
           {activeTabId === 0 && (<SignIn />)}
           {activeTabId === 1 && (<Register />)}
         </div>
+      </div>
+      <div className={classes.logotypeContainer}>
+        <img src={logo} alt="logo" className={classes.logotypeImage} />
+        <Typography className={classes.logotypeText}>Metro Travel</Typography>
       </div>
     </Grid>
   );

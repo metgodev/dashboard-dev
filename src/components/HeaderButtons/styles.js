@@ -12,12 +12,10 @@ export default makeStyles(theme => ({
         marginInline: theme.spacing(.5),
         color: theme.palette.primary.main,
         boxShadow: theme.customShadows.widget,
+        borderWidth: 1,
         textTransform: "none",
         "&:active": {
             boxShadow: theme.customShadows.widgetWide,
         },
-    },
-    buttonClicked: {
-        backgroundColor: theme.palette.warning.main,
     },
 }));

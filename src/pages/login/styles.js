@@ -3,17 +3,14 @@ import { em } from "../../utils/document";
 
 export default makeStyles(theme => ({
   container: {
-    height: "100vh",
+    overflow: 'hidden',
+    height: "85vh",
     width: "100vw",
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    top: 0,
-    left: 0,
   },
   logotypeContainer: {
-    backgroundColor: theme.palette.bg.light,
+    backgroundColor: theme.palette.bg,
     width: "60%",
     height: "100%",
     display: "flex",
@@ -32,8 +29,8 @@ export default makeStyles(theme => ({
     marginBottom: theme.spacing(4),
   },
   logotypeText: {
-    color: theme.palette.primary.main,
-    fontWeight: 300,
+    color: theme.palette.warning.main,
+    fontWeight: 400,
     fontSize: em(6),
     [theme.breakpoints.down("md")]: {
       fontSize: 48,
@@ -60,7 +57,7 @@ export default makeStyles(theme => ({
   greeting: {
     fontWeight: 500,
     textAlign: "center",
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
   },
   subGreeting: {
     fontWeight: 500,
@@ -131,5 +128,23 @@ export default makeStyles(theme => ({
       position: "absolute",
       bottom: theme.spacing(2),
     },
+  },
+  VerificationContainer: {
+    position: "fixed",
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50% , -50%)',
+    [theme.breakpoints.down("md")]: {
+      width: "90%",
+    },
+  },
+  VerificationWrapper: {
+    padding: theme.spacing(4),
+  },
+  VerificationLoader: {
+    paddingTop: theme.spacing(1),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));

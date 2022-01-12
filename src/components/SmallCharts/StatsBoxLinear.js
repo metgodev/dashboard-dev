@@ -14,7 +14,7 @@ function StatsBoxLinear() {
     return (
         <Widget
             title="App Performance"
-            upperTitle
+            uppertitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
         >
@@ -26,7 +26,7 @@ function StatsBoxLinear() {
                         colorBrightness="secondary"
                         className={classes.legendElementText}
                     >
-                        Integration
+                        {term('integration')}
                     </Typography>
                 </div>
                 <div className={classes.legendElement}>
@@ -36,7 +36,7 @@ function StatsBoxLinear() {
                         colorBrightness="secondary"
                         className={classes.legendElementText}
                     >
-                        SDK
+                        {term('SDK')}
                     </Typography>
                 </div>
             </div>
@@ -47,7 +47,7 @@ function StatsBoxLinear() {
                     colorBrightness="secondary"
                     className={classes.progressSectionTitle}
                 >
-                    Integration
+                    {term('integration')}
                 </Typography>
                 <LinearProgress
                     variant="determinate"
@@ -63,7 +63,7 @@ function StatsBoxLinear() {
                     colorBrightness="secondary"
                     className={classes.progressSectionTitle}
                 >
-                    SDK
+                    {term('SDK')}
                 </Typography>
                 <LinearProgress
                     variant="determinate"

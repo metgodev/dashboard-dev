@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import classnames from "classnames";
 import Lottie from 'react-lottie';
 import animatedErr from '../../Assets/lottie/AnimatedError404.json'
 // styles
@@ -26,7 +25,7 @@ export default function Error() {
         <Lottie width={'80%'} height={'75%'} options={options} autoplay={true} loop={true} />
         <Button
           variant="contained"
-          color="success"
+          color="secondary"
           component={Link}
           to="/dashboard"
           size="large"

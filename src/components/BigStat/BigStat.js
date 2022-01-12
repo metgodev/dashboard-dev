@@ -43,7 +43,7 @@ export default function BigStat(props) {
           </Select>
         </div>
       }
-      upperTitle
+      uppertitle
     >
       <div className={classes.totalValueContainer}>
         <div className={classes.totalValue}>
@@ -63,7 +63,7 @@ export default function BigStat(props) {
       <div className={classes.bottomStatsContainer}>
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
-            <Typography color={total.percent.profit ? "secondary" : "success"}>
+            <Typography color={total.percent.profit ? "secondary" : "default"}>
               &nbsp;{total.percent.profit ? "+" : "-"}
               {total.percent.value}%
             </Typography>

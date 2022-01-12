@@ -21,7 +21,7 @@ function StatsBoxPieChart() {
     let theme = useTheme();
 
     return (
-        <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
+        <Widget title="Revenue Breakdown" uppertitle className={classes.card}>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
                     <ResponsiveContainer width="100%" height={144}>

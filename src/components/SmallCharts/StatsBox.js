@@ -16,7 +16,7 @@ function StatsBox() {
     return (
         <Widget
             title="Visits Today"
-            upperTitle
+            uppertitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
         >
@@ -53,19 +53,19 @@ function StatsBox() {
             >
                 <Grid item>
                     <Typography color="text" colorBrightness="secondary">
-                        Registrations
+                        {term('registrations')}
                     </Typography>
                     <Typography size="md">860</Typography>
                 </Grid>
                 <Grid item>
                     <Typography color="text" colorBrightness="secondary">
-                        Sign Out
+                        {term('sign_out')}
                     </Typography>
                     <Typography size="md">32</Typography>
                 </Grid>
                 <Grid item>
                     <Typography color="text" colorBrightness="secondary">
-                        Rate
+                        {term('rate')}
                     </Typography>
                     <Typography size="md">3.25%</Typography>
                 </Grid>

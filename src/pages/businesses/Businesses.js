@@ -1,66 +1,66 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Box } from '@mui/material'
 import PageTitle from '../../components/PageTitle/PageTitle'
-import term from '../../terms'
-import { Typography } from '../../components/Wrappers/Wrappers' 
-import Table from '../../components/BusinessTable/Table'
-import { Grid, Box, Icon } from '@mui/material'
-import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
-import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import PaginationTable from '../../components/Tables/PaginationTable'
 import config from '../../config'
-import Popup from '../../components/Popup/Popup';
-import {ExportToPdf } from '../../hooks/ExportToPdf'
-
+import term from '../../terms'
+import { ExportToExcel } from '../../hooks/ExportToExcel'
+import { ReadFromExcel } from '../../hooks/ReadFromExcel'
+import { useSelector } from 'react-redux'
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import PopupDialog from '../../components/PopupDialog/PopupDialog'
+import TableService from '../../hooks/DataService/TableService'
 
 function Businesses() {
-    //popup
+    let tableData = config.businesses_table;
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(25);
+    const pages = Math.ceil(tableData.length / rowsPerPage - 1)
+    //dialog
     const [open, setOpen] = useState(false);
+    const [dialogType, setDialogType] = useState('add');
+    const [initialDataDialog, setInitialDataDialog] = useState([]);
+    //global 
+    const { lang } = useSelector(s => s.mainRememberReducer)
 
+    // let data = TableService(rowsPerPage, page).businesses
+    // console.log(data)
 
-    let businessHeaderButtons = [
-        { name: term('Import to xslx'), func: () => console.log('import') },
-        { name: term('Export to xslx'), func: () => console.log('export') },
-        { name: term('Add'), func: () => setOpen(true) },
-        { name: term('Previous'), func: () => console.log('prev'), icon: <ChevronRightOutlinedIcon /> },
-        { name: term('Next'), func: () => console.log('next'), icon: <ChevronLeftOutlinedIcon /> } ,
+    const openDialog = (data) => {
+        if (!data) setDialogType('add')
+        else {
+            setDialogType('edit')
+            setInitialDataDialog(data)
+        }
+        setOpen(!open)
+    }
+
+    let headerBtns = [
+        //can get name, func, input, icon 
+        { name: term('export'), func: () => ExportToExcel(tableData, 'test') },
+        { name: term('import'), func: ReadFromExcel, input: true, },
+        { name: term('add'), func: openDialog },
+        { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
+        { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
-
-    const tableHeaderCells = [
-        {empty:true},
-        { name:"Status", options:["first", "second"] },
-        { name:"Name", options:["first", "second"] },
-        { name:"Impact", options:["first", "second"] },
-        { name:"Category", options:["first", "second"] },
-        { name:"Tag", options:["first", "second"] },
-        { name:"Authority", options:["first", "second"] },
-        { name:"Address", options:["first", "second"] },
-        { name:"Edit", options:["first", "second"] },
-        { name:"Search", button:true },
-      ]
-
-      let [numberOfRows, setNumberOfRows] = useState(config.table.length)
 
     return (
         <Box>
-            <Grid container direction="row" justifyContent="flex-end">
-                <Grid item>
-                    <Box display="flex" justifyContent="center" marginTop="30px"> 
-                      <Typography> Showing {numberOfRows} results </Typography>   
-                    </Box>
-                </Grid>
-                <Grid item >
-                      <PageTitle title={term('businesses')} buttonGroup={{ btns: businessHeaderButtons }} numberOfRowsInBusinessTable={numberOfRows} />
-                </Grid>
-            </Grid>
-            <Table
-            tableHeaderCells={ tableHeaderCells }
-            tableRows={config.table}
-            updateNumberOfRowsInHeaderFunction={setNumberOfRows}
-            />
-            <Popup title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} />
+            <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
+            {tableData && <PaginationTable
+                lang={lang}
+                data={tableData}
+                page={page}
+                setPage={setPage}
+                rowsPerPage={rowsPerPage}
+                setRowsPerPage={setRowsPerPage}
+                openDialog={openDialog}
+            />}
+            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} initialData={initialDataDialog} type={dialogType} />
         </Box>
     )
 }
 
 export default Businesses
-
 

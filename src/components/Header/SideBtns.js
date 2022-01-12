@@ -13,8 +13,8 @@ function SideBtns() {
     return (
         <>
             <LangMenu />
-            <MailMenu />
-            <NotifyMenu />
+            {/* <MailMenu /> */}
+            {/* <NotifyMenu /> */}
             <ProfileMenu />
         </>
     )
