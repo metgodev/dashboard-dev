@@ -4,13 +4,14 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
 import EncodedImageList from '../../../../EncodedImageList/EncodedImageList';
+import term from '../../../../../terms';
 
 
 export const UploadMediaTab = () => {
   const [base64Image, setBase64Image] = useState([])
   return (
     <>
-      <DialogTitle id="scroll-dialog-title">Upload Media</DialogTitle>
+      <DialogTitle id="scroll-dialog-title">{term('upload_media')}</DialogTitle>
       <DialogContent >
         <DialogContentText >
           <input

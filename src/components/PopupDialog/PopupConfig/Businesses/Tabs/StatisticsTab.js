@@ -9,7 +9,7 @@ import { Button } from '@material-ui/core';
 export const StatisticsTab = () => {
     return (
         <>
-            <DialogTitle id="scroll-dialog-title">Download Statistics</DialogTitle>
+            <DialogTitle id="scroll-dialog-title">{term('download_statistics')}</DialogTitle>
             <DialogContent dividers={true}>
                 <DialogContentText>
                     {statisticsText}

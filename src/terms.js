@@ -106,6 +106,11 @@ const active_lexicon = {
         he: 'חודשי',
         ar: 'شهريا',
     },
+    rate: {
+        en: 'Rate',
+        he: 'דירוג',
+        ar: 'معدل',
+    },
     registrations: {
         en: 'Registrations',
         he: 'הרשמות',
@@ -491,6 +496,27 @@ const active_lexicon = {
         he: 'ראשון פתיחה',
         ar: 'الأحد افتتاح',
     },
+    download_statistics: {
+        en: 'Download Statistics',
+        he: 'הורדת סטטיסטיקה',
+        ar: 'تنزيل الإحصائيات',
+    },
+    upload_media: {
+        en: 'Upload Media',
+        he: 'העלאת מדיה',
+        ar: 'تحميل الوسائط',
+    },
+    integration: {
+        en: 'Integration',
+        he: 'אינטגריציה',
+        ar: 'دمج',
+    },
+    SDK: {
+        en: 'SDK',
+        he: 'SDK',
+        ar: 'SDK',
+    },
+    
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
