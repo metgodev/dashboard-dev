@@ -10,6 +10,7 @@ import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
+import term from '../../terms';
 
 
 

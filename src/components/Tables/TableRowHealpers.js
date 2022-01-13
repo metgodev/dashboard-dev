@@ -55,7 +55,7 @@ export const addTableRow = (data, columns, columnsToHide) => {
                     if (data[item] && item === col) {
                         return data[item];
                     } else if (item === col) {
-                        return "No Value";
+                        return term("no_value");
                     }
                 })
             );
