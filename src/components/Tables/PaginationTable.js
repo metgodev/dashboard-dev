@@ -11,20 +11,21 @@ import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //healpers
-import { StyledTableRow, languages, stats, addTableRow } from './TableRowHealpers';
+import { StyledTableRow, languages, stats, addTableRow, mapDynamicColumns } from './TableRowHealpers';
 import Widget from '../Widget/Widget';
 import TableHeader from './TableHeader';
 import TableMenuBtn from './TableMenuBtn';
 import TableInfoMenu from './TableInfoMenu';
 
-export default function PaginationTable({ data, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog }) {
+export default function PaginationTable({ data, ignore, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog }) {
     let keys = Object.keys(data[0]).map(i => i);
-    keys.shift() // delete "id" key,
+    // let keys = Object.keys(data[0]).filter((el) => !ignore.includes(el));
+
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
     //local
     const [TableCel, setTable] = useState({
         columns: keys,
-        columnsToHide: ['id', 'status', 'contact'],
+        columnsToHide: ignore,
     })
     //style
     let classes = useStyles();
@@ -52,7 +53,7 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
                                         <TableCell size="small" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <TableInfoMenu options={data.contact} />
+                                            <TableInfoMenu options={JSON.parse(data.contact)} />
                                             {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
                                                 <ArrowBackIosIcon />
                                             </IconButton>}

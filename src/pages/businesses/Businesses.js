@@ -24,8 +24,7 @@ function Businesses() {
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
 
-    // let data = TableService(rowsPerPage, page).businesses
-    // console.log(data)
+    let { businesses, ignore } = TableService(rowsPerPage, page)
 
     const openDialog = (data) => {
         if (!data) setDialogType('add')
@@ -48,9 +47,10 @@ function Businesses() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            {tableData && <PaginationTable
+            {businesses.length && <PaginationTable
                 lang={lang}
-                data={tableData}
+                data={businesses}
+                ignore={ignore}
                 page={page}
                 setPage={setPage}
                 rowsPerPage={rowsPerPage}

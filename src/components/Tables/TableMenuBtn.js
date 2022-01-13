@@ -21,7 +21,7 @@ export default function TableMenuBtn({ status, stats }) {
     return (
         <div>
             <Button
-                color={stats[status.toLowerCase()]}
+                color={stats[term(status.toLowerCase())]}
                 size="small"
                 style={{ borderWidth: 2 }}
                 className={classes.statusBtns}
@@ -32,7 +32,7 @@ export default function TableMenuBtn({ status, stats }) {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
                 fullWidth
-            >{status}
+            >{term(status.toLowerCase())}
             </Button>
             <Menu
                 id="basic-menu"

@@ -1,8 +1,7 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE4OTExMzksImlhdCI6MTY0MTg5MTEzOSwiZXhwIjoxNjQyNDk1OTM5LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiI0NDc3OGVhOS04NTRjLTQ4MGEtOWIyMS0yZjgzMmQ1MmZjOTQifQ.Soj08WosqXCUX4YQzpxDm4_1lONw6sFvfaUCm8c19OE
-
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE5ODczMTcsImlhdCI6MTY0MTk4NzMxNiwiZXhwIjoxNjQyNTkyMTE2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiIxZGZhNGU4Mi0zODI3LTRlMGUtOWVjMS0zMzQxMTAwMjQwZWUifQ.PDVz7sMMeh0FAYIgxM_0RlEZf1u_nuc0-XopihMCpeE
 @email = "fixiv59040@rubygon.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
@@ -135,11 +134,11 @@ Authorization: {{authorization}}
       "travel"
    ],
    "autorityId":"61d2eb2df58fa2f89374dbb7",
-   "address":"tel aviv",
+   "address":"Ranana",
    "phoneNumber":"0566296634",
-   "contactPersonName":"avi",
+   "contactPersonName":"Moshe",
    "contactPersonPhoneNumber":"0566296634",
-   "emailAddress":"avi@gmail.com",
+   "emailAddress":"mosh@gmail.com",
    "relevantTo":"INFANCY",
    "websiteUrl":"www.website.com",
    "facebookPageUrl":"www.website.com",
@@ -181,5 +180,5 @@ Authorization: {{authorization}}
          "end":"16:00"
       }
    },
-   "open24Hours":true
+   "open24Hours":false
 }
