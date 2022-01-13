@@ -10,7 +10,7 @@ export default function TableMenuBtn({ status, stats }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     let classes = useStyles();
-
+    let sts = status.toLowerCase()
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -21,7 +21,7 @@ export default function TableMenuBtn({ status, stats }) {
     return (
         <div>
             <Button
-                color={stats[term(status.toLowerCase())]}
+                color={stats[term(sts)]}
                 size="small"
                 style={{ borderWidth: 2 }}
                 className={classes.statusBtns}
@@ -32,7 +32,7 @@ export default function TableMenuBtn({ status, stats }) {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
                 fullWidth
-            >{term(status.toLowerCase())}
+            >{term(sts)}
             </Button>
             <Menu
                 id="basic-menu"
@@ -45,7 +45,7 @@ export default function TableMenuBtn({ status, stats }) {
             >
                 <MenuItem onClick={handleClose}>{term('private')}</MenuItem>
                 <MenuItem onClick={handleClose}>{term('public')}</MenuItem>
-                <MenuItem onClick={handleClose}>{term('pending')}</MenuItem>
+                <MenuItem onClick={handleClose}>{term('pending_approval')}</MenuItem>
             </Menu>
         </div>
     );

@@ -19,7 +19,7 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export const stats = {
     [term('private')]: "error",
     [term('public')]: "success",
-    [term('pending')]: "warning",
+    [term('pending_approval')]: "warning",
 };
 
 //lang helper
@@ -47,6 +47,7 @@ export const mapDynamicColumns = (data) => {
 
 //add table row
 export const addTableRow = (data, columns, columnsToHide) => {
+    console.log(data)
     let row = [];
     columns.forEach((col) => {
         if (!columnsToHide.includes(col)) {

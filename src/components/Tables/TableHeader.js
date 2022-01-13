@@ -4,11 +4,9 @@ import { MenuItem, Select } from '@material-ui/core';
 import { FormControl, InputAdornment, TableCell, TableRow, TextField, TableHead } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import term from '../../terms';
-import config from '../../config';
 
+function TableHeader({ keys, cat }) {
 
-function TableHeader({ keys }) {
-    let cat = config.tableCategories;
     const [values, setValues] = useState({
         status: '',
         name: '',
@@ -31,7 +29,7 @@ function TableHeader({ keys }) {
                     <TableCell size="small" align='center' key={key}>
                         <FormControl fullWidth style={{ minWidth: 130 }}>
                             {
-                                key !== 'contact' ? ['name', 'address'].indexOf(key) > -1 ?
+                                key !== 'btn' ? ['name', 'address'].indexOf(key) > -1 ?
                                     <>
                                         {term(key)}
                                         <TextField

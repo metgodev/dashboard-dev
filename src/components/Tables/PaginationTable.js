@@ -11,21 +11,18 @@ import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //healpers
-import { StyledTableRow, languages, stats, addTableRow, mapDynamicColumns } from './TableRowHealpers';
+import { StyledTableRow, languages, stats, addTableRow } from './TableRowHealpers';
 import Widget from '../Widget/Widget';
 import TableHeader from './TableHeader';
 import TableMenuBtn from './TableMenuBtn';
 import TableInfoMenu from './TableInfoMenu';
 
-export default function PaginationTable({ data, ignore, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog }) {
-    let keys = Object.keys(data[0]).map(i => i);
-    // let keys = Object.keys(data[0]).filter((el) => !ignore.includes(el));
-
+export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat }) {
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
     //local
-    const [TableCel, setTable] = useState({
+    const [TableCel] = useState({
         columns: keys,
-        columnsToHide: ignore,
+        columnsToHide: ['btn', 'status'],
     })
     //style
     let classes = useStyles();
@@ -43,7 +40,7 @@ export default function PaginationTable({ data, ignore, page, setPage, rowsPerPa
             <ThemeProvider theme={createTheme(theme, PaginationLanguage)}>
                 <TableContainer className={classes.tableContainer}>
                     <Table stickyHeader aria-label="sticky table"  >
-                        <TableHeader keys={keys} />
+                        <TableHeader keys={keys} cat={cat} />
                         <TableBody >
                             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(({ id, status, ...data }) => (

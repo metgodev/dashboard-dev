@@ -6,7 +6,7 @@ const active_lexicon = {
         he: 'שפה',
         ar: 'يا الهي',
     },
-    no_value : {
+    no_value: {
         en: 'No Value',
         he: 'אין ערך',
         ar: 'لا قيمة',
@@ -131,12 +131,12 @@ const active_lexicon = {
         he: 'צפיות',
         ar: 'الآراء',
     },
-    visits_today : {
+    visits_today: {
         en: 'Visits Today',
         he: 'ביקורים היום',
         ar: 'زيارات اليوم',
     },
-    today : {
+    today: {
         en: 'Today',
         he: 'היום',
         ar: 'اليوم',
@@ -156,12 +156,12 @@ const active_lexicon = {
         he: 'צור חשבון',
         ar: 'أنشئ حسابك',
     },
-    app_performance : {
+    app_performance: {
         en: 'App Performance',
         he: 'ביצועי אפליקציה',
         ar: 'أداء التطبيق',
     },
-    revenue_breakdown : {
+    revenue_breakdown: {
         en: 'Revenue Breakdown',
         he: 'פירוט הכנסות',
         ar: 'انهيار إيرادات',
@@ -256,7 +256,7 @@ const active_lexicon = {
         he: 'שאלות נפוצות',
         ar: 'التعليمات',
     },
-    server_overview : {
+    server_overview: {
         en: 'Server Overview',
         he: 'סקירת שרת',
         ar: 'نظرة عامة على الخادم',
@@ -295,6 +295,11 @@ const active_lexicon = {
         en: 'Food',
         he: 'אוכל',
         ar: 'اكل',
+    },
+    all: {
+        en: 'All',
+        he: 'הכל',
+        ar: 'الجميع',
     },
     download: {
         en: 'Download',
@@ -351,7 +356,7 @@ const active_lexicon = {
         he: 'ציבורי',
         ar: 'عام',
     },
-    pending: {
+    pending_approval: {
         en: 'pending approval',
         he: 'ממתין לאישור',
         ar: 'ما زال يحتاج بتصدير',
@@ -551,12 +556,12 @@ const active_lexicon = {
         he: 'SDK',
         ar: 'SDK',
     },
-    suitable_for : {
+    suitable_for: {
         en: 'suitable_for',
         he: 'מתאים ל',
         ar: 'مناسب ل',
     }
-    
+
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

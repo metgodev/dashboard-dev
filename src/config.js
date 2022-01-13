@@ -549,7 +549,7 @@ export default {
     status: ['private', 'public', 'pending'],
     category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
     tag: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
-    authority: ['ashdod', 'askelon'],
+    // authority: ['ashdod', 'askelon'],
     edit: ['last week', 'last month']
   }
 };

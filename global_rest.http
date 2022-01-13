@@ -1,7 +1,7 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDE5ODczMTcsImlhdCI6MTY0MTk4NzMxNiwiZXhwIjoxNjQyNTkyMTE2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiIxZGZhNGU4Mi0zODI3LTRlMGUtOWVjMS0zMzQxMTAwMjQwZWUifQ.PDVz7sMMeh0FAYIgxM_0RlEZf1u_nuc0-XopihMCpeE
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDIwNjIyNjEsImlhdCI6MTY0MjA2MjI2MSwiZXhwIjoxNjQyNjY3MDYxLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiI5YWNiZGViMy04ZmZkLTQ3YzMtYjA4ZC0xMjU3YWNjY2JmZWUifQ.7rgXEEeIcVW3g3aNeHq7YQKjKnizSXd9UqJo3Bq_jxQ
 @email = "fixiv59040@rubygon.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
@@ -126,20 +126,17 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {
-   "name":"Trakers",
-   "description":"travel around the beautiful area of the city",
-   "status":"PUBLIC",
-   "tagsIds":[
-      "sea",
-      "travel"
-   ],
+   "name":"עין חרא",
+   "description":"בואו לטייל בעין חרא עוד היום",
+   "status":"PENDING_APPROVAL",
+   "tagsIds":["food"],
    "autorityId":"61d2eb2df58fa2f89374dbb7",
-   "address":"Ranana",
+   "address":"ליד עזאזל בדרך לקנטים",
    "phoneNumber":"0566296634",
-   "contactPersonName":"Moshe",
+   "contactPersonName":"כלב בן יפונה",
    "contactPersonPhoneNumber":"0566296634",
-   "emailAddress":"mosh@gmail.com",
-   "relevantTo":"INFANCY",
+   "emailAddress":"hara@gmail.com",
+   "relevantTo":"GOLDEN_AGE",
    "websiteUrl":"www.website.com",
    "facebookPageUrl":"www.website.com",
    "instagramPageUrl":"www.website.com",
@@ -182,3 +179,39 @@ Authorization: {{authorization}}
    },
    "open24Hours":false
 }
+
+
+
+#   {
+#       name: { type: String, required: true },
+#       description: { type: String, required: true },
+#       status: { type: String, enum: ["PUBLIC", "PRIVATE", "PENDING_APPROVAL"] },
+#       tagsIds: { type: [String], default: [] },
+#       userId: { type: String, required: true },
+#       autorityId: { type: String, required: true },
+#       address: { type: String },
+#       phoneNumber: { type: String },
+#       contactPersonName: { type: String },
+#       contactPersonPhoneNumber: { type: String },
+#       websiteUrl: { type: String },
+#       emailAddress: { type: String },
+#       relevantTo: {
+#         type: String,
+#         enum: ["INFANCY", "KIDS&YOUTH", "ALL_FAMILY", "GROUPS", "GOLDEN_AGE"],
+#         required: true,
+#       },
+#       facebookPageUrl: { type: String },
+#       instagramPageUrl: { type: String },
+#       youtubePageUrl: { type: String },
+#       twitterPageUrl: { type: String },
+#       linkedInPageUrl: { type: String },
+#       galleryFileIds: { type: [String], default: [] },
+#       openingHours: {
+#         type: Map,
+#         default: {},
+#       },
+#       open24Hours: { type: Boolean, default: false },
+#     },
+#     {
+#       timestamps: true,
+#     }
