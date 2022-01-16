@@ -3,19 +3,26 @@ import term from "../../../terms";
 
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
 export const ModalInit = [
-    { title: term('businesse_name'), id: 1, field: 'bussinesName', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('for_whom'), id: 2, field: 'suitableFor', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('authority'), id: 3, field: 'authority', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('address'), id: 4, field: 'address', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('tags'), id: 5, field: 'tags', rows: 4, maxRows: 4, size: 'small' },
-    { title: term('description'), id: 6, field: 'description', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('opening_hours'), id: 7, field: 'openingTimes', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('contact'), id: 8, field: 'contactNumber', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('contact_number'), id: 9, field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('site_link'), id: 10, field: 'websiteLink', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('business_number'), id: 11, field: 'bussinesPhone', rows: 1, maxRows: 4, size: 'small' },
-    { title: term('email_address'), id: 12, field: 'email', rows: 1, maxRows: 4, size: 'small' },
+    { title: term('businesse_name'), id: 1, field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('description'), id: 2, field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('tags'), id: 3, field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker' },
+    { title: term('authority'), id: 4, field: 'autorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
+    { title: term('address'), id: 5, field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('contact'), id: 6, field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('contact_name'), id: 7, field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('business_number'), id: 8, field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('email_address'), id: 9, field: 'emailAddress', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('for_whom'), id: 10, field: 'relevantTo', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
+    { title: term('opening_hours'), id: 11, field: 'openingHours', rows: 1, maxRows: 4, size: 'small', type: 'timePicker' },
+    { title: term('site_link'), id: 12, field: 'websiteUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('facebook_link'), id: 13, field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('instagram_link'), id: 14, field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('youtube_link'), id: 15, field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('twitter_link'), id: 16, field: 'twitterPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('linkedIn_link'), id: 17, field: 'linkedInPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('open_24_hours'), id: 18, field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
 ]
+
 export const tags = [
     { id: 'נגב - כנסים וקבוצות' },
     { id: 'נגב - פעילות חקלאית' },
@@ -26,12 +33,12 @@ export const tags = [
     { id: 'הרצליה - דירות נופש' },
 ]
 export const picker = {
-    suitableFor: [{ value: 'לגיל הרך' },
+    relevantTo: [{ value: 'לגיל הרך' },
     { value: 'לילדים ונוער' },
     { value: 'לכל המשפחה' },
     { value: 'לזוגות' },
     { value: 'לקבוצות' },],
-    authority: [{ value: 'מועצה איזורית שער הנגב' },
+    autorityId: [{ value: 'מועצה איזורית שער הנגב' },
     { value: 'רהט' },
     { value: 'הרצליה' },
     { value: 'אופקים' },
@@ -39,20 +46,20 @@ export const picker = {
 };
 
 export const TimePicker = [
-    {day:term('sunday_opening') , type: 1},
-    {day:term('sunday_closing'), type: 2},
-    {day:term('monday_opening'), type: 1},
-    {day:term('monday_closing'), type: 2},
-    {day:term('tuesday_opening'), type: 1},
-    {day:term('tuesday_closing'), type: 2},
-    {day:term('wednesday_opening'), type: 1},
-    {day:term('wednesday_closing'), type: 2},
-    {day:term('thursday_opening'), type: 1},
-    {day:term('thursday_closing'), type: 2},
-    {day:term('friday_opening'), type: 1},
-    {day:term('friday_closing'), type: 2},
-    {day:term('saturday_opening'), type: 1},
-    {day:term('saturday_closing'), type: 2},
+    { day: term('sunday_opening'), type: 1, timeref: 'sunday' },
+    { day: term('sunday_closing'), type: 2, timeref: 'sunday' },
+    { day: term('monday_opening'), type: 1, timeref: 'monday' },
+    { day: term('monday_closing'), type: 2, timeref: 'monday' },
+    { day: term('tuesday_opening'), type: 1, timeref: 'tuesday' },
+    { day: term('tuesday_closing'), type: 2, timeref: 'tuesday' },
+    { day: term('wednesday_opening'), type: 1, timeref: 'wednesday' },
+    { day: term('wednesday_closing'), type: 2, timeref: 'wednesday' },
+    { day: term('thursday_opening'), type: 1, timeref: 'thursday' },
+    { day: term('thursday_closing'), type: 2, timeref: 'thursday' },
+    { day: term('friday_opening'), type: 1, timeref: 'friday' },
+    { day: term('friday_closing'), type: 2, timeref: 'friday' },
+    { day: term('saturday_opening'), type: 1, timeref: 'saturday' },
+    { day: term('saturday_closing'), type: 2, timeref: 'saturday' },
 ];
 
 export const statisticsText = `מספר לחיצות על: טלפון, אתר, ניווט, שיתוף, מייל, שמירה, תמונות, דירוג

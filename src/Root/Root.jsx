@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
@@ -19,7 +19,7 @@ import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 import { Box } from '@material-ui/core';
-import { isLoggedIn, isVerified } from '../API/metro';
+import { isLoggedIn, isVerified, reAuth } from '../API/metro';
 
 
 const Root = () => {
@@ -28,6 +28,7 @@ const Root = () => {
     let classes = useStyles();
     let location = useLocation();
     let { pathname } = location;
+
     //global 
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
 
@@ -36,6 +37,10 @@ const Root = () => {
     }
 
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
+
+    useLayoutEffect(() => {
+        return (() => reAuth())
+    }, [])
 
     return (
         <Box className={classes.Router}>

@@ -14,8 +14,11 @@ import term from '../../terms';
 import { Box } from '@mui/system';
 
 
-export default function TimeSelector({ warp, label , type}) {
-    const [selectedDate, handleDateChange] = useState(new Date().setHours(type === 1 ? 8 : 16,30,0,0));
+export default function TimeSelector({ warp, label, type, times }) {
+    let openingTime = times.start ? parseInt(times.start) : 8
+    let closingTime = times.end ? parseInt(times.end) : (16, 30)
+
+    const [selectedDate, handleDateChange] = useState(new Date().setHours(type === 1 ? openingTime : closingTime, 0, 0));
     const { lang } = useSelector(state => state.mainRememberReducer)
     let classes = useStyles();
     let theme = useTheme();
@@ -30,8 +33,13 @@ export default function TimeSelector({ warp, label , type}) {
                 break;
         }
     }
-
     const Warp = warp ? Widget : Box
+
+    // console.log(new Date(selectedDate).toLocaleTimeString([], {
+    //     hourCycle: 'h23',
+    //     hour: '2-digit',
+    //     minute: '2-digit'
+    // }))
 
     return (
         <Warp title={term('time')} uppertitle className={classes.card} >

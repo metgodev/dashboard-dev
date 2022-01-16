@@ -47,7 +47,6 @@ export const mapDynamicColumns = (data) => {
 
 //add table row
 export const addTableRow = (data, columns, columnsToHide) => {
-    console.log(data)
     let row = [];
     columns.forEach((col) => {
         if (!columnsToHide.includes(col)) {

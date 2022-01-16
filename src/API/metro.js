@@ -15,21 +15,6 @@ const app = feathers()
 
 const restClient = rest(uri)
 
-// const reAuth = async () => {
-//     app.authentication.getFromLocation(token).then((res) => {
-//         console.log(res)
-//     }).then((err) => {
-//         console.log(err)
-//     })
-//     app.reAuthenticate().then((res) => {
-//         console.log(res)
-//     }).catch((e) => {
-//         console.log(e)
-//     });
-// }
-
-// reAuth()
-
 export const Auth = async (email, password) =>
     app.authenticate({
         strategy: 'local',
@@ -40,6 +25,16 @@ export const Auth = async (email, password) =>
     }).catch(e => {
         return { error: true, message: e };
     });
+
+export const reAuth = async () => {
+    app.reAuthenticate().then((res) => {
+        token = res.accessToken;
+        verified = res.isVerified;
+    }).catch((err) => {
+        if (err) client.logout();
+        console.log(err)
+    });
+}
 
 export const client = app.configure(restClient.axios(axios.create({
     baseURL: uri,
@@ -55,9 +50,9 @@ export const metro = axios.create({
     }
 });
 
-
+//jwt
 JWT.defaults = {
-    key: '',
+    key: '9kXcO/Sq6QVB8QdwpOEFK5NjavU=',
     tokenPrefix: `Bearer ${token}`,
     storage: global.localStorage,
     padding: false
@@ -70,12 +65,13 @@ export const isVerified = () => {
     else if (JWT.validate(token)) return JWT.validate(token)
     else return false
 }
+
 export const isLoggedIn = () => {
-    token = localStorage.getItem('feathers-jwt')
     if (!token) return false
     else if (JWT.validate(token)) return JWT.validate(token)
     else return false
 }
+
 
 
 // .find()	GET	/messages

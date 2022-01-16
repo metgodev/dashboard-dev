@@ -1,17 +1,23 @@
 import { useState, useLayoutEffect } from 'react'
 import { client } from '../../API/metro';
 
-const TableService = ({ rowsPerPage, page }) => {
+const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
     // local
     const [data, setData] = useState({
         areas: {},
         authorities: [],
         businesses: [],
         keys: [],
-        ignore: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
-            'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
-            'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
-            'relevantTo', 'contact'],
+        ignore: {
+            businesses: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
+                'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
+                'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
+                'relevantTo', 'contact'],
+            events: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
+                'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
+                'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
+                'relevantTo', 'contact']
+        },
         tableCategories: {
             impact: ['1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
             status: ['private', 'public', 'pending_approval'],
@@ -47,12 +53,11 @@ const TableService = ({ rowsPerPage, page }) => {
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleString(), userId, websiteUrl, youtubePageUrl, id: _id,
                 contact: JSON.stringify([{ 'whatsapp': phoneNumber }, { 'phone': contactPersonPhoneNumber }, { 'email': emailAddress }])
             }]);
-            let keys = Object.keys(businesses[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            let keys = Object.keys(businesses[0]).filter((el) => !data.ignore[ignorePage].includes(el)); keys.push('btn');
             setData(prevState => ({ ...prevState, areas, authorities, businesses, keys }));
         })();
     }, [])
 
-    console.log(data.keys)
     return data
 }
 
