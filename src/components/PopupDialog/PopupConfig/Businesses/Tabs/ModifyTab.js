@@ -3,7 +3,7 @@ import term from '../../../../../terms';
 import { Button } from '@material-ui/core';
 import { Collapse, MenuItem } from '@material-ui/core';
 import { ModalInit, tags, picker, TimePicker } from '../../popConfig';
-import { Autocomplete, FormControl, Grid, IconButton, InputLabel, TextField, Switch } from '@mui/material';
+import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -13,7 +13,8 @@ import useStyles from '../../../styles'
 export const ModifyTab = ({ initialData, type }) => {
     let classes = useStyles();
     let OT = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
-    let { whatsapp, phone, email } = initialData.contact && JSON.parse(initialData.contact) || {}
+    let OC = initialData.contact && JSON.parse(initialData.contact) || {}
+
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         name: '',
