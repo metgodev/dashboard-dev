@@ -32,12 +32,13 @@ export const tags = [
     { id: "נגב - אירוח ביתי וארוחות שף" },
     { id: 'הרצליה - דירות נופש' },
 ]
+
 export const picker = {
-    relevantTo: [{ value: 'לגיל הרך' },
-    { value: 'לילדים ונוער' },
-    { value: 'לכל המשפחה' },
-    { value: 'לזוגות' },
-    { value: 'לקבוצות' },],
+    relevantTo: [{ value: 'INFANCY', name: 'לגיל הרך' },
+    { value: 'KIDS&YOUTH', name: 'לילדים ונוער' },
+    { value: 'ALL_FAMILY', name: 'לכל המשפחה' },
+    { value: 'GROUPS', name: 'לזוגות' },
+    { value: 'GOLDEN_AGE', name: 'לקבוצות' },],
     autorityId: [{ value: 'מועצה איזורית שער הנגב' },
     { value: 'רהט' },
     { value: 'הרצליה' },

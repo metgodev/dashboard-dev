@@ -59,6 +59,7 @@ export const ModifyTab = ({ initialData, type }) => {
     }, [type])
 
     const handleChange = (e, field, tags) => {
+        console.log(e, field)
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
         else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
@@ -117,7 +118,7 @@ export const ModifyTab = ({ initialData, type }) => {
                             >
                                 {picker[field].map((s) => (
                                     <MenuItem key={s.value} value={s.value}>
-                                        {s.value}
+                                        {s.name}
                                     </MenuItem>
                                 ))}
                             </TextField>}
