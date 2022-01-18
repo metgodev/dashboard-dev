@@ -16,7 +16,7 @@ function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { businesses, tableCategories, keys, ignore } = TableService(rowsPerPage, page, "businesses")
+    let { businesses, tableCategories, keys, businessNotFormatted } = TableService(rowsPerPage, page, "businesses")
     const pages = Math.ceil(businesses.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
@@ -36,7 +36,7 @@ function Businesses() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(businesses, 'test') },
+        { name: term('export'), func: () => ExportToExcel(businessNotFormatted, 'businesses_list') },
         { name: term('import'), func: ReadFromExcel, input: true, },
         { name: term('add'), func: openDialog },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },

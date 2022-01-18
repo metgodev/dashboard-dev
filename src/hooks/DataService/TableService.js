@@ -7,6 +7,7 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
         areas: {},
         authorities: [],
         businesses: [],
+        businessNotFormatted: [],
         keys: [],
         ignore: {
             businesses: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
@@ -51,10 +52,10 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
                 createdAt, description, facebookPageUrl, galleryFileIds, instagramPageUrl,
                 linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: tagsIds,
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
-                contact: JSON.stringify([{ 'whatsapp': phoneNumber }, { 'phone': contactPersonPhoneNumber }, { 'email': emailAddress }])
+                contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
             }]);
             let keys = Object.keys(businesses[0]).filter((el) => !data.ignore[ignorePage].includes(el)); keys.push('btn');
-            setData(prevState => ({ ...prevState, areas, authorities, businesses, keys }));
+            setData(prevState => ({ ...prevState, areas, authorities, businesses, keys, businessNotFormatted: business.data }));
         })();
     }, [])
 

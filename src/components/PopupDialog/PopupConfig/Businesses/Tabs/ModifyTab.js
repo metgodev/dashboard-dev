@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
 import { Button } from '@material-ui/core';
 import { Collapse, MenuItem } from '@material-ui/core';
@@ -9,12 +9,14 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 //styles
 import useStyles from '../../../styles'
+import { client } from '../../../../../API/metro';
 
 export const ModifyTab = ({ initialData, type }) => {
     let classes = useStyles();
-    let OT = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
-    let OC = initialData.contact && JSON.parse(initialData.contact) || {}
+    const openDrop = () => setOpen(!open);
 
+    const [OT, setOT] = useState({});
+    const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         name: '',
@@ -34,9 +36,27 @@ export const ModifyTab = ({ initialData, type }) => {
         youtubePageUrl: '',
         twitterPageUrl: '',
         linkedInPageUrl: '',
-        openingHours: {},
-        open24Hours: null,
+        openingHours: {
+            sunday: {},
+            monday: {},
+            tuesday: {},
+            wednesday: {},
+            thursday: {},
+            friday: {},
+            saturday: {},
+        },
+        open24Hours: false,
     });
+    //validator 
+    let isFulfilled = Object.values(values).every(item => item);
+
+    useEffect(() => {
+        if (Object.keys(initialData).length === 0) return;
+        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
+        setOT(initialData.openingHours && JSON.parse(initialData.openingHours) || {})
+        setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
+        if (type === 'add') setInit({})
+    }, [type])
 
     const handleChange = (e, field, tags) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
@@ -44,9 +64,19 @@ export const ModifyTab = ({ initialData, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    const openDrop = () => {
-        setOpen(!open);
+    const setTimes = (times, field, type) => {
+        let pos = type === 1 ? 'start' : 'end'
+        setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
     };
+
+    const edit = async () => {
+        // let res = await client.service('business').patch()
+    }
+
+    const add = async () => {
+        let res = await client.service('business').create(values)
+        console.log(res)
+    }
 
     return (
         <Grid container spacing={2}>
@@ -68,7 +98,7 @@ export const ModifyTab = ({ initialData, type }) => {
                                 multiline
                                 rows={rows}
                                 maxRows={maxRows}
-                                defaultValue={initialData[field]}
+                                defaultValue={init[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             />}
                         {type === 'picker' &&
@@ -115,7 +145,8 @@ export const ModifyTab = ({ initialData, type }) => {
                             />}
                         {type === 'timePicker' &&
                             <>
-                                <Button variant="outlined" size={'large'} color="primary" onClick={openDrop} style={{ marginBottom: 10 }} >
+                                <Button variant="outlined" size={'large'} color="primary"
+                                    onClick={openDrop} style={{ marginBottom: 10 }} >
                                     {open ? <ExpandLess /> : <ExpandMore />}
                                 </Button>
                                 <Collapse in={open} timeout="auto" unmountOnExit>
@@ -125,7 +156,8 @@ export const ModifyTab = ({ initialData, type }) => {
                                         alignItems="stretch" spacing={1}>
                                         {TimePicker.map((s) => (
                                             <Grid item lg={6} md={6} sm={6} key={s}>
-                                                <TimeSelector label={s.day} type={s.type} times={OT[s.timeref]} />
+                                                <TimeSelector label={s.day} type={s.type} times={OT[s.timeref] || null}
+                                                    timeref={s.timeref} setTimes={setTimes} />
                                             </Grid>
                                         ))}
                                     </Grid>
@@ -141,13 +173,17 @@ export const ModifyTab = ({ initialData, type }) => {
                     </FormControl>
                 </Grid>
             )}
-            <Button
-                variant="contained"
-                style={{ marginTop: 10 }}
-                color="primary"
-                onClick={() => { console.log(values) }}>
-                {term(type)}
-            </Button>
+            <div style={{ marginTop: 10, marginLeft: 15, display: 'flex', justifyContent: 'left', width: '100%' }}>
+                <Button
+                    style={{ width: 200 }}
+                    size="large"
+                    disabled={!isFulfilled}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => add()}>
+                    {term(type)}
+                </Button>
+            </div>
         </Grid>
     )
 }

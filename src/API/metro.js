@@ -31,8 +31,9 @@ export const reAuth = async () => {
         token = res.accessToken;
         verified = res.isVerified;
     }).catch((err) => {
-        if (err) client.logout();
-        console.log(err)
+        client.logout();
+        window.location.replace('/')
+        // console.log(err)
     });
 }
 
@@ -52,7 +53,7 @@ export const metro = axios.create({
 
 //jwt
 JWT.defaults = {
-    key: '9kXcO/Sq6QVB8QdwpOEFK5NjavU=',
+    key: '',
     tokenPrefix: `Bearer ${token}`,
     storage: global.localStorage,
     padding: false
