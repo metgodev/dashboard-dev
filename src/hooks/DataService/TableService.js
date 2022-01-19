@@ -31,6 +31,7 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
 
     useLayoutEffect(() => {
         (async (areaName = "Western Negev", autorityId = "61d2eb2df58fa2f89374dbb7") => {
+            localStorage.setItem('areaID', '61d2e93c927d2b5be84b2cdb') // delete in future
             let areas = {};
             let authorities = [];
             let businesses = [];
@@ -55,7 +56,7 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
                 contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
             }]);
             let keys = Object.keys(businesses[0]).filter((el) => !data.ignore[ignorePage].includes(el)); keys.push('btn');
-            setData(prevState => ({ ...prevState, areas, authorities, businesses, keys, businessNotFormatted: business.data }));
+            setData(prevState => ({ ...prevState, areas, authorities, businesses, keys, businessNotFormatted: business.data, area }));
         })();
     }, [])
 

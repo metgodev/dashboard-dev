@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
-import { ModalTabs } from '../popConfig';
+import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';

@@ -3,6 +3,7 @@ export const SET_THEME_COLOR = 'SET_THEME_COLOR';
 export const SET_SIDEBAR_TOGGLE = 'SET_SIDEBAR_TOGGLE';
 export const SET_MOBILE_TOGGLE = 'SET_MOBILE_TOGGLE';
 export const SET_USER = 'SET_USER';
+export const SET_INITIAL_DATA_DIALOG = 'SET_INITIAL_DATA_DIALOG';
 
 
 export const set_theme_color = (value) => ({
@@ -27,6 +28,11 @@ export const set_mobile_toggle = (value) => ({
 
 export const set_user = (value) => ({
     type: SET_USER,
+    payload: value
+})
+
+export const set_initial_data_dialog = (value) => ({
+    type: SET_INITIAL_DATA_DIALOG,
     payload: value
 })
 

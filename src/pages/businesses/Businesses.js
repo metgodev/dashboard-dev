@@ -21,15 +21,18 @@ function Businesses() {
     //dialog
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState([]);
+    const [initialDataDialog, setInitialDataDialog] = useState({});
     //global 
-    const { lang } = useSelector(s => s.mainRememberReducer)
+    const { lang } = useSelector(s => s.mainRememberReducer);
 
     const openDialog = (data) => {
-        if (!data) setDialogType('add')
-        else {
-            setDialogType('edit')
+        if (data) {
             setInitialDataDialog(data)
+            setDialogType('edit')
+        }
+        else {
+            setInitialDataDialog({})
+            setDialogType('add')
         }
         setOpen(!open)
     }
@@ -57,18 +60,20 @@ function Businesses() {
                 setRowsPerPage={setRowsPerPage}
                 openDialog={openDialog}
             /> :
-                <Box style={{
-                    position: "fixed",
-                    top: '52%',
-                    left: '48%',
-                    transform: 'translate(-50% , -50%)',
-                }}>
+                <Box style={progress}>
                     <CircularProgress size={60} />
                 </Box>
             }
             <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} initialData={initialDataDialog} type={dialogType} />
         </Box>
     )
+}
+
+const progress = {
+    position: "fixed",
+    top: '52%',
+    left: '48%',
+    transform: 'translate(-50% , -50%)',
 }
 
 export default Businesses

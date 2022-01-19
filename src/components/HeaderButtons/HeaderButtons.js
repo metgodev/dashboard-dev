@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, IconButton } from '@mui/material'
+import React from "react";
+import { Box, IconButton, TextField, MenuItem } from '@mui/material'
 import { Button } from '../Wrappers/Wrappers'
 
 // styles
@@ -10,7 +10,7 @@ function HeaderButtons({ btns }) {
 
     return (
         <>
-            {btns && btns.map(({ name, func, input, icon }) =>
+            {btns && btns.map(({ name, func, input, icon, picker }) =>
                 <Box className={classes.box} key={name}>
                     {icon ?
                         <IconButton
@@ -19,7 +19,8 @@ function HeaderButtons({ btns }) {
                             onClick={() => !input && func()}
                         >
                             {icon}
-                        </IconButton> :
+                        </IconButton>
+                        :
                         <Button
                             classes={{ root: classes.button }}
                             variant={'outlined'}

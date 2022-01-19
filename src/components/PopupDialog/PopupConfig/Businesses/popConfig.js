@@ -1,4 +1,13 @@
-import term from "../../../terms";
+import { client } from "../../../../API/metro";
+import term from "../../../../terms";
+
+
+(async () => {
+    let areaName = localStorage.getItem('areaID')
+    client.service("authorities").find({ query: { areaId: areaName } })
+        .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
+        .then((authorities => picker.autorityId = authorities))
+})();
 
 
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
@@ -39,11 +48,7 @@ export const picker = {
     { value: 'ALL_FAMILY', name: 'לכל המשפחה' },
     { value: 'GROUPS', name: 'לזוגות' },
     { value: 'GOLDEN_AGE', name: 'לקבוצות' },],
-    autorityId: [{ value: 'מועצה איזורית שער הנגב' },
-    { value: 'רהט' },
-    { value: 'הרצליה' },
-    { value: 'אופקים' },
-    { value: 'נתיבות' },]
+    autorityId: []
 };
 
 export const TimePicker = [

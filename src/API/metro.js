@@ -5,10 +5,10 @@ import rest from '@feathersjs/rest-client';
 import auth from '@feathersjs/authentication-client'
 import JWT from 'jwt-client'
 
-let dev = false
+let dev = false;
 let token = localStorage.getItem('feathers-jwt');
 let verified;
-let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app'
+let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app';
 
 const app = feathers()
     .configure(auth())
@@ -32,8 +32,6 @@ export const reAuth = async () => {
         verified = res.isVerified;
     }).catch((err) => {
         client.logout();
-        window.location.replace('/')
-        // console.log(err)
     });
 }
 

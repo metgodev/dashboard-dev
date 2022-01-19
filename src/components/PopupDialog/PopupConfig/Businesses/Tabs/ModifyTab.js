@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
 import { Button } from '@material-ui/core';
 import { Collapse, MenuItem } from '@material-ui/core';
-import { ModalInit, tags, picker, TimePicker } from '../../popConfig';
+import { ModalInit, tags, picker, TimePicker } from '../popConfig';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { client } from '../../../../../API/metro';
 //styles
 import useStyles from '../../../styles'
-import { client } from '../../../../../API/metro';
 
 export const ModifyTab = ({ initialData, type }) => {
+    console.log(type);
+
     let classes = useStyles();
     const openDrop = () => setOpen(!open);
 
@@ -45,21 +47,19 @@ export const ModifyTab = ({ initialData, type }) => {
             friday: {},
             saturday: {},
         },
-        open24Hours: false,
     });
     //validator 
-    let isFulfilled = Object.values(values).every(item => item);
+    let isFulfilled = Object.values(values).every(Boolean);
 
     useEffect(() => {
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
         setOT(initialData.openingHours && JSON.parse(initialData.openingHours) || {})
         setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
-        if (type === 'add') setInit({})
-    }, [type])
+        return (() => setInit({}))
+    }, [type, initialData])
 
     const handleChange = (e, field, tags) => {
-        console.log(e, field)
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
         else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
