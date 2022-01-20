@@ -115,6 +115,11 @@ GET https://{{hostname}}/
 content-type: {{contentType}}
 Authorization: {{authorization}}
 ###
+# categories tags 
+GET https://{{hostname}}/categories
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
 # Get all businesses in specific autority
 GET https://{{hostname}}/business?autorityId=61d2eb2df58fa2f89374dbb7
 content-type: {{contentType}}
