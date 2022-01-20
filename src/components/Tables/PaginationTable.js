@@ -49,7 +49,7 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                                             <TableMenuBtn status={status} stats={stats} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
-                                        <TableCell size="small" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <TableCell size="small" style={{ display: "flex", justifyContent: 'space-between' }}>
                                             <TableInfoMenu options={JSON.parse(data.contact)} />
                                             {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
                                                 <ArrowBackIosIcon />

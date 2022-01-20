@@ -557,10 +557,20 @@ const active_lexicon = {
         ar: 'SDK',
     },
     suitable_for: {
-        en: 'suitable_for',
+        en: 'suitable for',
         he: 'מתאים ל',
         ar: 'مناسب ل',
-    }
+    },
+    last_week: {
+        en: 'last week',
+        he: 'שבוע שעבר',
+        ar: 'الاسبوع الماضي',
+    },
+    last_month: {
+        en: 'last month',
+        he: 'חודש שעבר',
+        ar: 'الشهر الماضي',
+    },
 
 }
 

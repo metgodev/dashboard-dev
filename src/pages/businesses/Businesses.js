@@ -42,9 +42,9 @@ function Businesses() {
     //needs to be shown correctly on mobile too
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), icon: <GetAppOutlinedIcon /> },
-        { name: term('import'), func: ReadFromExcel, input: true, icon: <PublishOutlinedIcon /> },
-        { name: term('add'), func: openDialog, icon: <AddCircleOutlineOutlinedIcon /> },
+        { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('import'), func: ReadFromExcel, input: true, buttonIcon: <PublishOutlinedIcon /> },
+        { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
         { name: 'forward', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]

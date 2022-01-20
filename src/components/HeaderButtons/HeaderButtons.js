@@ -10,7 +10,7 @@ function HeaderButtons({ btns, mobile }) {
 
     return (
         <>
-            {btns && btns.map(({ name, func, input, icon }) =>
+            {btns && btns.map(({ name, func, input, icon, buttonIcon }) =>
                 <Box className={classes.box} key={name}>
                     {icon ?
                         <IconButton
@@ -28,7 +28,7 @@ function HeaderButtons({ btns, mobile }) {
                             onClick={() => !input && func()}
                             component="label"
                         >
-                            {mobile ? name : icon}
+                            {mobile ? name : buttonIcon}
                             {input && <input
                                 name="files[]"
                                 type="file"
