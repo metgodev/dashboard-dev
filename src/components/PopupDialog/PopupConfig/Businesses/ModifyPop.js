@@ -9,7 +9,7 @@ import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
 
-const ModifyPop = ({ initialData, type }) => {
+const ModifyPop = ({ handleClose, initialData, type }) => {
     const [tab, setTab] = useState(0);
 
     const handleTabs = (event, newValue) => {
@@ -25,7 +25,7 @@ const ModifyPop = ({ initialData, type }) => {
             </Box>
             <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <ModifyTab initialData={initialData} type={type} />
+                    <ModifyTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <StatisticsTab />

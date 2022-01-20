@@ -55,7 +55,7 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop initialData={initialData} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

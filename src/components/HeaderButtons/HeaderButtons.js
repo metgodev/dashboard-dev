@@ -1,16 +1,16 @@
 import React from "react";
-import { Box, IconButton, TextField, MenuItem } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import { Button } from '../Wrappers/Wrappers'
 
 // styles
 import useStyles from "./styles";
 
-function HeaderButtons({ btns }) {
+function HeaderButtons({ btns, mobile }) {
     let classes = useStyles()
 
     return (
         <>
-            {btns && btns.map(({ name, func, input, icon, picker }) =>
+            {btns && btns.map(({ name, func, input, icon }) =>
                 <Box className={classes.box} key={name}>
                     {icon ?
                         <IconButton
@@ -28,7 +28,7 @@ function HeaderButtons({ btns }) {
                             onClick={() => !input && func()}
                             component="label"
                         >
-                            {name}
+                            {mobile ? name : icon}
                             {input && <input
                                 name="files[]"
                                 type="file"

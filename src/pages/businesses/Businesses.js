@@ -10,13 +10,16 @@ import PopupDialog from '../../components/PopupDialog/PopupDialog'
 import TableService from '../../hooks/DataService/TableService'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
+import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import { CircularProgress } from '@material-ui/core'
 
 function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { businesses, tableCategories, keys, businessNotFormatted } = TableService(rowsPerPage, page, "businesses")
+    let { businesses, tableCategories, keys } = TableService(rowsPerPage, page, "businesses")
     const pages = Math.ceil(businesses.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
@@ -36,13 +39,13 @@ function Businesses() {
         }
         setOpen(!open)
     }
-
+    //needs to be shown correctly on mobile too
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(businessNotFormatted, 'businesses_list') },
-        { name: term('import'), func: ReadFromExcel, input: true, },
-        { name: term('add'), func: openDialog },
-        { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
+        { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), icon: <GetAppOutlinedIcon /> },
+        { name: term('import'), func: ReadFromExcel, input: true, icon: <PublishOutlinedIcon /> },
+        { name: term('add'), func: openDialog, icon: <AddCircleOutlineOutlinedIcon /> },
+        { name: 'forward', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 

@@ -1,13 +1,15 @@
 import { useState, useLayoutEffect } from 'react'
+import { useSelector } from 'react-redux';
 import { client } from '../../API/metro';
 
 const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
+    //global
+    const { businessAdded } = useSelector(s => s.mainReducer);
     // local
     const [data, setData] = useState({
         areas: {},
         authorities: [],
         businesses: [],
-        businessNotFormatted: [],
         keys: [],
         ignore: {
             businesses: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
@@ -56,9 +58,9 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
                 contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
             }]);
             let keys = Object.keys(businesses[0]).filter((el) => !data.ignore[ignorePage].includes(el)); keys.push('btn');
-            setData(prevState => ({ ...prevState, areas, authorities, businesses, keys, businessNotFormatted: business.data, area }));
+            setData(prevState => ({ ...prevState, areas, authorities, businesses, keys, area }));
         })();
-    }, [])
+    }, [businessAdded])
 
     return data
 }

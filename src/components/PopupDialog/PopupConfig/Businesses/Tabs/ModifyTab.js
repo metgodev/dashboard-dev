@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import term from '../../../../../terms';
 import { Button } from '@material-ui/core';
 import { Collapse, MenuItem } from '@material-ui/core';
@@ -8,15 +9,16 @@ import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { client } from '../../../../../API/metro';
+import { set_business_added } from '../../../../../REDUX/actions/main.actions';
 //styles
 import useStyles from '../../../styles'
 
-export const ModifyTab = ({ initialData, type }) => {
-    console.log(type);
-
+export const ModifyTab = ({ handleClose, initialData, type }) => {
+    //global
+    const dispatch = useDispatch()
     let classes = useStyles();
     const openDrop = () => setOpen(!open);
-
+    //local
     const [OT, setOT] = useState({});
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
@@ -75,8 +77,9 @@ export const ModifyTab = ({ initialData, type }) => {
     }
 
     const add = async () => {
-        let res = await client.service('business').create(values)
-        console.log(res)
+        client.service('business').create(values)
+            .then(() => dispatch(set_business_added(values.name)))
+            .then(() => handleClose(false))
     }
 
     return (
@@ -156,7 +159,7 @@ export const ModifyTab = ({ initialData, type }) => {
                                         justifyContent="center"
                                         alignItems="stretch" spacing={1}>
                                         {TimePicker.map((s) => (
-                                            <Grid item lg={6} md={6} sm={6} key={s}>
+                                            <Grid item lg={6} md={6} sm={6} key={s.day}>
                                                 <TimeSelector label={s.day} type={s.type} times={OT[s.timeref] || null}
                                                     timeref={s.timeref} setTimes={setTimes} />
                                             </Grid>

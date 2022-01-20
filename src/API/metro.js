@@ -31,7 +31,7 @@ export const reAuth = async () => {
         token = res.accessToken;
         verified = res.isVerified;
     }).catch((err) => {
-        client.logout();
+        if (err) return client.logout();
     });
 }
 
