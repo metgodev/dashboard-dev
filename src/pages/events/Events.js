@@ -8,6 +8,9 @@ import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import PaginationTable from '../../components/Tables/PaginationTable'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
+import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
 import { CircularProgress } from '@mui/material'
 import term from '../../terms'
@@ -36,9 +39,9 @@ function Events() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(businesses, 'test') },
-        { name: term('import'), func: ReadFromExcel, input: true, },
-        { name: term('add'), func: () => openDialog },
+        { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('import'), func: ReadFromExcel, input: true, buttonIcon: <PublishOutlinedIcon /> },
+        { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]

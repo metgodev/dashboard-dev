@@ -37,6 +37,7 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
     const Warp = warp ? Widget : Box
 
     useEffect(() => {
+        if (!setTimes) return
         let hours = new Date(selectedDate).toLocaleTimeString([], {
             hourCycle: 'h23',
             hour: '2-digit',
