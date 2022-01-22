@@ -13,6 +13,9 @@ import { set_business_added } from '../../../../../REDUX/actions/main.actions';
 //styles
 import useStyles from '../../../styles'
 
+
+
+// add anothe option ___ addable text _____
 export const ModifyTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
@@ -25,7 +28,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     const [values, setValues] = useState({
         name: '',
         description: '',
-        status: 'PRIVATE',
+        status: 'PENDING_APROVAL',
         tagsIds: [],
         autorityId: '',
         address: '',
