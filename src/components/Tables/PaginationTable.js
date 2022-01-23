@@ -17,14 +17,12 @@ import TableHeader from './TableHeader';
 import TableMenuBtn from './TableMenuBtn';
 import TableInfoMenu from './TableInfoMenu';
 
-export default function PaginationTable({ data, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog }) {
-    let keys = Object.keys(data[0]).map(i => i);
-    keys.shift() // delete "id" key,
+export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat }) {
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
     //local
-    const [TableCel, setTable] = useState({
+    const [TableCel] = useState({
         columns: keys,
-        columnsToHide: ['id', 'status', 'contact'],
+        columnsToHide: ['btn', 'status'],
     })
     //style
     let classes = useStyles();
@@ -42,7 +40,7 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
             <ThemeProvider theme={createTheme(theme, PaginationLanguage)}>
                 <TableContainer className={classes.tableContainer}>
                     <Table stickyHeader aria-label="sticky table"  >
-                        <TableHeader keys={keys} />
+                        <TableHeader keys={keys} cat={cat} />
                         <TableBody >
                             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map(({ id, status, ...data }) => (
@@ -51,8 +49,8 @@ export default function PaginationTable({ data, page, setPage, rowsPerPage, setR
                                             <TableMenuBtn status={status} stats={stats} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
-                                        <TableCell size="small" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <TableInfoMenu options={data.contact} />
+                                        <TableCell size="small" style={{ display: "flex", justifyContent: 'space-between' }}>
+                                            <TableInfoMenu options={JSON.parse(data.contact)} />
                                             {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
                                                 <ArrowBackIosIcon />
                                             </IconButton>}

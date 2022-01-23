@@ -19,7 +19,7 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export const stats = {
     [term('private')]: "error",
     [term('public')]: "success",
-    [term('pending')]: "warning",
+    [term('pending_approval')]: "warning",
 };
 
 //lang helper
@@ -55,7 +55,7 @@ export const addTableRow = (data, columns, columnsToHide) => {
                     if (data[item] && item === col) {
                         return data[item];
                     } else if (item === col) {
-                        return "No Value";
+                        return term("no_value");
                     }
                 })
             );
@@ -86,12 +86,3 @@ const filterUndefined = (arr) => {
         });
 };
 
-
-// impact  1-10 10-20 .... 90-100
-// business name  search field
-// status private , public  , waiting for aproval
-// category [ 'all' ,'lodging', 'attraction' , 'culture' , 'local','travel' , 'food' ]
-// authority [ from back ]
-// tag [ from back ]
-// adress search field
-// edit [dates()]

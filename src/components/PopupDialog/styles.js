@@ -11,5 +11,19 @@ export default makeStyles(theme => ({
         // overflow: 'hidden',
         padding: 0,
         margin: 0,
-    }
+    },
+    textFieldUnderline: {
+        "&:before": {
+            borderBottomColor: theme.palette.primary.light,
+        },
+        "&:after": {
+            borderBottomColor: theme.palette.primary.main,
+        },
+        "&:hover:before": {
+            borderBottomColor: `${theme.palette.primary.light} !important`,
+        },
+    },
+    textField: {
+        borderBottomColor: theme.palette.background.light,
+    },
 }));

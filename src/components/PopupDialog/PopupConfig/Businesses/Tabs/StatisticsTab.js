@@ -3,13 +3,13 @@ import term from '../../../../../terms';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { statisticsText } from '../../popConfig';
+import { statisticsText } from '../popConfig';
 import { Button } from '@material-ui/core';
 
 export const StatisticsTab = () => {
     return (
         <>
-            <DialogTitle id="scroll-dialog-title">Download Statistics</DialogTitle>
+            <DialogTitle id="scroll-dialog-title">{term('download_statistics')}</DialogTitle>
             <DialogContent dividers={true}>
                 <DialogContentText>
                     {statisticsText}

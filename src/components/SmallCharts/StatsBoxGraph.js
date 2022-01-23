@@ -6,6 +6,7 @@ import useStyles from ".styles";
 // components
 import Widget from "../components/Widget/Widget";
 import { Typography } from "../components/Wrappers/Wrappers";
+import term from "../../terms";
 
 
 function getRandomData(length, min, max, multiplier = 10, maxDiff = 10) {
@@ -35,7 +36,7 @@ function StatsBoxGraph() {
 
     return (
         <Widget
-            title="Server Overview"
+            title={term("server_overview")}
             uppertitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}

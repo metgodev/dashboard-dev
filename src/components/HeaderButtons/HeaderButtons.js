@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, IconButton } from '@mui/material'
 import { Button } from '../Wrappers/Wrappers'
 
 // styles
 import useStyles from "./styles";
 
-function HeaderButtons({ btns }) {
+function HeaderButtons({ btns, mobile }) {
     let classes = useStyles()
 
     return (
         <>
-            {btns && btns.map(({ name, func, input, icon }) =>
+            {btns && btns.map(({ name, func, input, icon, buttonIcon }) =>
                 <Box className={classes.box} key={name}>
                     {icon ?
                         <IconButton
@@ -19,7 +19,8 @@ function HeaderButtons({ btns }) {
                             onClick={() => !input && func()}
                         >
                             {icon}
-                        </IconButton> :
+                        </IconButton>
+                        :
                         <Button
                             classes={{ root: classes.button }}
                             variant={'outlined'}
@@ -27,7 +28,7 @@ function HeaderButtons({ btns }) {
                             onClick={() => !input && func()}
                             component="label"
                         >
-                            {name}
+                            {mobile ? name : buttonIcon}
                             {input && <input
                                 name="files[]"
                                 type="file"

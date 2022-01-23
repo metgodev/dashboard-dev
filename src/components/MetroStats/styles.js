@@ -19,7 +19,6 @@ export default makeStyles(theme => ({
         padding: 1, margin: 1,
     },
     circleBox: {
-        width: '100%',
         alignItems: "center",
         alignSelf: "center",
         justifyContent: "center",
@@ -29,7 +28,8 @@ export default makeStyles(theme => ({
         borderColor: 'rgba(10, 10, 10,.5)',
         borderWidth: 1,
         backgroundColor: 'rgba(10, 10, 10,.1)',
-        padding: 2,
-        marginInline: 20
+        padding: 3,
+        paddingLeft: 5,
+        paddingRight: 5
     }
 }));

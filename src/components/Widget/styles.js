@@ -7,7 +7,6 @@ export default makeStyles(theme => ({
   },
   widgetHeader: {
     padding: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",

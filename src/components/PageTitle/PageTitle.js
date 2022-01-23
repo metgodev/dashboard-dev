@@ -52,8 +52,8 @@ export default function PageTitle(props) {
         {props.calendar && mobile &&
           (<Calendar type={2} />)
         }
-        {props.buttonGroup && mobile && (
-          <HeaderButtons btns={props.buttonGroup.btns} />
+        {props.buttonGroup && (
+          <HeaderButtons btns={props.buttonGroup.btns} mobile={mobile} />
         )}
       </Box>
     </Box>

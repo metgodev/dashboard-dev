@@ -56,19 +56,19 @@ export default function TableInfoMenu({ options }) {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '20ch',
+                        // width: '40ch',
                     },
                 }}
             >
                 {options.map((option) => (
-                    <MenuItem key={option} onClick={handleClose}>
+                    < MenuItem divider dense autoFocus key={Object.keys(option)} onClick={handleClose}>
                         <ListItemIcon>
-                            {iconTypes(option)}
+                            {iconTypes(Object.keys(option).pop())}
                         </ListItemIcon>
-                        {option}
+                        {Object.values(option)}
                     </MenuItem>
                 ))}
             </Menu>
-        </div>
+        </div >
     );
 }

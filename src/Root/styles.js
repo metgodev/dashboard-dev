@@ -7,6 +7,7 @@ export default makeStyles(theme => ({
     overflowX: "hidden",
   },
   Router: {
+    padding: 10,
     position: "relative",
     paddingTop: "3rem"
   },

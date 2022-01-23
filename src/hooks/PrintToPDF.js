@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
 
 export default (div, text) => {
-    
+
     const printAsPdf = () => {
         const iframe = document.createElement("iframe");
         iframe.style.display = "none";
@@ -15,7 +15,7 @@ export default (div, text) => {
         pri.onafterprint = () => { document.body.removeChild(iframe); }
     }
 
-    return(
+    return (
         <Button onClick={printAsPdf}>{text}</Button>
     )
-}
+} 

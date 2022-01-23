@@ -5,11 +5,9 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
-import { ModifyTab } from './Tabs/ModifyTab';
-import { StatisticsTab } from './Tabs/StatisticsTab';
-import { UploadMediaTab } from './Tabs/UploadMediaTab';
+import { EventsTab } from './Tabs/EventsTab';
 
-const ModifyPop = ({ handleClose, initialData, type }) => {
+const EventsPop = ({ handleClose, initialData, type }) => {
     const [tab, setTab] = useState(0);
 
     const handleTabs = (event, newValue) => {
@@ -25,17 +23,11 @@ const ModifyPop = ({ handleClose, initialData, type }) => {
             </Box>
             <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <ModifyTab handleClose={handleClose} initialData={initialData} type={type} />
-                </TabPanel>
-                <TabPanel value={tab} index={1}>
-                    <StatisticsTab />
-                </TabPanel>
-                <TabPanel value={tab} index={2}>
-                    <UploadMediaTab />
+                    <EventsTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
             </DialogContent>
         </div >
     )
 }
 
-export default ModifyPop;
+export default EventsPop;
