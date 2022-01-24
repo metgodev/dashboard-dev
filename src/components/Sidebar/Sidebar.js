@@ -47,7 +47,7 @@ const structure = [
     { id: 14, type: "divider" },
 ];
 
-function SideBar({ location }) {
+const SideBar = React.memo(({ location }) => {
     let classes = useStyles();
     let theme = useTheme();
     let dispatch = useDispatch()
@@ -110,6 +110,6 @@ function SideBar({ location }) {
             dispatch(set_mobile_toggle(true))
         }
     }
-}
+})
 
 export default SideBar;

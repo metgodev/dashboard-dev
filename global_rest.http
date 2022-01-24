@@ -2,7 +2,7 @@
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
 @authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDI2NzI4MjEsImlhdCI6MTY0MjY3MjgyMCwiZXhwIjoxNjQzMjc3NjIwLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiI1N2MyMmU4ZC0zZTU2LTQ1NDQtOWI2Ny0zNzczMzlmNjg0NWYifQ.jqCvheorb45FwFeUWVLqRLG8mNDHNB7goiflwoxOMnU
-@email = "fixiv59040@rubygon.com"
+@email = "celeja6810@showbaz.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
 

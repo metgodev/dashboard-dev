@@ -5,6 +5,7 @@ export const SET_MOBILE_TOGGLE = 'SET_MOBILE_TOGGLE';
 export const SET_USER = 'SET_USER';
 export const SET_INITIAL_DATA_DIALOG = 'SET_INITIAL_DATA_DIALOG';
 export const SET_BUSINESS_ADDED = 'SET_BUSINESS_ADDED';
+export const SET_AREA = 'SET_AREA';
 
 
 export const set_theme_color = (value) => ({
@@ -39,6 +40,11 @@ export const set_initial_data_dialog = (value) => ({
 
 export const set_business_added = (value) => ({
     type: SET_BUSINESS_ADDED,
+    payload: value
+})
+
+export const set_area = (value) => ({
+    type: SET_AREA,
     payload: value
 })
 

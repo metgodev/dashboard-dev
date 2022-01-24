@@ -5,6 +5,7 @@ import { client } from '../../API/metro';
 const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
     //global
     const { businessAdded } = useSelector(s => s.mainReducer);
+    const { area } = useSelector(s => s.mainRememberReducer);
     // local
     const [data, setData] = useState({
         areas: {},
@@ -32,7 +33,7 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
     })
 
     useLayoutEffect(() => {
-        (async (areaName = "Western Negev", autorityId = "61d2eb2df58fa2f89374dbb7") => {
+        (async (areaName = 'Western Negev', autorityId = "61d2eb2df58fa2f89374dbb7") => {
             localStorage.setItem('areaID', '61d2e93c927d2b5be84b2cdb') // delete in future
             let areas = {};
             let authorities = [];
@@ -49,7 +50,8 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
                 authority_cat = [...authority_cat, name]
             });
             // Get all businesses the autorityId
-            let business = await client.service("business").find({ query: { autorityId: authorities.find(a => a.id === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } });
+            let SpesificAuthority = autorityId ? { autorityId: authorities.find(a => a.id === autorityId).id } : null
+            let business = await client.service("business").find({ query: { SpesificAuthority, "$limit": rowsPerPage, "$skip": page * rowsPerPage } });
             business?.data.map(({
                 address, autorityId, contactPersonName, contactPersonPhoneNumber,
                 createdAt, description, emailAddress, facebookPageUrl, galleryFileIds, instagramPageUrl,
@@ -74,7 +76,6 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
             }));
         })();
     }, [businessAdded])
-
 
     return data
 }
