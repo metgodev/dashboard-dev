@@ -25,6 +25,9 @@ const EventsPop = ({ handleClose, initialData, type }) => {
                 <TabPanel value={tab} index={0}>
                     <EventsTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
+                <TabPanel value={tab} index={1}>
+                    <p>gallery</p>
+                </TabPanel>
             </DialogContent>
         </div >
     )

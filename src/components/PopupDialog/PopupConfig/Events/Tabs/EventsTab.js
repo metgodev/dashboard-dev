@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
-import { Button, MenuItem } from '@material-ui/core';
 import { ModalInit, tags, picker } from '../popConfig';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 import TimeSelector from '../../../../TimePicker/TimePicker';
-
+import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
+import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 //styles
 import useStyles from '../../../styles'
 import Calendar from '../../../../Calendar/Calendar';
@@ -131,6 +130,14 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                         }
                         {type === 'datePicker' &&
                             <Calendar type={2} />
+                        }
+                        {type === 'textArea' &&
+                            <TextareaAutosize
+                                maxRows={maxRows}
+                                aria-label={title}
+                                defaultValue={init[field] || ''}
+                                fullWidth
+                            />
                         }
                     </FormControl>
                 </Grid>
