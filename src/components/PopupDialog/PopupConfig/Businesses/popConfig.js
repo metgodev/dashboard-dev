@@ -3,8 +3,8 @@ import term from "../../../../terms";
 
 
 (async () => {
-    let areaName = localStorage.getItem('areaID')
-    client.service("authorities").find({ query: { areaId: areaName } })
+    let areaId = localStorage.getItem('areaID')
+    client.service("authorities").find({ query: { areaId: areaId } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
         .then((authorities => picker.autorityId = authorities))
 })();

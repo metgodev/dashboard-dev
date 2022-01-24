@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
 import SideBar from '../components/SideBar/SideBar';
 import Main from '../components/AdjustHelpers/Main';

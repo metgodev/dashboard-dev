@@ -83,7 +83,7 @@ function Verification() {
                 <TextField
                     variant="outlined"
                     id="verification"
-                    InputProps={{
+                    inputProps={{
                         classes: {
                             input: classes.textField,
                         },

@@ -14,21 +14,32 @@ function AreaMenu() {
     // local
     let [areaMenu, setAreaMenu] = useState(null);
     let [areaMenuItem, setMenuItem] = useState([]);
-    let [area, setArea] = useState({ name: 'all', id: null });
+    let [area, setArea] = useState('');
     let classes = useStyles();
 
+    const setAreaID = (id) => localStorage.setItem('areaID', id)
 
     useLayoutEffect(() => {
         (async () => {
-            setMenuItem([{ name: 'all', id: null }])
-            let area = await client.service("area").find();
-            area?.data.map(a => setMenuItem(pervState => [...pervState, { name: a.name, id: a._id }]));
+            setMenuItem([])
+            let res = await client.service("area").find();
+            if (!res.data) return;
+            res?.data.map(({ name, _id }, i) => {
+                let obj = { name, id: _id }
+                setMenuItem(pervState => [...pervState, obj]);
+                if (i === 0) {
+                    setArea(obj);
+                    dispatch(set_area(obj));
+                    setAreaID(obj.id)
+                }
+            });
         })();
     }, []);
 
     const changeArea = (area) => {
         setArea(area)
         setAreaMenu(null)
+        setAreaID(area.id)
         dispatch(set_area(area))
     }
 
@@ -63,7 +74,7 @@ function AreaMenu() {
                     >
                         {areaMenuItem.map((a) => (
                             <MenuItem key={a.id} className={classes.messageNotification}>
-                                <Typography color="text" colorBrightness="secondary" onClick={() => changeArea(a)} >
+                                <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" onClick={() => changeArea(a)} >
                                     {a.name}
                                 </Typography>
                             </MenuItem>

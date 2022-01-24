@@ -1,57 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
 import term from '../../../../../terms';
-import { Button } from '@material-ui/core';
-import { Collapse, MenuItem } from '@material-ui/core';
-import { ModalInit, tags, picker, TimePicker } from '../popConfig';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { ModalInit, tags, picker } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import { client } from '../../../../../API/metro';
-import { set_business_added } from '../../../../../REDUX/actions/main.actions';
+import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
+import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 //styles
 import useStyles from '../../../styles'
+import Calendar from '../../../../Calendar/Calendar';
 
-
-
-// add anothe option ___ addable text _____
-export const ModifyTab = ({ handleClose, initialData, type }) => {
+export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
-    const dispatch = useDispatch()
     let classes = useStyles();
-    const openDrop = () => setOpen(!open);
     //local
-    const [OT, setOT] = useState({});
     const [init, setInit] = useState({});
-    const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
-        name: '',
-        description: '',
-        status: 'PENDING_APPROVAL',
-        tagsIds: [],
-        autorityId: '',
-        address: '',
-        phoneNumber: '',
-        contactPersonName: '',
-        contactPersonPhoneNumber: '',
-        emailAddress: '',
-        relevantTo: '',
-        websiteUrl: '',
-        facebookPageUrl: '',
-        instagramPageUrl: '',
-        youtubePageUrl: '',
-        twitterPageUrl: '',
-        linkedInPageUrl: '',
-        openingHours: {
-            sunday: {},
-            monday: {},
-            tuesday: {},
-            wednesday: {},
-            thursday: {},
-            friday: {},
-            saturday: {},
-        },
+        name: "",
+        address: "",
+        start: "",
+        end: "",
+        tagsIds: "",
+        category: "",
+        hours: "",
+        relevantTo: "",
+        howMuch: "",
+        producer: "",
+        producerPhone: "",
+        producerMail: "",
+        reservationsPhone: "",
+        reservationsMail: "",
+        websiteUrl: "",
+        description: "",
+        authorityId: "",
+        area: "",
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
@@ -59,7 +39,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     useEffect(() => {
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        setOT(initialData.openingHours && JSON.parse(initialData.openingHours) || {})
         setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
         return (() => setInit({}))
     }, [type, initialData])
@@ -70,20 +49,9 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    const setTimes = (times, field, type) => {
-        let pos = type === 1 ? 'start' : 'end'
-        setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
-    };
+    const edit = async () => { }
 
-    const edit = async () => {
-        // let res = await client.service('business').patch()
-    }
-
-    const add = async () => {
-        client.service('business').create(values)
-            .then(() => dispatch(set_business_added(values.name)))
-            .then(() => handleClose(false))
-    }
+    const add = async () => { }
 
     return (
         <Grid container spacing={2}>
@@ -151,30 +119,24 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 )}
                             />}
                         {type === 'timePicker' &&
-                            <>
-                                <Button variant="outlined" size={'large'} color="primary"
-                                    onClick={openDrop} style={{ marginBottom: 10 }} >
-                                    {open ? <ExpandLess /> : <ExpandMore />}
-                                </Button>
-                                <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Grid container
-                                        direction="row"
-                                        justifyContent="center"
-                                        alignItems="stretch" spacing={1}>
-                                        {TimePicker.map((s) => (
-                                            <Grid item lg={6} md={6} sm={6} key={s.day}>
-                                                <TimeSelector label={s.day} type={s.type} times={OT[s.timeref] || null}
-                                                    timeref={s.timeref} setTimes={setTimes} />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </Collapse>
-                            </>}
+                            <TimeSelector label={title} />
+                        }
                         {type === 'toggle' &&
                             <Switch
                                 checked={values[field]}
                                 onChange={(e) => handleChange(e, field)}
                                 inputProps={{ 'aria-label': title }}
+                            />
+                        }
+                        {type === 'datePicker' &&
+                            <Calendar type={2} />
+                        }
+                        {type === 'textArea' &&
+                            <TextareaAutosize
+                                maxRows={maxRows}
+                                aria-label={title}
+                                defaultValue={init[field] || ''}
+                                fullWidth
                             />
                         }
                     </FormControl>

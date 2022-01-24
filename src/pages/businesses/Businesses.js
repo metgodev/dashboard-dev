@@ -7,7 +7,7 @@ import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import PaginationTable from '../../components/Tables/PaginationTable'
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
-import TableService from '../../hooks/DataService/TableService'
+import BusinessTableService from '../../hooks/DataService/BusinessTableService'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
@@ -19,7 +19,7 @@ function Businesses() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { businesses, tableCategories, keys } = TableService(rowsPerPage, page, "businesses")
+    let { businesses, tableCategories, keys } = BusinessTableService(rowsPerPage, page)
     const pages = Math.ceil(businesses.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);

@@ -6,6 +6,7 @@ export const SET_USER = 'SET_USER';
 export const SET_INITIAL_DATA_DIALOG = 'SET_INITIAL_DATA_DIALOG';
 export const SET_BUSINESS_ADDED = 'SET_BUSINESS_ADDED';
 export const SET_AREA = 'SET_AREA';
+export const SET_FILTER_TABLE = 'SET_FILTER_TABLE';
 
 
 export const set_theme_color = (value) => ({
@@ -45,6 +46,11 @@ export const set_business_added = (value) => ({
 
 export const set_area = (value) => ({
     type: SET_AREA,
+    payload: value
+})
+
+export const set_filter_table = (value) => ({
+    type: SET_FILTER_TABLE,
     payload: value
 })
 

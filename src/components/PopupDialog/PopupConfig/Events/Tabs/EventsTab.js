@@ -61,7 +61,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                     <FormControl fullWidth  >
                         {type === 'textfield' &&
                             <TextField
-                                InputProps={{
+                                inputProps={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -78,7 +78,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                InputProps={{
+                                inputProps={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -98,7 +98,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                             </TextField>}
                         {type === 'tagsPicker' &&
                             <Autocomplete
-                                InputProps={{
+                                inputProps={{
                                     classes: {
                                         input: classes.textField,
                                     },
