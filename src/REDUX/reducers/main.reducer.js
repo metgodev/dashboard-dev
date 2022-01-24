@@ -1,10 +1,11 @@
-import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_BUSINESS_ADDED } from "../actions/main.actions";
+import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_BUSINESS_ADDED, SET_AREA } from "../actions/main.actions";
 
 let initialState = {
     sidebar: false,
     mobile: false,
     initialData: {},
     businessAdded: false,
+    area: {}
 }
 
 export default (state = initialState, action) => {
@@ -26,6 +27,10 @@ export default (state = initialState, action) => {
         case SET_BUSINESS_ADDED:
             return {
                 ...state, businessAdded: action.payload
+            }
+        case SET_AREA:
+            return {
+                ...state, area: action.payload
             }
         default:
             return state

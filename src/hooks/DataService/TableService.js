@@ -4,8 +4,7 @@ import { client } from '../../API/metro';
 
 const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
     //global
-    const { businessAdded } = useSelector(s => s.mainReducer);
-    const { area } = useSelector(s => s.mainRememberReducer);
+    const { businessAdded, area } = useSelector(s => s.mainReducer);
     // local
     const [data, setData] = useState({
         areas: {},
@@ -33,7 +32,7 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
     })
 
     useLayoutEffect(() => {
-        (async (areaName = 'Western Negev', autorityId = "61d2eb2df58fa2f89374dbb7") => {
+        (async (areaName = area.name || 'Western Negev', autorityId = "") => {
             localStorage.setItem('areaID', '61d2e93c927d2b5be84b2cdb') // delete in future
             let areas = {};
             let authorities = [];
@@ -49,7 +48,9 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
                 authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
                 authority_cat = [...authority_cat, name]
             });
+            console.log(authorities);
             // Get all businesses the autorityId
+            if (!authorities.length) return;
             let SpesificAuthority = autorityId ? { autorityId: authorities.find(a => a.id === autorityId).id } : null
             let business = await client.service("business").find({ query: { SpesificAuthority, "$limit": rowsPerPage, "$skip": page * rowsPerPage } });
             business?.data.map(({

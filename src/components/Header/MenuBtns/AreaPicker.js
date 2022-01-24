@@ -14,7 +14,7 @@ function AreaMenu() {
     // local
     let [areaMenu, setAreaMenu] = useState(null);
     let [areaMenuItem, setMenuItem] = useState([]);
-    let [area, setArea] = useState('');
+    let [area, setArea] = useState({ name: 'all', id: null });
     let classes = useStyles();
 
 
@@ -22,7 +22,7 @@ function AreaMenu() {
         (async () => {
             setMenuItem([{ name: 'all', id: null }])
             let area = await client.service("area").find();
-            area?.data.map(a => setMenuItem(pervState => [...pervState, { name: a.name, id: a._id }]))
+            area?.data.map(a => setMenuItem(pervState => [...pervState, { name: a.name, id: a._id }]));
         })();
     }, []);
 
