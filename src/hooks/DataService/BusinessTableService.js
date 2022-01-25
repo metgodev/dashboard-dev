@@ -2,54 +2,45 @@ import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { client } from '../../API/metro';
 
-const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
+const BusinessTableService = (rowsPerPage, page) => {
     //global
-    const { businessAdded } = useSelector(s => s.mainReducer);
+    const { tableChanged, area, filterTable } = useSelector(s => s.mainReducer);
     // local
     const [data, setData] = useState({
-        areas: {},
         authorities: [],
         businesses: [],
         keys: [],
-        ignore: {
-            businesses: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
-                'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
-                'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
-                'relevantTo', 'contact'],
-            events: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
-                'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
-                'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
-                'relevantTo', 'contact']
-        },
+        ignore: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
+            'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
+            'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
+            'relevantTo', 'contact'],
         tableCategories: {
-            impact: ['1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
-            status: ['private', 'public', 'pending_approval'],
+            impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
+            status: ['all', 'private', 'public', 'pending_approval'],
             category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
-            tag: [],
-            authority: [],
-            edit: ['today', 'last_week', 'last_month'],
+            tag: ['all',],
+            authority: ['all',],
+            edit: ['all', 'today', 'last_week', 'last_month'],
         }
     })
-
     useLayoutEffect(() => {
-        (async (areaName = "Western Negev", autorityId = "61d2eb2df58fa2f89374dbb7") => {
-            localStorage.setItem('areaID', '61d2e93c927d2b5be84b2cdb') // delete in future
-            let areas = {};
+        (async (areaId = area.id, autorityId = filterTable.authority) => {
             let authorities = [];
-            let authority_cat = [];
+            let authority_cat = ['all'];
             let businesses = [];
             let categories = [];
-            // Get all areas
-            let area = await client.service("area").find();
-            area?.data.map(n => areas = { ...areas, [n.name]: n._id });
             // Get all autorities
-            let authority = await client.service("authorities").find({ query: { areaId: areas[areaName] } });
+            if (!areaId) return;
+            let authority = await client.service("authorities").find({ query: { areaId: areaId } });
             authority?.data.map(({ address, areaId, createdAt, email, name, _id }) => {
                 authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
                 authority_cat = [...authority_cat, name]
             });
             // Get all businesses the autorityId
-            let business = await client.service("business").find({ query: { autorityId: authorities.find(a => a.id === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } });
+            if (!authorities.length) return;
+            let SpesificAuthority = autorityId && autorityId !== 'all' ?
+                { autorityId: authorities.find(a => a.name === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
+            let business = await client.service("business").find({ query: SpesificAuthority });
             business?.data.map(({
                 address, autorityId, contactPersonName, contactPersonPhoneNumber,
                 createdAt, description, emailAddress, facebookPageUrl, galleryFileIds, instagramPageUrl,
@@ -62,21 +53,21 @@ const TableService = ({ rowsPerPage, page, ignorePage = 'businesses' }) => {
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
                 contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
             }]);
+            if (!businesses.length) return;
             //get all categories
             let cat = await client.service("categories").find();
             cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
             //define the keys
-            let keys = Object.keys(businesses[0]).filter((el) => !data.ignore[ignorePage].includes(el)); keys.push('btn');
+            let keys = Object.keys(businesses[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
             //state init
             setData(prevState => ({
-                ...prevState, areas, authorities, businesses, keys, area,
+                ...prevState, authorities, businesses, keys,
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();
-    }, [businessAdded])
-
+    }, [tableChanged])
 
     return data
 }
 
-export default TableService
+export default BusinessTableService

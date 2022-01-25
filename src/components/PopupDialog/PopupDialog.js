@@ -9,6 +9,8 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 import EventsPop from './PopupConfig/Events/EventsPop';
+import PointsPop from './PopupConfig/Points/PointsPop';
+import TracksPop from './PopupConfig/Tracks/TracksPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
@@ -58,6 +60,8 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                 <DialogContent dividers={true} className={classes.dialogContent}>
                     {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} />}
                     {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

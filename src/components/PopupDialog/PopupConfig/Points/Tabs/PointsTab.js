@@ -8,32 +8,31 @@ import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '
 import useStyles from '../../../styles'
 import Calendar from '../../../../Calendar/Calendar';
 
-export const EventsTab = ({ handleClose, initialData, type }) => {
+export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
-        name: "",
-        authorityId: "",
+        poiName: "",
         address: "",
-        startDate: "",
-        endDate: "",
-        tags: [],
-        openHour: "",
-        relevantTo: "",
-        price: 0,
-        currency: "",
-        producerName: "",
-        producerPhone: "",
-        producerEmail: "",
-        reservationCenterPhone: "",
-        reservationCenterEmail: "",
+        addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
+        categoriesIds: "",
+        relevantTo: "GOLDEN_AGE",
+        isAccessable: false,
+        description: "",
         websiteUrl: "",
-        category: [],
-        description: ""
+        authorityId: "",
+        galleryFileIds: "",
+        activitiesInPlace: "",
+        exclusiveFor: "",
+        prefferedSeason: "SUMMER",
+        shady: "FULL",
+        arrivalRecommendations: "",
+        phoneNumber: "",
+        webpageUrl: "",
+        contactEmail: ""
     });
-
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
 
@@ -46,7 +45,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
 
     const handleChange = (e, field, tags) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+        else if (field === 'isAccessable') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 

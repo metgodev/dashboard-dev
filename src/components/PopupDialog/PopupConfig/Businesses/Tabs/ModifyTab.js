@@ -9,9 +9,9 @@ import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { client } from '../../../../../API/metro';
-import { set_business_added } from '../../../../../REDUX/actions/main.actions';
+import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 //styles
-import useStyles from '../../../styles'
+import useStyles from '../../../styles';
 
 
 
@@ -28,7 +28,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     const [values, setValues] = useState({
         name: '',
         description: '',
-        status: 'PENDING_APROVAL',
+        status: 'PENDING_APPROVAL',
         tagsIds: [],
         autorityId: '',
         address: '',
@@ -64,9 +64,9 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         return (() => setInit({}))
     }, [type, initialData])
 
-    const handleChange = (e, field, tags) => {
+    const handleChange = (e, field, tags, type) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+        else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
@@ -81,7 +81,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
 
     const add = async () => {
         client.service('business').create(values)
-            .then(() => dispatch(set_business_added(values.name)))
+            .then(() => dispatch(set_table_changed(values.name)))
             .then(() => handleClose(false))
     }
 
@@ -93,7 +93,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                     <FormControl fullWidth  >
                         {type === 'textfield' &&
                             <TextField
-                                InputProps={{
+                                inputProps={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -110,7 +110,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                InputProps={{
+                                inputProps={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -130,7 +130,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             </TextField>}
                         {type === 'tagsPicker' &&
                             <Autocomplete
-                                InputProps={{
+                                inputProps={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -173,7 +173,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                         {type === 'toggle' &&
                             <Switch
                                 checked={values[field]}
-                                onChange={(e) => handleChange(e, field)}
+                                onChange={(e) => handleChange(e, field, type)}
                                 inputProps={{ 'aria-label': title }}
                             />
                         }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box } from '@material-ui/core'
-import TableService from '../../hooks/DataService/TableService'
+import EventstableService from '../../hooks/DataService/EventstableService'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import { ExportToExcel } from '../../hooks/ExportToExcel'
 import { ReadFromExcel } from '../../hooks/ReadFromExcel'
@@ -19,7 +19,7 @@ function Events() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { businesses, tableCategories, keys } = TableService(rowsPerPage, page, "events")
+    let { businesses, tableCategories, keys } = EventstableService(rowsPerPage, page, "events")
     const pages = Math.ceil(businesses.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);

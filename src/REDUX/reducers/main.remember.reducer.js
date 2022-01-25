@@ -3,7 +3,7 @@ import { SET_THEME_COLOR, SET_LANGUAGE, SET_USER } from "../actions/main.actions
 let rememberState = {
     theme: true,
     lang: 'he',
-    user: {}
+    user: {},
 }
 
 //initial remember 

@@ -4,9 +4,10 @@ import { MenuItem, Select } from '@material-ui/core';
 import { FormControl, InputAdornment, TableCell, TableRow, TextField, TableHead } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import term from '../../terms';
+import { useDispatch } from 'react-redux';
+import { set_filter_table } from '../../REDUX/actions/main.actions';
 
 function TableHeader({ keys, cat }) {
-
     const [values, setValues] = useState({
         status: '',
         name: '',
@@ -17,10 +18,16 @@ function TableHeader({ keys, cat }) {
         address: '',
         edit: ''
     })
+    //global
+    let dispatch = useDispatch();
 
     const handleChange = (e, key) => {
         setValues(prevState => ({ ...prevState, [key]: e.target.value }));
     };
+
+    const filterTable = (val) => {
+        dispatch(set_filter_table(val))
+    }
 
     return (
         <TableHead >
@@ -37,7 +44,7 @@ function TableHeader({ keys, cat }) {
                                             size="small"
                                             id="outlined-required"
                                             defaultValue=""
-                                            InputProps={{
+                                            inputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
                                                         <SearchIcon />
@@ -57,7 +64,7 @@ function TableHeader({ keys, cat }) {
                                     <Button
                                         style={{ marginTop: 20 }}
                                         color="primary"
-                                        onClick={() => { console.log(values) }}>
+                                        onClick={() => filterTable(values)}>
                                         {term('search')}
                                     </Button>
                             }

@@ -64,7 +64,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="first name"
-                    InputProps={{
+                    inputProps={{
                         classes: {
                             input: classes.textField,
                         },
@@ -79,7 +79,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="last name"
-                    InputProps={{
+                    inputProps={{
                         classes: {
                             input: classes.textField,
                         },
@@ -94,7 +94,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="email"
-                    InputProps={{
+                    inputProps={{
                         classes: {
                             input: classes.textField,
                         },
@@ -109,7 +109,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="password"
-                    InputProps={{
+                    inputProps={{
                         classes: {
                             input: classes.textField,
                         },

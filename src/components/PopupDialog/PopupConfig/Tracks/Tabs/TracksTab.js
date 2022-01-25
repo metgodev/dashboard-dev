@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
-import { ModalInit, tags, picker } from '../popConfig';
+import { ModalInit, picker } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
@@ -8,32 +8,22 @@ import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '
 import useStyles from '../../../styles'
 import Calendar from '../../../../Calendar/Calendar';
 
-export const EventsTab = ({ handleClose, initialData, type }) => {
+export const TracksTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
-        name: "",
+        trackName: "",
         authorityId: "",
-        address: "",
-        startDate: "",
-        endDate: "",
-        tags: [],
-        openHour: "",
-        relevantTo: "",
-        price: 0,
-        currency: "",
-        producerName: "",
-        producerPhone: "",
-        producerEmail: "",
-        reservationCenterPhone: "",
-        reservationCenterEmail: "",
-        websiteUrl: "",
-        category: [],
-        description: ""
+        relevantTo: "GOLDEN_AGE",
+        timeDurationDays: 0,
+        timeDurationHours: 0,
+        timeDuraionMinutes: 0,
+        description: "",
+        pois: [],
+        featured: false,
     });
-
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
 
@@ -44,9 +34,8 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
         return (() => setInit({}))
     }, [type, initialData])
 
-    const handleChange = (e, field, tags) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+    const handleChange = (e, field) => {
+        if (field === 'featured') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
@@ -97,28 +86,6 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                     </MenuItem>
                                 ))}
                             </TextField>}
-                        {type === 'tagsPicker' &&
-                            <Autocomplete
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
-                                size={size}
-                                multiple
-                                id="tags-outlined"
-                                options={tags}
-                                getOptionLabel={(o) => o.id}
-                                filterSelectedOptions
-                                onChange={(e, val) => handleChange(e, field, val)}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={title}
-                                        placeholder="תגיות"
-                                    />
-                                )}
-                            />}
                         {type === 'timePicker' &&
                             <TimeSelector label={title} />
                         }

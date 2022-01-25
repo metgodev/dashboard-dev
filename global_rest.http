@@ -1,8 +1,8 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDI2NzI4MjEsImlhdCI6MTY0MjY3MjgyMCwiZXhwIjoxNjQzMjc3NjIwLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWRjNDc3OTFmZDM0ZTg3MWQ2YWJlOTMiLCJqdGkiOiI1N2MyMmU4ZC0zZTU2LTQ1NDQtOWI2Ny0zNzczMzlmNjg0NWYifQ.jqCvheorb45FwFeUWVLqRLG8mNDHNB7goiflwoxOMnU
-@email = "fixiv59040@rubygon.com"
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDMwOTU4MjIsImlhdCI6MTY0MzA5NTgyMSwiZXhwIjoxNjQzNzAwNjIxLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiI5NDMyNGI1OC04MmJjLTRiOWUtYWRmYy05ZDE3NDk2ZDY1MTIifQ.56si90jvk_FbME6BIVsataLG6YRWCJaOy2dLDmJNeOM
+@email = "celeja6810@showbaz.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
 
@@ -182,41 +182,109 @@ Authorization: {{authorization}}
          "end":"16:00"
       }
    },
-   "open24Hours":false
+   "open24Hours":false,
+   "openOnWeekend": false,
+   "isKosher": false,
+}
+
+###
+# "Create Event"
+POST  https://{{hostname}}/events
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{ 
+   "name": "test event", 
+   "authorityId": "61d2e93c927d2b5be84b2cdb",
+   "address": "gani tal", 
+   "startDate": "", 
+   "endDate": "",
+   "tags": [],
+   "openHour": "08:30",
+   "relevantTo": "INFANCY",
+   "price": 20,
+   "currency": "ILS", 
+   "producerName": "Orel Asper",
+   "producerPhone": "",
+   "producerEmail": "", 
+   "reservationCenterPhone": "",
+   "reservationCenterEmail": "", 
+   "websiteUrl": ""
 }
 
 
+###
+# create categhories
+POST  https://{{hostname}}/tag
+content-type: {{contentType}}
+Authorization: {{authorization}}
 
-#   {
-#       name: { type: String, required: true },
-#       description: { type: String, required: true },
-#       status: { type: String, enum: ["PUBLIC", "PRIVATE", "PENDING_APPROVAL"] },
-#       tagsIds: { type: [String], default: [] },
-#       userId: { type: String, required: true },
-#       autorityId: { type: String, required: true },
-#       address: { type: String },
-#       phoneNumber: { type: String },
-#       contactPersonName: { type: String },
-#       contactPersonPhoneNumber: { type: String },
-#       websiteUrl: { type: String },
-#       emailAddress: { type: String },
-#       relevantTo: {
-#         type: String,
-#         enum: ["INFANCY", "KIDS&YOUTH", "ALL_FAMILY", "GROUPS", "GOLDEN_AGE"],
-#         required: true,
-#       },
-#       facebookPageUrl: { type: String },
-#       instagramPageUrl: { type: String },
-#       youtubePageUrl: { type: String },
-#       twitterPageUrl: { type: String },
-#       linkedInPageUrl: { type: String },
-#       galleryFileIds: { type: [String], default: [] },
-#       openingHours: {
-#         type: Map,
-#         default: {},
-#       },
-#       open24Hours: { type: Boolean, default: false },
-#     },
-#     {
-#       timestamps: true,
-#     }
+{
+  "title": "משמר הנגב",
+  "categoryId": "61e94815f49adf4a20db7ca7"
+}
+###
+# get categhories
+GET https://{{hostname}}/tag
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+###
+#PointOfIntrest
+POST  https://{{hostname}}/pois
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{
+      "poiName": "",
+      "address": "",
+      "addressType":"",
+      "categoriesIds": "",
+      "relevantTo":"GOLDEN_AGE",
+      "isAccessable": false,
+      "description": "",
+      "websiteUrl": "",
+      "authorityId": "",
+      "galleryFileIds": "",
+      "activitiesInPlace": "",
+      "exclusiveFor": "",
+      "prefferedSeason": "SUMMER", 
+      "shady": "FULL",
+      "arrivalRecommendations": "",
+      "phoneNumber": "",
+      "webpageUrl": "",
+      "contactEmail": ""
+}
+
+#  prefferedSeason: ["SUMMER", "WINTER", "FALL", "SPRING"],
+# shady: ["FULL", "PARTIAL", "NONE"]
+###
+#PointOfIntrest
+GET  https://{{hostname}}/pois
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+#tracks
+###
+POST  https://{{hostname}}/tracks
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+{
+   "trackName": "",
+   "authorityId": "",
+   "relevantTo": "GOLDEN_AGE",
+   "timeDurationDays": 0,
+   "timeDurationHours": 0,
+   "timeDuraionMinutes": 0,
+   "description": "",
+   "pois": [],
+   "featured": false,
+   "galleryFilesIds": []
+}
+
+# get tracks
+###
+GET  https://{{hostname}}/tracks
+content-type: {{contentType}}
+Authorization: {{authorization}}

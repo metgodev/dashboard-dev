@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { set_sidebar_toggle } from "../../REDUX/actions/main.actions"
 
 
-export default function Header() {
+const Header = React.memo(() => {
   let classes = useStyles();
   let { sidebar } = useSelector(s => s.mainReducer)
   let dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function Header() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <img src={Logo} alt="logo" className={classes.logotype} width={em(2)} />
-          <Typography variant="h6" weight="medium" className={classes.logotype}>
+          <Typography CC className={classes.logotype}>
             {term('metro_travel')}
           </Typography>
           <div className={classes.grow} />
@@ -64,4 +64,8 @@ export default function Header() {
       </AppBar>
     </Box>
   );
-}
+})
+
+
+
+export default Header;
