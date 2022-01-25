@@ -65,7 +65,7 @@ export const addTableRow = (data, columns, columnsToHide) => {
     return row.map((item, index) => {
         return (
             <TableCell size="small" align='center' key={`${item}--${index}`}>
-                {item}
+                {item}{" "}
             </TableCell>
         );
     });
@@ -86,3 +86,12 @@ const filterUndefined = (arr) => {
         });
 };
 
+
+//parse items
+
+const tableText = (txt) => {
+    txt.map(t => {
+        if (typeof t === 'object') console.log(t);
+        else return t
+    })
+}

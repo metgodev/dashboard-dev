@@ -3,18 +3,27 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import term from '../../terms';
+import { client } from '../../API/metro';
+import { useDispatch } from 'react-redux';
 // styles
 import useStyles from "./styles";
+import { set_table_changed } from '../../REDUX/actions/main.actions';
 
-export default function TableMenuBtn({ status, stats }) {
+export default function TableMenuBtn({ status, stats, id }) {
+    const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     let classes = useStyles();
     let sts = status.toLowerCase()
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+
+    const handleClose = async (element) => {
+        client.service('business').patch(id, { "status": element }).then(() => {
+            dispatch(set_table_changed(element))
+        })
         setAnchorEl(null);
     };
 
@@ -43,9 +52,9 @@ export default function TableMenuBtn({ status, stats }) {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>{term('private')}</MenuItem>
-                <MenuItem onClick={handleClose}>{term('public')}</MenuItem>
-                <MenuItem onClick={handleClose}>{term('pending_approval')}</MenuItem>
+                <MenuItem onClick={() => handleClose('PRIVATE')}>{term('private')}</MenuItem>
+                <MenuItem onClick={() => handleClose('PUBLIC')}>{term('public')}</MenuItem>
+                <MenuItem onClick={() => handleClose('PENDING_APPROVAL')}>{term('pending_approval')}</MenuItem>
             </Menu>
         </div>
     );

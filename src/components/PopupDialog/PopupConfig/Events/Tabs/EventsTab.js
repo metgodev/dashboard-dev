@@ -15,24 +15,25 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
         name: "",
-        address: "",
-        start: "",
-        end: "",
-        tagsIds: "",
-        category: "",
-        hours: "",
-        relevantTo: "",
-        howMuch: "",
-        producer: "",
-        producerPhone: "",
-        producerMail: "",
-        reservationsPhone: "",
-        reservationsMail: "",
-        websiteUrl: "",
-        description: "",
         authorityId: "",
-        area: "",
+        address: "",
+        startDate: "",
+        endDate: "",
+        tags: [],
+        openHour: "",
+        relevantTo: "",
+        price: 0,
+        currency: "",
+        producerName: "",
+        producerPhone: "",
+        producerEmail: "",
+        reservationCenterPhone: "",
+        reservationCenterEmail: "",
+        websiteUrl: "",
+        category: [],
+        description: ""
     });
+
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
 

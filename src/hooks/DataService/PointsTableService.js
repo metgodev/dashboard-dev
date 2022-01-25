@@ -4,16 +4,13 @@ import { client } from '../../API/metro';
 
 const PointsTableService = (rowsPerPage, page) => {
     //global
-    const { businessAdded, area, filterTable } = useSelector(s => s.mainReducer);
+    const { tableChanged, area, filterTable } = useSelector(s => s.mainReducer);
     // local
     const [data, setData] = useState({
         authorities: [],
         businesses: [],
         keys: [],
-        ignore: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
-            'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
-            'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
-            'relevantTo', 'contact'],
+        ignore: [],
         tableCategories: {
             impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
             status: ['all', 'private', 'public', 'pending_approval'],
@@ -64,7 +61,7 @@ const PointsTableService = (rowsPerPage, page) => {
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();
-    }, [businessAdded])
+    }, [tableChanged])
 
     return data
 }

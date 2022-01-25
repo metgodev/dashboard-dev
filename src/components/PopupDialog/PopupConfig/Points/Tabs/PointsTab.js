@@ -14,24 +14,24 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
-        name: "",
+        poiName: "",
         address: "",
-        start: "",
-        end: "",
-        tagsIds: "",
-        category: "",
-        hours: "",
-        relevantTo: "",
-        howMuch: "",
-        producer: "",
-        producerPhone: "",
-        producerMail: "",
-        reservationsPhone: "",
-        reservationsMail: "",
-        websiteUrl: "",
+        addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
+        categoriesIds: "",
+        relevantTo: "GOLDEN_AGE",
+        isAccessable: false,
         description: "",
+        websiteUrl: "",
         authorityId: "",
-        area: "",
+        galleryFileIds: "",
+        activitiesInPlace: "",
+        exclusiveFor: "",
+        prefferedSeason: "SUMMER",
+        shady: "FULL",
+        arrivalRecommendations: "",
+        phoneNumber: "",
+        webpageUrl: "",
+        contactEmail: ""
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
@@ -45,7 +45,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
 
     const handleChange = (e, field, tags) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+        else if (field === 'isAccessable') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 

@@ -4,8 +4,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
-import { IconButton } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Grid, IconButton } from '@mui/material';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 // styles
 import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
@@ -36,7 +36,7 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
     };
 
     return (
-        <Widget disableWidgetMenu>
+        <Widget disableWidgetMenu >
             <ThemeProvider theme={createTheme(theme, PaginationLanguage)}>
                 <TableContainer className={classes.tableContainer}>
                     <Table stickyHeader aria-label="sticky table"  >
@@ -46,14 +46,16 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                                 .map(({ id, status, ...data }) => (
                                     <StyledTableRow key={id}>
                                         {status && <TableCell size="small" align='center' >
-                                            <TableMenuBtn status={status} stats={stats} />
+                                            <TableMenuBtn status={status} stats={stats} id={id} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
-                                        <TableCell size="small" style={{ display: "flex", justifyContent: 'space-between' }}>
-                                            <TableInfoMenu options={JSON.parse(data.contact)} />
-                                            {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
-                                                <ArrowBackIosIcon />
-                                            </IconButton>}
+                                        <TableCell align="justify" size="small">
+                                            <Grid container direction="row" justifyContent="space-between" alignItems="stretch">
+                                                <TableInfoMenu options={JSON.parse(data.contact)} />
+                                                {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
+                                                    <EditOutlinedIcon />
+                                                </IconButton>}
+                                            </Grid>
                                         </TableCell>
                                     </StyledTableRow>
                                 ))}

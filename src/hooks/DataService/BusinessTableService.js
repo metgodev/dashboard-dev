@@ -4,7 +4,7 @@ import { client } from '../../API/metro';
 
 const BusinessTableService = (rowsPerPage, page) => {
     //global
-    const { businessAdded, area, filterTable } = useSelector(s => s.mainReducer);
+    const { tableChanged, area, filterTable } = useSelector(s => s.mainReducer);
     // local
     const [data, setData] = useState({
         authorities: [],
@@ -53,6 +53,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
                 contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
             }]);
+            if (!businesses.length) return;
             //get all categories
             let cat = await client.service("categories").find();
             cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
@@ -64,7 +65,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();
-    }, [businessAdded])
+    }, [tableChanged])
 
     return data
 }

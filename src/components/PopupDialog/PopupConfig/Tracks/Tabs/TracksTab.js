@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
-import { ModalInit, tags, picker } from '../popConfig';
+import { ModalInit, picker } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
@@ -14,24 +14,15 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
-        name: "",
-        address: "",
-        start: "",
-        end: "",
-        tagsIds: "",
-        category: "",
-        hours: "",
-        relevantTo: "",
-        howMuch: "",
-        producer: "",
-        producerPhone: "",
-        producerMail: "",
-        reservationsPhone: "",
-        reservationsMail: "",
-        websiteUrl: "",
-        description: "",
+        trackName: "",
         authorityId: "",
-        area: "",
+        relevantTo: "GOLDEN_AGE",
+        timeDurationDays: 0,
+        timeDurationHours: 0,
+        timeDuraionMinutes: 0,
+        description: "",
+        pois: [],
+        featured: false,
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
@@ -43,9 +34,8 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
         return (() => setInit({}))
     }, [type, initialData])
 
-    const handleChange = (e, field, tags) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+    const handleChange = (e, field) => {
+        if (field === 'featured') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
@@ -96,28 +86,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                                     </MenuItem>
                                 ))}
                             </TextField>}
-                        {type === 'tagsPicker' &&
-                            <Autocomplete
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
-                                size={size}
-                                multiple
-                                id="tags-outlined"
-                                options={tags}
-                                getOptionLabel={(o) => o.id}
-                                filterSelectedOptions
-                                onChange={(e, val) => handleChange(e, field, val)}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={title}
-                                        placeholder="תגיות"
-                                    />
-                                )}
-                            />}
                         {type === 'timePicker' &&
                             <TimeSelector label={title} />
                         }

@@ -6,6 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { PointsTab } from './Tabs/PointsTab';
+import { UploadMediaTab } from '../Businesses/Tabs/UploadMediaTab';
 
 const PointsPop = ({ handleClose, initialData, type }) => {
     const [tab, setTab] = useState(0);
@@ -26,7 +27,7 @@ const PointsPop = ({ handleClose, initialData, type }) => {
                     <PointsTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    gallery
+                    <UploadMediaTab />
                 </TabPanel>
             </DialogContent>
         </div >

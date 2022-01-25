@@ -30,6 +30,8 @@ export const ModalInit = [
     { title: term('twitter_link'), id: 16, field: 'twitterPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('linkedIn_link'), id: 17, field: 'linkedInPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('open_24_hours'), id: 18, field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
+    { title: term('open_on_weekend'), id: 18, field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
+    { title: term('is_kosher'), id: 18, field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
 ]
 
 export const tags = [
@@ -43,11 +45,11 @@ export const tags = [
 ]
 
 export const picker = {
-    relevantTo: [{ value: 'INFANCY', name: 'לגיל הרך' },
-    { value: 'KIDS&YOUTH', name: 'לילדים ונוער' },
-    { value: 'ALL_FAMILY', name: 'לכל המשפחה' },
-    { value: 'GROUPS', name: 'לזוגות' },
-    { value: 'GOLDEN_AGE', name: 'לקבוצות' },],
+    relevantTo: [{ value: 'INFANCY', name: term('infency') },
+    { value: 'KIDS&YOUTH', name: term('kids_&_youth') },
+    { value: 'ALL_FAMILY', name: term('all_family') },
+    { value: 'GROUPS', name: term('groups') },
+    { value: 'GOLDEN_AGE', name: term('golden_age') },],
     autorityId: []
 };
 

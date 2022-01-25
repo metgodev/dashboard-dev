@@ -4,7 +4,7 @@ import { client } from '../../API/metro';
 
 const TracksTableService = (rowsPerPage, page) => {
     //global
-    const { businessAdded, area, filterTable } = useSelector(s => s.mainReducer);
+    const { tableChanged, area, filterTable } = useSelector(s => s.mainReducer);
     // local
     const [data, setData] = useState({
         authorities: [],
@@ -64,7 +64,7 @@ const TracksTableService = (rowsPerPage, page) => {
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();
-    }, [businessAdded])
+    }, [tableChanged])
 
     return data
 }
