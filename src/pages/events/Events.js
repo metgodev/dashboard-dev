@@ -19,8 +19,8 @@ function Events() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { businesses, tableCategories, keys } = EventstableService(rowsPerPage, page, "events")
-    const pages = Math.ceil(businesses.length / rowsPerPage - 1)
+    let { events, tableCategories, keys } = EventstableService(rowsPerPage, page)
+    const pages = Math.ceil(events.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
@@ -39,7 +39,7 @@ function Events() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('export'), func: () => ExportToExcel(events, 'events_list'), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: ReadFromExcel, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
@@ -50,12 +50,12 @@ function Events() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />
-            {businesses.length ? <PaginationTable
+            {events.length ? <PaginationTable
                 lang={lang}
                 page={page}
                 keys={keys}
                 setPage={setPage}
-                data={businesses}
+                data={events}
                 cat={tableCategories}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}

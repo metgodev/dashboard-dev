@@ -8,7 +8,7 @@ import JWT from 'jwt-client'
 let dev = false;
 let token = localStorage.getItem('feathers-jwt');
 let verified;
-let uri = dev ? 'http://localhost:3030' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app';
+let uri = dev ? 'http://localhost:9229' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app';
 
 const app = feathers()
     .configure(auth())

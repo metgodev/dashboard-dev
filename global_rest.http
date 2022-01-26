@@ -1,7 +1,7 @@
 
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDMwOTU4MjIsImlhdCI6MTY0MzA5NTgyMSwiZXhwIjoxNjQzNzAwNjIxLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiI5NDMyNGI1OC04MmJjLTRiOWUtYWRmYy05ZDE3NDk2ZDY1MTIifQ.56si90jvk_FbME6BIVsataLG6YRWCJaOy2dLDmJNeOM
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDMxODExOTUsImlhdCI6MTY0MzE4MTE5NSwiZXhwIjoxNjQzNzg1OTk1LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiJlMzJlMDhiMi1mYjhhLTQ3MWQtYTE2Zi0xZTQ0MjA3MzQ2YTQifQ.bbP2hT3lrwftuIGCzr-cn0Juj-tiO5Av0OORg623LYo
 @email = "celeja6810@showbaz.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
@@ -211,7 +211,11 @@ Authorization: {{authorization}}
    "reservationCenterEmail": "", 
    "websiteUrl": ""
 }
-
+###
+# "get Event"
+GET  https://{{hostname}}/events
+content-type: {{contentType}}
+Authorization: {{authorization}}
 
 ###
 # create categhories

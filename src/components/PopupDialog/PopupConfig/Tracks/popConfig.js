@@ -19,7 +19,7 @@ export const ModalInit = [
     { title: term('time_duration_hours'), id: 5, field: 'timeDurationHours', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('time_duration_minutes'), id: 6, field: 'timeDuraionMinutes', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('description'), id: 7, field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('point_of_views'), id: 8, field: 'pois', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('point_of_intrest'), id: 8, field: 'pois', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('featured'), id: 9, field: 'featured', rows: 1, maxRows: 1, size: 'small', type: 'toggle' },
 ]
 
