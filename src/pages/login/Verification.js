@@ -107,7 +107,7 @@ function Verification() {
                             size="large"
                             fullWidth
                         >
-                            {term('', 'send')}
+                            {term('send')}
                         </Button>
                     )}
                 </div>
