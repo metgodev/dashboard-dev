@@ -56,6 +56,11 @@ const active_lexicon = {
         he: 'התנתק',
         ar: 'تسجيل خروج',
     },
+    sign_up: {
+        en: 'Sign up',
+        he: 'הרשם',
+        ar: 'اشتراك',
+    },
     edit: {
         en: 'Edit',
         he: 'ערוך',
@@ -312,9 +317,14 @@ const active_lexicon = {
         ar: 'تحميل',
     },
     name: {
-        en: 'name',
+        en: 'Name',
         he: 'שם העסק',
         ar: 'اسم',
+    },
+    last_name: {
+        en: 'Last name',
+        he: 'שם משפחה',
+        ar: 'الكنية',
     },
     impact: {
         en: 'impact',
@@ -571,7 +581,286 @@ const active_lexicon = {
         he: 'חודש שעבר',
         ar: 'الشهر الماضي',
     },
-
+    facebook_link: {
+        en: 'Facebook Link',
+        he: 'לינק לפייסבוק',
+        ar: 'رابط الفيسبوك',
+    },
+    instagram_link: {
+        en: 'Instagram Link',
+        he: 'לינק לאינסטגרם',
+        ar: 'رابط الانستغرام',
+    },
+    youtube_link: {
+        en: 'YouTube Link',
+        he: 'לינק ליוטיוב',
+        ar: 'رابط يوتيوب',
+    },
+    twitter_link: {
+        en: 'Twitter Link',
+        he: 'לינק לטוויטר',
+        ar: 'رابط تويتر',
+    },
+    linkedIn_link: {
+        en: 'LinkedIn Link',
+        he: 'לינק ללינקדאין',
+        ar: 'رابط ينكدين',
+    },
+    open_24_hours: {
+        en: 'Open 24 Hours',
+        he: 'פתוח 24 שעות',
+        ar: 'مفتوحة 24 ساعة',
+    },
+    open_on_weekend: {
+        en: 'Open on weekend',
+        he: 'פתוח בסוף שבוע',
+        ar: 'مفتوح في عطلة نهاية الأسبوع',
+    },
+    is_kosher: {
+        en: 'Is Kosher',
+        he: 'כשרות',
+        ar: 'كوشير',
+    },
+    event_name: {
+        en: 'Event name',
+        he: 'שם האירוע',
+        ar: 'اسم الحدث',
+    },
+    date_start: {
+        en: 'Start date',
+        he: 'תאריך התחלה',
+        ar: 'تاريخ البدء',
+    },
+    date_end: {
+        en: 'End date',
+        he: 'תאריך סיום',
+        ar: 'تاريخ الانتهاء',
+    },
+    how_much: {
+        en: 'Ammount',
+        he: 'כמות',
+        ar: 'كم الثمن',
+    },
+    currency: {
+        en: 'Currency',
+        he: 'מטבע',
+        ar: 'عملة',
+    },
+    currency: {
+        en: 'Currency',
+        he: 'מטבע',
+        ar: 'عملة',
+    },
+    producer: {
+        en: 'Producer',
+        he: 'יצרן',
+        ar: 'منتج',
+    },
+    producer_phone: {
+        en: 'Producer phone',
+        he: 'מספר יצרן',
+        ar: 'هاتف المنتج',
+    },
+    producer_mail: {
+        en: 'Producer mail',
+        he: 'מייל יצרן',
+        ar: 'بريد المنتج',
+    },
+    reservations_phone: {
+        en: 'Reservations phone',
+        he: 'טלפון להזמנות',
+        ar: 'هاتف الحجز',
+    },
+    reservations_mail: {
+        en: 'Reservations mail',
+        he: 'מייל להזמנות',
+        ar: 'بريد الحجز',
+    },
+    category_id: {
+        en: 'Category ID',
+        he: 'מזהה קטגוריה',
+        ar: 'معرف الفئة',
+    },
+    is_accessable: {
+        en: 'Accessability',
+        he: 'נגישות',
+        ar: 'يمكن الوصول إليه',
+    },
+    activities_in_place: {
+        en: 'Activities in place',
+        he: 'פעילויות במקום',
+        ar: 'لأنشطة في المكان',
+    },
+    activities_in_place: {
+        en: 'Activities in place',
+        he: 'פעילויות במקום',
+        ar: 'لأنشطة في المكان',
+    },
+    exclusive_for: {
+        en: 'Exclusive for',
+        he: 'בלעדי עבור',
+        ar: 'حصريا ل',
+    },
+    preffered_season: {
+        en: 'Sreffered Season',
+        he: 'עונה מועדפת',
+        ar: 'الموسم المفضل',
+    },
+    shady: {
+        en: 'Shady',
+        he: 'מוצל',
+        ar: 'ظليلة',
+    },
+    arrival_recommendations: {
+        en: 'Arrival Recommendations',
+        he: 'המלצות מבקרים',
+        ar: 'توصيات وصول',
+    },
+    number: {
+        en: 'Number',
+        he: 'מספר',
+        ar: 'رقم التليفون',
+    },
+    webpage_url: {
+        en: 'Webpage URL',
+        he: 'כתובת אתר',
+        ar: 'عنوان url لصفحة الويب',
+    },
+    contact_email: {
+        en: 'Contact Email',
+        he: 'מייל איש קשר',
+        ar: 'بريد الاتصال',
+    },
+    infancy: {
+        en: 'Infancy',
+        he: 'גיל הרך',
+        ar: 'الطفولة',
+    },
+    kids_and_youth: {
+        en: 'Kids and youth',
+        he: 'ילדים ונוער',
+        ar: 'الأطفال والشباب',
+    },
+    all_family: {
+        en: 'For all the family',
+        he: 'לכל המשפחה',
+        ar: 'لجميع أفراد الأسرة',
+    },
+    groups: {
+        en: 'Groups',
+        he: 'קבוצות',
+        ar: 'مجموعات',
+    },
+    golden_age: {
+        en: 'Golden age',
+        he: 'גיל הזהב',
+        ar: 'العصر الذهبي',
+    },
+    golden_age: {
+        en: 'Golden age',
+        he: 'גיל הזהב',
+        ar: 'العصر الذهبي',
+    },
+    time_duration_days: {
+        en: 'Time duration days',
+        he: 'משך זמן בימים',
+        ar: 'المدة الزمنية أيام',
+    },
+    time_duration_hours: {
+        en: 'Time duration hours',
+        he: 'משך זמן בשעות',
+        ar: 'المدة الزمنية بالساعات',
+    },
+    time_duration_minutes: {
+        en: 'Time duration minutes',
+        he: 'משך זמן בדקות',
+        ar: 'مدة الوقت بالدقائق',
+    },
+    point_of_intrest: {
+        en: 'Point of intrest',
+        he: 'נקודת עניין',
+        ar: 'نقطة الأهتمام',
+    },
+    featured: {
+        en: 'Featured',
+        he: 'מומלצים',
+        ar: 'متميز',
+    },
+    summer: {
+        en: 'Summer',
+        he: 'קיץ',
+        ar: 'الصيف',
+    },
+    winter: {
+        en: 'winter',
+        he: 'חורף',
+        ar: 'شتاء',
+    },
+    fall: {
+        en: 'Fall',
+        he: 'סתיו',
+        ar: 'يسقط',
+    },
+    spring: {
+        en: 'Spring',
+        he: 'אביב',
+        ar: 'الخريف',
+    },
+    full: {
+        en: 'Full',
+        he: 'מלא',
+        ar: 'ممتلئ',
+    },
+    partial: {
+        en: 'Partial',
+        he: 'חלקי',
+        ar: 'جزئي',
+    },
+    none: {
+        en: 'None',
+        he: 'ללא',
+        ar: 'لا أحد',
+    },
+    verification_page: {
+        en: 'Verification Page',
+        he: 'דף אימות',
+        ar: 'صفحة التحقق',
+    },
+    an_email_has_been_sent_to: {
+        en: 'An email has been sent to',
+        he: 'המייל נשלח ל',
+        ar: 'تم إرسال رسالة إلكترونية إلى',
+    },
+    please_enter_your_verification_code: {
+        en: 'Please enter your verification code',
+        he: 'הכנס בבקשה את קוד האימות',
+        ar: 'الرجاء إدخال رمز التحقق الخاص بك',
+    },
+    an_email_has_been_sent_to: {
+        en: 'An email has been sent to',
+        he: 'המייל נשלח ל',
+        ar: 'تم إرسال رسالة إلكترونية إلى',
+    },
+    verify_code: {
+        en: 'Verify code',
+        he: 'קוד אימות',
+        ar: 'كود التحقق',
+    },
+    send: {
+        en: 'Send',
+        he: 'שלח',
+        ar: 'إرسال',
+    },
+    resend_verification_code: {
+        en: 'Resend verification code',
+        he: 'שלח קוד אימות מחדש',
+        ar: 'إعادة إرسال رمز التحقق',
+    },
+    verified: {
+        en: 'verified',
+        he: 'מאומת',
+        ar: 'تم التحقق',
+    }
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

@@ -7,6 +7,7 @@ import useStyles from "./styles";
 import logo from "../../Assets/svgs/MTN.svg";
 import Register from "./Register";
 import SignIn from "./SignIn";
+import term from "../../terms"
 
 function Login() {
   let classes = useStyles();
@@ -25,8 +26,8 @@ function Login() {
             textColor="primary"
             centered
           >
-            <Tab label="התחברות" classes={{ root: classes.tab }} />
-            <Tab label="הרשמה" classes={{ root: classes.tab }} />
+            <Tab label={term("log_in")} classes={{ root: classes.tab }} />
+            <Tab label={term("sign_up")} classes={{ root: classes.tab }} />
           </Tabs>
           {activeTabId === 0 && (<SignIn />)}
           {activeTabId === 1 && (<Register />)}
@@ -34,7 +35,7 @@ function Login() {
       </div>
       <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Metro Travel</Typography>
+        <Typography className={classes.logotypeText}>{term("metro_travel")}</Typography>
       </div>
     </Grid>
   );

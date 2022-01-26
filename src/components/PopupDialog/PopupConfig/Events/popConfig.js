@@ -21,7 +21,7 @@ export const ModalInit = [
     { title: term('date_start'), id: 4, field: 'startDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
     { title: term('date_end'), id: 5, field: 'endDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
     { title: term('tags'), id: 16, field: 'tagsIds', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker' },
-    { title: term('hours_open'), id: 6, field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker' },
+    { title: term('opening_hours'), id: 6, field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker' },
     { title: term('for_whom'), id: 7, field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('how_much'), id: 8, field: 'price', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('currency'), id: 9, field: 'currency', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
@@ -31,7 +31,7 @@ export const ModalInit = [
     { title: term('reservations_phone'), id: 13, field: 'reservationCenterPhone', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('reservations_mail'), id: 14, field: 'reservationCenterEmail', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('site_link'), id: 15, field: 'websiteUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('categoryId'), id: 17, field: 'category', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('category_id'), id: 17, field: 'category', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('description'), id: 18, field: 'description', rows: 5, maxRows: 5, size: 'small', type: 'textfield' },
 ]
 
@@ -46,8 +46,8 @@ export const tags = [
 ]
 
 export const picker = {
-    relevantTo: [{ value: 'INFANCY', name: term('infency') },
-    { value: 'KIDS&YOUTH', name: term('kids_&_youth') },
+    relevantTo: [{ value: 'INFANCY', name: term('infancy') },
+    { value: 'KIDS&YOUTH', name: term('kids_and_youth') },
     { value: 'ALL_FAMILY', name: term('all_family') },
     { value: 'GROUPS', name: term('groups') },
     { value: 'GOLDEN_AGE', name: term('golden_age') },],

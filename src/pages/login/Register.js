@@ -72,7 +72,7 @@ function Register() {
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)}
                     margin="normal"
-                    placeholder="שם"
+                    placeholder={term("name")}
                     type="email"
                     fullWidth
                 />
@@ -87,7 +87,7 @@ function Register() {
                     value={lastName}
                     onChange={e => setLastName(e.target.value)}
                     margin="normal"
-                    placeholder="שם משפחה"
+                    placeholder={term("last_name")}
                     type="email"
                     fullWidth
                 />
@@ -102,7 +102,7 @@ function Register() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     margin="normal"
-                    placeholder="כתובת אימייל"
+                    placeholder={term("email_address")}
                     type="email"
                     fullWidth
                 />
@@ -117,7 +117,7 @@ function Register() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     margin="normal"
-                    placeholder="סיסמה"
+                    placeholder={term("password")}
                     type="password"
                     fullWidth
                 />

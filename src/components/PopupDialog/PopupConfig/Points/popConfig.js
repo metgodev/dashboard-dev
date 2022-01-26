@@ -15,7 +15,7 @@ import term from "../../../../terms";
 
 export const ModalTabs = [term('event')]
 export const ModalInit = [
-    { title: term('point_name'), id: 1, field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('name'), id: 1, field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('address'), id: 2, field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('category'), id: 3, field: 'categoriesIds', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('for_whom'), id: 4, field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
@@ -45,8 +45,8 @@ export const tags = [
 ]
 
 export const picker = {
-    relevantTo: [{ value: 'INFANCY', name: term('infency') },
-    { value: 'KIDS&YOUTH', name: term('kids_&_youth') },
+    relevantTo: [{ value: 'INFANCY', name: term('infancy') },
+    { value: 'KIDS&YOUTH', name: term('kids_and_youth') },
     { value: 'ALL_FAMILY', name: term('all_family') },
     { value: 'GROUPS', name: term('groups') },
     { value: 'GOLDEN_AGE', name: term('golden_age') },],

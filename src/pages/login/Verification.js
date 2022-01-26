@@ -72,13 +72,13 @@ function Verification() {
         <div className={classes.VerificationContainer}>
             <Widget noBodyPadding disableWidgetMenu bodyClass={classes.VerificationWrapper}>
                 <Typography variant="h1" className={classes.greeting}>
-                    {term('', 'Verification Page')}
+                    {term('verification_page')}
                 </Typography>
                 <Typography variant="subtitle2" className={classes.greeting}>
-                    {term('', `an email has been sent to ${b64_to_utf8(user.e)}`)}
+                    {term(`an_email_has_been_sent_to`) + `${b64_to_utf8(user.e)}`}
                 </Typography>
                 <Typography variant="h6" className={classes.greeting}>
-                    {term('', 'please enter your verification code')}
+                    {term('please_enter_your_verification_code')}
                 </Typography>
                 <TextField
                     variant="outlined"
@@ -91,7 +91,7 @@ function Verification() {
                     value={code}
                     onChange={e => setCode(e.target.value)}
                     margin="normal"
-                    placeholder={term('', 'verify code')}
+                    placeholder={term('verify_code')}
                     type="verification"
                     fullWidth
                 />
@@ -118,7 +118,7 @@ function Verification() {
                         size="large"
                         fullWidth
                     >
-                        {term('', "resend verification code")}
+                        {term("resend_verification_code")}
                     </Button>
                 </div>
                 <Fade in={error.err}>

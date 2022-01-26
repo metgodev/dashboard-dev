@@ -12,13 +12,13 @@ import term from "../../../../terms";
 
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
 export const ModalInit = [
-    { title: term('businesse_name'), id: 1, field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('name'), id: 1, field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('description'), id: 2, field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('tags'), id: 3, field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker' },
     { title: term('authority'), id: 4, field: 'autorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
     { title: term('address'), id: 5, field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('contact'), id: 6, field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('contact_name'), id: 7, field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('contact'), id: 7, field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('business_number'), id: 8, field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('email_address'), id: 9, field: 'emailAddress', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('for_whom'), id: 10, field: 'relevantTo', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
@@ -45,8 +45,8 @@ export const tags = [
 ]
 
 export const picker = {
-    relevantTo: [{ value: 'INFANCY', name: term('infency') },
-    { value: 'KIDS&YOUTH', name: term('kids_&_youth') },
+    relevantTo: [{ value: 'INFANCY', name: term('infancy') },
+    { value: 'KIDS&YOUTH', name: term('kids_and_youth') },
     { value: 'ALL_FAMILY', name: term('all_family') },
     { value: 'GROUPS', name: term('groups') },
     { value: 'GOLDEN_AGE', name: term('golden_age') },],
