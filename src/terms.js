@@ -318,7 +318,7 @@ const active_lexicon = {
     },
     name: {
         en: 'Name',
-        he: 'שם העסק',
+        he: 'שם',
         ar: 'اسم',
     },
     last_name: {
