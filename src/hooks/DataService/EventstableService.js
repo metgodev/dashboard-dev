@@ -8,7 +8,7 @@ const EventstableService = (rowsPerPage, page) => {
     // local
     const [data, setData] = useState({
         authorities: [],
-        businesses: [],
+        events: [],
         keys: [],
         ignore: [],
         tableCategories: {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box } from '@material-ui/core'
-import EventstableService from '../../hooks/DataService/EventstableService'
+import TracksTableService from '../../hooks/DataService/TracksTableService'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import { ExportToExcel } from '../../hooks/ExportToExcel'
 import { ReadFromExcel } from '../../hooks/ReadFromExcel'
@@ -19,8 +19,8 @@ function Tracks() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { businesses, tableCategories, keys } = EventstableService(rowsPerPage, page, "events")
-    const pages = Math.ceil(businesses.length / rowsPerPage - 1)
+    let { tracks, tableCategories, keys } = TracksTableService(rowsPerPage, page)
+    const pages = Math.ceil(tracks.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
@@ -39,7 +39,7 @@ function Tracks() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('export'), func: () => ExportToExcel(tracks, 'tracks_list'), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: ReadFromExcel, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
@@ -52,12 +52,12 @@ function Tracks() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('routes')} />
-            {businesses.length ? <PaginationTable
+            {tracks.length ? <PaginationTable
                 lang={lang}
                 page={page}
                 keys={keys}
                 setPage={setPage}
-                data={businesses}
+                data={tracks}
                 cat={tableCategories}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}

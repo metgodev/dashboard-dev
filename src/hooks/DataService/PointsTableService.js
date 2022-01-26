@@ -8,7 +8,7 @@ const PointsTableService = (rowsPerPage, page) => {
     // local
     const [data, setData] = useState({
         authorities: [],
-        businesses: [],
+        poi: [],
         keys: [],
         ignore: [],
         tableCategories: {
@@ -24,7 +24,7 @@ const PointsTableService = (rowsPerPage, page) => {
         (async (areaId = area.id, autorityId = filterTable.authority) => {
             let authorities = [];
             let authority_cat = ['all'];
-            let businesses = [];
+            let poi = [];
             let categories = [];
             // Get all autorities
             if (!areaId) return;
@@ -33,31 +33,27 @@ const PointsTableService = (rowsPerPage, page) => {
                 authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
                 authority_cat = [...authority_cat, name]
             });
-            // Get all businesses the autorityId
+            // Get all point of intrest the autorityId
             if (!authorities.length) return;
             let SpesificAuthority = autorityId && autorityId !== 'all' ?
                 { autorityId: authorities.find(a => a.name === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
-            let business = await client.service("business").find({ query: SpesificAuthority });
-            business?.data.map(({
-                address, autorityId, contactPersonName, contactPersonPhoneNumber,
-                createdAt, description, emailAddress, facebookPageUrl, galleryFileIds, instagramPageUrl,
-                linkedInPageUrl, name, open24Hours, openingHours, phoneNumber, relevantTo, status, tagsIds,
-                twitterPageUrl, updatedAt, userId, websiteUrl, youtubePageUrl, _id
-            }) => businesses = [...businesses, {
-                status, address, authority: authorities.find(a => a.id === autorityId).name, contactPersonName,
-                createdAt, description, facebookPageUrl, galleryFileIds, instagramPageUrl,
-                linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: tagsIds,
-                twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
-                contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
+            let points = await client.service("pois").find({ query: SpesificAuthority });
+            points?.data.map(({
+                poiName, address, addressType, categoriesIds, relevantTo, isAccessable, description, websiteUrl, authorityId, galleryFileIds,
+                activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail
+            }) => poi = [...poi, {
+                poiName, address, addressType, categoriesIds, relevantTo, isAccessable, description, websiteUrl,
+                authority: authorities.find(a => a.id === authorityId).name, galleryFileIds,
+                activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail
             }]);
             //get all categories
             let cat = await client.service("categories").find();
             cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
             //define the keys
-            let keys = Object.keys(businesses[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            let keys = Object.keys(poi[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
             //state init
             setData(prevState => ({
-                ...prevState, authorities, businesses, keys,
+                ...prevState, authorities, poi, keys,
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();
