@@ -1,7 +1,8 @@
 
-@hostname = metro-backend-ohx3vk2ipa-ew.a.run.app
+@hostname = metro-backend-ohx3vk2ipa-ew.a.run.app           
+# metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDMxODExOTUsImlhdCI6MTY0MzE4MTE5NSwiZXhwIjoxNjQzNzg1OTk1LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiJlMzJlMDhiMi1mYjhhLTQ3MWQtYTE2Zi0xZTQ0MjA3MzQ2YTQifQ.bbP2hT3lrwftuIGCzr-cn0Juj-tiO5Av0OORg623LYo
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDMyMDA5NDMsImlhdCI6MTY0MzIwMDk0MywiZXhwIjoxNjQzODA1NzQzLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiJhODY5OTMzZi1lYWFjLTQ2N2UtYWQ4Zi01YjlkZDIzNzcwNTIifQ.tCxAb2ta_qmB-IGhyrB_v39pwK7e7vJyAqPD1ZMSr2M
 @email = "celeja6810@showbaz.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
@@ -184,7 +185,7 @@ Authorization: {{authorization}}
    },
    "open24Hours":false,
    "openOnWeekend": false,
-   "isKosher": false,
+   "isKosher": false
 }
 
 ###
@@ -196,20 +197,21 @@ Authorization: {{authorization}}
 { 
    "name": "test event", 
    "authorityId": "61d2e93c927d2b5be84b2cdb",
+   "categoryId":"61e94815f49adf4a20db7ca7",
    "address": "gani tal", 
-   "startDate": "", 
-   "endDate": "",
-   "tags": [],
+   "startDate": "12/29/2022", 
+   "endDate": "12/30/2022",
+   "tags": ["sea"],
    "openHour": "08:30",
    "relevantTo": "INFANCY",
    "price": 20,
    "currency": "ILS", 
    "producerName": "Orel Asper",
-   "producerPhone": "",
-   "producerEmail": "", 
-   "reservationCenterPhone": "",
-   "reservationCenterEmail": "", 
-   "websiteUrl": ""
+   "producerPhone": "05005555",
+   "producerEmail": "pro@gmail.com", 
+   "reservationCenterPhone": "02551651",
+   "reservationCenterEmail": "p@gg.com", 
+   "websiteUrl": "www.google.com"
 }
 ###
 # "get Event"
@@ -219,17 +221,17 @@ Authorization: {{authorization}}
 
 ###
 # create categhories
-POST  https://{{hostname}}/tag
+POST  https://{{hostname}}/tags
 content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {
-  "title": "משמר הנגב",
-  "categoryId": "61e94815f49adf4a20db7ca7"
+  "title": "אופניים",
+  "categoryId": "61e9485bf49adf4a20db7cbf"
 }
 ###
 # get categhories
-GET https://{{hostname}}/tag
+GET https://{{hostname}}/tags
 content-type: {{contentType}}
 Authorization: {{authorization}}
 
@@ -275,13 +277,13 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {
-   "trackName": "",
-   "authorityId": "",
+   "trackName": "שם",
+   "authorityId": "61d2e93c927d2b5be84b2cdb",
    "relevantTo": "GOLDEN_AGE",
-   "timeDurationDays": 0,
-   "timeDurationHours": 0,
-   "timeDuraionMinutes": 0,
-   "description": "",
+   "timeDurationDays": 2,
+   "timeDurationHours": 3,
+   "timeDuraionMinutes": 4,
+   "description": "גקדב",
    "pois": [],
    "featured": false,
    "galleryFilesIds": []
