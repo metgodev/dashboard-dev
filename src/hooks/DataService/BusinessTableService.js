@@ -23,12 +23,24 @@ const BusinessTableService = (rowsPerPage, page) => {
             edit: ['all', 'today', 'last_week', 'last_month'],
         }
     })
+
+    const intersect = (o1, o2, key) => {
+        // return Object.keys(o1).filter(k => k in o2 && o2[k])
+        let output = [];
+        Object.keys(o1).filter(k => k in o2 && output.push(`${o2[k][key]}  `))
+        return output
+    }
+
     useLayoutEffect(() => {
         (async (areaId = area.id, autorityId = filterTable.authority) => {
             let authorities = [];
             let authority_cat = ['all'];
             let businesses = [];
             let categories = [];
+            let tags = [];
+            //get all tags
+            let tag = await client.service("tags").find();
+            tag?.data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }])
             // Get all autorities
             if (!areaId) return;
             let authority = await client.service("authorities").find({ query: { areaId: areaId } });
@@ -49,7 +61,7 @@ const BusinessTableService = (rowsPerPage, page) => {
             }) => businesses = [...businesses, {
                 status, address, authority: authorities.find(a => a.id === autorityId).name, contactPersonName,
                 createdAt, description, facebookPageUrl, galleryFileIds, instagramPageUrl,
-                linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: tagsIds,
+                linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: intersect(tagsIds, tags, 'title'),
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
                 contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
             }]);
@@ -71,3 +83,6 @@ const BusinessTableService = (rowsPerPage, page) => {
 }
 
 export default BusinessTableService
+
+
+// tags?.find((t, i) => t.id === tagsIds[i]).title

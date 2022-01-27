@@ -9,13 +9,16 @@ import term from "../../terms";
 import config from "../../config";
 import MetroStats from "../../components/MetroStats/MetroStats";
 import Download from "../../components/Download/Download";
+import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
+import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 
 export default function Dashboard() {
   let headerBtns = [
     //can get name, func, input, icon 
-    { name: term('daily'), func: () => console.log('Days') },
-    { name: term('weekly'), func: () => console.log('Week') },
-    { name: term('monthly'), func: () => console.log('Months') },
+    { name: term('daily'), func: () => console.log('Days') ,  buttonIcon: <TodayOutlinedIcon />},
+    { name: term('weekly'), func: () => console.log('Week') , buttonIcon: <DateRangeOutlinedIcon />},
+    { name: term('monthly'), func: () => console.log('Months'),  buttonIcon: <CalendarTodayOutlinedIcon /> },
   ]
 
   return (

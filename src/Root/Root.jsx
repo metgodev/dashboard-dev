@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { shallowEqual, useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
-import SideBar from '../components/Sidebar/Sidebar';
+import SideBar from '../components/SideBar/SideBar';
 import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
@@ -39,7 +39,8 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
 
     useLayoutEffect(() => {
-        return (() => reAuth())
+        // reAuth() //delete 
+        // return (() => reAuth())
     }, [])
 
     return (

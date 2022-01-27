@@ -3,7 +3,7 @@ import term from "../../../../terms";
 
 
 (async () => {
-    let areaId = localStorage.getItem('areaID')
+    let areaId = localStorage.getItem('aid')
     client.service("authorities").find({ query: { areaId: areaId } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
         .then((authorities => picker.autorityId = authorities))
@@ -13,7 +13,7 @@ import term from "../../../../terms";
     })
 })();
 
-export const ModalTabs = [term('event')]
+export const ModalTabs = [term('points')]
 export const ModalInit = [
     { title: term('name'), id: 1, field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('address'), id: 2, field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },

@@ -46,7 +46,6 @@ function Events() {
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
-
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />

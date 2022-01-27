@@ -216,6 +216,11 @@ const active_lexicon = {
         he: 'אירועים',
         ar: 'الأحداث',
     },
+    event: {
+        en: 'Event',
+        he: 'אירוע',
+        ar: 'حدث',
+    },
     points: {
         en: 'Points of interest',
         he: 'נקודות עניין',
@@ -618,7 +623,7 @@ const active_lexicon = {
     },
     is_kosher: {
         en: 'Is Kosher',
-        he: 'כשרות',
+        he: 'כשר',
         ar: 'كوشير',
     },
     event_name: {
@@ -677,9 +682,9 @@ const active_lexicon = {
         ar: 'بريد الحجز',
     },
     category_id: {
-        en: 'Category ID',
-        he: 'מזהה קטגוריה',
-        ar: 'معرف الفئة',
+        en: 'Category',
+        he: 'קטגוריה',
+        ar: 'الفئة',
     },
     is_accessable: {
         en: 'Accessability',
@@ -860,7 +865,37 @@ const active_lexicon = {
         en: 'verified',
         he: 'מאומת',
         ar: 'تم التحقق',
-    }
+    },
+    phone_number: {
+        en: 'phone number',
+        he: 'מספר טלפון',
+        ar: 'رقم التليفون',
+    },
+    Will_not_be_displayed: {
+        en: '(Will not be displayed in the app)',
+        he: '(לא יוצג באפליקציה)',
+        ar: '(لن يتم عرضها في التطبيق)',
+    },
+    start_date: {
+        en: 'start date',
+        he: 'תאריך התחלה',
+        ar: 'تاريخ البدء',
+    },
+    price: {
+        en: 'price',
+        he: 'מחיר',
+        ar: 'السعر',
+    },
+    open_hour: {
+        en: 'open hour',
+        he: 'שעה פתיחה',
+        ar: 'ساعة مفتوحة',
+    },
+    end_date: {
+        en: 'end_date',
+        he: 'תאריך סיום',
+        ar: 'تاريخ الانتهاء',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

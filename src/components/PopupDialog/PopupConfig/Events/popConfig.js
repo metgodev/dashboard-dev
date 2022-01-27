@@ -3,20 +3,24 @@ import term from "../../../../terms";
 
 
 (async () => {
-    let areaId = localStorage.getItem('areaID')
+    let areaId = localStorage.getItem('aid')
     client.service("authorities").find({ query: { areaId: areaId } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
-        .then((authorities => picker.autorityId = authorities))
+        .then((authorities => picker.authorityId = authorities))
 
     client.service("categories").find().then((res) => {
         res?.data.map(({ title, _id }) => picker.category = [...picker.category, { value: _id, name: term(title.toLowerCase()) }])
+    })
+
+    client.service("tags").find().then((res) => {
+        res?.data.map(({ title, _id }) => tags = [...tags, { title, id: _id }])
     })
 })();
 
 export const ModalTabs = [term('event'), term('gallery'),]
 export const ModalInit = [
     { title: term('event_name'), id: 1, field: 'name', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('authority'), id: 2, field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('authority'), id: 2, field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('address'), id: 3, field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('date_start'), id: 4, field: 'startDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
     { title: term('date_end'), id: 5, field: 'endDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
@@ -35,23 +39,15 @@ export const ModalInit = [
     { title: term('description'), id: 18, field: 'description', rows: 5, maxRows: 5, size: 'small', type: 'textfield' },
 ]
 
-export const tags = [
-    { id: 'נגב - כנסים וקבוצות' },
-    { id: 'נגב - פעילות חקלאית' },
-    { id: 'נגב - תוצרת מקומית' },
-    { id: 'נגב - אומנות ועיצוב' },
-    { id: 'נגב - סדנאות והרצאות' },
-    { id: "נגב - אירוח ביתי וארוחות שף" },
-    { id: 'הרצליה - דירות נופש' },
-]
+export let tags = []
 
-export const picker = {
+export let picker = {
     relevantTo: [{ value: 'INFANCY', name: term('infancy') },
     { value: 'KIDS&YOUTH', name: term('kids_and_youth') },
     { value: 'ALL_FAMILY', name: term('all_family') },
     { value: 'GROUPS', name: term('groups') },
     { value: 'GOLDEN_AGE', name: term('golden_age') },],
-    autorityId: [],
+    authorityId: [],
     category: []
 };
 

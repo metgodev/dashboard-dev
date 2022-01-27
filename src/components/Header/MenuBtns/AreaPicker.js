@@ -17,7 +17,7 @@ function AreaMenu() {
     let [area, setArea] = useState('');
     let classes = useStyles();
 
-    const setAreaID = (id) => localStorage.setItem('areaID', id)
+    const setAreaID = (id) => localStorage.setItem('aid', id)
 
     useLayoutEffect(() => {
         (async () => {

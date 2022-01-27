@@ -12,7 +12,6 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
     //local
-    const [init, setInit] = useState({});
     const [values, setValues] = useState({
         poiName: "",
         address: "",
@@ -35,13 +34,6 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
-
-    useEffect(() => {
-        if (Object.keys(initialData).length === 0) return;
-        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
-        return (() => setInit({}))
-    }, [type, initialData])
 
     const handleChange = (e, field, tags) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
@@ -73,7 +65,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                 multiline
                                 rows={rows}
                                 maxRows={maxRows}
-                                defaultValue={init[field] || ''}
+                                defaultValue={initialData[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             />}
                         {type === 'picker' &&
@@ -135,7 +127,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                             <TextareaAutosize
                                 maxRows={maxRows}
                                 aria-label={title}
-                                defaultValue={init[field] || ''}
+                                defaultValue={initialData[field] || ''}
                                 fullWidth
                             />
                         }

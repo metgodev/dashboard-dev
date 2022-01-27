@@ -43,6 +43,7 @@ const TracksTableService = (rowsPerPage, page) => {
             }) => tracks = [...tracks, {
                 trackName, authority: authorities.find(a => a.id === authorityId).name, relevantTo, timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds
             }]);
+            if (!tracks.length) return;
             //get all categories
             let cat = await client.service("categories").find();
             cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])

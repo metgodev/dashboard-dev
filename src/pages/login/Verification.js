@@ -28,8 +28,6 @@ function Verification() {
         if (verified) navigate("/dashboard")
     }, [])
 
-
-
     const verifyCode = async () => {
         setIsLoading(true)
         let res = await client.service('authmanagement').create({

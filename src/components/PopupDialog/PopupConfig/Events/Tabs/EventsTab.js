@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
+import { useDispatch } from 'react-redux';
+import { client } from '../../../../../API/metro';
 import { ModalInit, tags, picker } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
+import Calendar from '../../../../Calendar/Calendar';
 //styles
 import useStyles from '../../../styles'
-import Calendar from '../../../../Calendar/Calendar';
 
 export const EventsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
+    const dispatch = useDispatch()
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
@@ -38,11 +42,10 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     let isFulfilled = Object.values(values).every(Boolean);
 
     useEffect(() => {
-        if (Object.keys(initialData).length === 0) return;
-        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
+        if (type === 'add') setInit({})
+        else setInit(initialData)
         return (() => setInit({}))
-    }, [type, initialData])
+    }, [type])
 
     const handleChange = (e, field, tags) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
@@ -52,7 +55,11 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
 
     const edit = async () => { }
 
-    const add = async () => { }
+    const add = async () => {
+        client.service('events').create(values)
+            .then(() => dispatch(set_table_changed(values.name)))
+            .then(() => handleClose(false))
+    }
 
     return (
         <Grid container spacing={2}>
@@ -108,7 +115,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 multiple
                                 id="tags-outlined"
                                 options={tags}
-                                getOptionLabel={(o) => o.id}
+                                getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
                                 renderInput={(params) => (

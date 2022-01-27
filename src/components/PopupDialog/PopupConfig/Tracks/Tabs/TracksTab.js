@@ -12,7 +12,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
     //local
-    const [init, setInit] = useState({});
     const [values, setValues] = useState({
         trackName: "",
         authorityId: "",
@@ -26,13 +25,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
-
-    useEffect(() => {
-        if (Object.keys(initialData).length === 0) return;
-        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
-        return (() => setInit({}))
-    }, [type, initialData])
 
     const handleChange = (e, field) => {
         if (field === 'featured') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
@@ -63,7 +55,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                                 multiline
                                 rows={rows}
                                 maxRows={maxRows}
-                                defaultValue={init[field] || ''}
+                                defaultValue={initialData[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             />}
                         {type === 'picker' &&
@@ -103,7 +95,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                             <TextareaAutosize
                                 maxRows={maxRows}
                                 aria-label={title}
-                                defaultValue={init[field] || ''}
+                                defaultValue={initialData[field] || ''}
                                 fullWidth
                             />
                         }

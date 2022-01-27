@@ -50,8 +50,8 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
                                         <TableCell align="justify" size="small">
-                                            <Grid container direction="row" justifyContent="space-between" alignItems="stretch">
-                                                <TableInfoMenu options={JSON.parse(data.contact)} />
+                                            <Grid container direction="row" justifyContent={data.contact ? "space-between" : "center"} alignItems="stretch">
+                                                {data.contact && <TableInfoMenu options={JSON.parse(data.contact)} />}
                                                 {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
                                                     <EditOutlinedIcon />
                                                 </IconButton>}

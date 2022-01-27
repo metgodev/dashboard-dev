@@ -3,7 +3,7 @@ import term from "../../../../terms";
 
 
 (async () => {
-    let areaId = localStorage.getItem('areaID')
+    let areaId = localStorage.getItem('aid')
     client.service("authorities").find({ query: { areaId: areaId } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
         .then((authorities => picker.autorityId = authorities))
@@ -17,7 +17,7 @@ export const ModalInit = [
     { title: term('tags'), id: 3, field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker' },
     { title: term('authority'), id: 4, field: 'autorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
     { title: term('address'), id: 5, field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('contact'), id: 6, field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('phone_number') + " " + term('Will_not_be_displayed'), id: 6, field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('contact'), id: 7, field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('business_number'), id: 8, field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('email_address'), id: 9, field: 'emailAddress', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },

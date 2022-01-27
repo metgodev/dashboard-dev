@@ -22,6 +22,7 @@ function SignIn() {
     const loginUser = async () => {
         setIsLoading(false)
         Auth(email, password).then((res) => {
+            console.log(res);
             if (res.error) setError(true);
             else {
                 let user = {

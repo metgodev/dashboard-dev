@@ -46,6 +46,7 @@ const PointsTableService = (rowsPerPage, page) => {
                 authority: authorities.find(a => a.id === authorityId).name, galleryFileIds,
                 activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail
             }]);
+            if (!points.length) return;
             //get all categories
             let cat = await client.service("categories").find();
             cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
