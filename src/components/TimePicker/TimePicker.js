@@ -15,7 +15,7 @@ import { Box } from '@mui/system';
 import { useEffect } from 'react';
 
 
-export default function TimeSelector({ warp, label, type, times, timeref, setTimes }) {
+export default function TimeSelector({ warp, label, type, times, timeref, setTimes, setTime, field }) {
     let openingTime = times?.start ? parseInt(times.start) : 8
     let closingTime = times?.end ? parseInt(times.end) : (16, 30)
 
@@ -37,12 +37,13 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
     const Warp = warp ? Widget : Box
 
     useEffect(() => {
-        if (!setTimes) return
         let hours = new Date(selectedDate).toLocaleTimeString([], {
             hourCycle: 'h23',
             hour: '2-digit',
             minute: '2-digit'
         })
+        if (setTime) setTime(hours, field)
+        if (!setTimes) return
         setTimes(hours, timeref, type)
     }, [])
 

@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
+import { client } from '../../../../../API/metro';
+import Calendar from '../../../../Calendar/Calendar';
 import { ModalInit, tags, picker } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
+import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { useDispatch } from 'react-redux';
 //styles
 import useStyles from '../../../styles'
-import Calendar from '../../../../Calendar/Calendar';
 
 export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
+    let dispatch = useDispatch()
     //local
+    const [init, setInit] = useState({});
     const [values, setValues] = useState({
         poiName: "",
         address: "",
         addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
         categoriesIds: "",
         relevantTo: "GOLDEN_AGE",
-        isAccessable: false,
         description: "",
         websiteUrl: "",
         authorityId: "",
-        galleryFileIds: "",
         activitiesInPlace: "",
         exclusiveFor: "",
         prefferedSeason: "SUMMER",
@@ -41,10 +44,20 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
+    useEffect(() => {
+        if (type === 'add') setInit({})
+        else setInit(initialData)
+        return (() => setInit({}))
+    }, [type])
+
     const edit = async () => { }
 
-    const add = async () => { }
-
+    const add = async () => {
+        client.service('pois').create(values)
+            .then(() => dispatch(set_table_changed(values.name)))
+            .then(() => handleClose(false))
+    }
+    console.log(values);
     return (
         <Grid container spacing={2}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
@@ -65,7 +78,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                 multiline
                                 rows={rows}
                                 maxRows={maxRows}
-                                defaultValue={initialData[field] || ''}
+                                defaultValue={init[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             />}
                         {type === 'picker' &&
@@ -99,7 +112,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                 multiple
                                 id="tags-outlined"
                                 options={tags}
-                                getOptionLabel={(o) => o.id}
+                                getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
                                 renderInput={(params) => (
@@ -127,7 +140,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                             <TextareaAutosize
                                 maxRows={maxRows}
                                 aria-label={title}
-                                defaultValue={initialData[field] || ''}
+                                defaultValue={init[field] || ''}
                                 fullWidth
                             />
                         }

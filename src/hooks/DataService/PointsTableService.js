@@ -8,53 +8,56 @@ const PointsTableService = (rowsPerPage, page) => {
     // local
     const [data, setData] = useState({
         authorities: [],
-        poi: [],
+        pois: [],
         keys: [],
-        ignore: [],
+        ignore: [
+            'authority', 'address', 'addressType', 'categoriesIds', 'relevantTo', 'isAccessable', 'description',
+            'websiteUrl', 'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail'
+        ],
         tableCategories: {
-            impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
-            status: ['all', 'private', 'public', 'pending_approval'],
-            category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
-            tag: ['all',],
-            authority: ['all',],
-            edit: ['all', 'today', 'last_week', 'last_month'],
+            poiName: ['all',],
+            activitiesInPlace: ['all',],
+            exclusiveFor: ['all',],
+            prefferedSeason: ['all',],
+            shady: ['all',],
+            arrivalRecommendations: ['all',],
         }
     })
     useLayoutEffect(() => {
-        (async (areaId = area.id, autorityId = filterTable.authority) => {
+        (async (area_id = area.id, authority_id = filterTable.authority) => {
             let authorities = [];
             let authority_cat = ['all'];
-            let poi = [];
+            let pois = [];
             let categories = [];
             // Get all autorities
-            if (!areaId) return;
-            let authority = await client.service("authorities").find({ query: { areaId: areaId } });
+            if (!area_id) return;
+            let authority = await client.service("authorities").find({ query: { areaId: area_id } });
             authority?.data.map(({ address, areaId, createdAt, email, name, _id }) => {
                 authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
                 authority_cat = [...authority_cat, name]
             });
             // Get all point of intrest the autorityId
             if (!authorities.length) return;
-            let SpesificAuthority = autorityId && autorityId !== 'all' ?
-                { autorityId: authorities.find(a => a.name === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
+            let SpesificAuthority = authority_id && authority_id !== 'all' ?
+                { autorityId: authorities.find(a => a.name === authority_id).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
             let points = await client.service("pois").find({ query: SpesificAuthority });
             points?.data.map(({
                 poiName, address, addressType, categoriesIds, relevantTo, isAccessable, description, websiteUrl, authorityId, galleryFileIds,
                 activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail
-            }) => poi = [...poi, {
+            }) => pois = [...pois, {
                 poiName, address, addressType, categoriesIds, relevantTo, isAccessable, description, websiteUrl,
-                authority: authorities.find(a => a.id === authorityId).name, galleryFileIds,
-                activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail
+                authority: authorityId, galleryFileIds, activitiesInPlace, exclusiveFor, prefferedSeason, shady,
+                arrivalRecommendations, phoneNumber, webpageUrl, contactEmail,
             }]);
-            if (!points.length) return;
+            if (!pois.length) return;
             //get all categories
             let cat = await client.service("categories").find();
             cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
             //define the keys
-            let keys = Object.keys(poi[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            let keys = Object.keys(pois[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
             //state init
             setData(prevState => ({
-                ...prevState, authorities, poi, keys,
+                ...prevState, authorities, pois, keys,
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();

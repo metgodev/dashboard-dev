@@ -108,7 +108,7 @@ Authorization: {{authorization}}
     "areaId": "61d2e93c927d2b5be84b2cdb",  
     "name": "שומרון", 
     "email": "contact@email.com", 
-    "address": "השונית 3"
+    "address": ""
 }
 ###
 # Upload file 
@@ -242,24 +242,24 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {
-      "poiName": "",
-      "address": "",
-      "addressType":"",
-      "categoriesIds": "",
+      "poiName": "הר חמור",
+      "address": "שביל הבונים",
+      "addressType":"FREE_TEXT",
+      "categoriesIds": ["61e9485bf49adf4a20db7cbf"],
       "relevantTo":"GOLDEN_AGE",
       "isAccessable": false,
-      "description": "",
-      "websiteUrl": "",
-      "authorityId": "",
-      "galleryFileIds": "",
-      "activitiesInPlace": "",
-      "exclusiveFor": "",
+      "description": "שביל מצויין להליכות בשמש ללא מים",
+      "websiteUrl": "www.google.com",
+      "authorityId": "61d2e93c927d2b5be84b2cdb",
+      "galleryFileIds": [],
+      "activitiesInPlace": "תוכלו להינות מהכלום ושום דבר",
+      "exclusiveFor": "אנשים שמשעמם להם",
       "prefferedSeason": "SUMMER", 
       "shady": "FULL",
-      "arrivalRecommendations": "",
-      "phoneNumber": "",
-      "webpageUrl": "",
-      "contactEmail": ""
+      "arrivalRecommendations": "4*4",
+      "phoneNumber": "0351654665",
+      "webpageUrl": "www.google.com",
+      "contactEmail": "p@g.com"
 }
 
 #  prefferedSeason: ["SUMMER", "WINTER", "FALL", "SPRING"],
@@ -283,7 +283,7 @@ Authorization: {{authorization}}
    "timeDurationDays": 2,
    "timeDurationHours": 3,
    "timeDuraionMinutes": 4,
-   "description": "גקדב",
+   "description": "מסלול מיוחד לכל המשפחה",
    "pois": [],
    "featured": false,
    "galleryFilesIds": []

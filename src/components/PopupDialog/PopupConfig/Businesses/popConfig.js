@@ -7,6 +7,11 @@ import term from "../../../../terms";
     client.service("authorities").find({ query: { areaId: areaId } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
         .then((authorities => picker.autorityId = authorities))
+
+
+    client.service("tags").find().then((res) => {
+        res?.data.map(({ title, _id }) => tags = [...tags, { title, id: _id }])
+    })
 })();
 
 
@@ -34,17 +39,9 @@ export const ModalInit = [
     { title: term('is_kosher'), id: 18, field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
 ]
 
-export const tags = [
-    { id: 'נגב - כנסים וקבוצות' },
-    { id: 'נגב - פעילות חקלאית' },
-    { id: 'נגב - תוצרת מקומית' },
-    { id: 'נגב - אומנות ועיצוב' },
-    { id: 'נגב - סדנאות והרצאות' },
-    { id: "נגב - אירוח ביתי וארוחות שף" },
-    { id: 'הרצליה - דירות נופש' },
-]
+export let tags = []
 
-export const picker = {
+export let picker = {
     relevantTo: [{ value: 'INFANCY', name: term('infancy') },
     { value: 'KIDS&YOUTH', name: term('kids_and_youth') },
     { value: 'ALL_FAMILY', name: term('all_family') },
@@ -53,7 +50,7 @@ export const picker = {
     autorityId: []
 };
 
-export const TimePicker = [
+export let TimePicker = [
     { day: term('sunday_opening'), type: 1, timeref: 'sunday' },
     { day: term('sunday_closing'), type: 2, timeref: 'sunday' },
     { day: term('monday_opening'), type: 1, timeref: 'monday' },

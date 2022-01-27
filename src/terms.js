@@ -566,7 +566,7 @@ const active_lexicon = {
         he: 'אינטגריציה',
         ar: 'دمج',
     },
-    SDK: {
+    sdk: {
         en: 'SDK',
         he: 'SDK',
         ar: 'SDK',
@@ -643,7 +643,7 @@ const active_lexicon = {
     },
     how_much: {
         en: 'Ammount',
-        he: 'כמות',
+        he: 'מחיר',
         ar: 'كم الثمن',
     },
     currency: {
@@ -658,17 +658,17 @@ const active_lexicon = {
     },
     producer: {
         en: 'Producer',
-        he: 'יצרן',
+        he: 'מפיק',
         ar: 'منتج',
     },
     producer_phone: {
         en: 'Producer phone',
-        he: 'מספר יצרן',
+        he: 'מספר מפיק',
         ar: 'هاتف المنتج',
     },
     producer_mail: {
         en: 'Producer mail',
-        he: 'מייל יצרן',
+        he: 'מייל מפיק',
         ar: 'بريد المنتج',
     },
     reservations_phone: {
@@ -703,7 +703,7 @@ const active_lexicon = {
     },
     exclusive_for: {
         en: 'Exclusive for',
-        he: 'בלעדי עבור',
+        he: 'מתאים עבור',
         ar: 'حصريا ل',
     },
     preffered_season: {
@@ -895,6 +895,16 @@ const active_lexicon = {
         en: 'end_date',
         he: 'תאריך סיום',
         ar: 'تاريخ الانتهاء',
+    },
+    poi_name: {
+        en: 'point name',
+        he: 'שם נקודה',
+        ar: 'اسم النقطة',
+    },
+    track_name: {
+        en: 'track name',
+        he: 'שם מסלול',
+        ar: 'اسم المسار',
     },
 }
 

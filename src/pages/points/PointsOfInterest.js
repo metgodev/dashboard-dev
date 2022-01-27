@@ -19,8 +19,8 @@ function PointsOfInterest() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
-    let { poi, tableCategories, keys } = PointsTableService(rowsPerPage, page)
-    const pages = Math.ceil(poi.length / rowsPerPage - 1)
+    let { pois, tableCategories, keys } = PointsTableService(rowsPerPage, page)
+    const pages = Math.ceil(pois.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
@@ -39,7 +39,7 @@ function PointsOfInterest() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => ExportToExcel(poi, 'points_of_intrest_list'), buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('export'), func: () => ExportToExcel(pois, 'points_of_intrest_list'), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: ReadFromExcel, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
@@ -49,12 +49,12 @@ function PointsOfInterest() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('points')} />
-            {poi.length ? <PaginationTable
+            {pois.length ? <PaginationTable
                 lang={lang}
                 page={page}
                 keys={keys}
                 setPage={setPage}
-                data={poi}
+                data={pois}
                 cat={tableCategories}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}

@@ -12,9 +12,10 @@ import useStyles from "./styles";
 import Widget from "../Widget/Widget";
 import term from '../../terms';
 import { Box } from '@mui/system';
+import { useEffect } from 'react';
 
 
-export default function Calendar({ type, warp }) {
+export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
     const [date, changeDate] = useState(new Date());
     const [datetwo, changeDateTwo] = useState(new Date());
     const { lang } = useSelector(state => state.mainRememberReducer)
@@ -31,6 +32,12 @@ export default function Calendar({ type, warp }) {
                 break;
         }
     }
+
+    useEffect(() => {
+        let d2 = new Date(datetwo).toLocaleDateString()
+        if (setDate) setDate(date)
+        if (setDateTwo) setDateTwo(d2, field)
+    }, [])
 
     const Warp = warp ? Widget : Box
 

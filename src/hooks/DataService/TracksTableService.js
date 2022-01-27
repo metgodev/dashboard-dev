@@ -10,14 +10,13 @@ const TracksTableService = (rowsPerPage, page) => {
         authorities: [],
         tracks: [],
         keys: [],
-        ignore: [],
+        ignore: [
+            'authority', 'relevantTo', 'timeDurationDays', 'timeDurationHours', 'timeDuraionMinutes', 'pois', 'galleryFilesIds'
+        ],
         tableCategories: {
-            impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
-            status: ['all', 'private', 'public', 'pending_approval'],
-            category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
-            tag: ['all',],
-            authority: ['all',],
-            edit: ['all', 'today', 'last_week', 'last_month'],
+            trackName: ['all',],
+            featured: ['all',],
+            description: ['all',],
         }
     })
     useLayoutEffect(() => {
@@ -41,7 +40,8 @@ const TracksTableService = (rowsPerPage, page) => {
             track?.data.map(({
                 trackName, authorityId, relevantTo, timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds
             }) => tracks = [...tracks, {
-                trackName, authority: authorities.find(a => a.id === authorityId).name, relevantTo, timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds
+                trackName, authority: authorityId, relevantTo,
+                timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds
             }]);
             if (!tracks.length) return;
             //get all categories

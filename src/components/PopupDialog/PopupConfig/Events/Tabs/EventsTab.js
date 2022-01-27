@@ -23,7 +23,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
         address: "",
         startDate: "",
         endDate: "",
-        tags: [],
+        tagsIds: [],
         openHour: "",
         relevantTo: "",
         price: 0,
@@ -34,7 +34,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
         reservationCenterPhone: "",
         reservationCenterEmail: "",
         websiteUrl: "",
-        category: [],
+        categoryId: "",
         description: ""
     });
 
@@ -47,11 +47,12 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
         return (() => setInit({}))
     }, [type])
 
-    const handleChange = (e, field, tags) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'open24Hours') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+    const handleChange = (e, field, tagsIds) => {
+        if (tagsIds) setValues(prevState => ({ ...prevState, [field]: Object.keys(tagsIds).map(key => tagsIds[key].id) }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
+
+    const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: time }));
 
     const edit = async () => { }
 
@@ -127,7 +128,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 )}
                             />}
                         {type === 'timePicker' &&
-                            <TimeSelector label={title} />
+                            <TimeSelector label={title} setTime={setDateTime} field={field} />
                         }
                         {type === 'toggle' &&
                             <Switch
@@ -137,7 +138,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                             />
                         }
                         {type === 'datePicker' &&
-                            <Calendar type={2} />
+                            <Calendar type={2} setDateTwo={setDateTime} field={field} />
                         }
                         {type === 'textArea' &&
                             <TextareaAutosize

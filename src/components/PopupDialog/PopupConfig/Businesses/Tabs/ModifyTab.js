@@ -139,7 +139,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 multiple
                                 id="tags-outlined"
                                 options={tags}
-                                getOptionLabel={(o) => o.id}
+                                getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
                                 renderInput={(params) => (

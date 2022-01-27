@@ -36,7 +36,7 @@ function StatsBoxLinear() {
                         colorBrightness="secondary"
                         className={classes.legendElementText}
                     >
-                        {term('SDK')}
+                        {term('sdk')}
                     </Typography>
                 </div>
             </div>
@@ -63,7 +63,7 @@ function StatsBoxLinear() {
                     colorBrightness="secondary"
                     className={classes.progressSectionTitle}
                 >
-                    {term('SDK')}
+                    {term('sdk')}
                 </Typography>
                 <LinearProgress
                     variant="determinate"
