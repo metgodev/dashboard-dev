@@ -1,10 +1,8 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import { Typography } from '../Wrappers/Wrappers';
 
 
-export default function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+export default function TabPanel({ children, value, index, ...other }) {
 
     return (
         <div
@@ -15,9 +13,7 @@ export default function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box>
-                    <Typography >{children}</Typography>
-                </Box>
+                <Box>{children}</Box>
             )}
         </div>
     );

@@ -67,10 +67,7 @@ function AreaMenu() {
                 disablescrolllock={true.toString()}
             >
                 <div className={classes.langMenuUser}>
-                    <Typography
-                        className={classes.langMenuLink}
-                        component="a"
-                        color="secondary"
+                    <div
                     >
                         {areaMenuItem.map((a) => (
                             <MenuItem key={a.id} className={classes.messageNotification}>
@@ -79,7 +76,7 @@ function AreaMenu() {
                                 </Typography>
                             </MenuItem>
                         ))}
-                    </Typography>
+                    </div>
                 </div>
             </Menu>
         </>

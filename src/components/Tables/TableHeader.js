@@ -38,7 +38,7 @@ function TableHeader({ keys, cat }) {
                                             id="outlined-required"
                                             defaultValue=""
                                             inputProps={{
-                                                startAdornment: (
+                                                startadornment: (
                                                     <InputAdornment position="start">
                                                         <SearchIcon />
                                                     </InputAdornment>

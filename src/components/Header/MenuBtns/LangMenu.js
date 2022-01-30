@@ -54,19 +54,13 @@ function LangMenu() {
                     {/* <Typography variant="h4" weight="medium">
                         {term('language')}
                     </Typography> */}
-                    <Typography
-                        className={classes.langMenuLink}
-                        component="a"
-                        color="secondary"
-                    >
-                        {languages.map(({ lang, id, short }) => (
-                            <MenuItem key={id} className={classes.messageNotification}>
-                                <Typography color="text" colorBrightness="secondary" onClick={() => changeLanguage(short)}>
-                                    {lang}
-                                </Typography>
-                            </MenuItem>
-                        ))}
-                    </Typography>
+                    {languages.map(({ lang, id, short }) => (
+                        <MenuItem key={id} className={classes.messageNotification}>
+                            <Typography color="text" colorBrightness="secondary" onClick={() => changeLanguage(short)}>
+                                {lang}
+                            </Typography>
+                        </MenuItem>
+                    ))}
                 </div>
             </Menu>
         </>
