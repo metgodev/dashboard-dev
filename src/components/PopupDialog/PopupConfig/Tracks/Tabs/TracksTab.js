@@ -31,9 +31,16 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    const edit = async () => { }
-
-    const add = async () => { }
+    const modify = async (type, id) => {
+        if (type === 'add')
+            client.service('pois').create(values)
+                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => handleClose(false))
+        else
+            client.service('pois').patch(id, values)
+                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => handleClose(false))
+    }
 
     return (
         <Grid container spacing={2}>
@@ -109,7 +116,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                     disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => add()}>
+                    onClick={() => modify(type, init.id)}>
                     {term(type)}
                 </Button>
             </div>

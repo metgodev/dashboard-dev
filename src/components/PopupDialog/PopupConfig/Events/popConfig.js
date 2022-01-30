@@ -28,7 +28,7 @@ export const ModalInit = [
     { title: term('opening_hours'), id: 7, field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker' },
     { title: term('for_whom'), id: 8, field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('how_much'), id: 9, field: 'price', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('currency'), id: 10, field: 'currency', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('currency'), id: 10, field: 'currency', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('producer'), id: 11, field: 'producerName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('producer_phone'), id: 12, field: 'producerPhone', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('producer_mail'), id: 13, field: 'producerEmail', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
@@ -48,6 +48,9 @@ export let picker = {
     { value: 'GROUPS', name: term('groups') },
     { value: 'GOLDEN_AGE', name: term('golden_age') },],
     authorityId: [],
-    categoryId: []
+    categoryId: [],
+    currency: [{ value: 'ILS', name: 'ILS' },
+    { value: 'USD', name: 'USD' },
+    { value: 'EUR', name: 'EUR' }]
 };
 

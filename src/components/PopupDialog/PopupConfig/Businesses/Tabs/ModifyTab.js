@@ -62,14 +62,12 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('business').create(values)
-                .then(() => dispatch(set_table_changed(type)))
+                .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
-                .then(() => console.log(type))
         else
             client.service('business').patch(id, values)
-                .then(() => dispatch(set_table_changed(type)))
+                .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
-                .then(() => console.log(type))
     }
 
     return (

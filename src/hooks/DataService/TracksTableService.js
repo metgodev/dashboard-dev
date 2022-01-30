@@ -11,7 +11,7 @@ const TracksTableService = (rowsPerPage, page) => {
         tracks: [],
         keys: [],
         ignore: [
-            'authority', 'relevantTo', 'timeDurationDays', 'timeDurationHours', 'timeDuraionMinutes', 'pois', 'galleryFilesIds'
+            'authority', 'relevantTo', 'timeDurationDays', 'timeDurationHours', 'timeDuraionMinutes', 'pois', 'galleryFilesIds', 'id'
         ],
         tableCategories: {
             trackName: ['all',],
@@ -38,10 +38,10 @@ const TracksTableService = (rowsPerPage, page) => {
                 { autorityId: authorities.find(a => a.name === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
             let track = await client.service("tracks").find({ query: SpesificAuthority });
             track?.data.map(({
-                trackName, authorityId, relevantTo, timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds
+                trackName, authorityId, relevantTo, timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds, _id
             }) => tracks = [...tracks, {
                 trackName, authority: authorityId, relevantTo,
-                timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds
+                timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds, id: _id
             }]);
             if (!tracks.length) return;
             //get all categories

@@ -18,22 +18,10 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
-        poiName: "",
-        address: "",
         addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
-        categoriesIds: "",
         relevantTo: "GOLDEN_AGE",
-        description: "",
-        websiteUrl: "",
-        authorityId: "",
-        activitiesInPlace: "",
-        exclusiveFor: "",
         prefferedSeason: "SUMMER",
         shady: "FULL",
-        arrivalRecommendations: "",
-        phoneNumber: "",
-        webpageUrl: "",
-        contactEmail: ""
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
@@ -50,12 +38,15 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
         return (() => setInit({}))
     }, [type])
 
-    const edit = async () => { }
-
-    const add = async () => {
-        client.service('pois').create(values)
-            .then(() => dispatch(set_table_changed(values.name)))
-            .then(() => handleClose(false))
+    const modify = async (type, id) => {
+        if (type === 'add')
+            client.service('pois').create(values)
+                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => handleClose(false))
+        else
+            client.service('pois').patch(id, values)
+                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => handleClose(false))
     }
 
     return (
@@ -151,10 +142,10 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    disabled={!isFulfilled}
+                    // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => add()}>
+                    onClick={() => modify(type, init.id)}>
                     {term(type)}
                 </Button>
             </div>

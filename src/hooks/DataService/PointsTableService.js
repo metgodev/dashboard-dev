@@ -11,8 +11,8 @@ const PointsTableService = (rowsPerPage, page) => {
         pois: [],
         keys: [],
         ignore: [
-            'authority', 'address', 'addressType', 'categoriesIds', 'relevantTo', 'isAccessable', 'description',
-            'websiteUrl', 'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail'
+            'authority', 'address', 'addressType', 'categoriesIds', 'relevantTo', 'isAccessable', 'description', 'websiteUrl',
+            'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail', 'id'
         ],
         tableCategories: {
             poiName: ['all',],
@@ -43,11 +43,11 @@ const PointsTableService = (rowsPerPage, page) => {
             let points = await client.service("pois").find({ query: SpesificAuthority });
             points?.data.map(({
                 poiName, address, addressType, categoriesIds, relevantTo, isAccessable, description, websiteUrl, authorityId, galleryFileIds,
-                activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail
+                activitiesInPlace, exclusiveFor, prefferedSeason, shady, arrivalRecommendations, phoneNumber, webpageUrl, contactEmail, _id
             }) => pois = [...pois, {
                 poiName, address, addressType, categoriesIds, relevantTo, isAccessable, description, websiteUrl,
                 authority: authorityId, galleryFileIds, activitiesInPlace, exclusiveFor, prefferedSeason, shady,
-                arrivalRecommendations, phoneNumber, webpageUrl, contactEmail,
+                arrivalRecommendations, phoneNumber, webpageUrl, contactEmail, id: _id
             }]);
             if (!pois.length) return;
             //get all categories

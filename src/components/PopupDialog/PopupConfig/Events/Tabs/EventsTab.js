@@ -17,26 +17,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     const dispatch = useDispatch()
     //local
     const [init, setInit] = useState({});
-    const [values, setValues] = useState({
-        name: "",
-        authorityId: "",
-        address: "",
-        startDate: "",
-        endDate: "",
-        tagsIds: [],
-        openHour: "",
-        relevantTo: "",
-        price: 0,
-        currency: "",
-        producerName: "",
-        producerPhone: "",
-        producerEmail: "",
-        reservationCenterPhone: "",
-        reservationCenterEmail: "",
-        websiteUrl: "",
-        categoryId: "",
-        description: ""
-    });
+    const [values, setValues] = useState({});
 
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
@@ -54,12 +35,15 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
 
     const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: time }));
 
-    const edit = async () => { }
-
-    const add = async () => {
-        client.service('events').create(values)
-            .then(() => dispatch(set_table_changed(values.name)))
-            .then(() => handleClose(false))
+    const modify = async (type, id) => {
+        if (type === 'add')
+            client.service('events').create(values)
+                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => handleClose(false))
+        else
+            client.service('events').patch(id, values)
+                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => handleClose(false))
     }
 
     return (
@@ -155,10 +139,10 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    disabled={!isFulfilled}
+                    // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => add()}>
+                    onClick={() => modify(type, init.id)}>
                     {term(type)}
                 </Button>
             </div>
