@@ -14,7 +14,7 @@ import useStyles from '../../../styles'
 export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
-    let dispatch = useDispatch()
+    let dispatch = useDispatch();
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
@@ -145,7 +145,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                     // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => modify(type, init.id)}>
+                    onClick={() => modify(type, initialData.id)}>
                     {term(type)}
                 </Button>
             </div>

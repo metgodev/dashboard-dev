@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import term from '../../../../../terms';
 import { ModalInit, picker } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import Calendar from '../../../../Calendar/Calendar';
+import { client } from '../../../../../API/metro';
+import { useDispatch } from 'react-redux';
+import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 //styles
 import useStyles from '../../../styles'
-import Calendar from '../../../../Calendar/Calendar';
 
 export const TracksTab = ({ handleClose, initialData, type }) => {
     //global
+    let dispatch = useDispatch()
     let classes = useStyles();
     //local
-    const [values, setValues] = useState({
-        trackName: "",
-        authorityId: "",
-        relevantTo: "GOLDEN_AGE",
-        timeDurationDays: 0,
-        timeDurationHours: 0,
-        timeDuraionMinutes: 0,
-        description: "",
-        pois: [],
-        featured: false,
-    });
+    const [values, setValues] = useState({ relevantTo: "GOLDEN_AGE" });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
 
@@ -116,7 +110,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                     disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => modify(type, init.id)}>
+                    onClick={() => modify(type, initialData.id)}>
                     {term(type)}
                 </Button>
             </div>
