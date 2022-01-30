@@ -61,11 +61,6 @@ const active_lexicon = {
         he: 'הרשם',
         ar: 'اشتراك',
     },
-    edit: {
-        en: 'Edit',
-        he: 'ערוך',
-        ar: 'تعديل',
-    },
     copy: {
         en: 'Copy',
         he: 'העתק',
@@ -355,11 +350,6 @@ const active_lexicon = {
         en: 'address',
         he: 'כתובת',
         ar: 'تبوك',
-    },
-    edit: {
-        en: 'edit',
-        he: 'עריכה',
-        ar: 'تعديل',
     },
     private: {
         en: 'private',
@@ -651,11 +641,6 @@ const active_lexicon = {
         he: 'מטבע',
         ar: 'عملة',
     },
-    currency: {
-        en: 'Currency',
-        he: 'מטבע',
-        ar: 'عملة',
-    },
     producer: {
         en: 'Producer',
         he: 'מפיק',
@@ -690,11 +675,6 @@ const active_lexicon = {
         en: 'Accessability',
         he: 'נגישות',
         ar: 'يمكن الوصول إليه',
-    },
-    activities_in_place: {
-        en: 'Activities in place',
-        he: 'פעילויות במקום',
-        ar: 'لأنشطة في المكان',
     },
     activities_in_place: {
         en: 'Activities in place',
@@ -755,11 +735,6 @@ const active_lexicon = {
         en: 'Groups',
         he: 'קבוצות',
         ar: 'مجموعات',
-    },
-    golden_age: {
-        en: 'Golden age',
-        he: 'גיל הזהב',
-        ar: 'العصر الذهبي',
     },
     golden_age: {
         en: 'Golden age',
@@ -840,11 +815,6 @@ const active_lexicon = {
         en: 'Please enter your verification code',
         he: 'הכנס בבקשה את קוד האימות',
         ar: 'الرجاء إدخال رمز التحقق الخاص بك',
-    },
-    an_email_has_been_sent_to: {
-        en: 'An email has been sent to',
-        he: 'המייל נשלח ל',
-        ar: 'تم إرسال رسالة إلكترونية إلى',
     },
     verify_code: {
         en: 'Verify code',

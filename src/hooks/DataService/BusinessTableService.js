@@ -32,7 +32,7 @@ const BusinessTableService = (rowsPerPage, page) => {
     }
 
     useLayoutEffect(() => {
-        (async (areaId = area.id, autorityId = filterTable.authority) => {
+        (async (area_id = area.id, authority_id = filterTable.authority) => {
             let authorities = [];
             let authority_cat = ['all'];
             let businesses = [];
@@ -42,16 +42,16 @@ const BusinessTableService = (rowsPerPage, page) => {
             let tag = await client.service("tags").find();
             tag?.data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }])
             // Get all autorities
-            if (!areaId) return;
-            let authority = await client.service("authorities").find({ query: { areaId: areaId } });
+            if (!area_id) return;
+            let authority = await client.service("authorities").find({ query: { areaId: area_id } });
             authority?.data.map(({ address, areaId, createdAt, email, name, _id }) => {
                 authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
                 authority_cat = [...authority_cat, name]
             });
             // Get all businesses the autorityId
             if (!authorities.length) return;
-            let SpesificAuthority = autorityId && autorityId !== 'all' ?
-                { autorityId: authorities.find(a => a.name === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
+            let SpesificAuthority = authority_id && authority_id !== 'all' ?
+                { autorityId: authorities.find(a => a.name === authority_id).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
             let business = await client.service("business").find({ query: SpesificAuthority });
             business?.data.map(({
                 address, autorityId, contactPersonName, contactPersonPhoneNumber,
@@ -59,7 +59,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                 linkedInPageUrl, name, open24Hours, openingHours, phoneNumber, relevantTo, status, tagsIds,
                 twitterPageUrl, updatedAt, userId, websiteUrl, youtubePageUrl, _id
             }) => businesses = [...businesses, {
-                status, address, authority: authorities.find(a => a.id === autorityId).name, contactPersonName,
+                status, address, authority: authorities.find(a => a.id === autorityId)?.name, contactPersonName,
                 createdAt, description, facebookPageUrl, galleryFileIds, instagramPageUrl,
                 linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: intersect(tagsIds, tags, 'title'),
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
