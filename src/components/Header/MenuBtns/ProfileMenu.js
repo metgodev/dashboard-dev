@@ -21,7 +21,7 @@ function ProfileMenu() {
     const { user } = useSelector(state => state.mainRememberReducer)
 
     let classes = useStyles();
-    let avatar = 'https://i.pravatar.cc/'
+    let avatar = `https://ui-avatars.com/api/?name=${b64_to_utf8(user.fn) + " " + b64_to_utf8(user.ln)}`
     let navigate = useNavigate()
 
     const logout = () => {

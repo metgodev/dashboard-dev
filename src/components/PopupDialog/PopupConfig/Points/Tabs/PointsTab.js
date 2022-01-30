@@ -57,7 +57,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
             .then(() => dispatch(set_table_changed(values.name)))
             .then(() => handleClose(false))
     }
-    console.log(values);
+
     return (
         <Grid container spacing={2}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>

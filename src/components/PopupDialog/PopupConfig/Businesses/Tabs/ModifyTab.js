@@ -26,23 +26,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
-        name: '',
-        description: '',
         status: 'PENDING_APPROVAL',
-        tagsIds: [],
-        autorityId: '',
-        address: '',
-        phoneNumber: '',
-        contactPersonName: '',
-        contactPersonPhoneNumber: '',
-        emailAddress: '',
-        relevantTo: '',
-        websiteUrl: '',
-        facebookPageUrl: '',
-        instagramPageUrl: '',
-        youtubePageUrl: '',
-        twitterPageUrl: '',
-        linkedInPageUrl: '',
         openingHours: {
             sunday: {},
             monday: {},
@@ -75,14 +59,17 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
     };
 
-    const edit = async () => {
-        // let res = await client.service('business').patch()
-    }
-
-    const add = async () => {
-        client.service('business').create(values)
-            .then(() => dispatch(set_table_changed(values.name)))
-            .then(() => handleClose(false))
+    const modify = async (type, id) => {
+        if (type === 'add')
+            client.service('business').create(values)
+                .then(() => dispatch(set_table_changed(type)))
+                .then(() => handleClose(false))
+                .then(() => console.log(type))
+        else
+            client.service('business').patch(id, values)
+                .then(() => dispatch(set_table_changed(type)))
+                .then(() => handleClose(false))
+                .then(() => console.log(type))
     }
 
     return (
@@ -184,10 +171,10 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    disabled={!isFulfilled}
+                    // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => add()}>
+                    onClick={() => modify(type, init.id)}>
                     {term(type)}
                 </Button>
             </div>

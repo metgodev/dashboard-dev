@@ -49,8 +49,8 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
 
     return (
         <Warp title={term('time')} uppertitle className={classes.card} >
-            <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
-                <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+                <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
                     <TimePicker
                         ampm={false}
                         inputVariant="outlined"
@@ -63,8 +63,8 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
                         cancelLabel={term('cancel')}
                         onChange={handleDateChange}
                     />
-                </ThemeProvider>
-            </MuiPickersUtilsProvider>
+                </MuiPickersUtilsProvider>
+            </ThemeProvider>
         </Warp>
     );
 }

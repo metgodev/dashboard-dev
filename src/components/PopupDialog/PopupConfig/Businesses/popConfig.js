@@ -35,8 +35,8 @@ export const ModalInit = [
     { title: term('twitter_link'), id: 16, field: 'twitterPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('linkedIn_link'), id: 17, field: 'linkedInPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('open_24_hours'), id: 18, field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
-    { title: term('open_on_weekend'), id: 18, field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
-    { title: term('is_kosher'), id: 18, field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
+    { title: term('open_on_weekend'), id: 19, field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
+    { title: term('is_kosher'), id: 20, field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
 ]
 
 export let tags = []

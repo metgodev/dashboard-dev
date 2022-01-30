@@ -7,7 +7,6 @@ import { em } from '../../utils/document';
 export default function EncodedImageList({ base64Image }) {
     return (
         <>
-            {/* {console.log(base64Image)} */}
             <ImageList sx={{ width: em(50), height: em(50) }} cols={3} rowHeight={164}>
                 {base64Image.length ? base64Image.map((item, i) => (
                     <ImageListItem key={i}>

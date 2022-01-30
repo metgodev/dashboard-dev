@@ -43,10 +43,10 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                         <TableHeader keys={keys} cat={cat} />
                         <TableBody >
                             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(({ id, status, ...data }) => (
-                                    <StyledTableRow key={id}>
+                                .map(({ status, ...data }) => (
+                                    <StyledTableRow key={data.id}>
                                         {status && <TableCell size="small" align='center' >
-                                            <TableMenuBtn status={status} stats={stats} id={id} />
+                                            <TableMenuBtn status={status} stats={stats} id={data.id} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
                                         <TableCell align="justify" size="small">

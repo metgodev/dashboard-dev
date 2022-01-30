@@ -1,6 +1,5 @@
 import React, { useLayoutEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import { shallowEqual, useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
 import SideBar from '../components/SideBar/SideBar';
 import Main from '../components/AdjustHelpers/Main';
@@ -29,9 +28,6 @@ const Root = () => {
     let location = useLocation();
     let { pathname } = location;
 
-    //global 
-    const { sidebar, mobile } = useSelector(s => s.mainReducer)
-
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
     }
@@ -43,9 +39,10 @@ const Root = () => {
         // return (() => reAuth())
     }, [])
 
+
     return (
         <Box className={classes.Router}>
-            <Main open={sidebar} mobile={mobile.toString()}>
+            <Main >
                 {shouldDisplay &&
                     <>
                         <Header />

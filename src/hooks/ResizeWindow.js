@@ -20,7 +20,6 @@ const ResizeWindow = ({ children }) => {
 
         }
     })
-    console.log(dimensions)
 
     return (<div style={{ width: dimensions.width, height: dimensions.height }}>
         {children}

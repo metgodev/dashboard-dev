@@ -15,6 +15,7 @@ export default makeStyles(theme => ({
   },
   drawerOpen: {
     width: drawerWidth,
+    overflowX: "hidden",
     //animation
     // transition: theme.transitions.create("width", {
     //   easing: theme.transitions.easing.sharp,
