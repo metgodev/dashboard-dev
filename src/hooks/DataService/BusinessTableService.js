@@ -77,7 +77,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                 tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
             }));
         })();
-    }, [tableChanged])
+    }, [tableChanged, area])
 
     return data
 }
