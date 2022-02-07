@@ -21,7 +21,7 @@ export const ModalInit = [
     { title: term('description'), id: 2, field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('tags'), id: 3, field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker' },
     { title: term('authority'), id: 4, field: 'autorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
-    { title: term('address'), id: 5, field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('address'), id: 5, field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'googleAutocomplete' },
     { title: term('phone_number') + " " + term('Will_not_be_displayed'), id: 6, field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('contact'), id: 7, field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('business_number'), id: 8, field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },

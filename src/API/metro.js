@@ -5,10 +5,11 @@ import rest from '@feathersjs/rest-client';
 import auth from '@feathersjs/authentication-client'
 import JWT from 'jwt-client'
 
-let dev = false;
+const { REACT_APP_STRAPI } = process.env
+
 let token = localStorage.getItem('feathers-jwt');
 let verified;
-let uri = dev ? 'http://localhost:3031' : 'https://metro-backend-ohx3vk2ipa-ew.a.run.app';
+let uri = REACT_APP_STRAPI;
 
 const app = feathers()
     .configure(auth())

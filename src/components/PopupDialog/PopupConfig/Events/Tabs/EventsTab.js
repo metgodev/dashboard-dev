@@ -8,6 +8,7 @@ import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import Calendar from '../../../../Calendar/Calendar';
+import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 //styles
 import useStyles from '../../../styles'
 
@@ -52,6 +53,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
+                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
                                 inputProps={{

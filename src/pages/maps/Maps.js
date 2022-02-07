@@ -15,6 +15,7 @@ import { em } from "../../utils/document";
 // styles
 import useStyles from "./styles";
 
+const { REACT_APP_GOOGLE_API_KEY } = process.env
 
 export default function Maps() {
   const [lat, setlat] = useState('')
@@ -47,7 +48,7 @@ export default function Maps() {
     <div className={classes.mapContainer}>
       <PageTitle title={term('map')} />
       <BasicMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMoe_LmnA0wBSKsB9wQTfvA8xRZkajrS4&callback=initMap"
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${REACT_APP_GOOGLE_API_KEY}&callback=initMap`}
         loadingElement={<div style={{ height: "inherit", width: "inherit" }} />}
         containerElement={<div style={{ height: em(40), width: '100%', padding: em(1) }} />}
         mapElement={<div style={{ height: "100%" }} />}

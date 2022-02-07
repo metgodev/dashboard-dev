@@ -4,16 +4,15 @@ import term from '../../../../../terms';
 import { Button } from '@material-ui/core';
 import { Collapse, MenuItem } from '@material-ui/core';
 import { ModalInit, tags, picker, TimePicker } from '../popConfig';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { client } from '../../../../../API/metro';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
+import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 //styles
 import useStyles from '../../../styles';
-
-
 
 // add anothe option ___ addable text _____
 export const ModifyTab = ({ handleClose, initialData, type }) => {
@@ -76,6 +75,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
+                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
                                 inputProps={{
@@ -114,7 +114,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 ))}
                             </TextField>}
                         {type === 'tagsPicker' &&
-                            <Autocomplete
+                            <MuiAutomplete
                                 inputProps={{
                                     classes: {
                                         input: classes.textField,
