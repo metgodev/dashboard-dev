@@ -17,7 +17,7 @@ import term from "../../../../terms";
     })
 })();
 
-export const ModalTabs = [term('points')]
+export const ModalTabs = [term('points'), term('gallery')]
 export const ModalInit = [
     { title: term('name'), id: 1, field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('address'), id: 2, field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },

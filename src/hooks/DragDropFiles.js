@@ -4,13 +4,14 @@ import { resizeFile } from "./FileResizer";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
-function DragDrop({ setBase64Image }) {
+function DragDrop({ setImages, setImagesUri }) {
     const [file, setFile] = useState(null);
     const handleChange = async (file) => {
         try {
             setFile(file);
-            const image = await resizeFile(file);
-            setBase64Image(prevState =>([ ...prevState, {image , alt:file?.name} ]));
+            const imageUri = await resizeFile(file);
+            setImagesUri(prevState =>([ ...prevState, {imageUri , alt:file?.name} ]))
+            setImages(prevState =>([ ...prevState, file ]));
         } catch (err) {
             console.log(err);
         }
@@ -23,6 +24,7 @@ function DragDrop({ setBase64Image }) {
         hoverTitle="Drop here"
         label="Upload or drop a file right here"
         maxSize={2} //size im mb
+        fileOrFiles
         />
         );
     }

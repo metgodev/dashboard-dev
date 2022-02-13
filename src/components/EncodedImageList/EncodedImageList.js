@@ -4,15 +4,15 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { em } from '../../utils/document';
 
 
-export default function EncodedImageList({ base64Image }) {
+export default function EncodedImageList({ imagesUri }) {
     return (
         <>
-            <ImageList sx={{ width: em(50), height: em(50) }} cols={3} rowHeight={164}>
-                {base64Image.length ? base64Image.map((item, i) => (
+            <ImageList sx={{ width: '100%', height: '100%' }} cols={6} rowHeight={200}>
+                {imagesUri.length ? imagesUri.map((item, i) => (
                     <ImageListItem key={i}>
                         <img
-                            src={item.image}
-                            srcSet={`${item.image} 2x`}
+                            src={item.imageUri}
+                            srcSet={`${item.imageUri} 2x`}
                             alt={item.alt}
                             loading="lazy"
                         />

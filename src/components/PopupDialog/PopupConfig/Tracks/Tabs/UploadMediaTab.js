@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
 import EncodedImageList from '../../../../EncodedImageList/EncodedImageList';

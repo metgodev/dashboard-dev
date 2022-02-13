@@ -6,7 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { EventsTab } from './Tabs/EventsTab';
-import { UploadMediaTab } from '../Businesses/Tabs/UploadMediaTab';
+import { UploadMediaTab } from './Tabs/UploadMediaTab';
 
 const EventsPop = ({ handleClose, initialData, type }) => {
     const [tab, setTab] = useState(0);
