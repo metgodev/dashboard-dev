@@ -14,6 +14,8 @@ import TracksPop from './PopupConfig/Tracks/TracksPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
+import { useDispatch } from 'react-redux';
+import { set_clear_images_arr } from '../../REDUX/actions/main.actions';
 
 
 
@@ -26,8 +28,13 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
     const theme = useTheme();
+    //global
+    const dispatch = useDispatch();
 
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false)
+        dispatch(set_clear_images_arr())
+    };
 
     const handleWidth = () => {
         if (expend === "sm") setExpend("md")

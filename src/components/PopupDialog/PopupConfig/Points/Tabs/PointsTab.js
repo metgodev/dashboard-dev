@@ -12,7 +12,7 @@ import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplet
 //styles
 import useStyles from '../../../styles'
 
-export const PointsTab = ({ handleClose, initialData, type }) => {
+export const PointsTab = ({ imagesArr, handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
     let dispatch = useDispatch();
@@ -23,6 +23,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
         relevantTo: "GOLDEN_AGE",
         prefferedSeason: "SUMMER",
         shady: "FULL",
+        galleryFileIds: imagesArr.map((itm) => itm.id) || [],
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);

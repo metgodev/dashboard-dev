@@ -7,9 +7,7 @@ import term from '../../../../../terms';
 import { Divider } from '@mui/material';
 
 
-export const UploadMediaTab = () => {
-  const [images, setImages] = useState([])
-  const [imagesUri, setImagesUri] = useState([])
+export const UploadMediaTab = ({ imagesArr }) => {
   return (
     <>
       <DialogTitle id="scroll-dialog-title">{term('upload_media')}</DialogTitle>
@@ -21,8 +19,8 @@ export const UploadMediaTab = () => {
           multiple
           type="file"
         />
-        <DragDrop setImages={setImages} setImagesUri={setImagesUri} />
-        <EncodedImageList imagesUri={imagesUri} />
+        <DragDrop />
+        <EncodedImageList imagesArr={imagesArr} />
         <Divider />
       </DialogContent>
     </>

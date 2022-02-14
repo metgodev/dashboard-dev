@@ -1,21 +1,49 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-import { resizeFile } from "./FileResizer";
+import { useDispatch } from "react-redux";
+import { client } from "../API/metro";
+import { set_images_arr } from "../REDUX/actions/main.actions";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
-function DragDrop({ setImages, setImagesUri }) {
+function DragDrop() {
+    // local
     const [file, setFile] = useState(null);
+    const [progress, setProgress] = useState(0);
+    //global
+    const dispatch = useDispatch();
+
+    const upload_media = async (file) => {
+        const formData = new FormData();
+        if (Array.isArray(file)) {
+            file.forEach(f => {
+                formData.append("file", f);
+            });
+        } else {
+            formData.append("file", file);
+        }
+        const config = {
+            onUploadProgress: (event) => {
+                return Math.round((event.loaded * 100) / event.total);
+            }
+        };
+        client.service("files").create(formData, {
+            onUploadProgress: config.onUploadProgress
+        }).then(res => {
+            setProgress(config.onUploadProgress)
+            dispatch(set_images_arr( {id:res[0]._id, url:res[0].url}))
+        })
+    };
+
     const handleChange = async (file) => {
         try {
             setFile(file);
-            const imageUri = await resizeFile(file);
-            setImagesUri(prevState =>([ ...prevState, {imageUri , alt:file?.name} ]))
-            setImages(prevState =>([ ...prevState, file ]));
+            upload_media(file);
         } catch (err) {
             console.log(err);
         }
     };
+    
     return (
         <FileUploader
         handleChange={handleChange}

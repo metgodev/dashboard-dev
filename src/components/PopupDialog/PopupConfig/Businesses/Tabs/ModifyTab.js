@@ -15,12 +15,12 @@ import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplet
 import useStyles from '../../../styles';
 
 // add anothe option ___ addable text _____
-export const ModifyTab = ({ handleClose, initialData, type }) => {
+export const ModifyTab = ({ imagesArr, handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     let classes = useStyles();
-    const openDrop = () => setOpen(!open);
     //local
+    const openDrop = () => setOpen(!open);
     const [OT, setOT] = useState({});
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
@@ -35,6 +35,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             friday: {},
             saturday: {},
         },
+        galleryFileIds: imagesArr.map((itm) => itm.id) || [],
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);

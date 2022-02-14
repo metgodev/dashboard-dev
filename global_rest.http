@@ -2,7 +2,7 @@
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app           
 # metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDQyMTk5MTYsImlhdCI6MTY0NDIxOTkxNSwiZXhwIjoxNjQ0ODI0NzE1LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiIwYWUzYWZiYy0zMjBlLTQ3MTItOGVlNi1kMjUwYmY1NWE4MzMifQ.OVO6u8QLoIJGIiVGZctN0KDW-70ECGxKwS7Dj0s7BbA
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDQ4MzQ3NDQsImlhdCI6MTY0NDgzNDc0NCwiZXhwIjoxNjQ1NDM5NTQ0LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiI5MmYzNDkzYS0xZjZlLTQxMmEtOWQxMi0yMDA0OWVmNDQwZGEifQ.ZQ4BkYyIzdIoZp5zgLkvgAjKIAs3Nq1sw3T-N_hJ0Yg
 @email = "celeja6810@showbaz.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
@@ -220,17 +220,17 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 
 ###
-# create categhories
+# create tags
 POST  https://{{hostname}}/tags
 content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {
-  "title": "אופניים",
+  "title": "בריכות",
   "categoryId": "61e9485bf49adf4a20db7cbf"
 }
 ###
-# get categhories
+# get tags
 GET https://{{hostname}}/tags
 content-type: {{contentType}}
 Authorization: {{authorization}}
@@ -296,7 +296,6 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 ###
 # Upload file 
-
-GET https://storage.googleapis.com/metro-travel-dev-files/1641214017111_dhl_.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcs-client-access%40metro-travel-dev.iam.gserviceaccount.com%2F20220103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20220103T124658Z&X-Goog-Expires=3601&X-Goog-SignedHeaders=host&X-Goog-Signature=046d3959d1fab6c0d0d6ec6934cb14359aadc7a54b2b57ecfc0172908b61974efd510190b49c220d3e9a8075f24f6539905157f492b1d61707d5962de3a7cdccea4f8e405248f178bb3e2d2e0343592de36e94a62854586274dd175f0f86d479b42abc2f73760ff7252ae89d559e0d0538f369e7972056d8a42e8f8689c7018154ef72481579d5f1f36b1131dea3d247eb5eb14b132e33292eb4cac79af2f5222afbcce7d7c3f11c6da0f307844f7114d3579583fb2b20103b76d1a9b0070e68541fb97803062509830f6f426a631092290c4f61f4421be4f93de0f60d1282d34bc4ecf9abccfdf06095349f96eeb12d09534c4493f784e18d5deea3e73f4af4
+GET https://{{hostname}}/files
 content-type: {{contentType}}
 Authorization: {{authorization}}

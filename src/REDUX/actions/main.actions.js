@@ -7,6 +7,9 @@ export const SET_INITIAL_DATA_DIALOG = 'SET_INITIAL_DATA_DIALOG';
 export const SET_TABLE_CHANGED = 'SET_TABLE_CHANGED';
 export const SET_AREA = 'SET_AREA';
 export const SET_FILTER_TABLE = 'SET_FILTER_TABLE';
+export const SET_IMAGES_ARR = 'SET_IMAGES_ARR';
+export const SET_CLEAR_IMAGES_ARR = 'SET_CLEAR_IMAGES_ARR';
+
 
 
 export const set_theme_color = (value) => ({
@@ -51,6 +54,16 @@ export const set_area = (value) => ({
 
 export const set_filter_table = (value) => ({
     type: SET_FILTER_TABLE,
+    payload: value
+})
+
+export const set_images_arr = (value) => ({
+    type: SET_IMAGES_ARR,
+    payload: value
+})
+
+export const set_clear_images_arr = (value) => ({
+    type: SET_CLEAR_IMAGES_ARR,
     payload: value
 })
 

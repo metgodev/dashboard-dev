@@ -1,4 +1,4 @@
-import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_AREA, SET_FILTER_TABLE } from "../actions/main.actions";
+import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_AREA, SET_FILTER_TABLE, SET_IMAGES_ARR, SET_CLEAR_IMAGES_ARR } from "../actions/main.actions";
 
 let initialState = {
     sidebar: false,
@@ -6,7 +6,8 @@ let initialState = {
     initialData: {},
     tableChanged: false,
     area: {},
-    filterTable: {}
+    filterTable: {},
+    imagesArr: [],
 }
 
 export default (state = initialState, action) => {
@@ -36,6 +37,14 @@ export default (state = initialState, action) => {
         case SET_FILTER_TABLE:
             return {
                 ...state, filterTable: action.payload
+            }
+        case SET_IMAGES_ARR:
+            return {
+                ...state, imagesArr: [...state.imagesArr, action.payload]
+            }
+        case SET_CLEAR_IMAGES_ARR:
+            return {
+                ...state, imagesArr: []
             }
         default:
             return state

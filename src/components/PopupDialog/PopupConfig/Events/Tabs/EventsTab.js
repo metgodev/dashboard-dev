@@ -12,13 +12,15 @@ import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplet
 //styles
 import useStyles from '../../../styles'
 
-export const EventsTab = ({ handleClose, initialData, type }) => {
+export const EventsTab = ({ imagesArr, handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
     const dispatch = useDispatch()
     //local
     const [init, setInit] = useState({});
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        galleryFileIds: imagesArr.map((itm) => itm.id) || [],
+    });
 
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);

@@ -10,7 +10,7 @@ import term from "../../../../terms";
 })();
 
 
-export const ModalTabs = [term('locations'), term('gallery')]
+export const ModalTabs = [term('locations')]
 export const ModalInit = [
     { title: term('name'), id: 1, field: 'trackName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('authority'), id: 2, field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },

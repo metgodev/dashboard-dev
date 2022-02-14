@@ -7,8 +7,12 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { EventsTab } from './Tabs/EventsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
+import { useSelector } from 'react-redux';
+
 
 const EventsPop = ({ handleClose, initialData, type }) => {
+    const { imagesArr } = useSelector(state => state.mainReducer);
+    //local
     const [tab, setTab] = useState(0);
 
     const handleTabs = (event, newValue) => {
@@ -24,10 +28,10 @@ const EventsPop = ({ handleClose, initialData, type }) => {
             </Box>
             <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <EventsTab handleClose={handleClose} initialData={initialData} type={type} />
+                    <EventsTab imagesArr={imagesArr} handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab />
+                    <UploadMediaTab imagesArr={imagesArr} />
                 </TabPanel>
             </DialogContent>
         </div >

@@ -4,15 +4,14 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { em } from '../../utils/document';
 
 
-export default function EncodedImageList({ imagesUri }) {
+export default function EncodedImageList({ imagesArr }) {
     return (
         <>
             <ImageList sx={{ width: '100%', height: '100%' }} cols={6} rowHeight={200}>
-                {imagesUri.length ? imagesUri.map((item, i) => (
+                {imagesArr.length ? imagesArr.map((item, i) => (
                     <ImageListItem key={i}>
                         <img
-                            src={item.imageUri}
-                            srcSet={`${item.imageUri} 2x`}
+                            src={item.url}
                             alt={item.alt}
                             loading="lazy"
                         />
