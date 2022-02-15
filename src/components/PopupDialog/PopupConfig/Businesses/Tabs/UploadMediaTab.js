@@ -4,10 +4,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
 import EncodedImageList from '../../../../EncodedImageList/EncodedImageList';
 import term from '../../../../../terms';
-import { Divider } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
+import { client } from '../../../../../API/metro';
+import { Button } from '@material-ui/core';
 
+export const UploadMediaTab = ({ initialData, type }) => {
+  //local
+  const [values, setValues] = useState({
+    galleryFileIds: [],
+  });
+  const [imagesArr, setImagesArr] = useState([]);
 
-export const UploadMediaTab = ({ imagesArr }) => {
+  let gallery = initialData?.gallery?.length ? JSON.parse(initialData?.gallery) : [];
+  //global 
+  const dispatch = useDispatch();
+
+  const addPhotos = async () => {
+    if (type === 'edit') {
+      client.service('business').patch(initialData.id, values)
+        .then(() => dispatch(set_table_changed("upload_media" + Math.random())))
+    }
+  }
+
   return (
     <>
       <DialogTitle id="scroll-dialog-title">{term('upload_media')}</DialogTitle>
@@ -19,9 +38,18 @@ export const UploadMediaTab = ({ imagesArr }) => {
           multiple
           type="file"
         />
-        <DragDrop />
-        <EncodedImageList imagesArr={imagesArr} />
-        <Divider />
+        <DragDrop setValues={setValues} setImagesArr={setImagesArr} />
+        <EncodedImageList gallery={gallery} imagesArr={imagesArr} />
+        <div style={{ display: 'flex', justifyContent: 'left', width: '100%' }}>
+          <Button
+            style={{ width: 200 }}
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={() => addPhotos()}>
+            {term('add')}
+          </Button>
+        </div>
       </DialogContent>
     </>
   )

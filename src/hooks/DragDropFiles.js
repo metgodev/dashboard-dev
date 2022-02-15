@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-import { useDispatch } from "react-redux";
 import { client } from "../API/metro";
-import { set_images_arr } from "../REDUX/actions/main.actions";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
-function DragDrop() {
+function DragDrop({ setValues ,setImagesArr }) {
     // local
     const [file, setFile] = useState(null);
-    const [progress, setProgress] = useState(0);
-    //global
-    const dispatch = useDispatch();
 
     const upload_media = async (file) => {
         const formData = new FormData();
@@ -30,8 +25,8 @@ function DragDrop() {
         client.service("files").create(formData, {
             onUploadProgress: config.onUploadProgress
         }).then(res => {
-            setProgress(config.onUploadProgress)
-            dispatch(set_images_arr( {id:res[0]._id, url:res[0].url}))
+            setValues(prevState => ({ ...prevState, galleryFileIds: [...prevState.galleryFileIds, res[0]._id] }))
+            setImagesArr(prevState => [...prevState, res[0].url]);
         })
     };
 
@@ -43,7 +38,8 @@ function DragDrop() {
             console.log(err);
         }
     };
-    
+
+
     return (
         <FileUploader
         handleChange={handleChange}
@@ -51,7 +47,7 @@ function DragDrop() {
         types={fileTypes}
         hoverTitle="Drop here"
         label="Upload or drop a file right here"
-        maxSize={2} //size im mb
+            maxSize={5} //size im mb
         fileOrFiles
         />
         );

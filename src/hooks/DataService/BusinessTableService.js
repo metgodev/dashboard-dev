@@ -10,7 +10,7 @@ const BusinessTableService = (rowsPerPage, page) => {
         authorities: [],
         businesses: [],
         keys: [],
-        ignore: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'galleryFileIds',
+        ignore: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
             'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
             'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
             'relevantTo', 'contact'],
@@ -53,14 +53,15 @@ const BusinessTableService = (rowsPerPage, page) => {
             let SpesificAuthority = authority_id && authority_id !== 'all' ?
                 { autorityId: authorities.find(a => a.name === authority_id).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
             let business = await client.service("business").find({ query: SpesificAuthority });
+            console.log(business)
             business?.data.map(({
                 address, autorityId, contactPersonName, contactPersonPhoneNumber,
-                createdAt, description, emailAddress, facebookPageUrl, galleryFileIds, instagramPageUrl,
+                createdAt, description, emailAddress, facebookPageUrl, gallery, galleryFileIds, instagramPageUrl,
                 linkedInPageUrl, name, open24Hours, openingHours, phoneNumber, relevantTo, status, tagsIds,
                 twitterPageUrl, updatedAt, userId, websiteUrl, youtubePageUrl, _id
             }) => businesses = [...businesses, {
                 status, address, authority: authorities.find(a => a.id === autorityId)?.name, contactPersonName,
-                createdAt, description, facebookPageUrl, galleryFileIds, instagramPageUrl,
+                createdAt, description, facebookPageUrl, gallery: JSON.stringify(gallery), galleryFileIds, instagramPageUrl,
                 linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: intersect(tagsIds, tags, 'title'),
                 twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
                 contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])

@@ -15,7 +15,7 @@ import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplet
 import useStyles from '../../../styles';
 
 // add anothe option ___ addable text _____
-export const ModifyTab = ({ imagesArr, handleClose, initialData, type }) => {
+export const ModifyTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     let classes = useStyles();
@@ -35,7 +35,6 @@ export const ModifyTab = ({ imagesArr, handleClose, initialData, type }) => {
             friday: {},
             saturday: {},
         },
-        galleryFileIds: imagesArr.map((itm) => itm.id) || [],
     });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);

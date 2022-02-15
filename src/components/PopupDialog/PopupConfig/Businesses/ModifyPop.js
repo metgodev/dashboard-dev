@@ -8,11 +8,9 @@ import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
-import { useSelector } from 'react-redux';
 
 
 const ModifyPop = ({ handleClose, initialData, type }) => {
-    const { imagesArr } = useSelector(state => state.mainReducer);
     //local
     const [tab, setTab] = useState(0);
 
@@ -24,18 +22,18 @@ const ModifyPop = ({ handleClose, initialData, type }) => {
         <div>
             <Box sx={{ borderBottom: .1, borderColor: 'lightGray', width: '100%' }}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
-                    {ModalTabs.map(b => <Tab key={b} label={b} />)}
+                    {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
                 </Tabs>
             </Box>
             <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <ModifyTab imagesArr={imagesArr} handleClose={handleClose} initialData={initialData} type={type} />
+                    <ModifyTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab imagesArr={imagesArr} />
+                    <UploadMediaTab initialData={initialData} type={type} />
                 </TabPanel>
             </DialogContent>
         </div >
