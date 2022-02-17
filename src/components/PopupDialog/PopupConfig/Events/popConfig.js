@@ -24,7 +24,7 @@ export const ModalInit = [
     { title: term('address'), id: 3, field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },
     { title: term('date_start'), id: 4, field: 'startDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
     { title: term('date_end'), id: 5, field: 'endDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
-    { title: term('tags'), id: 6, field: 'tagsIds', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker' },
+    { title: term('tags'), id: 6, field: 'tags', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker' },
     { title: term('opening_hours'), id: 7, field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker' },
     { title: term('for_whom'), id: 8, field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('how_much'), id: 9, field: 'price', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },

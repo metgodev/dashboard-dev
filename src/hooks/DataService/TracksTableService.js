@@ -11,7 +11,7 @@ const TracksTableService = (rowsPerPage, page) => {
         tracks: [],
         keys: [],
         ignore: [
-            'authority', 'relevantTo', 'timeDurationDays', 'timeDurationHours', 'timeDuraionMinutes', 'pois', 'galleryFilesIds', 'id'
+            'relevantTo', 'timeDurationDays', 'timeDurationHours', 'timeDuraionMinutes', 'pois', 'galleryFilesIds', 'createdAt', 'updatedAt', '__v', 'id'
         ],
         tableCategories: {
             trackName: ['all',],
@@ -19,43 +19,43 @@ const TracksTableService = (rowsPerPage, page) => {
             description: ['all',],
         }
     })
+
     useLayoutEffect(() => {
-        (async (areaId = area.id, autorityId = filterTable.authority) => {
+        (async (area_id = area.id, authority_id = filterTable.authority) => {
             let authorities = [];
             let authority_cat = ['all'];
             let tracks = [];
             let categories = [];
-            // Get all autorities
-            if (!areaId) return;
-            let authority = await client.service("authorities").find({ query: { areaId: areaId } });
-            authority?.data.map(({ address, areaId, createdAt, email, name, _id }) => {
-                authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
-                authority_cat = [...authority_cat, name]
-            });
-            // Get all tracks the autorityId
-            if (!authorities.length) return;
-            let SpesificAuthority = autorityId && autorityId !== 'all' ?
-                { autorityId: authorities.find(a => a.name === autorityId).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
-            let track = await client.service("tracks").find({ query: SpesificAuthority });
-            track?.data.map(({
-                trackName, authorityId, relevantTo, timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds, _id
-            }) => tracks = [...tracks, {
-                trackName, authority: authorityId, relevantTo,
-                timeDurationDays, timeDurationHours, timeDuraionMinutes, description, pois, featured, galleryFilesIds, id: _id
-            }]);
-            if (!tracks.length) return;
-            //get all categories
-            let cat = await client.service("categories").find();
-            cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
-            //define the keys
+            // -------------------===autorities===-------------------
+            if (!area_id) return;
+            await client.service('authorities').find({ query: { areaId: area_id } })
+                .then(({ data }) => data.map(({ address, areaId, createdAt, email, name, _id }) => {
+                    authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
+                    authority_cat = [...authority_cat, name]
+                }))
+            // -------------------===tracks===-------------------
+            await client.service('tracks').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage } })
+                .then(({ data }) => data.map(({ authorityId, _id, ...rest }) => {
+                    tracks = [...tracks, { authority: authorities.find(el => el.id === authorityId)?.name, id: _id, ...rest }]
+                }))
+            // -------------------===categories===-------------------
+            await client.service('categories').find()
+                .then(({ data }) => data.map(({ name, _id }) => categories = [...categories, { name, id: _id }]))
+            // -------------------===keys===-------------------
             let keys = Object.keys(tracks[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
-            //state init
+            // -------------------===set data===-------------------
             setData(prevState => ({
                 ...prevState, authorities, tracks, keys,
-                tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
-            }));
-        })();
-    }, [tableChanged, area])
+                tableCategories: {
+                    ...prevState.tableCategories,
+                    authority: authority_cat,
+                    trackName: [...new Set(tracks.map(({ trackName }) => trackName))],
+                    featured: [...new Set(tracks.map(({ featured }) => featured))],
+                    description: [...new Set(tracks.map(({ description }) => description))],
+                }
+            }))
+        })(area.id, filterTable.authority)
+    }, [tableChanged, area, filterTable])
 
     return data
 }

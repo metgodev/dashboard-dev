@@ -1,6 +1,8 @@
 import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { client } from '../../API/metro';
+import intersect_between_objects from '../../utils/intersect_between_objects';
+import stringify_nested from '../../utils/stringify_nested';
 
 const BusinessTableService = (rowsPerPage, page) => {
     //global
@@ -10,10 +12,11 @@ const BusinessTableService = (rowsPerPage, page) => {
         authorities: [],
         businesses: [],
         keys: [],
-        ignore: ['autorityId', 'contactPersonName', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
-            'instagramPageUrl', 'createdAt', 'linkedInPageUrl', 'open24Hours', 'openingHours',
-            'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', 'id',
-            'relevantTo', 'contact'],
+        ignore: [
+            'address', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
+            'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours',
+            'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
+        ],
         tableCategories: {
             impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
             status: ['all', 'private', 'public', 'pending_approval'],
@@ -24,61 +27,62 @@ const BusinessTableService = (rowsPerPage, page) => {
         }
     })
 
-    const intersect = (o1, o2, key) => {
-        // return Object.keys(o1).filter(k => k in o2 && o2[k])
-        let output = [];
-        Object.keys(o1).filter(k => k in o2 && output.push(`${o2[k][key]}  `))
-        return output
-    }
+    // create custom query filter
+    // const customQueryFilter = () => {
+    //     let query = { "$limit": rowsPerPage, "$skip": page * rowsPerPage };
+    //     // if filterTable is not empty then add filter to query
+    //     if (Object.keys(filterTable).length) {
+    //         query = { ...query, $sort: filterTable };
+    //     }
+    //     return query;
+    // }
+
+
+    // useLayoutEffect(() => {
+    //     (async () => {
+    //         await client.service('business').find({ query: { $select: ['twitterPageUrl', 'userId'] } })
+    //             .then((res) => console.log(res))
+    //     })()
+    // }, [tableChanged])
 
     useLayoutEffect(() => {
-        (async (area_id = area.id, authority_id = filterTable.authority) => {
+        (async (area_id = area.id) => {
             let authorities = [];
             let authority_cat = ['all'];
             let businesses = [];
             let categories = [];
             let tags = [];
-            //get all tags
-            let tag = await client.service("tags").find();
-            tag?.data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }])
-            // Get all autorities
+            // -------------------===tags===-------------------
+            await client.service('tags').find()
+                .then(({ data }) => data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
+            // -------------------===autorities===-------------------
             if (!area_id) return;
-            let authority = await client.service("authorities").find({ query: { areaId: area_id } });
-            authority?.data.map(({ address, areaId, createdAt, email, name, _id }) => {
-                authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
-                authority_cat = [...authority_cat, name]
-            });
-            // Get all businesses the autorityId
-            if (!authorities.length) return;
-            let SpesificAuthority = authority_id && authority_id !== 'all' ?
-                { autorityId: authorities.find(a => a.name === authority_id).id, "$limit": rowsPerPage, "$skip": page * rowsPerPage } : { "$limit": rowsPerPage, "$skip": page * rowsPerPage }
-            let business = await client.service("business").find({ query: SpesificAuthority });
-            console.log(business)
-            business?.data.map(({
-                address, autorityId, contactPersonName, contactPersonPhoneNumber,
-                createdAt, description, emailAddress, facebookPageUrl, gallery, galleryFileIds, instagramPageUrl,
-                linkedInPageUrl, name, open24Hours, openingHours, phoneNumber, relevantTo, status, tagsIds,
-                twitterPageUrl, updatedAt, userId, websiteUrl, youtubePageUrl, _id
-            }) => businesses = [...businesses, {
-                status, address, authority: authorities.find(a => a.id === autorityId)?.name, contactPersonName,
-                createdAt, description, facebookPageUrl, gallery: JSON.stringify(gallery), galleryFileIds, instagramPageUrl,
-                linkedInPageUrl, name, open24Hours, openingHours: JSON.stringify(openingHours), relevantTo, tag: intersect(tagsIds, tags, 'title'),
-                twitterPageUrl, edit: new Date(updatedAt).toLocaleDateString(), userId, websiteUrl, youtubePageUrl, id: _id, autorityId,
-                contact: JSON.stringify([{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }])
-            }]);
-            if (!businesses.length) return;
-            //get all categories
-            let cat = await client.service("categories").find();
-            cat?.data.map(({ title, _id }) => categories = [...categories, { title, id: _id }])
-            //define the keys
+            await client.service('authorities').find({ query: { areaId: area_id } })
+                .then(({ data }) => data.map(({ address, areaId, createdAt, email, name, _id }) => {
+                    authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
+                    authority_cat = [...authority_cat, name]
+                }));
+            // -------------------===businesses===-------------------
+            await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage } })
+                .then(({ data }) => data.map(({
+                    status, autorityId, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
+                }) => businesses = [...businesses, {
+                    status, authority: authorities.find(a => a.id === autorityId)?.name,
+                    tag: intersect_between_objects(tagsIds, tags, 'title'), edit: new Date(updatedAt).toLocaleDateString(), id: _id,
+                    contact: [{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }], ...rest
+                }]));
+            // -------------------===categories===-------------------
+            await client.service('categories').find()
+                .then(({ data }) => data.map(({ title, _id }) => categories = [...categories, { title, id: _id }]));
+            // -------------------===keys===-------------------
             let keys = Object.keys(businesses[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
-            //state init
+            // -------------------===setData===-------------------
             setData(prevState => ({
-                ...prevState, authorities, businesses, keys,
-                tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat }
+                ...prevState, authorities, businesses: stringify_nested(businesses, 'tag'), keys,
+                tableCategories: { ...prevState.tableCategories, category: categories, authority: authority_cat, tag: [...new Set(tags.map(t => t.title))] }
             }));
-        })();
-    }, [tableChanged, area])
+        })(area.id, filterTable);
+    }, [tableChanged, area, filterTable]);
 
     return data
 }

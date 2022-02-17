@@ -69,7 +69,7 @@ export const addTableRow = (data, columns, columnsToHide) => {
             </TableCell>
         );
     });
-}
+};
 
 //filter deep undefineds
 const filterUndefined = (arr) => {
@@ -85,13 +85,3 @@ const filterUndefined = (arr) => {
             return val;
         });
 };
-
-
-//parse items
-
-const tableText = (txt) => {
-    txt.map(t => {
-        if (typeof t === 'object') console.log(t);
-        else return t
-    })
-}
