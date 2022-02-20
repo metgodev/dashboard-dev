@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import term from '../../../../../terms';
 import { Button } from '@material-ui/core';
+import { client } from '../../../../../API/metro';
 import { Collapse, MenuItem } from '@material-ui/core';
-import { ModalInit, tags, picker, TimePicker } from '../popConfig';
-import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
-import TimeSelector from '../../../../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { client } from '../../../../../API/metro';
+import TimeSelector from '../../../../TimePicker/TimePicker';
+import { ModalInit, tags, picker, TimePicker } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
+import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 //styles
 import useStyles from '../../../styles';
 
@@ -39,6 +39,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
 
+    // set the innitial data
     useEffect(() => {
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
@@ -47,12 +48,14 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         return (() => setInit({}))
     }, [type, initialData])
 
+    //set the values
     const handleChange = (e, field, tags, type) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
         else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
+    //set the time
     const setTimes = (times, field, type) => {
         let pos = type === 1 ? 'start' : 'end'
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
@@ -68,6 +71,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
     }
+
 
     return (
         <Grid container spacing={2}>
@@ -89,9 +93,10 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 placeholder={title}
                                 multiline
                                 rows={rows}
-                                maxRows={maxRows}
+                                // maxRows={maxRows}
                                 defaultValue={init[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
+                                error={values[field] === ''}
                             />}
                         {type === 'picker' &&
                             <TextField
@@ -104,7 +109,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 id="select-field"
                                 select
                                 label={title}
-                                value={values[field]}
+                                value={values[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             >
                                 {picker[field].map((s) => (

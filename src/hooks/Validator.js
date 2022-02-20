@@ -1,56 +1,47 @@
 import { useEffect, useState } from 'react'
 
-const useValidator = ({ rule, value }) => {
+const useValidator = () => {
     const [error, setError] = useState('');
-    const [isValid, setIsValid] = useState({
-        isValid: false,
-        isRequierd: false,
-        isEmail: false,
-        isPhone: false,
-        isNumber: false,
-        isMin: false,
-        isMax: false,
-        isMinLength: false,
-        isMaxLength: false,
-        isEqual: false,
-    })
+    const [isValid, setIsValid] = useState(false);
 
-    const validate = () => {
+
+    const validate = (rule, value) => {
+        console.log(rule, value)
         switch (rule) {
             case 'isRequierd':
-                setIsValid({ isValid: !!value, isRequierd: true })
+                setIsValid(!!value)
                 setError(value ? '' : 'is required')
                 break;
             case 'isEmail':
-                setIsValid({ isValid: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value), isEmail: true })
+                setIsValid(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
                 setError(value ? '' : 'is not valid email')
                 break;
             case 'isPhone':
-                setIsValid({ isValid: /^\d{10}$/.test(value), isPhone: true })
+                setIsValid(/^\d{10}$/.test(value))
                 setError(value ? '' : 'is not valid phone')
                 break;
             case 'isNumber':
-                setIsValid({ isValid: !isNaN(value), isNumber: true })
+                setIsValid(!isNaN(value))
                 setError(value ? '' : 'is not valid number')
                 break;
             case 'isMin':
-                setIsValid({ isValid: value >= rule, isMin: true })
+                setIsValid(value >= rule)
                 setError(value ? '' : 'is not valid min')
                 break;
             case 'isMax':
-                setIsValid({ isValid: value <= rule, isMax: true })
+                setIsValid(value <= rule)
                 setError(value ? '' : 'is not valid max')
                 break;
             case 'isMinLength':
-                setIsValid({ isValid: value.length >= rule, isMinLength: true })
+                setIsValid(value.length >= rule)
                 setError(value ? '' : 'is not valid min length')
                 break;
             case 'isMaxLength':
-                setIsValid({ isValid: value.length <= rule, isMaxLength: true })
+                setIsValid(value.length <= rule)
                 setError(value ? '' : 'is not valid max length')
                 break;
             case 'isEqual':
-                setIsValid({ isValid: value === rule, isEqual: true })
+                setIsValid(value === rule)
                 setError(value ? '' : 'is not valid equal')
                 break;
             default:
@@ -58,13 +49,7 @@ const useValidator = ({ rule, value }) => {
         }
     }
 
-    useEffect(() => {
-        if (rule, value) {
-            validate()
-        }
-    }, [rule, value])
-
-    return [error, isValid]
+    return [error, isValid, validate]
 }
 
 export default useValidator

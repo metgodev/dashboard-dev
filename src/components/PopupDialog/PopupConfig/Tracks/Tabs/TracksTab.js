@@ -58,6 +58,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                                 maxRows={maxRows}
                                 defaultValue={initialData[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
+                                error={values[field] === ''}
                             />}
                         {type === 'picker' &&
                             <TextField

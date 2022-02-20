@@ -46,7 +46,7 @@ export let picker = {
     { value: 'KIDS&YOUTH', name: term('kids_and_youth') },
     { value: 'ALL_FAMILY', name: term('all_family') },
     { value: 'GROUPS', name: term('groups') },
-    { value: 'GOLDEN_AGE', name: term('golden_age') },],
+    { value: 'GOLDEN_AGE', name: term('golden_age') }],
     autorityId: []
 };
 

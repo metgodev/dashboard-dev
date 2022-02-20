@@ -70,6 +70,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 maxRows={maxRows}
                                 defaultValue={init[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
+                                error={values[field] === ''}
                             />}
                         {type === 'picker' &&
                             <TextField

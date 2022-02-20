@@ -27,23 +27,6 @@ const BusinessTableService = (rowsPerPage, page) => {
         }
     })
 
-    // create custom query filter
-    // const customQueryFilter = () => {
-    //     let query = { "$limit": rowsPerPage, "$skip": page * rowsPerPage };
-    //     // if filterTable is not empty then add filter to query
-    //     if (Object.keys(filterTable).length) {
-    //         query = { ...query, $sort: filterTable };
-    //     }
-    //     return query;
-    // }
-
-
-    // useLayoutEffect(() => {
-    //     (async () => {
-    //         await client.service('business').find({ query: { $select: ['twitterPageUrl', 'userId'] } })
-    //             .then((res) => console.log(res))
-    //     })()
-    // }, [tableChanged])
 
     useLayoutEffect(() => {
         (async (area_id = area.id) => {
@@ -63,7 +46,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }));
             // -------------------===businesses===-------------------
-            await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage } })
+            await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
                 .then(({ data }) => data.map(({
                     status, autorityId, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {
@@ -87,7 +70,4 @@ const BusinessTableService = (rowsPerPage, page) => {
     return data
 }
 
-export default BusinessTableService
-
-
-// tags?.find((t, i) => t.id === tagsIds[i]).title
+export default BusinessTableService;
