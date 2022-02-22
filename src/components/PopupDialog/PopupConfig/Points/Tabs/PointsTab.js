@@ -59,7 +59,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                         {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -77,7 +77,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -97,7 +97,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                             </TextField>}
                         {type === 'tagsPicker' &&
                             <Autocomplete
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -124,7 +124,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                             <Switch
                                 checked={values[field]}
                                 onChange={(e) => handleChange(e, field)}
-                                inputProps={{ 'aria-label': title }}
+                                inputprops={{ 'aria-label': title }}
                             />
                         }
                         {type === 'datePicker' &&

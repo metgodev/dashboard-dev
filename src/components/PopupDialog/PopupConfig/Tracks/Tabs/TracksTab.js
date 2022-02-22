@@ -44,7 +44,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                     <FormControl fullWidth  >
                         {type === 'textfield' &&
                             <TextField
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -62,7 +62,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -87,7 +87,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                             <Switch
                                 checked={values[field]}
                                 onChange={(e) => handleChange(e, field)}
-                                inputProps={{ 'aria-label': title }}
+                                inputprops={{ 'aria-label': title }}
                             />
                         }
                         {type === 'datePicker' &&

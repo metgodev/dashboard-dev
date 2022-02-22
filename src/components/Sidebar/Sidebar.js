@@ -13,6 +13,7 @@ import {
     MapOutlined as Map,
     HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 // styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -45,6 +46,7 @@ const structure = [
     { id: 11, label: term('support'), link: "/support", icon: <Support />, },
     { id: 13, label: term('faq'), link: "/FAQ", icon: <FAQIcon /> },
     { id: 14, type: "divider" },
+    { id: 15, label: term('admin'), link: "/admin", icon: <AdminPanelSettingsOutlinedIcon /> },
 ];
 
 const SideBar = React.memo(({ location }) => {

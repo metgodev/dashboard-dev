@@ -52,7 +52,7 @@ function SignIn() {
             <TextField
                 variant="outlined"
                 id="email"
-                inputProps={{
+                inputprops={{
                     classes: {
                         input: classes.textField,
                     },
@@ -67,7 +67,7 @@ function SignIn() {
             <TextField
                 variant="outlined"
                 id="password"
-                inputProps={{
+                inputprops={{
                     classes: {
                         input: classes.textField,
                     },

@@ -37,7 +37,7 @@ function TableHeader({ keys, cat }) {
                                             size="small"
                                             id="outlined-required"
                                             defaultValue=""
-                                            inputProps={{
+                                            inputprops={{
                                                 startadornment: (
                                                     <InputAdornment position="start">
                                                         <SearchIcon />

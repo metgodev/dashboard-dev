@@ -41,7 +41,7 @@ function Businesses() {
     }
     //needs to be shown correctly on mobile too
     let headerBtns = [
-        //can get name, func, input, icon 
+        //can get name, func, input, icon ,buttonIcon
         { name: term('export'), func: () => ExportToExcel(businesses, 'businesses_list'), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: ReadFromExcel, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },

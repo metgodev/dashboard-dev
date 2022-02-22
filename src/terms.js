@@ -876,6 +876,61 @@ const active_lexicon = {
         he: 'שם מסלול',
         ar: 'اسم المسار',
     },
+    admin: {
+        en: 'admin',
+        he: 'מנהל',
+        ar: 'مدير',
+    },
+    admin_page: {
+        en: 'Admin Page',
+        he: 'דף מנהל',
+        ar: 'صفحة المدير',
+    },
+    add_tags: {
+        en: 'Add tags',
+        he: 'הוסף תגיות',
+        ar: 'إضافة علامات',
+    },
+    add_tag: {
+        en: 'Add tag',
+        he: 'הוסף תגית',
+        ar: 'إضافة علامة',
+    },
+    add_new_area: {
+        en: 'Add new area',
+        he: 'הוסף אזור חדש',
+        ar: 'إضافة منطقة جديدة',
+    },
+    add_new_authority: {
+        en: 'Add new authority',
+        he: 'הוסף רשות חדשה',
+        ar: 'إضافة جهة جديدة',
+    },
+    area: {
+        en: 'Area',
+        he: 'אזור',
+        ar: 'منطقة',
+    },
+    error_creating: {
+        en: 'Error creating',
+        he: 'שגיאה ביצירת',
+        ar: 'خطأ في الإنشاء',
+    },
+    created_successfully: {
+        en: 'created successfully',
+        he: 'נוצר בהצלחה',
+        ar: 'تم الإنشاء بنجاح',
+    },
+    manage_users: {
+        en: 'Manage users',
+        he: 'נהל משתמשים',
+        ar: 'إدارة المستخدمين',
+    },
+    manage_properties: {
+        en: 'Manage properties',
+        he: 'נהל מאפיינים',
+        ar: 'إدارة الخصائص',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

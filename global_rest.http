@@ -116,7 +116,7 @@ GET https://{{hostname}}/
 content-type: {{contentType}}
 Authorization: {{authorization}}
 ###
-# categories tags 
+#get categories  
 GET https://{{hostname}}/categories
 content-type: {{contentType}}
 Authorization: {{authorization}}

@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
-  const notify = () => toast("Wow so easy!");
+const Notify = ({ text, type }) => {
+  //create a function to show toast
+  const notifyWithOptions = (text) => {
+    toast.success(text, {
+      theme: 'colored',
+      position: 'top-right',
+      rtl: true,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      type: type
+    });
+  };
+
+  //call the function
+  useEffect(() => {
+    notifyWithOptions(text);
+  }, [text]);
+
 
   return (
     <div>
@@ -12,3 +32,5 @@ function App() {
     </div>
   );
 }
+
+export default Notify;

@@ -16,6 +16,7 @@ import Voucher from '../pages/voucher/Voucher';
 import UsersTable from '../pages/userstable/UsersTable';
 import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
+import Admin from '../pages/admin/Admin';
 import FAQ from '../pages/FAQ/FAQ';
 import { Box } from '@material-ui/core';
 import { isLoggedIn, isVerified, reAuth } from '../API/metro';
@@ -62,6 +63,7 @@ const Root = () => {
                     <Route exact path="/map" element={<Protecte auth={verified}><Maps /></Protecte>} />
                     <Route exact path="/support" element={<Protecte auth={verified}><Support /></Protecte>} />
                     <Route exact path="/FAQ" element={<Protecte auth={verified}><FAQ /></Protecte>} />
+                    <Route path="admin" element={<Protecte auth={verified}><Admin /></Protecte>} />
                     <Route exact path="/login" element={<Login />} />
                     <Route path='*' element={<Protecte auth={verified}><Error /></Protecte>} />
                 </Routes>

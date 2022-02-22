@@ -81,7 +81,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                         {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -99,7 +99,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -119,7 +119,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             </TextField>}
                         {type === 'tagsPicker' &&
                             <MuiAutomplete
-                                inputProps={{
+                                inputprops={{
                                     classes: {
                                         input: classes.textField,
                                     },
@@ -163,7 +163,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             <Switch
                                 checked={values[field]}
                                 onChange={(e) => handleChange(e, field, type)}
-                                inputProps={{ 'aria-label': title }}
+                                inputprops={{ 'aria-label': title }}
                             />
                         }
                     </FormControl>
