@@ -931,6 +931,11 @@ const active_lexicon = {
         he: 'נהל מאפיינים',
         ar: 'إدارة الخصائص',
     },
+    tag_name: {
+        en: 'tag name',
+        he: 'שם תגית',
+        ar: 'اسم العلامة',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
