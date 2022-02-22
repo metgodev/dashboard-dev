@@ -38,7 +38,7 @@ const PointsTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===pois===-------------------
-            await client.service('pois').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage } })
+            await client.service('pois').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
                 .then(({ data }) => data.map(({ authorityId, _id, ...rest }) => pois = [...pois, { authority: authorities.find(el => el.id === authorityId)?.name, id: _id, ...rest }]))
             // -------------------===categories===-------------------
             await client.service('categories').find()

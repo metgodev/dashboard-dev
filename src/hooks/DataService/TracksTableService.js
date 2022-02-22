@@ -34,7 +34,7 @@ const TracksTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===tracks===-------------------
-            await client.service('tracks').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage } })
+            await client.service('tracks').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
                 .then(({ data }) => data.map(({ authorityId, _id, ...rest }) => {
                     tracks = [...tracks, { authority: authorities.find(el => el.id === authorityId)?.name, id: _id, ...rest }]
                 }))

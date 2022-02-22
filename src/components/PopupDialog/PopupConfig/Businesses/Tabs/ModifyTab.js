@@ -21,7 +21,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     let classes = useStyles();
     //local
     const openDrop = () => setOpen(!open);
-    const [OT, setOT] = useState({});
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
@@ -43,8 +42,9 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     useEffect(() => {
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        setOT(initialData.openingHours && JSON.parse(initialData.openingHours) || {})
+        let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
         setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
+        setValues(prevState => ({ ...prevState, openingHours: OH }))
         return (() => setInit({}))
     }, [type, initialData])
 
@@ -71,7 +71,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
     }
-
 
     return (
         <Grid container spacing={2}>
@@ -153,7 +152,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                         alignItems="stretch" spacing={1}>
                                         {TimePicker.map((s) => (
                                             <Grid item lg={6} md={6} sm={6} key={s.day}>
-                                                <TimeSelector label={s.day} type={s.type} times={OT[s.timeref] || null}
+                                                <TimeSelector label={s.day} type={s.type} times={values.openingHours[s.timeref] || null}
                                                     timeref={s.timeref} setTimes={setTimes} />
                                             </Grid>
                                         ))}
