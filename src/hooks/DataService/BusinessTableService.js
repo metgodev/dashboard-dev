@@ -13,7 +13,7 @@ const BusinessTableService = (rowsPerPage, page) => {
         businesses: [],
         keys: [],
         ignore: [
-            'address', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
+            'address', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
             'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours',
             'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
         ],
@@ -48,9 +48,9 @@ const BusinessTableService = (rowsPerPage, page) => {
             // -------------------===businesses===-------------------
             await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
                 .then(({ data }) => data.map(({
-                    status, autorityId, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
+                    status, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {
-                    status, authority: authorities.find(a => a.id === autorityId)?.name,
+                    status, authority: authority?.name,
                     tag: intersect_between_objects(tagsIds, tags, 'title'), edit: new Date(updatedAt).toLocaleDateString(), id: _id,
                     contact: [{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }], ...rest
                 }]));

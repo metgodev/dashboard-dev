@@ -46,9 +46,9 @@ const EventstableService = (rowsPerPage, page) => {
                 }))
             // -------------------===events===-------------------
             await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
-                .then(({ data }) => data.map(({ authorityId, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
+                .then(({ data }) => data.map(({ authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
                     events = [...events, {
-                        authority: authorities.find(el => el.id === authorityId)?.name, endDate: new Date(endDate).toLocaleDateString(),
+                        authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),
                         startDate: new Date(startDate).toLocaleDateString(), tag: intersect_between_objects(tagsIds, tags, 'title'), id: _id, ...rest
                     }]
                 }))

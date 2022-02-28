@@ -8,9 +8,13 @@ import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
+//styles
+import useStyles from "../../styles";
+
 
 
 const ModifyPop = ({ handleClose, initialData, type }) => {
+    const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
 
@@ -18,9 +22,11 @@ const ModifyPop = ({ handleClose, initialData, type }) => {
         setTab(newValue);
     };
 
+
+
     return (
         <div>
-            <Box sx={{ borderBottom: .1, borderColor: 'lightGray', width: '100%' }}>
+            <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
                 </Tabs>

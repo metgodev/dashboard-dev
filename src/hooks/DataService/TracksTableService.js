@@ -35,13 +35,14 @@ const TracksTableService = (rowsPerPage, page) => {
                 }))
             // -------------------===tracks===-------------------
             await client.service('tracks').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
-                .then(({ data }) => data.map(({ authorityId, _id, ...rest }) => {
-                    tracks = [...tracks, { authority: authorities.find(el => el.id === authorityId)?.name, id: _id, ...rest }]
+                .then(({ data }) => data.map(({ authority, _id, ...rest }) => {
+                    tracks = [...tracks, { authority: authority?.name, id: _id, ...rest }]
                 }))
             // -------------------===categories===-------------------
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ name, _id }) => categories = [...categories, { name, id: _id }]))
             // -------------------===keys===-------------------
+            if (!tracks.length) return;
             let keys = Object.keys(tracks[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
             // -------------------===set data===-------------------
             setData(prevState => ({

@@ -106,6 +106,7 @@ Authorization: {{authorization}}
 
 {  
     "areaId": "61d2e93c927d2b5be84b2cdb",  
+    "phoneNumber": "054-1234567",
     "name": "שומרון", 
     "email": "contact@email.com", 
     "address": ""
@@ -122,7 +123,7 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 ###
 # Get all businesses in specific autority
-GET https://{{hostname}}/business?autorityId=61d2eb2df58fa2f89374dbb7
+GET https://{{hostname}}/business?authorityId=61d2eb2df58fa2f89374dbb7
 content-type: {{contentType}}
 Authorization: {{authorization}}
 ###
@@ -134,10 +135,20 @@ Authorization: {{authorization}}
 {
    "name":"עין חרא",
    "description":"בואו לטייל בעין חרא עוד היום",
+   "userId":"61d2e959927d2b5be84b2ce1",
    "status":"PENDING_APPROVAL",
    "tagsIds":["food"],
-   "autorityId":"61d2eb2df58fa2f89374dbb7",
+   "authorityId":"61d2eb2df58fa2f89374dbb7",
    "address":"ליד עזאזל בדרך לקנטים",
+   "location":{
+      "type":"Point",
+      "coordinates":[
+         34.869,
+         32.0
+      ]
+   },
+   "locationInfo":{},
+   "locationName":"",
    "phoneNumber":"0566296634",
    "contactPersonName":"כלב בן יפונה",
    "contactPersonPhoneNumber":"0566296634",
@@ -185,9 +196,9 @@ Authorization: {{authorization}}
    },
    "open24Hours":false,
    "openOnWeekend": false,
-   "isKosher": false
+   "isKosher": false,
+   "isAccessable": false,
 }
-
 ###
 # "Create Event"
 POST  https://{{hostname}}/events

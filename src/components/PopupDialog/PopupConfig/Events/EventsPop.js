@@ -8,9 +8,12 @@ import { ModalTabs } from './popConfig';
 import { EventsTab } from './Tabs/EventsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
 import { useSelector } from 'react-redux';
+//styles
+import useStyles from "../../styles";
 
 
 const EventsPop = ({ handleClose, initialData, type }) => {
+    const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
 
@@ -20,7 +23,7 @@ const EventsPop = ({ handleClose, initialData, type }) => {
 
     return (
         <div>
-            <Box sx={{ borderBottom: .1, borderColor: 'lightGray', width: '100%' }}>
+            <Box className={classes.stickyBox}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
                 </Tabs>

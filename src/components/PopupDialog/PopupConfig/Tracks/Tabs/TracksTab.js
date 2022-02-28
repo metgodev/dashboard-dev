@@ -37,18 +37,13 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     }
 
     return (
-        <Grid container spacing={2}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
                         {type === 'textfield' &&
                             <TextField
-                                inputprops={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 id={title}
                                 label={title}
@@ -62,11 +57,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                inputprops={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 id="select-field"
                                 select
@@ -104,7 +94,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                     </FormControl>
                 </Grid>
             )}
-            <div style={{ marginTop: 10, marginLeft: 15, display: 'flex', justifyContent: 'left', width: '100%' }}>
+            <div style={{ marginTop: 15, marginLeft: 25, display: 'flex', justifyContent: 'left', width: '100%' }}>
                 <Button
                     style={{ width: 200 }}
                     size="large"

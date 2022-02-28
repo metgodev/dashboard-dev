@@ -936,6 +936,42 @@ const active_lexicon = {
         he: 'שם תגית',
         ar: 'اسم العلامة',
     },
+    latitute: {
+        en: 'latitute',
+        he: 'קו רוחב',
+        ar: 'خط العرض',
+    },
+    longitude: {
+        en: 'longitude',
+        he: 'קו אורך',
+        ar: 'خط الطول',
+    },
+    zoom: {
+        en: 'zoom',
+        he: 'זום',
+        ar: 'التكبير',
+    },
+    reset_location: {
+        en: 'Reset location',
+        he: 'אפס מיקום',
+        ar: 'إعادة تعيين الموقع',
+    },
+    location: {
+        en: 'location',
+        he: 'מיקום',
+        ar: 'الموقع',
+    },
+    location_name: {
+        en: 'location name',
+        he: 'שם מיקום',
+        ar: 'اسم الموقع',
+    },
+    is_accessable: {
+        en: 'is accessable',
+        he: 'נגיש',
+        ar: 'متاح',
+    },
+
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
