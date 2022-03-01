@@ -13,6 +13,7 @@ import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField
 //styles
 import useStyles from '../../../styles';
 import MapPick from '../../../../MapPicker.js/MapPick';
+import { FormatColorReset } from '@material-ui/icons';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -126,6 +127,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
+                                disabled={values[field]?.length > 4 || false}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
