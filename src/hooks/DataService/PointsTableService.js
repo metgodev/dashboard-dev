@@ -12,7 +12,7 @@ const PointsTableService = (rowsPerPage, page) => {
         pois: [],
         keys: [],
         ignore: [
-            'address', 'addressType', 'categoriesIds', 'relevantTo', 'isAccessable', 'description', 'websiteUrl', 'locationInfo', 'location',
+            'address', 'relevantTo', 'addressType', 'categoriesIds', 'isAccessable', 'description', 'websiteUrl', 'locationInfo', 'location',
             'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail', 'id', 'createdAt', 'updatedAt', '__v'
         ],
         tableCategories: {

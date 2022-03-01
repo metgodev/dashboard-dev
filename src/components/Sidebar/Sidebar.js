@@ -26,18 +26,19 @@ import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.
 import term from "../../terms";
 
 const structure = [
-    { id: 0, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
-    { id: 1, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
-    { id: 2, label: term('events'), link: "/events", icon: <Event /> },
-    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
     {
-        id: 5, label: term('routes'), link: "/routes", icon: <Route />,
-        // children: [
-        //     { label: "Icons", link: "/" },
-        //     { label: "Charts", link: "/" },
-        //     { label: "Maps", link: "/" },
-        // ],
+        id: 0, label: term('admin'), icon: <AdminPanelSettingsOutlinedIcon />,
+        children: [
+            { label: term('manage_areas'), link: "/admin/areas" },
+            { label: term('manage_authorities'), link: "/admin/authorities" },
+            { label: term('manage_tags'), link: "/admin/tags" },
+        ],
     },
+    { id: 1, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
+    { id: 2, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
+    { id: 3, label: term('events'), link: "/events", icon: <Event /> },
+    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
+    { id: 5, label: term('routes'), link: "/routes", icon: <Route />, },
     // { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
     // { id: 7, label: term('users'), link: "/users", icon: <People />, },
     { id: 8, label: term('map'), link: "/map", icon: <Map />, },
@@ -46,7 +47,6 @@ const structure = [
     { id: 11, label: term('support'), link: "/support", icon: <Support />, },
     { id: 13, label: term('faq'), link: "/FAQ", icon: <FAQIcon /> },
     { id: 14, type: "divider" },
-    { id: 15, label: term('admin'), link: "/admin", icon: <AdminPanelSettingsOutlinedIcon /> },
 ];
 
 const SideBar = React.memo(({ location }) => {

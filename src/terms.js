@@ -971,6 +971,21 @@ const active_lexicon = {
         he: 'נגיש',
         ar: 'متاح',
     },
+    manage_tags: {
+        en: 'Manage tags',
+        he: 'נהל תגיות',
+        ar: 'إدارة العلامات',
+    },
+    manage_areas: {
+        en: 'Manage areas',
+        he: 'נהל אזורים',
+        ar: 'إدارة المناطق',
+    },
+    manage_authorities: {
+        en: 'Manage authorities',
+        he: 'נהל רשויות',
+        ar: 'إدارة الجهات',
+    },
 
 }
 

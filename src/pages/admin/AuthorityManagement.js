@@ -76,7 +76,7 @@ const GetForm = ({ data, values, handleChange, form, callAgain }) => {
     )
 }
 
-const Admin = () => {
+const AuthorityManagement = () => {
     let headerBtns = [
         //can get name, func, input, icon ,buttonIcon
         { name: term('manage_users') },
@@ -136,7 +136,7 @@ const Admin = () => {
 
     return (
         <Box>
-            <PageTitle buttonGroup={{ btns: headerBtns }} title={term('admin_page')} />
+            <PageTitle buttonGroup={{ btns: headerBtns }} title={term('manage_authorities')} />
             <Divider />
             <Box pt={2} />
             <Grid container spacing={2}>
@@ -164,5 +164,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
-
+export default AuthorityManagement
