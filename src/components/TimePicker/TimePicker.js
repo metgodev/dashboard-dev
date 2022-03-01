@@ -77,7 +77,7 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
                             okLabel={term('confirm')}
                             cancelLabel={term('cancel')}
                             onChange={handleDateChange}
-                            disabled={checked.includes(timeref) || false}
+                            disabled={checked?.includes(timeref) || false}
                         />
                         {type === 2 && <Checkbox
                             onClick={(e) => removeDay(timeref, e)}

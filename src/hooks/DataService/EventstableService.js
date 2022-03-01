@@ -35,8 +35,9 @@ const EventstableService = (rowsPerPage, page) => {
             let categories = [];
             let tags = [];
             // -------------------===tags===-------------------
-            await client.service('tags').find()
-                .then(({ data }) => data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
+            if (!area_id) return;
+            await client.service('area').find({ query: { _id: area_id } })
+                .then(({ data }) => data[0].tags.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
             // -------------------===autorities===-------------------
             if (!area_id) return;
             await client.service('authorities').find({ query: { areaId: area_id } })

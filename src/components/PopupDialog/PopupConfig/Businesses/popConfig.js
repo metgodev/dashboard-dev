@@ -3,15 +3,13 @@ import term from "../../../../terms";
 
 
 (async () => {
-    let areaId = localStorage.getItem('aid')
-    client.service("authorities").find({ query: { areaId: areaId } })
+    let area_id = localStorage.getItem('aid')
+    await client.service("authorities").find({ query: { areaId: area_id } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
         .then((authorities => picker.authorityId = authorities))
 
-
-    client.service("tags").find().then((res) => {
-        res?.data.map(({ title, _id }) => tags = [...tags, { title, id: _id }])
-    })
+    await client.service('area').find({ query: { _id: area_id } })
+        .then(({ data }) => data[0].tags.map(({ title, _id }) => tags = [...tags, { title, id: _id }]));
 })();
 
 const createRandomId = () => {
