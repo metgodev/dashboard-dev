@@ -1,4 +1,3 @@
-
 // local terms until remote config available
 const active_lexicon = {
     language: {
@@ -551,6 +550,26 @@ const active_lexicon = {
         he: 'העלאת מדיה',
         ar: 'تحميل الوسائط',
     },
+    upload_video: {
+        en: 'Upload Video',
+        he: 'העלאת סרטון',
+        ar: 'رفع فيديو',
+    },
+    upload_logo: {
+        en: 'Upload Logo',
+        he: 'העלאת לוגו',
+        ar: 'تحميل الشعار',
+    },
+    upload_photo: {
+        en: 'Upload Photo',
+        he: 'העלאת תמונה',
+        ar: 'حمل الصورة',
+    },
+    upload_files: {
+        en: 'Upload Files',
+        he: 'העלאת קבצים',
+        ar: 'رفع ملف',
+    },
     integration: {
         en: 'Integration',
         he: 'אינטגריציה',
@@ -845,6 +864,11 @@ const active_lexicon = {
         en: '(Will not be displayed in the app)',
         he: '(לא יוצג באפליקציה)',
         ar: '(لن يتم عرضها في التطبيق)',
+    },
+    other: {
+        en: 'Other',
+        he: 'אחר',
+        ar: 'آخر',
     },
     start_date: {
         en: 'start date',

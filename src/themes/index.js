@@ -30,7 +30,9 @@ const overrides = {
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 
-export default {
+const thm = {
   default: createTheme({ ...defaultTheme, ...overrides, direction: dir(lang), }),
   dark: createTheme({ ...dark, ...overrides, direction: dir(lang), }),
 };
+
+export default thm

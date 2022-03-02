@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { client } from "../API/metro";
+import { set_table_changed } from '../REDUX/actions/main.actions'
+import { useDispatch } from 'react-redux';
 
-const fileTypes = ["JPG", "PNG", "GIF"];
-
-function DragDrop({ setValues ,setImagesArr }) {
+function DragDrop({ setArr, fileTypes, initialData }) {
     // local
     const [file, setFile] = useState(null);
+    
+    const [values, setValues] = useState({
+            galleryFileIds: []
+    });
+
+    const dispatch = useDispatch();
+
+      useEffect( () => {
+          setValues({ galleryFileIds : JSON.parse(initialData.galleryFileIds)})
+      }, [])
+
+      const handleGalleryFileIds = ( newImage ) => {
+        setValues(pervState => ({ ...pervState, galleryFileIds: [ ...pervState.galleryFileIds, newImage ]  }));
+        //newImage = { ...values, galleryFileIds: [ ...values.galleryFileIds, newImage ]  }
+        let mapTest = new Map();
+        mapTest.set('a', 1);
+        mapTest.set('b',2);
+        console.log(mapTest)
+        client.service("business").patch(initialData.id, mapTest)
+            .then(res => console.log(res))
+            // .then(() => dispatch(set_table_changed("upload_media" + Math.random())))
+      };
+    
 
     const upload_media = async (file) => {
+
         const formData = new FormData();
         if (Array.isArray(file)) {
             file.forEach(f => {
@@ -17,20 +41,21 @@ function DragDrop({ setValues ,setImagesArr }) {
         } else {
             formData.append("file", file);
         }
+
         const config = {
-            onUploadProgress: (event) => {
-                return Math.round((event.loaded * 100) / event.total);
+            onUploadProgress: function (progressEvent) {
+                // const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             }
         };
-        client.service("files").create(formData, {
-            onUploadProgress: config.onUploadProgress
-        }).then(res => {
-            setValues(prevState => ({ ...prevState, galleryFileIds: [...prevState.galleryFileIds, res[0]._id] }))
-            setImagesArr(prevState => [...prevState, res[0].url]);
+
+        client.service("files").create(formData, config.onUploadProgress).then(res => {
+            console.log(res[0]._id)
+            handleGalleryFileIds(res[0]._id)
+            setArr(prevState => [ res[0].url, ...prevState ]);
         })
     };
 
-    const handleChange = async (file) => {
+    const handleChange = (file) => {
         try {
             setFile(file);
             upload_media(file);
@@ -39,30 +64,19 @@ function DragDrop({ setValues ,setImagesArr }) {
         }
     };
 
-
     return (
-        <FileUploader
-        handleChange={handleChange}
-        name={file?.name || 'file'}
-        types={fileTypes}
-        hoverTitle="Drop here"
-        label="Upload or drop a file right here"
-            maxSize={5} //size im mb
-        fileOrFiles
-        />
+        <>
+            <FileUploader
+                handleChange={handleChange}
+                name={file?.name || 'file'}
+                types={fileTypes}
+                hoverTitle="Drop here"
+                label="Upload or drop a file right here"
+                maxSize={5} //size in mb
+            />
+        </>
+        
         );
     }
     
     export default DragDrop;
-    
-    // import { IconButton } from '@mui/material';
-    // import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
-    
-        // children={
-        //     <div style={{ height: '30vh', border: '2px dashed lightBlue' }}>
-        //         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        //             <FileUploadOutlinedIcon fontSize='large' />
-        //             <p>Upload or drop a file right here</p><br></br>
-        //             <p>{fileTypes.join('-')}</p>
-        //         </div>
-        //     </div>}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
-import EncodedImageList from '../../../../EncodedImageList/EncodedImageList';
+import MyImageList from '../../../../MyImageList/MyImageList';
 import term from '../../../../../terms';
 import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
@@ -39,7 +39,7 @@ export const UploadMediaTab = ({ initialData, type }) => {
           type="file"
         />
         <DragDrop setValues={setValues} setImagesArr={setImagesArr} />
-        <EncodedImageList gallery={gallery} imagesArr={imagesArr} />
+        <MyImageList gallery={gallery} imagesArr={imagesArr} />
         <div style={{ display: 'flex', justifyContent: 'left', width: '100%' }}>
           <Button
             style={{ width: 200 }}

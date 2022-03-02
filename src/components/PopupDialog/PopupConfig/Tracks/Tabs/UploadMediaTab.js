@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
-import EncodedImageList from '../../../../EncodedImageList/EncodedImageList';
+import MyImageList from '../../../../MyImageList/MyImageList';
 import term from '../../../../../terms';
 import { Divider } from '@mui/material';
 
@@ -20,7 +20,7 @@ export const UploadMediaTab = ({ imagesArr }) => {
           type="file"
         />
         <DragDrop />
-        <EncodedImageList imagesArr={imagesArr} />
+        <MyImageList imagesArr={imagesArr} />
         <Divider />
       </DialogContent>
     </>

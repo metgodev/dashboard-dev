@@ -1,4 +1,4 @@
-export default (obj, exept) => {
+const x = (obj, exept) => {
     // loop on nested object and chack if one of the value is object
     for (let key in obj) {
         //loop inside the object
@@ -12,3 +12,4 @@ export default (obj, exept) => {
     }
     return obj
 }
+export default x
