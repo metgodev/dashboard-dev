@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 import { isLoggedIn, isVerified, reAuth } from '../API/metro';
 //pages
 import Header from '../components/Header/Header';
-import SideBar from '../components/SideBar/SideBar';
+import SideBar from '../components/Sidebar/Sidebar';
 import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
