@@ -986,7 +986,26 @@ const active_lexicon = {
         he: 'נהל רשויות',
         ar: 'إدارة الجهات',
     },
-
+    title: {
+        en: 'title',
+        he: 'כותרת',
+        ar: 'العنوان',
+    },
+    email: {
+        en: 'email',
+        he: 'אימייל',
+        ar: 'البريد الإلكتروني',
+    },
+    authorities: {
+        en: 'authorities',
+        he: 'רשויות',
+        ar: 'الجهات',
+    },
+    tags_around: {
+        en: 'tags around',
+        he: 'תגיות בסביבה',
+        ar: 'العلامات حول',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

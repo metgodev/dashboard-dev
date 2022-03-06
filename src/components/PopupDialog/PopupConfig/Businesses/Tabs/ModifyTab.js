@@ -41,10 +41,8 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         },
     });
 
-    // set the innitial data 
-
     useEffect(() => {
-        setInit({})
+        setInit({});
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
         let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}

@@ -1,167 +1,98 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import term from '../../terms'
-import { Box, Divider, FormControl, InputLabel, MenuItem, TextField } from '@mui/material'
-import { Grid } from "@material-ui/core";
+import { Box, Grid, Typography } from '@mui/material'
+import { useSelector } from 'react-redux'
 import PageTitle from '../../components/PageTitle/PageTitle'
-import Widget from '../../components/Widget/Widget';
-import { add_new_area, add_new_authority, tags } from './adminConfig';
-import { Button } from '@material-ui/core';
-import { client } from '../../API/metro';
-import Notify from '../notifications/Notifications';
+import PaginationTable from '../../components/Tables/PaginationTable'
+import PopupDialog from '../../components/PopupDialog/PopupDialog'
+import { CircularProgress } from '@material-ui/core'
+import AreaService from '../../hooks/DataService/AreaService'
+import { AddCircleOutline } from '@material-ui/icons'
 
-const styleBtn = {
-    marginTop: 10,
-}
+function AreaManagement() {
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(25);
+    //table data
+    let { areaTags, authorities, tags, areaTagsKeys, authoritiesKeys, tagsKeys } = AreaService()
+    //global 
+    const { lang } = useSelector(s => s.mainRememberReducer);
+    //dialog
+    const [open, setOpen] = useState(false);
+    const [dialogType, setDialogType] = useState('add');
+    const [initialDataDialog, setInitialDataDialog] = useState({});
 
-const GetForm = ({ data, values, handleChange, form, callAgain }) => {
-
-    let [picker, setPicker] = useState({
-        areaId: [],
-        categoryId: [],
-    })
-
-    useEffect(() => {
-        (async () => {
-            client.service("area").find().then((res) => {
-                res?.data.map(({ name, _id }) => setPicker(pervState => ({ ...pervState, areaId: [...pervState.areaId, { title: name, id: _id }] })))
-            })
-
-            client.service("categories").find().then((res) => {
-                res?.data.map(({ title, _id }) => setPicker(pervState => ({ ...pervState, categoryId: [...pervState.categoryId, { title, id: _id }] })))
-            })
-        })();
-        return () => {
-            setPicker({
-                areaId: [],
-                categoryId: [],
-            })
+    const openDialog = (data) => {
+        if (data) {
+            setInitialDataDialog(data)
+            setDialogType('edit')
         }
-    }, [callAgain])
+        else {
+            setInitialDataDialog({})
+            setDialogType('add')
+        }
+        setOpen(!open)
+    }
 
-    return (
-        <>
-            {data.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <FormControl fullWidth key={id} sx={{ pt: 1 }}>
-                    {type === 'textfield' &&
-                        <TextField
-                            size={size}
-                            id={title}
-                            label={title}
-                            placeholder={title}
-                            multiline
-                            rows={rows}
-                            value={values[field] || ''}
-                            maxRows={maxRows}
-                            onChange={(e) => handleChange(e, field, form)}
-                            error={values[field] === ''}
-                        />}
-                    {type === 'picker' &&
-                        <TextField
-                            size={size}
-                            id="select-field"
-                            select
-                            label={title}
-                            value={values[field] || ''}
-                            onChange={(e) => handleChange(e, field, form)}
-                        >
-                            {picker[field].map(({ title, id }) => (
-                                <MenuItem key={id} value={id}>
-                                    {term(title.toLowerCase())}
-                                </MenuItem>
-                            ))}
-                        </TextField>}
-                </FormControl>
-            )}
-        </>
-    )
-}
+    const remove = (id) => {
+        console.log(id)
+    }
 
-const AreaManagement = () => {
     let headerBtns = [
         //can get name, func, input, icon ,buttonIcon
-        { name: term('manage_users') },
-        { name: term('manage_properties') },
+        { name: term('add_new_authority'), func: openDialog, buttonIcon: <AddCircleOutline /> },
+        { name: term('add_tags'), func: openDialog, buttonIcon: <AddCircleOutline /> },
     ]
-
-    const [NewArea, setNewArea] = useState({})
-    const [NewAuthority, setNewAuthority] = useState({})
-    const [NewTag, setNewTag] = useState({})
-    const [info, setInfo] = useState({ text: '', id: 0 })
-
-    const handleChange = (e, field, type) => {
-        if (type === 'area') {
-            setNewArea({ ...NewArea, [field]: e.target.value })
-        } else if (type === 'authority') {
-            setNewAuthority({ ...NewAuthority, [field]: e.target.value })
-        } else {
-            setNewTag({ ...NewTag, [field]: e.target.value })
-        }
-    }
-
-    let isFulfilled = (state) => {
-        let isFulfilled;
-        for (let key in state) {
-            state[key] === '' ? isFulfilled = false : isFulfilled = true
-        }
-        return isFulfilled
-    }
-
-    let heandleSubmit = (type) => {
-        if (type === 'area') {
-            client.service('area').create(NewArea).then((res) => {
-                setNewArea({})
-                errHandler(res, type)
-
-            })
-        } else if (type === 'authority') {
-            client.service('authorities').create(NewAuthority).then((res) => {
-                setNewAuthority({})
-                errHandler(res, type)
-            })
-        } else {
-            client.service('tags').create(NewTag).then((res) => {
-                setNewTag({})
-                errHandler(res, type)
-            })
-        }
-    }
-
-    const errHandler = (res, type) => {
-        if (!res._id) {
-            setInfo({ text: `${term('error_creating')} ${term(type)}`, id: Math.random() })
-        } else {
-            setInfo({ text: `${term(type)} - ${term('created_successfully')}`, id: Math.random() })
-        }
-    }
 
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('manage_areas')} />
-            <Divider />
-            <Box pt={2} />
-            <Grid container spacing={2}>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                    <Widget header={term('add_new_area')} disableWidgetMenu >
-                        <GetForm data={add_new_area} values={NewArea} handleChange={handleChange} form={'area'} callAgain={info.id} />
-                        <Button disabled={!isFulfilled(NewArea)} style={styleBtn} variant="contained" color="primary" onClick={() => heandleSubmit('area')} >{term('add_new_area')}</Button>
-                    </Widget>
+            <Grid container spacing={3}>
+                <Grid item xs={9}>
+                    <Typography variant="h6" component="h6">{term('authorities')}</Typography>
+                    {authorities.length ? <PaginationTable
+                        lang={lang}
+                        page={page}
+                        keys={authoritiesKeys}
+                        setPage={setPage}
+                        data={authorities}
+                        rowsPerPage={rowsPerPage}
+                        setRowsPerPage={setRowsPerPage}
+                        openDialog={openDialog}
+                    /> :
+                        <Box style={progress}>
+                            <CircularProgress size={60} />
+                        </Box>
+                    }
                 </Grid>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                    <Widget header={term('add_new_authority')} disableWidgetMenu >
-                        <GetForm data={add_new_authority} values={NewAuthority} handleChange={handleChange} form={'authority'} callAgain={info.id} />
-                        <Button disabled={!isFulfilled(NewAuthority)} style={styleBtn} variant="contained" color="primary" onClick={() => heandleSubmit('authority')} >{term('add_new_authority')}</Button>
-                    </Widget>
-                </Grid>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                    <Widget header={term('add_tags')} disableWidgetMenu >
-                        <GetForm data={tags} values={NewTag} handleChange={handleChange} form={'tags'} callAgain={info.id} />
-                        <Button disabled={!isFulfilled(NewTag)} style={styleBtn} variant="contained" color="primary" onClick={() => heandleSubmit('tags')} >{term('add_tags')}</Button>
-                    </Widget>
+                <Grid item xs={3}>
+                    <Typography variant="h6" component="h6">{term('tags_around')}</Typography>
+                    {areaTags.length ? <PaginationTable
+                        lang={lang}
+                        page={page}
+                        keys={areaTagsKeys}
+                        setPage={setPage}
+                        data={areaTags}
+                        rowsPerPage={rowsPerPage}
+                        setRowsPerPage={setRowsPerPage}
+                        openDialog={openDialog}
+                        remove={remove}
+                    /> :
+                        <Box style={progress}>
+                            <CircularProgress size={60} />
+                        </Box>
+                    }
                 </Grid>
             </Grid>
-            {info.text !== '' && <Notify text={info.text} />}
+            <PopupDialog open={open} setOpen={setOpen} type={dialogType} data={initialDataDialog} />
         </Box>
     )
+}
+
+const progress = {
+    position: "fixed",
+    top: '52%',
+    left: '48%',
+    transform: 'translate(-50% , -50%)',
 }
 
 export default AreaManagement

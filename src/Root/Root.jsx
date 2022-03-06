@@ -23,7 +23,6 @@ import FAQ from '../pages/FAQ/FAQ';
 // admin pages
 import AreaManagement from '../pages/admin/AreaManagement';
 import AuthorityManagement from '../pages/admin/AuthorityManagement';
-import TagsManagement from '../pages/admin/TagsManagement';
 
 
 const Root = () => {
@@ -68,7 +67,6 @@ const Root = () => {
                         <>
                             <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement/></Protecte>} />
                             <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement/></Protecte>} />
-                            <Route exact path="/admin/tags" element={<Protecte auth={verified}><TagsManagement/></Protecte>} />
                         </>
                     }
                 </Routes>
