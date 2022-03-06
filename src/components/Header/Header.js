@@ -30,8 +30,8 @@ const Header = React.memo(() => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <img src={Logo} alt="logo" className={classes.logotype} width={em(2)} />
-          <Typography component={'span'} variant={'body2'} className={classes.logotype}>
-            {term('metro_travel')}
+          <Typography variant="h3" weight="medium" color="text" className={classes.logotype}>
+            {term('met_go')}
           </Typography>
           <div className={classes.grow} />
           <SideBtns />

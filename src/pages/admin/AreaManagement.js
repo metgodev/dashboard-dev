@@ -11,7 +11,7 @@ import { AddCircleOutline } from '@material-ui/icons'
 
 function AreaManagement() {
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(25);
+    const [rowsPerPage, setRowsPerPage] = useState(20);
     //table data
     let { areaTags, authorities, tags, areaTagsKeys, authoritiesKeys, tagsKeys } = AreaService()
     //global 

@@ -16,10 +16,10 @@ const active_lexicon = {
         he: 'לוח הבקרה',
         ar: 'لوحة التحكم',
     },
-    metro_travel: {
-        en: 'Metro Travel',
-        he: 'מטרו נגב',
-        ar: 'مترو ترافيل',
+    met_go: {
+        en: 'MetGo',
+        he: 'MetGo',
+        ar: 'MetGo',
     },
     new_messages: {
         en: 'New Messages',
