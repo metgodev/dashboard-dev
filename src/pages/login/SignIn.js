@@ -5,7 +5,6 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 import useStyles from "./styles";
 import term from "../../terms";
 import { Auth } from "../../API/metro";
-import { utf8_to_b64 } from "../../utils/enode";
 import { useDispatch } from "react-redux";
 import { set_user } from "../../REDUX/actions/main.actions";
 
@@ -25,10 +24,9 @@ function SignIn() {
             if (res.error) setError(true);
             else {
                 let user = {
-                    e: utf8_to_b64(res.email),
-                    fn: utf8_to_b64(res.firstName),
-                    ln: utf8_to_b64(res.lastName),
-                    rn: utf8_to_b64(res.roles[0].roleName),
+                    e: res.email,
+                    fn: res.firstName,
+                    ln: res.lastName,
                     v: res.isVerified,
                     id: res._id
                 }

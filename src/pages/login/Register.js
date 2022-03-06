@@ -4,7 +4,6 @@ import { CircularProgress, Typography, Button, TextField, Fade, } from "@materia
 import term from "../../terms";
 import { Auth, client } from '../../API/metro';
 import { useDispatch } from 'react-redux';
-import { utf8_to_b64 } from '../../utils/enode';
 import { set_user } from '../../REDUX/actions/main.actions';
 // styles
 import useStyles from "./styles";
@@ -32,10 +31,9 @@ function Register() {
                 if (res.error) setError(true);
                 else {
                     let user = {
-                        e: utf8_to_b64(res.email),
-                        fn: utf8_to_b64(res.firstName),
-                        ln: utf8_to_b64(res.lastName),
-                        rn: utf8_to_b64(res.roles[0].roleName),
+                        e: res.email,
+                        fn: res.firstName,
+                        ln: res.lastName,
                         v: res.isVerified,
                         id: res._id
                     }

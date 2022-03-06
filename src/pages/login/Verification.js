@@ -4,7 +4,6 @@ import { set_user } from "../../REDUX/actions/main.actions";
 import { useSelector, useDispatch } from "react-redux";
 import { client, isVerified } from "../../API/metro";
 import Widget from "../../components/Widget/Widget";
-import { b64_to_utf8 } from "../../utils/enode";
 import { useNavigate } from "react-router-dom";
 import term from "../../terms";
 // styles
@@ -32,7 +31,7 @@ function Verification() {
         setIsLoading(true)
         let res = await client.service('authmanagement').create({
             action: "verifySignupShort",
-            value: { user: { email: b64_to_utf8(user.e) }, token: code }
+            value: { user: { email: user.e }, token: code }
         })
         if (res.error) {
             setError({ err: true, msg: res.message })
@@ -51,7 +50,7 @@ function Verification() {
         setIsLoading(true)
         let res = await client.service('authmanagement').create({
             action: "resendVerifySignup",
-            value: { email: b64_to_utf8(user.e) }
+            value: { email: user.e }
         })
         if (res.error) {
             setError({ err: true, msg: res.message })
@@ -73,7 +72,7 @@ function Verification() {
                     {term('verification_page')}
                 </Typography>
                 <Typography variant="subtitle2" className={classes.greeting}>
-                    {term(`an_email_has_been_sent_to`) + `${b64_to_utf8(user.e)}`}
+                    {term(`an_email_has_been_sent_to`) + `${user.e}`}
                 </Typography>
                 <Typography variant="h6" className={classes.greeting}>
                     {term('please_enter_your_verification_code')}
