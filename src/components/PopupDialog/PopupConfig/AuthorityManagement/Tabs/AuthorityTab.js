@@ -1,44 +1,39 @@
 import React, { useState } from 'react'
-import term from '../../../../../terms';
-import { ModalInit, picker } from '../popConfig';
-import TimeSelector from '../../../../TimePicker/TimePicker';
-import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
-import { FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
-import Calendar from '../../../../Calendar/Calendar';
-import { client } from '../../../../../API/metro';
 import { useDispatch } from 'react-redux';
+import term from '../../../../../terms';
+import { client } from '../../../../../API/metro';
+import { ModalInit, picker } from '../popConfig';
+import { Button, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-//styles
-import useStyles from '../../../styles'
+import { FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 
-export const TracksTab = ({ handleClose, initialData, type }) => {
+export const AuthorityTab = ({ handleClose, initialData, type }) => {
     //global
-    let dispatch = useDispatch()
-    let classes = useStyles();
+    const dispatch = useDispatch()
     //local
-    const [values, setValues] = useState({ relevantTo: "GOLDEN_AGE" });
-    //validator 
-    let isFulfilled = Object.values(values).every(Boolean);
+    const [values, setValues] = useState({});
 
-    const handleChange = (e, field) => {
-        if (field === 'featured') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+    //set the values
+    const handleChange = (e, field, tags, type) => {
+        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
+        else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
     const modify = async (type, id) => {
         if (type === 'add')
-            client.service('pois').create(values)
+            client.service('authorities').create(values)
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
         else
-            client.service('pois').patch(id, values)
+            client.service('authorities').patch(id, values)
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
     }
 
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
+            {ModalInit.map(({ title, id, field, rows, size, type }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
@@ -50,7 +45,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                                 placeholder={title}
                                 multiline
                                 rows={rows}
-                                maxRows={maxRows}
                                 defaultValue={initialData[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                                 error={values[field] === ''}
@@ -61,7 +55,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                                 id="select-field"
                                 select
                                 label={title}
-                                value={values[field]}
+                                value={values[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             >
                                 {picker[field].map((s) => (
@@ -70,25 +64,12 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                                     </MenuItem>
                                 ))}
                             </TextField>}
-                        {type === 'timePicker' &&
-                            <TimeSelector label={title} />
-                        }
                         {type === 'toggle' &&
                             <Switch
-                                checked={values[field]}
-                                onChange={(e) => handleChange(e, field)}
+                                defaultValue={values[field] || false}
+                                checked={values[field] || false}
+                                onChange={(e) => handleChange(e, field, undefined, type)}
                                 inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                        {type === 'datePicker' &&
-                            <Calendar type={2} />
-                        }
-                        {type === 'textArea' &&
-                            <TextareaAutosize
-                                maxRows={maxRows}
-                                aria-label={title}
-                                defaultValue={initialData[field] || ''}
-                                fullWidth
                             />
                         }
                     </FormControl>
@@ -98,7 +79,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
                     onClick={() => modify(type, initialData.id)}>

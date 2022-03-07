@@ -11,10 +11,11 @@ import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 import EventsPop from './PopupConfig/Events/EventsPop';
 import PointsPop from './PopupConfig/Points/PointsPop';
 import TracksPop from './PopupConfig/Tracks/TracksPop';
+import AuthorityPop from './PopupConfig/AuthorityManagement/AuthorityPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
-import { useDispatch } from 'react-redux';
+import TagPop from './PopupConfig/TagsManagment/TagPop';
 
 
 
@@ -27,8 +28,6 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
     const theme = useTheme();
-    //global
-    const dispatch = useDispatch();
 
     const handleClose = () => setOpen(false)
 
@@ -65,6 +64,9 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} />}
                     {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} />}
                     {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {/* authority management */}
+                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

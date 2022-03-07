@@ -37,12 +37,12 @@ const AreaService = () => {
             // -------------------===tags===-------------------
             await client.service('tags').find()
                 .then(({ data }) => data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
-            // -------------------===keys===-------------------
-            let areaTagsKeys = Object.keys(areaTags[0]).filter((el) => !data.ignore.includes(el));
-            let authoritiesKeys = Object.keys(authorities[0]).filter((el) => !data.ignore.includes(el));
-            let tagsKeys = Object.keys(tags[0]).filter((el) => !data.ignore.includes(el));
+            // -------------------===keys===------------------- 
+            let areaTagsKeys = Object.keys(areaTags[0]).filter((el) => !data.ignore.includes(el)); areaTagsKeys.push('actions');
+            let authoritiesKeys = Object.keys(authorities[0]).filter((el) => !data.ignore.includes(el)); authoritiesKeys.push('actions');
+            let tagsKeys = Object.keys(tags[0]).filter((el) => !data.ignore.includes(el)); tagsKeys.push('actions');
             // -------------------===setData===-------------------
-            setData(prevState => ({ ...prevState, areaTags, authorities, tags, areaTagsKeys, authoritiesKeys, tagsKeys }))
+            setData(prevState => ({ ...prevState, areaTags: areaTags.reverse(), authorities, tags, areaTagsKeys, authoritiesKeys, tagsKeys }))
         })(area.id, filterTable);
     }, [tableChanged, area, filterTable]);
 

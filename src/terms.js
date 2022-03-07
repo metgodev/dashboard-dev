@@ -1006,6 +1006,11 @@ const active_lexicon = {
         he: 'תגיות בסביבה',
         ar: 'العلامات حول',
     },
+    actions: {
+        en: 'actions',
+        he: 'פעולות',
+        ar: 'الإجراءات',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

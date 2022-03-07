@@ -1,62 +1,45 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import term from '../../../../../terms';
 import { client } from '../../../../../API/metro';
-import Calendar from '../../../../Calendar/Calendar';
-import { ModalInit, tags, picker } from '../popConfig';
-import TimeSelector from '../../../../TimePicker/TimePicker';
-import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
+import { ModalInit, picker, categories } from '../popConfig';
+import { Button, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
-//styles
-import useStyles from '../../../styles'
+import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 
-export const PointsTab = ({ handleClose, initialData, type }) => {
+
+export const TagsTab = ({ handleClose, initialData, type }) => {
     //global
-    let classes = useStyles();
-    let dispatch = useDispatch();
+    const dispatch = useDispatch()
     //local
-    const [init, setInit] = useState({});
-    const [values, setValues] = useState({
-        addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
-        relevantTo: "GOLDEN_AGE",
-        prefferedSeason: "SUMMER",
-        shady: "FULL",
-    });
-    //validator 
-    let isFulfilled = Object.values(values).every(Boolean);
+    const [values, setValues] = useState({});
 
-    const handleChange = (e, field, tags) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (field === 'isAccessable') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+    //set the values
+    const handleChange = (e, field, categories, type) => {
+        if (categories) setValues(prevState => ({ ...prevState, [field]: Object.keys(categories).map(key => categories[key].id) }));
+        else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    useEffect(() => {
-        if (type === 'add') setInit({})
-        else setInit(initialData)
-        return (() => setInit({}))
-    }, [type])
-
     const modify = async (type, id) => {
+        let area_id = localStorage.getItem('aid')
         if (type === 'add')
-            client.service('pois').create(values)
+            await client.service('tags').create(values)
+                .then(({ _id }) => client.service('area').patch(area_id, { $push: { tagsIds: _id } }))
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
         else
-            client.service('pois').patch(id, values)
+            await client.service('tags').patch(id, values)
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
     }
 
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
+            {ModalInit.map(({ title, id, field, rows, size, type }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
                                 size={size}
@@ -65,8 +48,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                 placeholder={title}
                                 multiline
                                 rows={rows}
-                                maxRows={maxRows}
-                                defaultValue={init[field] || ''}
+                                defaultValue={initialData[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                                 error={values[field] === ''}
                             />}
@@ -76,7 +58,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                 id="select-field"
                                 select
                                 label={title}
-                                value={values[field]}
+                                value={values[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             >
                                 {picker[field].map((s) => (
@@ -86,15 +68,15 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                 ))}
                             </TextField>}
                         {type === 'tagsPicker' &&
-                            <Autocomplete
+                            <MuiAutomplete
                                 size={size}
                                 multiple
-                                id="tags-outlined"
-                                options={tags}
+                                id="categories-outlined"
+                                options={categories}
                                 getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
-                                disabled={values[field]?.length > 4 || false}
+                                // disabled={values[field]?.length > 4 || false}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -103,25 +85,12 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                                     />
                                 )}
                             />}
-                        {type === 'timePicker' &&
-                            <TimeSelector label={title} />
-                        }
                         {type === 'toggle' &&
                             <Switch
-                                checked={values[field]}
-                                onChange={(e) => handleChange(e, field)}
+                                defaultValue={values[field] || false}
+                                checked={values[field] || false}
+                                onChange={(e) => handleChange(e, field, undefined, type)}
                                 inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                        {type === 'datePicker' &&
-                            <Calendar type={2} />
-                        }
-                        {type === 'textArea' &&
-                            <TextareaAutosize
-                                maxRows={maxRows}
-                                aria-label={title}
-                                defaultValue={init[field] || ''}
-                                fullWidth
                             />
                         }
                     </FormControl>
@@ -131,7 +100,6 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
                     onClick={() => modify(type, initialData.id)}>

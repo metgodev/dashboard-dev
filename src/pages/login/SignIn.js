@@ -41,7 +41,7 @@ function SignIn() {
     return (
         <>
             <Typography variant="h1" className={classes.greeting}>
-                {term('metro_travel')}
+                {term('met_go')}
             </Typography>
             <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>

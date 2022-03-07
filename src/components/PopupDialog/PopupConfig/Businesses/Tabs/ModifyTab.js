@@ -162,7 +162,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                     </FormControl>
                 </Grid>
             )}
-            <div style={{ marginTop: 15, marginLeft: 25, display: 'flex', justifyContent: 'left', width: '100%' }}>
+            <div style={styles.ButtomLeftCornerButton}>
                 <Button
                     style={{ width: 200 }}
                     size="large"
@@ -174,4 +174,12 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             </div>
         </Grid>
     )
+}
+
+const styles = {
+    ButtomLeftCornerButton: {
+        position: 'absolute',
+        bottom: '10px',
+        left: '10px',
+    },
 }
