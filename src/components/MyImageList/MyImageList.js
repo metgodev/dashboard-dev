@@ -38,7 +38,7 @@ export default function MyImageList({ gallery, imagesArr, initialData, type }) {
                             loading="lazy"
                             style={{width:"200px", height:"200px", position: "relative"}}
                         />
-                        <div style={{position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
+                        <div style={{borderRadius: "15px", position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
                             <DeleteOutlineOutlinedIcon onClick={ () => deleteItem({item})} sx={{color:"black"}}/>
                         </div>
                     </ImageListItem>
@@ -55,7 +55,7 @@ export default function MyImageList({ gallery, imagesArr, initialData, type }) {
                             /> 
                         </a>
                         
-                        <div style={{position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
+                        <div style={{borderRadius: "15px",position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
                             <DeleteOutlineOutlinedIcon onClick={ () => deleteItem({item})} sx={{color:"black"}}/>
                         </div>
                     </ImageListItem>
@@ -70,7 +70,7 @@ export default function MyImageList({ gallery, imagesArr, initialData, type }) {
                                 style={{width:"200px", height:"200px", position: "relative"}}
 
                             />
-                            <div style={{position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
+                            <div style={{borderRadius: "15px",position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
                                 <DeleteOutlineOutlinedIcon onClick={ () => deleteItem({item})} sx={{color:"black"}}/>
                             </div>
                         </ImageListItem>
@@ -86,7 +86,7 @@ export default function MyImageList({ gallery, imagesArr, initialData, type }) {
                                     style={{width:"200px", height:"200px", position: "relative"}}
                                 />
                             </a>
-                            <div style={{position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
+                            <div style={{borderRadius: "15px",position:"absolute", left: "0px", top: "5px",  left: "5px", backgroundColor: "rgba(255, 255, 255, 0.7)",cursor:"pointer"}}>
                                 <DeleteOutlineOutlinedIcon onClick={ () => deleteItem({item})} sx={{color:"black"}}/>
                             </div>
                         </ImageListItem>
