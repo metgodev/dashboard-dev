@@ -900,6 +900,121 @@ const active_lexicon = {
         he: 'שם מסלול',
         ar: 'اسم المسار',
     },
+    admin: {
+        en: 'admin',
+        he: 'מנהל',
+        ar: 'مدير',
+    },
+    admin_page: {
+        en: 'Admin Page',
+        he: 'דף מנהל',
+        ar: 'صفحة المدير',
+    },
+    add_tags: {
+        en: 'Add tags',
+        he: 'הוסף תגיות',
+        ar: 'إضافة علامات',
+    },
+    add_tag: {
+        en: 'Add tag',
+        he: 'הוסף תגית',
+        ar: 'إضافة علامة',
+    },
+    add_new_area: {
+        en: 'Add new area',
+        he: 'הוסף אזור חדש',
+        ar: 'إضافة منطقة جديدة',
+    },
+    add_new_authority: {
+        en: 'Add new authority',
+        he: 'הוסף רשות חדשה',
+        ar: 'إضافة جهة جديدة',
+    },
+    area: {
+        en: 'Area',
+        he: 'אזור',
+        ar: 'منطقة',
+    },
+    error_creating: {
+        en: 'Error creating',
+        he: 'שגיאה ביצירת',
+        ar: 'خطأ في الإنشاء',
+    },
+    created_successfully: {
+        en: 'created successfully',
+        he: 'נוצר בהצלחה',
+        ar: 'تم الإنشاء بنجاح',
+    },
+    manage_users: {
+        en: 'Manage users',
+        he: 'נהל משתמשים',
+        ar: 'إدارة المستخدمين',
+    },
+    manage_properties: {
+        en: 'Manage properties',
+        he: 'נהל מאפיינים',
+        ar: 'إدارة الخصائص',
+    },
+    tag_name: {
+        en: 'tag name',
+        he: 'שם תגית',
+        ar: 'اسم العلامة',
+    },
+    latitute: {
+        en: 'latitute',
+        he: 'קו רוחב',
+        ar: 'خط العرض',
+    },
+    longitude: {
+        en: 'longitude',
+        he: 'קו אורך',
+        ar: 'خط الطول',
+    },
+    zoom: {
+        en: 'zoom',
+        he: 'זום',
+        ar: 'التكبير',
+    },
+    reset_location: {
+        en: 'Reset location',
+        he: 'אפס מיקום',
+        ar: 'إعادة تعيين الموقع',
+    },
+    location: {
+        en: 'location',
+        he: 'מיקום',
+        ar: 'الموقع',
+    },
+    location_name: {
+        en: 'location name',
+        he: 'שם מיקום',
+        ar: 'اسم الموقع',
+    },
+    is_accessable: {
+        en: 'is accessable',
+        he: 'נגיש',
+        ar: 'متاح',
+    },
+    manage_tags: {
+        en: 'Manage tags',
+        he: 'נהל תגיות',
+        ar: 'إدارة العلامات',
+    },
+    manage_areas: {
+        en: 'Manage areas',
+        he: 'נהל אזורים',
+        ar: 'إدارة المناطق',
+    },
+    manage_authorities: {
+        en: 'Manage authorities',
+        he: 'נהל רשויות',
+        ar: 'إدارة الجهات',
+    },
+    crop_image: {
+        en: "Crop Image",
+        he: "חתוך תמונה",
+        ar: "قص الصوره"
+    }
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

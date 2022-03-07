@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
@@ -11,10 +11,9 @@ export const UploadMediaTab = ({ initialData }) => {
   const [videoArr, setVideoArr] = useState([]);
   const [logo,setLogo] = useState([]);
   const [files,setFiles] = useState([]);
+  const [showImage, setShowImage] = useState(false);
 
   let initialGallery = initialData?.gallery?.length ? JSON.parse(initialData?.gallery) : [];
-  console.log(JSON.parse(initialData.galleryFileIds))
-  
 
   return (
     <>
@@ -24,8 +23,10 @@ export const UploadMediaTab = ({ initialData }) => {
               <>
                 <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
                 <DialogContent key={index}>
-                  <DragDrop type={type} setArr={type === "photo" ? setImagesArr : type === "video" ? setVideoArr : type === "logo" ? setLogo : setFiles} fileTypes={fileTypes} initialData={initialData} />
-                  <MyImageList initialData={initialData} type={type} gallery={initialGallery} imagesArr={type === "photo" ? imagesArr : type === "video" ? videoArr : type === "logo" ? logo : files} />
+                  <div style={{display: 'flex', alignItems: "center", justifyContent: 'center'}}>
+                    <DragDrop showImage={showImage} setShowImage={setShowImage} mediaType={type} setArr={type === "image" ? setImagesArr : type === "video" ? setVideoArr : type === "logo" ? setLogo : setFiles} fileTypes={fileTypes} initialData={initialData} />
+                  </div>
+                  {!showImage && <MyImageList type={type} initialData={initialData} gallery={initialGallery} imagesArr={type === "image" ? imagesArr : type === "video" ? videoArr : type === "logo" ? logo : files} />}
                 </DialogContent>
                 {index < 3 && <div style={{width:"80%", height: "1px", backgroundColor: "rgba(0,0,256)"}}></div>}
               </>

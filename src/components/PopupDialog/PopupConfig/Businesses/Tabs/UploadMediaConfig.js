@@ -6,19 +6,19 @@ export const mediaUploadSections = [
         type: "photo",
         fileTypes: ["JPG", "PNG", "GIF"],
     },
-    // {
-    //     title: term('upload_video'),
-    //     type: "video",
-    //     fileTypes: ["MP4", "AVI", "WMV"],
-    // },
-    // {
-    //     title: term('upload_logo'),
-    //     type: "logo",
-    //     fileTypes: ["JPG", "PNG", "PDF"],
-    // },
-    // {
-    //     title: term('upload_files'),
-    //     type: "files",
-    //     fileTypes: ["MP3"],
-    // },
+    {
+        title: term('upload_video'),
+        type: "video",
+        fileTypes: ["MP4", "AVI", "WMV"],
+    },
+    {
+        title: term('upload_logo'),
+        type: "logo",
+        fileTypes: ["JPG", "PNG", "PDF"],
+    },
+    {
+        title: term('upload_files'),
+        type: "files",
+        fileTypes: ["MP3"],
+    },
 ]

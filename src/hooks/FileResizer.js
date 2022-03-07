@@ -1,18 +1,18 @@
 import Resizer from "react-image-file-resizer";
 
-export const resizeFile = (file) =>
+export const resizeFile = (file, width, height, format) =>
     new Promise((resolve) => {
         Resizer.imageFileResizer(
             file,
-            300,
-            300,
-            "JPEG",
+            width,
+            height,
+            format,
             100,
             0,
             (uri) => {
                 resolve(uri);
             },
-            // "base64"
+            file
         );
     });
 
