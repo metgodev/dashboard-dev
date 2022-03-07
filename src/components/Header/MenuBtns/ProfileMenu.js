@@ -12,7 +12,6 @@ import { client } from "../../../API/metro";
 import { useNavigate } from "react-router";
 import term from "../../../terms";
 import { useSelector } from "react-redux";
-import { b64_to_utf8 } from "../../../utils/enode";
 
 function ProfileMenu() {
     // local
@@ -21,7 +20,7 @@ function ProfileMenu() {
     const { user } = useSelector(state => state.mainRememberReducer)
 
     let classes = useStyles();
-    let avatar = `https://ui-avatars.com/api/?name=${b64_to_utf8(user.fn) + " " + b64_to_utf8(user.ln)}`
+    let avatar = `https://ui-avatars.com/api/?name=${user.fn + " " + user.ln}`
     let navigate = useNavigate()
 
     const logout = () => {
@@ -53,7 +52,7 @@ function ProfileMenu() {
             >
                 <div className={classes.profileMenuUser}>
                     <Typography variant="h4" weight="medium">
-                        {`${b64_to_utf8(user.fn)} ${b64_to_utf8(user.ln)}`}
+                        {`${user.fn} ${user.ln}`}
                     </Typography>
                 </div>
                 {/* <MenuItem
