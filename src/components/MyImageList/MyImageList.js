@@ -5,14 +5,15 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { client } from '../../API/metro'
 
 
-export default function MyImageList({ gallery, imagesArr, initialData, type }) {
+export default function MyImageList({ setImageArr, gallery, imagesArr, initialData, type }) {
 
     const deleteItem = ( item ) => {
         if(item.item.local) {
             const newGallery = gallery.filter( galleryItem => galleryItem.file.url !== item.item.url)
             const newIds = (JSON.parse(initialData.galleryFileIds)).filter( id => id.fileId !== item.item.id)
             const dataToSend = { galleryFileIds : [ ...newIds ], gallery: [ ...newGallery]}
-            document.getElementById(item.item.id).style.display = 'none'
+            const newLocalImagesArr = imagesArr.filter( localImage => localImage.url !== item.item.url)
+            setImageArr(newLocalImagesArr)
             client.service("business").patch(initialData.id, dataToSend)
                 .then(res => console.log(res))
         }else{

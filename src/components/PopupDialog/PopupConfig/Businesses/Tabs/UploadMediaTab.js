@@ -26,7 +26,7 @@ export const UploadMediaTab = ({ initialData }) => {
                   <div style={{display: 'flex', alignItems: "center", justifyContent: 'center'}}>
                     <DragDrop showImage={showImage} setShowImage={setShowImage} mediaType={type} setArr={type === "image" ? setImagesArr : type === "video" ? setVideoArr : type === "logo" ? setLogo : setFiles} fileTypes={fileTypes} initialData={initialData} />
                   </div>
-                  {!showImage && <MyImageList type={type} initialData={initialData} gallery={initialGallery} imagesArr={type === "image" ? imagesArr : type === "video" ? videoArr : type === "logo" ? logo : files} />}
+                  {!showImage && <MyImageList setImageArr={setImagesArr} type={type} initialData={initialData} gallery={initialGallery} imagesArr={type === "image" ? imagesArr : type === "video" ? videoArr : type === "logo" ? logo : files} />}
                 </DialogContent>
                 {index < 3 && <div style={{width:"80%", height: "1px", backgroundColor: "rgba(0,0,256)"}}></div>}
               </>
