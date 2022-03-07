@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import term from '../../../../../terms';
-import { Button } from '@material-ui/core';
 import { client } from '../../../../../API/metro';
-import { Collapse, MenuItem } from '@material-ui/core';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { ModalInit, tags, picker, TimePicker } from '../popConfig';
+import { Box, Button, Collapse, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 //styles
 import useStyles from '../../../styles';
+import MapPick from '../../../../MapPicker.js/MapPick';
+import { FormatColorReset } from '@material-ui/icons';
 
-// add anothe option ___ addable text _____
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
 export const ModifyTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     let classes = useStyles();
+    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     //local
     const openDrop = () => setOpen(!open);
-    const [OT, setOT] = useState({});
+    const [checked, setChecked] = useState([]);
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
-        status: 'PENDING_APPROVAL',
+        userId: user.id,
+        status: status,
         openingHours: {
             sunday: {},
             monday: {},
@@ -36,15 +40,14 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             saturday: {},
         },
     });
-    //validator 
-    let isFulfilled = Object.values(values).every(Boolean);
 
-    // set the innitial data
     useEffect(() => {
+        setInit({});
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        setOT(initialData.openingHours && JSON.parse(initialData.openingHours) || {})
+        let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
         setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
+        setValues(prevState => ({ ...prevState, openingHours: OH }))
         return (() => setInit({}))
     }, [type, initialData])
 
@@ -60,6 +63,10 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         let pos = type === 1 ? 'start' : 'end'
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
     };
+    const removeDay = (timeRef, e) => {
+        if (!e.target.checked) return;
+        setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: "00:00", end: "00:00" } } }))
+    }
 
     const modify = async (type, id) => {
         if (type === 'add')
@@ -72,21 +79,17 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
-
+    let maxSizeElements = ['MapPicker', 'timePicker']
     return (
-        <Grid container spacing={2}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
+                <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
+                        {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
                         {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 id={title}
                                 label={title}
@@ -100,11 +103,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 id="select-field"
                                 select
@@ -120,11 +118,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             </TextField>}
                         {type === 'tagsPicker' &&
                             <MuiAutomplete
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 multiple
                                 id="tags-outlined"
@@ -132,6 +125,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
+                                disabled={values[field]?.length > 4 || false}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -147,14 +141,11 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                     {open ? <ExpandLess /> : <ExpandMore />}
                                 </Button>
                                 <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Grid container
-                                        direction="row"
-                                        justifyContent="center"
-                                        alignItems="stretch" spacing={1}>
+                                    <Grid container spacing={1}>
                                         {TimePicker.map((s) => (
                                             <Grid item lg={6} md={6} sm={6} key={s.day}>
-                                                <TimeSelector label={s.day} type={s.type} times={OT[s.timeref] || null}
-                                                    timeref={s.timeref} setTimes={setTimes} />
+                                                <TimeSelector label={s.day} type={s.type} times={values.openingHours[s.timeref] || null}
+                                                    timeref={s.timeref} setTimes={setTimes} removeDay={removeDay} setChecked={setChecked} checked={checked} />
                                             </Grid>
                                         ))}
                                     </Grid>
@@ -162,19 +153,19 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                             </>}
                         {type === 'toggle' &&
                             <Switch
-                                checked={values[field]}
-                                onChange={(e) => handleChange(e, field, type)}
-                                inputProps={{ 'aria-label': title }}
+                                defaultValue={init[field] || false}
+                                checked={values[field] || false}
+                                onChange={(e) => handleChange(e, field, undefined, type)}
+                                inputprops={{ 'aria-label': title }}
                             />
                         }
                     </FormControl>
                 </Grid>
             )}
-            <div style={{ marginTop: 10, marginLeft: 15, display: 'flex', justifyContent: 'left', width: '100%' }}>
+            <div style={{ marginTop: 15, marginLeft: 25, display: 'flex', justifyContent: 'left', width: '100%' }}>
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
                     onClick={() => modify(type, init.id)}>

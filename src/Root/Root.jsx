@@ -1,5 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import { Box } from '@material-ui/core';
+import { isLoggedIn, isVerified, reAuth } from '../API/metro';
+//pages
 import Header from '../components/Header/Header';
 import SideBar from '../components/Sidebar/Sidebar';
 import Main from '../components/AdjustHelpers/Main';
@@ -17,8 +20,9 @@ import UsersTable from '../pages/userstable/UsersTable';
 import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
-import { Box } from '@material-ui/core';
-import { isLoggedIn, isVerified, reAuth } from '../API/metro';
+// admin pages
+import AreaManagement from '../pages/admin/AreaManagement';
+import AuthorityManagement from '../pages/admin/AuthorityManagement';
 
 
 const Root = () => {
@@ -33,12 +37,7 @@ const Root = () => {
     }
 
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
-
-    useLayoutEffect(() => {
-        // reAuth() //delete 
-        // return (() => reAuth())
-    }, [])
-
+    let isSuperAdmin = true;
 
     return (
         <Box className={classes.Router}>
@@ -64,6 +63,12 @@ const Root = () => {
                     <Route exact path="/FAQ" element={<Protecte auth={verified}><FAQ /></Protecte>} />
                     <Route exact path="/login" element={<Login />} />
                     <Route path='*' element={<Protecte auth={verified}><Error /></Protecte>} />
+                    {isSuperAdmin &&
+                        <>
+                            <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement/></Protecte>} />
+                            <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement/></Protecte>} />
+                        </>
+                    }
                 </Routes>
             </Main>
         </Box >

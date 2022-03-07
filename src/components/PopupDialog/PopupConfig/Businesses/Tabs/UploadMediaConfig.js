@@ -3,7 +3,7 @@ import term from "../../../../../terms";
 export const mediaUploadSections = [
     {
         title: term('upload_photo'),
-        type: "photo",
+        type: "image",
         fileTypes: ["JPG", "PNG", "GIF"],
     },
     {

@@ -7,8 +7,11 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { TracksTab } from './Tabs/TracksTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
+//styles
+import useStyles from "../../styles";
 
 const TracksPop = ({ handleClose, initialData, type }) => {
+    const classes = useStyles()
     const [tab, setTab] = useState(0);
 
     const handleTabs = (event, newValue) => {
@@ -17,7 +20,7 @@ const TracksPop = ({ handleClose, initialData, type }) => {
 
     return (
         <div>
-            <Box sx={{ borderBottom: .1, borderColor: 'lightGray', width: '100%' }}>
+            <Box className={classes.stickyBox}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} />)}
                 </Tabs>

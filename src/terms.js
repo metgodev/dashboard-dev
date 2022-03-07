@@ -15,10 +15,10 @@ const active_lexicon = {
         he: 'לוח הבקרה',
         ar: 'لوحة التحكم',
     },
-    metro_travel: {
-        en: 'Metro Travel',
-        he: 'מטרו נגב',
-        ar: 'مترو ترافيل',
+    met_go: {
+        en: 'MetGo',
+        he: 'MetGo',
+        ar: 'MetGo',
     },
     new_messages: {
         en: 'New Messages',
@@ -1014,7 +1014,27 @@ const active_lexicon = {
         en: "Crop Image",
         he: "חתוך תמונה",
         ar: "قص الصوره"
-    }
+    },
+    title: {
+        en: 'title',
+        he: 'כותרת',
+        ar: 'العنوان',
+    },
+    email: {
+        en: 'email',
+        he: 'אימייל',
+        ar: 'البريد الإلكتروني',
+    },
+    authorities: {
+        en: 'authorities',
+        he: 'רשויות',
+        ar: 'الجهات',
+    },
+    tags_around: {
+        en: 'tags around',
+        he: 'תגיות בסביבה',
+        ar: 'العلامات حول',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

@@ -13,6 +13,7 @@ import {
     MapOutlined as Map,
     HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 // styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -25,18 +26,19 @@ import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.
 import term from "../../terms";
 
 const structure = [
-    { id: 0, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
-    { id: 1, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
-    { id: 2, label: term('events'), link: "/events", icon: <Event /> },
-    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
     {
-        id: 5, label: term('routes'), link: "/routes", icon: <Route />,
-        // children: [
-        //     { label: "Icons", link: "/" },
-        //     { label: "Charts", link: "/" },
-        //     { label: "Maps", link: "/" },
-        // ],
+        id: 0, label: term('admin'), icon: <AdminPanelSettingsOutlinedIcon />,
+        children: [
+            { label: term('manage_areas'), link: "/admin/areas" },
+            { label: term('manage_authorities'), link: "/admin/authorities" },
+            // { label: term('manage_tags'), link: "/admin/tags" },
+        ],
     },
+    { id: 1, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
+    { id: 2, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
+    { id: 3, label: term('events'), link: "/events", icon: <Event /> },
+    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
+    { id: 5, label: term('routes'), link: "/routes", icon: <Route />, },
     // { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
     // { id: 7, label: term('users'), link: "/users", icon: <People />, },
     { id: 8, label: term('map'), link: "/map", icon: <Map />, },

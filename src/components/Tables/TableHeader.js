@@ -10,7 +10,6 @@ import { camelToSnakeCase } from '../../utils/camelToSnakeCase';
 
 function TableHeader({ keys, cat }) {
     const [values, setValues] = useState({})
-    let isFulfilled = Object.values(values).every(Boolean);
     //global
     let dispatch = useDispatch();
 
@@ -24,12 +23,12 @@ function TableHeader({ keys, cat }) {
 
     return (
         <TableHead >
-            <TableRow>
+            <TableRow >
                 {keys.map((key) => (
                     <TableCell size="small" align='center' key={key}>
                         <FormControl fullWidth style={{ minWidth: 130 }}>
                             {
-                                key !== 'btn' ? ['name', 'address'].indexOf(key) > -1 ?
+                                key !== 'btn' ? ['name', 'address'].indexOf(key) > -1 && cat ?
                                     <>
                                         {term(key)}
                                         <TextField
@@ -37,7 +36,7 @@ function TableHeader({ keys, cat }) {
                                             size="small"
                                             id="outlined-required"
                                             defaultValue=""
-                                            inputProps={{
+                                            inputprops={{
                                                 startadornment: (
                                                     <InputAdornment position="start">
                                                         <SearchIcon />
@@ -46,13 +45,18 @@ function TableHeader({ keys, cat }) {
                                             }}
                                         />
                                     </>
-                                    :
-                                    <>
-                                        {term(camelToSnakeCase(key))}
-                                        <Select variant="outlined" value={values[key]} displayEmpty onChange={(e) => handleChange(e, key)}>
-                                            {cat[key] && cat[key].map(c => <MenuItem key={c} disablescrolllock={true.toString()} value={c}>{term(c)}</MenuItem>)}
-                                        </Select>
-                                    </>
+                                    : cat ?
+
+                                        <>
+                                            {term(camelToSnakeCase(key))}
+                                            <Select variant="outlined" value={values[key]} displayEmpty onChange={(e) => handleChange(e, key)}>
+                                                {cat[key] && cat[key].map(c => <MenuItem key={c} disablescrolllock={true.toString()} value={c}>{term(c)}</MenuItem>)}
+                                            </Select>
+                                        </>
+                                        :
+                                        <>
+                                            {term(camelToSnakeCase(key))}
+                                        </>
                                     :
                                     <Button
                                         color="primary"

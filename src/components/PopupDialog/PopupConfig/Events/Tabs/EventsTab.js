@@ -48,7 +48,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     }
 
     return (
-        <Grid container spacing={2}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
@@ -56,11 +56,6 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                         {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 id={title}
                                 label={title}
@@ -74,11 +69,6 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                             />}
                         {type === 'picker' &&
                             <TextField
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 id="select-field"
                                 select
@@ -94,11 +84,6 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                             </TextField>}
                         {type === 'tagsPicker' &&
                             <Autocomplete
-                                inputProps={{
-                                    classes: {
-                                        input: classes.textField,
-                                    },
-                                }}
                                 size={size}
                                 multiple
                                 id="tags-outlined"
@@ -106,6 +91,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
+                                disabled={values[field]?.length > 4 || false}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -121,7 +107,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                             <Switch
                                 checked={values[field]}
                                 onChange={(e) => handleChange(e, field)}
-                                inputProps={{ 'aria-label': title }}
+                                inputprops={{ 'aria-label': title }}
                             />
                         }
                         {type === 'datePicker' &&
@@ -138,7 +124,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                     </FormControl>
                 </Grid>
             )}
-            <div style={{ marginTop: 10, marginLeft: 15, display: 'flex', justifyContent: 'left', width: '100%' }}>
+            <div style={{ marginTop: 15, marginLeft: 25, display: 'flex', justifyContent: 'left', width: '100%' }}>
                 <Button
                     style={{ width: 200 }}
                     size="large"

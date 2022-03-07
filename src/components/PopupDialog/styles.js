@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
         // padding: '10px !important',
     },
     dialogContent: {
-        // overflow: 'hidden',
+        overflowX: 'hidden',
         padding: 0,
         margin: 0,
     },
@@ -26,4 +26,14 @@ export default makeStyles(theme => ({
     textField: {
         borderBottomColor: theme.palette.background.light,
     },
+    stickyBox: {
+        position: 'sticky',
+        top: '0px',
+        zIndex: 3,
+        backgroundColor: '#fff',
+        boxShadow: '0px 0px 5px #ccc',
+        borderBottom: .1,
+        borderColor: 'lightGray',
+        width: '100%'
+    }
 }));

@@ -35,8 +35,9 @@ const EventstableService = (rowsPerPage, page) => {
             let categories = [];
             let tags = [];
             // -------------------===tags===-------------------
-            await client.service('tags').find()
-                .then(({ data }) => data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
+            if (!area_id) return;
+            await client.service('area').find({ query: { _id: area_id } })
+                .then(({ data }) => data[0].tags.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
             // -------------------===autorities===-------------------
             if (!area_id) return;
             await client.service('authorities').find({ query: { areaId: area_id } })
@@ -45,10 +46,10 @@ const EventstableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===events===-------------------
-            await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage } })
-                .then(({ data }) => data.map(({ authorityId, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
+            await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
+                .then(({ data }) => data.map(({ authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
                     events = [...events, {
-                        authority: authorities.find(el => el.id === authorityId)?.name, endDate: new Date(endDate).toLocaleDateString(),
+                        authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),
                         startDate: new Date(startDate).toLocaleDateString(), tag: intersect_between_objects(tagsIds, tags, 'title'), id: _id, ...rest
                     }]
                 }))

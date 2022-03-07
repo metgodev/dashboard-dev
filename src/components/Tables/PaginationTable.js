@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import { Grid, IconButton } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 // styles
 import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
@@ -17,7 +18,7 @@ import TableHeader from './TableHeader';
 import TableMenuBtn from './TableMenuBtn';
 import TableInfoMenu from './TableInfoMenu';
 
-export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat }) {
+export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat, remove }) {
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
     //local
     const [TableCel] = useState({
@@ -43,15 +44,18 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                         <TableHeader keys={keys} cat={cat} />
                         <TableBody >
                             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(({ status, ...data }) => (
+                                .map(({ ...data }) => (
                                     <StyledTableRow key={data.id}>
-                                        {status && <TableCell size="small" align='center' >
-                                            <TableMenuBtn status={status} stats={stats} id={data.id} />
+                                        {data?.status && <TableCell size="small" align='center' >
+                                            <TableMenuBtn status={data.status} stats={stats} id={data.id} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
                                         <TableCell align="justify" size="small">
-                                            <Grid container direction="row" justifyContent={data.contact ? "space-between" : "center"} alignItems="stretch">
+                                            <Grid container direction="row" justifyContent={data.contact || remove ? "space-evenly" : "center"} alignItems="stretch">
                                                 {data.contact && <TableInfoMenu options={JSON.parse(data.contact)} />}
+                                                {remove && <IconButton size="small" aria-haspopup="true" onClick={() => remove(data)} >
+                                                    <DeleteOutlinedIcon />
+                                                </IconButton>}
                                                 {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
                                                     <EditOutlinedIcon />
                                                 </IconButton>}

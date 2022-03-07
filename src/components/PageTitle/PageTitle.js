@@ -44,7 +44,7 @@ export default function PageTitle(props) {
           <FormControlLabel control={<Switch
             checked={theme}
             onChange={ColorChange}
-            inputProps={{ 'aria-label': 'controlled' }}
+            inputprops={{ 'aria-label': 'controlled' }}
           />} label={theme ? 'light' : 'dark'} />
         </FormGroup>
       )}

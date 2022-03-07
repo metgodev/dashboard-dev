@@ -1,5 +1,5 @@
 {
-  "name": "MetroTravel",
+  "name": "MetGo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,6 +30,7 @@
     "react-dom": "^17.0.2",
     "react-drag-drop-files": "^2.2.3",
     "react-google-maps": "^9.4.5",
+    "react-google-map-picker": "^1.2.3",
     "react-google-places-autocomplete": "^3.3.2",
     "react-image-file-resizer": "^0.4.7",
     "react-lottie": "^1.2.3",
@@ -49,6 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:prod": "env.prod-cmd -f react-scripts start",
+    "build:prod": "env.prod-cmd -f react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

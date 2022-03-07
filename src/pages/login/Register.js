@@ -36,7 +36,8 @@ function Register() {
                         fn: utf8_to_b64(res.firstName),
                         ln: utf8_to_b64(res.lastName),
                         rn: utf8_to_b64(res.roles[0].roleName),
-                        v: res.isVerified
+                        v: res.isVerified,
+                        id: res._id
                     }
                     dispatch(set_user(user))
                     if (res.isVerified) navigate("/dashboard");
@@ -64,7 +65,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="first name"
-                    inputProps={{
+                    inputprops={{
                         classes: {
                             input: classes.textField,
                         },
@@ -79,7 +80,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="last name"
-                    inputProps={{
+                    inputprops={{
                         classes: {
                             input: classes.textField,
                         },
@@ -94,7 +95,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="email"
-                    inputProps={{
+                    inputprops={{
                         classes: {
                             input: classes.textField,
                         },
@@ -109,7 +110,7 @@ function Register() {
                 <TextField
                     variant="outlined"
                     id="password"
-                    inputProps={{
+                    inputprops={{
                         classes: {
                             input: classes.textField,
                         },

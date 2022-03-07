@@ -6,8 +6,8 @@ export default makeStyles(theme => ({
     color: "#FFF",
     marginLeft: theme.spacing(2.5),
     marginRight: theme.spacing(2.5),
-    fontWeight: 500,
-    fontSize: 18,
+    fontWeight: 600,
+    fontSize: 22,
     whiteSpace: "nowrap",
     [theme.breakpoints.down("xs")]: {
       display: "none",

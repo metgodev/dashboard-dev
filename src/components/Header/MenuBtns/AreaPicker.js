@@ -3,7 +3,7 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch } from "react-redux";
 import { set_area } from "../../../REDUX/actions/main.actions";
-import { client } from "../../../API/metro";
+import { client, isLoggedIn } from "../../../API/metro";
 // styles
 import useStyles from "../styles";
 // components
@@ -16,32 +16,34 @@ function AreaMenu() {
     let [areaMenuItem, setMenuItem] = useState([]);
     let [area, setArea] = useState('');
     let classes = useStyles();
+    let setAreaID = (id) => localStorage.setItem('aid', id)
 
-    const setAreaID = (id) => localStorage.setItem('aid', id)
 
     useLayoutEffect(() => {
+        if (!isLoggedIn()) return;
         (async () => {
             setMenuItem([])
-            let res = await client.service("area").find();
-            if (!res.data) return;
-            res?.data.map(({ name, _id }, i) => {
-                let obj = { name, id: _id }
-                setMenuItem(pervState => [...pervState, obj]);
-                if (i === 0) {
-                    setArea(obj);
-                    dispatch(set_area(obj));
-                    setAreaID(obj.id)
-                }
+            await client.service("area").find().then(({ data }) => {
+                if (!data) return;
+                data?.map(({ name, _id }, i) => {
+                    setMenuItem(pervState => [...pervState, { name, id: _id }]);
+                    if (i === 0) {
+                        setArea({ name, id: _id });
+                        dispatch(set_area({ name, id: _id }));
+                        setAreaID(_id)
+                    }
+                })
             });
         })();
     }, []);
 
-    const changeArea = (area) => {
-        setArea(area)
-        setAreaMenu(null)
-        setAreaID(area.id)
-        dispatch(set_area(area))
+    const changeArea = async (area) => {
+        dispatch(set_area(area));
+        setArea(area);
+        setAreaID(area.id);
+        setAreaMenu(null);
     }
+
 
     return (
         <>

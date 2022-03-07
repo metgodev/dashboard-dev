@@ -6,7 +6,6 @@ const useValidator = () => {
 
 
     const validate = (rule, value) => {
-        console.log(rule, value)
         switch (rule) {
             case 'isRequierd':
                 setIsValid(!!value)

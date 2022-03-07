@@ -13,7 +13,7 @@ const BusinessTableService = (rowsPerPage, page) => {
         businesses: [],
         keys: [],
         ignore: [
-            'address', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
+            'address', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
             'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours',
             'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
         ],
@@ -27,7 +27,6 @@ const BusinessTableService = (rowsPerPage, page) => {
         }
     })
 
-
     useLayoutEffect(() => {
         (async (area_id = area.id) => {
             let authorities = [];
@@ -36,10 +35,10 @@ const BusinessTableService = (rowsPerPage, page) => {
             let categories = [];
             let tags = [];
             // -------------------===tags===-------------------
-            await client.service('tags').find()
-                .then(({ data }) => data.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
-            // -------------------===autorities===-------------------
             if (!area_id) return;
+            await client.service('area').find({ query: { _id: area_id } })
+                .then(({ data }) => data[0].tags.map(({ title, _id, categoryId }) => tags = [...tags, { title, id: _id, categoryId }]));
+            // -------------------===autorities===-------------------
             await client.service('authorities').find({ query: { areaId: area_id } })
                 .then(({ data }) => data.map(({ address, areaId, createdAt, email, name, _id }) => {
                     authorities = [...authorities, { address, areaId, createdAt, email, name, id: _id }]
@@ -48,9 +47,9 @@ const BusinessTableService = (rowsPerPage, page) => {
             // -------------------===businesses===-------------------
             await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
                 .then(({ data }) => data.map(({
-                    status, autorityId, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
+                    status, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {
-                    status, authority: authorities.find(a => a.id === autorityId)?.name,
+                    status, authority: authority?.name,
                     tag: intersect_between_objects(tagsIds, tags, 'title'), edit: new Date(updatedAt).toLocaleDateString(), id: _id,
                     contact: [{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }], ...rest
                 }]));
