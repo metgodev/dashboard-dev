@@ -21,6 +21,10 @@ const ModifyPop = ({ handleClose, initialData, type }) => {
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
+    const [imagesArr, setImagesArr] = useState([]);
+    const [videoArr, setVideoArr] = useState([]);
+    const [logo,setLogo] = useState([]);
+    const [files,setFiles] = useState([]);
 
 
 
@@ -39,7 +43,14 @@ const ModifyPop = ({ handleClose, initialData, type }) => {
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab initialData={initialData} type={type} />
+                    <UploadMediaTab
+                        imagesArr={imagesArr} setImagesArr={setImagesArr}
+                        videoArr={videoArr} setVideoArr={setVideoArr}
+                        logo={logo} setLogo={setLogo}
+                        files={files} setFiles={setFiles}
+                        initialData={initialData} 
+                        type={type} 
+                    />
                 </TabPanel>
             </DialogContent>
         </div >

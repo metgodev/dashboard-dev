@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DragDrop from '../../../../../hooks/DragDropFiles';
 import MyImageList from '../../../../MyImageList/MyImageList';
 import {mediaUploadSections } from './UploadMediaConfig'
 
-export const UploadMediaTab = ({ initialData }) => {
+export const UploadMediaTab = ({ initialData, imagesArr, setImagesArr, videoArr, setVideoArr, logo, setLogo, files, setFiles }) => {
  
-  const [imagesArr, setImagesArr] = useState([]);
-  const [videoArr, setVideoArr] = useState([]);
-  const [logo,setLogo] = useState([]);
-  const [files,setFiles] = useState([]);
   const [showImage, setShowImage] = useState(false);
 
   let initialGallery = initialData?.gallery?.length ? JSON.parse(initialData?.gallery) : [];

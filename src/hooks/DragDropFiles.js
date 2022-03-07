@@ -19,7 +19,7 @@ function DragDrop({ setArr, fileTypes, initialData, mediaType, showImage, setSho
     const dispatch = useDispatch();
 
       useEffect( () => {
-          setValues({ galleryFileIds : JSON.parse(initialData.galleryFileIds)})
+          setValues({ galleryFileIds : initialData.galleryFileIds? JSON.parse(initialData.galleryFileIds) : []})
       }, [])
 
       const handleGalleryFileIds = ( imageId ) => {

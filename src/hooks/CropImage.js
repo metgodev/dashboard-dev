@@ -20,7 +20,6 @@ export const cropFile = (file, setImage) => {
     fetch(file).then((res) => {
         res.blob().then((res) => {
             reader.readAsDataURL(res);
-            console.log("Done")
         })
     });
 
