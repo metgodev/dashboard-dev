@@ -13,8 +13,9 @@ const EventstableService = (rowsPerPage, page) => {
         events: [],
         keys: [],
         ignore: [
-            "authorityId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "relevantTo", "currency", "producerName", "producerPhone", "producerEmail",
-            'isAccessable', "reservationCenterPhone", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
+            "authorityId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address",
+            "relevantTo", "currency", "producerName", "producerPhone", "producerEmail", "locationName", 'isAccessable', "reservationCenterPhone",
+            "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
         ],
         tableCategories: {
             authority: ['all'],

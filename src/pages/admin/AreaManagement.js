@@ -26,7 +26,6 @@ function AreaManagement() {
     const [dialogType, setDialogType] = useState('add');
     const [initialDataDialog, setInitialDataDialog] = useState({});
 
-
     const openAuthorityDialog = (data) => {
         if (data) {
             setDialogType('edit')
@@ -72,7 +71,7 @@ function AreaManagement() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('manage_areas')} />
             <Grid container spacing={3}>
-                <Grid item lg={8} md={6} sm={12} xs={12} >
+                <Grid item lg={7} md={6} sm={12} xs={12} >
                     <Typography variant="h6" component="h6">{term('authorities')}</Typography>
                     {authorities.length ? <PaginationTable
                         lang={lang}
@@ -90,7 +89,7 @@ function AreaManagement() {
                         </Box>
                     }
                 </Grid>
-                <Grid item lg={4} md={6} sm={12} xs={12}>
+                <Grid item lg={5} md={6} sm={12} xs={12}>
                     <Typography variant="h6" component="h6">{term('tags_around')}</Typography>
                     {areaTags.length ? <PaginationTable
                         lang={lang}

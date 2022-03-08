@@ -14,7 +14,7 @@ const BusinessTableService = (rowsPerPage, page) => {
         keys: [],
         ignore: [
             'address', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
-            'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend',
+            'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend', 'locationName',
             'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
         ],
         tableCategories: {

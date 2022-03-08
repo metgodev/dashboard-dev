@@ -29,11 +29,11 @@ export const TagsTab = ({ handleClose, initialData, type }) => {
         if (type === 'add')
             await client.service('tags').create(values)
                 .then(({ _id }) => client.service('area').patch(area_id, { $push: { tagsIds: _id } }))
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
             await client.service('tags').patch(id, values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 

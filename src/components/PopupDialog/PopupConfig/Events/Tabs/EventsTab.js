@@ -33,11 +33,11 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('events').create(values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
             client.service('events').patch(id, values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 

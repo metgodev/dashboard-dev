@@ -45,11 +45,11 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('pois').create(values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
             client.service('pois').patch(id, values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 

@@ -10,8 +10,8 @@ import term from "../../../../terms";
 
 export const ModalTabs = [term('details')]
 export const ModalInit = [
-    { title: term('category_id'), id: 2, field: 'categoryIds', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker' },
-    { title: term('tag_name'), id: 3, field: 'title', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('category_id'), id: 1, field: 'categoryIds', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker' },
+    { title: term('tag_name'), id: 2, field: 'title', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
 ]
 
 export let picker = {

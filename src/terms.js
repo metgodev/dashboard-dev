@@ -1011,6 +1011,11 @@ const active_lexicon = {
         he: 'פעולות',
         ar: 'الإجراءات',
     },
+    related_categories: {
+        en: 'related categories',
+        he: 'קטגוריות קשורות',
+        ar: 'الفئات المرتبطة',
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

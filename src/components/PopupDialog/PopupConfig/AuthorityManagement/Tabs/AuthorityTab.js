@@ -23,11 +23,11 @@ export const AuthorityTab = ({ handleClose, initialData, type }) => {
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('authorities').create(values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
             client.service('authorities').patch(id, values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 
