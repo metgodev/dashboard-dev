@@ -14,6 +14,7 @@ import {
     HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 // styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -40,7 +41,8 @@ const structure = [
     { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
     { id: 5, label: term('routes'), link: "/routes", icon: <Route />, },
     { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
-    { id: 7, label: term('users'), link: "/users", icon: <People />, },
+    // { id: 7, label: term('users'), link: "/users", icon: <People />, },
+    { id: 7, label: term('local_campaigns'), link: "/campaign", icon: <CampaignOutlinedIcon />, },
     { id: 8, label: term('map'), link: "/map", icon: <Map />, },
     { id: 9, type: "divider" },
     { id: 10, type: 'title', label: term('help') },

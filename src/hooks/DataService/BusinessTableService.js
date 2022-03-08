@@ -47,10 +47,10 @@ const BusinessTableService = (rowsPerPage, page) => {
             // -------------------===businesses===-------------------
             await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
                 .then(({ data }) => data.map(({
-                    status, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
+                    status, name, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {
-                    status, authority: authority?.name,
-                    tag: intersect_between_objects(tagsIds, tags, 'title'), edit: new Date(updatedAt).toLocaleDateString(), id: _id,
+                    status, name, authority: authority?.name,
+                    tag: intersect_between_objects(tagsIds, tags, 'title'), lastChanges: new Date(updatedAt).toLocaleDateString(), id: _id,
                     contact: [{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }], ...rest
                 }]));
             // -------------------===categories===-------------------

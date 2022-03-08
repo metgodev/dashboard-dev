@@ -2,8 +2,6 @@ import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { client } from '../../API/metro';
 import term from '../../terms';
-import intersect_between_objects from '../../utils/intersect_between_objects';
-import stringify_nested from '../../utils/stringify_nested';
 
 const AreaService = () => {
     //global

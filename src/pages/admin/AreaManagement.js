@@ -69,9 +69,9 @@ function AreaManagement() {
 
     return (
         <Box>
-            <PageTitle buttonGroup={{ btns: headerBtns }} title={term('manage_areas')} />
+            <PageTitle buttonGroup={{ btns: headerBtns }} title={term('manage_area')} />
             <Grid container spacing={3}>
-                <Grid item lg={7} md={6} sm={12} xs={12} >
+                <Grid item lg={6} md={6} sm={12} xs={12} >
                     <Typography variant="h6" component="h6">{term('authorities')}</Typography>
                     {authorities.length ? <PaginationTable
                         lang={lang}
@@ -89,8 +89,8 @@ function AreaManagement() {
                         </Box>
                     }
                 </Grid>
-                <Grid item lg={5} md={6} sm={12} xs={12}>
-                    <Typography variant="h6" component="h6">{term('tags_around')}</Typography>
+                <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <Typography variant="h6" component="h6">{term('area_related_tags')}</Typography>
                     {areaTags.length ? <PaginationTable
                         lang={lang}
                         page={tagPage}

@@ -91,6 +91,7 @@ export const AuthorityTab = ({ handleClose, initialData, type }) => {
 
 const styles = {
     ButtomLeftCornerButton: {
+        zIndex: 1,
         position: 'absolute',
         bottom: '10px',
         left: '10px',

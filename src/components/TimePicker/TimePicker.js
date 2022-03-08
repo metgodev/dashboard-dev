@@ -17,7 +17,7 @@ import term from '../../terms';
 
 export default function TimeSelector({ warp, label, type, times, timeref, setTimes, removeDay, setChecked, checked }) {
     let openingTime = times?.start ? parseInt(times.start) : 8
-    let closingTime = times?.end ? parseInt(times.end) : (16, 30)
+    let closingTime = times?.end ? parseInt(times.end) : 16
 
     const [selectedDate, handleDateChange] = useState(new Date().setHours(type === 1 ? openingTime : closingTime, 0, 0));
     const { lang } = useSelector(state => state.mainRememberReducer)
@@ -38,7 +38,7 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
 
     useEffect(() => {
         let hours = new Date(selectedDate).toLocaleTimeString([], {
-            hourCycle: 'h23',
+            hour: '2-digit',
             hour: '2-digit',
             minute: '2-digit'
         })
