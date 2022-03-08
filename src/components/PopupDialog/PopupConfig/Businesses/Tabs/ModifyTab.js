@@ -6,14 +6,13 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { ModalInit, tags, picker, TimePicker } from '../popConfig';
-import { Box, Button, Collapse, MenuItem } from '@material-ui/core';
+import { Button, Collapse, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 //styles
 import useStyles from '../../../styles';
 import MapPick from '../../../../MapPicker.js/MapPick';
-import { FormatColorReset } from '@material-ui/icons';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -42,7 +41,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     });
 
     useEffect(() => {
-        setInit({});
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
         let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
