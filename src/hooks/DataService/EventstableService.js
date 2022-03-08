@@ -13,8 +13,8 @@ const EventstableService = (rowsPerPage, page) => {
         events: [],
         keys: [],
         ignore: [
-            "authorityId", 'description', "categoryId", "address", "relevantTo", "currency", "producerName", "producerPhone", "producerEmail",
-            "reservationCenterPhone", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
+            "authorityId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "relevantTo", "currency", "producerName", "producerPhone", "producerEmail",
+            'isAccessable', "reservationCenterPhone", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
         ],
         tableCategories: {
             authority: ['all'],
@@ -46,7 +46,7 @@ const EventstableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===events===-------------------
-            await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
+            await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
                 .then(({ data }) => data.map(({ authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
                     events = [...events, {
                         authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),

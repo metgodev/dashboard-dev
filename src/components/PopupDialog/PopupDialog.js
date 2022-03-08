@@ -29,7 +29,10 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
     const classes = useStyles()
     const theme = useTheme();
 
-    const handleClose = () => setOpen(false)
+    const handleClose = () => {
+        setOpen(false)
+        initialData = {}
+    }
 
     const handleWidth = () => {
         if (expend === "sm") setExpend("md")

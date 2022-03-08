@@ -52,7 +52,7 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
     }, [checked])
 
     const handleCheck = (e, timeref) => {
-        if (e.target.checked) {
+        if (!e.target.checked) {
             setChecked([...checked, timeref]);
         } else {
             setChecked(checked.filter(time => time !== timeref));
@@ -82,7 +82,7 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
                         {type === 2 && <Checkbox
                             onClick={(e) => removeDay(timeref, e)}
                             onChange={(e) => handleCheck(e, timeref)}
-                            defaultChecked={false}
+                            defaultChecked={true}
                         />}
                     </div>
                 </MuiPickersUtilsProvider>

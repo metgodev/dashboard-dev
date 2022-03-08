@@ -22,11 +22,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     let classes = useStyles();
     let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     //local
-    const openDrop = () => setOpen(!open);
-    const [checked, setChecked] = useState([]);
-    const [init, setInit] = useState({});
-    const [open, setOpen] = useState(false);
-    const [values, setValues] = useState({
+    let initState = {
         userId: user.id,
         status: status,
         openingHours: {
@@ -38,9 +34,15 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             friday: {},
             saturday: {},
         },
-    });
+    }
+    const openDrop = () => setOpen(!open);
+    const [checked, setChecked] = useState([]);
+    const [init, setInit] = useState({});
+    const [open, setOpen] = useState(false);
+    const [values, setValues] = useState(initState);
 
     useEffect(() => {
+        setValues(initState);
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
         let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
@@ -62,7 +64,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
     };
     const removeDay = (timeRef, e) => {
-        if (!e.target.checked) return;
+        if (e.target.checked) return;
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: "00:00", end: "00:00" } } }))
     }
 
@@ -80,7 +82,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     let maxSizeElements = ['MapPicker', 'timePicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
+            {ModalInit.map(({ title, id, field, rows, size, type }) =>
                 <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
@@ -94,7 +96,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 placeholder={title}
                                 multiline
                                 rows={rows}
-                                // maxRows={maxRows}
                                 defaultValue={init[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                                 error={values[field] === ''}
@@ -128,7 +129,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                     <TextField
                                         {...params}
                                         label={title}
-                                        placeholder="תגיות"
+                                        placeholder={title}
                                     />
                                 )}
                             />}

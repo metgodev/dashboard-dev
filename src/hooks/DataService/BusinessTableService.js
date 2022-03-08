@@ -14,8 +14,8 @@ const BusinessTableService = (rowsPerPage, page) => {
         keys: [],
         ignore: [
             'address', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
-            'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours',
-            'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
+            'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend',
+            'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
         ],
         tableCategories: {
             impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
@@ -45,7 +45,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }));
             // -------------------===businesses===-------------------
-            await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
+            await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
                 .then(({ data }) => data.map(({
                     status, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {
