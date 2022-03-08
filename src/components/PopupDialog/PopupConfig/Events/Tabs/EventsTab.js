@@ -40,7 +40,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
     }
-    console.log(values)
+
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
