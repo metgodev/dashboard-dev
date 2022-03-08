@@ -12,6 +12,8 @@ import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplet
 //styles
 import useStyles from '../../../styles'
 
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
 export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
@@ -19,6 +21,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
+        userId: user.id,
         addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
         relevantTo: "GOLDEN_AGE",
         prefferedSeason: "SUMMER",

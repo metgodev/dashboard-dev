@@ -11,12 +11,17 @@ import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 //styles
 import useStyles from '../../../styles'
 
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
 export const TracksTab = ({ handleClose, initialData, type }) => {
     //global
     let dispatch = useDispatch()
     let classes = useStyles();
     //local
-    const [values, setValues] = useState({ relevantTo: "GOLDEN_AGE" });
+    const [values, setValues] = useState({
+        userId: user.id,
+        relevantTo: "GOLDEN_AGE"
+    });
     //validator 
     let isFulfilled = Object.values(values).every(Boolean);
 

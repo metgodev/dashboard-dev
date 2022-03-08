@@ -37,7 +37,7 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
         let d2 = new Date(datetwo).toLocaleDateString()
         if (setDate) setDate(date)
         if (setDateTwo) setDateTwo(d2, field)
-    }, [])
+    }, [date, datetwo])
 
     const Warp = warp ? Widget : Box
 

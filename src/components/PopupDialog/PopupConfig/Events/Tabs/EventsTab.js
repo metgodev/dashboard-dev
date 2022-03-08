@@ -9,19 +9,13 @@ import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import Calendar from '../../../../Calendar/Calendar';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
-//styles
-import useStyles from '../../../styles'
 
 export const EventsTab = ({ handleClose, initialData, type }) => {
     //global
-    let classes = useStyles();
     const dispatch = useDispatch()
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({});
-
-    //validator 
-    let isFulfilled = Object.values(values).every(Boolean);
 
     useEffect(() => {
         if (type === 'add') setInit({})
@@ -34,7 +28,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: time }));
+    const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: new Date(time) }));
 
     const modify = async (type, id) => {
         if (type === 'add')
@@ -46,7 +40,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 .then(() => dispatch(set_table_changed(type + Math.random())))
                 .then(() => handleClose(false))
     }
-
+    console.log(values)
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>

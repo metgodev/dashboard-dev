@@ -7,12 +7,15 @@ import { Button, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
 export const TagsTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     //local
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        userId: user.id,
+    });
 
     //set the values
     const handleChange = (e, field, categories, type) => {
