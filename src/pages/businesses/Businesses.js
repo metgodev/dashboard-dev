@@ -20,6 +20,7 @@ function Businesses() {
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
     let { businesses, tableCategories, keys } = BusinessTableService(rowsPerPage, page)
+    console.log(businesses)
     const pages = Math.ceil(businesses.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);

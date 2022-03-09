@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -14,8 +14,6 @@ import TracksPop from './PopupConfig/Tracks/TracksPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
-import { useDispatch } from 'react-redux';
-
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -24,12 +22,31 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 
 export default function PopupDialog({ description, tabs, title, open, setOpen, initialData, type }) {
+
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
     const theme = useTheme();
-    
+
+    const [media, setMedia] = useState([])
+
+    const setInitialValuesForMedia = () => {
+        if(initialData.gallery !== undefined){
+            let initImagesArr = []
+            console.log(JSON.parse(initialData.gallery).length)
+            JSON.parse(initialData.gallery).map( (mediaItem) => {
+                console.log(mediaItem)
+                initImagesArr.push(mediaItem)
+            })
+            console.log(initImagesArr)
+            setMedia(initImagesArr)
+        }
+    }
+
+    useEffect( () => {
+        setInitialValuesForMedia()
+    }, [open])
+
     //global
-    const dispatch = useDispatch();
 
     const handleClose = () => setOpen(false)
 
@@ -62,10 +79,10 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'events' && <EventsPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'points' && <PointsPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tracks' && <TracksPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

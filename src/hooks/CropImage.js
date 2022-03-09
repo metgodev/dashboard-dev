@@ -12,7 +12,6 @@ const getCropData = (upload_media, cropper, setVisibility) => {
 };
 
 export const cropFile = (file, setImage) => {
-    console.log(file)
     const reader = new FileReader();
     reader.onload = () => {
         setImage(reader.result);

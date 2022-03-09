@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
@@ -8,28 +8,27 @@ import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
+import LoadingSpin from "react-loading-spin";
 //styles
 import useStyles from "../../styles";
 
 
 
-const ModifyPop = ({ handleClose, initialData, type }) => {
+const ModifyPop = ({ media, setMedia, handleClose, initialData, type, imagesArr, setImagesArr, videoArr, setVideoArr, logo, setLogo, files, setFiles }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
+    const [loadingImage, setLoadingImage] = useState(false)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
-    const [imagesArr, setImagesArr] = useState([]);
-    const [videoArr, setVideoArr] = useState([]);
-    const [logo,setLogo] = useState([]);
-    const [files,setFiles] = useState([]);
-
-
 
     return (
         <div>
+            {loadingImage && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", backgroundColor:"rgba(0,0,0,0.5)", top:"0", left:"0", right:"0", bottom:"0", zIndex:"5"}}>
+                <LoadingSpin />
+            </div>}
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
@@ -43,14 +42,7 @@ const ModifyPop = ({ handleClose, initialData, type }) => {
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab
-                        imagesArr={imagesArr} setImagesArr={setImagesArr}
-                        videoArr={videoArr} setVideoArr={setVideoArr}
-                        logo={logo} setLogo={setLogo}
-                        files={files} setFiles={setFiles}
-                        initialData={initialData} 
-                        type={type} 
-                    />
+                    <UploadMediaTab setLoadingImage={setLoadingImage} media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"business"}/>
                 </TabPanel>
             </DialogContent>
         </div >

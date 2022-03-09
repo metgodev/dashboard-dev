@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import useStyles from "../../styles";
 
 
-const EventsPop = ({ handleClose, initialData, type }) => {
+const EventsPop = ({ media, setMedia, handleClose, initialData, type }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
@@ -33,7 +33,7 @@ const EventsPop = ({ handleClose, initialData, type }) => {
                     <EventsTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab initialData={initialData} type={type} />
+                    <UploadMediaTab media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"events"}/>
                 </TabPanel>
             </DialogContent>
         </div >

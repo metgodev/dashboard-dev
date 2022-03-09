@@ -10,7 +10,7 @@ import { UploadMediaTab } from './Tabs/UploadMediaTab';
 //styles
 import useStyles from "../../styles";
 
-const TracksPop = ({ handleClose, initialData, type }) => {
+const TracksPop = ({media, setMedia, handleClose, initialData, type }) => {
     const classes = useStyles()
     const [tab, setTab] = useState(0);
 
@@ -30,7 +30,7 @@ const TracksPop = ({ handleClose, initialData, type }) => {
                     <TracksTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab />
+                    <UploadMediaTab media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"tracks"}/>
                 </TabPanel>
             </DialogContent>
         </div >
