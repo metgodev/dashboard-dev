@@ -7,7 +7,7 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { EventsTab } from './Tabs/EventsTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
-import LoadingSpin from "react-loading-spin";
+import { CircularProgress } from '@material-ui/core'
 //styles
 import useStyles from "../../styles";
 
@@ -25,7 +25,7 @@ const EventsPop = ({ media, setMedia, handleClose, initialData, type, open }) =>
     return (
         <div>
             {loadingImage && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", backgroundColor:"rgba(0,0,0,0.5)", top:"0", left:"0", right:"0", bottom:"0", zIndex:"5"}}>
-                <LoadingSpin />
+                <CircularProgress size={100}/>
             </div>}
             <Box className={classes.stickyBox}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
