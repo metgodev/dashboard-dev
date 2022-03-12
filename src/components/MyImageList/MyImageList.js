@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../REDUX/actions/main.actions'
 
 
-export default function MyImageList({media, setMedia, initialData, type }) {
+export default function MyImageList({media, setMedia, initialData, type, tab }) {
 
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -17,20 +17,25 @@ export default function MyImageList({media, setMedia, initialData, type }) {
     const deleteItem = ( item ) => {
         let newMedia = media.filter( mediaItem => item.item.file._id !== mediaItem.file._id)
         setMedia(newMedia)
+        console.log(newMedia)
         let ids = newMedia.map( (item) => {
             return {fileId:item.file._id, metadata: {type: item.metadata.type}}
         })
         const dataToSend = { galleryFileIds : [ ...ids ], gallery: [ ...newMedia]}
-        client.service("business").patch(initialData.id, dataToSend)
+        console.log(dataToSend)
+        client.service(tab).patch(initialData.id, dataToSend)
             .then( (res) => {
                 dispatch(set_table_changed("upload_media" + Math.random()))
-                setMedia([...res.gallery])
+                setMedia(
+                    res.gallery? [...res.gallery] : []
+                    )
+                console.log("Item deleted")
             })
     }
 
     return (
         <>
-            <ImageList className={classes.imageList} cols={4} rowHeight={200}>
+            <ImageList className={classes.imageList} cols={3} rowHeight={200}>
                 {media.map( (item, index) => {
                     if(item.metadata.type === type && type !== 'video' && type !== 'files') {
                         return(

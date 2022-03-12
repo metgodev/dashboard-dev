@@ -55,7 +55,7 @@ export let picker = {
 
 export const mediaUploadSections = [
     {
-        title: term('upload_photo'),
+        title: term('image'),
         type: "image",
         fileTypes: ["JPG", "PNG", "GIF"],
     },

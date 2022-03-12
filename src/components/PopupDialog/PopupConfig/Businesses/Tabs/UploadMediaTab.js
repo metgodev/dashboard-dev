@@ -76,11 +76,9 @@ const uploadFile = (fileToUpload, type) => {
         let mediaToUpload = { galleryFileIds: [ ...currentFileIds, { fileId:res[0]._id, metadata:{ type:uploadCategory } } ] }
         client.service(tab).patch(initialData.id, mediaToUpload )
           .then( (res) => {
-            setMedia([...res.gallery])
-            setLoadingImage(false)
-          })
-          .then( () => {
-            dispatch(set_table_changed("upload_media"))
+              dispatch( set_table_changed("upload_media" + Math.random()))
+              setMedia([...res.gallery])
+              setLoadingImage(false)
           })
       })
   }
@@ -113,7 +111,7 @@ const uploadFile = (fileToUpload, type) => {
               <>
                 <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
                 <DialogContent key={index}>
-                  <MyImageList media={media} setMedia={setMedia} type={type} initialData={initialData} />
+                  <MyImageList tab={tab} media={media} setMedia={setMedia} type={type} initialData={initialData} />
                 </DialogContent>
                 {index < 3 && <Box className={classes.divider}></Box>}
               </>

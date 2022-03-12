@@ -11,7 +11,7 @@ export default makeStyles(theme => ({
       position: "relative",
     },
     audio: {
-      width:"270px",
+      width:"200px",
       height:"100px",
       position: "relative",
     },

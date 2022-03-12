@@ -53,7 +53,7 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
 
   const uploadMedia = (fileToUpload, type) => {
     if(type === "file"){
-        uploadFile(fileToUpload) //Just upload the file AS IS
+        uploadFile(fileToUpload, type) //Just upload the file AS IS
     }else{
       const reader = new FileReader(); //Crop the image and then send it to upload
       reader.onload = () => {
@@ -67,8 +67,8 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
   }
 }
 
-const uploadFile = (fileToUpload) => {
-  if (typeof cropper !== "undefined") {
+const uploadFile = (fileToUpload, type) => {
+  if (typeof cropper !== "undefined" || type === "file") {
         setLoadingImage(true)
         const formData = new FormData();
         formData.append("file", fileToUpload);
@@ -77,11 +77,9 @@ const uploadFile = (fileToUpload) => {
         let mediaToUpload = { galleryFileIds: [ ...currentFileIds, { fileId:res[0]._id, metadata:{ type:uploadCategory } } ] }
         client.service(tab).patch(initialData.id, mediaToUpload )
           .then( (res) => {
+            dispatch( set_table_changed("upload_media" + Math.random()))
             setMedia([...res.gallery])
             setLoadingImage(false)
-          })
-          .then( () => {
-            dispatch(set_table_changed("upload_media"))
           })
       })
   }
@@ -114,7 +112,7 @@ const uploadFile = (fileToUpload) => {
               <>
                 <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
                 <DialogContent key={index}>
-                  <MyImageList media={media} setMedia={setMedia} type={type} initialData={initialData} />
+                  <MyImageList tab={tab} media={media} setMedia={setMedia} type={type} initialData={initialData} />
                 </DialogContent>
                 {index < 3 && <Box className={classes.divider}></Box>}
               </>
