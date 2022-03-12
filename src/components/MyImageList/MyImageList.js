@@ -17,19 +17,16 @@ export default function MyImageList({media, setMedia, initialData, type, tab }) 
     const deleteItem = ( item ) => {
         let newMedia = media.filter( mediaItem => item.item.file._id !== mediaItem.file._id)
         setMedia(newMedia)
-        console.log(newMedia)
         let ids = newMedia.map( (item) => {
             return {fileId:item.file._id, metadata: {type: item.metadata.type}}
         })
         const dataToSend = { galleryFileIds : [ ...ids ], gallery: [ ...newMedia]}
-        console.log(dataToSend)
         client.service(tab).patch(initialData.id, dataToSend)
             .then( (res) => {
                 dispatch(set_table_changed("upload_media" + Math.random()))
                 setMedia(
                     res.gallery? [...res.gallery] : []
                     )
-                console.log("Item deleted")
             })
     }
 

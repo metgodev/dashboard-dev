@@ -41,7 +41,6 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
 
     useEffect( () => {
             setInitialValuesForMedia()
-            console.log("Data changed")
     }, [open, initialData])
 
     //global

@@ -82,7 +82,7 @@ const uploadFile = (fileToUpload, type) => {
     <>
       <Box className={classes.uploadMediaTabWrapper}>
         <Typography weight={"bold"} size={"xxl"}>{term("upload_media")}</Typography>
-        <ToggleButtonGroup sx={{direction:"ltr"}} size="small" color="primary" value={uploadCategory} onChange={handleCategoryChange} exclusive ={true}>
+        <ToggleButtonGroup className={classes.toggleButtons} size="small" color="primary" value={uploadCategory} onChange={handleCategoryChange} exclusive ={true}>
           {mediaUploadSections.map( ({type}) => {
                 return(
                 <ToggleButton value={type} key={type}>
@@ -96,7 +96,7 @@ const uploadFile = (fileToUpload, type) => {
               <DragDrop onRecieveFile={uploadMedia} fileTypes={uploadFileTypes} />
           </Box>}
           {imageToCrop !== null &&
-            <CropImage cropper={cropper} src={imageToCrop} setCropper={setCropper} onClick={uploadFile} />
+            <CropImage cropper={cropper} src={imageToCrop} setCropper={setCropper} onClick={uploadFile}  style={classes.cropBox}/>
           }
           {!imageToCrop && <Typography weight={"bold"} size={"xxl"}>{term('gallery')}</Typography>}
           {!imageToCrop && mediaUploadSections.map( ({ type }, index) => {
