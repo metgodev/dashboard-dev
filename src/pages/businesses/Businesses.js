@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import term from '../../terms'
 import { Box } from '@mui/material'
 import { useSelector } from 'react-redux'
@@ -20,7 +20,6 @@ function Businesses() {
     const [rowsPerPage, setRowsPerPage] = useState(25);
     //table data
     let { businesses, tableCategories, keys } = BusinessTableService(rowsPerPage, page)
-    console.log(businesses)
     const pages = Math.ceil(businesses.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);

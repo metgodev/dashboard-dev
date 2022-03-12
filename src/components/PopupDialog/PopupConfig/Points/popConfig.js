@@ -55,3 +55,16 @@ export let picker = {
     { value: "PARTIAL", name: term('partial') },
     { value: "NONE", name: term('none') }]
 };
+
+export const mediaUploadSections = [
+    {
+        title: term('upload_photo'),
+        type: "image",
+        fileTypes: ["JPG", "PNG", "GIF"],
+    },
+    {
+        title: term('upload_video'),
+        type: "video",
+        fileTypes: ["MP4", "AVI", "WMV"],
+    },
+]

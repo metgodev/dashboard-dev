@@ -32,19 +32,16 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
     const setInitialValuesForMedia = () => {
         if(initialData.gallery !== undefined){
             let initImagesArr = []
-            console.log(JSON.parse(initialData.gallery).length)
             JSON.parse(initialData.gallery).map( (mediaItem) => {
-                console.log(mediaItem)
                 initImagesArr.push(mediaItem)
             })
-            console.log(initImagesArr)
             setMedia(initImagesArr)
         }
     }
 
     useEffect( () => {
-        setInitialValuesForMedia()
-    }, [open])
+            setInitialValuesForMedia()
+    }, [open, initialData])
 
     //global
 
@@ -79,10 +76,10 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'events' && <EventsPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'points' && <PointsPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tracks' && <TracksPop media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'events' && <EventsPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'points' && <PointsPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tracks' && <TracksPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

@@ -80,3 +80,26 @@ export const statisticsText = `מספר לחיצות על: טלפון, אתר, �
 אירועים שהעסק פתח
 מספר מסלולים שהעסק מופיע
 כמה כסף נכנס מתו נגב - כמה תוים נרכשו`
+
+export const mediaUploadSections = [
+    {
+        title: term('logo'),
+        type: "logo",
+        fileTypes: ["JPG", "PNG", "PDF"],
+    },
+    {
+        title: term('image'),
+        type: "image",
+        fileTypes: ["JPG", "PNG", "GIF"],
+    },
+    {
+        title: term('video'),
+        type: "video",
+        fileTypes: ["MP4", "AVI", "WMV"],
+    },
+    {
+        title: term('audio'),
+        type: "files",
+        fileTypes: ["MP3"],
+    },
+]

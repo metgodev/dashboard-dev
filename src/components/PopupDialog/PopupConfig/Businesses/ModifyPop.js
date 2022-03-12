@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
@@ -14,7 +14,7 @@ import useStyles from "../../styles";
 
 
 
-const ModifyPop = ({ media, setMedia, handleClose, initialData, type, imagesArr, setImagesArr, videoArr, setVideoArr, logo, setLogo, files, setFiles }) => {
+const ModifyPop = ({ media, setMedia, handleClose, initialData, type, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
@@ -42,7 +42,7 @@ const ModifyPop = ({ media, setMedia, handleClose, initialData, type, imagesArr,
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab setLoadingImage={setLoadingImage} media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"business"}/>
+                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} media={media} setMedia={setMedia} initialData={initialData} tab={"business"}/>
                 </TabPanel>
             </DialogContent>
         </div >

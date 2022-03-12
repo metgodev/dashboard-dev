@@ -1,15 +1,7 @@
-import Cropper from "react-cropper";
 import { Button } from '@material-ui/core';
 import term from '../terms';
+import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-
-
-const getCropData = (upload_media, cropper, setVisibility) => {
-    if (typeof cropper !== "undefined") {
-        upload_media(cropper.getCroppedCanvas().toDataURL());
-        setVisibility(false)
-    }
-};
 
 export const cropFile = (file, setImage) => {
     const reader = new FileReader();
@@ -21,22 +13,28 @@ export const cropFile = (file, setImage) => {
             reader.readAsDataURL(res);
         })
     });
-
 }
 
-const cropImage = ({ cropper, setVisibility, visibility, src, setCropper, upload_media }) => {
+const handleClick = (cropper, onClick) => {
+    fetch(cropper.getCroppedCanvas().toDataURL()).then( (res) => {
+        res.blob().then( (res) => {
+            let fileToUpload = new File([res], "imageFile", { type: "image/png" })
+            onClick(fileToUpload)
+        })
+    })
+}
+
+const cropImage = ({ cropper, setCropper, src,  onClick, style  }) => {
     return (
-        visibility &&
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+        <div className={style}>
             <Cropper
-                style={{ width: 400, height: 400 }}
+                style={{ width: "50vw", height: "400px"}}
                 zoomTo={0.5}
                 aspectRatio={1}
                 src={src}
                 viewMode={1}
                 minCropBoxHeight={10}
                 minCropBoxWidth={10}
-                cropBoxResizable={false}
                 background={false}
                 responsive={true}
                 autoCropArea={1}
@@ -50,7 +48,7 @@ const cropImage = ({ cropper, setVisibility, visibility, src, setCropper, upload
                 size="large"
                 variant="contained"
                 color="primary"
-                onClick={() => { getCropData(upload_media, cropper, setVisibility) }}
+                onClick={() => {handleClick(cropper, onClick)}}
             >
                 {term('crop_image')}
             </Button>

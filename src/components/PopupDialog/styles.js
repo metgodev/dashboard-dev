@@ -35,5 +35,33 @@ export default makeStyles(theme => ({
         borderBottom: .1,
         borderColor: 'lightGray',
         width: '100%'
+    },
+    uploadMediaTabWrapper: {
+        display: 'flex',
+        flexDirection: "column",
+        justifyContent: 'center',
+        alignItems: "center", 
+        width: '100%'
+    },
+    dragDropWrapper: {
+        display: 'flex',
+        alignItems: "center",
+        justifyContent: 'center'
+    },
+    divider: {
+        width:"80%",
+        height: "1px",
+        backgroundColor: theme.palette.primary.main
+    },
+    cropBox: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '10px' 
+    },
+    toggleButtons: {
+        direction:"ltr",
+        marginTop: "20px",
+        marginBottom: "20px"
     }
 }));

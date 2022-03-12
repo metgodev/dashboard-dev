@@ -1035,6 +1035,31 @@ const active_lexicon = {
         he: 'תגיות בסביבה',
         ar: 'العلامات حول',
     },
+    audio: {
+        en: 'Audio',
+        he: 'שמע',
+        ar: 'صوتي'
+    },
+    video: {
+        en: 'Video',
+        he: 'סרטון',
+        ar: 'فيديو'
+    },
+    logo: {
+        en: "Logo",
+        he: "לוגו",
+        ar: 'شعار'
+    },
+    image: {
+        en: "Image",
+        he: 'תמונה',
+        ar: 'صورة'
+    },
+    files: {
+        en: "Files",
+        he: 'קבצים',
+        ar: 'الملفات'
+    }
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
