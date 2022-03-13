@@ -79,10 +79,10 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} media={media} />}
+                    {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} media={media} />}
+                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} media={media} />}
+                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} media={media} />}
                     {/* authority management */}
                     {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
                     {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />}
