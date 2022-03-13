@@ -46,7 +46,7 @@ const MapPick = ({ setFatherValue }) => {
         <>
             {show &&
                 <>
-                    {/* <Grid container
+                    <Grid container
                         direction='row'
                         alignItems="stretch" style={{ paddingBottom: 5 }}>
                         <Grid item xs={4}>
@@ -64,7 +64,7 @@ const MapPick = ({ setFatherValue }) => {
                                 <Input type='text' value={zoom} disabled />
                             </FormLabel>
                         </Grid>
-                    </Grid> */}
+                    </Grid>
 
                     <MapPicker
                         defaultLocation={defaultLocation}
