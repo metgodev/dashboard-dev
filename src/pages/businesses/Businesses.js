@@ -53,6 +53,7 @@ function Businesses() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
             {businesses.length ? <PaginationTable
+                tableType={'business'}
                 lang={lang}
                 page={page}
                 keys={keys}

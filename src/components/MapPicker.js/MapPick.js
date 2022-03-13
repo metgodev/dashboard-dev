@@ -8,10 +8,8 @@ const { REACT_APP_GOOGLE_API_KEY } = process.env
 
 const DefaultZoom = 15;
 
-const MapPick = ({ setFatherValue }) => {
-
+const MapPick = React.memo(({ setFatherValue }) => {
     const [defaultLocation, setDefaultLocation] = useState({ lat: 0, lng: 0 });
-
     const [location, setLocation] = useState(defaultLocation);
     const [zoom, setZoom] = useState(DefaultZoom);
     const [show, setShow] = useState(false);
@@ -21,26 +19,24 @@ const MapPick = ({ setFatherValue }) => {
     }
 
     useLayoutEffect(() => {
+        let timer = setTimeout(() => setShow(true), 1000);
         navigator.geolocation.getCurrentPosition((position) => {
             setDefaultLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
         });
+        return () => clearTimeout(timer)
     }, [])
 
-    useEffect(() => {
-        let timer = setTimeout(() => setShow(true), 1000);
-        setFatherValue(pervState => ({ ...pervState, locationInfo: { type: "Custom", coordinates: [location.lat, location.lng] } }));
-        return () => clearTimeout(timer)
-    }, [location])
+    // useEffect(() => {
+    //     setFatherValue(pervState => ({ ...pervState, locationInfo: { type: "Custom", coordinates: [location.lat, location.lng] } }));
+    // }, [location])
 
-    function handleChangeZoom(newZoom) {
-        setZoom(newZoom);
-    }
+    const setPlace = () => setFatherValue(pervState => ({ ...pervState, locationInfo: { type: "Custom", coordinates: [location.lat, location.lng] } }));
 
-    function handleResetLocation() {
+    const handleChangeZoom = (newZoom) => setZoom(newZoom);
+    const handleResetLocation = () => {
         setDefaultLocation({ ...defaultLocation });
         setZoom(DefaultZoom);
     }
-
 
     return (
         <>
@@ -75,11 +71,19 @@ const MapPick = ({ setFatherValue }) => {
                         onChangeLocation={handleChangeLocation}
                         onChangeZoom={handleChangeZoom}
                         apiKey={REACT_APP_GOOGLE_API_KEY} />
-                    <Button style={{ marginTop: 10 }} variant='outlined' onClick={handleResetLocation}>{term('reset_location')}</Button>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <Button style={{ marginTop: 10, width: '100%' }} variant='outlined' onClick={handleResetLocation}>{term('reset_location')}</Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Button style={{ marginTop: 10, width: '100%' }} variant='outlined' onClick={setPlace}>{term('set_location')}</Button>
+                        </Grid>
+                    </Grid>
                 </>
             }
         </>
     );
-}
+})
+
 
 export default MapPick

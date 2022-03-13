@@ -18,6 +18,7 @@ const PointsTableService = (rowsPerPage, page) => {
         ],
         stringifyExept: ['tags', 'activitiesInPlace', 'exclusiveFor'],
         tableCategories: {
+            status: ['all', 'private', 'public', 'pending_approval'],
             poiName: ['all',],
             activitiesInPlace: ['all',],
             exclusiveFor: ['all',],
@@ -42,8 +43,11 @@ const PointsTableService = (rowsPerPage, page) => {
                 }))
             // -------------------===pois===-------------------
             await client.service('pois').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
-                .then(({ data }) => data.map(({ authority, _id, prefferedSeason, shady, ...rest }) =>
-                    pois = [...pois, { authority: authority?.name, id: _id, prefferedSeason: term(prefferedSeason.toLowerCase()), shady: term(shady.toLowerCase()), ...rest }]))
+                .then(({ data }) => data.map(({ status, authority, _id, prefferedSeason, shady, ...rest }) =>
+                    pois = [...pois, {
+                        status, authority: authority?.name, id: _id, prefferedSeason: term(prefferedSeason.toLowerCase()),
+                        shady: term(shady.toLowerCase()), ...rest
+                    }]))
             // -------------------===categories===-------------------
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ name, _id }) => categories = [...categories, { name, id: _id }]))

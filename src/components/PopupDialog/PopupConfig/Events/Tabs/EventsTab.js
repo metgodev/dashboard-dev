@@ -9,13 +9,21 @@ import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import Calendar from '../../../../Calendar/Calendar';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
+import MapPick from '../../../../MapPicker.js/MapPick';
+
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
 export const EventsTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     //local
+    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     const [init, setInit] = useState({});
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        userId: user.id,
+        status: status,
+    });
+
 
     useEffect(() => {
         if (type === 'add') setInit({})
@@ -41,13 +49,14 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
+    let maxSizeElements = ['MapPicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
-
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
+                <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
+                        {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
                         {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField

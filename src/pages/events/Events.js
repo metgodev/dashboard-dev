@@ -50,6 +50,7 @@ function Events() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />
             {events.length ? <PaginationTable
+                tableType={'events'}
                 lang={lang}
                 page={page}
                 keys={keys}

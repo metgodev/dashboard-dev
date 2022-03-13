@@ -16,6 +16,8 @@ export const ModalInit = [
     { title: term('name'), id: createRandomId(), field: 'trackName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
+    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
     { title: term('time_duration_days'), id: createRandomId(), field: 'timeDurationDays', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('time_duration_hours'), id: createRandomId(), field: 'timeDurationHours', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('time_duration_minutes'), id: createRandomId(), field: 'timeDuraionMinutes', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },

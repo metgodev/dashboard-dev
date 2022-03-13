@@ -50,6 +50,7 @@ function PointsOfInterest() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('points')} />
             {pois.length ? <PaginationTable
+                tableType={'pois'}
                 lang={lang}
                 page={page}
                 keys={keys}

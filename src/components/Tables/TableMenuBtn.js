@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import useStyles from "./styles";
 import { set_table_changed } from '../../REDUX/actions/main.actions';
 
-export default function TableMenuBtn({ status, stats, id }) {
+export default function TableMenuBtn({ status, stats, id, tableType }) {
     const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -21,7 +21,7 @@ export default function TableMenuBtn({ status, stats, id }) {
     };
 
     const handleClose = async (element) => {
-        client.service('business').patch(id, { "status": element }).then(() => {
+        client.service(tableType).patch(id, { "status": element }).then(() => {
             dispatch(set_table_changed(element + Math.random()))
         })
         setAnchorEl(null);

@@ -18,7 +18,7 @@ import TableHeader from './TableHeader';
 import TableMenuBtn from './TableMenuBtn';
 import TableInfoMenu from './TableInfoMenu';
 
-export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat, remove }) {
+export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat, remove, tableType }) {
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
     //local
     const [TableCel] = useState({
@@ -47,7 +47,7 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                                 .map(({ ...data }) => (
                                     <StyledTableRow key={data.id}>
                                         {data?.status && <TableCell size="small" align='center' >
-                                            <TableMenuBtn status={data.status} stats={stats} id={data.id} />
+                                            <TableMenuBtn status={data.status} stats={stats} id={data.id} tableType={tableType} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
                                         <Grid container direction="row" justifyContent={data.contact || remove ? "space-evenly" : "center"} alignItems="stretch">

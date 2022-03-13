@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 //styles
 import useStyles from '../../../styles'
+import MapPick from '../../../../MapPicker.js/MapPick';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -18,7 +19,9 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     let dispatch = useDispatch()
     let classes = useStyles();
     //local
+    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     const [values, setValues] = useState({
+        status: status,
         userId: user.id,
         relevantTo: "GOLDEN_AGE"
     });
@@ -41,13 +44,14 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
+    let maxSizeElements = ['MapPicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
-
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
+                <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
+                        {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
                         {type === 'textfield' &&
                             <TextField
                                 size={size}

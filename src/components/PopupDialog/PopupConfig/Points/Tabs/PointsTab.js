@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 //styles
 import useStyles from '../../../styles'
+import MapPick from '../../../../MapPicker.js/MapPick';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -19,8 +20,10 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     let classes = useStyles();
     let dispatch = useDispatch();
     //local
+    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
+        status: status,
         userId: user.id,
         addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
         relevantTo: "GOLDEN_AGE",
@@ -43,6 +46,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     }, [type])
 
     const modify = async (type, id) => {
+        console.log(values)
         if (type === 'add')
             client.service('pois').create(values)
                 .then(() => dispatch(set_table_changed(type)))
@@ -53,13 +57,14 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
+    let maxSizeElements = ['MapPicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
-
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
+                <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
+                        {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
                         {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField

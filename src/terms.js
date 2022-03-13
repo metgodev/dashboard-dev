@@ -1110,6 +1110,11 @@ const active_lexicon = {
         he: 'ללא',
         ar: 'لا شيء'
     },
+    set_location: {
+        en: 'Set location',
+        he: 'קבע מיקום',
+        ar: 'تعيين الموقع'
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

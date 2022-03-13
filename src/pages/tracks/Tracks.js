@@ -53,6 +53,7 @@ function Tracks() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('routes')} />
             {tracks.length ? <PaginationTable
+                tableData={'tracks'}
                 lang={lang}
                 page={page}
                 keys={keys}
