@@ -54,7 +54,8 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     }
 
     return (
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
+
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>

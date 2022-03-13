@@ -1079,7 +1079,37 @@ const active_lexicon = {
         en: "Files",
         he: 'קבצים',
         ar: 'الملفات'
-    }
+    },
+    summer: {
+        en: 'Summer',
+        he: 'קיץ',
+        ar: 'صيفي'
+    },
+    winter: {
+        en: 'Winter',
+        he: 'חורף',
+        ar: 'شتاء'
+    },
+    spring: {
+        en: 'Spring',
+        he: 'אביב',
+        ar: 'ربيعي'
+    },
+    full: {
+        en: 'Full',
+        he: 'מלא',
+        ar: 'كامل'
+    },
+    partial: {
+        en: 'Partial',
+        he: 'חלקי',
+        ar: 'جزئي'
+    },
+    none: {
+        en: 'None',
+        he: 'ללא',
+        ar: 'لا شيء'
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

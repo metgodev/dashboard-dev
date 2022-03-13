@@ -25,6 +25,7 @@ const EventstableService = (rowsPerPage, page) => {
             price: ['all',],
             startDate: ['all',],
             endDate: ['all', 'today', 'last_week', 'last_month'],
+            startDate: ['all', 'today', 'last_week', 'last_month'],
         }
     })
 

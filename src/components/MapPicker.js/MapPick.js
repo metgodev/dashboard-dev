@@ -21,15 +21,15 @@ const MapPick = ({ setFatherValue }) => {
     }
 
     useLayoutEffect(() => {
-        let timer = setTimeout(() => setShow(true), 3000);
         navigator.geolocation.getCurrentPosition((position) => {
             setDefaultLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
         });
-        return () => clearTimeout(timer)
     }, [])
 
     useEffect(() => {
+        let timer = setTimeout(() => setShow(true), 1000);
         setFatherValue(pervState => ({ ...pervState, locationInfo: { type: "Custom", coordinates: [location.lat, location.lng] } }));
+        return () => clearTimeout(timer)
     }, [location])
 
     function handleChangeZoom(newZoom) {
@@ -46,7 +46,7 @@ const MapPick = ({ setFatherValue }) => {
         <>
             {show &&
                 <>
-                    <Grid container
+                    {/* <Grid container
                         direction='row'
                         alignItems="stretch" style={{ paddingBottom: 5 }}>
                         <Grid item xs={4}>
@@ -64,12 +64,13 @@ const MapPick = ({ setFatherValue }) => {
                                 <Input type='text' value={zoom} disabled />
                             </FormLabel>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
 
                     <MapPicker
                         defaultLocation={defaultLocation}
                         zoom={zoom}
                         mapTypeId="roadmap"
+                        mapTypeIds={['roadmap', 'satellite', 'hybrid', 'terrain']}
                         style={{ width: '100%', height: '400px' }}
                         onChangeLocation={handleChangeLocation}
                         onChangeZoom={handleChangeZoom}

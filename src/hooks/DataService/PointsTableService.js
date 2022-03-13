@@ -2,6 +2,7 @@ import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { client } from '../../API/metro';
 import stringify_nested from '../../utils/stringify_nested';
+import term from '../../terms';
 
 const PointsTableService = (rowsPerPage, page) => {
     //global
@@ -15,12 +16,13 @@ const PointsTableService = (rowsPerPage, page) => {
             'address', 'relevantTo', 'addressType', 'categoriesIds', 'isAccessable', 'description', 'websiteUrl', 'locationInfo', 'location',
             'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail', 'id', 'createdAt', 'updatedAt', '__v'
         ],
+        stringifyExept: ['tags', 'activitiesInPlace', 'exclusiveFor'],
         tableCategories: {
             poiName: ['all',],
             activitiesInPlace: ['all',],
             exclusiveFor: ['all',],
-            prefferedSeason: ['all',],
-            shady: ['all',],
+            prefferedSeason: ['all', "summer", "winter", "fall", "spring"],
+            shady: ['all', "full", "partial", "none"],
             arrivalRecommendations: ['all',],
         }
     })
@@ -40,7 +42,8 @@ const PointsTableService = (rowsPerPage, page) => {
                 }))
             // -------------------===pois===-------------------
             await client.service('pois').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
-                .then(({ data }) => data.map(({ authority, _id, ...rest }) => pois = [...pois, { authority: authority?.name, id: _id, ...rest }]))
+                .then(({ data }) => data.map(({ authority, _id, prefferedSeason, shady, ...rest }) =>
+                    pois = [...pois, { authority: authority?.name, id: _id, prefferedSeason: term(prefferedSeason.toLowerCase()), shady: term(shady.toLowerCase()), ...rest }]))
             // -------------------===categories===-------------------
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ name, _id }) => categories = [...categories, { name, id: _id }]))
@@ -49,7 +52,7 @@ const PointsTableService = (rowsPerPage, page) => {
             let keys = Object.keys(pois[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
             // -------------------===set data===-------------------
             setData(prevState => ({
-                ...prevState, authorities, pois: stringify_nested(pois, 'tags'), keys,
+                ...prevState, authorities, pois: stringify_nested(pois, data.stringifyExept), keys,
                 tableCategories: {
                     ...prevState.tableCategories, category: categories, authority: authority_cat
                 }
