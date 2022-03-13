@@ -27,7 +27,6 @@ function SignIn() {
                     e: res.email,
                     fn: res.firstName,
                     ln: res.lastName,
-                    rn: res.roles[0].roleName,
                     v: res.isVerified,
                     id: res._id
                 }
@@ -42,7 +41,7 @@ function SignIn() {
     return (
         <>
             <Typography variant="h1" className={classes.greeting}>
-                {term('metro_travel')}
+                {term('met_go')}
             </Typography>
             <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>

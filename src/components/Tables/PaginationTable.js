@@ -23,7 +23,7 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
     //local
     const [TableCel] = useState({
         columns: keys,
-        columnsToHide: ['btn', 'status'],
+        columnsToHide: ['btn', 'actions', 'status'],
     })
     //style
     let classes = useStyles();
@@ -50,17 +50,15 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                                             <TableMenuBtn status={data.status} stats={stats} id={data.id} />
                                         </TableCell>}
                                         {addTableRow(data, TableCel.columns, TableCel.columnsToHide)}
-                                        <TableCell align="justify" size="small">
-                                            <Grid container direction="row" justifyContent={data.contact || remove ? "space-evenly" : "center"} alignItems="stretch">
-                                                {data.contact && <TableInfoMenu options={JSON.parse(data.contact)} />}
-                                                {remove && <IconButton size="small" aria-haspopup="true" onClick={() => remove(data)} >
-                                                    <DeleteOutlinedIcon />
-                                                </IconButton>}
-                                                {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
-                                                    <EditOutlinedIcon />
-                                                </IconButton>}
-                                            </Grid>
-                                        </TableCell>
+                                        <Grid container direction="row" justifyContent={data.contact || remove ? "space-evenly" : "center"} alignItems="stretch">
+                                            {data.contact && <TableInfoMenu options={JSON.parse(data.contact)} />}
+                                            {remove && <IconButton size="small" aria-haspopup="true" onClick={() => remove(data.id)} >
+                                                <DeleteOutlinedIcon />
+                                            </IconButton>}
+                                            {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
+                                                <EditOutlinedIcon />
+                                            </IconButton>}
+                                        </Grid>
                                     </StyledTableRow>
                                 ))}
                         </TableBody>

@@ -35,7 +35,7 @@ function Login() {
       </div>
       <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>{term("metro_travel")}</Typography>
+        <Typography className={classes.logotypeText}>{term("met_go")}</Typography>
       </div>
     </Grid>
   );

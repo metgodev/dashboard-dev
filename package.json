@@ -52,7 +52,7 @@
     "start": "react-scripts start",
     "start:prod": "env.prod-cmd -f react-scripts start",
     "build:prod": "env.prod-cmd -f react-scripts build",
-    "build": "react-scripts build",
+    "build": "CI=false && BUILD_PATH='./dist' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -73,5 +73,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "firebase-tools": "^10.2.2"
   }
 }

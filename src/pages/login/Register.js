@@ -34,7 +34,6 @@ function Register() {
                         e: res.email,
                         fn: res.firstName,
                         ln: res.lastName,
-                        rn: res.roles[0].roleName,
                         v: res.isVerified,
                         id: res._id
                     }

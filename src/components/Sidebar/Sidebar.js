@@ -14,6 +14,7 @@ import {
     HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 // styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -27,7 +28,7 @@ import term from "../../terms";
 
 const structure = [
     {
-        id: 0, label: term('admin'), icon: <AdminPanelSettingsOutlinedIcon />,
+        id: 0, label: term('admin'), link: "/admin/areas", icon: <AdminPanelSettingsOutlinedIcon />,
         children: [
             { label: term('manage_areas'), link: "/admin/areas" },
             { label: term('manage_authorities'), link: "/admin/authorities" },
@@ -39,8 +40,9 @@ const structure = [
     { id: 3, label: term('events'), link: "/events", icon: <Event /> },
     { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
     { id: 5, label: term('routes'), link: "/routes", icon: <Route />, },
-    // { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
+    { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
     // { id: 7, label: term('users'), link: "/users", icon: <People />, },
+    { id: 7, label: term('local_campaigns'), link: "/campaign", icon: <CampaignOutlinedIcon />, },
     { id: 8, label: term('map'), link: "/map", icon: <Map />, },
     { id: 9, type: "divider" },
     { id: 10, type: 'title', label: term('help') },
@@ -49,7 +51,7 @@ const structure = [
     { id: 14, type: "divider" },
 ];
 
-const SideBar = React.memo(({ location }) => {
+const Sidebar = React.memo(({ location }) => {
     let classes = useStyles();
     let theme = useTheme();
     let dispatch = useDispatch()
@@ -114,4 +116,4 @@ const SideBar = React.memo(({ location }) => {
     }
 })
 
-export default SideBar;
+export default Sidebar;

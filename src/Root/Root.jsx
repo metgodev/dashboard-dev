@@ -23,6 +23,7 @@ import FAQ from '../pages/FAQ/FAQ';
 // admin pages
 import AreaManagement from '../pages/admin/AreaManagement';
 import AuthorityManagement from '../pages/admin/AuthorityManagement';
+import LocalCampaigns from '../pages/localCampains/LocalCampaigns';
 
 
 const Root = () => {
@@ -58,6 +59,7 @@ const Root = () => {
                     <Route exact path="/routes" element={<Protecte auth={verified}><Tracks /></Protecte>} />
                     <Route exact path="/voucher" element={<Protecte auth={verified}><Voucher /></Protecte>} />
                     <Route exact path="/users" element={<Protecte auth={verified}><UsersTable /></Protecte>} />
+                    <Route exact path="/campaign" element={<Protecte auth={verified}><LocalCampaigns /></Protecte>} />
                     <Route exact path="/map" element={<Protecte auth={verified}><Maps /></Protecte>} />
                     <Route exact path="/support" element={<Protecte auth={verified}><Support /></Protecte>} />
                     <Route exact path="/FAQ" element={<Protecte auth={verified}><FAQ /></Protecte>} />
@@ -65,8 +67,8 @@ const Root = () => {
                     <Route path='*' element={<Protecte auth={verified}><Error /></Protecte>} />
                     {isSuperAdmin &&
                         <>
-                            <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement/></Protecte>} />
-                            <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement/></Protecte>} />
+                            <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement /></Protecte>} />
+                            <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement /></Protecte>} />
                         </>
                     }
                 </Routes>

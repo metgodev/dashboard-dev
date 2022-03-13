@@ -1,5 +1,6 @@
 import { client } from "../../../../API/metro";
 import term from "../../../../terms";
+import { createRandomId } from "../../../../utils/randomId";
 
 
 (async () => {
@@ -13,27 +14,27 @@ import term from "../../../../terms";
     })
 
     // await client.service('area').find({ query: { _id: area_id } })
-    //     .then(({ data }) => data[0].tags.map(({ title, _id }) => tags = [...tags, { title, id: _id }]));
+    //     .then(({ data }) => data[0].tags.map(({ title, _id }) => tags = [...tags, { title, id: createRandomId()id }]));
 })();
 
 export const ModalTabs = [term('points'), term('gallery')]
 export const ModalInit = [
-    { title: term('name'), id: 1, field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('address'), id: 2, field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },
-    { title: term('category'), id: 3, field: 'categoriesIds', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('for_whom'), id: 4, field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('is_accessable'), id: 5, field: 'isAccessable', rows: 1, maxRows: 1, size: 'small', type: 'toggle' },
-    { title: term('description'), id: 6, field: 'description', rows: 5, maxRows: 5, size: 'small', type: 'textfield' },
-    { title: term('site_link'), id: 7, field: 'websiteUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('authority'), id: 8, field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('activities_in_place'), id: 9, field: 'activitiesInPlace', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('exclusive_for'), id: 10, field: 'exclusiveFor', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('preffered_season'), id: 11, field: 'prefferedSeason', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('shady'), id: 12, field: 'shady', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('arrival_recommendations'), id: 13, field: 'arrivalRecommendations', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('phone_number'), id: 14, field: 'phoneNumber', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('webpage_url'), id: 15, field: 'webpageUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
-    { title: term('contact_email'), id: 16, field: 'contactEmail', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('name'), id: createRandomId(), field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },
+    { title: term('category'), id: createRandomId(), field: 'categoriesIds', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 1, size: 'small', type: 'toggle' },
+    { title: term('description'), id: createRandomId(), field: 'description', rows: 5, maxRows: 5, size: 'small', type: 'textfield' },
+    { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('activities_in_place'), id: createRandomId(), field: 'activitiesInPlace', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('exclusive_for'), id: createRandomId(), field: 'exclusiveFor', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('preffered_season'), id: createRandomId(), field: 'prefferedSeason', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('shady'), id: createRandomId(), field: 'shady', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
+    { title: term('arrival_recommendations'), id: createRandomId(), field: 'arrivalRecommendations', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('phone_number'), id: createRandomId(), field: 'phoneNumber', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('webpage_url'), id: createRandomId(), field: 'webpageUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    { title: term('contact_email'), id: createRandomId(), field: 'contactEmail', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
 ]
 
 
