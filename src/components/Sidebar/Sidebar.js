@@ -51,7 +51,7 @@ const structure = [
     { id: 14, type: "divider" },
 ];
 
-const SideBar = React.memo(({ location }) => {
+const Sidebar = React.memo(({ location }) => {
     let classes = useStyles();
     let theme = useTheme();
     let dispatch = useDispatch()
@@ -116,4 +116,4 @@ const SideBar = React.memo(({ location }) => {
     }
 })
 
-export default SideBar;
+export default Sidebar;

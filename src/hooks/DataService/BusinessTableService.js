@@ -23,7 +23,7 @@ const BusinessTableService = (rowsPerPage, page) => {
             category: ['all', 'lodging', 'attraction', 'culture', 'local', 'travel', 'food'],
             tag: ['all',],
             authority: ['all',],
-            edit: ['all', 'today', 'last_week', 'last_month'],
+            lastChanges: ['all', 'today', 'last_week', 'last_month'],
         }
     })
 

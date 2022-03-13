@@ -67,8 +67,8 @@ const Root = () => {
                     <Route path='*' element={<Protecte auth={verified}><Error /></Protecte>} />
                     {isSuperAdmin &&
                         <>
-                            <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement/></Protecte>} />
-                            <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement/></Protecte>} />
+                            <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement /></Protecte>} />
+                            <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement /></Protecte>} />
                         </>
                     }
                 </Routes>
