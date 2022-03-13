@@ -17,31 +17,31 @@ import { set_table_changed } from '../../../../../REDUX/actions/main.actions'
 import useStyles from "../../../styles";
 
 export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingImage, open }) => {
- 
+
   const classes = useStyles()
   const dispatch = useDispatch();
 
-  useEffect( () => {
+  useEffect(() => {
     setImageToCrop(null)
   }, [open])
-  
+
   const [uploadCategory, setUploadCategory] = useState('image')
   const [uploadFileTypes, setUploadFileTypes] = useState(["JPG", "PNG", "JPEG"])
   const [imageToCrop, setImageToCrop] = useState(null)
   const [cropper, setCropper] = useState();
 
-  useEffect( () => { //Cleanup
+  useEffect(() => { //Cleanup
     setImageToCrop(null)
     console.log("Cleanup")
-    return(
+    return (
       console.log("Cleanup")
     )
-  },[])
+  }, [])
 
   const handleCategoryChange = (event, newCategory) => {
     setUploadCategory(newCategory)
     setImageToCrop(null)
-    switch(newCategory) {
+    switch (newCategory) {
       case 'image':
         setUploadFileTypes(["JPG", "PNG", "JPEG"])
         break
@@ -51,11 +51,11 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
     }
   }
 
-  const uploadMedia = (fileToUpload, type) => {
-    if(type === "file"){
-        uploadFile(fileToUpload, type) //Just upload the file AS IS
-    }else{
-      const reader = new FileReader(); //Crop the image and then send it to upload
+  const uploadMedia = async (fileToUpload, type) => {
+    if (type === "file") {
+      uploadFile(fileToUpload, type)
+    } else {
+      const reader = new FileReader();
       reader.onload = () => {
         setImageToCrop(reader.result)
       }
@@ -64,60 +64,66 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
           reader.readAsDataURL(res);
         })
       })
+    }
   }
-}
 
-const uploadFile = (fileToUpload, type) => {
-  if (typeof cropper !== "undefined" || type === "file") {
-        setLoadingImage(true)
-        const formData = new FormData();
-        formData.append("file", fileToUpload);
-        client.service("files").create(formData).then( (res) => {
-        let currentFileIds = media.map( (item) => { return( {fileId: item.file._id, metadata: {type: item.metadata.type}} )})
-        let mediaToUpload = { galleryFileIds: [ ...currentFileIds, { fileId:res[0]._id, metadata:{ type:uploadCategory } } ] }
-        client.service(tab).patch(initialData.id, mediaToUpload )
-          .then( (res) => {
-            dispatch( set_table_changed("upload_media" + Math.random()))
-            setMedia([...res.gallery])
-            setLoadingImage(false)
-          })
-      })
+  const uploadFile = async (fileToUpload, type) => {
+    if (typeof cropper !== "undefined" || type === "file") {
+      setLoadingImage(true)
+      const formData = new FormData();
+      formData.append("file", fileToUpload);
+      const res = await client.service("files").create(formData)
+      let currentFileIds = media.map((item) => { return ({ fileId: item.file._id, metadata: { type: item.metadata.type } }) })
+      let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res[0]._id, metadata: { type: uploadCategory } }] }
+      await client.service(tab).patch(initialData.id, mediaToUpload)
+        .then((res) => {
+          dispatch(set_table_changed("upload_media"))
+          setMedia([...res.gallery])
+          setLoadingImage(false)
+        })
+    }
+    setImageToCrop(null)
   }
-  setImageToCrop(null)
-}
 
   return (
     <>
       <Box className={classes.uploadMediaTabWrapper}>
-        <Typography weight={"bold"} size={"xxl"}>{term("upload_media")}</Typography>
-        <ToggleButtonGroup className={classes.toggleButtons} size="small" color="primary" value={uploadCategory} onChange={handleCategoryChange} exclusive ={true}>
-          {mediaUploadSections.map( ({type}) => {
-                return(
-                <ToggleButton value={type} key={type}>
-                   {term(type)}
-                </ToggleButton>
-                )
-          })}
-        </ToggleButtonGroup>
-          {imageToCrop === null &&
-          <Box className={classes.dragDropWrapper}>
-              <DragDrop onRecieveFile={uploadMedia} fileTypes={uploadFileTypes} />
-          </Box>}
-          {imageToCrop !== null &&
-            <CropImage cropper={cropper} src={imageToCrop} setCropper={setCropper} onClick={uploadFile}  style={classes.cropBox}/>
-          }
-          {!imageToCrop && <Typography weight={"bold"} size={"xxl"}>{term('gallery')}</Typography>}
-          {!imageToCrop && mediaUploadSections.map( ({ type }, index) => {
-            return(
-              <>
-                <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
-                <DialogContent key={index}>
-                  <MyImageList tab={tab} media={media} setMedia={setMedia} type={type} initialData={initialData} />
-                </DialogContent>
-                {index < 3 && <Box className={classes.divider}></Box>}
-              </>
+        <Typography weight={"400"} size={"xl"}>{term("upload_media")}</Typography>
+        <Box className={classes.SectionDivider} />
+        <ToggleButtonGroup className={classes.toggleButtons} size="small" color="primary" value={uploadCategory} onChange={handleCategoryChange} exclusive={true}>
+          {mediaUploadSections.map(({ type }) => {
+            return (
+              <ToggleButton value={type} key={type}>
+                {term(type)}
+              </ToggleButton>
             )
           })}
+        </ToggleButtonGroup>
+        {imageToCrop === null &&
+          <Box className={classes.dragDropWrapper}>
+            <DragDrop onRecieveFile={uploadMedia} fileTypes={uploadFileTypes} />
+          </Box>}
+        {imageToCrop !== null &&
+          <CropImage cropper={cropper} src={imageToCrop} setCropper={setCropper} onClick={uploadFile} style={classes.cropBox} />
+        }
+        {!imageToCrop &&
+          <>
+            <Box className={classes.SectionDivider} />
+            <Typography weight={"400"} size={"xl"}>{term('gallery')}</Typography>
+            <Box className={classes.SectionDivider} />
+          </>
+        }
+        {!imageToCrop && mediaUploadSections.map(({ type }, index) => {
+          return (
+            <>
+              <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
+              <DialogContent key={index}>
+                <MyImageList tab={tab} media={media} setMedia={setMedia} type={type} initialData={initialData} />
+              </DialogContent>
+              {index < 3 && <Box className={classes.divider} />}
+            </>
+          )
+        })}
       </Box>
     </>
   )

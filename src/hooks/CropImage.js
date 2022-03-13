@@ -16,26 +16,27 @@ export const cropFile = (file, setImage) => {
 }
 
 const handleClick = (cropper, onClick) => {
-    fetch(cropper.getCroppedCanvas().toDataURL()).then( (res) => {
-        res.blob().then( (res) => {
+    fetch(cropper.getCroppedCanvas().toDataURL()).then((res) => {
+        res.blob().then((res) => {
             let fileToUpload = new File([res], "imageFile", { type: "image/png" })
             onClick(fileToUpload)
         })
     })
 }
 
-const cropImage = ({ cropper, setCropper, src,  onClick, style  }) => {
+const CropImage = ({ cropper, setCropper, src, onClick, style }) => {
     return (
         <div className={style}>
             <Cropper
-                style={{ width: "50vw", height: "400px"}}
+                style={{ width: "50vw", height: "400px", margin: "auto", display: "block" }}
+                highlight={false}
                 zoomTo={0.5}
-                aspectRatio={1}
+                // aspectRatio={1}
                 src={src}
                 viewMode={1}
                 minCropBoxHeight={10}
                 minCropBoxWidth={10}
-                background={false}
+                background={true}
                 responsive={true}
                 autoCropArea={1}
                 onInitialized={(instance) => {
@@ -48,7 +49,7 @@ const cropImage = ({ cropper, setCropper, src,  onClick, style  }) => {
                 size="large"
                 variant="contained"
                 color="primary"
-                onClick={() => {handleClick(cropper, onClick)}}
+                onClick={() => { handleClick(cropper, onClick) }}
             >
                 {term('crop_image')}
             </Button>
@@ -56,4 +57,4 @@ const cropImage = ({ cropper, setCropper, src,  onClick, style  }) => {
     )
 }
 
-export default cropImage
+export default CropImage

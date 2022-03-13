@@ -40,7 +40,7 @@ export default makeStyles(theme => ({
         display: 'flex',
         flexDirection: "column",
         justifyContent: 'center',
-        alignItems: "center", 
+        alignItems: "center",
         width: '100%'
     },
     dragDropWrapper: {
@@ -49,18 +49,27 @@ export default makeStyles(theme => ({
         justifyContent: 'center'
     },
     divider: {
-        width:"80%",
-        height: "1px",
-        backgroundColor: theme.palette.primary.main
+        borderBottomColor: '#ccc',
+        borderBottomStyle: 'solid',
+        borderBottomWidth: '1px',
+        margin: '10px 0px',
+        width: '100%'
+    },
+    SectionDivider: {
+        borderBottomColor: '#000',
+        borderBottomStyle: 'solid',
+        borderBottomWidth: .5,
+        margin: '10px 0px',
+        width: '100%'
     },
     cropBox: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '10px' 
+        gap: '10px'
     },
     toggleButtons: {
-        direction:"ltr",
+        direction: "ltr",
         marginTop: "20px",
         marginBottom: "20px"
     }
