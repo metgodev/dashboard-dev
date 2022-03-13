@@ -1,5 +1,6 @@
 import { client } from "../../../../API/metro";
 import term from "../../../../terms";
+import { createRandomId } from "../../../../utils/randomId";
 
 
 (async () => {
@@ -11,10 +12,6 @@ import term from "../../../../terms";
     await client.service('area').find({ query: { _id: area_id } })
         .then(({ data }) => data[0].tags.map(({ title, _id }) => tags = [...tags, { title, id: _id }]));
 })();
-
-const createRandomId = () => {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-}
 
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
 export const ModalInit = [

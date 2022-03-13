@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '../Wrappers/Wrappers';
 import { MenuItem, Select } from '@material-ui/core';
 import { FormControl, InputAdornment, TableCell, TableRow, TextField, TableHead } from '@mui/material';
@@ -46,7 +46,6 @@ function TableHeader({ keys, cat }) {
                                         />
                                     </>
                                     : cat ?
-
                                         <>
                                             {term(camelToSnakeCase(key))}
                                             <Select variant="outlined" value={values[key]} displayEmpty onChange={(e) => handleChange(e, key)}>

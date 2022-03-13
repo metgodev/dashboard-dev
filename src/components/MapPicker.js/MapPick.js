@@ -21,7 +21,7 @@ const MapPick = ({ setFatherValue }) => {
     }
 
     useLayoutEffect(() => {
-        let timer = setTimeout(() => setShow(true), 2000);
+        let timer = setTimeout(() => setShow(true), 3000);
         navigator.geolocation.getCurrentPosition((position) => {
             setDefaultLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
         });

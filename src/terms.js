@@ -231,9 +231,9 @@ const active_lexicon = {
         ar: 'طرق',
     },
     voucher: {
-        en: 'Metro Voucher',
-        he: 'תו הנגב',
-        ar: 'قسيمة مترو',
+        en: 'GiveTav',
+        he: 'GiveTav',
+        ar: 'GiveTav',
     },
     users: {
         en: 'Users',
@@ -396,9 +396,14 @@ const active_lexicon = {
         ar: "يضيف",
     },
     edit: {
-        en: "Edit",
-        he: "עריכה",
-        ar: "تقييم",
+        en: "Save Changes",
+        he: "שמירת שינויים",
+        ar: "حفظ التغييرات",
+    },
+    last_changes: {
+        en: "Last Changes",
+        he: "שינויים אחרונים",
+        ar: "أخر التغييرات",
     },
     businesse_name: {
         en: "businesse Name",
@@ -987,7 +992,7 @@ const active_lexicon = {
     },
     location_name: {
         en: 'location name',
-        he: 'שם מיקום',
+        he: 'שם יעד',
         ar: 'اسم الموقع',
     },
     is_accessable: {
@@ -1000,10 +1005,10 @@ const active_lexicon = {
         he: 'נהל תגיות',
         ar: 'إدارة العلامات',
     },
-    manage_areas: {
-        en: 'Manage areas',
-        he: 'נהל אזורים',
-        ar: 'إدارة المناطق',
+    manage_area: {
+        en: 'Manage area',
+        he: 'נהל אזור',
+        ar: 'إدارة المنطقة',
     },
     manage_authorities: {
         en: 'Manage authorities',
@@ -1030,10 +1035,25 @@ const active_lexicon = {
         he: 'רשויות',
         ar: 'الجهات',
     },
-    tags_around: {
-        en: 'tags around',
-        he: 'תגיות בסביבה',
-        ar: 'العلامات حول',
+    area_related_tags: {
+        en: 'area related tags',
+        he: 'תגיות מקושרות לאזור',
+        ar: 'العلامات المرتبطة بالمنطقة',
+    },
+    actions: {
+        en: 'actions',
+        he: 'פעולות',
+        ar: 'الإجراءات',
+    },
+    related_categories: {
+        en: 'related categories',
+        he: 'קטגוריות קשורות',
+        ar: 'الفئات المرتبطة',
+    },
+    local_campaigns: {
+        en: 'local campaigns',
+        he: 'קמפיינים מקומיים',
+        ar: 'الحملات المحلية',
     },
     audio: {
         en: 'Audio',

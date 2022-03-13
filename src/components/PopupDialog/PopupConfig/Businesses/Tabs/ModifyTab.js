@@ -6,14 +6,13 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { ModalInit, tags, picker, TimePicker } from '../popConfig';
-import { Box, Button, Collapse, MenuItem } from '@material-ui/core';
+import { Button, Collapse, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 //styles
 import useStyles from '../../../styles';
 import MapPick from '../../../../MapPicker.js/MapPick';
-import { FormatColorReset } from '@material-ui/icons';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -23,11 +22,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     let classes = useStyles();
     let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     //local
-    const openDrop = () => setOpen(!open);
-    const [checked, setChecked] = useState([]);
-    const [init, setInit] = useState({});
-    const [open, setOpen] = useState(false);
-    const [values, setValues] = useState({
+    let initState = {
         userId: user.id,
         status: status,
         openingHours: {
@@ -39,10 +34,15 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             friday: {},
             saturday: {},
         },
-    });
+    }
+    const openDrop = () => setOpen(!open);
+    const [checked, setChecked] = useState([]);
+    const [init, setInit] = useState({});
+    const [open, setOpen] = useState(false);
+    const [values, setValues] = useState(initState);
 
     useEffect(() => {
-        setInit({});
+        setValues(initState);
         if (Object.keys(initialData).length === 0) return;
         let OC = initialData.contact && JSON.parse(initialData.contact) || {}
         let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
@@ -64,25 +64,25 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [field]: { ...prevState.openingHours[field], [pos]: times } } }))
     };
     const removeDay = (timeRef, e) => {
-        if (!e.target.checked) return;
+        if (e.target.checked) return;
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: "00:00", end: "00:00" } } }))
     }
 
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('business').create(values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
             client.service('business').patch(id, values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 
     let maxSizeElements = ['MapPicker', 'timePicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
+            {ModalInit.map(({ title, id, field, rows, size, type }) =>
                 <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
@@ -96,7 +96,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 placeholder={title}
                                 multiline
                                 rows={rows}
-                                // maxRows={maxRows}
                                 defaultValue={init[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                                 error={values[field] === ''}
@@ -130,7 +129,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                     <TextField
                                         {...params}
                                         label={title}
-                                        placeholder="תגיות"
+                                        placeholder={title}
                                     />
                                 )}
                             />}
@@ -162,7 +161,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                     </FormControl>
                 </Grid>
             )}
-            <div style={{ marginTop: 15, marginLeft: 25, display: 'flex', justifyContent: 'left', width: '100%' }}>
+            <div style={styles.ButtomLeftCornerButton}>
                 <Button
                     style={{ width: 200 }}
                     size="large"
@@ -174,4 +173,13 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             </div>
         </Grid>
     )
+}
+
+const styles = {
+    ButtomLeftCornerButton: {
+        zIndex: 1,
+        position: 'absolute',
+        bottom: '10px',
+        left: '10px',
+    },
 }

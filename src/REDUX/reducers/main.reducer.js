@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
             }
         case SET_TABLE_CHANGED:
             return {
-                ...state, tableChanged: action.payload
+                ...state, tableChanged: action.payload + Math.random()
             }
         case SET_AREA:
             return {

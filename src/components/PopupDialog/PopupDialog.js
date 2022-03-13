@@ -11,9 +11,12 @@ import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 import EventsPop from './PopupConfig/Events/EventsPop';
 import PointsPop from './PopupConfig/Points/PointsPop';
 import TracksPop from './PopupConfig/Tracks/TracksPop';
+import AuthorityPop from './PopupConfig/AuthorityManagement/AuthorityPop';
+import TagPop from './PopupConfig/TagsManagment/TagPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
+
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -26,26 +29,26 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
     const theme = useTheme();
-
     const [media, setMedia] = useState([])
 
     const setInitialValuesForMedia = () => {
-        if(initialData.gallery !== undefined){
+        if (initialData.gallery !== undefined) {
             let initImagesArr = []
-            JSON.parse(initialData.gallery).map( (mediaItem) => {
+            JSON.parse(initialData.gallery).map((mediaItem) => {
                 initImagesArr.push(mediaItem)
             })
             setMedia(initImagesArr)
         }
     }
 
-    useEffect( () => {
-            setInitialValuesForMedia()
+    useEffect(() => {
+        setInitialValuesForMedia()
     }, [open, initialData])
 
-    //global
-
-    const handleClose = () => setOpen(false)
+    const handleClose = () => {
+        setOpen(false)
+        initialData = {}
+    }
 
     const handleWidth = () => {
         if (expend === "sm") setExpend("md")
@@ -76,10 +79,13 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'events' && <EventsPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'points' && <PointsPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tracks' && <TracksPop open={open} media={media} setMedia={setMedia} handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {/* authority management */}
+                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

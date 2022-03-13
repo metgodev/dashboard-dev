@@ -1,53 +1,48 @@
-import React, { useState, useEffect } from 'react'
-import term from '../../../../../terms';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import term from '../../../../../terms';
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker } from '../popConfig';
-import TimeSelector from '../../../../TimePicker/TimePicker';
-import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { ModalInit, picker, categories } from '../popConfig';
+import { Button, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import Calendar from '../../../../Calendar/Calendar';
-import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
+import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
 
-export const EventsTab = ({ handleClose, initialData, type }) => {
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
+export const TagsTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     //local
-    const [init, setInit] = useState({});
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        userId: user.id,
+    });
 
-    useEffect(() => {
-        if (type === 'add') setInit({})
-        else setInit(initialData)
-        return (() => setInit({}))
-    }, [type])
-
-    const handleChange = (e, field, tagsIds) => {
-        if (tagsIds) setValues(prevState => ({ ...prevState, [field]: Object.keys(tagsIds).map(key => tagsIds[key].id) }));
+    //set the values
+    const handleChange = (e, field, categories, type) => {
+        if (categories) setValues(prevState => ({ ...prevState, [field]: Object.keys(categories).map(key => categories[key].id) }));
+        else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: new Date(time) }));
-
     const modify = async (type, id) => {
+        let area_id = localStorage.getItem('aid')
         if (type === 'add')
-            client.service('events').create(values)
+            await client.service('tags').create(values)
+                .then(({ _id }) => client.service('area').patch(area_id, { $push: { tagsIds: _id } }))
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
-            client.service('events').patch(id, values)
+            await client.service('tags').patch(id, values)
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
+            {ModalInit.map(({ title, id, field, rows, size, type }) =>
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
                         {type === 'textfield' &&
                             <TextField
                                 size={size}
@@ -56,8 +51,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 placeholder={title}
                                 multiline
                                 rows={rows}
-                                maxRows={maxRows}
-                                defaultValue={init[field] || ''}
+                                defaultValue={initialData[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                                 error={values[field] === ''}
                             />}
@@ -67,7 +61,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 id="select-field"
                                 select
                                 label={title}
-                                value={values[field]}
+                                value={values[field] || ''}
                                 onChange={(e) => handleChange(e, field)}
                             >
                                 {picker[field].map((s) => (
@@ -77,15 +71,15 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                 ))}
                             </TextField>}
                         {type === 'tagsPicker' &&
-                            <Autocomplete
+                            <MuiAutomplete
                                 size={size}
                                 multiple
-                                id="tags-outlined"
-                                options={tags}
+                                id="categories-outlined"
+                                options={categories}
                                 getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
-                                disabled={values[field]?.length > 4 || false}
+                                // disabled={values[field]?.length > 4 || false}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -94,25 +88,12 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                                     />
                                 )}
                             />}
-                        {type === 'timePicker' &&
-                            <TimeSelector label={title} setTime={setDateTime} field={field} />
-                        }
                         {type === 'toggle' &&
                             <Switch
-                                checked={values[field]}
-                                onChange={(e) => handleChange(e, field)}
+                                defaultValue={values[field] || false}
+                                checked={values[field] || false}
+                                onChange={(e) => handleChange(e, field, undefined, type)}
                                 inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                        {type === 'datePicker' &&
-                            <Calendar type={2} setDateTwo={setDateTime} field={field} />
-                        }
-                        {type === 'textArea' &&
-                            <TextareaAutosize
-                                maxRows={maxRows}
-                                aria-label={title}
-                                defaultValue={init[field] || ''}
-                                fullWidth
                             />
                         }
                     </FormControl>
@@ -122,10 +103,9 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 <Button
                     style={{ width: 200 }}
                     size="large"
-                    // disabled={!isFulfilled}
                     variant="contained"
                     color="primary"
-                    onClick={() => modify(type, init.id)}>
+                    onClick={() => modify(type, initialData.id)}>
                     {term(type)}
                 </Button>
             </div>

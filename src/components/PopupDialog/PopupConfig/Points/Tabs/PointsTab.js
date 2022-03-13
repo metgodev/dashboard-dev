@@ -12,6 +12,8 @@ import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplet
 //styles
 import useStyles from '../../../styles'
 
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
 export const PointsTab = ({ handleClose, initialData, type }) => {
     //global
     let classes = useStyles();
@@ -19,6 +21,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     //local
     const [init, setInit] = useState({});
     const [values, setValues] = useState({
+        userId: user.id,
         addressType: "FREE_TEXT", //  ["WEBSITE_URL", "FREE_TEXT"] 
         relevantTo: "GOLDEN_AGE",
         prefferedSeason: "SUMMER",
@@ -42,11 +45,11 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('pois').create(values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
             client.service('pois').patch(id, values)
-                .then(() => dispatch(set_table_changed(type + Math.random())))
+                .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 
@@ -127,7 +130,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
                     </FormControl>
                 </Grid>
             )}
-            <div style={{ marginTop: 15, marginLeft: 25, display: 'flex', justifyContent: 'left', width: '100%' }}>
+            <div style={styles.ButtomLeftCornerButton}>
                 <Button
                     style={{ width: 200 }}
                     size="large"
@@ -140,4 +143,13 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
             </div>
         </Grid>
     )
+}
+
+const styles = {
+    ButtomLeftCornerButton: {
+        zIndex: 1,
+        position: 'absolute',
+        bottom: '10px',
+        left: '10px',
+    },
 }

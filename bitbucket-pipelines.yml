@@ -1,0 +1,40 @@
+image: node:10.15.1
+pipelines:
+  branches:
+    # sandbox (development) pipeline will deploy when push to develop branch 
+    develop:
+      - step:
+          name: Build
+          script:
+            - npm install
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Firebase
+          deployment: sandbox
+          script:
+            - pipe: atlassian/firebase-deploy:0.8.0
+              variables:
+                FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: $FIREBASE_PROJECT   
+
+   
+
+    # production pipeline will be taken when push to master branch 
+    master:
+      - step:
+          name: Build
+          script:
+            - npm install
+            - npm run build:prod
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Firebase
+          deployment: production
+          script:
+            - pipe: atlassian/firebase-deploy:0.8.0
+              variables:
+                FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: $FIREBASE_PROJECT       
