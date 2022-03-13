@@ -81,7 +81,7 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
       <Box className={classes.uploadMediaTabWrapper}>
         <Typography weight={"400"} size={"xl"}>{term("upload_media")}</Typography>
         <Box className={classes.SectionDivider} />
-        <ToggleButtonGroup className={classes.toggleButtons} size="small" color="primary" value={uploadCategory} onChange={handleCategoryChange} exclusive={true}>
+        <ToggleButtonGroup className={classes.toggleButtons} size={"medium"} color="primary" value={uploadCategory} onChange={handleCategoryChange} exclusive={true}>
           {mediaUploadSections.map(({ type }) => {
             return (
               <ToggleButton value={type} key={type}>
