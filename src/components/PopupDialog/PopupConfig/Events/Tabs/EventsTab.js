@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker } from '../popConfig';
+import { ModalInit, tags, picker, clearButtonId } from '../popConfig';
 import TimeSelector from '../../../../TimePicker/TimePicker';
 import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
 import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
@@ -28,7 +28,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     useEffect(() => {
         if (type === 'add') setInit({})
         else setInit(initialData)
-        return (() => setInit({}))
+        return (() => clear())
     }, [type])
 
     const handleChange = (e, field, tagsIds) => {
@@ -49,11 +49,17 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
+    const clear = () => {
+        let clearButton = document.querySelector(clearButtonId);
+        if (clearButton) clearButton.click();
+        setInit({});
+    }
+
     let maxSizeElements = ['MapPicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
             {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
+                <Grid item md={maxSizeElements.indexOf(type) > -1 ? 12 : 6} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
                         {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}

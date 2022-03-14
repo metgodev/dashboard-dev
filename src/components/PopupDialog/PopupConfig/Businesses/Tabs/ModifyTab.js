@@ -5,7 +5,7 @@ import { client } from '../../../../../API/metro';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import TimeSelector from '../../../../TimePicker/TimePicker';
-import { ModalInit, tags, picker, TimePicker } from '../popConfig';
+import { ModalInit, tags, picker, TimePicker, clearButtonId } from '../popConfig';
 import { Button, Collapse, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
@@ -21,7 +21,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     const dispatch = useDispatch()
     let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     //local
-    let initState = {
+    const stateInit = {
         userId: user.id,
         status: status,
         openingHours: {
@@ -32,24 +32,23 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             thursday: {},
             friday: {},
             saturday: {},
-        },
+        }
     }
     const openDrop = () => setOpen(!open);
     const [checked, setChecked] = useState([]);
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
-    const [values, setValues] = useState(initState);
-
-    console.log(values.openingHours)
+    const [values, setValues] = useState(stateInit);
 
     useEffect(() => {
-        setValues(initState);
-        if (Object.keys(initialData).length === 0) return;
-        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
-        setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
-        setValues(prevState => ({ ...prevState, openingHours: OH }))
-        return (() => setInit({}))
+        if (Object.keys(initialData).length === 0) clear();
+        else {
+            let OC = initialData.contact && JSON.parse(initialData.contact) || {}
+            let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
+            setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
+            setValues(prevState => ({ ...prevState, openingHours: OH }))
+        }
+        return (() => clear())
     }, [type, initialData])
 
     //set the values
@@ -80,12 +79,20 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
+    const clear = () => {
+        let clearButton = document.querySelector(clearButtonId);
+        if (clearButton) clearButton.click();
+        setValues(stateInit)
+        setInit({})
+        setChecked([]);
+        setOpen(false);
+    }
+
     let maxSizeElements = ['MapPicker', 'timePicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
-
             {ModalInit.map(({ title, id, field, rows, size, type }) =>
-                <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
+                <Grid item md={maxSizeElements.indexOf(type) > -1 ? 12 : 6} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth>
                         {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
@@ -126,12 +133,12 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                 getOptionLabel={(o) => o.title}
                                 filterSelectedOptions
                                 onChange={(e, val) => handleChange(e, field, val)}
-                                disabled={values[field]?.length > 4 || false}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
                                         label={title}
                                         placeholder={title}
+                                        error={values[field]?.length > 4 || false}
                                     />
                                 )}
                             />}
@@ -145,7 +152,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                                     <Grid container spacing={1}>
                                         {TimePicker.map((s) => (
                                             <Grid item lg={6} md={6} sm={6} key={s.day}>
-                                                <TimeSelector label={s.day} type={s.type} times={values.openingHours[s.timeref] || null}
+                                                <TimeSelector label={s.day} type={s.type} times={values.openingHours[s.timeref] || {}}
                                                     timeref={s.timeref} setTimes={setTimes} removeDay={removeDay} setChecked={setChecked} checked={checked} />
                                             </Grid>
                                         ))}
