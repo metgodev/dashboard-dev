@@ -35,11 +35,11 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
 
     const modify = async (type, id) => {
         if (type === 'add')
-            client.service('pois').create(values)
+            client.service('tracks').create(values)
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
-            client.service('pois').patch(id, values)
+            client.service('tracks').patch(id, values)
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }

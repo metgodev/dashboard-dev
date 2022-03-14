@@ -46,7 +46,6 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     }, [type])
 
     const modify = async (type, id) => {
-        console.log(values)
         if (type === 'add')
             client.service('pois').create(values)
                 .then(() => dispatch(set_table_changed(type)))

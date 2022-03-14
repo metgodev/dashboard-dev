@@ -38,9 +38,13 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
 
     useEffect(() => {
         let hours = new Date(selectedDate).toLocaleTimeString([], {
-            hour: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
+            hourCycle: 'h23',
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
         })
         if (!setTimes) return
         setTimes(hours, timeref, type)

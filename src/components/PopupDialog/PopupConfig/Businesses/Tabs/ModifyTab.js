@@ -19,7 +19,6 @@ let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')
 export const ModifyTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
-    let classes = useStyles();
     let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     //local
     let initState = {
@@ -40,6 +39,8 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState(initState);
+
+    console.log(values.openingHours)
 
     useEffect(() => {
         setValues(initState);
