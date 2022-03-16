@@ -721,9 +721,9 @@ const active_lexicon = {
         ar: 'ظليلة',
     },
     arrival_recommendations: {
-        en: 'Arrival Recommendations',
-        he: 'המלצות מבקרים',
-        ar: 'توصيات وصول',
+        en: 'Arrival recommendations',
+        he: 'המלצות הגעה',
+        ar: 'توصيات الوصول',
     },
     number: {
         en: 'Number',

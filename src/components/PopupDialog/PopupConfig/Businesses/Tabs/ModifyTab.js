@@ -88,7 +88,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         setOpen(false);
     }
 
-    let maxSizeElements = ['MapPicker', 'timePicker']
+    let maxSizeElements = ['MapPicker']
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
             {ModalInit.map(({ title, id, field, rows, size, type }) =>
