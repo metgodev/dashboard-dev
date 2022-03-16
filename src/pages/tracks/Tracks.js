@@ -47,8 +47,6 @@ function Tracks() {
     ]
 
 
-
-
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('routes')} />

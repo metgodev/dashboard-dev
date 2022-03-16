@@ -1,4 +1,4 @@
-import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_AREA, SET_FILTER_TABLE, SET_CURRENT_ID } from "../actions/main.actions";
+import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_AREA, SET_FILTER_TABLE, SET_CURRENT_ID, SET_EDIT_TAB_DATA, SET_GALLERY_FIELDS } from "../actions/main.actions";
 
 let initialState = {
     sidebar: false,
@@ -8,6 +8,8 @@ let initialState = {
     area: {},
     filterTable: {},
     currentID: '',
+    editTabData: {},
+    galleryField: []
 }
 
 export default (state = initialState, action) => {
@@ -41,6 +43,14 @@ export default (state = initialState, action) => {
         case SET_CURRENT_ID:
             return {
                 ...state, currentID: action.payload
+            }
+        case SET_EDIT_TAB_DATA:
+            return {
+                ...state, editTabData: action.payload
+            }
+        case SET_GALLERY_FIELDS:
+            return {
+                ...state, galleryField: action.payload
             }
         default:
             return state

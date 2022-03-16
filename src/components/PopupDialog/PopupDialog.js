@@ -24,7 +24,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 
-export default function PopupDialog({ description, tabs, title, open, setOpen, initialData, type }) {
+export default function PopupDialog({ description, tabs, title, open, setOpen, type, initialData }) {
 
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
@@ -32,7 +32,7 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
     const [media, setMedia] = useState([])
 
     const setInitialValuesForMedia = () => {
-        if (initialData.gallery !== undefined) {
+        if (initialData?.gallery !== undefined) {
             let initImagesArr = []
             JSON.parse(initialData.gallery).map((mediaItem) => {
                 initImagesArr.push(mediaItem)
@@ -79,7 +79,7 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type} media={media} setMedia={setMedia} />}
                     {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
                     {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
                     {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
