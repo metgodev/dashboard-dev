@@ -15,14 +15,13 @@ import { useSelector } from 'react-redux';
 
 
 
-const ModifyPop = ({ media, setMedia, handleClose, type, open }) => {
+const ModifyPop = ({handleClose, type, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
     const [loadingImage, setLoadingImage] = useState(false)
     //global
     const { editTabData } = useSelector(s => s.mainReducer)
-
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
@@ -45,7 +44,7 @@ const ModifyPop = ({ media, setMedia, handleClose, type, open }) => {
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} media={media} setMedia={setMedia} initialData={editTabData} tab={"business"} />
+                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} tab={"business"} />
                 </TabPanel>
             </DialogContent>
         </div >

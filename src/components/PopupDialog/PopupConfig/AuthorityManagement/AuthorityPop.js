@@ -6,6 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { AuthorityTab } from './Tabs/AuthorityTab';
+import { useSelector } from 'react-redux';
 //styles
 import useStyles from "../../styles";
 

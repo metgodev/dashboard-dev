@@ -1,30 +1,34 @@
-import React from 'react';
+import React ,{useEffect, useState} from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { client } from '../../API/metro'
 import { Box } from '@mui/material'
 import useStyles from './styles'
-import { useDispatch } from 'react-redux';
-import { set_table_changed } from '../../REDUX/actions/main.actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { set_table_changed, set_edit_tab_data } from '../../REDUX/actions/main.actions'
 
 
-export default function MyImageList({ media, setMedia, initialData, type, tab }) {
+export default function MyImageList({type, tab }) {
 
     const classes = useStyles()
     const dispatch = useDispatch()
 
+    const { editTabData } = useSelector(s => s.mainReducer)    
+    
+    const media = editTabData?.gallery? (typeof editTabData.gallery == 'string')? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
     const deleteItem = async (item) => {
         let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
-        setMedia(newMedia)
         let ids = newMedia.map((item) => {
             return { fileId: item.file._id, metadata: { type: item.metadata.type } }
         })
         const dataToSend = { galleryFileIds: [...ids], gallery: [...newMedia] }
-        await client.service(tab).patch(initialData.id, dataToSend)
+        await client.service(tab).patch(editTabData.id, dataToSend)
             .then((res) => {
+                let business = {...res, id: res._id}
+                delete business._id
                 dispatch(set_table_changed("upload_media"))
-                setMedia(res.gallery ? [...res.gallery] : [])
+                dispatch(set_edit_tab_data(business))
             })
     }
 

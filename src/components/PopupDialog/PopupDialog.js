@@ -24,30 +24,29 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 
-export default function PopupDialog({ description, tabs, title, open, setOpen, type, initialData }) {
+export default function PopupDialog({description, tabs, title, open, setOpen, type }) {
 
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
     const theme = useTheme();
-    const [media, setMedia] = useState([])
+    // const [media, setMedia] = useState([])
 
-    const setInitialValuesForMedia = () => {
-        if (initialData?.gallery !== undefined) {
-            let initImagesArr = []
-            JSON.parse(initialData.gallery).map((mediaItem) => {
-                initImagesArr.push(mediaItem)
-            })
-            setMedia(initImagesArr)
-        }
-    }
+    // const setInitialValuesForMedia = () => {
+    //     if (initialData?.gallery !== undefined) {
+    //         let initImagesArr = []
+    //         JSON.parse(initialData.gallery).map((mediaItem) => {
+    //             initImagesArr.push(mediaItem)
+    //         })
+    //         setMedia(initImagesArr)
+    //     }
+    // }
 
-    useEffect(() => {
-        setInitialValuesForMedia()
-    }, [open, initialData])
+    // useEffect(() => {
+    //     setInitialValuesForMedia()
+    // }, [open, initialData])
 
     const handleClose = () => {
         setOpen(false)
-        initialData = {}
     }
 
     const handleWidth = () => {
@@ -79,13 +78,13 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, t
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type} media={media} setMedia={setMedia} />}
-                    {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
-                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type}  />}
+                    {tabs === 'events' && <EventsPop handleClose={handleClose} type={type} />}
+                    {tabs === 'points' && <PointsPop handleClose={handleClose} type={type}  />}
+                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} type={type} />}
                     {/* authority management */}
-                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {/* {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />} */}
                 </DialogContent>
                 <DialogContentText>
                     {description}

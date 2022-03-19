@@ -11,15 +11,17 @@ import { Typography } from '../../../../Wrappers/Wrappers'
 import term from '../../../../../terms'
 import CropImage from "../../../../../hooks/CropImage";
 import { client } from '../../../../../API/metro'
-import { useDispatch } from 'react-redux';
-import { set_table_changed } from '../../../../../REDUX/actions/main.actions'
+import { useDispatch,useSelector } from 'react-redux';
+import { set_table_changed ,set_edit_tab_data } from '../../../../../REDUX/actions/main.actions'
 //styles
 import useStyles from "../../../styles";
 
-export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingImage, open }) => {
+export const UploadMediaTab = ({tab, setLoadingImage, open }) => {
 
   const classes = useStyles()
   const dispatch = useDispatch();
+  const { editTabData } = useSelector(s => s.mainReducer)
+  const media = editTabData?.gallery? (typeof editTabData.gallery == 'string')? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
 
   const [uploadCategory, setUploadCategory] = useState('logo')
   const [uploadFileTypes, setUploadFileTypes] = useState(["JPG", "PNG", "JPEG"])
@@ -74,10 +76,13 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
       const res = await client.service("files").create(formData)
       let currentFileIds = media.map((item) => { return ({ fileId: item.file._id, metadata: { type: item.metadata.type } }) })
       let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res[0]._id, metadata: { type: uploadCategory } }] }
-      await client.service(tab).patch(initialData.id, mediaToUpload)
+      await client.service(tab).patch(editTabData.id, mediaToUpload)
         .then((res) => {
-          dispatch(set_table_changed("upload_media"))
-          setMedia([...res.gallery])
+          let business = {...res, id: res._id}
+          delete business._id
+          console.log(business)
+          dispatch(set_edit_tab_data(business))
+          dispatch(set_table_changed('upload-image'))
           setLoadingImage(false)
         })
     }
@@ -118,7 +123,7 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
             <>
               <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
               <DialogContent key={index}>
-                <MyImageList tab={tab} media={media} setMedia={setMedia} type={type} initialData={initialData} />
+                <MyImageList tab={tab} type={type}  />
               </DialogContent>
               {index < 3 && <Box className={classes.divider} />}
             </>
