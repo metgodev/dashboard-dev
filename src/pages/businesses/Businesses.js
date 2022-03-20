@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import term from '../../terms'
 import { Box } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
@@ -28,10 +28,6 @@ function Businesses() {
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer);
     const dispatch = useDispatch();
-
-    useEffect( () => {
-        console.log("Data Changed")
-    },[businesses])
 
     const openDialog = (data) => {
         if (data) {

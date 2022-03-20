@@ -1,4 +1,4 @@
-import React ,{useEffect, useState} from 'react';
+import React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -30,11 +30,6 @@ export default function MyImageList({type, tab}) {
                 dispatch(set_table_changed("upload_media"))
             })
     }
-
-    useEffect( () => {
-        console.log("Data Changed")
-    },[editTabData])
-
 
     return (
         <>
