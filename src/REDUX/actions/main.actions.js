@@ -8,6 +8,7 @@ export const SET_TABLE_CHANGED = 'SET_TABLE_CHANGED';
 export const SET_AREA = 'SET_AREA';
 export const SET_FILTER_TABLE = 'SET_FILTER_TABLE';
 export const SET_CURRENT_ID = 'SET_CURRENT_ID';
+export const SET_EDIT_TAB_DATA = 'SET_EDIT_TAB_DATA';
 
 
 
@@ -61,3 +62,7 @@ export const set_current_id = (value) => ({
     payload: value
 })
 
+export const set_edit_tab_data = (value) => ({
+    type: SET_EDIT_TAB_DATA,
+    payload: value
+})

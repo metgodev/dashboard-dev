@@ -63,7 +63,6 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
             <ThemeProvider theme={theme}>
                 <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-
                         <TimePicker
                             style={{ width: '100%' }}
                             ampm={false}

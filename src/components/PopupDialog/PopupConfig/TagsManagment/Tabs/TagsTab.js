@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import term from '../../../../../terms';
 import { client } from '../../../../../API/metro';
 import { ModalInit, picker, categories } from '../popConfig';
-import { Button, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -38,87 +36,15 @@ export const TagsTab = ({ handleClose, initialData, type }) => {
     }
 
     return (
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
-
-            {ModalInit.map(({ title, id, field, rows, size, type }) =>
-                <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
-                    <InputLabel>{title}</InputLabel>
-                    <FormControl fullWidth  >
-                        {type === 'textfield' &&
-                            <TextField
-                                size={size}
-                                id={title}
-                                label={title}
-                                placeholder={title}
-                                multiline
-                                rows={rows}
-                                defaultValue={initialData[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                                error={values[field] === ''}
-                            />}
-                        {type === 'picker' &&
-                            <TextField
-                                size={size}
-                                id="select-field"
-                                select
-                                label={title}
-                                value={values[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                            >
-                                {picker[field].map((s) => (
-                                    <MenuItem key={s.value} value={s.value}>
-                                        {s.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>}
-                        {type === 'tagsPicker' &&
-                            <MuiAutomplete
-                                size={size}
-                                multiple
-                                id="categories-outlined"
-                                options={categories}
-                                getOptionLabel={(o) => o.title}
-                                filterSelectedOptions
-                                onChange={(e, val) => handleChange(e, field, val)}
-                                // disabled={values[field]?.length > 4 || false}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={title}
-                                        placeholder="תגיות"
-                                    />
-                                )}
-                            />}
-                        {type === 'toggle' &&
-                            <Switch
-                                defaultValue={values[field] || false}
-                                checked={values[field] || false}
-                                onChange={(e) => handleChange(e, field, undefined, type)}
-                                inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                    </FormControl>
-                </Grid>
-            )}
-            <div style={styles.ButtomLeftCornerButton}>
-                <Button
-                    style={{ width: 200 }}
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => modify(type, initialData.id)}>
-                    {term(type)}
-                </Button>
-            </div>
-        </Grid>
+        <FormBuilder
+            ModalInit={ModalInit}
+            picker={picker}
+            tags={categories}
+            handleChange={handleChange}
+            values={values}
+            modify={modify}
+            type={type}
+            init={initialData}
+        />
     )
-}
-
-const styles = {
-    ButtomLeftCornerButton: {
-        zIndex: 1,
-        position: 'absolute',
-        bottom: '10px',
-        left: '10px',
-    },
 }

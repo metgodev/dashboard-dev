@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import term from '../../terms'
 import { Box } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { ExportToExcel } from '../../hooks/ExportToExcel'
 import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import PageTitle from '../../components/PageTitle/PageTitle'
@@ -14,6 +14,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import { CircularProgress } from '@material-ui/core'
+import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 
 function Businesses() {
     const [page, setPage] = useState(0);
@@ -24,17 +25,17 @@ function Businesses() {
     //dialog
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState({});
     //global 
     const { lang } = useSelector(s => s.mainRememberReducer);
+    const dispatch = useDispatch();
 
     const openDialog = (data) => {
         if (data) {
-            setInitialDataDialog(data)
+            dispatch(set_edit_tab_data(data))
             setDialogType('edit')
         }
         else {
-            setInitialDataDialog({})
+            dispatch(set_edit_tab_data([]))
             setDialogType('add')
         }
         setOpen(!open)
@@ -53,7 +54,6 @@ function Businesses() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
             {businesses.length ? <PaginationTable
-                tableType={'business'}
                 lang={lang}
                 page={page}
                 keys={keys}
@@ -68,7 +68,7 @@ function Businesses() {
                     <CircularProgress size={60} />
                 </Box>
             }
-            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} initialData={initialDataDialog} type={dialogType} />
+            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} type={dialogType} />
         </Box>
     )
 }

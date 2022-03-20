@@ -12,14 +12,15 @@ import term from '../../../../../terms'
 import CropImage from "../../../../../hooks/CropImage";
 import { client } from '../../../../../API/metro'
 import { useDispatch } from 'react-redux';
-import { set_table_changed } from '../../../../../REDUX/actions/main.actions'
+import { set_table_changed, set_edit_tab_data } from '../../../../../REDUX/actions/main.actions'
 //styles
 import useStyles from "../../../styles";
 
-export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingImage, open }) => {
+export const UploadMediaTab = ({ tab, setLoadingImage, open, initialData }) => {
 
   const classes = useStyles()
   const dispatch = useDispatch();
+  const media = initialData?.gallery ? (typeof initialData.gallery == 'string') ? JSON.parse(initialData.gallery) : initialData?.gallery : []
 
   const [uploadCategory, setUploadCategory] = useState('logo')
   const [uploadFileTypes, setUploadFileTypes] = useState(["JPG", "PNG", "JPEG"])
@@ -76,8 +77,10 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
       let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res[0]._id, metadata: { type: uploadCategory } }] }
       await client.service(tab).patch(initialData.id, mediaToUpload)
         .then((res) => {
-          dispatch(set_table_changed("upload_media"))
-          setMedia([...res.gallery])
+          let business = { ...res, id: res._id }
+          delete business._id
+          dispatch(set_edit_tab_data(business))
+          dispatch(set_table_changed('upload-image'))
           setLoadingImage(false)
         })
     }
@@ -118,7 +121,7 @@ export const UploadMediaTab = ({ media, setMedia, initialData, tab, setLoadingIm
             <>
               <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
               <DialogContent key={index}>
-                <MyImageList tab={tab} media={media} setMedia={setMedia} type={type} initialData={initialData} />
+                <MyImageList tab={tab} type={type} media={media} />
               </DialogContent>
               {index < 3 && <Box className={classes.divider} />}
             </>

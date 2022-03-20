@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Box } from '@material-ui/core'
 import PointsTableService from '../../hooks/DataService/PointsTableService'
 import PageTitle from '../../components/PageTitle/PageTitle'
@@ -12,7 +11,9 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress } from '@material-ui/core'
+import { useSelector, useDispatch } from 'react-redux'
+import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import term from '../../terms'
 
 function PointsOfInterest() {
@@ -23,20 +24,21 @@ function PointsOfInterest() {
     const pages = Math.ceil(pois.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState([]);
-    //global 
+    const [dialogType, setDialogType] = useState('add');    //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
+    const dispatch = useDispatch();
 
     const openDialog = (data) => {
-        if (!data) setDialogType('add')
-        else {
+        if (data) {
+            dispatch(set_edit_tab_data(data))
             setDialogType('edit')
-            setInitialDataDialog(data)
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
+            setDialogType('add')
         }
         setOpen(!open)
     }
-
     let headerBtns = [
         //can get name, func, input, icon 
         { name: term('export'), func: () => ExportToExcel(pois, 'points_of_intrest_list'), buttonIcon: <GetAppOutlinedIcon /> },
@@ -70,7 +72,7 @@ function PointsOfInterest() {
                     <CircularProgress size={60} />
                 </Box>
             }
-            <PopupDialog title={term('points')} open={open} setOpen={setOpen} tabs={'points'} initialData={initialDataDialog} type={dialogType} />
+            <PopupDialog title={term('points')} open={open} setOpen={setOpen} tabs={'points'} type={dialogType} />
         </Box>
     )
 }

@@ -19,13 +19,15 @@ import { createRandomId } from "../../../../utils/randomId";
 
 export const ModalTabs = [term('event'), term('gallery'),]
 export const ModalInit = [
+    // ------------------ map ------------------
+    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },
+    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'locationName' },
+    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
+    // ------------------ map ------------------
     { title: term('event_name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },
     { title: term('date_start'), id: createRandomId(), field: 'startDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
     { title: term('date_end'), id: createRandomId(), field: 'endDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker' },
-    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
     { title: term('tags'), id: createRandomId(), field: 'tags', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker' },
     { title: term('opening_hours'), id: createRandomId(), field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker' },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },

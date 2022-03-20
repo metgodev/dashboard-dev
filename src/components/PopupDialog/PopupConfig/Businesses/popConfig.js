@@ -15,19 +15,21 @@ import { createRandomId } from "../../../../utils/randomId";
 
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
 export const ModalInit = [
+    // ------------------ map ------------------
+    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'googleAutocomplete' },
+    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'locationName' },
+    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
+    // ------------------ map ------------------
     { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker' },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
-    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'googleAutocomplete' },
-    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
     { title: term('phone_number') + " " + term('Will_not_be_displayed'), id: createRandomId(), field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('contact'), id: createRandomId(), field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('business_number'), id: createRandomId(), field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('email_address'), id: createRandomId(), field: 'emailAddress', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
-    { title: term('opening_hours'), id: createRandomId(), field: 'openingHours', rows: 1, maxRows: 4, size: 'small', type: 'timePicker' },
+    { title: term('opening_hours'), id: createRandomId(), field: 'openingHours', rows: 1, maxRows: 4, size: 'small', type: 'timesPicker' },
     { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('instagram_link'), id: createRandomId(), field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },

@@ -11,7 +11,7 @@ import useStyles from "../../styles";
 
 
 
-const TagPop = ({ handleClose, initialData, type }) => {
+const TagPop = ({ handleClose, type, initialData }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
@@ -19,8 +19,6 @@ const TagPop = ({ handleClose, initialData, type }) => {
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
-
-
 
     return (
         <div>

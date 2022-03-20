@@ -1115,6 +1115,32 @@ const active_lexicon = {
         he: 'קבע מיקום',
         ar: 'تعيين الموقع'
     },
+    delete_confirmation: {
+        en: 'Are you sure you want to delete this?',
+        he: 'האם אתה בטוח שברצונך למחוק?',
+        ar: 'هل أنت متأكد من حذف هذا؟'
+    },
+    location_set: {
+        en: 'Location set',
+        he: 'מיקום נקבע',
+        ar: 'تم تعيين الموقع'
+    },
+    general: {
+        en: 'General',
+        he: 'כללי',
+        ar: 'عام'
+    },
+    map_location: {
+        en: 'Map location',
+        he: 'מיקום במפה',
+        ar: 'موقع الخريطة'
+    },
+    more_info: {
+        en: 'More info',
+        he: 'מידע נוסף',
+        ar: 'مزيد من المعلومات'
+    },
+
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

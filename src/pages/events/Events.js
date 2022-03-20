@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import term from '../../terms'
 import { Box } from '@material-ui/core'
-import EventstableService from '../../hooks/DataService/EventstableService'
+import { useSelector, useDispatch } from 'react-redux'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import { ExportToExcel } from '../../hooks/ExportToExcel'
 import { ReadFromExcel } from '../../hooks/ReadFromExcel'
 import PaginationTable from '../../components/Tables/PaginationTable'
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
-import { CircularProgress } from '@mui/material'
-import term from '../../terms'
+import { CircularProgress } from '@material-ui/core'
+import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
+import EventstableService from '../../hooks/DataService/EventstableService'
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 function Events() {
     const [page, setPage] = useState(0);
@@ -23,16 +24,18 @@ function Events() {
     const pages = Math.ceil(events.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState([]);
-    //global 
+    const [dialogType, setDialogType] = useState('add');    //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
+    const dispatch = useDispatch();
 
     const openDialog = (data) => {
-        if (!data) setDialogType('add')
-        else {
+        if (data) {
+            dispatch(set_edit_tab_data(data))
             setDialogType('edit')
-            setInitialDataDialog(data)
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
+            setDialogType('add')
         }
         setOpen(!open)
     }
@@ -70,7 +73,7 @@ function Events() {
                     <CircularProgress size={60} />
                 </Box>
             }
-            <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={'events'} initialData={initialDataDialog} type={dialogType} />
+            <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={'events'} type={dialogType} />
         </Box>
     )
 }

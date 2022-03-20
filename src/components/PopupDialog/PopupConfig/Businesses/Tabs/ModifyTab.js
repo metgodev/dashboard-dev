@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import term from '../../../../../terms';
 import { client } from '../../../../../API/metro';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import TimeSelector from '../../../../TimePicker/TimePicker';
 import { ModalInit, tags, picker, TimePicker, clearButtonId } from '../popConfig';
-import { Button, Collapse, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
-import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
-//styles
-import useStyles from '../../../styles';
-import MapPick from '../../../../MapPicker.js/MapPick';
+import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -45,7 +36,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         else {
             let OC = initialData.contact && JSON.parse(initialData.contact) || {}
             let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
-            setInit({ ...initialData, phoneNumber: OC[0].whatsapp, contactPersonPhoneNumber: OC[1].phone, email: OC[2].email })
+            setInit({ ...initialData, phoneNumber: OC[0]?.whatsapp, contactPersonPhoneNumber: OC[1]?.phone, email: OC[2]?.email })
             setValues(prevState => ({ ...prevState, openingHours: OH }))
         }
         return (() => clear())
@@ -90,105 +81,24 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
 
     let maxSizeElements = ['MapPicker']
     return (
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} style={{ paddingBottom: 50 }}>
-            {ModalInit.map(({ title, id, field, rows, size, type }) =>
-                <Grid item md={maxSizeElements.indexOf(type) > -1 ? 12 : 6} sm={12} xs={12} key={id} >
-                    <InputLabel>{title}</InputLabel>
-                    <FormControl fullWidth>
-                        {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
-                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
-                        {type === 'textfield' &&
-                            <TextField
-                                size={size}
-                                id={title}
-                                label={title}
-                                placeholder={title}
-                                multiline
-                                rows={rows}
-                                defaultValue={init[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                                error={values[field] === ''}
-                            />}
-                        {type === 'picker' &&
-                            <TextField
-                                size={size}
-                                id="select-field"
-                                select
-                                label={title}
-                                value={values[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                            >
-                                {picker[field].map((s) => (
-                                    <MenuItem key={s.value} value={s.value}>
-                                        {s.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>}
-                        {type === 'tagsPicker' &&
-                            <MuiAutomplete
-                                size={size}
-                                multiple
-                                id="tags-outlined"
-                                options={tags}
-                                getOptionLabel={(o) => o.title}
-                                filterSelectedOptions
-                                onChange={(e, val) => handleChange(e, field, val)}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={title}
-                                        placeholder={title}
-                                        error={values[field]?.length > 4 || false}
-                                    />
-                                )}
-                            />}
-                        {type === 'timePicker' &&
-                            <>
-                                <Button variant="outlined" size={'large'} color="primary"
-                                    onClick={openDrop} style={{ marginBottom: 10 }} >
-                                    {open ? <ExpandLess /> : <ExpandMore />}
-                                </Button>
-                                <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Grid container spacing={1}>
-                                        {TimePicker.map((s) => (
-                                            <Grid item lg={6} md={6} sm={6} key={s.day}>
-                                                <TimeSelector label={s.day} type={s.type} times={values.openingHours[s.timeref] || {}}
-                                                    timeref={s.timeref} setTimes={setTimes} removeDay={removeDay} setChecked={setChecked} checked={checked} />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </Collapse>
-                            </>}
-                        {type === 'toggle' &&
-                            <Switch
-                                defaultValue={init[field] || false}
-                                checked={values[field] || false}
-                                onChange={(e) => handleChange(e, field, undefined, type)}
-                                inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                    </FormControl>
-                </Grid>
-            )}
-            <div style={styles.ButtomLeftCornerButton}>
-                <Button
-                    style={{ width: 200 }}
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => modify(type, init.id)}>
-                    {term(type)}
-                </Button>
-            </div>
-        </Grid>
+        <FormBuilder
+            handleChange={handleChange}
+            ModalInit={ModalInit}
+            maxSizeElements={maxSizeElements}
+            setValues={setValues}
+            values={values}
+            tags={tags}
+            picker={picker}
+            TimePicker={TimePicker}
+            init={init}
+            openDrop={openDrop}
+            checked={checked}
+            setChecked={setChecked}
+            open={open}
+            setTimes={setTimes}
+            removeDay={removeDay}
+            modify={modify}
+            type={type}
+        />
     )
-}
-
-const styles = {
-    ButtomLeftCornerButton: {
-        zIndex: 1,
-        position: 'absolute',
-        bottom: '10px',
-        left: '10px',
-    },
 }

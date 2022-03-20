@@ -7,14 +7,15 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { TracksTab } from './Tabs/TracksTab';
 import { UploadMediaTab } from './Tabs/UploadMediaTab';
-import { CircularProgress } from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core';
 //styles
 import useStyles from "../../styles";
 
-const TracksPop = ({media, setMedia, handleClose, initialData, type, open }) => {
-    
+const TracksPop = ({ handleClose, type, open, initialData }) => {
+    //local 
     const classes = useStyles()
     const [tab, setTab] = useState(0);
+    const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
 
     const handleTabs = (event, newValue) => {
@@ -23,8 +24,8 @@ const TracksPop = ({media, setMedia, handleClose, initialData, type, open }) => 
 
     return (
         <div>
-            {loadingImage && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", backgroundColor:"rgba(0,0,0,0.5)", top:"0", left:"0", right:"0", bottom:"0", zIndex:"5"}}>
-                <CircularProgress size={100}/>
+            {loadingImage && <div className={classes.loadingImage}>
+                <CircularProgress size={100} />
             </div>}
             <Box className={classes.stickyBox}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
@@ -36,7 +37,7 @@ const TracksPop = ({media, setMedia, handleClose, initialData, type, open }) => 
                     <TracksTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab open={open} media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"tracks"}/>
+                    {/* <UploadMediaTab open={open} media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"tracks"} /> */}
                 </TabPanel>
             </DialogContent>
         </div >

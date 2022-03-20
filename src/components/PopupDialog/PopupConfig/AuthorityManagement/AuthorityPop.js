@@ -11,7 +11,7 @@ import useStyles from "../../styles";
 
 
 
-const AuthorityPop = ({ handleClose, initialData, type }) => {
+const AuthorityPop = ({ handleClose, type, initialData }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
@@ -19,8 +19,6 @@ const AuthorityPop = ({ handleClose, initialData, type }) => {
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
-
-
 
     return (
         <div>

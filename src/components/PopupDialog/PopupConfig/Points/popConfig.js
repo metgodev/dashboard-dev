@@ -19,12 +19,14 @@ import { createRandomId } from "../../../../utils/randomId";
 
 export const ModalTabs = [term('points'), term('gallery')]
 export const ModalInit = [
-    { title: term('name'), id: createRandomId(), field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
+    // ------------------ map ------------------
     { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 1, size: 'small', type: 'googleAutocomplete' },
+    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'locationName' },
+    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
+    // ------------------ map ------------------
+    { title: term('name'), id: createRandomId(), field: 'poiName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('category'), id: createRandomId(), field: 'categoriesIds', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
     { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 1, size: 'small', type: 'toggle' },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 5, maxRows: 5, size: 'small', type: 'textfield' },
     { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },

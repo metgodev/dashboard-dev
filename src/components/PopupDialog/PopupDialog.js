@@ -1,12 +1,12 @@
-import React, { forwardRef, useEffect, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+import React, { forwardRef, useState } from 'react';
 import { Box } from '@mui/system';
+import Slide from '@mui/material/Slide';
+import Dialog from '@mui/material/Dialog';
+import { useSelector } from 'react-redux';
+import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContent, IconButton } from '@material-ui/core';
+import DialogContentText from '@mui/material/DialogContentText';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 import EventsPop from './PopupConfig/Events/EventsPop';
 import PointsPop from './PopupConfig/Points/PointsPop';
@@ -17,44 +17,18 @@ import TagPop from './PopupConfig/TagsManagment/TagPop';
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
 
-
-
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-export default function PopupDialog({ description, tabs, title, open, setOpen, initialData, type }) {
-
-    const [expend, setExpend] = useState("md")
+export default function PopupDialog({ description, tabs, title, open, setOpen, type }) {
+    //styles
     const classes = useStyles()
     const theme = useTheme();
-    const [media, setMedia] = useState([])
+    //global
+    const { editTabData } = useSelector(s => s.mainReducer);
 
-    const setInitialValuesForMedia = () => {
-        if (initialData.gallery !== undefined) {
-            let initImagesArr = []
-            JSON.parse(initialData.gallery).map((mediaItem) => {
-                initImagesArr.push(mediaItem)
-            })
-            setMedia(initImagesArr)
-        }
-    }
-
-    useEffect(() => {
-        setInitialValuesForMedia()
-    }, [open, initialData])
-
-    const handleClose = () => {
-        setOpen(false)
-        initialData = {}
-    }
-
-    const handleWidth = () => {
-        if (expend === "sm") setExpend("md")
-        else if (expend === "md") setExpend("lg")
-        else if (expend === "lg") setExpend("sm")
-    }
+    const handleClose = () => setOpen(false);
 
     return (
         <Box>
@@ -67,25 +41,22 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, i
                 keepMounted
                 aria-describedby="alert-dialog-slide-description"
                 fullWidth
-                maxWidth={expend}
+                maxWidth={"lg"}
             >
                 <DialogTitle className={classes.dialogHeader}>
-                    <IconButton onClick={handleWidth}>
-                        < OpenInFullOutlinedIcon />
-                    </IconButton>
                     {title}
                     <IconButton onClick={handleClose}>
                         < CloseOutlinedIcon />
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
-                    {tabs === 'events' && <EventsPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
-                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} initialData={initialData} type={type} media={media} setMedia={setMedia} />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type} initialData={editTabData} />}
+                    {tabs === 'events' && <EventsPop handleClose={handleClose} type={type} initialData={editTabData} />}
+                    {tabs === 'points' && <PointsPop handleClose={handleClose} type={type} initialData={editTabData} />}
+                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} type={type} initialData={editTabData} />}
                     {/* authority management */}
-                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />}
+                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} type={type} initialData={editTabData} />}
+                    {tabs === 'tags' && <TagPop handleClose={handleClose} type={type} initialData={editTabData} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

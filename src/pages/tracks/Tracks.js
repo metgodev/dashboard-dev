@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Box } from '@material-ui/core'
 import TracksTableService from '../../hooks/DataService/TracksTableService'
 import PageTitle from '../../components/PageTitle/PageTitle'
@@ -12,7 +11,9 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress } from '@material-ui/core'
+import { useSelector, useDispatch } from 'react-redux';
+import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import term from '../../terms'
 
 function Tracks() {
@@ -23,16 +24,18 @@ function Tracks() {
     const pages = Math.ceil(tracks.length / rowsPerPage - 1)
     //dialog
     const [open, setOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState([]);
-    //global 
+    const [dialogType, setDialogType] = useState('add');    //global 
     const { lang } = useSelector(s => s.mainRememberReducer)
+    const dispatch = useDispatch();
 
     const openDialog = (data) => {
-        if (!data) setDialogType('add')
-        else {
+        if (data) {
+            dispatch(set_edit_tab_data(data))
             setDialogType('edit')
-            setInitialDataDialog(data)
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
+            setDialogType('add')
         }
         setOpen(!open)
     }
@@ -45,9 +48,6 @@ function Tracks() {
         { name: 'forword', func: () => setPage((page < pages) ? (page + 1) : page), icon: <ArrowForwardIosOutlinedIcon /> },
         { name: 'back', func: () => setPage((page >= pages) && (pages > 0) ? (page - 1) : page), icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
-
-
-
 
     return (
         <Box>
@@ -73,7 +73,7 @@ function Tracks() {
                     <CircularProgress size={60} />
                 </Box>
             }
-            <PopupDialog title={term('routes')} open={open} setOpen={setOpen} tabs={'tracks'} initialData={initialDataDialog} type={dialogType} />
+            <PopupDialog title={term('routes')} open={open} setOpen={setOpen} tabs={'tracks'} type={dialogType} />
         </Box>
     )
 }
