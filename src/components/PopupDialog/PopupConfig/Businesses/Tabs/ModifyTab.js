@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import term from '../../../../../terms';
 import { client } from '../../../../../API/metro';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import TimeSelector from '../../../../TimePicker/TimePicker';
 import { ModalInit, tags, picker, TimePicker } from '../popConfig';
 import { Button, Collapse, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
 import { Autocomplete as MuiAutomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import CategoryConfig from '../../CategoryConfig'
 //styles
 import useStyles from '../../../styles';
-import MapPick from '../../../../MapPicker.js/MapPick';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
@@ -86,78 +82,25 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 <Grid item lg={maxSizeElements.indexOf(type) > -1 ? 12 : 6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
-                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
-                        {type === 'textfield' &&
-                            <TextField
-                                size={size}
-                                id={title}
-                                label={title}
-                                placeholder={title}
-                                multiline
-                                rows={rows}
-                                defaultValue={init[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                                error={values[field] === ''}
-                            />}
-                        {type === 'picker' &&
-                            <TextField
-                                size={size}
-                                id="select-field"
-                                select
-                                label={title}
-                                value={values[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                            >
-                                {picker[field].map((s) => (
-                                    <MenuItem key={s.value} value={s.value}>
-                                        {s.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>}
-                        {type === 'tagsPicker' &&
-                            <MuiAutomplete
-                                size={size}
-                                multiple
-                                id="tags-outlined"
-                                options={tags}
-                                getOptionLabel={(o) => o.title}
-                                filterSelectedOptions
-                                onChange={(e, val) => handleChange(e, field, val)}
-                                disabled={values[field]?.length > 4 || false}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={title}
-                                        placeholder={title}
-                                    />
-                                )}
-                            />}
-                        {type === 'timePicker' &&
-                            <>
-                                <Button variant="outlined" size={'large'} color="primary"
-                                    onClick={openDrop} style={{ marginBottom: 10 }} >
-                                    {open ? <ExpandLess /> : <ExpandMore />}
-                                </Button>
-                                <Collapse in={open} timeout="auto" unmountOnExit>
-                                    <Grid container spacing={1}>
-                                        {TimePicker.map((s) => (
-                                            <Grid item lg={6} md={6} sm={6} key={s.day}>
-                                                <TimeSelector label={s.day} type={s.type} times={values.openingHours[s.timeref] || null}
-                                                    timeref={s.timeref} setTimes={setTimes} removeDay={removeDay} setChecked={setChecked} checked={checked} />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </Collapse>
-                            </>}
-                        {type === 'toggle' &&
-                            <Switch
-                                defaultValue={init[field] || false}
-                                checked={values[field] || false}
-                                onChange={(e) => handleChange(e, field, undefined, type)}
-                                inputprops={{ 'aria-label': title }}
-                            />
-                        }
+                        <CategoryConfig
+                            title={title}
+                            id={id}
+                            field={field}
+                            rows={rows}
+                            size={size}
+                            type={type}
+                            setValues={setValues}
+                            init={init}
+                            values={values}
+                            handleChange={handleChange}
+                            tab={'businesses'}
+                            openDrop={openDrop}
+                            open={open}
+                            setTimes={setTimes}
+                            removeDay={removeDay}
+                            setChecked={setChecked}
+                            checked={checked}
+                        />
                     </FormControl>
                 </Grid>
             )}

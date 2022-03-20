@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react'
 import term from '../../../../../terms';
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker } from '../popConfig';
-import TimeSelector from '../../../../TimePicker/TimePicker';
-import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
-import { Autocomplete, FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { ModalInit } from '../popConfig';
+import { Button } from '@material-ui/core';
+import { FormControl, Grid, InputLabel } from '@mui/material';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import Calendar from '../../../../Calendar/Calendar';
-import GoogleAutocomplete from '../../../../GoogleAutocomplete/GoogleAutocomplete';
+import CategoryConfig from '../../CategoryConfig'
 
 export const EventsTab = ({ handleClose, initialData, type }) => {
     //global
     const dispatch = useDispatch()
     //local
+    const openDrop = () => setOpen(!open);
+    const [open, setOpen] = useState(false);
     const [init, setInit] = useState({});
     const [values, setValues] = useState({});
 
@@ -47,74 +47,21 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
-                        {type === 'textfield' &&
-                            <TextField
-                                size={size}
-                                id={title}
-                                label={title}
-                                placeholder={title}
-                                multiline
-                                rows={rows}
-                                maxRows={maxRows}
-                                defaultValue={init[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                                error={values[field] === ''}
-                            />}
-                        {type === 'picker' &&
-                            <TextField
-                                size={size}
-                                id="select-field"
-                                select
-                                label={title}
-                                value={values[field]}
-                                onChange={(e) => handleChange(e, field)}
-                            >
-                                {picker[field].map((s) => (
-                                    <MenuItem key={s.value} value={s.value}>
-                                        {s.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>}
-                        {type === 'tagsPicker' &&
-                            <Autocomplete
-                                size={size}
-                                multiple
-                                id="tags-outlined"
-                                options={tags}
-                                getOptionLabel={(o) => o.title}
-                                filterSelectedOptions
-                                onChange={(e, val) => handleChange(e, field, val)}
-                                disabled={values[field]?.length > 4 || false}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={title}
-                                        placeholder="תגיות"
-                                    />
-                                )}
-                            />}
-                        {type === 'timePicker' &&
-                            <TimeSelector label={title} setTime={setDateTime} field={field} />
-                        }
-                        {type === 'toggle' &&
-                            <Switch
-                                checked={values[field]}
-                                onChange={(e) => handleChange(e, field)}
-                                inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                        {type === 'datePicker' &&
-                            <Calendar type={2} setDateTwo={setDateTime} field={field} />
-                        }
-                        {type === 'textArea' &&
-                            <TextareaAutosize
-                                maxRows={maxRows}
-                                aria-label={title}
-                                defaultValue={init[field] || ''}
-                                fullWidth
-                            />
-                        }
+                        <CategoryConfig
+                            title={title}
+                            id={id}
+                            field={field}
+                            rows={rows}
+                            size={size}
+                            type={type}
+                            setValues={setValues}
+                            init={init}
+                            values={values}
+                            handleChange={handleChange}
+                            tab={'events'}
+                            open={open}
+                            setOpen={setOpen}
+                        />
                     </FormControl>
                 </Grid>
             )}

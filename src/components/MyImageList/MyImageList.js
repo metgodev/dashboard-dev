@@ -9,14 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { set_table_changed, set_edit_tab_data } from '../../REDUX/actions/main.actions'
 
 
-export default function MyImageList({type, tab }) {
+export default function MyImageList({type, tab}) {
 
     const classes = useStyles()
     const dispatch = useDispatch()
 
-    const { editTabData } = useSelector(s => s.mainReducer)    
+    let { editTabData } = useSelector(s => s.mainReducer)    
+    let media = editTabData?.gallery? (typeof editTabData.gallery == 'string')? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
     
-    const media = editTabData?.gallery? (typeof editTabData.gallery == 'string')? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
     const deleteItem = async (item) => {
         let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
         let ids = newMedia.map((item) => {
@@ -28,9 +28,13 @@ export default function MyImageList({type, tab }) {
                 let business = {...res, id: res._id}
                 delete business._id
                 dispatch(set_table_changed("upload_media"))
-                dispatch(set_edit_tab_data(business))
             })
     }
+
+    useEffect( () => {
+        console.log("Data Changed")
+    },[editTabData])
+
 
     return (
         <>

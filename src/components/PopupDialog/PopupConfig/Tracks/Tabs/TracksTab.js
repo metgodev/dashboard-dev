@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import term from '../../../../../terms';
-import { ModalInit, picker } from '../popConfig';
-import TimeSelector from '../../../../TimePicker/TimePicker';
-import { Button, MenuItem, TextareaAutosize } from '@material-ui/core';
-import { FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
-import Calendar from '../../../../Calendar/Calendar';
+import { ModalInit } from '../popConfig';
+import { Button } from '@material-ui/core';
+import { FormControl, Grid, InputLabel } from '@mui/material';
 import { client } from '../../../../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
+import CategoryConfig from '../../CategoryConfig'
 //styles
 import useStyles from '../../../styles'
 
@@ -47,55 +46,18 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {type === 'textfield' &&
-                            <TextField
-                                size={size}
-                                id={title}
-                                label={title}
-                                placeholder={title}
-                                multiline
-                                rows={rows}
-                                maxRows={maxRows}
-                                defaultValue={initialData[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                                error={values[field] === ''}
-                            />}
-                        {type === 'picker' &&
-                            <TextField
-                                size={size}
-                                id="select-field"
-                                select
-                                label={title}
-                                value={values[field]}
-                                onChange={(e) => handleChange(e, field)}
-                            >
-                                {picker[field].map((s) => (
-                                    <MenuItem key={s.value} value={s.value}>
-                                        {s.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>}
-                        {type === 'timePicker' &&
-                            <TimeSelector label={title} />
-                        }
-                        {type === 'toggle' &&
-                            <Switch
-                                checked={values[field]}
-                                onChange={(e) => handleChange(e, field)}
-                                inputprops={{ 'aria-label': title }}
-                            />
-                        }
-                        {type === 'datePicker' &&
-                            <Calendar type={2} />
-                        }
-                        {type === 'textArea' &&
-                            <TextareaAutosize
-                                maxRows={maxRows}
-                                aria-label={title}
-                                defaultValue={initialData[field] || ''}
-                                fullWidth
-                            />
-                        }
+                        <CategoryConfig
+                            title={title}
+                            id={id}
+                            field={field}
+                            rows={rows}
+                            size={size}
+                            type={type}
+                            setValues={setValues}
+                            values={values}
+                            handleChange={handleChange}
+                            tab={'tracks'}
+                        />
                     </FormControl>
                 </Grid>
             )}

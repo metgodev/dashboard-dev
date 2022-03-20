@@ -24,7 +24,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 
-export default function PopupDialog({description, tabs, title, open, setOpen, type }) {
+export default function PopupDialog({ description, tabs, title, open, setOpen, type }) {
 
     const [expend, setExpend] = useState("md")
     const classes = useStyles()
@@ -78,13 +78,13 @@ export default function PopupDialog({description, tabs, title, open, setOpen, ty
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type}  />}
+                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type} />}
                     {tabs === 'events' && <EventsPop handleClose={handleClose} type={type} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} type={type}  />}
+                    {tabs === 'points' && <PointsPop handleClose={handleClose} type={type} />}
                     {tabs === 'tracks' && <TracksPop handleClose={handleClose} type={type} />}
                     {/* authority management */}
-                    {/* {tabs === 'authority' && <AuthorityPop handleClose={handleClose} initialData={initialData} type={type} />}
-                    {tabs === 'tags' && <TagPop handleClose={handleClose} initialData={initialData} type={type} />} */}
+                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} type={type} />}
+                    {tabs === 'tags' && <TagPop handleClose={handleClose} type={type} />}
                 </DialogContent>
                 <DialogContentText>
                     {description}

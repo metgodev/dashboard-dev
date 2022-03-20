@@ -80,8 +80,6 @@ export const UploadMediaTab = ({tab, setLoadingImage, open }) => {
         .then((res) => {
           let business = {...res, id: res._id}
           delete business._id
-          console.log(business)
-          dispatch(set_edit_tab_data(business))
           dispatch(set_table_changed('upload-image'))
           setLoadingImage(false)
         })
@@ -120,13 +118,13 @@ export const UploadMediaTab = ({tab, setLoadingImage, open }) => {
         }
         {!imageToCrop && mediaUploadSections.map(({ type }, index) => {
           return (
-            <>
+            <div key={index}>
               <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
               <DialogContent key={index}>
                 <MyImageList tab={tab} type={type}  />
               </DialogContent>
               {index < 3 && <Box className={classes.divider} />}
-            </>
+            </div>
           )
         })}
       </Box>

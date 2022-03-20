@@ -6,6 +6,7 @@ import { ModalInit, picker } from '../popConfig';
 import { Button, MenuItem } from '@material-ui/core';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import { FormControl, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import CategoryConfig from '../../CategoryConfig'
 
 export const AuthorityTab = ({ handleClose, initialData, type }) => {
     //global
@@ -37,41 +38,18 @@ export const AuthorityTab = ({ handleClose, initialData, type }) => {
                 <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
                     <InputLabel>{title}</InputLabel>
                     <FormControl fullWidth  >
-                        {type === 'textfield' &&
-                            <TextField
-                                size={size}
-                                id={title}
-                                label={title}
-                                placeholder={title}
-                                multiline
-                                rows={rows}
-                                defaultValue={initialData[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                                error={values[field] === ''}
-                            />}
-                        {type === 'picker' &&
-                            <TextField
-                                size={size}
-                                id="select-field"
-                                select
-                                label={title}
-                                value={values[field] || ''}
-                                onChange={(e) => handleChange(e, field)}
-                            >
-                                {picker[field].map((s) => (
-                                    <MenuItem key={s.value} value={s.value}>
-                                        {s.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>}
-                        {type === 'toggle' &&
-                            <Switch
-                                defaultValue={values[field] || false}
-                                checked={values[field] || false}
-                                onChange={(e) => handleChange(e, field, undefined, type)}
-                                inputprops={{ 'aria-label': title }}
-                            />
-                        }
+                    <CategoryConfig
+                            title={title}
+                            id={id}
+                            field={field}
+                            rows={rows}
+                            size={size}
+                            type={type}
+                            setValues={setValues}
+                            values={values}
+                            handleChange={handleChange}
+                            tab={'authorityManagment'}
+                        />
                     </FormControl>
                 </Grid>
             )}

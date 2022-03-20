@@ -29,6 +29,10 @@ function Businesses() {
     const { lang } = useSelector(s => s.mainRememberReducer);
     const dispatch = useDispatch();
 
+    useEffect( () => {
+        console.log("Data Changed")
+    },[businesses])
+
     const openDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
