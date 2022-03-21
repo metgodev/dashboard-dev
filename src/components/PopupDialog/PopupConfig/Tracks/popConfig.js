@@ -10,6 +10,11 @@ import { createRandomId } from "../../../../utils/randomId";
         .then((authorities => picker.authorityId = authorities))
 })();
 
+export const FormTabs = [{
+    value: term('general'),
+}, {
+    value: term('map_location'),
+}];
 
 export const ModalTabs = [term('locations')]
 export const ModalInit = [

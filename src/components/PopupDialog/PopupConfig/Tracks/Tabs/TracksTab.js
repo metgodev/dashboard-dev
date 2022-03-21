@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ModalInit, picker } from '../popConfig';
+import { ModalInit, picker, FormTabs } from '../popConfig';
 import { client } from '../../../../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
@@ -37,6 +37,7 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     let maxSizeElements = ['MapPicker']
     return (
         <FormBuilder
+            FormTabs={FormTabs}
             init={initialData}
             ModalInit={ModalInit}
             handleClose={handleClose}

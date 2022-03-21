@@ -1,11 +1,10 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import { Box } from '@mui/system';
 import Slide from '@mui/material/Slide';
 import Dialog from '@mui/material/Dialog';
 import { useSelector } from 'react-redux';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContent, IconButton } from '@material-ui/core';
-import DialogContentText from '@mui/material/DialogContentText';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 import EventsPop from './PopupConfig/Events/EventsPop';
@@ -21,7 +20,7 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PopupDialog({ description, tabs, title, open, setOpen, type }) {
+export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth }) {
     //styles
     const classes = useStyles()
     const theme = useTheme();
@@ -41,7 +40,7 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, t
                 keepMounted
                 aria-describedby="alert-dialog-slide-description"
                 fullWidth
-                maxWidth={"lg"}
+                maxWidth={maxWidth || "lg"}
             >
                 <DialogTitle className={classes.dialogHeader}>
                     {title}
@@ -58,9 +57,6 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, t
                     {tabs === 'authority' && <AuthorityPop handleClose={handleClose} type={type} initialData={editTabData} />}
                     {tabs === 'tags' && <TagPop handleClose={handleClose} type={type} initialData={editTabData} />}
                 </DialogContent>
-                <DialogContentText>
-                    {description}
-                </DialogContentText>
             </Dialog>
         </Box >
     );

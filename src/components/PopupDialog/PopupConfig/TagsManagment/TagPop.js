@@ -21,18 +21,18 @@ const TagPop = ({ handleClose, type, initialData }) => {
     };
 
     return (
-        <div>
+        <Box>
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
                 </Tabs>
             </Box>
-            <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
+            <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
                     <TagsTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
-            </DialogContent>
-        </div >
+            </Box>
+        </Box >
     )
 }
 

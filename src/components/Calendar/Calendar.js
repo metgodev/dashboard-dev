@@ -39,6 +39,7 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
         if (setDateTwo) setDateTwo(d2, field)
     }, [date, datetwo])
 
+    let validDate = date < new Date() && datetwo < date
     const Warp = warp ? Widget : Box
 
     return (
@@ -52,6 +53,8 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
                         openTo="date"
                         value={date}
                         onChange={changeDate}
+                        error={validDate}
+                        healperText={validDate ? term('date_error') : ''}
                     />
                 </ThemeProvider>
                 }
@@ -64,6 +67,8 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
                     value={datetwo}
                     InputAdornmentProps={{ position: "end" }}
                     onChange={date => changeDateTwo(date)}
+                    error={validDate}
+                    helperText={validDate ? term('date_error') : term('date_format')}
                 />}
             </MuiPickersUtilsProvider>
         </Warp>

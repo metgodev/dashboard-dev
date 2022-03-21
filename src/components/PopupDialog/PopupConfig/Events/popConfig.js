@@ -17,6 +17,12 @@ import { createRandomId } from "../../../../utils/randomId";
         .then(({ data }) => data[0].tags.map(({ title, _id }) => tags = [...tags, { title, id: _id }]));
 })();
 
+export const FormTabs = [{
+    value: term('general'),
+}, {
+    value: term('map_location'),
+}];
+
 export const ModalTabs = [term('event'), term('gallery'),]
 export const ModalInit = [
     // ------------------ map ------------------

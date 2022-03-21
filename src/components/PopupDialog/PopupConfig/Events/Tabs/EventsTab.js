@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker, clearButtonId } from '../popConfig';
+import { ModalInit, tags, picker, clearButtonId, FormTabs } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
@@ -51,6 +51,7 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
     let maxSizeElements = ['MapPicker']
     return (
         <FormBuilder
+            FormTabs={FormTabs}
             ModalInit={ModalInit}
             tags={tags}
             picker={picker}

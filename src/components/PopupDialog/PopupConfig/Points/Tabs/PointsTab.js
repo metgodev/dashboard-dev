@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker } from '../popConfig';
+import { ModalInit, tags, picker, FormTabs } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import { useDispatch } from 'react-redux';
 //styles
@@ -50,6 +50,7 @@ export const PointsTab = ({ handleClose, initialData, type }) => {
     return (
         <FormBuilder
             init={initialData}
+            FormTabs={FormTabs}
             ModalInit={ModalInit}
             handleClose={handleClose}
             values={values}

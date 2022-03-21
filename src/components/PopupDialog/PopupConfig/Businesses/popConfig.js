@@ -13,33 +13,39 @@ import { createRandomId } from "../../../../utils/randomId";
         .then(({ data }) => data[0].tags.map(({ title, _id }) => tags = [...tags, { title, id: _id }]));
 })();
 
+export const FormTabs = [{
+    value: term('general'),
+}, {
+    value: term('map_location'),
+}];
+
 export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')]
 export const ModalInit = [
     // ------------------ map ------------------
-    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'googleAutocomplete' },
-    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'locationName' },
-    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
+    { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 4, size: 'small', type: 'googleAutocomplete', required: true },
+    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'locationName', required: false },
+    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker', required: false },
     // ------------------ map ------------------
-    { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker' },
-    { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
-    { title: term('phone_number') + " " + term('Will_not_be_displayed'), id: createRandomId(), field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('contact'), id: createRandomId(), field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('business_number'), id: createRandomId(), field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('email_address'), id: createRandomId(), field: 'emailAddress', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 4, size: 'small', type: 'picker' },
-    { title: term('opening_hours'), id: createRandomId(), field: 'openingHours', rows: 1, maxRows: 4, size: 'small', type: 'timesPicker' },
-    { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('instagram_link'), id: createRandomId(), field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('youtube_link'), id: createRandomId(), field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('twitter_link'), id: createRandomId(), field: 'twitterPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('linkedIn_link'), id: createRandomId(), field: 'linkedInPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield' },
-    { title: term('open_24_hours'), id: createRandomId(), field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
-    { title: term('open_on_weekend'), id: createRandomId(), field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
-    { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
-    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'toggle' },
+    { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
+    { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield', required: true },
+    { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker', required: true },
+    { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 4, size: 'small', type: 'picker', required: true },
+    { title: term('phone_number'), id: createRandomId(), field: 'phoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('contact'), id: createRandomId(), field: 'contactPersonName', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('business_number'), id: createRandomId(), field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('email_address'), id: createRandomId(), field: 'emailAddress', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 4, size: 'small', type: 'picker', required: false },
+    { title: term('opening_hours'), id: createRandomId(), field: 'openingHours', rows: 1, maxRows: 4, size: 'small', type: 'timesPicker', required: false },
+    { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('instagram_link'), id: createRandomId(), field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('youtube_link'), id: createRandomId(), field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('twitter_link'), id: createRandomId(), field: 'twitterPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('linkedIn_link'), id: createRandomId(), field: 'linkedInPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('open_24_hours'), id: createRandomId(), field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
+    { title: term('open_on_weekend'), id: createRandomId(), field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
+    { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
+    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
 ]
 
 export let tags = []

@@ -7,7 +7,6 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
-import { UploadMediaTab } from './Tabs/UploadMediaTab';
 import { CircularProgress } from '@material-ui/core'
 import term from '../../../../terms';
 //styles
@@ -32,16 +31,16 @@ const ModifyPop = ({ handleClose, type, initialData }) => {
     }, [handleClose])
 
     return (
-        <div>
-            {loadingImage && <div className={classes.loadingImage}>
+        <Box>
+            {loadingImage && <Box className={classes.loadingImage}>
                 <CircularProgress size={50} />
-            </div>}
+            </Box>}
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={b === term('gallery') && type === 'add'} />)}
                 </Tabs>
             </Box>
-            <DialogContent id="alert-dialog-slide-description">
+            <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
                     <ModifyTab handleClose={handleClose} initialData={initialData} type={type} setTab={0} />
                 </TabPanel>
@@ -51,8 +50,8 @@ const ModifyPop = ({ handleClose, type, initialData }) => {
                 <TabPanel value={tab} index={2}>
                     {/* <UploadMediaTab open={open} setLoadingImage={setLoadingImage} setMedia={setMedia} initialData={initialData} tab={"business"} /> */}
                 </TabPanel>
-            </DialogContent>
-        </div >
+            </Box>
+        </Box >
     )
 }
 

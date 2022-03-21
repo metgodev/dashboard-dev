@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -23,24 +22,24 @@ const TracksPop = ({ handleClose, type, open, initialData }) => {
     };
 
     return (
-        <div>
-            {loadingImage && <div className={classes.loadingImage}>
+        <Box>
+            {loadingImage && <Box className={classes.loadingImage}>
                 <CircularProgress size={100} />
-            </div>}
+            </Box>}
             <Box className={classes.stickyBox}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} />)}
                 </Tabs>
             </Box>
-            <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
+            <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
                     <TracksTab handleClose={handleClose} initialData={initialData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     {/* <UploadMediaTab open={open} media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"tracks"} /> */}
                 </TabPanel>
-            </DialogContent>
-        </div >
+            </Box>
+        </Box >
     )
 }
 

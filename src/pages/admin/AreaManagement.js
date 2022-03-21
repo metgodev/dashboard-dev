@@ -111,8 +111,8 @@ function AreaManagement() {
                     }
                 </Grid>
             </Grid>
-            <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} />
-            <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} />
+            <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} maxWidth={'sm'} />
+            <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
         </Box>
     )
 }

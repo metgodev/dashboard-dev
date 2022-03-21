@@ -39,7 +39,8 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
     useEffect(() => {
         let hours = new Date(selectedDate).toLocaleTimeString([], {
             hourCycle: 'h23',
-            hour: "2-digit",
+            hour: '2-digit',
+            minute: '2-digit'
         })
         if (!setTimes) return
         setTimes(hours, timeref, type)
@@ -57,7 +58,6 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
             setChecked(checked.filter(time => time !== timeref));
         }
     }
-
     return (
         <Warp title={term('time')} uppertitle className={classes.card} >
             <ThemeProvider theme={theme}>
@@ -76,6 +76,7 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
                             cancelLabel={term('cancel')}
                             onChange={handleDateChange}
                             disabled={checked?.includes(timeref) || false}
+                            error={(!times || !times.start || !times.end) && checked?.includes(timeref) ? true : false}
                         />
                         {type === 2 && <Checkbox
                             onClick={(e) => {

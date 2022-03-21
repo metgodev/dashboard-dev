@@ -5,7 +5,6 @@ export default makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // padding: '10px !important',
     },
     dialogContent: {
         overflowX: 'hidden',

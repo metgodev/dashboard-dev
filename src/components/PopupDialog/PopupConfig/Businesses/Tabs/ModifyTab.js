@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker, TimePicker, clearButtonId } from '../popConfig';
+import { ModalInit, tags, picker, TimePicker, clearButtonId, FormTabs } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
@@ -33,12 +33,10 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
 
     useEffect(() => {
         if (Object.keys(initialData).length === 0) clear();
-        else {
-            let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-            let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
-            setInit({ ...initialData, phoneNumber: OC[0]?.whatsapp, contactPersonPhoneNumber: OC[1]?.phone, email: OC[2]?.email })
-            setValues(prevState => ({ ...prevState, openingHours: OH }))
-        }
+        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
+        let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
+        setInit({ ...initialData, phoneNumber: OC[0]?.whatsapp, contactPersonPhoneNumber: OC[1]?.phone, email: OC[2]?.email })
+        setValues(prevState => ({ ...prevState, openingHours: OH }))
         return (() => clear())
     }, [type, initialData])
 
@@ -56,7 +54,7 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     };
     const removeDay = (timeRef, e) => {
         if (e.target.checked) return;
-        setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: "00:00", end: "00:00" } } }))
+        setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: null, end: null } } }))
     }
 
     const modify = async (type, id) => {
@@ -79,10 +77,12 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
         setOpen(false);
     }
 
+
     let maxSizeElements = ['MapPicker']
     return (
         <FormBuilder
             handleChange={handleChange}
+            FormTabs={FormTabs}
             ModalInit={ModalInit}
             maxSizeElements={maxSizeElements}
             setValues={setValues}

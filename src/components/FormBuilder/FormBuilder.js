@@ -11,32 +11,28 @@ import Calendar from '../Calendar/Calendar';
 import VerticalTabPannel from '../TabPanel/VerticalTabPannel';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
-
-let tabs = [{
-    value: term('general'),
-}, {
-    value: term('map_location'),
-}];
-
+import { FormValidator, helperText } from './FormValidators';
 
 const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker, init, type, ...props }) => {
     const [tab, setTab] = useState(0);
+    const { mobile } = useSelector(s => s.mainReducer)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
-    const { mobile } = useSelector(s => s.mainReducer)
+
     return (
         <>
-            <Box sx={{ flexGrow: 1, display: 'flex', height: '100%' }} >
+            <Box sx={{ flexGrow: 1, height: '100%' }} >
                 <Box sx={{ position: 'absolute' }} >
-                    {mobile && <Tabs value={tab} onChange={handleTabs} aria-label="vertical-tabs" variant="fullWidth" scrollButtons="auto" orientation="vertical">
-                        {tabs.map(b => <Tab key={b.value} label={b.value} />)}
-                    </Tabs>}
+                    {mobile && props?.FormTabs &&
+                        <Tabs value={tab} onChange={handleTabs} aria-label="vertical-tabs" variant="fullWidth" scrollButtons="auto" orientation="vertical">
+                            {props.FormTabs.map(b => <Tab key={b.value} label={b.value} />)}
+                        </Tabs>}
                 </Box>
-                <Box sx={{ paddingRight: mobile ? 18 : 0, paddingBottom: 3 }} >
-                    <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 3, md: 5 }} >
-                        {ModalInit.map(({ title, id, field, rows, size, type }) =>
+                <Box sx={{ pr: mobile && props?.FormTabs ? 18 : 2, pl: 2, mt: 1.2, mb: 8 }} >
+                    <Grid container columnSpacing={{ xs: 1, sm: 3 }} >
+                        {ModalInit.map(({ title, id, field, rows, size, type, required }) =>
                             <Grid item md={props.maxSizeElements?.indexOf(type) > -1 ? 12 : 6} sm={12} xs={12} key={id} >
                                 <VerticalTabPannel value={tab} index={0} >
                                     {type === 'textfield' &&
@@ -45,14 +41,16 @@ const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker
                                             <TextField
                                                 fullWidth
                                                 size={size}
-                                                id={title}
                                                 label={title}
-                                                placeholder={title}
                                                 multiline
                                                 rows={rows}
                                                 defaultValue={init[field] || ''}
                                                 onChange={(e) => handleChange(e, field)}
+                                                required={required}
                                                 error={values[field] === ''}
+                                                helperText={
+                                                    values[field] === '' ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
+                                                }
                                             />
                                         </>
                                     }
@@ -65,7 +63,12 @@ const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker
                                                 id="select-field"
                                                 select
                                                 label={title}
+                                                required={required}
                                                 value={values[field] || ''}
+                                                error={values[field] === ''}
+                                                helperText={
+                                                    values[field] === '' ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
+                                                }
                                                 onChange={(e) => handleChange(e, field)}
                                             >
                                                 {picker[field].map((s) => (
@@ -92,8 +95,12 @@ const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker
                                                         fullWidth
                                                         {...params}
                                                         label={title}
+                                                        required={required}
                                                         placeholder={title}
                                                         error={values[field]?.length > 4 || false}
+                                                        helperText={
+                                                            values[field] === '' ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
+                                                        }
                                                     />
                                                 )}
                                             />
@@ -172,13 +179,16 @@ const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker
                                                 defaultValue={init[field] || ''}
                                                 onChange={(e) => handleChange(e, field)}
                                                 error={values[field] === ''}
+                                                helperText={
+                                                    values[field] === '' ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
+                                                }
                                             />
                                         </>
                                     }
                                 </VerticalTabPannel>
                             </Grid>
                         )}
-                        <div style={styles.ButtomLeftCornerButton}>
+                        <Box style={styles.ButtomLeftCornerButton}>
                             <Button
                                 style={{ width: 200 }}
                                 size="large"
@@ -187,7 +197,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker
                                 onClick={() => props.modify(type, init.id)}>
                                 {term(type)}
                             </Button>
-                        </div>
+                        </Box>
                     </Grid>
                 </Box>
             </Box >
