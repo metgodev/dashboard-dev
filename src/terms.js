@@ -1365,6 +1365,11 @@ const active_lexicon = {
         he: 'תבנית תאריך mm/dd/yyyy',
         ar: 'تنسيق التاريخ mm/dd/yyyy'
     },
+    link_tags: {
+        en: 'Link tags',
+        he: 'קישור תגיות',
+        ar: 'رابط الوسوم'
+    },
 }
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

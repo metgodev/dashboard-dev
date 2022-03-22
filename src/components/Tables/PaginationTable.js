@@ -7,6 +7,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { Grid, IconButton } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined';
 // styles
 import useStyles from "./styles";
 import { useTheme } from "@material-ui/styles";
@@ -18,7 +19,7 @@ import TableHeader from './TableHeader';
 import TableMenuBtn from './TableMenuBtn';
 import TableInfoMenu from './TableInfoMenu';
 
-export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat, remove, tableType }) {
+export default function PaginationTable({ data, keys, page, setPage, rowsPerPage, setRowsPerPage, lang, openDialog, cat, remove, tableType, linking }) {
     let PaginationLanguage = languages.find(l => Object.keys(l).shift() === lang)[lang]
     //local
     const [TableCel] = useState({
@@ -54,6 +55,9 @@ export default function PaginationTable({ data, keys, page, setPage, rowsPerPage
                                             {data.contact && <TableInfoMenu options={JSON.parse(data.contact)} />}
                                             {remove && <IconButton size="small" aria-haspopup="true" onClick={() => remove(data.id)} >
                                                 <DeleteOutlinedIcon />
+                                            </IconButton>}
+                                            {linking && <IconButton size="small" aria-haspopup="true" onClick={() => linking(data)} >
+                                                <InsertLinkOutlinedIcon />
                                             </IconButton>}
                                             {openDialog && <IconButton size="small" aria-haspopup="true" onClick={() => openDialog(data)} >
                                                 <EditOutlinedIcon />

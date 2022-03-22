@@ -21,10 +21,10 @@ function AreaManagement() {
     const { lang } = useSelector(s => s.mainRememberReducer);
     const dispatch = useDispatch()
     //dialog
+    const [tagLink, setTagLink] = useState(false)
     const [autorityOpen, setAutorityOpen] = useState(false);
     const [tagOpen, setTagOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState({});
 
     const openAuthorityDialog = (data) => {
         if (data) {
@@ -48,6 +48,18 @@ function AreaManagement() {
             setDialogType('add')
         }
         setTagOpen(!tagOpen)
+    }
+
+    const openLinkingDialog = (data) => {
+        if (data) {
+            dispatch(set_edit_tab_data(data))
+            setDialogType('edit')
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
+            setDialogType('add')
+        }
+        setTagLink(!tagOpen)
     }
 
     const remove = async (id) => {
@@ -104,6 +116,7 @@ function AreaManagement() {
                         openDialog={openTagDialog}
                         remove={remove}
                         actionBtns={true}
+                        linking={openLinkingDialog}
                     /> :
                         <Box style={progress}>
                             <CircularProgress size={60} />
@@ -113,6 +126,7 @@ function AreaManagement() {
             </Grid>
             <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} maxWidth={'sm'} />
             <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
+            <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={'tags_link'} maxWidth={'sm'} />
         </Box>
     )
 }

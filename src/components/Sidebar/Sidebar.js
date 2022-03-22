@@ -30,9 +30,7 @@ const structure = [
     {
         id: 0, label: term('admin'), link: "/admin/areas", icon: <AdminPanelSettingsOutlinedIcon />,
         children: [
-            { label: term('manage_areas'), link: "/admin/areas" },
-            { label: term('manage_authorities'), link: "/admin/authorities" },
-            // { label: term('manage_tags'), link: "/admin/tags" },
+            { label: term('manage_area'), link: "/admin/areas" },
         ],
     },
     { id: 1, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },

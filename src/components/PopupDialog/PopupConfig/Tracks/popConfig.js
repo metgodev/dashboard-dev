@@ -1,9 +1,10 @@
-import { client } from "../../../../API/metro";
+import { client, isLoggedIn } from "../../../../API/metro";
 import term from "../../../../terms";
 import { createRandomId } from "../../../../utils/randomId";
 
 
 (async () => {
+    if (!isLoggedIn()) return;
     let area_id = localStorage.getItem('aid')
     client.service("authorities").find({ query: { areaId: area_id } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))

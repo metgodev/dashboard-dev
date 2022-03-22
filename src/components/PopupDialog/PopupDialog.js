@@ -11,6 +11,7 @@ import PointsPop from './PopupConfig/Points/PointsPop';
 import TracksPop from './PopupConfig/Tracks/TracksPop';
 import AuthorityPop from './PopupConfig/AuthorityManagement/AuthorityPop';
 import TagPop from './PopupConfig/TagsManagment/TagPop';
+import { TagLinkPop } from './PopupConfig/TagsManagment/Tabs/TagLinkPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
@@ -59,6 +60,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                     {/* authority management */}
                     {tabs === 'authority' && <AuthorityPop handleClose={handleClose} type={type} />}
                     {tabs === 'tags' && <TagPop handleClose={handleClose} type={type} />}
+                    {tabs === 'tags_link' && <TagLinkPop handleClose={handleClose} type={type} />}
                 </DialogContent>
             </Dialog>
         </Box >
