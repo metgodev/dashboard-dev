@@ -5,7 +5,7 @@ import { ModalInit, picker } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
-export const AuthorityTab = ({ handleClose, initialData, type }) => {
+export const AuthorityTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     //local
@@ -36,7 +36,6 @@ export const AuthorityTab = ({ handleClose, initialData, type }) => {
             values={values}
             modify={modify}
             type={type}
-            init={initialData}
         />
     )
 }

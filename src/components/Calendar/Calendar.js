@@ -15,7 +15,7 @@ import { Box } from '@mui/system';
 import { useEffect } from 'react';
 
 
-export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
+export default function Calendar({ type, warp, setDate, setDateTwo, field, disableHelpers }) {
     const [date, changeDate] = useState(new Date());
     const [datetwo, changeDateTwo] = useState(new Date());
     const { lang } = useSelector(state => state.mainRememberReducer)
@@ -54,7 +54,7 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
                         value={date}
                         onChange={changeDate}
                         error={validDate}
-                        healperText={validDate ? term('date_error') : ''}
+                        healperText={!disableHelpers && (validDate ? term('date_error') : term('date_format'))}
                     />
                 </ThemeProvider>
                 }
@@ -68,7 +68,7 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field }) {
                     InputAdornmentProps={{ position: "end" }}
                     onChange={date => changeDateTwo(date)}
                     error={validDate}
-                    helperText={validDate ? term('date_error') : term('date_format')}
+                    helperText={!disableHelpers && (validDate ? term('date_error') : term('date_format'))}
                 />}
             </MuiPickersUtilsProvider>
         </Warp>

@@ -12,10 +12,12 @@ import VerticalTabPannel from '../TabPanel/VerticalTabPannel';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { FormValidator, helperText } from './FormValidators';
+import parse_nested from '../../utils/parse_nested';
 
-const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker, init, type, ...props }) => {
+const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker, type, ...props }) => {
     const [tab, setTab] = useState(0);
-    const { mobile } = useSelector(s => s.mainReducer)
+    const { mobile, editTabData } = useSelector(s => s.mainReducer)
+    const init = parse_nested(editTabData)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);

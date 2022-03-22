@@ -7,7 +7,7 @@ import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
-export const TagsTab = ({ handleClose, initialData, type }) => {
+export const TagsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     //local
@@ -44,7 +44,6 @@ export const TagsTab = ({ handleClose, initialData, type }) => {
             values={values}
             modify={modify}
             type={type}
-            init={initialData}
         />
     )
 }

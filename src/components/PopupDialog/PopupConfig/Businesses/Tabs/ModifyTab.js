@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
 import { ModalInit, tags, picker, TimePicker, clearButtonId, FormTabs } from '../popConfig';
@@ -7,14 +7,12 @@ import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
-export const ModifyTab = ({ handleClose, initialData, type }) => {
+export const ModifyTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
-    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     //local
     const stateInit = {
         userId: user.id,
-        status: status,
         openingHours: {
             sunday: {},
             monday: {},
@@ -27,18 +25,8 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
     }
     const openDrop = () => setOpen(!open);
     const [checked, setChecked] = useState([]);
-    const [init, setInit] = useState({});
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState(stateInit);
-
-    useEffect(() => {
-        if (Object.keys(initialData).length === 0) clear();
-        let OC = initialData.contact && JSON.parse(initialData.contact) || {}
-        let OH = initialData.openingHours && JSON.parse(initialData.openingHours) || {}
-        setInit({ ...initialData, phoneNumber: OC[0]?.whatsapp, contactPersonPhoneNumber: OC[1]?.phone, email: OC[2]?.email })
-        setValues(prevState => ({ ...prevState, openingHours: OH }))
-        return (() => clear())
-    }, [type, initialData])
 
     //set the values
     const handleChange = (e, field, tags, type) => {
@@ -68,15 +56,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
-    const clear = () => {
-        let clearButton = document.querySelector(clearButtonId);
-        if (clearButton) clearButton.click();
-        setValues(stateInit)
-        setInit({})
-        setChecked([]);
-        setOpen(false);
-    }
-
 
     let maxSizeElements = ['MapPicker']
     return (
@@ -90,7 +69,6 @@ export const ModifyTab = ({ handleClose, initialData, type }) => {
             tags={tags}
             picker={picker}
             TimePicker={TimePicker}
-            init={init}
             openDrop={openDrop}
             checked={checked}
             setChecked={setChecked}

@@ -7,13 +7,11 @@ import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
-export const TracksTab = ({ handleClose, initialData, type }) => {
+export const TracksTab = ({ handleClose, type }) => {
     //global
     let dispatch = useDispatch()
     //local
-    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
     const [values, setValues] = useState({
-        status: status,
         userId: user.id,
         relevantTo: "GOLDEN_AGE"
     });
@@ -38,7 +36,6 @@ export const TracksTab = ({ handleClose, initialData, type }) => {
     return (
         <FormBuilder
             FormTabs={FormTabs}
-            init={initialData}
             ModalInit={ModalInit}
             handleClose={handleClose}
             values={values}

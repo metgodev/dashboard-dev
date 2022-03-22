@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
 import { ModalInit, tags, picker, clearButtonId, FormTabs } from '../popConfig';
@@ -7,22 +7,13 @@ import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
-export const EventsTab = ({ handleClose, initialData, type }) => {
+export const EventsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     //local
-    let status = type === 'edit' ? initialData.status : 'PENDING_APPROVAL'
-    const [init, setInit] = useState({});
     const [values, setValues] = useState({
         userId: user.id,
-        status: status,
     });
-
-    useEffect(() => {
-        if (type === 'add') setInit({})
-        else setInit(initialData)
-        return (() => clear())
-    }, [type])
 
     const handleChange = (e, field, tagsIds) => {
         if (tagsIds) setValues(prevState => ({ ...prevState, [field]: Object.keys(tagsIds).map(key => tagsIds[key].id) }));
@@ -42,12 +33,6 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
-    const clear = () => {
-        let clearButton = document.querySelector(clearButtonId);
-        if (clearButton) clearButton.click();
-        setInit({});
-    }
-
     let maxSizeElements = ['MapPicker']
     return (
         <FormBuilder
@@ -59,7 +44,6 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
             handleChange={handleChange}
             setDateTime={setDateTime}
             values={values}
-            init={init}
             modify={modify}
             type={type}
         />

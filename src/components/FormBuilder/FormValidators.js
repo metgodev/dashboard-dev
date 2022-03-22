@@ -72,33 +72,18 @@ export const helperText = (name) => {
 
 export const FormValidator = (rule, value) => {
     switch (rule) {
-        case 'isRequierd':
-            !!value && Notify(`${value}${term('is_requierd')}`, 'error', Math.random())
-            break;
-        case 'isEmail':
+        case 'requierd':
+            !value && Notify(`${value}${term('is_requierd')}`, 'error', Math.random())
+            return !value
+        case 'email':
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) && Notify(`${value}${term('email_is_not_valid')}`, 'error', Math.random())
-            break;
-        case 'isPhone':
+            return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
+        case 'phone':
             /^\d{10}$/.test(value) && Notify(`${value}${term('phone_is_not_valid')}`, 'error', Math.random())
-            break;
-        case 'isNumber':
+            return /^\d{10}$/.test(value)
+        case 'number':
             !isNaN(value) && Notify(`${value}${term('is_not_number')}`, 'error', Math.random())
-            break;
-        case 'isMin':
-            value >= rule && Notify(`${value}${term('is_not_min')}`, 'error', Math.random())
-            break;
-        case 'isMax':
-            value <= rule && Notify(`${value}${term('is_not_max')}`, 'error', Math.random())
-            break;
-        case 'isMinLength':
-            value.length >= rule && Notify(`${value}${term('is_not_min_length')}`, 'error', Math.random())
-            break;
-        case 'isMaxLength':
-            value.length <= rule && Notify(`${value}${term('is_not_max_length')}`, 'error', Math.random())
-            break;
-        case 'isEqual':
-            value === rule && Notify(`${value}${term('is_not_equal')}`, 'error', Math.random())
-            break;
+            return !isNaN(value)
         default:
             break;
     }
