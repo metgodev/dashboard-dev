@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Notify = ({ text, type }) => {
+const Notify = ({ text, type, id }) => {
   //create a function to show toast
   const notifyWithOptions = (text) => {
     toast.success(text, {
@@ -23,7 +23,7 @@ const Notify = ({ text, type }) => {
   //call the function
   useEffect(() => {
     notifyWithOptions(text);
-  }, [text]);
+  }, [text, id]);
 
 
   return (

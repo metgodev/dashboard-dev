@@ -1,27 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import term from '../../../../../terms';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit } from '../popConfig';
-import { Button } from '@material-ui/core';
-import { FormControl, Grid, InputLabel } from '@mui/material';
+import { ModalInit, tags, picker, clearButtonId, FormTabs } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import CategoryConfig from '../../CategoryConfig'
+import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
-export const EventsTab = ({ handleClose, initialData, type }) => {
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
+export const EventsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     //local
-    const openDrop = () => setOpen(!open);
-    const [open, setOpen] = useState(false);
-    const [init, setInit] = useState({});
-    const [values, setValues] = useState({});
-
-    useEffect(() => {
-        if (type === 'add') setInit({})
-        else setInit(initialData)
-        return (() => setInit({}))
-    }, [type])
+    const [values, setValues] = useState({
+        userId: user.id,
+    });
 
     const handleChange = (e, field, tagsIds) => {
         if (tagsIds) setValues(prevState => ({ ...prevState, [field]: Object.keys(tagsIds).map(key => tagsIds[key].id) }));
@@ -41,50 +33,19 @@ export const EventsTab = ({ handleClose, initialData, type }) => {
                 .then(() => handleClose(false))
     }
 
+    let maxSizeElements = ['MapPicker']
     return (
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {ModalInit.map(({ title, id, field, rows, maxRows, size, type }) =>
-                <Grid item lg={6} md={12} sm={12} xs={12} key={id} >
-                    <InputLabel>{title}</InputLabel>
-                    <FormControl fullWidth  >
-                        <CategoryConfig
-                            title={title}
-                            id={id}
-                            field={field}
-                            rows={rows}
-                            size={size}
-                            type={type}
-                            setValues={setValues}
-                            init={init}
-                            values={values}
-                            handleChange={handleChange}
-                            tab={'events'}
-                            open={open}
-                            setOpen={setOpen}
-                        />
-                    </FormControl>
-                </Grid>
-            )}
-            <div style={styles.ButtomLeftCornerButton}>
-                <Button
-                    style={{ width: 200 }}
-                    size="large"
-                    // disabled={!isFulfilled}
-                    variant="contained"
-                    color="primary"
-                    onClick={() => modify(type, init.id)}>
-                    {term(type)}
-                </Button>
-            </div>
-        </Grid>
+        <FormBuilder
+            FormTabs={FormTabs}
+            ModalInit={ModalInit}
+            tags={tags}
+            picker={picker}
+            maxSizeElements={maxSizeElements}
+            handleChange={handleChange}
+            setDateTime={setDateTime}
+            values={values}
+            modify={modify}
+            type={type}
+        />
     )
-}
-
-const styles = {
-    ButtomLeftCornerButton: {
-        zIndex: 1,
-        position: 'absolute',
-        bottom: '10px',
-        left: '10px',
-    },
 }

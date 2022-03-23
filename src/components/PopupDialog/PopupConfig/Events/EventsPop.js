@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import DialogContent from '@mui/material/DialogContent';
+import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -13,10 +12,11 @@ import { useSelector } from 'react-redux';
 import useStyles from "../../styles";
 
 
-const EventsPop = ({ handleClose, initialData, type, open }) => {
+const EventsPop = ({ handleClose, type, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
+    const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
     //global
     const { editTabData } = useSelector(s => s.mainReducer)
@@ -25,25 +25,30 @@ const EventsPop = ({ handleClose, initialData, type, open }) => {
         setTab(newValue);
     };
 
+    useEffect(() => {
+        setMedia([])
+        { !open && setTab(0) }
+    }, [handleClose])
+
     return (
-        <div>
-            {loadingImage && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", backgroundColor:"rgba(0,0,0,0.5)", top:"0", left:"0", right:"0", bottom:"0", zIndex:"5"}}>
-                <CircularProgress size={100}/>
-            </div>}
+        <Box>
+            {loadingImage && <Box className={classes.loadingImage}>
+                <CircularProgress size={100} />
+            </Box>}
             <Box className={classes.stickyBox}>
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
                 </Tabs>
             </Box>
-            <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
+            <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
                     <EventsTab handleClose={handleClose} initialData={editTabData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} type={type} tab={"events"}/>
+                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} type={type} tab={"events"} />
                 </TabPanel>
-            </DialogContent>
-        </div >
+            </Box>
+        </Box >
     )
 }
 

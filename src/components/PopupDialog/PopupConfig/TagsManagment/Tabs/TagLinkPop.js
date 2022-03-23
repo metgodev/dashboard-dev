@@ -1,37 +1,44 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit, picker } from '../popConfig';
+import { LinkingModalInit, picker, categories } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
-export const AuthorityTab = ({ handleClose, type }) => {
+let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+
+export const TagLinkPop = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     //local
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        userId: user.id,
+    });
+
     //set the values
-    const handleChange = (e, field, tags, type) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
+    const handleChange = (e, field, categories, type) => {
+        if (categories) setValues(prevState => ({ ...prevState, [field]: Object.keys(categories).map(key => categories[key].id) }));
         else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
     const modify = async (type, id) => {
         if (type === 'add')
-            client.service('authorities').create(values)
+            await client.service('tag-categories').create(values)
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else
-            client.service('authorities').patch(id, values)
+            await client.service('tag-categories').patch(id, values)
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
     }
 
+
     return (
         <FormBuilder
-            ModalInit={ModalInit}
+            ModalInit={LinkingModalInit}
             picker={picker}
+            tags={categories}
             handleChange={handleChange}
             values={values}
             modify={modify}

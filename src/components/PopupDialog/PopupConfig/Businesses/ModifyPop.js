@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
@@ -7,18 +7,20 @@ import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
-import { UploadMediaTab } from './Tabs/UploadMediaTab';
 import { CircularProgress } from '@material-ui/core'
+import { UploadMediaTab } from './Tabs/UploadMediaTab'
+import term from '../../../../terms';
 //styles
 import useStyles from "../../styles";
 import { useSelector } from 'react-redux';
 
 
 
-const ModifyPop = ({handleClose, type, open }) => {
+const ModifyPop = ({ handleClose, type, initialData, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
+    const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
     //global
     const { editTabData } = useSelector(s => s.mainReducer)
@@ -26,28 +28,34 @@ const ModifyPop = ({handleClose, type, open }) => {
         setTab(newValue);
     };
 
+    useEffect(() => {
+        setMedia([])
+        { !open && setTab(0) }
+    }, [handleClose])
+
     return (
-        <div>
-            {loadingImage && <div style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "absolute", backgroundColor: "rgba(0,0,0,0.5)", top: "0", left: "0", right: "0", bottom: "0", zIndex: "5" }}>
-                <CircularProgress size={100} />
-            </div>}
+        <Box>
+            {loadingImage &&
+                <Box className={classes.loadingImage}>
+                    <CircularProgress size={50} />
+                </Box>}
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
-                    {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
+                    {ModalTabs.map(b => <Tab key={b} label={b} disabled={b === term('gallery') && type === 'add'} />)}
                 </Tabs>
             </Box>
-            <DialogContent sx={{ p: 2 }} id="alert-dialog-slide-description">
+            <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <ModifyTab handleClose={handleClose} initialData={editTabData} type={type} />
+                    <ModifyTab handleClose={handleClose} initialData={initialData} type={type} setTab={0} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} tab={"business"} />
+                    <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} />
                 </TabPanel>
-            </DialogContent>
-        </div >
+            </Box>
+        </Box >
     )
 }
 

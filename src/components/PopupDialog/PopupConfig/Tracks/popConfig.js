@@ -1,18 +1,28 @@
-import { client } from "../../../../API/metro";
+import { client, isLoggedIn } from "../../../../API/metro";
 import term from "../../../../terms";
 import { createRandomId } from "../../../../utils/randomId";
 
 
 (async () => {
+    if (!isLoggedIn()) return;
     let area_id = localStorage.getItem('aid')
     client.service("authorities").find({ query: { areaId: area_id } })
         .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
         .then((authorities => picker.authorityId = authorities))
 })();
 
+export const FormTabs = [{
+    value: term('general'),
+}, {
+    value: term('map_location'),
+}];
 
 export const ModalTabs = [term('locations')]
 export const ModalInit = [
+    // ------------------ map ------------------
+    { title: term('location_name'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'small', type: 'locationName' },
+    { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'small', type: 'MapPicker' },
+    // ------------------ map ------------------
     { title: term('name'), id: createRandomId(), field: 'trackName', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'small', type: 'picker' },

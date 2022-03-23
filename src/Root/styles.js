@@ -1,14 +1,18 @@
 import { makeStyles } from "@material-ui/styles";
+// window dimensions
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
 
 export default makeStyles(theme => ({
   root: {
-    display: "flex",
-    maxWidth: "100vw",
+    width: windowWidth,
+    height: windowHeight,
     overflowX: "hidden",
   },
   Router: {
-    padding: 10,
+    top: theme.spacing(6),
+    width: "100%",
+    height: "100%",
     position: "relative",
-    paddingTop: "3rem"
   },
 }));

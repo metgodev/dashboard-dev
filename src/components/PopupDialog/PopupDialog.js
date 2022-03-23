@@ -1,58 +1,36 @@
-import React, { forwardRef, useEffect, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+import React, { forwardRef } from 'react';
 import { Box } from '@mui/system';
+import Slide from '@mui/material/Slide';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContent, IconButton } from '@material-ui/core';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 import ModifyPop from './PopupConfig/Businesses/ModifyPop';
 import EventsPop from './PopupConfig/Events/EventsPop';
 import PointsPop from './PopupConfig/Points/PointsPop';
 import TracksPop from './PopupConfig/Tracks/TracksPop';
 import AuthorityPop from './PopupConfig/AuthorityManagement/AuthorityPop';
 import TagPop from './PopupConfig/TagsManagment/TagPop';
+import { TagLinkPop } from './PopupConfig/TagsManagment/Tabs/TagLinkPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
 
-
+export const clearButtonId = '.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.MuiAutocomplete-clearIndicator.css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator'
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-export default function PopupDialog({ description, tabs, title, open, setOpen, type }) {
-
-    const [expend, setExpend] = useState("md")
+export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth }) {
+    //styles
     const classes = useStyles()
     const theme = useTheme();
-    // const [media, setMedia] = useState([])
-
-    // const setInitialValuesForMedia = () => {
-    //     if (initialData?.gallery !== undefined) {
-    //         let initImagesArr = []
-    //         JSON.parse(initialData.gallery).map((mediaItem) => {
-    //             initImagesArr.push(mediaItem)
-    //         })
-    //         setMedia(initImagesArr)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     setInitialValuesForMedia()
-    // }, [open, initialData])
 
     const handleClose = () => {
-        setOpen(false)
-    }
-
-    const handleWidth = () => {
-        if (expend === "sm") setExpend("md")
-        else if (expend === "md") setExpend("lg")
-        else if (expend === "lg") setExpend("sm")
+        let clearButton = document.querySelector(clearButtonId);
+        if (clearButton) clearButton.click();
+        setOpen(false);
     }
 
     return (
@@ -66,29 +44,24 @@ export default function PopupDialog({ description, tabs, title, open, setOpen, t
                 keepMounted
                 aria-describedby="alert-dialog-slide-description"
                 fullWidth
-                maxWidth={expend}
+                maxWidth={maxWidth || "lg"}
             >
                 <DialogTitle className={classes.dialogHeader}>
-                    <IconButton onClick={handleWidth}>
-                        < OpenInFullOutlinedIcon />
-                    </IconButton>
                     {title}
                     <IconButton onClick={handleClose}>
                         < CloseOutlinedIcon />
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type} />}
-                    {tabs === 'events' && <EventsPop handleClose={handleClose} type={type} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} type={type} />}
-                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'events' && <EventsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'points' && <PointsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'tracks' && <TracksPop open={open} handleClose={handleClose} type={type} />}
                     {/* authority management */}
-                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} type={type} />}
-                    {tabs === 'tags' && <TagPop handleClose={handleClose} type={type} />}
+                    {tabs === 'authority' && <AuthorityPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'tags' && <TagPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'tags_link' && <TagLinkPop open={open} handleClose={handleClose} type={type} />}
                 </DialogContent>
-                <DialogContentText>
-                    {description}
-                </DialogContentText>
             </Dialog>
         </Box >
     );

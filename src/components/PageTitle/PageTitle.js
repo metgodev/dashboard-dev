@@ -50,7 +50,7 @@ export default function PageTitle(props) {
       )}
       <Box className={classes.boxWrapper}>
         {props.calendar && mobile &&
-          (<Calendar type={2} />)
+          (<Calendar type={2} disableHelpers={true} />)
         }
         {props.buttonGroup && (
           <HeaderButtons btns={props.buttonGroup.btns} mobile={mobile} />

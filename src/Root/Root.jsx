@@ -22,7 +22,6 @@ import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 // admin pages
 import AreaManagement from '../pages/admin/AreaManagement';
-import AuthorityManagement from '../pages/admin/AuthorityManagement';
 import LocalCampaigns from '../pages/localCampains/LocalCampaigns';
 
 
@@ -68,7 +67,6 @@ const Root = () => {
                     {isSuperAdmin &&
                         <>
                             <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement /></Protecte>} />
-                            <Route exact path="/admin/authorities" element={<Protecte auth={verified}><AuthorityManagement /></Protecte>} />
                         </>
                     }
                 </Routes>

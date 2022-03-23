@@ -1,7 +1,8 @@
 import { styled } from '@mui/material/styles';
+const windowWidth = window.innerWidth;
 
-const sideBarSize = 240;
-const sideBarSmallSize = 100;
+const sideBarSize = windowWidth * 0.2;
+const sideBarSmallSize = windowWidth * 0.1;
 
 const AppBar = styled('main', {
     shouldForwardProp: (prop) => prop !== 'open',

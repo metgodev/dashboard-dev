@@ -14,7 +14,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import { CircularProgress } from '@material-ui/core'
-import { set_edit_tab_data, set_gallery_fields } from '../../REDUX/actions/main.actions'
+import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 
 function Businesses() {
     const [page, setPage] = useState(0);

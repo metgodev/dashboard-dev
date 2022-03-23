@@ -10,27 +10,23 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Typography } from '../../../../Wrappers/Wrappers'
 import term from '../../../../../terms'
 import CropImage from "../../../../../hooks/CropImage";
-import { client } from '../../../../../API/metro'
-import { useDispatch,useSelector } from 'react-redux';
-import { set_table_changed ,set_edit_tab_data } from '../../../../../REDUX/actions/main.actions'
+import { client } from '../../../../../API/metro';
+import { useDispatch, useSelector } from 'react-redux';
+import { set_table_changed, set_edit_tab_data } from '../../../../../REDUX/actions/main.actions'
 //styles
 import useStyles from "../../../styles";
 
-export const UploadMediaTab = ({tab, setLoadingImage, open }) => {
+export const UploadMediaTab = ({ tab, setLoadingImage }) => {
 
   const classes = useStyles()
   const dispatch = useDispatch();
   const { editTabData } = useSelector(s => s.mainReducer)
-  const media = editTabData?.gallery? (typeof editTabData.gallery == 'string')? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
+  const media = editTabData?.gallery ? (typeof editTabData.gallery == 'string') ? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
 
   const [uploadCategory, setUploadCategory] = useState('logo')
   const [uploadFileTypes, setUploadFileTypes] = useState(["JPG", "PNG", "JPEG"])
   const [imageToCrop, setImageToCrop] = useState(null)
   const [cropper, setCropper] = useState();
-
-  useEffect(() => {
-    setImageToCrop(null)
-  }, [open])
 
 
   const handleCategoryChange = (event, newCategory) => {
@@ -78,8 +74,9 @@ export const UploadMediaTab = ({tab, setLoadingImage, open }) => {
       let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res[0]._id, metadata: { type: uploadCategory } }] }
       await client.service(tab).patch(editTabData.id, mediaToUpload)
         .then((res) => {
-          let business = {...res, id: res._id}
+          let business = { ...res, id: res._id }
           delete business._id
+          dispatch(set_edit_tab_data(business))
           dispatch(set_table_changed('upload-image'))
           setLoadingImage(false)
         })
@@ -120,8 +117,8 @@ export const UploadMediaTab = ({tab, setLoadingImage, open }) => {
           return (
             <div key={index}>
               <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
-              <DialogContent key={index}>
-                <MyImageList tab={tab} type={type}  />
+              <DialogContent key={index} >
+                <MyImageList setLoadingImage={setLoadingImage} tab={tab} type={type} />
               </DialogContent>
               {index < 3 && <Box className={classes.divider} />}
             </div>

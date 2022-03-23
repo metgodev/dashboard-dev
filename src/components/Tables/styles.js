@@ -1,8 +1,11 @@
 import { makeStyles } from "@material-ui/styles";
+const windowHeight = window.innerHeight;
+
 
 export default makeStyles(theme => ({
     tableContainer: {
-        height: "72vh",
+        height: windowHeight - 200,
+        width: "100%",
         overflowY: "auto",
         overflowX: "hidden",
         padding: "0px",

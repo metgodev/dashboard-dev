@@ -5,7 +5,6 @@ export default makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // padding: '10px !important',
     },
     dialogContent: {
         overflowX: 'hidden',
@@ -72,5 +71,22 @@ export default makeStyles(theme => ({
         direction: "ltr",
         marginTop: "20px",
         marginBottom: "20px"
-    }
+    },
+    loadingImage: {
+        position: "absolute",
+        zIndex: 100,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "rgba(0,0,0,.5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        "&:before": {
+            content: "",
+            display: "block",
+            paddingTop: "100%",
+        },
+    },
 }));

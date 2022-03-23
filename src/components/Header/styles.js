@@ -3,7 +3,7 @@ import { alpha } from "@material-ui/core/styles/colorManipulator";
 
 export default makeStyles(theme => ({
   logotype: {
-    color: "#FFF",
+    color: theme.palette.primary.text,
     marginLeft: theme.spacing(2.5),
     marginRight: theme.spacing(2.5),
     fontWeight: 600,
@@ -14,7 +14,7 @@ export default makeStyles(theme => ({
     },
   },
   appBar: {
-    width: "100vw",
+    width: "100%",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["margin"], {
       easing: theme.transitions.easing.sharp,
@@ -72,7 +72,6 @@ export default makeStyles(theme => ({
   },
   headerMenuButton: {
     marginLeft: theme.spacing(2),
-    padding: theme.spacing(0.5),
   },
   headerMenuButtonCollapse: {
     marginRight: theme.spacing(2),

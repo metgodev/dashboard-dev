@@ -13,11 +13,12 @@ const EventstableService = (rowsPerPage, page) => {
         events: [],
         keys: [],
         ignore: [
-            "authorityId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address",
+            "authorityId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "endDate",
             "relevantTo", "currency", "producerName", "producerPhone", "producerEmail", "locationName", 'isAccessable', "reservationCenterPhone",
             "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
         ],
         tableCategories: {
+            status: ['all', 'private', 'public', 'pending_approval'],
             authority: ['all'],
             openHour: ['all'],
             tag: ['all'],
@@ -25,6 +26,7 @@ const EventstableService = (rowsPerPage, page) => {
             price: ['all',],
             startDate: ['all',],
             endDate: ['all', 'today', 'last_week', 'last_month'],
+            startDate: ['all', 'today', 'last_week', 'last_month'],
         }
     })
 
@@ -48,9 +50,9 @@ const EventstableService = (rowsPerPage, page) => {
                 }))
             // -------------------===events===-------------------
             await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
-                .then(({ data }) => data.map(({ authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
+                .then(({ data }) => data.map(({ status, authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
                     events = [...events, {
-                        authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),
+                        status, authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),
                         startDate: new Date(startDate).toLocaleDateString(), tag: intersect_between_objects(tagsIds, tags, 'title'), id: _id, ...rest
                     }]
                 }))

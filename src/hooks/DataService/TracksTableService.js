@@ -14,6 +14,7 @@ const TracksTableService = (rowsPerPage, page) => {
             'relevantTo', 'timeDurationDays', 'timeDurationHours', 'timeDuraionMinutes', 'pois', 'galleryFilesIds', 'createdAt', 'updatedAt', '__v', 'id'
         ],
         tableCategories: {
+            status: ['all', 'private', 'public', 'pending_approval'],
             trackName: ['all',],
             featured: ['all',],
             description: ['all',],
@@ -35,8 +36,8 @@ const TracksTableService = (rowsPerPage, page) => {
                 }))
             // -------------------===tracks===-------------------
             await client.service('tracks').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
-                .then(({ data }) => data.map(({ authority, _id, ...rest }) => {
-                    tracks = [...tracks, { authority: authority?.name, id: _id, ...rest }]
+                .then(({ data }) => data.map(({ status, authority, _id, ...rest }) => {
+                    tracks = [...tracks, { status, authority: authority?.name, id: _id, ...rest }]
                 }))
             // -------------------===categories===-------------------
             await client.service('categories').find()

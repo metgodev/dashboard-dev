@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import term from '../../terms'
+import { client } from '../../API/metro'
 import { Box, Grid, Typography } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import PaginationTable from '../../components/Tables/PaginationTable'
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
 import { CircularProgress } from '@material-ui/core'
 import AreaService from '../../hooks/DataService/AreaService'
 import { AddCircleOutline } from '@material-ui/icons'
-import { client } from '../../API/metro'
-import { set_table_changed } from '../../REDUX/actions/main.actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { set_table_changed, set_edit_tab_data } from '../../REDUX/actions/main.actions'
 
 function AreaManagement() {
     const [autorityPage, setAutorityPage] = useState(0);
@@ -21,35 +21,49 @@ function AreaManagement() {
     const { lang } = useSelector(s => s.mainRememberReducer);
     const dispatch = useDispatch()
     //dialog
+    const [tagLink, setTagLink] = useState(false)
     const [autorityOpen, setAutorityOpen] = useState(false);
     const [tagOpen, setTagOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
-    const [initialDataDialog, setInitialDataDialog] = useState({});
 
     const openAuthorityDialog = (data) => {
         if (data) {
+            dispatch(set_edit_tab_data(data))
             setDialogType('edit')
-            setInitialDataDialog(data)
-        } else {
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
             setDialogType('add')
-            setInitialDataDialog({})
         }
         setAutorityOpen(!autorityOpen)
     }
 
     const openTagDialog = (data) => {
         if (data) {
+            dispatch(set_edit_tab_data(data))
             setDialogType('edit')
-            setInitialDataDialog(data)
-        } else {
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
             setDialogType('add')
-            setInitialDataDialog({})
         }
         setTagOpen(!tagOpen)
     }
 
+    const openLinkingDialog = (data) => {
+        if (data) {
+            dispatch(set_edit_tab_data(data))
+            setDialogType('edit')
+        }
+        else {
+            dispatch(set_edit_tab_data([]))
+            setDialogType('add')
+        }
+        setTagLink(!tagOpen)
+    }
+
     const remove = async (id) => {
-        if (window.confirm(term('Are you sure you want to delete this item?'))) {
+        if (window.confirm(term('delete_confirmation'))) {
             let area_id = localStorage.getItem('aid')
             await client.service('area').patch(area_id, {
                 $pull: {
@@ -102,6 +116,7 @@ function AreaManagement() {
                         openDialog={openTagDialog}
                         remove={remove}
                         actionBtns={true}
+                        linking={openLinkingDialog}
                     /> :
                         <Box style={progress}>
                             <CircularProgress size={60} />
@@ -109,8 +124,9 @@ function AreaManagement() {
                     }
                 </Grid>
             </Grid>
-            <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} initialData={initialDataDialog} title={term('authority')} tabs={'authority'} />
-            <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} initialData={initialDataDialog} title={term('tags')} tabs={'tags'} />
+            <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} maxWidth={'sm'} />
+            <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
+            <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={'tags_link'} maxWidth={'sm'} />
         </Box>
     )
 }
