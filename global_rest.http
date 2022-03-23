@@ -2,7 +2,7 @@
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app           
 # metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDQ4MzQ3NDQsImlhdCI6MTY0NDgzNDc0NCwiZXhwIjoxNjQ1NDM5NTQ0LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MWU5ODMxMzQyZTg0NmM5ODZmMDNjNmUiLCJqdGkiOiI5MmYzNDkzYS0xZjZlLTQxMmEtOWQxMi0yMDA0OWVmNDQwZGEifQ.ZQ4BkYyIzdIoZp5zgLkvgAjKIAs3Nq1sw3T-N_hJ0Yg
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NDgwMjAzOTcsImlhdCI6MTY0ODAyMDM5NiwiZXhwIjoxNjQ4NjI1MTk2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjI3MjViMjk5M2JjNTY0YzNmMjI5MDMiLCJqdGkiOiIzNjBjNTI1ZS03Nzg2LTQ2MzItOTlmZC1jYmQ3NzkxZWNjYWMifQ.O-lQqxdLT5n16JEl-A8GnJRNUQGqb6y7aWJWncXTFXI
 @email = "celeja6810@showbaz.com"
 @password = "5656"
 @postmanlink  = https://www.getpostman.com/collections/011abae26ecba7e10682
@@ -133,71 +133,51 @@ content-type: {{contentType}}
 Authorization: {{authorization}}
 
 {
-   "name":"עין חרא",
-   "description":"בואו לטייל בעין חרא עוד היום",
-   "userId":"61d2e959927d2b5be84b2ce1",
-   "status":"PENDING_APPROVAL",
-   "tagsIds":["food"],
-   "authorityId":"61d2eb2df58fa2f89374dbb7",
-   "address":"ליד עזאזל בדרך לקנטים",
-   "location":{
-      "type":"Point",
-      "coordinates":[
+   "name": "שומרון",
+   "description": "שומרון",
+   "status": "PENDING_APPROVAL",
+   "tagsIds": [
+      "62090e12bca60e44b90116b7"
+   ],
+   "areaId": "61d2e93c927d2b5be84b2cdb",
+   "userId": "61d2e959927d2b5be84b2ce1",
+   "authorityId": "61d2eb2df58fa2f89374dbb7",
+   "address": "",
+   "location": {
+      "type": "Point",
+      "coordinates": [
          34.869,
-         32.0
+         32.084
       ]
    },
-   "locationInfo":{},
-   "locationName":"",
-   "phoneNumber":"0566296634",
-   "contactPersonName":"כלב בן יפונה",
-   "contactPersonPhoneNumber":"0566296634",
-   "emailAddress":"hara@gmail.com",
-   "relevantTo":"GOLDEN_AGE",
-   "websiteUrl":"www.website.com",
-   "facebookPageUrl":"www.website.com",
-   "instagramPageUrl":"www.website.com",
-   "youtubePageUrl":"www.website.com",
-   "twitterPageUrl":"www.website.com",
-   "linkedInPageUrl":"www.website.com",
-   "galleryFileIds":[
-      "image1",
-      "image2"
-   ],
-   "openingHours":{
-      "sunday":{
-         "start":"08:00",
-         "end":"16:00"
-      },
-      "monday":{
-         "start":"08:00",
-         "end":"16:00"
-      },
-      "tuesday":{
-         "start":"08:00",
-         "end":"16:00"
-      },
-      "wednesday":{
-         "start":"08:00",
-         "end":"16:00"
-      },
-      "thursday":{
-         "start":"08:00",
-         "end":"16:00"
-      },
-      "friday":{
-         "start":"08:00",
-         "end":"16:00"
-      },
-      "saturday":{
-         "start":"08:00",
-         "end":"16:00"
-      }
+   "locationInfo": {
+      "address": "",
+      "city": "",
+      "country": "",
+      "postalCode": "",
+      "state": "",
+      "street": ""
    },
-   "open24Hours":false,
+   "locationName": "",
+   "phoneNumber": "0541234567",
+   "contactPersonName": "",
+   "contactPersonPhoneNumber": "",
+   "websitesUrl":[
+      "https://www.google.com"
+   ],
+   "emailAddress": "p@g.com",
+   "relevantTo":["INFANCY" , "KIDS"],
+   "facebookPageUrl": "https://www.facebook.com",
+   "instagramPageUrl": "https://www.instagram.com",
+   "youtubePageUrl": "https://www.youtube.com",
+   "galleryFileIds":[],
+   "openingHours": [],
+   "open24Hours": false,
    "openOnWeekend": false,
    "isKosher": false,
    "isAccessable": false,
+   "shortDescription": "aaaaaaaaaaa",
+   "reservations": ["FREE", "FREE_WITH_RESERVATION"]
 }
 ###
 # "Create Event"

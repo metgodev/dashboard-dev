@@ -13,7 +13,7 @@ const PointsTableService = (rowsPerPage, page) => {
         pois: [],
         keys: [],
         ignore: [
-            'address', 'relevantTo', 'addressType', 'categoriesIds', 'isAccessable', 'description', 'websiteUrl', 'locationInfo', 'location',
+            'address', 'relevantTo', 'addressType', 'categoriesIds', 'isAccessable', 'description', 'websiteUrl', 'locationInfo', 'location', 'gallery',
             'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail', 'id', 'createdAt', 'updatedAt', '__v'
         ],
         stringifyExept: ['tags', 'activitiesInPlace', 'exclusiveFor'],
@@ -34,6 +34,7 @@ const PointsTableService = (rowsPerPage, page) => {
             let authority_cat = ['all'];
             let pois = [];
             let categories = [];
+            let keys = [];
             // -------------------===autorities===-------------------
             if (!area_id) return;
             await client.service('authorities').find({ query: { areaId: area_id } })
@@ -42,7 +43,7 @@ const PointsTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===pois===-------------------
-            await client.service('pois').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
+            await client.service('pois').find({ query: { authorityId: authorities.map(({ id }) => id), $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
                 .then(({ data }) => data.map(({ status, authority, _id, prefferedSeason, shady, ...rest }) =>
                     pois = [...pois, {
                         status, authority: authority?.name, id: _id, prefferedSeason: term(prefferedSeason.toLowerCase()),
@@ -52,8 +53,10 @@ const PointsTableService = (rowsPerPage, page) => {
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ name, _id }) => categories = [...categories, { name, id: _id }]))
             // -------------------===keys===-------------------
-            if (!pois.length) return;
-            let keys = Object.keys(pois[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            if (pois.length) {
+                keys = Object.keys(pois[0]).filter((el) => !data.ignore.includes(el));
+                keys.push('btn');
+            }
             // -------------------===set data===-------------------
             setData(prevState => ({
                 ...prevState, authorities, pois: stringify_nested(pois, data.stringifyExept), keys,

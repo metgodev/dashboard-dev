@@ -1140,211 +1140,6 @@ const active_lexicon = {
         he: 'מידע נוסף',
         ar: 'مزيد من المعلومات'
     },
-    name_helper: {
-        en: 'Name of the location',
-        he: 'שם המקום',
-        ar: 'اسم الموقع'
-    },
-    description_helper: {
-        en: 'Description of the location',
-        he: 'תיאור המקום',
-        ar: 'وصف الموقع'
-    },
-    address_helper: {
-        en: 'Address of the location',
-        he: 'כתובת המקום',
-        ar: 'عنوان الموقع'
-    },
-    phone_helper: {
-        en: 'Phone number of the location',
-        he: 'מספר הטלפון של המקום',
-        ar: 'رقم الهاتف للموقع'
-    },
-    email_helper: {
-        en: 'Email of the location',
-        he: 'אימייל של המקום',
-        ar: 'البريد الإلكتروني للموقع'
-    },
-    website_helper: {
-        en: 'Website of the location',
-        he: 'אתר האינטרנט של המקום',
-        ar: 'موقع الإنترنت للموقع'
-    },
-    facebook_helper: {
-        en: 'Facebook page of the location',
-        he: 'עמוד פייסבוק של המקום',
-        ar: 'صفحة الفيسبوك للموقع'
-    },
-    twitter_helper: {
-        en: 'Twitter page of the location',
-        he: 'עמוד טוויטר של המקום',
-        ar: 'صفحة تويتر للموقع'
-    },
-    instagram_helper: {
-        en: 'Instagram page of the location',
-        he: 'עמוד אינסטגרם של המקום',
-        ar: 'صفحة إنستجرام للموقع'
-    },
-    youtube_helper: {
-        en: 'Youtube page of the location',
-        he: 'עמוד יוטיוב של המקום',
-        ar: 'صفحة يوتيوب للموقع'
-    },
-    location_helper: {
-        en: 'Location of the location',
-        he: 'איפה המקום נמצא',
-        ar: 'موقع الموقع'
-    },
-    location_name_helper: {
-        en: 'Name of the location',
-        he: 'שם המקום',
-        ar: 'اسم الموقع'
-    },
-    name_helper: {
-        en: 'Name of the location',
-        he: 'שם המקום',
-        ar: 'اسم الموقع'
-    },
-    tags_helper: {
-        en: 'Tags of the location',
-        he: 'תגיות המקום',
-        ar: 'وسوم الموقع'
-    },
-    authority_helper: {
-        en: 'Authority of the location',
-        he: 'רשות המקום',
-        ar: 'المجلس الموقع'
-    },
-    phone_number_helper: {
-        en: 'Phone number of the location',
-        he: 'מספר הטלפון של המקום',
-        ar: 'رقم الهاتف للموقع'
-    },
-    contact_person_name_helper: {
-        en: 'Contact person name of the location',
-        he: 'שם איש קשר של המקום',
-        ar: 'اسم شخص الاتصال للموقع'
-    },
-    contact_person_phone_number_helper: {
-        en: 'Contact person phone number of the location',
-        he: 'מספר טלפון איש קשר של המקום',
-        ar: 'رقم هاتف شخص الاتصال للموقع'
-    },
-    email_address_helper: {
-        en: 'Email address of the location',
-        he: 'אימייל של המקום',
-        ar: 'البريد الإلكتروني للموقع'
-    },
-    website_url_helper: {
-        en: 'Website of the location',
-        he: 'אתר האינטרנט של המקום',
-        ar: 'موقع الإنترنت للموقع'
-    },
-    relevant_to_helper: {
-        en: 'Suitable for',
-        he: 'מתאים ל',
-        ar: 'مناسب ل'
-    },
-    opening_hours_helper: {
-        en: 'Opening hours of the location',
-        he: 'שעות פתיחה של המקום',
-        ar: 'ساعات الموقع'
-    },
-    website_url_helper: {
-        en: 'Website of the location',
-        he: 'אתר האינטרנט של המקום',
-        ar: 'موقع الإنترنت للموقع'
-    },
-    facebook_url_helper: {
-        en: 'Facebook page of the location',
-        he: 'עמוד פייסבוק של המקום',
-        ar: 'صفحة الفيسبوك للموقع'
-    },
-    instagram_url_helper: {
-        en: 'Instagram page of the location',
-        he: 'עמוד אינסטגרם של המקום',
-        ar: 'صفحة إنستجرام للموقع'
-    },
-    twitter_url_helper: {
-        en: 'Twitter page of the location',
-        he: 'עמוד טוויטר של המקום',
-        ar: 'صفحة تويتر للموقع'
-    },
-    youtube_url_helper: {
-        en: 'Youtube page of the location',
-        he: 'עמוד יוטיוב של המקום',
-        ar: 'صفحة يوتيوب للموقع'
-    },
-    linkedin_url_helper: {
-        en: 'Linkedin page of the location',
-        he: 'עמוד לינקדאן של המקום',
-        ar: 'صفحة لينكدين للموقع'
-    },
-    start_date_helper: {
-        en: 'Start date of the event',
-        he: 'תאריך התחלה של האירוע',
-        ar: 'تاريخ البدء'
-    },
-    end_date_helper: {
-        en: 'End date of the event',
-        he: 'תאריך סיום של האירוע',
-        ar: 'تاريخ الانتهاء'
-    },
-    tags_helper: {
-        en: 'Tags of the event',
-        he: 'תגיות האירוע',
-        ar: 'وسوم الحدث'
-    },
-    open_hour_helper: {
-        en: 'Open hour of the event',
-        he: 'שעת פתיחת האירוע',
-        ar: 'ساعة الافتتاح'
-    },
-    price_helper: {
-        en: 'Price of the event',
-        he: 'מחיר האירוע',
-        ar: 'السعر'
-    },
-    open_hour_helper: {
-        en: 'Open hour of the event',
-        he: 'שעת פתיחת האירוע',
-        ar: 'ساعة الافتتاح'
-    },
-    price_helper: {
-        en: 'Price of the event',
-        he: 'מחיר האירוע',
-        ar: 'السعر'
-    },
-    currency_helper: {
-        en: 'Currency of the event',
-        he: 'מטבע האירוע',
-        ar: 'عملة الحدث'
-    },
-    producer_name_helper: {
-        en: 'Producer name of the event',
-        he: 'שם יוצר של האירוע',
-        ar: 'اسم المنتج'
-    },
-    producer_phone_helper: {
-        en: 'Producer phone number of the event',
-        he: 'מספר טלפון יוצר של האירוע',
-        ar: 'رقم هاتف المنتج'
-    },
-    producer_email_helper: {
-        en: 'Producer email address of the event',
-        he: 'אימייל יוצר של האירוע',
-        ar: 'البريد الإلكتروني للمنتج'
-    },
-    reservation_center_phone_helper: {
-        en: 'Reservation center phone number of the event',
-        he: 'מספר טלפון מרכז ההזמנות של האירוע',
-        ar: 'رقم هاتف مركز الحجز'
-    },
-    category_helper: {
-        en: 'Category of the event',
-        he: 'קטגוריה של האירוע',
-        ar: 'الفئة'
-    },
     this_filed_is_required: {
         en: 'This field is required',
         he: 'שדה זה הוא שדה חובה',
@@ -1370,7 +1165,374 @@ const active_lexicon = {
         he: 'קישור תגיות',
         ar: 'رابط الوسوم'
     },
-}
+    kids: {
+        en: 'Kids',
+        he: 'ילדים',
+        ar: 'أطفال'
+    },
+    youth: {
+        en: 'Youth',
+        he: 'נוער',
+        ar: 'شباب'
+    },
+    young_adults: {
+        en: 'Young adults',
+        he: 'צעירים',
+        ar: 'شباب'
+    },
+    adults: {
+        en: 'Adults',
+        he: 'מבוגרים',
+        ar: 'بالغين'
+    },
+    families: {
+        en: 'Families',
+        he: 'משפחות',
+        ar: 'أسر'
+    },
+    women_only: {
+        en: 'Women only',
+        he: 'נשים בלבד',
+        ar: 'النساء فقط'
+    },
+    men_only: {
+        en: 'men only',
+        he: 'גברים בלבד',
+        ar: 'الرجال فقط'
+    },
+    free: {
+        en: 'Free',
+        he: 'חינם',
+        ar: 'مجاني'
+    },
+    free_with_reservation: {
+        en: 'Free with reservation',
+        he: 'חינם עם הזמנה',
+        ar: 'مجاني مع الحجز'
+    },
+    payment: {
+        en: 'Payment',
+        he: 'בתשלום',
+        ar: 'الدفع'
+    },
+    payment_with_reservation: {
+        en: 'Payment with reservation',
+        he: 'בתשלום עם הזמנה',
+        ar: 'الدفع مع الحجز'
+    },
+    on_place: {
+        en: 'On place',
+        he: 'במקום',
+        ar: 'في المكان'
+    },
+    short_description: {
+        en: 'Short description',
+        he: 'תיאור מדוייק בכמה מילים',
+        ar: 'وصف قصير'
+    },
+    reservations: {
+        en: 'Reservations',
+        he: 'הזמנות',
+        ar: 'الحجوزات'
+    },
+    picnic_tables: {
+        en: 'Picnic tables',
+        he: 'שולחנות פיקניק',
+        ar: 'طاولات النزهة'
+    },
+    benches: {
+        en: 'Benches',
+        he: 'ספסלים',
+        ar: 'مقاعد'
+    },
+    tins: {
+        en: 'Tins',
+        he: 'פחים',
+        ar: 'علب'
+    },
+    bbq_positions: {
+        en: 'BBQ positions',
+        he: 'עמדות מנגל',
+        ar: 'مواقف للشواء'
+    },
+    toilet: {
+        en: 'Toilet',
+        he: 'שירותים',
+        ar: 'الحمام'
+    },
+    drinking_fountain: {
+        en: 'Drinking fountain',
+        he: 'ברזייה',
+        ar: 'نافورة مياه الشرب'
+    },
+    play_facilities: {
+        en: 'Play facilities',
+        he: 'מתקני משחק לילדים',
+        ar: 'مرافق اللعب'
+    },
+    exercise_machines: {
+        en: 'Exercise machines',
+        he: 'מתקני כושר',
+        ar: 'الة تمرين'
+    },
+    dog_garden: {
+        en: 'Dog garden',
+        he: 'גינה לכלבים',
+        ar: 'حديقة الكلب'
+    },
+    explanatory_board: {
+        en: 'Explanatory board',
+        he: 'שלטי הסבר',
+        ar: 'لوحة توضيحية'
+    },
+    buffet: {
+        en: 'Buffet',
+        he: 'מזנון',
+        ar: 'بوفيه'
+    },
+    cloakroom: {
+        en: 'Cloakroom',
+        he: 'מלתחות',
+        ar: 'حجرة إيداع'
+    },
+    beach_shower: {
+        en: 'Beach shower',
+        he: 'מקלחות חוף',
+        ar: 'دش الشاطئ'
+    },
+    free_parking: {
+        en: 'Free parking',
+        he: 'חניה חינם',
+        ar: 'موقف توزيع مجاني'
+    },
+    neat_parking: {
+        en: 'Neat parking',
+        he: 'חניה מסודרת',
+        ar: 'مرتبة وقوف السيارات'
+    },
+    at_the_place: {
+        en: 'At the place',
+        he: 'מה במקום',
+        ar: 'في المكان'
+    },
+    tip: {
+        en: 'Tip',
+        he: 'הידעת?',
+        ar: 'نصيحة'
+    },
+    online: {
+        en: 'Online',
+        he: 'מקוון',
+        ar: 'الإنترنت'
+    },
+    online_meeting_link: {
+        en: 'Online meeting link',
+        he: 'קישור לפגישה מקוונת',
+        ar: 'رابط المحادثة الإنترنتية'
+    },
+    related_business: {
+        en: 'Related business',
+        he: 'עסקים קשורים',
+        ar: 'الأعمال المرتبطة'
+    },
+    registration_link: {
+        en: 'Registration link',
+        he: 'קישור להרשמה',
+        ar: 'رابط التسجيل'
+    },
+    link: {
+        en: 'Link',
+        he: 'קישור',
+        ar: 'رابط'
+    },
+    // ----helpers----
+    location_name_helper: {
+        en: 'The name of the location',
+        he: 'שם המיקום',
+        ar: 'اسم الموقع'
+    },
+    name_helper: {
+        en: 'The name of the place',
+        he: 'שם המקום',
+        ar: 'اسم المكان'
+    },
+    websites_url_helper: {
+        en: 'The website of the place',
+        he: 'כתובת האתר של המקום',
+        ar: 'موقع المكان'
+    },
+    description_helper: {
+        en: 'The description of the place',
+        he: 'תיאור המקום',
+        ar: 'وصف المكان'
+    },
+    authority_id_helper: {
+        en: 'The authority of the place',
+        he: 'הרשות של המקום',
+        ar: 'سلطة المكان'
+    },
+    phone_number_helper: {
+        en: 'The phone number of the place',
+        he: 'מספר הטלפון של המקום',
+        ar: 'رقم الهاتف للمكان'
+    },
+    contact_person_name_helper: {
+        en: 'The name of the contact person',
+        he: 'שם האיש הקשר',
+        ar: 'اسم الشخص المراسل'
+    },
+    contact_person_phone_number_helper: {
+        en: 'The phone number of the contact person',
+        he: 'מספר הטלפון של האיש הקשר',
+        ar: 'رقم الهاتف للشخص المراسل'
+    },
+    email_address_helper: {
+        en: 'The email address of the contact person',
+        he: 'כתובת האימייל של האיש הקשר',
+        ar: 'عنوان البريد الإلكتروني للشخص المراسل'
+    },
+    facebook_page_url_helper: {
+        en: 'The facebook page of the place',
+        he: 'עמוד הפייסבוק של המקום',
+        ar: 'صفحة الفيسبوك للمكان'
+    },
+    instagram_page_url_helper: {
+        en: 'The instagram page of the place',
+        he: 'עמוד האינסטגרם של המקום',
+        ar: 'صفحة الإنستجرام للمكان'
+    },
+    youtube_page_url_helper: {
+        en: 'The youtube page of the place',
+        he: 'עמוד היוטיוב של המקום',
+        ar: 'صفحة اليوتيوب للمكان'
+    },
+    short_description_helper: {
+        en: 'The short description of the place',
+        he: 'תיאור קצר של המקום',
+        ar: 'وصف قصير للمكان'
+    },
+    reservations_helper: {
+        en: 'The reservations of the place',
+        he: 'הזמנות המקום',
+        ar: 'الحجوزات للمكان'
+    },
+    tags_ids_helper: {
+        en: 'The tags of the place',
+        he: 'תגיות המקום',
+        ar: 'العلامات للمكان'
+    },
+    tags_helper: {
+        en: 'The tags of the place',
+        he: 'תגיות המקום',
+        ar: 'العلامات للمكان'
+    },
+    relevant_to_helper: {
+        en: 'The relevant to of the place',
+        he: 'למי המקום הזה הוא שימושי',
+        ar: 'المكان الذي ينطبق عليه الإعلان'
+    },
+    online_meeting_u_r_l_helper: {
+        en: 'The online meeting link of the place',
+        he: 'קישור לפגישה מקוונת של המקום',
+        ar: 'رابط المحادثة الإنترنتية للمكان'
+    },
+    related_business_id_helper: {
+        en: 'The related business of the place',
+        he: 'העסקים הקשורים למקום',
+        ar: 'الأعمال المرتبطة للمكان'
+    },
+    price_helper: {
+        en: 'The price of the event',
+        he: 'מחיר האירוע',
+        ar: 'السعر للحدث'
+    },
+    currency_helper: {
+        en: 'The currency of the area',
+        he: 'המטבע של האיזור',
+        ar: 'العملة للمنطقة'
+    },
+    producer_name_helper: {
+        en: 'The producer name of the event',
+        he: 'שם היוצר',
+        ar: 'اسم المنتج'
+    },
+    producer_phone_helper: {
+        en: 'The producer phone of the event',
+        he: 'מספר הטלפון של היוצר',
+        ar: 'رقم الهاتف للمنتج'
+    },
+    producer_email_helper: {
+        en: 'The producer email of the event',
+        he: 'כתובת האימייל של היוצר',
+        ar: 'البريد الإلكتروني للمنتج'
+    },
+    reservation_center_phone_helper: {
+        en: 'The reservation center phone of the event',
+        he: 'מספר הטלפון של המרכז ההזמנות',
+        ar: 'رقم الهاتف للمركز الحجز'
+    },
+    website_url_helper: {
+        en: 'The website url of the event',
+        he: 'כתובת האתר של האירוע',
+        ar: 'رابط الموقع'
+    },
+    registration_url_helper: {
+        en: 'The registration url of the event',
+        he: 'כתובת הטופס הרשמה של האירוע',
+        ar: 'رابط التسجيل'
+    },
+    poi_name_helper: {
+        en: 'The name of the point of interest',
+        he: 'שם הנקודת העניין',
+        ar: 'اسم النقطة المهمة'
+    },
+    activities_in_place_helper: {
+        en: 'The activities in the place',
+        he: 'הפעילויות במקום',
+        ar: 'الأنشطة في المكان'
+    },
+    exclusive_for_helper: {
+        en: 'What this place is exclusive for',
+        he: 'המקום יחודי עבור?',
+        ar: 'ما هو المكان الخاص به'
+    },
+    preffered_season_helper: {
+        en: 'Preffered season',
+        he: 'עונה מועדפת',
+        ar: 'الموسم المفضل'
+    },
+    shady_helper: {
+        en: 'Is the place shady?',
+        he: 'האם המקום מוצל?',
+        ar: 'هل هو المكان الخاص به بشكل خاص؟'
+    },
+    arrival_recommendations_helper: {
+        en: 'How it is recommended to arrive',
+        he: 'איך מומלץ להגיע',
+        ar: 'كيف ينصح بالوصول'
+    },
+    tip_helper: {
+        en: 'Tip',
+        he: 'טיפ',
+        ar: 'نصيحة'
+    },
+    contact_email_helper: {
+        en: 'The contact email of the event',
+        he: 'כתובת האימייל של האירוע',
+        ar: 'البريد الإلكتروني للحدث'
+    },
+    // ----helpers----
+    please_fill_this_field: {
+        en: 'Please fill this field',
+        he: 'אנא מלא שדה זה',
+        ar: 'يرجى ملء هذا الحقل'
+    },
+    this_field_is_limited: {
+        en: 'This field is limited to',
+        he: 'שדה זה מוגבל ל',
+        ar: 'هذا الحقل محدود ل'
+    },
+};
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 

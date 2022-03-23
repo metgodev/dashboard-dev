@@ -1,117 +1,122 @@
-import React, { useState } from 'react'
+import React from 'react'
 import term from '../../terms';
 import TimeSelector from '../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { Button, Collapse, MenuItem } from '@material-ui/core';
+import { Button, Collapse, FormControl, MenuItem } from '@material-ui/core';
 import GoogleAutocomplete from '../GoogleAutocomplete/GoogleAutocomplete';
-import { Autocomplete as MuiAutomplete, Grid, InputLabel, TextField, Switch, Tabs, Tab } from '@mui/material';
+import { Autocomplete, Grid, InputLabel, TextField, Switch } from '@mui/material';
 import MapPick from '../MapPicker.js/MapPick';
 import Calendar from '../Calendar/Calendar';
-import VerticalTabPannel from '../TabPanel/VerticalTabPannel';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { FormValidator, helperText } from './FormValidators';
 import parse_nested from '../../utils/parse_nested';
+import { useFormControl } from '@mui/material/FormControl';
 
-const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker, type, ...props }) => {
-    const [tab, setTab] = useState(0);
-    const { mobile, editTabData } = useSelector(s => s.mainReducer)
+const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type, ...props }) => {
+    const { editTabData } = useSelector(s => s.mainReducer)
     const init = parse_nested(editTabData)
 
-    const handleTabs = (event, newValue) => {
-        setTab(newValue);
-    };
+    //useFormControl
+    const formControl = useFormControl();
+    console.log(formControl)
 
     return (
         <>
             <Box sx={{ flexGrow: 1, height: '100%' }} >
-                <Box sx={{ position: 'absolute' }} >
-                    {mobile && props?.FormTabs &&
-                        <Tabs value={tab} onChange={handleTabs} aria-label="vertical-tabs" variant="fullWidth" scrollButtons="auto" orientation="vertical">
-                            {props.FormTabs.map(b => <Tab key={b.value} label={b.value} />)}
-                        </Tabs>}
-                </Box>
-                <Box sx={{ pr: mobile && props?.FormTabs ? 18 : 2, pl: 2, mt: 1.2, mb: 8 }} >
+                <Box sx={{ pr: 2, pl: 2, mt: 1.2, mb: 8 }}>
                     <Grid container columnSpacing={{ xs: 1, sm: 3 }} >
-                        {ModalInit.map(({ title, id, field, rows, size, type, required }) =>
+                        {ModalInit.map(({ title, id, field, rows, size, type, required, maxItems, relaredToggle }) =>
                             <Grid item md={props.maxSizeElements?.indexOf(type) > -1 ? 12 : 6} sm={12} xs={12} key={id} >
-                                <VerticalTabPannel value={tab} index={0} >
+                                <FormControl fullWidth >
+                                    <InputLabel>{title}</InputLabel>
                                     {type === 'textfield' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <TextField
-                                                fullWidth
-                                                size={size}
-                                                label={title}
-                                                multiline
-                                                rows={rows}
-                                                defaultValue={init[field] || ''}
-                                                onChange={(e) => handleChange(e, field)}
-                                                required={required}
-                                                error={values[field] === ''}
-                                                helperText={
-                                                    values[field] === '' ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
-                                                }
-                                            />
-                                        </>
+                                        <TextField
+                                            size={size}
+                                            label={title}
+                                            multiline
+                                            rows={rows}
+                                            defaultValue={init[field] || ''}
+                                            onChange={(e) => handleChange(e, field)}
+                                            required={required}
+                                            error={values[field] === '' && required}
+                                            helperText={
+                                                values[field] === '' && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
+                                            }
+                                        />
                                     }
                                     {type === 'picker' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <TextField
-                                                fullWidth
-                                                size={size}
-                                                id="select-field"
-                                                select
-                                                label={title}
-                                                required={required}
-                                                value={values[field] || ''}
-                                                error={values[field] === ''}
-                                                helperText={
-                                                    values[field] === '' ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
-                                                }
-                                                onChange={(e) => handleChange(e, field)}
-                                            >
-                                                {picker[field].map((s) => (
-                                                    <MenuItem key={s.value} value={s.value}>
-                                                        {s.name}
-                                                    </MenuItem>
-                                                ))}
-                                            </TextField>
-                                        </>
+                                        <TextField
+                                            size={size}
+                                            id="select-field"
+                                            select
+                                            label={title}
+                                            required={required}
+                                            value={values[field] || ''}
+                                            error={values[field] === '' && required}
+                                            helperText={
+                                                values[field] === '' && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
+                                            }
+                                            onChange={(e) => handleChange(e, field)}
+                                        >
+                                            {picker[field].map((s) => (
+                                                <MenuItem key={s.value} value={s.value}>
+                                                    {s.name}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
                                     }
                                     {type === 'tagsPicker' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <MuiAutomplete
-                                                size={size}
-                                                multiple
-                                                id="tags-outlined"
-                                                options={tags}
-                                                getOptionLabel={(o) => o.title}
-                                                filterSelectedOptions
-                                                onChange={(e, val) => handleChange(e, field, val)}
-                                                renderInput={(params) => (
-                                                    <TextField
-                                                        fullWidth
-                                                        {...params}
-                                                        label={title}
-                                                        required={required}
-                                                        placeholder={title}
-                                                        error={values[field]?.length > 4 || false}
-                                                        helperText={
-                                                            values[field] === '' ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
-                                                        }
-                                                    />
-                                                )}
-                                            />
-                                        </>
+                                        <Autocomplete
+                                            size={size}
+                                            multiple
+                                            id="tags-outlined"
+                                            options={picker[field] || []}
+                                            getOptionLabel={(o) => o.title}
+                                            filterSelectedOptions
+                                            onError={(e) => console.log(e)}
+                                            onChange={(e, val) => handleChange(e, field, val)}
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    label={title}
+                                                    required={required}
+                                                    placeholder={title}
+                                                    error={values[field]?.length > maxItems && required || false}
+                                                    helperText={
+                                                        values[field]?.length > maxItems && required ? `${term('this_field_is_limited')} - ${maxItems}` : helperText(field)
+                                                    }
+                                                />
+                                            )}
+                                        />
+                                    }
+                                    {type === 'autocomplete' &&
+                                        <Autocomplete
+                                            size={size}
+                                            id="autocomplete-field"
+                                            options={picker[field]}
+                                            getOptionLabel={(o) => o.title}
+                                            filterSelectedOptions
+                                            onChange={(e, val) => handleChange(e, field, val)}
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    label={title}
+                                                    required={required}
+                                                    placeholder={title}
+                                                    error={values[field]?.length > maxItems && required || false}
+                                                    helperText={
+                                                        values[field] === '' && required ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
+                                                    }
+                                                />
+                                            )}
+                                        />
                                     }
                                     {type === 'timesPicker' &&
                                         <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <Button fullWidth variant="outlined" size={'large'} color="primary"
+                                            <Button variant="outlined" size={'large'} color="primary"
+                                                disabled={values[relaredToggle] || false}
                                                 onClick={props.openDrop} style={{ marginBottom: 10 }} >
                                                 {props.open ? <ExpandLess /> : <ExpandMore />}
                                             </Button>
@@ -130,64 +135,19 @@ const FormBuilder = ({ handleChange, ModalInit, values, tags, picker, TimePicker
                                                 </Grid>
                                             </Collapse>
                                         </>}
-                                    {type === 'timePicker' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <TimeSelector label={title} setTime={props.setDateTime} field={field} />
-                                        </>
-                                    }
-                                    {type === 'datePicker' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <Calendar type={2} setDateTwo={props.setDateTime} field={field} />
-                                        </>
-                                    }
+                                    {type === 'timePicker' && <TimeSelector label={title} setTime={props.setDateTime} field={field} />}
+                                    {type === 'datePicker' && <Calendar type={2} setDateTwo={props.setDateTime} field={field} />}
                                     {type === 'toggle' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <Switch
-                                                defaultValue={init[field] || false}
-                                                checked={values[field] || false}
-                                                onChange={(e) => handleChange(e, field, undefined, type)}
-                                                inputprops={{ 'aria-label': title }}
-                                            />
-                                        </>
+                                        <Switch
+                                            defaultValue={init[field] || false}
+                                            checked={values[field] || false}
+                                            onChange={(e) => handleChange(e, field, undefined, type)}
+                                            inputprops={{ 'aria-label': title }}
+                                        />
                                     }
-                                </VerticalTabPannel>
-                                <VerticalTabPannel value={tab} index={!mobile ? 0 : 1} >
-                                    {type === 'MapPicker' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <MapPick setFatherValue={props.setValues} />
-                                        </>
-                                    }
-                                    {type === 'googleAutocomplete' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <GoogleAutocomplete setFatherValue={props.setValues} field={field} />
-                                        </>
-                                    }
-                                    {type === 'locationName' &&
-                                        <>
-                                            <InputLabel>{title}</InputLabel>
-                                            <TextField
-                                                fullWidth
-                                                size={size}
-                                                id={title}
-                                                label={title}
-                                                placeholder={title}
-                                                multiline
-                                                rows={rows}
-                                                defaultValue={init[field] || ''}
-                                                onChange={(e) => handleChange(e, field)}
-                                                error={values[field] === ''}
-                                                helperText={
-                                                    values[field] === '' ? term('please_fill_this_field') + " - " + helperText(field) : helperText(field)
-                                                }
-                                            />
-                                        </>
-                                    }
-                                </VerticalTabPannel>
+                                    {type === 'MapPicker' && <MapPick setFatherValue={props.setFatherValue} />}
+                                    {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={props.setFatherValue} field={field} />}
+                                </FormControl>
                             </Grid>
                         )}
                         <Box style={styles.ButtomLeftCornerButton}>

@@ -53,11 +53,11 @@ function AreaManagement() {
     const openLinkingDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('edit')
+            setDialogType('link')
         }
         else {
             dispatch(set_edit_tab_data([]))
-            setDialogType('add')
+            setDialogType('edit')
         }
         setTagLink(!tagOpen)
     }

@@ -13,9 +13,9 @@ const BusinessTableService = (rowsPerPage, page) => {
         businesses: [],
         keys: [],
         ignore: [
-            'address', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
-            'id', 'instagramPageUrl', 'linkedInPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend', 'locationName',
-            'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
+            'address', 'areaId', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
+            'id', 'instagramPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend', 'locationName', 'websitesUrl', 'shortDescription',
+            'reservations', 'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
         ],
         tableCategories: {
             impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
@@ -34,6 +34,7 @@ const BusinessTableService = (rowsPerPage, page) => {
             let businesses = [];
             let categories = [];
             let tags = [];
+            let keys = [];
             // -------------------===tags===-------------------
             if (!area_id) return;
             await client.service('area').find({ query: { _id: area_id } })
@@ -45,7 +46,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }));
             // -------------------===businesses===-------------------
-            await client.service('business').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
+            await client.service('business').find({ query: { authorityId: authorities.map(({ id }) => id), $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
                 .then(({ data }) => data.map(({
                     status, name, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {
@@ -57,7 +58,10 @@ const BusinessTableService = (rowsPerPage, page) => {
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ title, _id }) => categories = [...categories, { title, id: _id }]));
             // -------------------===keys===-------------------
-            let keys = Object.keys(businesses[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            if (businesses.length) {
+                keys = Object.keys(businesses[0]).filter((el) => !data.ignore.includes(el));
+                keys.push('btn');
+            }
             // -------------------===setData===-------------------
             setData(prevState => ({
                 ...prevState, authorities, businesses: stringify_nested(businesses, 'tag'), keys,
@@ -70,3 +74,6 @@ const BusinessTableService = (rowsPerPage, page) => {
 }
 
 export default BusinessTableService;
+
+    // await client.service('business-search').find({ query: { search: 'שם עסק' } })
+    //     .then(({ data }) => console.log(data))

@@ -37,6 +37,7 @@ const EventstableService = (rowsPerPage, page) => {
             let events = [];
             let categories = [];
             let tags = [];
+            let keys = [];
             // -------------------===tags===-------------------
             if (!area_id) return;
             await client.service('area').find({ query: { _id: area_id } })
@@ -49,7 +50,7 @@ const EventstableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===events===-------------------
-            await client.service('events').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: -1 } } })
+            await client.service('events').find({ query: { authorityId: authorities.map(({ id }) => id), $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
                 .then(({ data }) => data.map(({ status, authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
                     events = [...events, {
                         status, authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),
@@ -60,7 +61,10 @@ const EventstableService = (rowsPerPage, page) => {
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ title, _id }) => categories = [...categories, { title, id: _id }]));
             // -------------------===keys===-------------------
-            let keys = Object.keys(events[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            if (events.length) {
+                keys = Object.keys(events[0]).filter((el) => !data.ignore.includes(el));
+                keys.push('btn');
+            }
             // -------------------===set data===-------------------
             setData(prevState => ({
                 ...prevState, authorities, events: stringify_nested(events, 'tags'), keys,

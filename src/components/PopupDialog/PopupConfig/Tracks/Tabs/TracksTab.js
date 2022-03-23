@@ -1,15 +1,33 @@
-import React, { useState } from 'react'
-import { ModalInit, picker, FormTabs } from '../popConfig';
+import React, { useEffect, useState } from 'react'
+import { ModalInit, FormTabs } from '../popConfig';
 import { client } from '../../../../../API/metro';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
+import term from '../../../../../terms';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
+const picker = {
+    relevantTo: [
+        { value: 'INFANCY', name: term('infancy') },
+        { value: 'KIDS', name: term('kids') },
+        { value: 'YOUTH', name: term('youth') },
+        { value: 'ALL_FAMILY', name: term('all_family') },
+        { value: 'YOUNG_ADULTS', name: term('young_adults') },
+        { value: 'ADULTS', name: term('adults') },
+        { value: 'FAMALIES', name: term('families') },
+        { value: 'GOLDEN_AGE', name: term('golden_age') },
+        { value: 'WOMEN_ONLY', name: term('women_only') },
+        { value: 'MEN_ONLY', name: term('men_only') },
+    ],
+    authorityId: [],
+    pois: [{ value: 'something', name: 'something' }]
+};
 
 export const TracksTab = ({ handleClose, type }) => {
     //global
     let dispatch = useDispatch()
+    const { area } = useSelector(state => state.mainReducer)
     //local
     const [values, setValues] = useState({
         userId: user.id,
@@ -32,9 +50,18 @@ export const TracksTab = ({ handleClose, type }) => {
                 .then(() => handleClose(false))
     }
 
+    useEffect(() => {
+        (async () => {
+            client.service("authorities").find({ query: { areaId: area.id } })
+                .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
+                .then((authorities => picker.authorityId = authorities))
+        })();
+    }, [area])
+
     let maxSizeElements = ['MapPicker']
     return (
         <FormBuilder
+            setFatherValue={setValues}
             FormTabs={FormTabs}
             ModalInit={ModalInit}
             handleClose={handleClose}

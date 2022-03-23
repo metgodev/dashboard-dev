@@ -27,6 +27,7 @@ const TracksTableService = (rowsPerPage, page) => {
             let authority_cat = ['all'];
             let tracks = [];
             let categories = [];
+            let keys = [];
             // -------------------===autorities===-------------------
             if (!area_id) return;
             await client.service('authorities').find({ query: { areaId: area_id } })
@@ -35,7 +36,7 @@ const TracksTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===tracks===-------------------
-            await client.service('tracks').find({ query: { "$limit": rowsPerPage, "$skip": page * rowsPerPage, "$sort": { createdAt: 1 } } })
+            await client.service('tracks').find({ query: { authorityId: authorities.map(({ id }) => id), $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: 1 } } })
                 .then(({ data }) => data.map(({ status, authority, _id, ...rest }) => {
                     tracks = [...tracks, { status, authority: authority?.name, id: _id, ...rest }]
                 }))
@@ -43,8 +44,10 @@ const TracksTableService = (rowsPerPage, page) => {
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ name, _id }) => categories = [...categories, { name, id: _id }]))
             // -------------------===keys===-------------------
-            if (!tracks.length) return;
-            let keys = Object.keys(tracks[0]).filter((el) => !data.ignore.includes(el)); keys.push('btn');
+            if (tracks.length) {
+                keys = Object.keys(tracks[0]).filter((el) => !data.ignore.includes(el));
+                keys.push('btn');
+            }
             // -------------------===set data===-------------------
             setData(prevState => ({
                 ...prevState, authorities, tracks, keys,
