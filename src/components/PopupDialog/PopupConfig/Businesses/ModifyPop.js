@@ -8,11 +8,12 @@ import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
 import { CircularProgress } from '@material-ui/core'
-import { UploadMediaTab } from './Tabs/UploadMediaTab'
+import { UploadMediaTab } from '../uploadMediaTab'
 import term from '../../../../terms';
 //styles
 import useStyles from "../../styles";
 import { useSelector } from 'react-redux';
+import { mediaTabConfig } from './popConfig'
 
 
 
@@ -52,7 +53,7 @@ const ModifyPop = ({ handleClose, type, initialData, open }) => {
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} />
+                    <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} config={mediaTabConfig}/>
                 </TabPanel>
             </Box>
         </Box >

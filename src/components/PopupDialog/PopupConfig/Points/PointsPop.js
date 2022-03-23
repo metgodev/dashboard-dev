@@ -5,9 +5,10 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { PointsTab } from './Tabs/PointsTab';
-import { UploadMediaTab } from './Tabs/UploadMediaTab';
+import { UploadMediaTab } from '../uploadMediaTab';
 import { CircularProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux';
+import { mediaTabConfig } from './popConfig'
 //styles
 import useStyles from "../../styles";
 
@@ -44,7 +45,7 @@ const PointsPop = ({ handleClose, type, open }) => {
                     <PointsTab handleClose={handleClose} initialData={editTabData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} type={type} tab={"pois"} />
+                <UploadMediaTab setLoadingImage={setLoadingImage} tab={"pois"} config={mediaTabConfig}/>
                 </TabPanel>
             </Box>
         </Box >

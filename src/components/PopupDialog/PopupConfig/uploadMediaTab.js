@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import DragDrop from '../../../../../hooks/DragDropFiles';
-import MyImageList from '../../../../MyImageList/MyImageList';
-import { Box } from '@mui/material'
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Typography } from '../../../../Wrappers/Wrappers'
-import term from '../../../../../terms'
-import CropImage from "../../../../../hooks/CropImage";
-import { client } from '../../../../../API/metro';
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { set_table_changed, set_edit_tab_data } from '../../../../../REDUX/actions/main.actions'
+import { set_table_changed, set_edit_tab_data } from '../../../REDUX/actions/main.actions'
+import { Box, DialogTitle, DialogContent,ToggleButton,ToggleButtonGroup } from '@mui/material'
+import DragDrop from '../../../hooks/DragDropFiles';
+import MyImageList from '../../MyImageList/MyImageList';
+import CropImage from "../../../hooks/CropImage";
+import { Typography } from '../../Wrappers/Wrappers'
+import { client } from '../../../API/metro';
+import term from '../../../terms'
 //styles
-import useStyles from "../../../styles";
+import useStyles from "../styles";
 
 export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
 
@@ -22,7 +18,7 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
   const { editTabData } = useSelector(s => s.mainReducer)
   const media = editTabData?.gallery ? (typeof editTabData.gallery == 'string') ? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
 
-  const [uploadCategory, setUploadCategory] = useState('image')
+  const [uploadCategory, setUploadCategory] = useState(config.initialMediaType)
   const [uploadFileTypes, setUploadFileTypes] = useState(["JPG", "PNG", "JPEG"])
   const [imageToCrop, setImageToCrop] = useState(null)
   const [cropper, setCropper] = useState();
@@ -32,11 +28,17 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
     setImageToCrop(null)
     setUploadCategory(newCategory)
     switch (newCategory) {
+      case 'logo':
+        setUploadFileTypes(["JPG", "PNG", "JPEG"])
+        break
       case 'image':
         setUploadFileTypes(["JPG", "PNG", "JPEG"])
         break
       case 'video':
         setUploadFileTypes(["MP4", "AVI", "WMV"])
+        break
+      case 'files':
+        setUploadFileTypes(["MP3", "WAV"])
         break
     }
   }

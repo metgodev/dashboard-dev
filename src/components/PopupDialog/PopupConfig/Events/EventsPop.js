@@ -5,9 +5,10 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { EventsTab } from './Tabs/EventsTab';
-import { UploadMediaTab } from './Tabs/UploadMediaTab';
+import { mediaTabConfig } from './popConfig'
 import { CircularProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux';
+import { UploadMediaTab } from '../uploadMediaTab'
 //styles
 import useStyles from "../../styles";
 
@@ -45,7 +46,7 @@ const EventsPop = ({ handleClose, type, open }) => {
                     <EventsTab handleClose={handleClose} initialData={editTabData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <UploadMediaTab open={open} setLoadingImage={setLoadingImage} type={type} tab={"events"} />
+                    <UploadMediaTab config={mediaTabConfig} setLoadingImage={setLoadingImage} tab={"events"} />
                 </TabPanel>
             </Box>
         </Box >

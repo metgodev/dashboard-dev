@@ -67,15 +67,18 @@ export let picker = {
     { value: "NONE", name: term('none') }]
 };
 
-export const mediaUploadSections = [
-    {
-        title: term('upload_photo'),
-        type: "image",
-        fileTypes: ["JPG", "PNG", "GIF"],
-    },
-    {
-        title: term('upload_video'),
-        type: "video",
-        fileTypes: ["MP4", "AVI", "WMV"],
-    },
-]
+export const mediaTabConfig = {
+    mediaTypes: [
+        {
+            title: term('image'),
+            type: "image",
+            fileTypes: ["JPG", "PNG", "GIF"],
+        },
+        {
+            title: term('video'),
+            type: "video",
+            fileTypes: ["MP4", "AVI", "WMV"],
+        },
+    ],
+    initialMediaType: "image",
+}

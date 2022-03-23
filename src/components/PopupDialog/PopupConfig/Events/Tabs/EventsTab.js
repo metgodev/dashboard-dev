@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { client } from '../../../../../API/metro';
-import { ModalInit, tags, picker, clearButtonId, FormTabs } from '../popConfig';
+import { ModalInit, tags, picker, FormTabs } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
