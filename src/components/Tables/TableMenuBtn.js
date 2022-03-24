@@ -22,7 +22,7 @@ export default function TableMenuBtn({ status, stats, id, tableType }) {
 
     const handleClose = async (element) => {
         client.service(tableType).patch(id, { "status": element }).then(() => {
-            dispatch(set_table_changed(element + Math.random()))
+            dispatch(set_table_changed(element))
         })
         setAnchorEl(null);
     };

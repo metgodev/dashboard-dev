@@ -63,6 +63,7 @@ function Businesses() {
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}
                 openDialog={openDialog}
+                tableType={'business'}
             /> :
                 <Box style={progress}>
                     <CircularProgress size={60} />

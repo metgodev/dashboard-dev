@@ -1,10 +1,30 @@
 import Notify from "../../pages/notifications/Notifications"
-import term from "../../terms"
 import { camelToSnakeCase } from "../../utils/camelToSnakeCase"
+import { toast } from 'react-toastify';
+import term from "../../terms"
 
 export const helperText = (name) => {
     let helperText = `${camelToSnakeCase(name)}_helper`
     return term(helperText)
+}
+
+export const allRequiredFiledsAreNotEmpty = (values, ModalInit, type) => {
+    if (type === "edit") return;
+    const requiredFields = ModalInit.filter(({ required }) => required)
+    const requierdValuesAreNotEmpty = requiredFields.every(({ field }) => values[field] !== undefined && values[field] !== "" && values[field] !== null)
+    const filedsNamesThatAreNotFiled = requiredFields.filter(({ field }) => values[field] === undefined || values[field] === "" || values[field] === null)
+    toast.error(`${term('please_fill_all_required_fields')}
+     ${filedsNamesThatAreNotFiled.map(({ title }) => title.toUpperCase()).join(", ")}`, {
+        theme: 'colored',
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    return !requierdValuesAreNotEmpty
 }
 
 export const FormValidator = (rule, value) => {

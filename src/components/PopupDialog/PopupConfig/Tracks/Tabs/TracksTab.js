@@ -58,7 +58,7 @@ export const TracksTab = ({ handleClose, type }) => {
         })();
     }, [area])
 
-    let maxSizeElements = ['MapPicker']
+    let maxSizeElements = ['MapPicker', 'divider']
     return (
         <FormBuilder
             setFatherValue={setValues}

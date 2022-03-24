@@ -790,6 +790,11 @@ const active_lexicon = {
         he: 'מומלצים',
         ar: 'متميز',
     },
+    all_seasons: {
+        en: 'All seasons',
+        he: 'כל העונות',
+        ar: 'كل المواسم',
+    },
     summer: {
         en: 'Summer',
         he: 'קיץ',
@@ -809,6 +814,26 @@ const active_lexicon = {
         en: 'Spring',
         he: 'אביב',
         ar: 'الخريف',
+    },
+    walk: {
+        en: 'Walk',
+        he: 'רגלי',
+        ar: 'مشي',
+    },
+    off_road: {
+        en: '4x4',
+        he: '4x4',
+        ar: '4x4',
+    },
+    car: {
+        en: 'Car',
+        he: 'רכב',
+        ar: 'سيارة',
+    },
+    bicycle: {
+        en: 'Bicycle',
+        he: 'אופניים',
+        ar: 'دراجة تدريبية',
     },
     full: {
         en: 'Full',
@@ -1521,6 +1546,16 @@ const active_lexicon = {
         he: 'כתובת האימייל של האירוע',
         ar: 'البريد الإلكتروني للحدث'
     },
+    reservation_center_email_helper: {
+        en: 'The reservation center email of the event',
+        he: 'כתובת האימייל של המרכז ההזמנות',
+        ar: 'البريد الإلكتروني للمركز الحجز'
+    },
+    in_place_helper: {
+        en: 'In place',
+        he: 'במקום',
+        ar: 'في المكان'
+    },
     // ----helpers----
     please_fill_this_field: {
         en: 'Please fill this field',
@@ -1531,6 +1566,11 @@ const active_lexicon = {
         en: 'This field is limited to',
         he: 'שדה זה מוגבל ל',
         ar: 'هذا الحقل محدود ل'
+    },
+    please_fill_all_required_fields: {
+        en: 'Please fill all required fields',
+        he: 'אנא מלא את כל השדות הנדרשים',
+        ar: 'يرجى ملء جميع الحقول المطلوبة'
     },
 };
 

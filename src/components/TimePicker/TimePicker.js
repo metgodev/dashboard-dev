@@ -15,7 +15,7 @@ import Widget from "../Widget/Widget";
 import term from '../../terms';
 
 
-export default function TimeSelector({ warp, label, type, times, timeref, setTimes, removeDay, setChecked, checked }) {
+export default function TimeSelector({ warp, label, type, times, timeref, setTimes, setTime, removeDay, setChecked, checked, field }) {
     let openingTime = times?.start ? parseInt(times.start) : 8
     let closingTime = times?.end ? parseInt(times.end) : 16
 
@@ -34,7 +34,8 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
                 break;
         }
     }
-    const Warp = warp ? Widget : Box
+    const Warp = warp ? Widget : Box;
+
 
     useEffect(() => {
         let hours = new Date(selectedDate).toLocaleTimeString([], {
@@ -42,8 +43,11 @@ export default function TimeSelector({ warp, label, type, times, timeref, setTim
             hour: '2-digit',
             minute: '2-digit'
         })
-        if (!setTimes) return
-        setTimes(hours, timeref, type)
+        if (setTimes) {
+            setTimes(hours, timeref, type)
+        } else {
+            setTime(hours, field)
+        }
     }, [selectedDate])
 
     useEffect(() => {

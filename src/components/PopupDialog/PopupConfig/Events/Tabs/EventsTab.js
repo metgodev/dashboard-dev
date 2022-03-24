@@ -45,6 +45,7 @@ export const EventsTab = ({ handleClose, type }) => {
         status: 'PENDING_APPROVAL',
         areaId: area?.id?.toString(),
         userId: user.id,
+        currency: 'ILS',
     });
 
     const handleChange = (e, field, tags, type) => {
@@ -53,7 +54,7 @@ export const EventsTab = ({ handleClose, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
-    const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: new Date(time) }));
+    const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: time }));
 
     const modify = async (type, id) => {
         if (type === 'add')
@@ -83,7 +84,7 @@ export const EventsTab = ({ handleClose, type }) => {
         })();
     }, [area.id])
 
-    let maxSizeElements = ['MapPicker']
+    let maxSizeElements = ['MapPicker', 'divider']
     return (
         <FormBuilder
             setFatherValue={setValues}
