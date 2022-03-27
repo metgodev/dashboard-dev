@@ -94,6 +94,9 @@ export const ModifyTab = ({ handleClose, type }) => {
 
             await client.service('area').find({ query: { _id: area.id } })
                 .then(({ data }) => data[0].tags.map(({ title, _id }) => picker.tagsIds = [...picker.tagsIds, { title, id: _id }]));
+
+            await client.service('tag-categories').find({ query: { areaId: area.id } })
+                .then(({ data }) => data.map(({ areaId, tagId, categoryId, userId }) => console.log(areaId, tagId, categoryId, userId)))
         })()
     }, [area])
 

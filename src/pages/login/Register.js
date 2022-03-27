@@ -22,6 +22,8 @@ function Register() {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
 
+    // registerUserWithEmailAndPassword('proorel@gmail.com', '565656').then(res => console.log(res)).catch(err => console.log(err))
+
     const registerUser = async () => {
         setIsLoading(true)
         let res = await client.service('users').create({ email, password, firstName, lastName })

@@ -21,9 +21,10 @@ const AreaService = () => {
 
     useLayoutEffect(() => {
         (async (area_id = area.id) => {
+            let categories = [];
             let areaTags = [];
             let authorities = [];
-            let categories = [];
+            let tag_categories = [];
             let tags = [];
             // -------------------===areas===-------------------
             if (!area_id) return;
@@ -37,12 +38,19 @@ const AreaService = () => {
             // -------------------===categories===-------------------
             await client.service('categories').find()
                 .then(({ data }) => data.map(({ title, _id }) => categories = [...categories, { title, id: _id }]));
+            // -------------------===tag categories===-------------------
+            await client.service('tag-categories').find()
+                .then(({ data }) => data.map(({ areaId, tagId, categoryId, userId }) => tag_categories = [...tag_categories, { areaId, tagId, categoryId, userId }]));
             // -------------------===tags===-------------------
             await client.service('tags').find()
-                .then(({ data }) => data.map(({ title, _id, categoryIds }) => tags = [...tags, { title, id: _id, categoryIds: categoryIds?.map(id => categories.find(cat => cat.id === id)) }]));
+                .then(({ data }) => data.map(({ title, _id }) => tags = [...tags, { title, id: _id }]));
             // -------------------===keys===------------------- 
             // add categoryIds to areaTags by looping through tagsIds in area
-            areaTags = areaTags.map((tag) => ({ ...tag, relatedCategories: tags.find(t => t.id === tag.id)?.categoryIds?.map(({ title }) => `${term(title.toLowerCase())}, `) }))
+            areaTags = areaTags.map((tag) => ({
+                ...tag, relatedCategories: tag_categories.filter(({ tagId }) => tagId === tag.id).map(({ categoryId }) => (
+                    `${term((categories.find(({ id }) => id === categoryId).title).toLowerCase())}, `
+                ))
+            }));
             //-------------------===filter===-------------------
             let areaTagsKeys = Object.keys(areaTags[0]).filter((el) => !data.ignore.includes(el)); areaTagsKeys.push('actions');
             let authoritiesKeys = Object.keys(authorities[0]).filter((el) => !data.ignore.includes(el)); authoritiesKeys.push('actions');

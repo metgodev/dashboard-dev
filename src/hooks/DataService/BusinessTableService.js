@@ -46,7 +46,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }));
             // -------------------===businesses===-------------------
-            await client.service('business').find({ query: { authorityId: authorities.map(({ id }) => id), $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
+            await client.service('business').find({ query: { areaId: area_id, $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
                 .then(({ data }) => data.map(({
                     status, name, authority, contactPersonPhoneNumber, emailAddress, phoneNumber, tagsIds, updatedAt, _id, ...rest
                 }) => businesses = [...businesses, {

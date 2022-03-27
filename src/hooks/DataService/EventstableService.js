@@ -50,7 +50,7 @@ const EventstableService = (rowsPerPage, page) => {
                     authority_cat = [...authority_cat, name]
                 }))
             // -------------------===events===-------------------
-            await client.service('events').find({ query: { authorityId: authorities.map(({ id }) => id), $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
+            await client.service('events').find({ query: { areaId: area_id, $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
                 .then(({ data }) => data.map(({ status, authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
                     events = [...events, {
                         status, authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),

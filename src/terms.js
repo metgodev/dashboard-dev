@@ -1556,6 +1556,31 @@ const active_lexicon = {
         he: 'במקום',
         ar: 'في المكان'
     },
+    category_id_helper: {
+        en: 'The category related to the tag',
+        he: 'הקטגוריה הקשורה לתג',
+        ar: 'الفئة المرتبطة بالعلامة'
+    },
+    title_helper: {
+        en: 'The title of the tag',
+        he: 'כותרת התג',
+        ar: 'عنوان العلامة'
+    },
+    area_id_helper: {
+        en: 'The area this authority is related to',
+        he: 'האיזור של הרשות',
+        ar: 'المنطقة التي ترتبط بها الجهة'
+    },
+    email_helper: {
+        en: 'The email of the authority',
+        he: 'כתובת האימייל של הרשות',
+        ar: 'البريد الإلكتروني للجهة'
+    },
+    address_helper: {
+        en: 'The address of the authority',
+        he: 'כתובת הרשות',
+        ar: 'عنوان الجهة'
+    },
     // ----helpers----
     please_fill_this_field: {
         en: 'Please fill this field',

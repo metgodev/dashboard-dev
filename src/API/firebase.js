@@ -3,8 +3,10 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPhoneNumber
+  signInWithPhoneNumber,
+  RecaptchaVerifier,
 } from "firebase/auth";
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -33,6 +35,7 @@ window.recaptchaVerifier = new RecaptchaVerifier(
   },
   auth
 );
+
 
 const appVerifier = window.recaptchaVerifier;
 
