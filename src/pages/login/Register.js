@@ -27,32 +27,41 @@ function Register() {
     const registerUser = async () => {
         if (password.length < 6) return;
         setIsLoading(true)
-        registerUserWithEmailAndPassword(email, password,).then(res => {
-            localStorage.setItem('jwt', JSON.stringify(res.user.accessToken))
-        }).catch(err => console.log(err))
-        await client.service('users').create({ email, password, firstName, lastName }).
-            then(res => {
-                if (res.error) setError(res.error)
-                else {
-                    let user = {
-                        e: res.email,
-                        fn: res.firstName,
-                        ln: res.lastName,
-                        v: res.isVerified,
-                        id: res._id
-                    }
-                    dispatch(set_user(user))
-                    if (res.isVerified) navigate("/dashboard");
-                    else navigate("/verification");
-                    setIsLoading(false)
+        registerUserWithEmailAndPassword(email, password).then(res => {
+            // localStorage.setItem('jwt', JSON.stringify(res.user.accessToken))
+            //res.user.accessToken
+            // sign in with access token 
 
-                }
-            }
-            ).catch(err => {
-                console.log(err)
-                setError(err)
-                setIsLoading(false)
-            })
+            // 1. call Auth with access toekn returned from firebase, a user of Metgo will be returned with no profile info
+            // 2. call await client.service('users').patch(user._id, {
+            //  firstName: "..",
+            //  /// .... 
+            //})
+
+        }).catch(err => console.log(err))
+        // await client.service('users').create({ email, password, firstName, lastName }).
+        //     then(res => {
+        //         if (res.error) setError(res.error)
+        //         else {
+        //             let user = {
+        //                 e: res.email,
+        //                 fn: res.firstName,
+        //                 ln: res.lastName,
+        //                 v: res.isVerified,
+        //                 id: res._id
+        //             }
+        //             dispatch(set_user(user))
+        //             if (res.isVerified) navigate("/dashboard");
+        //             else navigate("/verification");
+        //             setIsLoading(false)
+
+        //         }
+        //     }
+        //     ).catch(err => {
+        //         console.log(err)
+        //         setError(err)
+        //         setIsLoading(false)
+        //     })
     }
 
 
