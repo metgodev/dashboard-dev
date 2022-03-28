@@ -7,14 +7,15 @@ import JWT from 'jwt-client'
 
 const { REACT_APP_STRAPI } = process.env
 
-let token = localStorage.getItem('fethers-jwt');
 let verified;
-let uri = REACT_APP_STRAPI;
+let token = localStorage.getItem('metgo-jwt');
+const uri = REACT_APP_STRAPI;
 
-const app = feathers()
-    .configure(auth())
-
+const app = feathers();
 const restClient = rest(uri)
+
+app.configure(restClient.axios(axios));
+app.configure(auth({ storage: window.localStorage, storageKey: 'metgo-jwt' }));
 
 export const Auth = async (access_token) =>
     app.authenticate({
@@ -31,34 +32,15 @@ export const reAuth = async () => {
         token = res.accessToken;
         verified = res.isVerified;
     }).catch((err) => {
-        if (err) return client.logout();
+        if (err) return app.logout();
     });
 }
 
-export const client = app.configure(restClient.axios(axios.create({
-    baseURL: uri,
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-})));
+export default app;
 
-export const metro = axios.create({
-    baseURL: uri,
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-});
-
-//jwt
-JWT.defaults = {
-    key: '',
-    tokenPrefix: `Bearer ${token}`,
-    storage: global.localStorage,
-    padding: false
-};
 
 export const isVerified = () => {
-    token = localStorage.getItem('fethers-jwt')
+    token = localStorage.getItem('metgo-jwt')
     verified = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')).user.v
     if (!token || !!!verified) return false
     else if (JWT.validate(token)) return JWT.validate(token)
@@ -66,14 +48,10 @@ export const isVerified = () => {
 }
 
 export const isLoggedIn = () => {
-    return true
+    let token = localStorage.getItem('metgo-jwt')
+    if (token) return true
+    else return false
 }
-
-// export const isLoggedIn = () => {
-//     if (!token) return false
-//     else return true
-// }
-
 
 
 // .find()	GET	/messages
@@ -82,3 +60,5 @@ export const isLoggedIn = () => {
 // .update()	PUT	/messages/1
 // .patch()	PATCH	/messages/1
 // .remove()	DELETE	/messages/1
+
+

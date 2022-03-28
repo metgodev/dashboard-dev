@@ -10,7 +10,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Typography } from '../../../../Wrappers/Wrappers'
 import term from '../../../../../terms'
 import CropImage from "../../../../../hooks/CropImage";
-import { client } from '../../../../../API/metro'
+import client from '../../../../../API/metro'
 import { useDispatch } from 'react-redux';
 import { set_table_changed, set_edit_tab_data } from '../../../../../REDUX/actions/main.actions'
 //styles

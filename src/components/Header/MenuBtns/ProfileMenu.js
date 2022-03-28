@@ -8,7 +8,7 @@ import classNames from "classnames";
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
-import { client } from "../../../API/metro";
+import client from "../../../API/metro";
 import { useNavigate } from "react-router";
 import term from "../../../terms";
 import { useSelector } from "react-redux";

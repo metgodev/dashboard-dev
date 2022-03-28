@@ -6,7 +6,7 @@ import PageTitle from '../../components/PageTitle/PageTitle'
 import Widget from '../../components/Widget/Widget';
 import { add_new_area, add_new_authority, tags } from './adminConfig';
 import { Button } from '@material-ui/core';
-import { client } from '../../API/metro';
+import client from '../../API/metro';
 import Notify from '../notifications/Notifications';
 
 const styleBtn = {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ModalInit, FormTabs } from '../popConfig';
-import { client } from '../../../../../API/metro';
+import client from '../../../../../API/metro';
 import { useDispatch, useSelector } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';

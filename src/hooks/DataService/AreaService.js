@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { client } from '../../API/metro';
+import client from '../../API/metro';
 import term from '../../terms';
 
 const AreaService = () => {

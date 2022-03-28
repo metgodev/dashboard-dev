@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { client } from '../../API/metro'
+import client from '../../API/metro'
 import { Box } from '@mui/material'
 import useStyles from './styles'
 import { useDispatch, useSelector } from 'react-redux';

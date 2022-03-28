@@ -170,6 +170,11 @@ const active_lexicon = {
         he: 'שם משתמש או סיסמא לא נכונים',
         ar: 'اسم المستخدم او الرقم السري غير صحيح',
     },
+    plase_make_sure_that_your_details_are_correct: {
+        en: 'Please make sure that your details are correct',
+        he: 'אנא ודא שפרטיך נכונים',
+        ar: 'يرجى التأكد من صحة التفاصيل',
+    },
     incorrect_verification_code: {
         en: 'incorrect verification code',
         he: 'קוד אימות שגוי',
@@ -1581,6 +1586,11 @@ const active_lexicon = {
         he: 'כתובת הרשות',
         ar: 'عنوان الجهة'
     },
+    password_must_be_at_least_6_characters_long_helper: {
+        en: 'The password must be at least 6 characters long',
+        he: 'הסיסמה חייבת להיות באורך של 6 תווים לפחות',
+        ar: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل'
+    },
     // ----helpers----
     please_fill_this_field: {
         en: 'Please fill this field',
@@ -1596,6 +1606,17 @@ const active_lexicon = {
         en: 'Please fill all required fields',
         he: 'אנא מלא את כל השדות הנדרשים',
         ar: 'يرجى ملء جميع الحقول المطلوبة'
+    },
+    welcome_guest: {
+        en: 'Welcome guest',
+        he: 'ברוך הבא אורח',
+        ar: 'مرحبا بك الضيوف'
+    },
+    // ----errors from firebase----
+    auth_invalid_email: {
+        en: 'The email address is badly formatted.',
+        he: 'כתובת האימייל שגויה',
+        ar: 'البريد الإلكتروني غير صحيح'
     },
 };
 

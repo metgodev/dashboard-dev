@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
 import term from "../../terms";
-import { Auth, client } from '../../API/metro';
+import client, { Auth } from '../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../REDUX/actions/main.actions';
 // styles
 import useStyles from "./styles";
 import { registerUserWithEmailAndPassword } from '../../API/firebase';
-
-
 
 function Register() {
     let dispatch = useDispatch()
@@ -25,32 +23,26 @@ function Register() {
 
 
     const registerUser = async () => {
-        if (password.length < 6) return;
+        if (password.length < 6) return setError(true)
         setIsLoading(true)
         registerUserWithEmailAndPassword(email, password).then(res => {
-            // create Auth then if no error then patch user 
+            if (!res?.user) return setIsLoading(false);
             Auth(res.user.accessToken).then(res => {
-                console.log(res)
-                if (res.error) setError(res.error)
-                else {
+                if (res.error) {
+                    console.log(res.error)
+                    setError(res.error)
+                } else {
                     let user = {
                         e: res.email,
-                        fn: firstName,
-                        ln: lastName,
                         v: res.isVerified,
                         id: res._id
                     }
                     dispatch(set_user(user));
-                    client.client.service('users').patch(res._id, {
-                        firstName: firstName,
-                        lastName: lastName
-                    }).then(() => {
-                        navigate("/dashboard")
-                        setIsLoading(false)
-                    })
+                    setIsLoading(false);
+                    navigate("/dashboard");
                 }
-            });
-        });
+            })
+        })
     }
 
     return (
@@ -64,7 +56,7 @@ function Register() {
                 </Typography>
                 <Fade in={error}>
                     <Typography color="secondary" className={classes.errorMessage}>
-                        {term('something_went_wrong')}
+                        {term('plase_make_sure_that_your_details_are_correct')}
                     </Typography>
                 </Fade>
                 <TextField
@@ -121,11 +113,11 @@ function Register() {
                         },
                     }}
                     value={password}
-                    error={password.length < 6}
                     onChange={e => setPassword(e.target.value)}
                     margin="normal"
                     placeholder={term("password")}
                     type="password"
+                    helperText={term("password_must_be_at_least_6_characters_long_helper")}
                     fullWidth
                 />
                 <div className={classes.creatingButtonContainer}>

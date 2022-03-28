@@ -1,4 +1,4 @@
-import { client } from "../../../../API/metro";
+import client from "../../../../API/metro";
 import term from "../../../../terms";
 import { createRandomId } from "../../../../utils/randomId"
 

@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { client } from '../../API/metro';
+import client from '../../API/metro';
 import intersect_between_objects from '../../utils/intersect_between_objects';
 import stringify_nested from '../../utils/stringify_nested';
 

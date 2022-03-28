@@ -20,24 +20,26 @@ function SignIn() {
     let [password, setPassword] = useState("");
 
     const loginUser = async () => {
-        setIsLoading(false)
+        setIsLoading(true)
         loginWithEmailAndPassword(email, password).then(res => {
+            if (!res?.user) return setIsLoading(false);
             Auth(res.user.accessToken).then(res => {
-                if (res.error) setError(res.error)
-                else {
+                if (res.error) {
+                    setError(res.error)
+                } else {
                     let user = {
                         e: res.email,
-                        fn: res.firstName,
-                        ln: res.lastName,
+                        fn: term('welcome_guest'),
+                        ln: '',
                         v: res.isVerified,
                         id: res._id
                     }
+                    setIsLoading(false);
                     dispatch(set_user(user));
                     navigate("/dashboard");
-                    setIsLoading(false)
                 }
-            });
-        });
+            })
+        })
     }
 
     return (

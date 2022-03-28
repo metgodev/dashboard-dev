@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { client } from '../../API/metro';
+import client from '../../API/metro';
 import stringify_nested from '../../utils/stringify_nested';
 import term from '../../terms';
 

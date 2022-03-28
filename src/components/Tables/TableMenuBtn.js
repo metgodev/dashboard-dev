@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import term from '../../terms';
-import { client } from '../../API/metro';
+import client from '../../API/metro';
 import { useDispatch } from 'react-redux';
 // styles
 import useStyles from "./styles";

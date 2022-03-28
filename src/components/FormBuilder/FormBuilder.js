@@ -13,7 +13,6 @@ import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { allRequiredFiledsAreNotEmpty, helperText } from './FormValidators';
 import parse_nested from '../../utils/parse_nested';
-import { ToastContainer } from 'react-toastify';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
@@ -183,7 +182,6 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                             {term(type)}
                         </Button>
                     </Box>
-                    <ToastContainer />
                 </Grid>
             </Box>
         </>

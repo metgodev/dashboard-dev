@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import term from '../../terms'
-import { client } from '../../API/metro'
+import client from '../../API/metro'
 import { Box, Grid, Typography } from '@mui/material'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import PaginationTable from '../../components/Tables/PaginationTable'

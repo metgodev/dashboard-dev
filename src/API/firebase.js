@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -6,6 +7,8 @@ import {
   signInWithPhoneNumber,
   RecaptchaVerifier
 } from "firebase/auth";
+import { toast } from "react-toastify";
+import term from "../terms";
 
 
 const firebaseConfig = {
@@ -23,43 +26,24 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-// const configureCaptcha = () => {
-//   console.log("configurecaptcha working");
-//   // const auth = getAuth()
-//   console.log("auth", auth);
-
-//   window.recaptchaVerifier = new RecaptchaVerifier(
-//     "sign-in-button",
-//     {
-//       size: "invisible",
-//       callback: (response) => {
-//         // reCAPTCHA solved, allow signInWithPhoneNumber.
-//         onSignInSubmit();
-//         console.log("Recaptcha verified");
-//       },
-//       defaultCountry: "HE"
-//     },
-//     auth
-//   );
-// };
-
 const appVerifier = window.recaptchaVerifier;
 
-const loginWithEmailAndPassword = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
+const loginWithEmailAndPassword = async (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password).catch((error) => {
+    const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
+    toast.error(term(errorCode));
+  });
 };
 
-const registerUserWithEmailAndPassword = (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password);
+const registerUserWithEmailAndPassword = async (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password).catch((error) => {
+    const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
+    toast.error(term(errorCode));
+  });
 };
 
 const loginWithPhoneNumber = (phoneNumber) => {
   return signInWithPhoneNumber(auth, phoneNumber, appVerifier);
-
-  // reset recaptcha on error
-  // window.recaptchaVerifier.render().then(function(widgetId) {
-  //     grecaptcha.reset(widgetId);
-  //   }
 };
 
 export {

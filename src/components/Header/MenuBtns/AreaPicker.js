@@ -3,7 +3,7 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch } from "react-redux";
 import { set_area } from "../../../REDUX/actions/main.actions";
-import { client, isLoggedIn } from "../../../API/metro";
+import client, { isLoggedIn } from "../../../API/metro";
 // styles
 import useStyles from "../styles";
 // components
