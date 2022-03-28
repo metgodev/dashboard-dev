@@ -27,7 +27,7 @@ import LocalCampaigns from '../pages/localCampains/LocalCampaigns';
 
 const Root = () => {
     let logged = isLoggedIn();
-    let verified = isVerified();
+    // let verified = isVerified();
     let classes = useStyles();
     let location = useLocation();
     let { pathname } = location;
@@ -49,24 +49,24 @@ const Root = () => {
                     </>
                 }
                 <Routes>
-                    <Route exact path="/" element={<Protecte auth={verified}><Navigate to="/dashboard" /></Protecte>} />
-                    <Route exact path="/dashboard" element={<Protecte auth={verified}><Dashboard /></Protecte>} />
+                    <Route exact path="/" element={<Protecte auth={logged}><Navigate to="/dashboard" /></Protecte>} />
+                    <Route exact path="/dashboard" element={<Protecte auth={logged}><Dashboard /></Protecte>} />
                     <Route exact path="/verification" element={< Protecte auth={logged}><Verification /></Protecte>} />
-                    <Route exact path="/businesses" element={<Protecte auth={verified}><Businesses /></Protecte>} />
-                    <Route exact path="/events" element={<Protecte auth={verified}><Events /></ Protecte >} />
-                    <Route exact path="/locations" element={<Protecte auth={verified}><PointsOfInterest /></Protecte>} />
-                    <Route exact path="/routes" element={<Protecte auth={verified}><Tracks /></Protecte>} />
-                    <Route exact path="/voucher" element={<Protecte auth={verified}><Voucher /></Protecte>} />
-                    <Route exact path="/users" element={<Protecte auth={verified}><UsersTable /></Protecte>} />
-                    <Route exact path="/campaign" element={<Protecte auth={verified}><LocalCampaigns /></Protecte>} />
-                    <Route exact path="/map" element={<Protecte auth={verified}><Maps /></Protecte>} />
-                    <Route exact path="/support" element={<Protecte auth={verified}><Support /></Protecte>} />
-                    <Route exact path="/FAQ" element={<Protecte auth={verified}><FAQ /></Protecte>} />
+                    <Route exact path="/businesses" element={<Protecte auth={logged}><Businesses /></Protecte>} />
+                    <Route exact path="/events" element={<Protecte auth={logged}><Events /></ Protecte >} />
+                    <Route exact path="/locations" element={<Protecte auth={logged}><PointsOfInterest /></Protecte>} />
+                    <Route exact path="/routes" element={<Protecte auth={logged}><Tracks /></Protecte>} />
+                    <Route exact path="/voucher" element={<Protecte auth={logged}><Voucher /></Protecte>} />
+                    <Route exact path="/users" element={<Protecte auth={logged}><UsersTable /></Protecte>} />
+                    <Route exact path="/campaign" element={<Protecte auth={logged}><LocalCampaigns /></Protecte>} />
+                    <Route exact path="/map" element={<Protecte auth={logged}><Maps /></Protecte>} />
+                    <Route exact path="/support" element={<Protecte auth={logged}><Support /></Protecte>} />
+                    <Route exact path="/FAQ" element={<Protecte auth={logged}><FAQ /></Protecte>} />
                     <Route exact path="/login" element={<Login />} />
-                    <Route path='*' element={<Protecte auth={verified}><Error /></Protecte>} />
+                    <Route path='*' element={<Protecte auth={logged}><Error /></Protecte>} />
                     {isSuperAdmin &&
                         <>
-                            <Route exact path="/admin/areas" element={<Protecte auth={verified}><AreaManagement /></Protecte>} />
+                            <Route exact path="/admin/areas" element={<Protecte auth={logged}><AreaManagement /></Protecte>} />
                         </>
                     }
                 </Routes>

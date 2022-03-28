@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
-  RecaptchaVerifier,
+  RecaptchaVerifier
 } from "firebase/auth";
 
 
@@ -23,19 +23,25 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-// setup an invisible recapcha
-window.recaptchaVerifier = new RecaptchaVerifier(
-  "sign-in-button",
-  {
-    size: "invisible",
-    callback: (response) => {
-      // reCAPTCHA solved, allow signInWithPhoneNumber.
-      onSignInSubmit();
-    }
-  },
-  auth
-);
+// const configureCaptcha = () => {
+//   console.log("configurecaptcha working");
+//   // const auth = getAuth()
+//   console.log("auth", auth);
 
+//   window.recaptchaVerifier = new RecaptchaVerifier(
+//     "sign-in-button",
+//     {
+//       size: "invisible",
+//       callback: (response) => {
+//         // reCAPTCHA solved, allow signInWithPhoneNumber.
+//         onSignInSubmit();
+//         console.log("Recaptcha verified");
+//       },
+//       defaultCountry: "HE"
+//     },
+//     auth
+//   );
+// };
 
 const appVerifier = window.recaptchaVerifier;
 

@@ -7,7 +7,7 @@ import JWT from 'jwt-client'
 
 const { REACT_APP_STRAPI } = process.env
 
-let token = localStorage.getItem('feathers-jwt');
+let token = localStorage.getItem('fethers-jwt');
 let verified;
 let uri = REACT_APP_STRAPI;
 
@@ -16,11 +16,10 @@ const app = feathers()
 
 const restClient = rest(uri)
 
-export const Auth = async (email, password) =>
+export const Auth = async (access_token) =>
     app.authenticate({
-        strategy: 'local',
-        email,
-        password
+        strategy: 'firebase',
+        access_token
     }).then((res) => {
         return res;
     }).catch(e => {
@@ -59,7 +58,7 @@ JWT.defaults = {
 };
 
 export const isVerified = () => {
-    token = localStorage.getItem('feathers-jwt')
+    token = localStorage.getItem('fethers-jwt')
     verified = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')).user.v
     if (!token || !!!verified) return false
     else if (JWT.validate(token)) return JWT.validate(token)
@@ -67,10 +66,13 @@ export const isVerified = () => {
 }
 
 export const isLoggedIn = () => {
-    if (!token) return false
-    else if (JWT.validate(token)) return JWT.validate(token)
-    else return false
+    return true
 }
+
+// export const isLoggedIn = () => {
+//     if (!token) return false
+//     else return true
+// }
 
 
 

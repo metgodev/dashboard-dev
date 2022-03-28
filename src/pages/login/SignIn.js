@@ -7,6 +7,7 @@ import term from "../../terms";
 import { Auth } from "../../API/metro";
 import { useDispatch } from "react-redux";
 import { set_user } from "../../REDUX/actions/main.actions";
+import { loginWithEmailAndPassword } from "../../API/firebase";
 
 function SignIn() {
     let classes = useStyles();
@@ -20,22 +21,23 @@ function SignIn() {
 
     const loginUser = async () => {
         setIsLoading(false)
-        Auth(email, password).then((res) => {
-            if (res.error) setError(true);
-            else {
-                let user = {
-                    e: res.email,
-                    fn: res.firstName,
-                    ln: res.lastName,
-                    v: res.isVerified,
-                    id: res._id
+        loginWithEmailAndPassword(email, password).then(res => {
+            Auth(res.user.accessToken).then(res => {
+                if (res.error) setError(res.error)
+                else {
+                    let user = {
+                        e: res.email,
+                        fn: res.firstName,
+                        ln: res.lastName,
+                        v: res.isVerified,
+                        id: res._id
+                    }
+                    dispatch(set_user(user));
+                    navigate("/dashboard");
+                    setIsLoading(false)
                 }
-                dispatch(set_user(user))
-                if (res.isVerified) navigate("/dashboard");
-                else navigate("/verification");
-                setIsLoading(false)
-            }
-        })
+            });
+        });
     }
 
     return (

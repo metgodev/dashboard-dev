@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { set_user } from '../../REDUX/actions/main.actions';
 // styles
 import useStyles from "./styles";
+import { registerUserWithEmailAndPassword } from '../../API/firebase';
 
 
 
@@ -22,15 +23,16 @@ function Register() {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
 
-    // registerUserWithEmailAndPassword('proorel@gmail.com', '565656').then(res => console.log(res)).catch(err => console.log(err))
 
     const registerUser = async () => {
+        if (password.length < 6) return;
         setIsLoading(true)
-        let res = await client.service('users').create({ email, password, firstName, lastName })
-        if (res.error) setError(res.error)
-        else {
-            Auth(email, password).then((res) => {
-                if (res.error) setError(true);
+        registerUserWithEmailAndPassword(email, password,).then(res => {
+            localStorage.setItem('jwt', JSON.stringify(res.user.accessToken))
+        }).catch(err => console.log(err))
+        await client.service('users').create({ email, password, firstName, lastName }).
+            then(res => {
+                if (res.error) setError(res.error)
                 else {
                     let user = {
                         e: res.email,
@@ -43,10 +45,16 @@ function Register() {
                     if (res.isVerified) navigate("/dashboard");
                     else navigate("/verification");
                     setIsLoading(false)
+
                 }
+            }
+            ).catch(err => {
+                console.log(err)
+                setError(err)
+                setIsLoading(false)
             })
-        }
     }
+
 
     return (
         <div>
@@ -116,6 +124,7 @@ function Register() {
                         },
                     }}
                     value={password}
+                    error={password.length < 6}
                     onChange={e => setPassword(e.target.value)}
                     margin="normal"
                     placeholder={term("password")}

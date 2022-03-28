@@ -25,7 +25,7 @@ content-type: {{contentType}}
 {
 "email": {{email}},
 "password": {{password}},
-"strategy": "local"
+"strategy": "firebase"
 }
 ###
 # 2ways verification
