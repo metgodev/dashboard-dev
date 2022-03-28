@@ -1618,6 +1618,11 @@ const active_lexicon = {
         he: 'כתובת האימייל שגויה',
         ar: 'البريد الإلكتروني غير صحيح'
     },
+    auth_email_already_in_use: {
+        en: 'The email address is already in use by another account.',
+        he: 'כתובת האימייל כבר בשימוש',
+        ar: 'البريد الإلكتروني مستخدم بالفعل'
+    },
 };
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

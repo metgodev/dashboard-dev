@@ -29,7 +29,6 @@ function Register() {
             if (!res?.user) return setIsLoading(false);
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
-                    console.log(res.error)
                     setError(res.error)
                 } else {
                     let user = {

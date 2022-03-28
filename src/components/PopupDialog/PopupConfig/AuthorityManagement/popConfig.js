@@ -1,12 +1,5 @@
-import client from "../../../../API/metro";
 import term from "../../../../terms";
 import { createRandomId } from "../../../../utils/randomId"
-
-(async () => {
-    client.service("area").find().then((res) => {
-        res?.data.map(({ name, _id }) => picker.areaId = [...picker.areaId, { value: _id, name }])
-    })
-})();
 
 export const ModalTabs = [term('details')]
 export const ModalInit = [
@@ -18,7 +11,4 @@ export const ModalInit = [
 ]
 
 
-export let picker = {
-    areaId: []
-};
 

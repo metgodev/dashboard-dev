@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CircularProgress, Typography, Button, TextField, Fade } from "@material-ui/core";
 import { set_user } from "../../REDUX/actions/main.actions";
 import { useSelector, useDispatch } from "react-redux";
-import client, { isVerified } from "../../API/metro";
+import client from "../../API/metro";
 import Widget from "../../components/Widget/Widget";
 import { useNavigate } from "react-router-dom";
 import term from "../../terms";
@@ -11,7 +11,7 @@ import useStyles from "./styles";
 
 
 function Verification() {
-    let verified = isVerified();
+    let verified = true;
     let classes = useStyles();
     let navigate = useNavigate();
     let dispatch = useDispatch();

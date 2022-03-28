@@ -3,7 +3,7 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch } from "react-redux";
 import { set_area } from "../../../REDUX/actions/main.actions";
-import client, { isLoggedIn } from "../../../API/metro";
+import client from "../../../API/metro";
 // styles
 import useStyles from "../styles";
 // components
@@ -18,9 +18,7 @@ function AreaMenu() {
     let classes = useStyles();
     let setAreaID = (id) => localStorage.setItem('aid', id)
 
-
     useLayoutEffect(() => {
-        if (!isLoggedIn()) return;
         (async () => {
             setMenuItem([])
             await client.service("area").find().then(({ data }) => {
@@ -43,7 +41,6 @@ function AreaMenu() {
         setAreaID(area.id);
         setAreaMenu(null);
     }
-
 
     return (
         <>
