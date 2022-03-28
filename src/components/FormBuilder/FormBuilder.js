@@ -3,7 +3,7 @@ import term from '../../terms';
 import TimeSelector from '../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { Button, Collapse, FormControl, MenuItem } from '@material-ui/core';
+import { Button, Checkbox, Collapse, FormControl, MenuItem } from '@material-ui/core';
 import Divider from '@mui/material/Divider';
 import GoogleAutocomplete from '../GoogleAutocomplete/GoogleAutocomplete';
 import { Autocomplete, Grid, InputLabel, TextField, Switch } from '@mui/material';
@@ -14,7 +14,11 @@ import { useSelector } from 'react-redux';
 import { allRequiredFiledsAreNotEmpty, helperText } from './FormValidators';
 import parse_nested from '../../utils/parse_nested';
 import { ToastContainer } from 'react-toastify';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type, ...props }) => {
     const { editTabData } = useSelector(s => s.mainReducer)
@@ -71,23 +75,32 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                     <Autocomplete
                                         size={size}
                                         multiple
-                                        id="tags-outlined"
                                         options={picker[field] || []}
                                         getOptionLabel={(o) => o.title}
-                                        filterSelectedOptions
+                                        disableCloseOnSelect
                                         disabled={values[relaredToggle] || false}
                                         onChange={(e, val) => handleChange(e, field, val)}
+                                        renderOption={(props, option, { selected }) => (
+                                            (!values[field] || values[field]?.length < maxItems) &&
+                                            <li {...props}>
+                                                <Checkbox
+                                                    icon={icon}
+                                                    checkedIcon={checkedIcon}
+                                                    checked={selected}
+                                                />
+                                                {option.title}
+                                            </li>
+                                        )}
                                         renderInput={(params) => (
-                                            <TextField
-                                                {...params}
+                                            <TextField {...params}
                                                 label={title}
-                                                required={required}
                                                 placeholder={title}
-                                                error={values[field]?.length > maxItems || !values[field]?.length && required || false}
+                                                required={required}
+                                                error={values[field]?.length > maxItems}
                                                 helperText={
                                                     [
-                                                        !values[field]?.length && required && term('please_fill_this_field') + " - " + helperText(field),
-                                                        values[field]?.length > maxItems && required ? term('this_field_is_limited') + maxItems : ''
+                                                        !values[field]?.length && required ? term('please_fill_this_field') + " - " + helperText(field) + "  " :
+                                                            term('this_field_is_limited') + "-" + maxItems
                                                     ]
                                                 }
                                             />

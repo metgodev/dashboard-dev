@@ -28,42 +28,30 @@ function Register() {
         if (password.length < 6) return;
         setIsLoading(true)
         registerUserWithEmailAndPassword(email, password).then(res => {
-            // localStorage.setItem('jwt', JSON.stringify(res.user.accessToken))
-            //res.user.accessToken
-            // sign in with access token 
-
-            // 1. call Auth with access toekn returned from firebase, a user of Metgo will be returned with no profile info
-            // 2. call await client.service('users').patch(user._id, {
-            //  firstName: "..",
-            //  /// .... 
-            //})
-
-        }).catch(err => console.log(err))
-        // await client.service('users').create({ email, password, firstName, lastName }).
-        //     then(res => {
-        //         if (res.error) setError(res.error)
-        //         else {
-        //             let user = {
-        //                 e: res.email,
-        //                 fn: res.firstName,
-        //                 ln: res.lastName,
-        //                 v: res.isVerified,
-        //                 id: res._id
-        //             }
-        //             dispatch(set_user(user))
-        //             if (res.isVerified) navigate("/dashboard");
-        //             else navigate("/verification");
-        //             setIsLoading(false)
-
-        //         }
-        //     }
-        //     ).catch(err => {
-        //         console.log(err)
-        //         setError(err)
-        //         setIsLoading(false)
-        //     })
+            // create Auth then if no error then patch user 
+            Auth(res.user.accessToken).then(res => {
+                console.log(res)
+                if (res.error) setError(res.error)
+                else {
+                    let user = {
+                        e: res.email,
+                        fn: firstName,
+                        ln: lastName,
+                        v: res.isVerified,
+                        id: res._id
+                    }
+                    dispatch(set_user(user));
+                    client.client.service('users').patch(res._id, {
+                        firstName: firstName,
+                        lastName: lastName
+                    }).then(() => {
+                        navigate("/dashboard")
+                        setIsLoading(false)
+                    })
+                }
+            });
+        });
     }
-
 
     return (
         <div>
