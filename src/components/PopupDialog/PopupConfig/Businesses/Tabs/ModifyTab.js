@@ -38,24 +38,17 @@ export const ModifyTab = ({ handleClose, type }) => {
     const dispatch = useDispatch()
     const { area } = useSelector(state => state.mainReducer)
     //local
+    const initialState = {
+        status: 'PENDING_APPROVAL',
+        areaId: area?.id?.toString(),
+        userId: user.id,
+        openingHours: {},
+    }
 
     const openDrop = () => setOpen(!open);
     const [checked, setChecked] = useState([]);
     const [open, setOpen] = useState(false);
-    const [values, setValues] = useState({
-        status: 'PENDING_APPROVAL',
-        areaId: area?.id?.toString(),
-        userId: user.id,
-        openingHours: {
-            sunday: {},
-            monday: {},
-            tuesday: {},
-            wednesday: {},
-            thursday: {},
-            friday: {},
-            saturday: {},
-        },
-    });
+    const [values, setValues] = useState(initialState);
 
     //set the values
     const handleChange = (e, field, tags, type) => {
@@ -75,7 +68,6 @@ export const ModifyTab = ({ handleClose, type }) => {
     }
 
     const modify = async (type, id) => {
-        console.log(values)
         if (type === 'add')
             client.service('business').create(values)
                 .then(() => dispatch(set_table_changed(type)))
@@ -105,6 +97,7 @@ export const ModifyTab = ({ handleClose, type }) => {
     return (
         <FormBuilder
             setFatherValue={setValues}
+            handleClose={handleClose}
             handleChange={handleChange}
             FormTabs={FormTabs}
             ModalInit={ModalInit}
@@ -121,6 +114,7 @@ export const ModifyTab = ({ handleClose, type }) => {
             removeDay={removeDay}
             modify={modify}
             type={type}
+            presistableFileds={initialState}
         />
     )
 }

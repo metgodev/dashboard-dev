@@ -13,9 +13,9 @@ const EventstableService = (rowsPerPage, page) => {
         events: [],
         keys: [],
         ignore: [
-            "authorityId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "endDate",
-            "relevantTo", "currency", "producerName", "producerPhone", "producerEmail", "locationName", 'isAccessable', "reservationCenterPhone",
-            "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
+            "authorityId", "areaId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "endDate", "free", "reservations", "shortDescription",
+            "relevantTo", "currency", "producerName", "producerPhone", "producerEmail", "locationName", 'isAccessable', "reservationCenterPhone", "registrationLink",
+            "relatedBusinessId", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
         ],
         tableCategories: {
             status: ['all', 'private', 'public', 'pending_approval'],
@@ -51,9 +51,9 @@ const EventstableService = (rowsPerPage, page) => {
                 }))
             // -------------------===events===-------------------
             await client.service('events').find({ query: { areaId: area_id, $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
-                .then(({ data }) => data.map(({ status, authority, endDate, startDate, tags: tagsIds, _id, ...rest }) => {
+                .then(({ data }) => data.map(({ status, authority, endDate, startDate, tags: tagsIds, _id, relatedBusiness, ...rest }) => {
                     events = [...events, {
-                        status, authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(),
+                        status, authority: authority?.name, endDate: new Date(endDate).toLocaleDateString(), relatedBusiness: relatedBusiness?.name,
                         startDate: new Date(startDate).toLocaleDateString(), tag: intersect_between_objects(tagsIds, tags, 'title'), id: _id, ...rest
                     }]
                 }))

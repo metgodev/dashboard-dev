@@ -29,7 +29,7 @@ export const ModalInit = [
     { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
     { title: term('instagram_link'), id: createRandomId(), field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
     { title: term('youtube_link'), id: createRandomId(), field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
-    { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
+    { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
     { title: term('reservations'), id: createRandomId(), field: 'reservations', rows: 1, maxRows: 4, size: 'small', type: 'picker', required: false },
     { title: term('open_on_weekend'), id: createRandomId(), field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
     { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false, relaredToggle: 'open_on_weekend' },

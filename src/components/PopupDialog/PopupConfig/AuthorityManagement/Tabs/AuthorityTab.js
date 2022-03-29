@@ -42,12 +42,15 @@ export const AuthorityTab = ({ handleClose, type }) => {
 
     return (
         <FormBuilder
+            presistableFileds={{}}
+            setFatherValue={setValues}
             ModalInit={ModalInit}
             picker={picker}
             handleChange={handleChange}
             values={values}
             modify={modify}
             type={type}
+            handleClose={handleClose}
         />
     )
 }

@@ -41,12 +41,14 @@ export const EventsTab = ({ handleClose, type }) => {
     const dispatch = useDispatch()
     const { area } = useSelector(state => state.mainReducer)
     //local
-    const [values, setValues] = useState({
+    const initialState = {
         status: 'PENDING_APPROVAL',
         areaId: area?.id?.toString(),
         userId: user.id,
         currency: 'ILS',
-    });
+    }
+
+    const [values, setValues] = useState(initialState);
 
     const handleChange = (e, field, tags, type) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
@@ -79,7 +81,7 @@ export const EventsTab = ({ handleClose, type }) => {
             await client.service('business').find({ query: { areaId: area.id } })
                 .then(({ data }) => data.map(({ name, _id }) => {
                     if (!picker.relatedBusinessId.find(({ id }) => id === _id) && area.id === data[0].areaId)
-                        picker.relatedBusinessId = [...picker.relatedBusinessId, { title: name, id: _id }]
+                        picker.relatedBusinessId = [...picker.relatedBusinessId, { value: _id, name }]
                 }))
         })();
     }, [area.id])
@@ -97,6 +99,8 @@ export const EventsTab = ({ handleClose, type }) => {
             values={values}
             modify={modify}
             type={type}
+            presistableFileds={initialState}
+            handleClose={handleClose}
         />
     )
 }
