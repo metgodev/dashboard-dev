@@ -15,7 +15,7 @@ const BusinessTableService = (rowsPerPage, page) => {
         ignore: [
             'address', 'areaId', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
             'id', 'instagramPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend', 'locationName', 'websitesUrl', 'shortDescription',
-            'reservations', 'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v'
+            'reservations', 'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v', 'phoneNumber', 'emailAddress', 'contactPersonPhoneNumber',
         ],
         tableCategories: {
             impact: ['all', '1-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
@@ -52,6 +52,7 @@ const BusinessTableService = (rowsPerPage, page) => {
                 }) => businesses = [...businesses, {
                     status, name, authority: authority?.name,
                     tag: intersect_between_objects(tagsIds, tags, 'title'), lastChanges: new Date(updatedAt).toLocaleDateString(), id: _id,
+                    phoneNumber, emailAddress, contactPersonPhoneNumber,
                     contact: [{ whatsapp: phoneNumber }, { phone: contactPersonPhoneNumber }, { email: emailAddress }], ...rest
                 }]));
             // -------------------===categories===-------------------

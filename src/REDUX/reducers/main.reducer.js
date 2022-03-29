@@ -1,6 +1,6 @@
 import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_AREA, SET_FILTER_TABLE, SET_CURRENT_ID, SET_EDIT_TAB_DATA } from "../actions/main.actions";
 
-let initialState = {
+const initialState = {
     sidebar: false,
     mobile: false,
     initialData: {},

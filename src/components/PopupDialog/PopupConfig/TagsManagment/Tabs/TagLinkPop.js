@@ -17,11 +17,13 @@ export const TagLinkPop = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     const { area } = useSelector(state => state.mainReducer)
-    //local
-    const [values, setValues] = useState({
+    const initialState = {
         areaId: area?.id?.toString(),
         userId: user.id,
-    });
+    }
+
+    //local
+    const [values, setValues] = useState(initialState);
 
     //set the values
     const handleChange = (e, field, tags, type) => {
@@ -64,12 +66,15 @@ export const TagLinkPop = ({ handleClose, type }) => {
 
     return (
         <FormBuilder
+            setFatherValue={setValues}
             ModalInit={LinkingModalInit}
             picker={picker}
             handleChange={handleChange}
             values={values}
             modify={modify}
             type={type}
+            presistableFileds={initialState}
+            handleClose={handleClose}
         />
     )
 }

@@ -13,7 +13,8 @@ const PointsTableService = (rowsPerPage, page) => {
         pois: [],
         keys: [],
         ignore: [
-            'address', 'relevantTo', 'addressType', 'categoriesIds', 'isAccessable', 'description', 'websiteUrl', 'locationInfo', 'location', 'gallery',
+            'address', 'tagsIds', 'inPlace', 'relevantTo', 'addressType', 'categoriesIds', 'isAccessable', 'areaId', 'userId', 'prefferedSeason',
+            'description', 'websiteUrl', 'locationInfo', 'location', 'gallery', 'locationName', 'websitesUrl', 'shortDescription', 'tip',
             'authorityId', 'galleryFileIds', 'arrivalRecommendations', 'phoneNumber', 'webpageUrl', 'contactEmail', 'id', 'createdAt', 'updatedAt', '__v'
         ],
         stringifyExept: ['tags', 'activitiesInPlace', 'exclusiveFor'],
@@ -44,10 +45,9 @@ const PointsTableService = (rowsPerPage, page) => {
                 }))
             // -------------------===pois===-------------------
             await client.service('pois').find({ query: { areaId: area_id, $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
-                .then(({ data }) => data.map(({ status, authority, _id, prefferedSeason, shady, ...rest }) =>
+                .then(({ data }) => data.map(({ status, authority, _id, shady, ...rest }) =>
                     pois = [...pois, {
-                        status, authority: authority?.name, id: _id, prefferedSeason: term(prefferedSeason.toLowerCase()),
-                        shady: term(shady.toLowerCase()), ...rest
+                        status, authority: authority?.name, id: _id, shady: term(shady.toLowerCase()), ...rest
                     }]))
             // -------------------===categories===-------------------
             await client.service('categories').find()

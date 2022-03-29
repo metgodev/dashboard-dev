@@ -14,7 +14,7 @@ export const ModalInit = [
     // ------------------ general information ------------------
     { title: term('event_name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: true },
-    { title: term('related_business'), id: createRandomId(), field: 'relatedBusinessId', rows: 1, maxRows: 1, size: 'small', type: 'autocomplete', required: true },
+    { title: term('related_business'), id: createRandomId(), field: 'relatedBusinessId', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: true },
     { title: term('date_start'), id: createRandomId(), field: 'startDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker', required: true },
     { title: term('date_end'), id: createRandomId(), field: 'endDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker', required: false },
     { title: term('opening_hours'), id: createRandomId(), field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker', required: true },
@@ -38,7 +38,7 @@ export const ModalInit = [
     { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: true },
     { title: term('reservations'), id: createRandomId(), field: 'reservations', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: false },
     { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
-    { title: term('registration_link'), id: createRandomId(), field: 'registrationUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
+    { title: term('registration_link'), id: createRandomId(), field: 'registrationLink', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
     // ------------------ more information ------------------
     { title: term('map_location'), id: createRandomId(), field: 'mapLocation', type: 'divider', },
     // ------------------ map ------------------

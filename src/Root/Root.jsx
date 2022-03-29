@@ -29,7 +29,11 @@ const Root = () => {
     let classes = useStyles();
     let location = useLocation();
     let { pathname } = location;
-    const [loggedIn , setLoggedIn] = useState(false);
+    const [loggedIn , setLoggedIn] = useState(()=>reAuth().then((res) => {
+        setLoggedIn(true);
+    }).catch((err) => {
+        setLoggedIn(false);
+    }));
 
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
@@ -38,13 +42,6 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
-    useEffect(() => {
-        reAuth().then((res) => {
-            setLoggedIn(true);
-        }).catch((err) => {
-            setLoggedIn(false);
-        })
-    }, [])
 
     return (
         <Box className={classes.Router}>

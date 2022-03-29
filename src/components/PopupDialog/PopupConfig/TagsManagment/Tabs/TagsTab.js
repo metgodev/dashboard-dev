@@ -16,9 +16,8 @@ export const TagsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
     //local
-    const [values, setValues] = useState({
-        userId: user.id,
-    });
+    const initialState = { userId: user.id }
+    const [values, setValues] = useState(initialState);
 
     //set the values
     const handleChange = (e, field, tags, type) => {
@@ -54,12 +53,15 @@ export const TagsTab = ({ handleClose, type }) => {
 
     return (
         <FormBuilder
+            setFatherValue={setValues}
             ModalInit={ModalInit}
             picker={picker}
             handleChange={handleChange}
             values={values}
             modify={modify}
+            presistableFileds={initialState}
             type={type}
+            handleClose={handleClose}
         />
     )
 }

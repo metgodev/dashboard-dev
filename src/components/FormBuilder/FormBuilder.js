@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import term from '../../terms';
 import TimeSelector from '../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -23,6 +23,25 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
     const { editTabData } = useSelector(s => s.mainReducer)
     const init = parse_nested(editTabData)
 
+    useEffect(() => {
+        if (type === 'add') {
+            props.setFatherValue(props.presistableFileds)
+        } else {
+            if (init.relevantTo) delete init.relevantTo
+            if (init.tagsIds) delete init.tagsIds
+            if (init.inPlace) delete init.inPlace
+            if (init.reservations) delete init.reservations
+            if (init.authorityId) delete init.authorityId
+            if (init.inPlace) delete init.inPlace
+            if (init.arrivalRecommendations) delete init.arrivalRecommendations
+            if (init.shady) delete init.shady
+            if (init.prefferedSeason) delete init.prefferedSeason
+            props.setFatherValue(init)
+        }
+    }, [props.handleClose])
+
+    console.log(values)
+
     return (
         <>
             <Box sx={{ pr: 2, pl: 2, mt: 1.2, mb: 8 }}>
@@ -30,7 +49,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                     {ModalInit.map(({ title, id, field, rows, size, type, required, maxItems, relaredToggle }) =>
                         <Grid item md={props.maxSizeElements?.indexOf(type) > -1 ? 12 : 6} sm={12} xs={12} key={id} >
                             <FormControl fullWidth >
-                                {type !== 'divider' && <InputLabel> {title}</InputLabel>}
+                                {type !== 'divider' && <InputLabel>{title}</InputLabel>}
                                 {type === 'divider' && <Divider />}
                                 {type === 'textfield' &&
                                     <TextField
@@ -38,13 +57,13 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         label={title}
                                         multiline
                                         rows={rows}
-                                        defaultValue={init[field] || ''}
+                                        value={values[field] || ''}
                                         onChange={(e) => handleChange(e, field)}
                                         required={required}
                                         disabled={values[relaredToggle] || false}
                                         error={values[field] === '' && required}
                                         helperText={
-                                            values[field] === '' && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
+                                            !values[field] && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
                                         }
                                     />
                                 }
@@ -57,9 +76,9 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         required={required}
                                         value={values[field] || ''}
                                         disabled={values[relaredToggle] || false}
-                                        error={values[field] === '' && required}
+                                        error={false}
                                         helperText={
-                                            values[field] === '' && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
+                                            !values[field] && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
                                         }
                                         onChange={(e) => handleChange(e, field)}
                                     >
@@ -76,11 +95,12 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         multiple
                                         options={picker[field] || []}
                                         getOptionLabel={(o) => o.title}
+                                        getOptionDisabled={() => !(!values[field] || values[field]?.length < maxItems)}
                                         disableCloseOnSelect
+                                        clearOnEscape={true}
                                         disabled={values[relaredToggle] || false}
                                         onChange={(e, val) => handleChange(e, field, val)}
                                         renderOption={(props, option, { selected }) => (
-                                            (!values[field] || values[field]?.length < maxItems) &&
                                             <li {...props}>
                                                 <Checkbox
                                                     icon={icon}
@@ -121,7 +141,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                                 label={title}
                                                 required={required}
                                                 placeholder={title}
-                                                error={values[field]?.length > maxItems || !values[field]?.length && required || false}
+                                                error={values[field]?.length > maxItems}
                                                 helperText={
                                                     [
                                                         !values[field]?.length && required && term('please_fill_this_field') + " - " + helperText(field),

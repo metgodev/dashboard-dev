@@ -29,16 +29,17 @@ export const TracksTab = ({ handleClose, type }) => {
     let dispatch = useDispatch()
     const { area } = useSelector(state => state.mainReducer)
     //local
-    const [values, setValues] = useState({
+    const initialState = {
         userId: user.id,
         relevantTo: "GOLDEN_AGE"
-    });
+    }
+    const [values, setValues] = useState(initialState);
 
-    const handleChange = (e, field) => {
-        if (field === 'featured') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+    const handleChange = (e, field, tags, type) => {
+        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
+        else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
-
     const modify = async (type, id) => {
         if (type === 'add')
             client.service('tracks').create(values)
@@ -71,6 +72,7 @@ export const TracksTab = ({ handleClose, type }) => {
             type={type}
             handleChange={handleChange}
             maxSizeElements={maxSizeElements}
+            presistableFileds={initialState}
         />
     )
 }

@@ -70,11 +70,12 @@ export const PointsTab = ({ handleClose, type }) => {
     let dispatch = useDispatch();
     const { area } = useSelector(state => state.mainReducer)
     //local
-    const [values, setValues] = useState({
+    const initialState = {
         status: 'PENDING_APPROVAL',
         userId: user.id,
         areaId: area?.id?.toString(),
-    });
+    }
+    const [values, setValues] = useState(initialState);
 
     const handleChange = (e, field, tags) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
@@ -121,6 +122,7 @@ export const PointsTab = ({ handleClose, type }) => {
             type={type}
             handleChange={handleChange}
             maxSizeElements={maxSizeElements}
+            presistableFileds={initialState}
         />
     )
 }
