@@ -14,7 +14,7 @@ app.configure(restClient.axios(axios));
 app.configure(auth({ storage: window.localStorage, storageKey: 'metgo-jwt' }));
 
 export const Auth = async (access_token) => app.authenticate({
-    strategy: 'local',
+    strategy: 'firebase',
     access_token
 }).then((res) => {
     return res;

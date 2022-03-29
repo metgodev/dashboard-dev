@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { Box } from '@material-ui/core';
 //pages
@@ -38,13 +38,13 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         reAuth().then((res) => {
             setLoggedIn(true);
         }).catch((err) => {
             setLoggedIn(false);
         })
-    }, [location])
+    }, [])
 
     return (
         <Box className={classes.Router}>
