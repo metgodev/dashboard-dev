@@ -3,10 +3,10 @@ import term from '../../terms';
 import TimeSelector from '../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { Button, Checkbox, Collapse, FormControl, MenuItem } from '@material-ui/core';
+import { Button, Checkbox, Collapse, FormControl, FormGroup, MenuItem } from '@material-ui/core';
 import Divider from '@mui/material/Divider';
 import GoogleAutocomplete from '../GoogleAutocomplete/GoogleAutocomplete';
-import { Autocomplete, Grid, InputLabel, TextField, Switch } from '@mui/material';
+import { Autocomplete, Grid, InputLabel, TextField, Switch, FormControlLabel } from '@mui/material';
 import MapPick from '../MapPicker.js/MapPick';
 import Calendar from '../Calendar/Calendar';
 import { Box } from '@mui/system';
@@ -76,9 +76,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         required={required}
                                         disabled={values[relaredToggle] || false}
                                         error={errorHandler(field)}
-                                        helperText={
-                                            !values[field] && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
-                                        }
+                                        helperText={helperText(field)}
                                     />
                                 }
                                 {type === 'picker' &&
@@ -91,9 +89,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         value={values[field] || ''}
                                         disabled={values[relaredToggle] || false}
                                         error={errorHandler(field)}
-                                        helperText={
-                                            !values[field] && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
-                                        }
+                                        helperText={helperText(field)}
                                         onChange={(e) => handleChange(e, field)}
                                     >
                                         {picker[field].map((s) => (
@@ -130,12 +126,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                                 placeholder={title}
                                                 required={required}
                                                 error={errorHandler(field)}
-                                                helperText={
-                                                    [
-                                                        !values[field]?.length && required ? term('please_fill_this_field') + " - " + helperText(field) + "  " :
-                                                            term('this_field_is_limited') + "-" + maxItems
-                                                    ]
-                                                }
+                                                helperText={helperText(field) + "  " + term('this_field_is_limited') + "-" + maxItems}
                                             />
                                         )}
                                     />
@@ -156,12 +147,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                                 required={required}
                                                 placeholder={title}
                                                 error={errorHandler(field)}
-                                                helperText={
-                                                    [
-                                                        !values[field]?.length && required && term('please_fill_this_field') + " - " + helperText(field),
-                                                        values[field]?.length > maxItems && required ? term('this_field_is_limited') + maxItems : ''
-                                                    ]
-                                                }
+                                                helperText={helperText(field) + "  " + term('this_field_is_limited') + "-" + maxItems}
                                             />
                                         )}
                                     />
@@ -197,6 +183,15 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         onChange={(e) => handleChange(e, field, undefined, type)}
                                         inputprops={{ 'aria-label': title }}
                                     />
+                                }
+                                {type === 'checkbox' &&
+                                    <FormGroup>
+                                        <FormControlLabel control={<Checkbox
+                                            checked={values[field] || false}
+                                            onChange={(e) => handleChange(e, field, undefined, type)} />}
+                                            label={values[field] ? term('yes') : term('no')}
+                                        />
+                                    </FormGroup>
                                 }
                                 {type === 'MapPicker' && <MapPick setFatherValue={props.setFatherValue} />}
                                 {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={props.setFatherValue} field={field} />}

@@ -28,7 +28,7 @@ export const ModalInit = [
     { title: term('webpage_url'), id: createRandomId(), field: 'websitesUrl', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: false },
     { title: term('at_the_place'), id: createRandomId(), field: 'inPlace', rows: 1, maxRows: 1, size: 'small', type: 'tagsPicker', maxItems: 15, required: false },
     { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
-    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 1, size: 'small', type: 'toggle', required: false },
+    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 1, size: 'small', type: 'checkbox', required: false },
     { title: term('tip'), id: createRandomId(), field: 'tip', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: false },
     // ------------------ more information ------------------
     { title: term('map_location'), id: createRandomId(), field: 'mapLocation', type: 'divider', },

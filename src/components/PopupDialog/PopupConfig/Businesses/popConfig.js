@@ -15,7 +15,7 @@ export const ModalInit = [
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker', maxItems: 3, required: true },
     { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 4, size: 'small', type: 'tagsPicker', maxItems: 5, required: true },
     { title: term('opening_hours'), id: createRandomId(), field: 'openingHours', rows: 1, maxRows: 4, size: 'small', type: 'timesPicker', required: false, relaredToggle: 'open24Hours' },
-    { title: term('open_24_hours'), id: createRandomId(), field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
+    { title: term('open_24_hours'), id: createRandomId(), field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     //------------------ General Information ------------------
     { title: term('more_information'), id: createRandomId(), field: 'moreInformation', type: 'divider', },
     //------------------ More Information ------------------ 
@@ -30,9 +30,9 @@ export const ModalInit = [
     { title: term('youtube_link'), id: createRandomId(), field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: false },
     { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
     { title: term('reservations'), id: createRandomId(), field: 'reservations', rows: 1, maxRows: 4, size: 'small', type: 'picker', required: false },
-    { title: term('open_on_weekend'), id: createRandomId(), field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
-    { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false, relaredToggle: 'open_on_weekend' },
-    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'toggle', required: false },
+    { title: term('open_on_weekend'), id: createRandomId(), field: 'openOnWeekend', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
+    { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false, relaredToggle: 'open_on_weekend' },
+    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     //------------------ More Information ------------------
     { title: term('map_location'), id: createRandomId(), field: 'mapLocation', type: 'divider', },
     // ------------------ map ------------------

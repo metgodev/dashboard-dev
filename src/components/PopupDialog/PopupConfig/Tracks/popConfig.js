@@ -22,7 +22,7 @@ export const ModalInit = [
     { title: term('time_duration_minutes'), id: createRandomId(), field: 'timeDuraionMinutes', rows: 1, maxRows: 1, size: 'small', type: 'textfield' },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'small', type: 'textfield' },
     { title: term('point_of_intrest'), id: createRandomId(), field: 'pois', rows: 1, maxRows: 1, size: 'small', type: 'picker' },
-    { title: term('featured'), id: createRandomId(), field: 'featured', rows: 1, maxRows: 1, size: 'small', type: 'toggle' },
+    { title: term('featured'), id: createRandomId(), field: 'featured', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
 ]
 
 export const mediaUploadSections = [

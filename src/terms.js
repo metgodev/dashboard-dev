@@ -1551,6 +1551,11 @@ const active_lexicon = {
         he: 'הסיסמה חייבת להיות באורך של 6 תווים לפחות',
         ar: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل'
     },
+    registration_link_helper: {
+        en: 'The registration link of the event',
+        he: 'כתובת הטופס הרשמה של האירוע',
+        ar: 'رابط التسجيل'
+    },
     // ----helpers----
     please_fill_this_field: {
         en: 'Please fill this field',
@@ -1582,6 +1587,16 @@ const active_lexicon = {
         en: 'The email address is already in use by another account.',
         he: 'כתובת האימייל כבר בשימוש',
         ar: 'البريد الإلكتروني مستخدم بالفعل'
+    },
+    yes: {
+        en: 'Yes',
+        he: 'כן',
+        ar: 'نعم'
+    },
+    no: {
+        en: 'No',
+        he: 'לא',
+        ar: 'لا'
     },
 };
 

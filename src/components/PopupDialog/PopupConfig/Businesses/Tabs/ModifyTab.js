@@ -53,7 +53,7 @@ export const ModifyTab = ({ handleClose, type }) => {
     //set the values
     const handleChange = (e, field, tags, type) => {
         if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (type === 'toggle') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
+        else if (type === 'toggle' || type === 'checkbox') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
