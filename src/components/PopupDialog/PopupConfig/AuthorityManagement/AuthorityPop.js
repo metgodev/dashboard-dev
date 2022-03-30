@@ -10,7 +10,7 @@ import useStyles from "../../styles";
 
 
 
-const AuthorityPop = ({ handleClose, type, initialData }) => {
+const AuthorityPop = ({ handleClose, type, initialData, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);

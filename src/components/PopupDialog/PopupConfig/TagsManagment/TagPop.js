@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
@@ -11,14 +11,20 @@ import useStyles from "../../styles";
 
 
 
-const TagPop = ({ handleClose, type, initialData }) => {
+const TagPop = ({ handleClose, type, initialData, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
+    const [media, setMedia] = useState([]);
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
+
+    useEffect(() => {
+        setMedia([])
+        { !open && setTab(0) }
+    }, [handleClose])
 
     return (
         <Box>

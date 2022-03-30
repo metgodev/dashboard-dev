@@ -73,9 +73,12 @@ export default makeStyles(theme => ({
         marginBottom: "20px"
     },
     loadingImage: {
-        width: "100%",
-        height: "100%",
-        position: "relative",
+        position: "absolute",
+        zIndex: 100,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
         backgroundColor: "rgba(0,0,0,.5)",
         display: "flex",
         justifyContent: "center",

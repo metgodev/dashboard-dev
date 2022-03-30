@@ -53,14 +53,14 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop handleClose={handleClose} type={type} />}
-                    {tabs === 'events' && <EventsPop handleClose={handleClose} type={type} />}
-                    {tabs === 'points' && <PointsPop handleClose={handleClose} type={type} />}
-                    {tabs === 'tracks' && <TracksPop handleClose={handleClose} type={type} />}
+                    {tabs === 'businesess' && <ModifyPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'events' && <EventsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'points' && <PointsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'tracks' && <TracksPop open={open} handleClose={handleClose} type={type} />}
                     {/* authority management */}
-                    {tabs === 'authority' && <AuthorityPop handleClose={handleClose} type={type} />}
-                    {tabs === 'tags' && <TagPop handleClose={handleClose} type={type} />}
-                    {tabs === 'tags_link' && <TagLinkPop handleClose={handleClose} type={type} />}
+                    {tabs === 'authority' && <AuthorityPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'tags' && <TagPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === 'tags_link' && <TagLinkPop open={open} handleClose={handleClose} type={type} />}
                 </DialogContent>
             </Dialog>
         </Box >

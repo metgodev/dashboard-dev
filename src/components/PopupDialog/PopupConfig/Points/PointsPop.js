@@ -1,26 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
 import { PointsTab } from './Tabs/PointsTab';
-import { UploadMediaTab } from './Tabs/UploadMediaTab';
-import { CircularProgress } from '@material-ui/core';
+import { UploadMediaTab } from '../uploadMediaTab';
+import { CircularProgress } from '@material-ui/core'
+import { useSelector } from 'react-redux';
+import { mediaTabConfig } from './popConfig'
 //styles
 import useStyles from "../../styles";
 
 
-const PointsPop = ({ handleClose, type, open, initialData }) => {
+const PointsPop = ({ handleClose, type, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
     const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
+    const { editTabData } = useSelector(s => s.mainReducer)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
+
+    useEffect(() => {
+        setMedia([])
+        { !open && setTab(0) }
+    }, [handleClose])
 
     return (
         <Box>
@@ -34,10 +42,10 @@ const PointsPop = ({ handleClose, type, open, initialData }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <PointsTab handleClose={handleClose} initialData={initialData} type={type} />
+                    <PointsTab handleClose={handleClose} initialData={editTabData} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    {/* <UploadMediaTab open={open} setLoadingImage={setLoadingImage} media={media} setMedia={setMedia} initialData={initialData} type={type} tab={"pois"} /> */}
+                <UploadMediaTab setLoadingImage={setLoadingImage} tab={"pois"} config={mediaTabConfig}/>
                 </TabPanel>
             </Box>
         </Box >
