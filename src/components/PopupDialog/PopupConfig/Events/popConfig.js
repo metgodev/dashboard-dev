@@ -9,8 +9,6 @@ export const FormTabs = [{
 
 export const ModalTabs = [term('event'), term('gallery'),]
 export const ModalInit = [
-
-    { title: term('general_information'), id: createRandomId(), field: 'generalInformation', type: 'divider', },
     // ------------------ general information ------------------
     { title: term('event_name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: true },

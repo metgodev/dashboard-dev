@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import term from '../../terms';
 import TimeSelector from '../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -11,17 +11,33 @@ import MapPick from '../MapPicker.js/MapPick';
 import Calendar from '../Calendar/Calendar';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
-import { allRequiredFiledsAreNotEmpty, helperText } from './FormValidators';
+import { toastConfig, helperText } from './FormValidators';
 import parse_nested from '../../utils/parse_nested';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { toast } from 'react-toastify';
+
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type, ...props }) => {
+    const [requierdFields] = useState(ModalInit.filter(({ required }) => required));
+    const [filedsThatAreNotFiled, setFiledsThatAreNotFiled] = useState([]);
     const { editTabData } = useSelector(s => s.mainReducer)
     const init = parse_nested(editTabData)
+
+    const allRequiredFiledsAreNotEmpty = () => {
+        let requierdFieldsAreNotEmpty = requierdFields.filter(({ value }) => value !== '' || value !== undefined);
+        setFiledsThatAreNotFiled(requierdFieldsAreNotEmpty);
+        toast.info(`${term('please_fill_all_required_fields')} - ${requierdFieldsAreNotEmpty.map(({ title }) => title).join(', ')}`, toastConfig);
+        return requierdFieldsAreNotEmpty.length === requierdFields.length;
+    }
+
+    const errorHandler = (field) => {
+        if (!filedsThatAreNotFiled) return false;
+        return filedsThatAreNotFiled.some(({ field: fieldName }) => fieldName === field)
+    }
 
     useEffect(() => {
         if (type === 'add') {
@@ -29,7 +45,6 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
         } else {
             if (init.relevantTo) delete init.relevantTo
             if (init.tagsIds) delete init.tagsIds
-            if (init.inPlace) delete init.inPlace
             if (init.reservations) delete init.reservations
             if (init.authorityId) delete init.authorityId
             if (init.inPlace) delete init.inPlace
@@ -38,8 +53,8 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
             if (init.prefferedSeason) delete init.prefferedSeason
             props.setFatherValue(init)
         }
+        return () => setFiledsThatAreNotFiled([])
     }, [props.handleClose])
-
 
     return (
         <>
@@ -60,7 +75,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         onChange={(e) => handleChange(e, field)}
                                         required={required}
                                         disabled={values[relaredToggle] || false}
-                                        error={values[field] === '' && required}
+                                        error={errorHandler(field)}
                                         helperText={
                                             !values[field] && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
                                         }
@@ -75,7 +90,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         required={required}
                                         value={values[field] || ''}
                                         disabled={values[relaredToggle] || false}
-                                        error={false}
+                                        error={errorHandler(field)}
                                         helperText={
                                             !values[field] && required ? term('this_filed_is_required') + " - " + helperText(field) : helperText(field)
                                         }
@@ -114,7 +129,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                                 label={title}
                                                 placeholder={title}
                                                 required={required}
-                                                error={values[field]?.length > maxItems}
+                                                error={errorHandler(field)}
                                                 helperText={
                                                     [
                                                         !values[field]?.length && required ? term('please_fill_this_field') + " - " + helperText(field) + "  " :
@@ -140,7 +155,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                                 label={title}
                                                 required={required}
                                                 placeholder={title}
-                                                error={values[field]?.length > maxItems}
+                                                error={errorHandler(field)}
                                                 helperText={
                                                     [
                                                         !values[field]?.length && required && term('please_fill_this_field') + " - " + helperText(field),
@@ -195,8 +210,12 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                             variant="contained"
                             color="primary"
                             onClick={() => {
-                                allRequiredFiledsAreNotEmpty(values, ModalInit, type)
-                                props.modify(type, init.id)
+                                if (type === 'edit') {
+                                    props.modify(type, init.id)
+                                }
+                                else if (allRequiredFiledsAreNotEmpty()) {
+                                    props.modify(type)
+                                }
                             }}>
                             {term(type)}
                         </Button>

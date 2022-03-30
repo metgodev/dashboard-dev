@@ -700,11 +700,6 @@ const active_lexicon = {
         he: 'קטגוריה',
         ar: 'الفئة',
     },
-    is_accessable: {
-        en: 'Accessability',
-        he: 'נגישות',
-        ar: 'يمكن الوصول إليه',
-    },
     activities_in_place: {
         en: 'Activities in place',
         he: 'פעילויות במקום',
@@ -800,25 +795,10 @@ const active_lexicon = {
         he: 'כל העונות',
         ar: 'كل المواسم',
     },
-    summer: {
-        en: 'Summer',
-        he: 'קיץ',
-        ar: 'الصيف',
-    },
-    winter: {
-        en: 'winter',
-        he: 'חורף',
-        ar: 'شتاء',
-    },
     fall: {
         en: 'Fall',
         he: 'סתיו',
         ar: 'يسقط',
-    },
-    spring: {
-        en: 'Spring',
-        he: 'אביב',
-        ar: 'الخريف',
     },
     walk: {
         en: 'Walk',
@@ -839,21 +819,6 @@ const active_lexicon = {
         en: 'Bicycle',
         he: 'אופניים',
         ar: 'دراجة تدريبية',
-    },
-    full: {
-        en: 'Full',
-        he: 'מלא',
-        ar: 'ممتلئ',
-    },
-    partial: {
-        en: 'Partial',
-        he: 'חלקי',
-        ar: 'جزئي',
-    },
-    none: {
-        en: 'None',
-        he: 'ללא',
-        ar: 'لا أحد',
     },
     verification_page: {
         en: 'Verification Page',
@@ -1169,11 +1134,6 @@ const active_lexicon = {
         en: 'More info',
         he: 'מידע נוסף',
         ar: 'مزيد من المعلومات'
-    },
-    this_filed_is_required: {
-        en: 'This field is required',
-        he: 'שדה זה הוא שדה חובה',
-        ar: 'هذا الحقل مطلوب'
     },
     this_filed_is_required: {
         en: 'This field is required',

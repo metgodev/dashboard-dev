@@ -26,7 +26,6 @@ function Register() {
         if (password.length < 6) return setError(true)
         setIsLoading(true)
         registerUserWithEmailAndPassword(email, password).then(res => {
-            console.log(res)
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
                     setIsLoading(false);

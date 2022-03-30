@@ -21,7 +21,7 @@ const App = () => {
       <ThemeProvider theme={type(theme)} >
         <CssBaseline />
         <Root />
-        <ToastContainer />
+        <ToastContainer rtl limit={1} />
       </ThemeProvider >
     </Box>
   )
