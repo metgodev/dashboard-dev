@@ -6,7 +6,7 @@ import DragDrop from '../../../hooks/DragDropFiles';
 import MyImageList from '../../MyImageList/MyImageList';
 import CropImage from "../../../hooks/CropImage";
 import { Typography } from '../../Wrappers/Wrappers'
-import { client } from '../../../API/metro';
+import client from '../../../API/metro';
 import term from '../../../terms'
 //styles
 import useStyles from "../styles";

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/system';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';

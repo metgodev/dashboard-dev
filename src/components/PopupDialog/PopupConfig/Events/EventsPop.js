@@ -7,7 +7,6 @@ import { ModalTabs } from './popConfig';
 import { EventsTab } from './Tabs/EventsTab';
 import { mediaTabConfig } from './popConfig'
 import { CircularProgress } from '@material-ui/core'
-import { useSelector } from 'react-redux';
 import { UploadMediaTab } from '../uploadMediaTab'
 //styles
 import useStyles from "../../styles";
@@ -19,8 +18,6 @@ const EventsPop = ({ handleClose, type, open }) => {
     const [tab, setTab] = useState(0);
     const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
-    //global
-    const { editTabData } = useSelector(s => s.mainReducer)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
@@ -43,7 +40,7 @@ const EventsPop = ({ handleClose, type, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <EventsTab handleClose={handleClose} initialData={editTabData} type={type} />
+                    <EventsTab handleClose={handleClose} type={type} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <UploadMediaTab config={mediaTabConfig} setLoadingImage={setLoadingImage} tab={"events"} />

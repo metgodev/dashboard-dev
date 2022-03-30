@@ -9,10 +9,9 @@ import { StatisticsTab } from './Tabs/StatisticsTab';
 import { CircularProgress } from '@material-ui/core'
 import { UploadMediaTab } from '../uploadMediaTab'
 import term from '../../../../terms';
+import { mediaTabConfig } from './popConfig'
 //styles
 import useStyles from "../../styles";
-import { useSelector } from 'react-redux';
-import { mediaTabConfig } from './popConfig'
 
 
 
@@ -22,8 +21,7 @@ const ModifyPop = ({ handleClose, type, initialData, open }) => {
     const [tab, setTab] = useState(0);
     const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
-    //global
-    const { editTabData } = useSelector(s => s.mainReducer)
+
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
@@ -52,7 +50,7 @@ const ModifyPop = ({ handleClose, type, initialData, open }) => {
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} config={mediaTabConfig}/>
+                    <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} config={mediaTabConfig} />
                 </TabPanel>
             </Box>
         </Box >
