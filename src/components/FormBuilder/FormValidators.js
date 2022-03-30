@@ -1,5 +1,6 @@
 import Notify from "../../pages/notifications/Notifications"
 import { camelToSnakeCase } from "../../utils/camelToSnakeCase"
+import { toast } from 'react-toastify';
 import term from "../../terms"
 
 export const helperText = (name) => {
@@ -7,7 +8,7 @@ export const helperText = (name) => {
     return term(helperText)
 }
 
-export const toastConfig = {
+const toastConfig = {
     theme: 'colored',
     position: "top-right",
     hideProgressBar: false,
@@ -18,6 +19,13 @@ export const toastConfig = {
     progress: undefined,
 }
 
+export const checkRequired = (modal, values) => {
+    let requierdfileds = modal.filter(({ required }) => required);
+    const check = requierdfileds.every(({ field }) => values[field] && values[field] !== '' && values[field] !== null && values[field] !== undefined);
+    let unfullfilled = requierdfileds.filter(({ field }) => !values[field] || values[field] === '' || values[field] === null || values[field] === undefined);
+    if (!check) toast.info(`${term('please_fill_all_required_fields')} - ${unfullfilled.map(({ title }) => title).join(', ')}`, toastConfig);
+    return check
+}
 
 export const FormValidator = (rule, value) => {
     switch (rule) {

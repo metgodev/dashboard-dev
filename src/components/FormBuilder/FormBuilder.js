@@ -11,32 +11,25 @@ import MapPick from '../MapPicker.js/MapPick';
 import Calendar from '../Calendar/Calendar';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
-import { toastConfig, helperText } from './FormValidators';
+import { helperText, checkRequired } from './FormValidators';
 import parse_nested from '../../utils/parse_nested';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { toast } from 'react-toastify';
 
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type, ...props }) => {
-    const [requierdFields] = useState(ModalInit.filter(({ required }) => required));
-    const [filedsThatAreNotFiled, setFiledsThatAreNotFiled] = useState([]);
     const { editTabData } = useSelector(s => s.mainReducer)
     const init = parse_nested(editTabData)
 
-    const allRequiredFiledsAreNotEmpty = () => {
-        let requierdFieldsAreNotEmpty = requierdFields.filter(({ value }) => value !== '' || value !== undefined);
-        setFiledsThatAreNotFiled(requierdFieldsAreNotEmpty);
-        toast.info(`${term('please_fill_all_required_fields')} - ${requierdFieldsAreNotEmpty.map(({ title }) => title).join(', ')}`, toastConfig);
-        return requierdFieldsAreNotEmpty.length === requierdFields.length;
-    }
 
-    const errorHandler = (field) => {
-        if (!filedsThatAreNotFiled) return false;
-        return filedsThatAreNotFiled.some(({ field: fieldName }) => fieldName === field)
+    const errorHandler = (check) => {
+        if (type === 'edit') return;
+        let requierdfileds = ModalInit.filter(({ required }) => required);
+        let unfullfilled = requierdfileds.filter(({ field }) => !values[field] || values[field] === '' || values[field] === null || values[field] === undefined);
+        return unfullfilled.some(({ field }) => check === field)
     }
 
     useEffect(() => {
@@ -53,7 +46,6 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
             if (init.prefferedSeason) delete init.prefferedSeason
             props.setFatherValue(init)
         }
-        return () => setFiledsThatAreNotFiled([])
     }, [props.handleClose])
 
     return (
@@ -208,7 +200,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                 if (type === 'edit') {
                                     props.modify(type, init.id)
                                 }
-                                else if (allRequiredFiledsAreNotEmpty()) {
+                                else if (checkRequired(ModalInit, values)) {
                                     props.modify(type)
                                 }
                             }}>
