@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import React, { useLayoutEffect, useState } from 'react';
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import { Box } from '@material-ui/core';
 //pages
 import Header from '../components/Header/Header';
@@ -27,13 +27,10 @@ import { reAuth } from '../API/metro';
 
 const Root = () => {
     let classes = useStyles();
+    let navigate = useNavigate()
     let location = useLocation();
     let { pathname } = location;
-    const [loggedIn , setLoggedIn] = useState(()=>reAuth().then((res) => {
-        setLoggedIn(true);
-    }).catch((err) => {
-        setLoggedIn(false);
-    }));
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
@@ -42,16 +39,26 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
+    useLayoutEffect(() => {
+        reAuth().then((res) => {
+            setLoggedIn(true);
+            navigate(location);
+        }).catch((err) => {
+            setLoggedIn(false);
+            navigate('/login');
+        })
+    }, [])
+
 
     return (
         <Box className={classes.Router}>
             <Main >
                 {shouldDisplay &&
                     <>
-                    <Protecte auth={loggedIn}>
-                        <Header />
-                        <SideBar location={location} />
-                    </Protecte>
+                        <Protecte auth={loggedIn}>
+                            <Header />
+                            <SideBar location={location} />
+                        </Protecte>
                     </>
                 }
                 <Routes>

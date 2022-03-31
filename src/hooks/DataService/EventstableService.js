@@ -15,7 +15,7 @@ const EventstableService = (rowsPerPage, page) => {
         ignore: [
             "authorityId", "areaId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "endDate", "free", "reservations", "shortDescription",
             "relevantTo", "currency", "producerName", "producerPhone", "producerEmail", "locationName", 'isAccessable', "reservationCenterPhone", "registrationLink",
-            "relatedBusinessId", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', '__v'
+            "relatedBusinessId", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', 'websitesUrl', '__v'
         ],
         tableCategories: {
             status: ['all', 'private', 'public', 'pending_approval'],
