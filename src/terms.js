@@ -1588,6 +1588,12 @@ const active_lexicon = {
         he: 'כתובת האימייל כבר בשימוש',
         ar: 'البريد الإلكتروني مستخدم بالفعل'
     },
+    auth_operation_not_allowed: {
+        en: 'Password sign-in is disabled for this project.',
+        he: 'הכנסת סיסמא אינה אפשרית בפרויקט זה',
+        ar: 'تسجيل الدخول باستخدام كلمة المرور غير مسموح به'
+    },
+    // ----errors from firebase----
     yes: {
         en: 'Yes',
         he: 'כן',
