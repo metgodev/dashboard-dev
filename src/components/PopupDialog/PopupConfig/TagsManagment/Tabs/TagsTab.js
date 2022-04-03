@@ -14,7 +14,7 @@ let picker = {
 export const TagsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
-    const { area } = useSelector(state => state.mainReducer)
+    const { area, tableChanged } = useSelector(state => state.mainReducer)
     //local
     const initialState = {
         areaId: area?.id?.toString(),
@@ -49,7 +49,7 @@ export const TagsTab = ({ handleClose, type }) => {
                 data.map(({ title, _id }) => picker.tagId = [...picker.tagId, { title, id: _id }])
             })
         })();
-    }, [])
+    }, [tableChanged])
 
     return (
         <FormBuilder

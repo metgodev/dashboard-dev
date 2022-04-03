@@ -16,7 +16,7 @@ let picker = {
 export const TagLinkPop = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
-    const { area } = useSelector(state => state.mainReducer)
+    const { area, tableChanged } = useSelector(state => state.mainReducer)
     const initialState = {
         areaId: area?.id?.toString(),
         userId: user.id,
@@ -62,7 +62,7 @@ export const TagLinkPop = ({ handleClose, type }) => {
                 data.map(({ title, _id }) => picker.tagId = [...picker.tagId, { title, id: _id }])
             })
         })();
-    }, [area.id])
+    }, [tableChanged])
 
     return (
         <FormBuilder
