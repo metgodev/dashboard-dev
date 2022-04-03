@@ -56,7 +56,7 @@ export const TagLinkPop = ({ handleClose, type }) => {
     useEffect(() => {
         (async () => {
             await client.service("categories").find().then(({ data }) => {
-                data.map(({ title, _id }) => picker.categoryId = [...picker.categoryId, { value: _id, name: term(title.toLowerCase()) }])
+                data.map(({ title, _id }) => picker.categoryId = [{ value: _id, name: term(title.toLowerCase()) }])
             })
             await client.service("tags").find().then(({ data }) => {
                 data.map(({ title, _id }) => picker.tagId = [...picker.tagId, { title, id: _id }])
