@@ -23,6 +23,7 @@ import FAQ from '../pages/FAQ/FAQ';
 import AreaManagement from '../pages/admin/AreaManagement';
 import LocalCampaigns from '../pages/localCampains/LocalCampaigns';
 import { reAuth } from '../API/metro';
+import { useSelector } from 'react-redux';
 
 
 const Root = () => {
@@ -31,6 +32,8 @@ const Root = () => {
     let location = useLocation();
     let { pathname } = location;
     const [loggedIn, setLoggedIn] = useState(false);
+    //global 
+    const { user } = useSelector(s => s.mainRememberReducer);
 
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
@@ -39,15 +42,15 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
+
     useLayoutEffect(() => {
         reAuth().then((res) => {
             setLoggedIn(true);
-            navigate(location);
+            navigate('/dashboard');
         }).catch((err) => {
             setLoggedIn(false);
-            navigate('/login');
         })
-    }, [])
+    }, [user])
 
 
     return (

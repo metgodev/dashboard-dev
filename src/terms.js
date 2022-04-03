@@ -1556,6 +1556,11 @@ const active_lexicon = {
         he: 'כתובת הטופס הרשמה של האירוע',
         ar: 'رابط التسجيل'
     },
+    tag_id_helper: {
+        en: 'The tag related to the event',
+        he: 'התג הקשור לאירוע',
+        ar: 'العلامة المرتبطة بالحدث'
+    },
     // ----helpers----
     please_fill_this_field: {
         en: 'Please fill this field',
@@ -1592,6 +1597,11 @@ const active_lexicon = {
         en: 'Password sign-in is disabled for this project.',
         he: 'הכנסת סיסמא אינה אפשרית בפרויקט זה',
         ar: 'تسجيل الدخول باستخدام كلمة المرور غير مسموح به'
+    },
+    auth_wrong_password: {
+        en: 'The password is invalid or the user does not have a password.',
+        he: 'סיסמא שגויה',
+        ar: 'كلمة المرور غير صحيحة أو لا توجد كلمة مرور'
     },
     // ----errors from firebase----
     yes: {

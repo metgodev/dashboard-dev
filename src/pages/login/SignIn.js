@@ -34,9 +34,8 @@ function SignIn() {
                         v: res.isVerified,
                         id: res._id
                     }
-                    setIsLoading(false);
                     dispatch(set_user(user));
-                    navigate("/dashboard");
+                    setIsLoading(false);
                 }
             })
         })

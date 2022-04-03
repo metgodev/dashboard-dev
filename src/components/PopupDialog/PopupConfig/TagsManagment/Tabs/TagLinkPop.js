@@ -62,7 +62,7 @@ export const TagLinkPop = ({ handleClose, type }) => {
                 data.map(({ title, _id }) => picker.tagId = [...picker.tagId, { title, id: _id }])
             })
         })();
-    }, [])
+    }, [area.id])
 
     return (
         <FormBuilder

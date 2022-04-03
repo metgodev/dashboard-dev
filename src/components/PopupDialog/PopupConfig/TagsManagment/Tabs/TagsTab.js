@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import client from '../../../../../API/metro';
 import { ModalInit } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
@@ -9,14 +9,17 @@ import term from '../../../../../terms';
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 let picker = {
     tagId: [],
-    categoryId: [],
 };
 
 export const TagsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
+    const { area } = useSelector(state => state.mainReducer)
     //local
-    const initialState = { userId: user.id }
+    const initialState = {
+        areaId: area?.id?.toString(),
+        userId: user.id,
+    }
     const [values, setValues] = useState(initialState);
 
     //set the values
@@ -42,9 +45,6 @@ export const TagsTab = ({ handleClose, type }) => {
 
     useEffect(() => {
         (async () => {
-            await client.service("categories").find().then(({ data }) => {
-                data.map(({ title, _id }) => picker.categoryId = [...picker.categoryId, { value: _id, name: term(title.toLowerCase()) }])
-            })
             await client.service("tags").find().then(({ data }) => {
                 data.map(({ title, _id }) => picker.tagId = [...picker.tagId, { title, id: _id }])
             })

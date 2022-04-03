@@ -33,7 +33,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
     }
 
     useEffect(() => {
-        if (type === 'add') {
+        if (type === 'add' || type === 'link') {
             props.setFatherValue(props.presistableFileds)
         } else {
             if (init.relevantTo) delete init.relevantTo

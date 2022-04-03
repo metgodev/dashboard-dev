@@ -38,7 +38,6 @@ function Register() {
                     }
                     dispatch(set_user(user));
                     setIsLoading(false);
-                    navigate("/dashboard");
                 }
             })
         })
