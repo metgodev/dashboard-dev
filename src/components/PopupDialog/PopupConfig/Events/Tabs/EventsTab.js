@@ -75,8 +75,11 @@ export const EventsTab = ({ handleClose, type }) => {
                 .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
                 .then((authorities => picker.authorityId = authorities))
 
-            await client.service('area').find({ query: { _id: area.id } })
-                .then(({ data }) => data[0].tags.map(({ title, _id }) => picker.tags = [...picker.tags, { title, id: _id }]));
+            await client.service('tag-categories').find({ query: { areaId: area.id } })
+                .then(({ data }) => {
+                    data.map((data) => picker.tags =
+                        [...picker.tags, { title: data.tag.title + ' - ' + term(data.category.title.toLowerCase()), id: data.tag._id }])
+                })
 
             await client.service('business').find({ query: { areaId: area.id } })
                 .then(({ data }) => data.map(({ name, _id }) => {

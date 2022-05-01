@@ -65,11 +65,9 @@ function AreaManagement() {
     const remove = async (id) => {
         if (window.confirm(term('delete_confirmation'))) {
             let area_id = localStorage.getItem('aid')
-            await client.service('area').patch(area_id, {
-                $pull: {
-                    tagsIds: id
-                }
-            })
+            await client.service('area').patch(area_id, { $pull: { tagsIds: id } })
+            // delete tag-categories where tagId = id
+            await client.service('tag-categories').remove(null, { query: { tagId: id } })
             await client.service('tags').remove(id)
                 .then(() => dispatch(set_table_changed('remove' + Math.random())))
         }
@@ -114,7 +112,7 @@ function AreaManagement() {
                         rowsPerPage={rowsPerPage}
                         setRowsPerPage={setRowsPerPage}
                         openDialog={openTagDialog}
-                        remove={remove}
+                        // remove={remove}
                         actionBtns={true}
                         linking={openLinkingDialog}
                     /> :
