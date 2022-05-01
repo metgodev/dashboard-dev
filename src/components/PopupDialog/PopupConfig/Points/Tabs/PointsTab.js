@@ -106,6 +106,7 @@ export const PointsTab = ({ handleClose, type }) => {
 
             await client.service('tag-categories').find({ query: { areaId: area.id } })
                 .then(({ data }) => {
+                    picker.tagsIds = [];
                     data.map((data) => picker.tagsIds =
                         [...picker.tagsIds, { title: data.tag.title + ' - ' + term(data.category.title.toLowerCase()), id: data.tag._id }])
                 })
