@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState, useLayoutEffect, useEffect } from 'react'
 import MapPicker from 'react-google-map-picker'
 import term from '../../terms';
 import { Button, Grid } from '@material-ui/core';
@@ -11,7 +11,7 @@ const { REACT_APP_GOOGLE_API_KEY } = process.env
 
 const DefaultZoom = 15;
 
-const MapPick = React.memo(({ setFatherValue }) => {
+const MapPick = React.memo(({ setFatherValue, point }) => {
     const [defaultLocation, setDefaultLocation] = useState({ lat: 0, lng: 0 });
     const [location, setLocation] = useState(defaultLocation);
     const [zoom, setZoom] = useState(DefaultZoom);
@@ -31,11 +31,16 @@ const MapPick = React.memo(({ setFatherValue }) => {
     }
 
     useLayoutEffect(() => {
-        waitForMapToLoad();
-        navigator.geolocation.getCurrentPosition((position) => {
-            setDefaultLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
-        });
-    }, [])
+        if (point?.coordinates === undefined) {
+            waitForMapToLoad();
+            navigator.geolocation.getCurrentPosition((position) => {
+                setDefaultLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+            });
+        } else {
+            setDefaultLocation({ lat: point["coordinates"][0], lng: point["coordinates"][1] })
+        }
+
+    }, [point])
 
     const setPlace = () => {
         setFatherValue(pervState => ({ ...pervState, locationInfo: { type: "Custom", coordinates: [location.lat, location.lng] } }))

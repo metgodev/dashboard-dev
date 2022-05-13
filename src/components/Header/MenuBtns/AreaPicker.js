@@ -1,7 +1,7 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { set_area } from "../../../REDUX/actions/main.actions";
 import client from "../../../API/metro";
 // styles
@@ -17,15 +17,23 @@ function AreaMenu() {
     let [area, setArea] = useState('');
     let classes = useStyles();
     let setAreaID = (id) => localStorage.setItem('aid', id)
+    let setInitialArea = (area) => localStorage.setItem('chosenArea', JSON.stringify(area))
+    const { area: currentArea } = useSelector(s => s.mainReducer)
 
     useLayoutEffect(() => {
         (async () => {
             setMenuItem([])
+            if (Object.keys(currentArea).length) {
+                setArea({ name: currentArea["name"], id: currentArea["id"] })
+                dispatch(set_area({ name: currentArea["name"], id: currentArea["id"] }))
+                setAreaID(currentArea["id"])
+            }
             await client.service("area").find().then(({ data }) => {
                 if (!data) return;
                 data?.map(({ name, _id }, i) => {
                     setMenuItem(pervState => [...pervState, { name, id: _id }]);
-                    if (i === 0) {
+                    if (i === 0 && !Object.keys(currentArea).length) {
+                        setInitialArea({ name, id: _id })
                         setArea({ name, id: _id });
                         dispatch(set_area({ name, id: _id }));
                         setAreaID(_id)
@@ -48,7 +56,9 @@ function AreaMenu() {
                 color="inherit"
                 aria-haspopup="true"
                 aria-controls="lang-menu"
-                onClick={e => { setAreaMenu(e.currentTarget); }}
+                onClick={e => {
+                    setAreaMenu(e.currentTarget);
+                }}
                 className={classes.headerMenuButton}
             >
                 {area && area.name + "-"}
@@ -66,8 +76,7 @@ function AreaMenu() {
                 disablescrolllock={true.toString()}
             >
                 <div className={classes.langMenuUser}>
-                    <div
-                    >
+                    <div>
                         {areaMenuItem.map((a) => (
                             <MenuItem key={a.id} className={classes.messageNotification}>
                                 <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" onClick={() => changeArea(a)} >

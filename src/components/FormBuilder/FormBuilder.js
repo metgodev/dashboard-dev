@@ -185,7 +185,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                                         />
                                     </FormGroup>
                                 }
-                                {type === 'MapPicker' && <MapPick setFatherValue={props.setFatherValue} />}
+                                {type === 'MapPicker' && <MapPick setFatherValue={props.setFatherValue} point={values["location"]} />}
                                 {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={props.setFatherValue} field={field} />}
                             </FormControl>
                         </Grid>

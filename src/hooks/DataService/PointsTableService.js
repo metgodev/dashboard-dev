@@ -47,7 +47,7 @@ const PointsTableService = (rowsPerPage, page) => {
             await client.service('pois').find({ query: { areaId: area_id, $limit: rowsPerPage, $skip: page * rowsPerPage, $sort: { createdAt: -1 } } })
                 .then(({ data }) => data.map(({ status, authority, _id, shady, ...rest }) =>
                     pois = [...pois, {
-                        status, authority: authority?.name, id: _id, shady: term(shady.toLowerCase()), ...rest
+                        status, authority: authority?.name, id: _id, shady: term(shady)?.toLowerCase(), ...rest
                     }]))
             // -------------------===categories===-------------------
             await client.service('categories').find()

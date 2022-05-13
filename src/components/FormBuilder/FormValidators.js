@@ -12,7 +12,7 @@ const toastConfig = {
     theme: 'colored',
     position: "top-right",
     hideProgressBar: false,
-    autoClose: false,
+    autoClose: 5000,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
