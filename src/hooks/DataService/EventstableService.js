@@ -13,7 +13,7 @@ const EventstableService = (rowsPerPage, page) => {
         events: [],
         keys: [],
         ignore: [
-            "authorityId", "areaId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "endDate", "free", "reservations", "shortDescription",
+            "authorityId", 'tags', "areaId", "userId", 'gallery', 'galleryFileIds', 'description', "categoryId", "address", "endDate", "free", "reservations", "shortDescription",
             "relevantTo", "currency", "producerName", "producerPhone", "producerEmail", "locationName", 'isAccessable', "reservationCenterPhone", "registrationLink",
             "relatedBusinessId", "galleryFileIds", "reservationCenterEmail", "updatedAt", "websiteUrl", "id", 'createdAt', 'location', 'locationInfo', 'websitesUrl', '__v'
         ],

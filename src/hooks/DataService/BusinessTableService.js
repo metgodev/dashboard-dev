@@ -13,7 +13,7 @@ const BusinessTableService = (rowsPerPage, page) => {
         businesses: [],
         keys: [],
         ignore: [
-            'address', 'areaId', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
+            'address', 'tags', 'areaId', 'authorityId', 'contact', 'contactPersonName', 'createdAt', 'description', 'facebookPageUrl', 'gallery', 'galleryFileIds',
             'id', 'instagramPageUrl', 'location', 'locationInfo', 'open24Hours', 'openingHours', 'openOnWeekend', 'locationName', 'websitesUrl', 'shortDescription',
             'reservations', 'isKosher', 'isAccessable', 'relevantTo', 'twitterPageUrl', 'userId', 'websiteUrl', 'youtubePageUrl', '__v', 'phoneNumber', 'emailAddress', 'contactPersonPhoneNumber',
         ],

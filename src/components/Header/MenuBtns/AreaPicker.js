@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch, useSelector } from "react-redux";
