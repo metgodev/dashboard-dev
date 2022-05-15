@@ -8,6 +8,7 @@ import CropImage from "../../../hooks/CropImage";
 import { Typography } from '../../Wrappers/Wrappers'
 import client from '../../../API/metro';
 import term from '../../../terms'
+import axios from 'axios'
 //styles
 import useStyles from "../styles";
 
@@ -16,6 +17,7 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
   const classes = useStyles()
   const dispatch = useDispatch();
   const { editTabData } = useSelector(s => s.mainReducer)
+  let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
   const media = editTabData?.gallery ? (typeof editTabData.gallery == 'string') ? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
 
   const [uploadCategory, setUploadCategory] = useState(config.initialMediaType)
@@ -64,9 +66,20 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
       setLoadingImage(true)
       const formData = new FormData();
       formData.append("file", fileToUpload);
-      const res = await client.service("files").create(formData)
+      formData.append("areaId", editTabData.id);
+      const res = await axios.post(`${process.env.REACT_APP_STRAPI}/files`, formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: window.localStorage.getItem("metgo-jwt")
+          },
+          params: {
+            areaId: editTabData.id
+          }
+        }
+      )
       let currentFileIds = media.map((item) => { return ({ fileId: item.file._id, metadata: { type: item.metadata.type } }) })
-      let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res[0]._id, metadata: { type: uploadCategory } }] }
+      let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res["data"][0]._id, metadata: { type: uploadCategory } }] }
       await client.service(tab).patch(editTabData.id, mediaToUpload)
         .then((res) => {
           let business = { ...res, id: res._id }
