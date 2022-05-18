@@ -9,11 +9,16 @@ export const SET_AREA = 'SET_AREA';
 export const SET_FILTER_TABLE = 'SET_FILTER_TABLE';
 export const SET_CURRENT_ID = 'SET_CURRENT_ID';
 export const SET_EDIT_TAB_DATA = 'SET_EDIT_TAB_DATA';
+export const SET_AREA_ID = 'SET_AREA_ID'
 
 
 
 export const set_theme_color = (value) => ({
     type: SET_THEME_COLOR,
+    payload: value
+})
+export const set_area_id = (value) => ({
+    type: SET_AREA_ID,
     payload: value
 })
 

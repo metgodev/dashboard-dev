@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch, useSelector } from "react-redux";
-import { set_area } from "../../../REDUX/actions/main.actions";
+import { set_area, set_area_id } from "../../../REDUX/actions/main.actions";
 import client from "../../../API/metro";
 // styles
 import useStyles from "../styles";
@@ -16,27 +16,23 @@ function AreaMenu() {
     let [areaMenuItem, setMenuItem] = useState([]);
     let [area, setArea] = useState('');
     let classes = useStyles();
-    let setAreaID = (id) => localStorage.setItem('aid', id)
-    let setInitialArea = (area) => localStorage.setItem('chosenArea', JSON.stringify(area))
-    const { area: currentArea } = useSelector(s => s.mainReducer)
+    let setAreaID = (id) => dispatch(set_area_id(id))
+    const { areaId } = useSelector(s => s.mainRememberReducer)
 
     useLayoutEffect(() => {
         (async () => {
             setMenuItem([])
-            if (Object.keys(currentArea).length) {
-                setArea({ name: currentArea["name"], id: currentArea["id"] })
-                dispatch(set_area({ name: currentArea["name"], id: currentArea["id"] }))
-                setAreaID(currentArea["id"])
-            }
             await client.service("area").find().then(({ data }) => {
                 if (!data) return;
                 data?.map(({ name, _id }, i) => {
                     setMenuItem(pervState => [...pervState, { name, id: _id }]);
-                    if (i === 0 && !Object.keys(currentArea).length) {
-                        setInitialArea({ name, id: _id })
+                    if (i === 0 && areaId.length === 0) { //Check remember if AID exists
+                        setAreaID(_id)
                         setArea({ name, id: _id });
                         dispatch(set_area({ name, id: _id }));
-                        setAreaID(_id)
+                    } else if (areaId === _id) {
+                        setArea({ name, id: _id });
+                        dispatch(set_area({ name, id: _id }));
                     }
                 })
             });
@@ -45,8 +41,8 @@ function AreaMenu() {
 
     const changeArea = async (area) => {
         dispatch(set_area(area));
-        setArea(area);
         setAreaID(area.id);
+        setArea(area);
         setAreaMenu(null);
     }
 
