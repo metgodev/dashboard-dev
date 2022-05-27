@@ -1,3 +1,5 @@
+import { camelToSnakeCase } from "./utils/camelToSnakeCase";
+
 // local terms until remote config available
 const active_lexicon = {
     language: {
@@ -300,15 +302,40 @@ const active_lexicon = {
         he: 'לטייל',
         ar: 'أن يسافر',
     },
-    food: {
+    _food: {
         en: 'Food',
         he: 'אוכל',
         ar: 'اكل',
     },
-    all: {
-        en: 'All',
-        he: 'הכל',
-        ar: 'الجميع',
+    _lodging: {
+        en: 'lodging',
+        he: 'לינה',
+        ar: 'الإقامة',
+    },
+    _attraction: {
+        en: 'Attraction',
+        he: 'אטרקציה',
+        ar: 'جاذبية',
+    },
+    _culture: {
+        en: 'Culture',
+        he: 'תרבות',
+        ar: 'حضاره',
+    },
+    _local: {
+        en: 'Local',
+        he: 'מקומי',
+        ar: 'تيار',
+    },
+    _travel: {
+        en: 'Travel',
+        he: 'לטייל',
+        ar: 'أن يسافر',
+    },
+    _food: {
+        en: 'Food',
+        he: 'אוכל',
+        ar: 'اكل',
     },
     download: {
         en: 'Download',
@@ -319,6 +346,46 @@ const active_lexicon = {
         en: 'status',
         he: 'סטטוס',
         ar: 'تحميل',
+    },
+    action_buttons: {
+        en: 'Action Buttons',
+        he: 'כפתורי פעולה',
+        ar: 'أزرار العمل',
+    },
+    location_info: {
+        en: 'Location Info',
+        he: 'מידע על המיקום',
+        ar: 'معلومات الموقع',
+    },
+    location_name: {
+        en: 'Location Name',
+        he: 'שם המיקום',
+        ar: 'اسم الموقع',
+    },
+    reservation_center_phone: {
+        en: 'Reservation Center Phone',
+        he: 'מספר הטלפון של מרכז ההזמנות',
+        ar: 'رقم الهاتف لمركز الحجز',
+    },
+    created_at: {
+        en: 'Created At',
+        he: 'נוצר בתאריך',
+        ar: 'تم إنشاؤه في',
+    },
+    updated_at: {
+        en: 'Updated At',
+        he: 'עודכן בתאריך',
+        ar: 'تم تحديثه في',
+    },
+    authority_email: {
+        en: 'Authority Email',
+        he: 'דוא"ל מנהל',
+        ar: 'البريد الإلكتروني للمسؤول',
+    },
+    authority_name: {
+        en: 'Authority Name',
+        he: 'שם מנהל',
+        ar: 'اسم المسؤول',
     },
     name: {
         en: 'Name',
@@ -394,6 +461,11 @@ const active_lexicon = {
         en: "Search",
         he: "חיפוש",
         ar: "بحث",
+    },
+    closed: {
+        en: "Closed",
+        he: "סגור",
+        ar: "مغلق",
     },
     add: {
         en: "Add",
@@ -634,6 +706,41 @@ const active_lexicon = {
         en: 'Open 24 Hours',
         he: 'פתוח 24 שעות',
         ar: 'مفتوحة 24 ساعة',
+    },
+    open24_hours: {
+        en: 'Open 24 Hours',
+        he: 'פתוח 24 שעות',
+        ar: 'مفتوحة 24 ساعة',
+    },
+    instagram_page_url: {
+        en: 'Instagram Page URL',
+        he: 'עמוד אינסטגרם',
+        ar: 'رابط الصفحة الإنستغرام',
+    },
+    facebook_page_url: {
+        en: 'Facebook Page URL',
+        he: 'עמוד פייסבוק',
+        ar: 'رابط الصفحة الفيسبوك',
+    },
+    websites_url: {
+        en: 'Websites URL',
+        he: 'כתובות אתרים',
+        ar: 'روابط المواقع',
+    },
+    contact_person_phone_number: {
+        en: 'Contact Person Phone Number',
+        he: 'מספר טלפון איש קשר',
+        ar: 'رقم الهاتف للشخص المراد الاتصال به',
+    },
+    in_place: {
+        en: 'In Place',
+        he: 'במקום',
+        ar: 'في المكان',
+    },
+    contact_person_name: {
+        en: 'Contact Person Name',
+        he: 'שם איש קשר',
+        ar: 'اسم الشخص المراد الاتصال به',
     },
     open_on_weekend: {
         en: 'Open on weekend',
@@ -1619,8 +1726,9 @@ const active_lexicon = {
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 
 export default function term(name, default_val, lng = lang || 'he') {
-    return (name in active_lexicon ? active_lexicon[name][lng]
-        : (default_val === undefined ? name
+    let _name = camelToSnakeCase(name);
+    return (_name in active_lexicon ? active_lexicon[_name][lng]
+        : (default_val === undefined ? _name
             : default_val
         )
     )

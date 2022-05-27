@@ -9,7 +9,7 @@ import term from '../../../../../terms';
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 
 let picker = {
-    tags: [],
+    tagsIds: [],
     relevantTo: [
         { id: 'INFANCY', title: term('infancy') },
         { id: 'KIDS', title: term('kids') },
@@ -77,9 +77,9 @@ export const EventsTab = ({ handleClose, type }) => {
 
             await client.service('tag-categories').find({ query: { areaId: area.id } })
                 .then(({ data }) => {
-                    picker.tags = [];
-                    data.map((data) => picker.tags =
-                        [...picker.tags, { title: data.tag.title + ' - ' + term(data.category.title.toLowerCase()), id: data.tag._id }])
+                    picker.tagsIds = [];
+                    data.map((data) => picker.tagsIds =
+                        [...picker.tagsIds, { title: data.tag.title + ' - ' + term(data.category.title.toLowerCase()), id: data.tag._id }])
                 })
 
             await client.service('business').find({ query: { areaId: area.id } })

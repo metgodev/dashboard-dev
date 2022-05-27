@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import term from '../../terms';
 import TimeSelector from '../TimePicker/TimePicker';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -12,7 +12,6 @@ import Calendar from '../Calendar/Calendar';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { helperText, checkRequired } from './FormValidators';
-import parse_nested from '../../utils/parse_nested';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
@@ -21,9 +20,7 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type, ...props }) => {
-    const { editTabData } = useSelector(s => s.mainReducer)
-    const init = parse_nested(editTabData)
-
+    const init = useSelector(s => s.mainReducer.editTabData)
 
     const errorHandler = (check) => {
         if (type === 'edit') return;
@@ -36,14 +33,14 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
         if (type === 'add' || type === 'link') {
             props.setFatherValue(props.presistableFileds)
         } else {
-            if (init.relevantTo) delete init.relevantTo
-            if (init.tagsIds) delete init.tagsIds
-            if (init.reservations) delete init.reservations
-            if (init.authorityId) delete init.authorityId
-            if (init.inPlace) delete init.inPlace
-            if (init.arrivalRecommendations) delete init.arrivalRecommendations
-            if (init.shady) delete init.shady
-            if (init.prefferedSeason) delete init.prefferedSeason
+            // if (init.relevantTo) delete init.relevantTo
+            // if (init.tagsIds) delete init.tagsIds
+            // if (init.reservations) delete init.reservations
+            // if (init.authorityId) delete init.authorityId
+            // if (init.inPlace) delete init.inPlace
+            // if (init.arrivalRecommendations) delete init.arrivalRecommendations
+            // if (init.shady) delete init.shady
+            // if (init.prefferedSeason) delete init.prefferedSeason
             props.setFatherValue(init)
         }
     }, [props.handleClose])
@@ -198,7 +195,7 @@ const FormBuilder = ({ handleChange, ModalInit, values, picker, TimePicker, type
                             color="primary"
                             onClick={() => {
                                 if (type === 'edit') {
-                                    props.modify(type, init.id)
+                                    props.modify(type, init._id)
                                 }
                                 else if (checkRequired(ModalInit, values)) {
                                     props.modify(type)

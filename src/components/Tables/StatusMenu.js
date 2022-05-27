@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import term from '../../terms';
+
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import term from '../../terms';
-import client from '../../API/metro';
-import { useDispatch } from 'react-redux';
-// styles
 import useStyles from "./styles";
-import { set_table_changed } from '../../REDUX/actions/main.actions';
 
-export default function TableMenuBtn({ status, stats, id, tableType }) {
-    const dispatch = useDispatch()
+const stats = {
+    'PRIVATE': "error",
+    'PUBLIC': "success",
+    'PENDING_APPROVAL': "warning"
+};
+
+const StatusMenu = (element) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     let classes = useStyles();
-    let sts = status.toLowerCase()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = async (element) => {
-        client.service(tableType).patch(id, { "status": element }).then(() => {
-            dispatch(set_table_changed(element))
-        })
-        setAnchorEl(null);
+    const handleClose = async (status) => {
+        try {
+            element.onUpdate({ data: { status, _id: element.data._id }, node: element.node })
+            setAnchorEl(null);
+        } catch (e) {
+            console.log(e)
+        }
     };
-
     return (
-        <div>
+        <div key={element.data._id} style={{ display: 'flex', flex: 1, width: '100%', height: '100%' }}>
             <Button
-                color={stats[term(sts)]}
+                className={classes.statusBtns}
+                color={stats[element.value]}
                 size="small"
                 style={{ borderWidth: 2 }}
-                className={classes.statusBtns}
                 variant="outlined"
                 id="basic-button"
                 aria-controls="basic-menu"
@@ -41,13 +43,13 @@ export default function TableMenuBtn({ status, stats, id, tableType }) {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
                 fullWidth
-            >{term(sts)}
+            >
+                {term(element.value.toLowerCase())}
             </Button>
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={open}
-                onClose={handleClose}
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
                 }}
@@ -58,4 +60,7 @@ export default function TableMenuBtn({ status, stats, id, tableType }) {
             </Menu>
         </div>
     );
-}
+};
+
+
+export default StatusMenu;
