@@ -357,11 +357,6 @@ const active_lexicon = {
         he: 'מידע על המיקום',
         ar: 'معلومات الموقع',
     },
-    location_name: {
-        en: 'Location Name',
-        he: 'שם המיקום',
-        ar: 'اسم الموقع',
-    },
     reservation_center_phone: {
         en: 'Reservation Center Phone',
         he: 'מספר הטלפון של מרכז ההזמנות',
