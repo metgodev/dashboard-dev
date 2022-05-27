@@ -31,6 +31,7 @@ const Root = () => {
     let classes = useStyles();
     let navigate = useNavigate()
     let location = useLocation();
+
     let { pathname } = location;
     const [loggedIn, setLoggedIn] = useState(false);
     //global 
@@ -47,11 +48,11 @@ const Root = () => {
     useLayoutEffect(() => {
         reAuth().then((res) => {
             setLoggedIn(true);
-            navigate('/dashboard');
+            navigate(location.pathname);
         }).catch((err) => {
             setLoggedIn(false);
         })
-    }, [user])
+    }, [])
 
 
     return (

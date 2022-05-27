@@ -302,7 +302,7 @@ const active_lexicon = {
         he: 'לטייל',
         ar: 'أن يسافر',
     },
-    _food: {
+    food: {
         en: 'Food',
         he: 'אוכל',
         ar: 'اكل',

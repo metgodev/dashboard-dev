@@ -27,7 +27,7 @@ const picker = {
 export const TracksTab = ({ handleClose, type }) => {
     //global
     let dispatch = useDispatch()
-    const { area } = useSelector(state => state.mainReducer)
+    const { area } = useSelector(state => state.mainRememberReducer)
     //local
     const initialState = {
         userId: user.id,

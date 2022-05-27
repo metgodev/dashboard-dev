@@ -6,8 +6,6 @@ import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 import term from '../../../../../terms';
 
-let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
-
 let picker = {
     tagsIds: [],
     relevantTo: [
@@ -39,7 +37,7 @@ let picker = {
 export const EventsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
-    const { area } = useSelector(state => state.mainReducer)
+    const { area, user } = useSelector(state => state.mainRememberReducer)
     //local
     const initialState = {
         status: 'PENDING_APPROVAL',

@@ -4,9 +4,7 @@ import client from '../../../../../API/metro';
 import { ModalInit } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
-import term from '../../../../../terms';
 
-let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
 let picker = {
     tagId: [],
 };
@@ -14,7 +12,7 @@ let picker = {
 export const TagsTab = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
-    const { area, tableChanged } = useSelector(state => state.mainReducer)
+    const { area, tableChanged, user } = useSelector(state => state.mainRememberReducer)
     //local
     const initialState = {
         areaId: area?.id?.toString(),
@@ -31,10 +29,9 @@ export const TagsTab = ({ handleClose, type }) => {
 
 
     const modify = async (type, id) => {
-        let area_id = localStorage.getItem('aid')
         if (type === 'add')
             await client.service('tags').create(values)
-                .then(({ _id }) => client.service('area').patch(area_id, { $push: { tagsIds: _id } }))
+                .then(({ _id }) => client.service('area').patch(area.id, { $push: { tagsIds: _id } }))
                 .then(() => dispatch(set_table_changed(type)))
                 .then(() => handleClose(false))
         else

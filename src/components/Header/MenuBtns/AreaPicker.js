@@ -10,33 +10,27 @@ import useStyles from "../styles";
 import { Typography } from "../../Wrappers/Wrappers";
 function AreaMenu() {
     //global 
+    const { area: currentArea } = useSelector(s => s.mainRememberReducer)
     let dispatch = useDispatch();
     // local
     let [areaMenu, setAreaMenu] = useState(null);
     let [areaMenuItem, setMenuItem] = useState([]);
     let [area, setArea] = useState('');
     let classes = useStyles();
-    let setAreaID = (id) => localStorage.setItem('aid', id)
-    let setInitialArea = (area) => localStorage.setItem('chosenArea', JSON.stringify(area))
-    const { area: currentArea } = useSelector(s => s.mainReducer)
 
     useLayoutEffect(() => {
         (async () => {
             setMenuItem([])
             if (Object.keys(currentArea).length) {
                 setArea({ name: currentArea["name"], id: currentArea["id"] })
-                dispatch(set_area({ name: currentArea["name"], id: currentArea["id"] }))
-                setAreaID(currentArea["id"])
             }
             await client.service("area").find().then(({ data }) => {
                 if (!data) return;
                 data?.map(({ name, _id }, i) => {
                     setMenuItem(pervState => [...pervState, { name, id: _id }]);
                     if (i === 0 && !Object.keys(currentArea).length) {
-                        setInitialArea({ name, id: _id })
                         setArea({ name, id: _id });
                         dispatch(set_area({ name, id: _id }));
-                        setAreaID(_id)
                     }
                 })
             });
@@ -46,7 +40,6 @@ function AreaMenu() {
     const changeArea = async (area) => {
         dispatch(set_area(area));
         setArea(area);
-        setAreaID(area.id);
         setAreaMenu(null);
     }
 
