@@ -11,6 +11,7 @@ import Verification from '../pages/login/Verification';
 import Dashboard from '../pages/dashboard/Dashboard';
 import useStyles from "./styles";
 import Businesses from '../pages/businesses/Businesses';
+import LocalCampaigns from '../pages/localCampains/LocalCampaigns';
 import Events from '../pages/events/Events';
 import PointsOfInterest from '../pages/points/PointsOfInterest';
 import Tracks from '../pages/tracks/Tracks';
@@ -20,10 +21,10 @@ import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 // admin pages
-import AreaManagement from '../pages/admin/AreaManagement';
-import LocalCampaigns from '../pages/localCampains/LocalCampaigns';
 import { reAuth } from '../API/metro';
 import { useSelector } from 'react-redux';
+import AuthorityMng from '../pages/admin/AuthorityMng';
+import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
 
 
 const Root = () => {
@@ -82,7 +83,8 @@ const Root = () => {
                     <Route path='*' element={<Protecte auth={loggedIn}><Error /></Protecte>} />
                     {isSuperAdmin &&
                         <>
-                            <Route exact path="/admin/areas" element={<Protecte auth={loggedIn}><AreaManagement /></Protecte>} />
+                            <Route exact path="/admin/authority" element={<Protecte auth={loggedIn}><AuthorityMng /></Protecte>} />
+                            <Route exact path="/admin/tagcategories" element={<Protecte auth={loggedIn}><TagCategoriesMng /></Protecte>} />
                         </>
                     }
                 </Routes>

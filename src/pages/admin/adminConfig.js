@@ -1,4 +1,3 @@
-import { client } from "../../API/metro";
 import term from "../../terms";
 
 export let tags = [

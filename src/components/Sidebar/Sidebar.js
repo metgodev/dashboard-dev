@@ -28,9 +28,10 @@ import term from "../../terms";
 
 const structure = [
     {
-        id: 0, label: term('admin'), link: "/admin/areas", icon: <AdminPanelSettingsOutlinedIcon />,
+        id: 0, label: term('admin'), link: "/admin/authority", icon: <AdminPanelSettingsOutlinedIcon />,
         children: [
-            { label: term('manage_area'), link: "/admin/areas" },
+            { label: term('manage_area'), link: "/admin/authority" },
+            { label: term('manage_tags'), link: "/admin/tagcategories" },
         ],
     },
     { id: 1, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },

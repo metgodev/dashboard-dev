@@ -1,13 +1,17 @@
 import React from 'react'
 import PageTitle from '../../components/PageTitle/PageTitle'
-import term from '../../terms'
+import AGTable from '../../components/Tables/AGTable';
+import term from '../../terms';
 
-function Voucher() {
+const Voucher = () => {
     return (
-        <div>
+        <div >
             <PageTitle title={term('voucher')} />
+            <AGTable display={'events'} />
         </div>
     )
 }
 
-export default Voucher
+
+
+export default Voucher;
