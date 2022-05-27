@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { set_table_changed, set_edit_tab_data } from '../../../REDUX/actions/main.actions'
 import { Box, DialogTitle, DialogContent, ToggleButton, ToggleButtonGroup } from '@mui/material'
@@ -17,13 +17,23 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
   const classes = useStyles()
   const dispatch = useDispatch();
   const { editTabData } = useSelector(s => s.mainReducer)
-  let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
-  const media = editTabData?.gallery ? (typeof editTabData.gallery == 'string') ? JSON.parse(editTabData.gallery) : editTabData?.gallery : []
+  const [media, setMedia] = useState([])
 
   const [uploadCategory, setUploadCategory] = useState(config.initialMediaType)
   const [uploadFileTypes, setUploadFileTypes] = useState(["JPG", "PNG", "JPEG"])
   const [imageToCrop, setImageToCrop] = useState(null)
   const [cropper, setCropper] = useState();
+
+  const getGallery = async () => {
+    const gallery = await client.service(tab).get(editTabData._id)
+    return gallery
+  }
+
+  useEffect(() => {
+    getGallery().then(res => {
+      res?.gallery ? setMedia(res.gallery) : setMedia([])
+    })
+  }, [])
 
 
   const handleCategoryChange = (event, newCategory) => {
@@ -66,7 +76,7 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
       setLoadingImage(true)
       const formData = new FormData();
       formData.append("file", fileToUpload);
-      formData.append("areaId", editTabData.id);
+      formData.append("areaId", editTabData._id);
       const res = await axios.post(`${process.env.REACT_APP_STRAPI}/files`, formData,
         {
           headers: {
@@ -74,18 +84,18 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
             Authorization: window.localStorage.getItem("metgo-jwt")
           },
           params: {
-            areaId: editTabData.id
+            areaId: editTabData._id
           }
         }
       )
       let currentFileIds = media.map((item) => { return ({ fileId: item.file._id, metadata: { type: item.metadata.type } }) })
       let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: res["data"][0]._id, metadata: { type: uploadCategory } }] }
-      await client.service(tab).patch(editTabData.id, mediaToUpload)
+      await client.service(tab).patch(editTabData._id, mediaToUpload)
         .then((res) => {
-          let business = { ...res, id: res._id }
-          delete business._id
-          dispatch(set_edit_tab_data(business))
           dispatch(set_table_changed('upload-image'))
+          getGallery().then(res => {
+            res?.gallery ? setMedia(res.gallery) : setMedia([])
+          })
           setLoadingImage(false)
         })
     }
@@ -126,7 +136,7 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
             <div key={index}>
               <DialogTitle id="scroll-dialog-title">{term(type)}</DialogTitle>
               <DialogContent key={index} >
-                <MyImageList setLoadingImage={setLoadingImage} tab={tab} type={type} />
+                <MyImageList getGallery={getGallery} media={media} setMedia={setMedia} editTabData={editTabData} setLoadingImage={setLoadingImage} tab={tab} type={type} />
               </DialogContent>
               {index < 3 && <Box className={classes.divider} />}
             </div>
