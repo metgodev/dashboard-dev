@@ -16,7 +16,7 @@ let picker = {
 export const TagLinkPop = ({ handleClose, type }) => {
     //global
     const dispatch = useDispatch()
-    const { area, tableChanged } = useSelector(state => state.mainReducer)
+    const { area, tableChanged } = useSelector(state => state.mainRememberReducer)
     const initialState = {
         areaId: area?.id?.toString(),
         userId: user.id,

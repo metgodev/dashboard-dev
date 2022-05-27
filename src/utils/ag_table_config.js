@@ -497,3 +497,5 @@ export const idOptions = {
     suppressDragLeaveHidesColumns: true,
     suppressRowDrag: true,
 };
+
+export const ignore = ['__v', 'areaId', 'authorityId', 'location', 'tagsIds', 'galleryFileIds', 'gallery', 'userId', 'reservations', 'inPlace', 'prefferedSeason', 'relatedBusinessId']

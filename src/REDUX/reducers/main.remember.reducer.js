@@ -1,10 +1,10 @@
-import { SET_THEME_COLOR, SET_LANGUAGE, SET_USER, SET_AREA_ID } from "../actions/main.actions";
+import { SET_THEME_COLOR, SET_LANGUAGE, SET_USER, SET_AREA } from "../actions/main.actions";
 
 let rememberState = {
     theme: true,
     lang: 'he',
     user: {},
-    areaId: '',
+    area: {},
 }
 
 //initial remember 
@@ -26,9 +26,9 @@ export default (state = rememberState, action) => {
             return {
                 ...state, user: action.payload
             }
-        case SET_AREA_ID:
+        case SET_AREA:
             return {
-                ...state, areaId: action.payload
+                ...state, area: action.payload
             }
         default:
             return state

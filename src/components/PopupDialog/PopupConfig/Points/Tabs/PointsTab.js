@@ -7,9 +7,6 @@ import term from '../../../../../terms';
 //styles
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
-let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
-
-
 export let picker = {
     // if you want autocomplete use this format {id: '', title: ''}
     relevantTo: [
@@ -68,7 +65,7 @@ export let picker = {
 export const PointsTab = ({ handleClose, type }) => {
     //global
     let dispatch = useDispatch();
-    const { area } = useSelector(state => state.mainReducer)
+    const { area, user } = useSelector(state => state.mainRememberReducer)
     //local
     const initialState = {
         status: 'PENDING_APPROVAL',

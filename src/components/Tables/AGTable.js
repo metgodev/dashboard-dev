@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
-import { gridOptions, idOptions } from '../../utils/ag_table_config';
+import { gridOptions, idOptions, ignore } from '../../utils/ag_table_config';
 import { AgGridReact } from 'ag-grid-react';
 import term from '../../terms';
 import client from '../../API/metro';
@@ -13,6 +13,7 @@ import 'ag-grid-enterprise';
 
 const AGTable = ({ display, action }) => {
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
+    const area = useSelector(s => s.mainRememberReducer.area)
     const gridRef = useRef();
     const [RowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
@@ -38,6 +39,7 @@ const AGTable = ({ display, action }) => {
         try {
             const res = await client.service(display).find({
                 query: {
+                    areaId: area?.id?.toString(),
                     $limit: 500,
                     $sort: {
                         createdAt: -1
@@ -45,7 +47,6 @@ const AGTable = ({ display, action }) => {
                 }
             });
             if (res.data) {
-                let ignore = ['__v', 'areaId', 'authorityId', 'location', 'tagsIds', 'galleryFileIds', 'gallery', 'userId', 'reservations', 'inPlace']
                 let cols = Object.keys(res.data[0]).filter(x => !ignore.includes(x))
                 let keys = cols.map(key => {
                     switch (key) {
