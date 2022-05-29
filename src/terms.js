@@ -379,7 +379,7 @@ const active_lexicon = {
     },
     authority_name: {
         en: 'Authority Name',
-        he: 'שם מנהל',
+        he: 'שם רשות',
         ar: 'اسم المسؤول',
     },
     name: {

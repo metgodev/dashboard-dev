@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { gridOptions, idOptions, ignore } from '../../utils/ag_table_config';
 import { AgGridReact } from 'ag-grid-react';
 import term from '../../terms';
@@ -8,8 +8,7 @@ import { useSelector } from 'react-redux';
 
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
-import 'ag-grid-enterprise';
-
+import 'ag-grid-community';
 
 const AGTable = ({ display, action }) => {
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
@@ -18,9 +17,10 @@ const AGTable = ({ display, action }) => {
     const [RowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
 
-    useEffect(() => {
-        fetchData();
-    }, [tableChanged]);
+
+    function onBtExport() {
+        gridRef.current.api.exportDataAsCsv();
+    }
 
     const getRowId = useCallback(params => {
         return params.data._id;
@@ -28,18 +28,18 @@ const AGTable = ({ display, action }) => {
 
     const onUpdate = useCallback(async (params) => {
         try {
-            await client.service(display).patch(params.data._id, params.data)
-            fetchData();
+            let res = await client.service(display).patch(params.data._id, params.data)
+            gridRef.current.api.updateRowData({ update: [res] });
         } catch (e) {
             console.log(e)
         }
     }, []);
 
-    const fetchData = async () => {
+    const onGridReady = useCallback(async () => {
         try {
             const res = await client.service(display).find({
                 query: {
-                    areaId: area?.id?.toString(),
+                    areaId: area.id.toString(),
                     $limit: 500,
                     $sort: {
                         createdAt: -1
@@ -71,36 +71,48 @@ const AGTable = ({ display, action }) => {
                         case "tags":
                             return {
                                 headerName: term(key),
-                                valueFormatter: (params) => params?.data[key]?.map(tag => [tag.tag.title, term(tag?.category?.title)])?.join(' - '),
+                                valueFormatter: (params) => params?.data[key]?.map(tag => [tag?.tag?.title, term(tag?.category?.title)])?.join(' - '),
+                            }
+                        case "startDate":
+                            return {
+                                headerName: term(key), field: key, editable: false,
+                                valueFormatter: (params) => { return new Date(params.value).toLocaleString('he-IL').split(',')[0] }, filter: 'agDateColumnFilter'
+                            }
+                        case "endDate":
+                            return {
+                                headerName: term(key), field: key, editable: false,
+                                valueFormatter: (params) => { return new Date(params.value).toLocaleString('he-IL').split(',')[0] }, filter: 'agDateColumnFilter'
                             }
                         case 'authority':
                             return {
-                                headerName: term(key),
-                                children: [
-                                    {
-                                        headerName: term('authority_email'),
-                                        field: term('authority_email'),
-                                        valueFormatter: (params) => params?.data.authority?.email,
-                                        editable: false,
-                                    },
-                                    {
-                                        headerName: term('authority_name'),
-                                        field: term('authority_name'),
-                                        valueFormatter: (params) => params?.data.authority?.name,
-                                        editable: false,
-                                    },
-                                ]
+                                headerName: term(key), field: key,
+                                valueFormatter: (params) => params?.data?.authority?.name,
+                                editable: false,
+                                // children: [
+                                //     {
+                                //         headerName: term('authority_email'),
+                                //         field: term('authority_email'),
+                                //         valueFormatter: (params) => params?.data?.authority?.email,
+                                //         editable: false,
+                                //     },
+                                //     {
+                                //         headerName: term('authority_name'),
+                                //         field: term('authority_name'),
+                                //         valueFormatter: (params) => params?.data?.authority?.name,
+                                //         editable: false,
+                                //     },
+                                // ]
                             }
                         case 'locationInfo':
                             return {
                                 headerName: term(key),
-                                valueFormatter: (params) => params?.data.locationInfo?.description || params?.data.locationInfo?.formattedAddress,
+                                valueFormatter: (params) => params?.data?.locationInfo?.description || params?.data?.locationInfo?.formattedAddress,
                                 editable: false,
                             }
                         case 'inPlace':
                             return {
                                 headerName: term(key),
-                                valueFormatter: (params) => console.log(params?.data?.inPlace?.type),
+                                valueFormatter: (params) => params?.data?.inPlace?.type,
                                 editable: false,
                             }
                         case 'online':
@@ -111,7 +123,7 @@ const AGTable = ({ display, action }) => {
                         case 'free':
                             return {
                                 headerName: term(key),
-                                valueFormatter: (params) => params?.data[key] ? term('yes') : term('no'),
+                                valueFormatter: (params) => params.data && params?.data[key] ? term('yes') : term('no'),
                                 editable: false,
                             }
                         case 'openingHours':
@@ -151,16 +163,13 @@ const AGTable = ({ display, action }) => {
         } catch (e) {
             console.log(e)
         }
-    }
+    }, [tableChanged]);
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 120, direction: 'rtl' }} >
                 <AgGridReact
-                    onGridReady={params => {
-                        gridRef.current = params.api;
-                        params.api.sizeColumnsToFit();
-                    }}
+                    onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => { action(event.data, 'edit') }}
                     columnDefs={columnDefs}
                     rowData={RowData}

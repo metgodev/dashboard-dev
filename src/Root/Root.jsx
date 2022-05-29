@@ -48,7 +48,11 @@ const Root = () => {
     useLayoutEffect(() => {
         reAuth().then((res) => {
             setLoggedIn(true);
-            navigate(location.pathname);
+            if (location.pathname !== '/login') {
+                navigate(location.pathname);
+            } else {
+                navigate('/dashboard');
+            }
         }).catch((err) => {
             setLoggedIn(false);
         })

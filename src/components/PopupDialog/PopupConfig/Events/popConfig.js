@@ -12,7 +12,7 @@ export const ModalInit = [
     // ------------------ general information ------------------
     { title: term('event_name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: true },
-    { title: term('related_business'), id: createRandomId(), field: 'relatedBusinessId', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: true },
+    { title: term('related_business'), id: createRandomId(), field: 'relatedBusinessId', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: false },
     { title: term('date_start'), id: createRandomId(), field: 'startDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker', required: true },
     { title: term('date_end'), id: createRandomId(), field: 'endDate', rows: 1, maxRows: 1, size: 'small', type: 'datePicker', required: false },
     { title: term('opening_hours'), id: createRandomId(), field: 'openHour', rows: 4, maxRows: 1, size: 'small', type: 'timePicker', required: true },
@@ -21,7 +21,7 @@ export const ModalInit = [
     { title: term('online'), id: createRandomId(), field: 'online', rows: 1, maxRows: 1, size: 'small', type: 'checkbox', required: false },
     { title: term('online_meeting_link'), id: createRandomId(), field: 'onlineMeetingURL', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: false },
     { title: term('how_much'), id: createRandomId(), field: 'price', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: false, relaredToggle: 'free' },
-    { title: term('free'), id: createRandomId(), field: 'free', rows: 1, maxRows: 1, size: 'small', type: 'checkbox', required: true },
+    { title: term('free'), id: createRandomId(), field: 'free', rows: 1, maxRows: 1, size: 'small', type: 'checkbox', required: false },
     // ------------------ general information ------------------
     { title: term('more_information'), id: createRandomId(), field: 'moreInformation', type: 'divider', },
     // ------------------ more information ------------------
@@ -33,9 +33,9 @@ export const ModalInit = [
     { title: term('reservations_mail'), id: createRandomId(), field: 'reservationCenterEmail', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: false },
     { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 5, maxRows: 5, size: 'small', type: 'textfield', required: true },
-    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: true },
+    { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     { title: term('reservations'), id: createRandomId(), field: 'reservations', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: false },
-    { title: term('site_link'), id: createRandomId(), field: 'websitesUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
+    { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
     { title: term('registration_link'), id: createRandomId(), field: 'registrationLink', rows: 1, maxRows: 1, size: 'small', type: 'textfield', required: true },
     // ------------------ more information ------------------
     { title: term('map_location'), id: createRandomId(), field: 'mapLocation', type: 'divider', },
