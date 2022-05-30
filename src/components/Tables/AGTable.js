@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { gridOptions, idOptions, ignore } from '../../utils/ag_table_config';
 import { AgGridReact } from 'ag-grid-react';
 import term from '../../terms';
@@ -34,6 +34,12 @@ const AGTable = ({ display, action }) => {
             console.log(e)
         }
     }, []);
+
+    useEffect(() => {
+        if (tableChanged) {
+            onGridReady(gridRef.current.api);
+        }
+    }, [tableChanged])
 
     const onGridReady = useCallback(async () => {
         try {
@@ -170,6 +176,7 @@ const AGTable = ({ display, action }) => {
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 120, direction: 'rtl' }} >
                 <AgGridReact
                     onGridReady={onGridReady}
+                    // listen to changes in the table
                     onCellDoubleClicked={(event) => { action(event.data, 'edit') }}
                     columnDefs={columnDefs}
                     rowData={RowData}
