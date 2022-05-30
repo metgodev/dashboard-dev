@@ -52,6 +52,17 @@ export const duplicateField = (field, maxFileds) => {
     }
 }
 
+export const fixPhoneNumber = (num) => {
+    let newNum = ''
+    for (const c of num) {
+        if (!isNaN(c)) {
+            newNum = newNum + c
+        }
+    }
+    console.log(newNum)
+    return parseInt(newNum)
+}
+
 
 export let TimePicker = [
     { day: term('sunday_opening'), type: 1, timeref: 'sunday' },

@@ -64,3 +64,14 @@ export const mediaTabConfig = {
     ],
     initialMediaType: "image",
 }
+
+export const fixPhoneNumber = (num) => {
+    let newNum = ''
+    for (const c of num) {
+        if (!isNaN(c)) {
+            newNum = newNum + c
+        }
+    }
+    console.log(newNum)
+    return parseInt(newNum)
+}
