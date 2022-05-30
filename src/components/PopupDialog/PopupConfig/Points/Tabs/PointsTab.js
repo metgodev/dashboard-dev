@@ -80,7 +80,24 @@ export const PointsTab = ({ handleClose, type }) => {
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
 
+    const fixPhoneNumber = (num) => {
+        let newNum = ''
+        for (const c of num) {
+            if (!isNaN(c)) {
+                newNum = newNum + c
+            }
+        }
+        console.log(newNum)
+        return parseInt(newNum)
+    }
+
     const modify = async (type, id) => {
+        if (values.phoneNumber) {
+            setValues(prev => ({ ...prev, phoneNumber: fixPhoneNumber(prev.phoneNumber) }))
+        }
+        if (values.contactPersonPhoneNumber) {
+            setValues(prev => ({ ...prev, contactPersonPhoneNumber: fixPhoneNumber(prev.contactPersonPhoneNumber) }))
+        }
         if (type === 'add')
             client.service('pois').create(values)
                 .then(() => dispatch(set_table_changed(type)))

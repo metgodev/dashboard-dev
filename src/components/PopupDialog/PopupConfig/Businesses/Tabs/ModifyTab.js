@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import client from '../../../../../API/metro';
-import { ModalInit, TimePicker, FormTabs } from '../popConfig';
+import { ModalInit, TimePicker, FormTabs, fixPhoneNumber } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import FormBuilder from '../../../../FormBuilder/FormBuilder';
 import term from '../../../../../terms';
@@ -66,20 +66,13 @@ export const ModifyTab = ({ handleClose, type }) => {
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: null, end: null } } }))
     }
 
-    const fixPhoneNumber = (num) => {
-        let newNum = ''
-        for (const c of num) {
-            if (!isNaN(c)) {
-                newNum = newNum + c
-            }
-        }
-        console.log(newNum)
-        return parseInt(newNum)
-    }
-
     const modify = async (type, id) => {
-        setValues(prev => ({ ...prev, phoneNumber: fixPhoneNumber(prev.phoneNumber) }))
-        setValues(prev => ({ ...prev, contactPersonPhoneNumber: fixPhoneNumber(prev.contactPersonPhoneNumber) }))
+        if (values.phoneNumber) {
+            setValues(prev => ({ ...prev, phoneNumber: fixPhoneNumber(prev.phoneNumber) }))
+        }
+        if (values.contactPersonPhoneNumber) {
+            setValues(prev => ({ ...prev, contactPersonPhoneNumber: fixPhoneNumber(prev.contactPersonPhoneNumber) }))
+        }
         if (type === 'add')
             client.service('business').create(values)
                 .then(() => dispatch(set_table_changed(type)))
