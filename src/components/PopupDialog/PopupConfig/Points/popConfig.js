@@ -72,6 +72,5 @@ export const fixPhoneNumber = (num) => {
             newNum = newNum + c
         }
     }
-    console.log(newNum)
     return parseInt(newNum)
 }

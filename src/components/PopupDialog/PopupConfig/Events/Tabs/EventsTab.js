@@ -57,11 +57,11 @@ export const EventsTab = ({ handleClose, type }) => {
     const setDateTime = (time, field) => setValues(prevState => ({ ...prevState, [field]: time }));
 
     const modify = async (type, id) => {
-        if (values.phoneNumber) {
-            setValues(prev => ({ ...prev, phoneNumber: fixPhoneNumber(prev.phoneNumber) }))
+        if (values.producerPhone) {
+            setValues(prev => ({ ...prev, producerPhone: fixPhoneNumber(prev.producerPhone) }))
         }
-        if (values.contactPersonPhoneNumber) {
-            setValues(prev => ({ ...prev, contactPersonPhoneNumber: fixPhoneNumber(prev.contactPersonPhoneNumber) }))
+        if (values.reservationCenterPhone) {
+            setValues(prev => ({ ...prev, reservationCenterPhone: fixPhoneNumber(prev.reservationCenterPhone) }))
         }
         if (type === 'add')
             client.service('events').create(values)

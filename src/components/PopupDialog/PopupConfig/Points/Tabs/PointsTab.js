@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import client from '../../../../../API/metro';
-import { ModalInit, FormTabs } from '../popConfig';
+import { ModalInit, FormTabs, fixPhoneNumber } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import term from '../../../../../terms';
@@ -79,17 +79,6 @@ export const PointsTab = ({ handleClose, type }) => {
         else if (field === 'isAccessable') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
         else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
     };
-
-    const fixPhoneNumber = (num) => {
-        let newNum = ''
-        for (const c of num) {
-            if (!isNaN(c)) {
-                newNum = newNum + c
-            }
-        }
-        console.log(newNum)
-        return parseInt(newNum)
-    }
 
     const modify = async (type, id) => {
         if (values.phoneNumber) {
