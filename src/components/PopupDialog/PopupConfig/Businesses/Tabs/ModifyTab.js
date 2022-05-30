@@ -66,7 +66,20 @@ export const ModifyTab = ({ handleClose, type }) => {
         setValues(prevState => ({ ...prevState, openingHours: { ...prevState.openingHours, [timeRef]: { start: null, end: null } } }))
     }
 
+    const fixPhoneNumber = (num) => {
+        let newNum = ''
+        for (const c of num) {
+            if (!isNaN(c)) {
+                newNum = newNum + c
+            }
+        }
+        console.log(newNum)
+        return parseInt(newNum)
+    }
+
     const modify = async (type, id) => {
+        setValues(prev => ({ ...prev, phoneNumber: fixPhoneNumber(prev.phoneNumber) }))
+        setValues(prev => ({ ...prev, contactPersonPhoneNumber: fixPhoneNumber(prev.contactPersonPhoneNumber) }))
         if (type === 'add')
             client.service('business').create(values)
                 .then(() => dispatch(set_table_changed(type)))
