@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { gridOptions, idOptions, ignore } from '../../utils/ag_table_config';
 import { AgGridReact } from 'ag-grid-react';
 import term from '../../terms';
@@ -6,17 +6,17 @@ import client from '../../API/metro';
 import StatusMenu from './StatusMenu';
 import { useSelector } from 'react-redux';
 
+
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
-import 'ag-grid-community';
+import "ag-grid-enterprise";
 
 const AGTable = ({ display, action }) => {
-    const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
-    const gridRef = useRef();
-    const [RowData, setRowData] = useState([]);
+    const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const [columnDefs, setColumnDefs] = useState([]);
-
+    const [rowData, setRowData] = useState([]);
+    const gridRef = useRef();
 
     function onBtExport() {
         gridRef.current.api.exportDataAsCsv();
@@ -25,6 +25,7 @@ const AGTable = ({ display, action }) => {
     const getRowId = useCallback(params => {
         return params.data._id;
     }, []);
+
 
     const onUpdate = useCallback(async (params) => {
         try {
@@ -35,18 +36,13 @@ const AGTable = ({ display, action }) => {
         }
     }, []);
 
-    useEffect(() => {
-        if (tableChanged) {
-            onGridReady(gridRef.current.api);
-        }
-    }, [tableChanged])
 
     const onGridReady = useCallback(async () => {
         try {
             const res = await client.service(display).find({
                 query: {
                     areaId: area.id.toString(),
-                    $limit: 500,
+                    $limit: Infinity,
                     $sort: {
                         createdAt: -1
                     }
@@ -176,10 +172,9 @@ const AGTable = ({ display, action }) => {
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 120, direction: 'rtl' }} >
                 <AgGridReact
                     onGridReady={onGridReady}
-                    // listen to changes in the table
                     onCellDoubleClicked={(event) => { action(event.data, 'edit') }}
                     columnDefs={columnDefs}
-                    rowData={RowData}
+                    rowData={rowData}
                     rowSelection='multiple'
                     rowDragManaged={true}
                     getRowId={getRowId}
@@ -193,9 +188,7 @@ const AGTable = ({ display, action }) => {
                 />
             </div>
         </div>
-    )
+    );
 }
-
-
 
 export default AGTable;

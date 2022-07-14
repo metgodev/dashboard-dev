@@ -10,10 +10,12 @@ import { CircularProgress } from '@material-ui/core'
 import { UploadMediaTab } from '../uploadMediaTab'
 import term from '../../../../terms';
 import { mediaTabConfig } from './popConfig'
+import { Button } from '@mui/material';
+import chat from '../../../../Assets/placeholders/contact_bussines.png'
+import comments from '../../../../Assets/placeholders/comments.png'
+import promotions from '../../../../Assets/placeholders/promotions.png'
 //styles
 import useStyles from "../../styles";
-
-
 
 const ModifyPop = ({ handleClose, type, initialData, open }) => {
     const classes = useStyles()
@@ -51,6 +53,31 @@ const ModifyPop = ({ handleClose, type, initialData, open }) => {
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
                     <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} config={mediaTabConfig} />
+                </TabPanel>
+                <TabPanel value={tab} index={3}>
+                    <img src={promotions} alt="promotions"
+                    />
+                </TabPanel>
+                <TabPanel value={tab} index={4}>
+                    <img src={chat} alt="chat" />
+                </TabPanel>
+                <TabPanel value={tab} index={5}>
+                    <img src={comments} alt="comments" />
+                </TabPanel>
+                <TabPanel value={tab} index={6}>
+                    <Box
+                        style={{ //middkle of the screen
+                            top: '30%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            position: 'absolute',
+                        }}>
+                        <Button variant="contained" color="primary" >{term('add_product')}</Button>
+                    </Box>
+                </TabPanel>
+                <TabPanel value={tab} index={7}>
+                </TabPanel>
+                <TabPanel value={tab} index={8}>
                 </TabPanel>
             </Box>
         </Box >

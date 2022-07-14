@@ -118,7 +118,7 @@ export const AG_GRID_LOCALE_HE = {
     // noRowsToShow: 'No Rows To Show',
     // enabled: 'Enabled',
     loadingOoo: '...טוען',
-    noRowsToShow: 'אין שורות להצגה',
+    noRowsToShow: 'טוען נתונים',
     enabled: 'מופעל',
 
     // Menu
@@ -461,8 +461,29 @@ export const gridOptions = {
         animateRows: true,
         rowSelection: 'multiple',
         refreshCells: true,
+        enablePivot: true,
     },
-    sideBar: true,
+    sideBar: {
+        toolPanels: [
+            {
+                id: 'columns',
+                labelDefault: 'Columns',
+                labelKey: 'columns',
+                iconKey: 'columns',
+                toolPanel: 'agColumnsToolPanel',
+                toolPanelParams: {
+                    suppressRowGroups: true,
+                    suppressValues: true,
+                    suppressPivots: true,
+                    suppressPivotMode: true,
+                    suppressColumnFilter: true,
+                    suppressColumnSelectAll: true,
+                    suppressColumnExpandAll: true,
+                },
+            },
+        ],
+        defaultToolPanel: 'columns',
+    },
     statusBar: {
         statusPanels: [
             { statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left' },
@@ -494,6 +515,7 @@ export const idOptions = {
     suppressCellSelection: true,
     suppressDragLeaveHidesColumns: true,
     suppressRowDrag: true,
+    suppressColumnsToolPanel: true,
 };
 
 export const ignore = ['__v', 'areaId', 'authorityId', 'location', 'tagsIds', 'galleryFileIds', 'gallery', 'userId', 'reservations', 'inPlace', 'prefferedSeason', 'relatedBusinessId']

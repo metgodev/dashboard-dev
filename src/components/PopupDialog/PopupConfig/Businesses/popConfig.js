@@ -7,7 +7,7 @@ export const FormTabs = [{
     value: term('map_location'),
 }];
 
-export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls')];
+export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls'), term('reviews'), term('products'), term('invitation_manager')];
 export const ModalInit = [
     //------------------ General Information ------------------
     { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
