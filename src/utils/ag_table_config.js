@@ -449,7 +449,6 @@ export const gridOptions = {
         floatingFilter: true,
         resizable: true,
         rowGroupPanelShow: 'always',
-        pagination: true,
         enableRangeSelection: true,
         rowDragManaged: true,
         enableCellChangeFlash: true,
@@ -461,7 +460,6 @@ export const gridOptions = {
         animateRows: true,
         rowSelection: 'multiple',
         refreshCells: true,
-        enablePivot: true,
     },
     sideBar: {
         toolPanels: [
@@ -490,6 +488,8 @@ export const gridOptions = {
             { statusPanel: 'agAggregationComponent' },
         ],
     },
+    paginationAutoPageSize: true,
+    pagination: true,
     enableRtl: true,
     localeText: AG_GRID_LOCALE_HE,
 };

@@ -1438,6 +1438,16 @@ const active_lexicon = {
         he: 'מקוון',
         ar: 'الإنترنت'
     },
+    relevant_to: {
+        en: 'Relevant to',
+        he: 'למי מתאים',
+        ar: 'متعلق ب'
+    },
+    youtube_page_url: {
+        en: 'Youtube page url',
+        he: 'עמוד יוטיוב',
+        ar: 'رابط الصفحة الخاصة بي'
+    },
     online_meeting_link: {
         en: 'Online meeting link',
         he: 'קישור לפגישה מקוונת',
