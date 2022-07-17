@@ -14,6 +14,7 @@ export default makeStyles(theme => ({
     logotype: {
         width: '100%',
         height: '6rem',
+        cursor: 'pointer'
     },
     h: {
         padding: 1, margin: 1,
