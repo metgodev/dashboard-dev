@@ -40,7 +40,7 @@ const AGTable = ({ display, action }) => {
             const res = await client.service(display).find({
                 query: {
                     areaId: area.id.toString(),
-                    $limit: Infinity,
+                    $limit: 1000,
                     $sort: {
                         createdAt: -1
                     }
