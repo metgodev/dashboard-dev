@@ -12,15 +12,18 @@ import term from '../../../../terms';
 import { mediaTabConfig } from './popConfig'
 //styles
 import useStyles from "../../styles";
+import { useSelector } from 'react-redux';
+import client from "../../../../API/metro";
+import { Picker } from './Tabs/HandleBusinessData';
 
 
-
-const ModifyPop = ({ handleClose, type, initialData, open }) => {
+const ModifyPop = ({ handleClose, type, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
     const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
+    const [picker, setPicker] = useState(Picker)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
@@ -30,6 +33,36 @@ const ModifyPop = ({ handleClose, type, initialData, open }) => {
         setMedia([])
         { !open && setTab(0) }
     }, [handleClose])
+
+    const { area } = useSelector((state) => state.mainRememberReducer);
+
+    useEffect(() => {
+        (async () => {
+            let tempPicker = [];
+            await client
+                .service("authorities")
+                .find({ query: { areaId: area.id } })
+                .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
+                .then((authorities) => {
+                    setPicker(prev => ({ ...prev, authorityId: authorities }))
+                });
+
+            await client
+                .service("tag-categories")
+                .find({ query: { areaId: area.id } })
+                .then(({ data }) => {
+                    data.map(
+                        (data) =>
+                        (
+                            tempPicker.push({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id, idToSend: data.tag._id })
+                        )
+                    );
+                    setPicker(prev => ({ ...prev, tagsIds: tempPicker }))
+                });
+        })();
+    }, []);
+
+
 
     return (
         <Box>
@@ -44,7 +77,7 @@ const ModifyPop = ({ handleClose, type, initialData, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <ModifyTab handleClose={handleClose} initialData={initialData} type={type} setTab={0} />
+                    <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <StatisticsTab />
