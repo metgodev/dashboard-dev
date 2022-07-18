@@ -1,56 +1,59 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import client from '../../../../../API/metro';
+import { useSelector } from 'react-redux';
 import { ModalInit } from '../popConfig';
-import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import FormBuilder from '../../../../FormBuilder/FormBuilder';
+import Form from '../../../../Form/Form'
+import { validateForm } from './Validations'
+import get_orientation from '../../../../../utils/get_orientation'
+import { GetFormData } from './HandleAuthorityData'
 
-export let picker = {
-    areaId: []
-};
 
-export const AuthorityTab = ({ handleClose, type }) => {
+export const AuthorityTab = ({ handleClose, type, options }) => {
     //global
-    const dispatch = useDispatch()
+
+    const init = useSelector((s) => s.mainReducer.editTabData);
+    const { lang } = useSelector((state) => state.mainRememberReducer);
     //local
     const [values, setValues] = useState({});
-    //set the values
-    const handleChange = (e, field, tags, type) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (type === 'toggle' || type === 'checkbox') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
-        else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
-    };
+    const [orientation, setOrientation] = useState('ltr')
+
+    const formData = GetFormData(values, options)
 
     useEffect(() => {
-        (async () => {
-            client.service("area").find().then((res) => {
-                res?.data.map(({ name, _id }) => picker.areaId = [...picker.areaId, { value: _id, name }])
-            })
-        })();
-    }, []);
+        setValues(init)
+        setOrientation(get_orientation(lang))
+    }, [init]);
 
-    const modify = async (type, id) => {
-        if (type === 'add')
-            client.service('authorities').create(values)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-        else
-            client.service('authorities').patch(id, values)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
+    const modify = async (formValues) => {
+        const areaId = options.areaId.find(item => item.name === formValues.areaId).value
+        const valuesToSend = {
+            ...formValues,
+            areaId: areaId
+        }
+
+
+        // if (type === 'add')
+        //     client.service('authorities').create(valuesToSend)
+        //         .then(() => dispatch(set_table_changed(type)))
+        //         .then(() => handleClose(false))
+        // else
+        //     client.service('authorities').patch(areaId, valuesToSend)
+        //         .then(() => dispatch(set_table_changed(type)))
+        //         .then(() => handleClose(false))
     }
 
     return (
-        <FormBuilder
-            presistableFileds={{}}
-            setFatherValue={setValues}
-            ModalInit={ModalInit}
-            picker={picker}
-            handleChange={handleChange}
-            values={values}
-            modify={modify}
-            type={type}
-            handleClose={handleClose}
-        />
+        <div>
+            {options !== null &&
+                <Form
+                    fields={ModalInit}
+                    data={formData}
+                    options={{ areaId: options.areaId.map(item => item.name) }}
+                    submitFunction={modify}
+                    validiationFunction={validateForm}
+                    isPartOfStepper={false}
+                    orientation={orientation}
+                />
+            }
+        </div >
     )
 }

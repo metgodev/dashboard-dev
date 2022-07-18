@@ -2,7 +2,7 @@
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app           
 # metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NTIyNjEyODEsImlhdCI6MTY1MzAzODU3NCwiZXhwIjoxNjUzNjQzMzc0LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjdiODFhMTdlNGNkNTllOGUzYzhiMmQiLCJqdGkiOiI3ZTMwOGNlOS1iODcwLTQ0OGItYTc4NS1hN2M5OGIxMGY0ZGQifQ.aAoR9WSH6RYNwHHNuctjOuwVN6d4H3vO6rgIy_dGJg4
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NTY4NDM2ODgsImlhdCI6MTY1NzYxMTU5MiwiZXhwIjoxNjU4MjE2MzkyLCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjdiZTkxMDM3Y2Q4YjA2ZjEwMTQzOGQiLCJqdGkiOiI1OWMzYmU4ZS00YWI2LTQ3ZDgtYThjZC05YTI4YjY3M2U2MzYifQ.XBdlto9DmWzzObvK_DX_T6XVBp9NPEsqBzqAVT0GkJQ
 
 @email = "celeja6810@showbaz.com"
 @password = "5656"
@@ -110,7 +110,7 @@ Authorization: {{authorization}}
     "phoneNumber": "054-1234567",
     "name": "שומרון", 
     "email": "contact@email.com", 
-    "address": ""
+    "address": " "
 }
 ###
 # Upload file 
@@ -171,7 +171,6 @@ Authorization: {{authorization}}
    "facebookPageUrl": "https://www.facebook.com",
    "instagramPageUrl": "https://www.instagram.com",
    "youtubePageUrl": "https://www.youtube.com",
-   "galleryFileIds":[],
    "openingHours": [],
    "open24Hours": false,
    "openOnWeekend": false,
@@ -189,7 +188,6 @@ Authorization: {{authorization}}
 { 
    "name": "test event", 
    "authorityId": "61d2e93c927d2b5be84b2cdb",
-   "categoryId":"61e94815f49adf4a20db7ca7",
    "address": "gani tal", 
    "startDate": "12/29/2022", 
    "endDate": "12/30/2022",
@@ -289,5 +287,11 @@ Authorization: {{authorization}}
 ###
 # Upload file 
 GET https://{{hostname}}/files
+content-type: {{contentType}}
+Authorization: {{authorization}}
+
+###
+# get tag categories
+GET https://{{hostname}}/tag-categories
 content-type: {{contentType}}
 Authorization: {{authorization}}

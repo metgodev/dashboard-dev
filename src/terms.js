@@ -12,6 +12,16 @@ const active_lexicon = {
         he: 'אין ערך',
         ar: 'لا قيمة',
     },
+    no: {
+        en: 'No',
+        he: 'לא',
+        ar: 'رقم',
+    },
+    yes: {
+        en: 'Yes',
+        he: 'כן',
+        ar: 'نعم',
+    },
     dashboard: {
         en: 'Dashboard',
         he: 'לוח הבקרה',
@@ -26,6 +36,16 @@ const active_lexicon = {
         en: 'New Messages',
         he: 'הודעות חדשות',
         ar: 'مشاركات جديدة',
+    },
+    next: {
+        en: 'Next',
+        he: 'הבא',
+        ar: 'التالي',
+    },
+    back: {
+        en: 'Back',
+        he: 'אחורה',
+        ar: 'الى الخلف',
     },
     send_new_message: {
         en: 'Send New Message',
@@ -178,14 +198,29 @@ const active_lexicon = {
         ar: 'يرجى التأكد من صحة التفاصيل',
     },
     incorrect_verification_code: {
-        en: 'incorrect verification code',
+        en: 'Incorrect verification code',
         he: 'קוד אימות שגוי',
         ar: 'رمز التحقق غير صحيح',
+    },
+    please_choose_an_authority: {
+        en: 'Please choose an authority',
+        he: 'אנא בחר רשות',
+        ar: 'الرجاء اختيار سلطة',
+    },
+    name_cannot_exceed: {
+        en: 'Name cannot exceed',
+        he: 'שם לא יכול להכיל יותר מ',
+        ar: 'لا يمكن أن يتجاوز الاسم',
     },
     email_address: {
         en: 'Email address',
         he: 'כתובת אימייל',
         ar: 'عنوان البريد الإلكتروني',
+    },
+    please_enter_a_business_name: {
+        en: 'Please enter a business name',
+        he: 'הכנס שם עסק',
+        ar: 'الرجاء إدخال اسم العمل',
     },
     password: {
         en: 'Password',
@@ -462,10 +497,30 @@ const active_lexicon = {
         he: "סגור",
         ar: "مغلق",
     },
+    closing_time: {
+        en: "Closing Time",
+        he: "שעת סגירה",
+        ar: "وقت مفتوح",
+    },
+    opening_time: {
+        en: "Closing Time",
+        he: "שעת פתיחה",
+        ar: "وقت الإغلاق"
+    },
     add: {
         en: "Add",
         he: "הוספה",
         ar: "يضيف",
+    },
+    please_add_a_short_description: {
+        en: "Please add a short description",
+        he: "אנא הוסף תיאור קצר",
+        ar: "الرجاء إضافة وصف موجز",
+    },
+    do_you_want_to_save_your_changes: {
+        en: "Do you want to save you changes",
+        he: "האם ברצונך לשמור את השינויים",
+        ar: "هل تريد حفظ التغييرات",
     },
     edit: {
         en: "Save Changes",
@@ -767,6 +822,21 @@ const active_lexicon = {
         en: 'Is Kosher',
         he: 'כשר',
         ar: 'كوشير',
+    },
+    submit: {
+        en: 'Submit',
+        he: 'שלח',
+        ar: 'إرسال',
+    },
+    search_for_a_place: {
+        en: 'Search for a place',
+        he: 'חפש מיקום',
+        ar: 'ابحث عن مكان',
+    },
+    event_details: {
+        en: 'Event details',
+        he: 'פרטי האירוע',
+        ar: 'تفاصيل الحدث',
     },
     event_name: {
         en: 'Event name',
@@ -1104,7 +1174,7 @@ const active_lexicon = {
         ar: 'إعادة تعيين الموقع',
     },
     location: {
-        en: 'location',
+        en: 'Location',
         he: 'מיקום',
         ar: 'الموقع',
     },
@@ -1114,7 +1184,7 @@ const active_lexicon = {
         ar: 'اسم الموقع',
     },
     is_accessable: {
-        en: 'is accessable',
+        en: 'Is accessable',
         he: 'נגיש',
         ar: 'متاح',
     },
@@ -1679,6 +1749,86 @@ const active_lexicon = {
         he: 'כתובת הרשות',
         ar: 'عنوان الجهة'
     },
+    characters: {
+        en: 'characters',
+        he: 'תווים',
+        ar: 'الشخصيات'
+    },
+    words: {
+        en: 'Words',
+        he: 'מילים',
+        ar: 'كلمات'
+    },
+    please_enter_a_name: {
+        en: 'Please enter a name',
+        he: 'אנא הכנס שם',
+        ar: 'الرجاء إدخال اسم'
+    },
+    please_enter_a_registration_link: {
+        en: 'Please enter a registration link',
+        he: 'נא להזין קישור הרשמה',
+        ar: 'الرجاء إدخال ارتباط التسجيل'
+    },
+    please_add_a_description: {
+        en: 'Please add a description',
+        he: 'נא להוסיף תיאור',
+        ar: 'الرجاء إضافة وصف'
+    },
+    please_choose_a_resevation_option: {
+        en: 'Please choose a reservation option',
+        he: 'אנא בחר אפשרות הזמנה',
+        ar: 'الرجاء اختيار خيار الحجز'
+    },
+    please_enter_an_event_name: {
+        en: 'Please enter an event name',
+        he: 'נא להזין שם אירוע',
+        ar: 'الرجاء إدخال اسم الحدث'
+    },
+    please_choose_at_least_one_tag: {
+        en: 'Plase choose at least one tag',
+        he: 'בחר תג אחד לפחות',
+        ar: 'الرجاء اختيار علامة واحدة على الأقل'
+    },
+    please_choose_an_area: {
+        en: 'Please choose an area',
+        he: 'אנא בחר אזור',
+        ar: 'الرجاء اختيار منطقة'
+    },
+    please_enter_an_authority_name: {
+        en: 'Plase enter an authority name',
+        he: 'הזן שם רשות',
+        ar: 'الرجاء إدخال اسم السلطة'
+    },
+    please_enter_a_valid_email_address: {
+        en: 'Please enter a valid email address',
+        he: 'אנא הכנס כתובת דואר אלקטרוני תקינה',
+        ar: 'يرجى إدخال عنوان بريد إلكتروني صالح'
+    },
+    please_enter_the_contact_persons_name: {
+        en: 'Please enter the contact persons name',
+        he: 'אנא הכנס את שם איש הקשר',
+        ar: 'الرجاء إدخال اسم جهة الاتصال'
+    },
+    please_enter_a_valid_phone_number: {
+        en: 'Please enter a valid phone number',
+        he: 'אנא הכנס מספר חוקי',
+        ar: 'من فضلك أدخل رقما صالحا'
+    },
+    please_select_a_reservation_option: {
+        en: 'Please select a reservation option',
+        he: 'אנא בחר אפשרות הזמנה',
+        ar: 'الرجاء تحديد خيار الحجز'
+    },
+    short_description_cannot_exceed: {
+        en: 'Short description cannot exceed',
+        he: 'תיאור קצר לא יכול להכיל יותר מ',
+        ar: 'لا يمكن أن يتجاوز الوصف المختصر'
+    },
+    you_cant_be_kosher_and_open_on_weekends: {
+        en: 'You can\'t be kosher and open on weekends',
+        he: 'עסק לא יכול להיות כשר ופתוח בסופי שבוע',
+        ar: 'لا يمكنك أن تكون موافقًا للشريعة اليهودية ومفتوحًا في عطلات نهاية الأسبوع'
+    },
     password_must_be_at_least_6_characters_long_helper: {
         en: 'The password must be at least 6 characters long',
         he: 'הסיסמה חייבת להיות באורך של 6 תווים לפחות',
@@ -1742,11 +1892,51 @@ const active_lexicon = {
         he: 'כן',
         ar: 'نعم'
     },
-    no: {
-        en: 'No',
-        he: 'לא',
-        ar: 'لا'
+    sunday: {
+        en: 'Sunday',
+        he: 'יום ראשון',
+        ar: 'يوم الاحد'
     },
+    monday: {
+        en: 'Monday',
+        he: 'יום שני',
+        ar: 'يوم الاثنين'
+    },
+    tuesday: {
+        en: 'Tuesday',
+        he: 'יום שלישי',
+        ar: 'يوم الثلاثاء'
+    },
+    wednesday: {
+        en: 'Wednesday',
+        he: 'יום רבעי',
+        ar: 'يوم الاربعاء'
+    },
+    thursday: {
+        en: 'Thursday',
+        he: 'יום חמישי',
+        ar: 'يوم الخميس'
+    },
+    friday: {
+        en: 'Friday',
+        he: 'יום שישי',
+        ar: 'يوم الجمعة'
+    },
+    saturday: {
+        en: 'Saturday',
+        he: 'יום שבת',
+        ar: 'يوم السبت'
+    },
+    business_details: {
+        en: 'Business details',
+        he: 'פרטי העסק',
+        ar: 'تفاصيل العمل'
+    },
+    contact_information: {
+        en: 'Contact information',
+        he: 'פרטי איש הקשר',
+        ar: 'معلومات التواصل'
+    }
 };
 
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))

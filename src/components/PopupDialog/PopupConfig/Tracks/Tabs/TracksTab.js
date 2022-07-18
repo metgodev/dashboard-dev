@@ -3,7 +3,6 @@ import { ModalInit, FormTabs } from '../popConfig';
 import client from '../../../../../API/metro';
 import { useDispatch, useSelector } from 'react-redux';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import FormBuilder from '../../../../FormBuilder/FormBuilder';
 import term from '../../../../../terms';
 
 let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
@@ -61,18 +60,6 @@ export const TracksTab = ({ handleClose, type }) => {
 
     let maxSizeElements = ['MapPicker', 'divider']
     return (
-        <FormBuilder
-            setFatherValue={setValues}
-            FormTabs={FormTabs}
-            ModalInit={ModalInit}
-            handleClose={handleClose}
-            values={values}
-            modify={modify}
-            picker={picker}
-            type={type}
-            handleChange={handleChange}
-            maxSizeElements={maxSizeElements}
-            presistableFileds={initialState}
-        />
+        <></>
     )
 }

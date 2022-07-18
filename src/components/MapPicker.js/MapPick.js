@@ -1,98 +1,82 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react'
-import MapPicker from 'react-google-map-picker'
-import term from '../../terms';
-import { Button, Grid } from '@material-ui/core';
-import Notify from '../../pages/notifications/Notifications';
-import { CircularProgress } from '@mui/material';
-import { Box } from '@mui/system';
+import React, { useState, useCallback, useEffect } from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
+
+const DEFAULT_LOCATION = { lat: 32.0713, lng: 34.7886 }
+const DEFAULT_ZOOM = 15;
 const { innerWidth: windowWidth, innerHeight: windowHeight } = window
+const DEFAULT_CONTANER_STYLE = { width: windowWidth, height: windowHeight / 2 }
 
-const { REACT_APP_GOOGLE_API_KEY } = process.env
+const MapPick = ({ point, containerStyle, markers, setFatherValue, zoom, isLoaded }) => {
 
-const DefaultZoom = 15;
+    const [myMap, setMyMap] = useState(null)
+    const [location, setLocation] = useState(DEFAULT_LOCATION);
+    const [marker, setMarker] = useState(null)
+    const [geocoder, setGeocoder] = useState(null)
 
-const MapPick = React.memo(({ setFatherValue, point }) => {
-    const [defaultLocation, setDefaultLocation] = useState({ lat: 0, lng: 0 });
-    const [location, setLocation] = useState(defaultLocation);
-    const [zoom, setZoom] = useState(DefaultZoom);
-    const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [palceChoosed, setPalceChoosed] = useState(0);
-
-    function handleChangeLocation(lat, lng) {
-        setLocation({ lat: lat, lng: lng });
-    }
-
-    const waitForMapToLoad = async () => {
-        setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        setLoading(false);
-        setShow(true);
-    }
-
-    useLayoutEffect(() => {
-        if (point?.coordinates === undefined) {
-            waitForMapToLoad();
-            navigator.geolocation.getCurrentPosition((position) => {
-                setDefaultLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
-            });
-        } else {
-            setDefaultLocation({ lat: point["coordinates"][0], lng: point["coordinates"][1] })
+    useEffect(() => {
+        if (window.google && geocoder === null) {
+            setGeocoder(new window.google.maps.Geocoder())
         }
-
-    }, [point])
-
-    const setPlace = () => {
-        setFatherValue(pervState => ({ ...pervState, locationInfo: { type: "Custom", coordinates: [location.lat, location.lng] } }))
-        setPalceChoosed(location.lat + location.lng);
-    }
-
-    const handleChangeZoom = (newZoom) => setZoom(newZoom);
-    const handleResetLocation = () => {
-        setDefaultLocation({ ...defaultLocation });
-        setZoom(DefaultZoom);
-    }
-
-    return (
-        <>
-            {show &&
-                <>
-                    {loading ?
-                        <Box style={{
-                            position: 'absolute',
-                            top: '60%',
-                            left: '45%',
-                            transform: 'translate(-50%, -50%)',
-                        }}>
-                            <CircularProgress />
-                        </Box>
-                        :
-                        <>
-                            <MapPicker
-                                defaultLocation={defaultLocation}
-                                zoom={zoom}
-                                mapTypeId="roadmap"
-                                mapTypeIds={['roadmap', 'satellite', 'hybrid', 'terrain']}
-                                style={{ width: '100%', height: windowHeight * 0.5 }}
-                                onChangeLocation={handleChangeLocation}
-                                onChangeZoom={handleChangeZoom}
-                                apiKey={REACT_APP_GOOGLE_API_KEY} />
-                            <Grid container spacing={3}>
-                                <Grid item xs={6}>
-                                    <Button style={{ marginTop: 10, width: '100%' }} variant='outlined' onClick={handleResetLocation}>{term('reset_location')}</Button>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Button style={{ marginTop: 10, width: '100%' }} variant='outlined' onClick={setPlace}>{term('set_location')}</Button>
-                                </Grid>
-                            </Grid>
-                            {palceChoosed !== 0 && <Notify text={term('location_set')} id={palceChoosed} type='success' />}
-                        </>
-                    }
-                </>
+        if (point !== undefined) {
+            setLocation({ lat: point[0], lng: point[1] })
+            if (setFatherValue !== undefined) {
+                setMarker({ lat: point[0], lng: point[1] })
             }
-        </>
-    );
-})
+        } else {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+                if (setFatherValue !== undefined) {
+                    setMarker({ lat: position.coords.latitude, lng: position.coords.longitude })
+                }
+            });
+        }
+    }, [point, window.google])
 
+    const onLoad = useCallback((map) => {
+        setMyMap(map)
+    }, [])
 
-export default MapPick
+    const onUnmount = useCallback((map) => {
+        setMyMap(null)
+    }, [])
+
+    const handleClick = (event) => {
+        const newLat = event.latLng.lat()
+        const newLng = event.latLng.lng()
+        if (setFatherValue !== undefined) {
+            geocoder.geocode({ location: { lat: newLat, lng: newLng } }).then((res) => {
+                setFatherValue(prev => ({ ...prev, locationName: res.results[0]['formatted_address'], address: res.results[0]['formatted_address'] }))
+            })
+            setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [newLat, newLng] } }))
+        }
+    }
+
+    return isLoaded ? (
+        <GoogleMap
+            mapContainerStyle={containerStyle ? containerStyle : DEFAULT_CONTANER_STYLE}
+            center={location}
+            zoom={zoom ? zoom : DEFAULT_ZOOM}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            onClick={handleClick}
+        >
+            {markers &&
+                markers.map((marker, index) => {
+                    return (
+                        <Marker
+                            icon={{
+                                url: marker.icon,
+                                scaledSize: new window.google.maps.Size(30, 40)
+                            }}
+                            key={marker.location[0] + index}
+                            position={{ lat: marker.location[0], lng: marker.location[1] }}
+                        />
+                    )
+                })
+            }
+            {location && <Marker position={{ lat: point[0], lng: point[1] }} />}
+        </GoogleMap>
+    ) : <></>
+}
+
+export default React.memo(MapPick)

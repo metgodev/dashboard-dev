@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import client from '../../API/metro'
 import { Box } from '@mui/material'
 import useStyles from './styles'
-import { useDispatch, useSelector } from 'react-redux';
-import { set_table_changed, set_edit_tab_data } from '../../REDUX/actions/main.actions'
+import { useDispatch } from 'react-redux';
+import { set_table_changed } from '../../REDUX/actions/main.actions'
 
 
 export default function MyImageList({ type, tab, setLoadingImage, editTabData, media, setMedia, getGallery }) {

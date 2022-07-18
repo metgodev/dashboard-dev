@@ -22,7 +22,7 @@ function Events() {
             setDialogType('edit')
         }
         else {
-            dispatch(set_edit_tab_data([]))
+            dispatch(set_edit_tab_data({}))
             setDialogType('add')
         }
         setOpen(!open)

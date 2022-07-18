@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import client from '../../../../../API/metro';
 import { ModalInit } from '../popConfig';
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions';
-import FormBuilder from '../../../../FormBuilder/FormBuilder';
 
 let picker = {
     tagId: [],
@@ -49,16 +48,6 @@ export const TagsTab = ({ handleClose, type }) => {
     }, [tableChanged])
 
     return (
-        <FormBuilder
-            setFatherValue={setValues}
-            ModalInit={ModalInit}
-            picker={picker}
-            handleChange={handleChange}
-            values={values}
-            modify={modify}
-            presistableFileds={initialState}
-            type={type}
-            handleClose={handleClose}
-        />
+        <></>
     )
 }

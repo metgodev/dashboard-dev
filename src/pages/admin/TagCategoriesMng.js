@@ -21,7 +21,7 @@ function TagCategoriesMng() {
             setDialogType('edit')
         }
         else {
-            dispatch(set_edit_tab_data([]))
+            dispatch(set_edit_tab_data({}))
             setDialogType('add')
         }
         setTagOpen(!tagOpen)
@@ -33,7 +33,7 @@ function TagCategoriesMng() {
             setDialogType('link')
         }
         else {
-            dispatch(set_edit_tab_data([]))
+            dispatch(set_edit_tab_data({}))
             setDialogType('edit')
         }
         setTagLink(!tagOpen)
@@ -46,7 +46,7 @@ function TagCategoriesMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('area_related_tags')} />
-            <AGTable display={'tag-categories'} action={setTagOpen} />
+            <AGTable display={'tag-categories'} action={openTagDialog} />
             <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
             <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={'tags_link'} maxWidth={'sm'} />
         </Box>

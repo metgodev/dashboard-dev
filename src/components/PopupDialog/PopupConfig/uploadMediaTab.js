@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { set_table_changed, set_edit_tab_data } from '../../../REDUX/actions/main.actions'
+import { set_table_changed } from '../../../REDUX/actions/main.actions'
 import { Box, DialogTitle, DialogContent, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import DragDrop from '../../../hooks/DragDropFiles';
 import MyImageList from '../../MyImageList/MyImageList';

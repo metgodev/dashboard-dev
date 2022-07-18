@@ -20,7 +20,7 @@ function AuthorityMng() {
             setDialogType('edit')
         }
         else {
-            dispatch(set_edit_tab_data([]))
+            dispatch(set_edit_tab_data({}))
             setDialogType('add')
         }
         setAutorityOpen(!autorityOpen)
@@ -36,7 +36,7 @@ function AuthorityMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('authorities')} />
-            <AGTable display={'authorities'} action={setAutorityOpen} />
+            <AGTable display={'authorities'} action={openAuthorityDialog} />
             <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} maxWidth={'sm'} />
         </Box>
     )

@@ -7,9 +7,10 @@ import term from "../../terms";
 import MapPick from '../../components/newMapPick/MapPick'
 import client from '../../API/metro'
 import CircularProgress from '@mui/material/CircularProgress';
+import { useJsApiLoader } from '@react-google-maps/api';
 // styles
 import useStyles from "./styles";
-
+//
 import attractionIcon from '../../Assets/images/icons/attractions.png'
 import cultureIcon from '../../Assets/images/icons/culture.png'
 import foodIcon from '../../Assets/images/icons/food.png'
@@ -24,6 +25,8 @@ export default function Maps() {
   const [data, setData] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
 
+  const { REACT_APP_GOOGLE_API_KEY } = process.env
+  const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
   useEffect(() => {
     (async () => {
@@ -97,6 +100,7 @@ export default function Maps() {
             containerStyle={{ width: '100%', height: '60vh' }}
             markers={selectedCategory ? data[selectedCategory] : [...data.culture, ...data.food, ...data.travel, ...data.local, ...data.lodging, ...data.attraction]}
             zoom={8}
+            isLoaded={isLoaded}
           />
           <Grid container
             direction="row"
