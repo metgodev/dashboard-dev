@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
+import useStyles from './styles'
+import { Box } from "@mui/material";
+import term from "../../../../../terms";
+import { ModalInit } from "../popConfig";
+import Form from "../../../../Form/Form";
 import { useSelector } from "react-redux";
 import client from "../../../../../API/metro";
-import { ModalInit } from "../popConfig";
-import term from "../../../../../terms";
-import Form from "../../../../Form/Form";
 import Stepper from '../../../../Stepper/Stepper'
-import { Box } from "@mui/material";
-import useStyles from './styles'
-import { initialState, GetValuesToSendFirstPart, GetValuesToSendSecondPart, GetValuesToSendThirdPart } from './HandleBusinessData'
-import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
 import { useDispatch } from "react-redux";
-import { set_table_changed } from "../../../../../REDUX/actions/main.actions";
 import get_orientation from '../../../../../utils/get_orientation'
+import { set_table_changed } from "../../../../../REDUX/actions/main.actions";
+import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
+import { initialState, GetValuesToSendFirstPart, GetValuesToSendSecondPart, GetValuesToSendThirdPart } from './HandleBusinessData'
 
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
     const init = useSelector((s) => s.mainReducer.editTabData);
-    const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
+    const { area, user, lang } = useSelector((s) => s.mainRememberReducer);
     const dispatch = useDispatch()
     //local
     const classes = useStyles()
@@ -36,9 +36,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
         setOrientation(get_orientation(lang))
     }, [init]);
 
-    const handleSetValues = (init) => {
-        setValues(init);
-    }
+    const handleSetValues = (init) => setValues(init);
 
     const getTagIdsToSend = (tagCategoryIds) => {
         let x = areaSpecificData.tagsIds.filter(item => tagCategoryIds.includes(item.id))
@@ -48,7 +46,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
         return x
     }
 
-    const submitValues = () => {
+    const submitValues = async () => {
 
         const configurationValues = initialState(area, user)
 
@@ -83,21 +81,20 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
             },
             reservations: values.reservations
         }
-
-        if (type === "add")
-            client
-                .service("business")
-                .create(valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-                .catch(e => console.log(e))
-        else
-            client
-                .service("business")
-                .patch(values['_id'], valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-                .catch(e => console.log(e))
+        try {
+            if (type === "add") {
+                await client.service("business").create(valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+            else {
+                await client.service("business").patch(values['_id'], valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleValues = (formValues) => {

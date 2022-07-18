@@ -96,7 +96,7 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
         return x
     }
 
-    const submitValues = () => {
+    const submitValues = async () => {
 
         const configurationValues = initialState(area, user)
 
@@ -125,21 +125,20 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
             activitiesInPlace: values.activitiesInPlace,
             prefferedSeason: [values.prefferedSeason],
         }
-
-        if (type === "add")
-            client
-                .service("pois")
-                .create(valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-                .catch(e => console.log(e))
-        else
-            client
-                .service("pois")
-                .patch(values['_id'], valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-                .catch(e => console.log(e))
+        try {
+            if (type === "add") {
+                await client.service("pois").create(valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+            else {
+                await client.service("pois").patch(values['_id'], valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (

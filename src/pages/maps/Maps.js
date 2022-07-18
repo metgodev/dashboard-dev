@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MetroStats from "../../components/MetroStats/MetroStats";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import config from "../../config";
@@ -10,7 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useJsApiLoader } from '@react-google-maps/api';
 // styles
 import useStyles from "./styles";
-//
+//png
 import attractionIcon from '../../Assets/images/icons/attractions.png'
 import cultureIcon from '../../Assets/images/icons/culture.png'
 import foodIcon from '../../Assets/images/icons/food.png'
@@ -18,14 +18,15 @@ import localIcon from '../../Assets/images/icons/local.png'
 import lodgingIcon from '../../Assets/images/icons/lodging.png'
 import travelIcon from '../../Assets/images/icons/travel.png'
 
-export default function Maps() {
+const { REACT_APP_GOOGLE_API_KEY } = process.env
 
+const Maps = () => {
+  //style 
   let classes = useStyles();
-
+  //local
   const [data, setData] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
 
-  const { REACT_APP_GOOGLE_API_KEY } = process.env
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
   useEffect(() => {
@@ -124,3 +125,5 @@ export default function Maps() {
     </div>
   );
 }
+
+export default Maps;

@@ -42,7 +42,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
         return x
     }
 
-    const submitValues = () => {
+    const submitValues = async () => {
         const configurationValues = initialState(area, user)
 
         const valuesToSend = {
@@ -71,21 +71,20 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
             websitesUrl: values.websitesUrl,
             registrationLink: values.registrationLink
         }
-
-        if (type === "add")
-            client
-                .service("events")
-                .create(valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-                .catch(e => console.log(e))
-        else
-            client
-                .service("events")
-                .patch(values['_id'], valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-                .catch(e => console.log(e))
+        try {
+            if (type === "add") {
+                await client.service("events").create(valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+            else {
+                await client.service("events").patch(values['_id'], valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleValues = (formValues) => {

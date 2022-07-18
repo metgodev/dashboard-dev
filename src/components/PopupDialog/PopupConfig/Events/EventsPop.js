@@ -31,27 +31,19 @@ const EventsPop = ({ handleClose, type, open }) => {
     useEffect(() => {
         setMedia([])
         { !open && setTab(0) }
-        if (picker.tagsIds.length === 0) {
-            (() => {
-                client
-                    .service("tag-categories")
-                    .find({ query: { areaId: area.id } })
-                    .then(({ data }) => {
-                        return data.map(
-                            (data) =>
-                            (
-                                ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id, idToSend: data.tag._id })
-                            )
-                        )
-                    }).then(res => {
-                        setPicker(prev => ({ ...prev, tagsIds: res }))
-                    }).catch(e => console.log(e))
-                client.service("authorities").find({ query: { areaId: area.id } })
-                    .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name: name })))
-                    .then((authorities => setPicker(prev => ({ ...prev, authorityId: authorities }))))
-                    .catch(e => console.log(e))
-            })();
-        }
+        (async () => {
+            try {
+                let authorities_res = await client.service("authorities").find({ query: { areaId: area.id } })
+                let tag_categories_res = await client.service("tag-categories").find({ query: { areaId: area.id } })
+                if ((authorities_res.total > 0) && (tag_categories_res.total > 0)) {
+                    let authorities = await authorities_res.data.map(({ name, _id }) => ({ value: _id, name }))
+                    let tag_categories = await tag_categories_res.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id, idToSend: data.tag._id }));
+                    setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        })();
     }, [handleClose])
 
     return (

@@ -42,31 +42,19 @@ const ModifyPop = ({ handleClose, type, open }) => {
 
     useEffect(() => {
         (async () => {
-            let tempPicker = [];
-            await client
-                .service("authorities")
-                .find({ query: { areaId: area.id } })
-                .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
-                .then((authorities) => {
-                    setPicker(prev => ({ ...prev, authorityId: authorities }))
-                });
-
-            await client
-                .service("tag-categories")
-                .find({ query: { areaId: area.id } })
-                .then(({ data }) => {
-                    data.map(
-                        (data) =>
-                        (
-                            tempPicker.push({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id, idToSend: data.tag._id })
-                        )
-                    );
-                    setPicker(prev => ({ ...prev, tagsIds: tempPicker }))
-                });
+            try {
+                let authorities_res = await client.service("authorities").find({ query: { areaId: area.id } })
+                let tag_categories_res = await client.service("tag-categories").find({ query: { areaId: area.id } })
+                if ((authorities_res.total > 0) && (tag_categories_res.total > 0)) {
+                    let authorities = await authorities_res.data.map(({ name, _id }) => ({ value: _id, name }))
+                    let tag_categories = await tag_categories_res.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id, idToSend: data.tag._id }));
+                    setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
+                }
+            } catch (e) {
+                console.log(e)
+            }
         })();
     }, []);
-
-
 
     return (
         <Box>
