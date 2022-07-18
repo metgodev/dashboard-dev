@@ -93,7 +93,7 @@ export const ModifyTab = ({ handleClose, type }) => {
                 .then(({ data }) => {
                     picker.tagsIds = [];
                     data.map((data) => picker.tagsIds =
-                        [...picker.tagsIds, { title: data.tag.title + ' - ' + term(data.category.title.toLowerCase()), id: data.tag._id }])
+                        [...picker.tagsIds, { title: data.tag.title + ' - ' + term(data.category.title.toLowerCase()), id: data._id }])
                 })
         })()
     }, [area])
