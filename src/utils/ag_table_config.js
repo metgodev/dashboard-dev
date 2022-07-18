@@ -489,7 +489,7 @@ export const gridOptions = {
         ],
     },
     paginationAutoPageSize: true,
-    pagination: true,
+    // pagination: true,
     enableRtl: true,
     localeText: AG_GRID_LOCALE_HE,
 };
