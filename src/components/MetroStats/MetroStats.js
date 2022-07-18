@@ -31,3 +31,4 @@ function MetroStats({ title, ammount, svg, setSelectedCategory }) {
 }
 
 export default MetroStats
+

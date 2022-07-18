@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Box } from '@material-ui/core'
 import PageTitle from '../../components/PageTitle/PageTitle'
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
@@ -34,8 +32,6 @@ function Tracks() {
         { name: term('export'), func: () => { }, buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: () => { }, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
-        { name: 'forword', func: () => { }, icon: <ArrowForwardIosOutlinedIcon /> },
-        { name: 'back', func: () => { }, icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
     return (

@@ -7,8 +7,6 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AGTable from '../../components/Tables/AGTable'
 
@@ -35,8 +33,6 @@ function Events() {
         { name: term('export'), func: () => { }, buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: () => { }, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
-        { name: 'forword', func: () => () => { }, icon: <ArrowForwardIosOutlinedIcon /> },
-        { name: 'back', func: () => () => { }, icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
     return (

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import term from '../../terms'
 import { Box } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import PopupDialog from '../../components/PopupDialog/PopupDialog'
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
@@ -34,8 +32,6 @@ function Businesses() {
         { name: term('export'), func: () => { }, buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: () => { }, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
-        { name: 'forward', func: () => () => { }, icon: <ArrowForwardIosOutlinedIcon /> },
-        { name: 'back', func: () => () => { }, icon: <ArrowBackIosNewOutlinedIcon /> },
     ]
 
 

@@ -1,23 +1,16 @@
 import { Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import MetroStats from "../../components/MetroStats/MetroStats";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import config from "../../config";
 import term from "../../terms";
-import MapPick from '../../components/MapPicker.js/MapPick.js'
+import MapPick from '../../components/newMapPick/MapPick'
 import client from '../../API/metro'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useJsApiLoader } from '@react-google-maps/api';
 // styles
 import useStyles from "./styles";
-//svgs
-import attraction from '../../Assets/svgs/attraction.svg'
-import culture from '../../Assets/svgs/culture.svg'
-import food from '../../Assets/svgs/food.svg'
-import local from '../../Assets/svgs/local.svg'
-import lodging from '../../Assets/svgs/lodging.svg'
-import travel from '../../Assets/svgs/travel.svg'
-
+//
 import attractionIcon from '../../Assets/images/icons/attractions.png'
 import cultureIcon from '../../Assets/images/icons/culture.png'
 import foodIcon from '../../Assets/images/icons/food.png'
@@ -29,34 +22,30 @@ export default function Maps() {
 
   let classes = useStyles();
 
+  const [data, setData] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(null)
+
   const { REACT_APP_GOOGLE_API_KEY } = process.env
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
-  const [data, setData] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState(null)
-  let svgArr = [{ attraction }, { culture }, { food }, { local }, { lodging }, { travel }];
-  let img = svgArr.find(s => Object.keys(s)[0] == selectedCategory && s)
-
   useEffect(() => {
-    let businesses = client.service("business").find({ query: { $limit: 135 } })
-    let points = client.service("pois").find({ query: { $limit: 135 } });
-    let events = client.service("events").find({ query: { $limit: 135 } });
-    Promise.all([businesses, points, events])
-      .then(res => {
-        return ([...res[0].data, ...res[1].data, ...res[2].data])
-      })
-      .then(res => res.filter(item => item.tags && item.tags[0] && item.tags[0].category))
-      .then(res => {
-        return res.map(item => {
+    (async () => {
+      try {
+        let businesses = await client.service("business").find({ query: { $limit: 135, status: 'PUBLIC' } })
+        let points = await client.service("pois").find({ query: { $limit: 135, status: 'PUBLIC' } });
+        let events = await client.service("events").find({ query: { $limit: 135, status: 'PUBLIC' } });
+        let data = [...businesses.data, ...points.data, ...events.data]
+        data = data.filter(item => item.tags && item.tags[0] && item.tags[0].category)
+        data = data.map(item => {
           return (
             { category: item.tags[0].category.title, location: item.location.coordinates }
           )
         })
-      })
-      .then(res => {
-        sortDataByCategory(res)
-      })
-
+        sortDataByCategory(data)
+      } catch (err) {
+        console.log(err, 'error by fetching data in map')
+      }
+    })()
   }, [])
 
   const sortDataByCategory = (data) => {

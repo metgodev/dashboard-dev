@@ -587,6 +587,22 @@ const active_lexicon = {
         he: "סטטיסטיקות",
         ar: "إحصائيات",
     },
+    products: {
+        en: "Products",
+        he: "מוצרים",
+        ar: "المنتجات",
+    },
+    reviews: {
+        en: "Reviews",
+        he: "ביקורות",
+        ar: "التقييمات",
+    },
+
+    invitation_manager: {
+        en: "Invitation Manager",
+        he: "ניהול הזמנות",
+        ar: "مدير الدعوات",
+    },
     gallery: {
         en: "Gallery",
         he: "גלריה",
@@ -676,6 +692,11 @@ const active_lexicon = {
         en: 'Download Statistics',
         he: 'הורדת סטטיסטיקה',
         ar: 'تنزيل الإحصائيات',
+    },
+    add_product: {
+        en: 'Add Product',
+        he: 'הוסף מוצר',
+        ar: 'إضافة منتج',
     },
     upload_media: {
         en: 'Upload Media',
@@ -1486,6 +1507,16 @@ const active_lexicon = {
         en: 'Online',
         he: 'מקוון',
         ar: 'الإنترنت'
+    },
+    relevant_to: {
+        en: 'Relevant to',
+        he: 'למי מתאים',
+        ar: 'متعلق ب'
+    },
+    youtube_page_url: {
+        en: 'Youtube page url',
+        he: 'עמוד יוטיוב',
+        ar: 'رابط الصفحة الخاصة بي'
     },
     online_meeting_link: {
         en: 'Online meeting link',
