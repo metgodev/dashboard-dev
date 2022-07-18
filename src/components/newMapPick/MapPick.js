@@ -6,10 +6,7 @@ const DEFAULT_ZOOM = 15;
 const { innerWidth: windowWidth, innerHeight: windowHeight } = window
 const DEFAULT_CONTANER_STYLE = { width: windowWidth, height: windowHeight / 2 }
 
-const MapPick = ({ point, containerStyle, markers, setFatherValue, zoom }) => {
-
-    const { REACT_APP_GOOGLE_API_KEY } = process.env
-    const { isLoaded } = useJsApiLoader({ id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
+const MapPick = ({ point, containerStyle, markers, setFatherValue, zoom, isLoaded }) => {
 
     const [myMap, setMyMap] = useState(null)
     const [location, setLocation] = useState(DEFAULT_LOCATION);
