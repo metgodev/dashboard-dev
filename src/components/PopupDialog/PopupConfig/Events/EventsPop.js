@@ -47,7 +47,7 @@ const EventsPop = ({ handleClose, type, open }) => {
     }, [handleClose])
 
     return (
-        <Box>
+        <Box sx={{ height: "100%" }}>
             {loadingImage && <Box className={classes.loadingImage}>
                 <CircularProgress size={100} />
             </Box>}
@@ -56,8 +56,8 @@ const EventsPop = ({ handleClose, type, open }) => {
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={type === 'add'} />)}
                 </Tabs>
             </Box>
-            <Box id="alert-dialog-slide-description">
-                <TabPanel value={tab} index={0}>
+            <Box id="alert-dialog-slide-description" sx={{ height: "90%" }}>
+                <TabPanel value={tab} index={0} >
                     {(picker.tagsIds.length > 0 && picker.authorityId.length > 0) ?
                         <ModifyEventsTab handleClose={handleClose} type={type} areaSpecificData={picker} /> : <></>
                     }

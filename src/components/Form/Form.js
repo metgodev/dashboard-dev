@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { TextField, Select, Checkboxes, Autocomplete, TimePicker as MuiRffTimePicker, DatePicker } from "mui-rff";
 import { MenuItem, Checkbox as MuiCheckbox } from "@material-ui/core";
@@ -19,11 +19,19 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   const { REACT_APP_GOOGLE_API_KEY } = process.env
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
+  const [resizableText, setResizableText] = useState("")
+
+  useEffect(() => {
+    setResizableText(data['description'])
+  }, [data])
+
   return (
     <>
       {
         <Form
-          onSubmit={submitFunction}
+          onSubmit={(values) => {
+            submitFunction({ ...values, description: resizableText })
+          }}
           initialValues={data}
           validate={validiationFunction}
           render={({ handleSubmit, values }) => (
@@ -127,12 +135,12 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                     {type === 'textAreaSizeable' && (
                       <TextareaAutosize
                         aria-label={field}
-                        style={{ height: '56px' }}
+                        style={{ height: '56px', fontSize: '16px', paddingTop: '10px' }}
                         className={classes.resizeTextField}
                         placeholder={term('description')}
-                        value={data[field]}
+                        value={resizableText}
                         minRows={3}
-                        onChange={(e) => { setExternalValues(prev => ({ ...prev, description: e.target.value })) }}
+                        onChange={(e) => { setResizableText(e.target.value) }}
                       />
                     )}
                   </Grid>
@@ -142,7 +150,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                 orientation === 'rtl' ?
                   classes.submitButtonLeft : classes.submitButtonRight
               }>
-                <Button type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
+                <Button variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
               </Box>
             </form >
           )}

@@ -4,7 +4,8 @@ export default makeStyles(theme => ({
     form: {
         width: '100%',
         padding: '10px',
-        position: 'relative'
+        marginBottom: '20px',
+        height: '100%'
     },
     gridContainer: {
         width: '100%'
@@ -15,12 +16,12 @@ export default makeStyles(theme => ({
     submitButtonRight: {
         position: 'absolute',
         right: 10,
-        bottom: -55
+        bottom: 10,
     },
     submitButtonLeft: {
         position: 'absolute',
-        left: 10,
-        bottom: -55
+        bottom: 10,
+        left: 20
     },
     resizeTextField: {
         width: '100%',
@@ -33,7 +34,7 @@ export default makeStyles(theme => ({
         padding: '10px'
     },
     submitButton: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 0
     }
 }));

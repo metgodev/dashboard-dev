@@ -11,8 +11,8 @@ import { useDispatch } from "react-redux";
 import get_orientation from '../../../../../utils/get_orientation'
 import { set_table_changed } from "../../../../../REDUX/actions/main.actions";
 import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
-import { initialState, GetValuesToSendFirstPart, GetValuesToSendSecondPart, GetValuesToSendThirdPart } from './HandleBusinessData'
-
+import { initialState } from './HandleBusinessData'
+import { GetValuesForForm, getTagIdsToSend } from "../../CategoryConfig";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
@@ -26,9 +26,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const [step, setStep] = useState(0)
     const [orientation, setOrientation] = useState('ltr')
 
-    const firstFormData = GetValuesToSendFirstPart(values, areaSpecificData.tagsIds)
-    const secondFormData = GetValuesToSendSecondPart(values)
-    const thirdFormData = GetValuesToSendThirdPart(values)
+    const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     useEffect(() => {
         handleSetValues(init)
@@ -38,21 +36,13 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
 
     const handleSetValues = (init) => setValues(init);
 
-    const getTagIdsToSend = (tagCategoryIds) => {
-        let x = areaSpecificData.tagsIds.filter(item => tagCategoryIds.includes(item.id))
-        x = x.map(item => {
-            return item.idToSend
-        })
-        return x
-    }
-
     const submitValues = async () => {
 
         const configurationValues = initialState(area, user)
 
         const valuesToSend = {
             name: values.name,
-            tagsIds: getTagIdsToSend(values.tagsIds),
+            tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
             description: values.description,
             authorityId: values.authorityId,
             address: values.locationName,
@@ -110,7 +100,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                 field:
                     <Form
                         fields={ModalInit.slice(0, 12)}
-                        data={firstFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateFirstFormPart}
@@ -125,7 +115,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                 field:
                     < Form
                         fields={ModalInit.slice(12, 20)}
-                        data={secondFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateSeconsFormPart}
@@ -140,7 +130,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                 field:
                     < Form
                         fields={ModalInit.slice(20)}
-                        data={thirdFormData} //Send the data in the correct format
+                        data={formData} //Send the data in the correct format
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateThirdFormPart}

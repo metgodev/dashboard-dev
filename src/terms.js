@@ -522,6 +522,11 @@ const active_lexicon = {
         he: "האם ברצונך לשמור את השינויים",
         ar: "هل تريد حفظ التغييرات",
     },
+    please_choose_up_to: {
+        en: "Please choose up to",
+        he: "אנא בחר עד",
+        ar: "الرجاء اختيار ما يصل",
+    },
     edit: {
         en: "Save Changes",
         he: "שמירת שינויים",

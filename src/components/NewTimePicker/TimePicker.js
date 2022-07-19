@@ -14,7 +14,7 @@ const TimePicker = ({ title, realData, setTimes }) => {
     const classes = useStyles()
 
     useEffect(() => {
-        if (Object.keys(realData).length > 0) {
+        if (realData !== undefined && realData !== null && Object.keys(realData).length > 0) {
             setData(realData)
         } else {
             setData(placeholderData)

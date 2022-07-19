@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Form from '../../../../Form/Form'
 import { ModalInit } from '../popConfig'
-import { GetValuesToSendFirstPart, GetValuesToSendSecondPart, GetValuesToSendThirdPart, initialState } from './HandlePointsData'
+import { initialState } from './HandlePointsData'
 import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } from './Validations'
 import useStyles from './styles'
 import get_orientation from '../../../../../utils/get_orientation'
@@ -11,8 +11,9 @@ import { Box } from '@mui/material'
 import Stepper from '../../../../Stepper/Stepper'
 import client from '../../../../../API/metro'
 import { set_table_changed } from "../../../../../REDUX/actions/main.actions";
+import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
 
-function ModifyPointTab({ type, areaSpecificData, handleClose }) {
+const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
     //global
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
@@ -24,9 +25,7 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
     const [step, setStep] = useState(0)
     const [orientation, setOrientation] = useState('ltr')
 
-    const firstFormData = GetValuesToSendFirstPart(values, areaSpecificData.tagsIds)
-    const secondFormData = GetValuesToSendSecondPart(values)
-    const thirdFormData = GetValuesToSendThirdPart(values)
+    const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     useEffect(() => {
         setValues(init)
@@ -47,7 +46,7 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
                 field:
                     <Form
                         fields={ModalInit.slice(0, 14)}
-                        data={firstFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateFirstFormPart}
@@ -62,7 +61,7 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
                 field:
                     < Form
                         fields={ModalInit.slice(14, 17)}
-                        data={secondFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateSecondFormPart}
@@ -77,7 +76,7 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
                 field:
                     < Form
                         fields={ModalInit.slice(17)}
-                        data={thirdFormData} //Send the data in the correct format
+                        data={formData} //Send the data in the correct format
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateThirdFormPart}
@@ -87,14 +86,6 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
                     />,
             }
         ]
-
-    const getTagIdsToSend = (tagCategoryIds) => {
-        let x = areaSpecificData.tagsIds.filter(item => tagCategoryIds.includes(item.id))
-        x = x.map(item => {
-            return item.idToSend
-        })
-        return x
-    }
 
     const submitValues = async () => {
 
@@ -117,7 +108,7 @@ function ModifyPointTab({ type, areaSpecificData, handleClose }) {
             phoneNumber: values.phoneNumber,
             websitesUrl: typeof values.websitesUrl === 'string' ? [values.websitesUrl] : values.websitesUrl,
             contactEmail: values.contactEmail,
-            tagsIds: getTagIdsToSend(values.tagsIds),
+            tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
             shortDescription: values.shortDescription,
             inPlace: values.inPlace,
             tip: values.tip,

@@ -6,7 +6,7 @@ export default function TabPanel({ children, value, index, ...other }) {
 
     return (
         <div
-            style={{ overflowX: 'hidden' }}
+            style={{ overflowX: 'hidden', height: '100%' }}
             role="tabpanel"
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
@@ -14,7 +14,7 @@ export default function TabPanel({ children, value, index, ...other }) {
             {...other}
         >
             {value === index && (
-                <Box>{children}</Box>
+                <Box style={{ height: '90%' }}>{children}</Box>
             )}
         </div>
     );

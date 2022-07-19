@@ -10,6 +10,8 @@ export default makeStyles(theme => ({
         overflowX: 'hidden',
         padding: 0,
         margin: 0,
+        position: 'relative',
+        height: '100%'
     },
     textFieldUnderline: {
         "&:before": {

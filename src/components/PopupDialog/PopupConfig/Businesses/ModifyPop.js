@@ -57,7 +57,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
     }, []);
 
     return (
-        <Box>
+        <div style={{ height: '100%' }}>
             {loadingImage &&
                 <Box className={classes.loadingImage}>
                     <CircularProgress size={50} />
@@ -67,7 +67,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={b === term('gallery') && type === 'add'} />)}
                 </Tabs>
             </Box>
-            <Box id="alert-dialog-slide-description">
+            <Box sx={{ height: '90%' }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
                     <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />
                 </TabPanel>
@@ -103,7 +103,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                 <TabPanel value={tab} index={8}>
                 </TabPanel>
             </Box>
-        </Box >
+        </div >
     )
 }
 

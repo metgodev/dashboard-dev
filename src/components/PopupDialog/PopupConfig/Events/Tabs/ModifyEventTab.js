@@ -7,10 +7,11 @@ import get_orientation from '../../../../../utils/get_orientation'
 import term from '../../../../../terms'
 import { ModalInit } from '../popConfig'
 import Form from "../../../../Form/Form";
-import { initialState, GetValuesToSendFirstPart, GetValuesToSendSecondPart, GetValuesToSendThirdPart } from './HandleEventsData'
+import { initialState } from './HandleEventsData'
 import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } from './Validations'
 import { set_table_changed } from '../../../../../REDUX/actions/main.actions'
 import client from '../../../../../API/metro'
+import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
 
 export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
 
@@ -24,23 +25,13 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
     const dispatch = useDispatch()
 
 
-    const firstFormData = GetValuesToSendFirstPart(values, areaSpecificData.tagsIds)
-    const secondFormData = GetValuesToSendSecondPart(values)
-    const thirdFormData = GetValuesToSendThirdPart(values)
+    const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     useEffect(() => {
         setValues(init)
         setStep(0)
         setOrientation(get_orientation(lang))
     }, [init])
-
-    const getTagIdsToSend = (tagCategoryIds) => {
-        let x = areaSpecificData.tagsIds.filter(item => tagCategoryIds.includes(item.id))
-        x = x.map(item => {
-            return item.idToSend
-        })
-        return x
-    }
 
     const submitValues = async () => {
         const configurationValues = initialState(area, user)
@@ -59,7 +50,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
             description: values.description,
             shortDescription: values.shortDescription,
             endDate: values.endDate,
-            tagsIds: getTagIdsToSend(values.tagsIds),
+            tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
             openHour: values.openHour,
             relevantTo: values.relevantTo,
             price: values.price,
@@ -100,7 +91,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 field:
                     <Form
                         fields={ModalInit.slice(0, 15)}
-                        data={firstFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateFirstFormPart}
@@ -115,7 +106,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 field:
                     < Form
                         fields={ModalInit.slice(15, 19)}
-                        data={secondFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateSecondFormPart}
@@ -130,7 +121,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 field:
                     < Form
                         fields={ModalInit.slice(19)}
-                        data={thirdFormData}
+                        data={formData}
                         options={areaSpecificData}
                         submitFunction={handleValues}
                         validiationFunction={validateThirdFormPart}
