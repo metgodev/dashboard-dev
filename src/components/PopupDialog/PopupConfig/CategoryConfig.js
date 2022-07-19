@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import MapPick from '../../MapPicker.js/MapPick';
 import GoogleAutocomplete from '../../GoogleAutocomplete/GoogleAutocomplete'
 import Calendar from '../../Calendar/Calendar'
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -80,7 +79,6 @@ let TimePicker = [
 function CategoryConfig({ checked, setChecked, removeDay, setTimes, title, id, field, rows, size, type, setValues, values, init, handleChange, tab, openDrop, setDateTime, maxRows, open }) {
   return (
     <>
-      {type === 'MapPicker' && <MapPick setFatherValue={setValues} />}
       {type === 'googleAutocomplete' && <GoogleAutocomplete setFatherValue={setValues} field={field} />}
       {type === 'textfield' &&
         <TextField

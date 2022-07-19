@@ -4,7 +4,7 @@ import MetroStats from "../../components/MetroStats/MetroStats";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import config from "../../config";
 import term from "../../terms";
-import MapPick from '../../components/newMapPick/MapPick'
+import MapPick from '../../components/MapPicker.js/MapPick'
 import client from '../../API/metro'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useJsApiLoader } from '@react-google-maps/api';

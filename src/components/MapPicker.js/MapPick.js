@@ -74,7 +74,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, zoom, isLoade
                     )
                 })
             }
-            {location && <Marker position={{ lat: point[0], lng: point[1] }} />}
+            {marker && <Marker position={{ lat: point[0], lng: point[1] }} />}
         </GoogleMap>
     ) : <></>
 }
