@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
         height: '100%',
     },
     stepWrapper: {
-        paddingTop: '30px',
+        paddingTop: '10px',
         marginBottom: '100px',
         height: '100%'
     },

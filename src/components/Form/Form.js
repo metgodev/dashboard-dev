@@ -135,7 +135,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                     {type === 'textAreaSizeable' && (
                       <TextareaAutosize
                         aria-label={field}
-                        style={{ height: '56px', fontSize: '16px', paddingTop: '10px' }}
+                        style={{ height: '56px', fontSize: '16px', paddingTop: '10px', overflowY: 'hidden' }}
                         className={classes.resizeTextField}
                         placeholder={term('description')}
                         value={resizableText}
