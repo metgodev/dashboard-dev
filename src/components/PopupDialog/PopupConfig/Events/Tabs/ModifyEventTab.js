@@ -49,6 +49,10 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
             shortDescription: values.shortDescription,
             endDate: values.endDate,
             tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
+            locationInfo: {
+                type: "Point",
+                coordinates: values.locationInfo.coordinates
+            },
             openHour: values.openHour,
             relevantTo: values.relevantTo,
             price: values.price,
