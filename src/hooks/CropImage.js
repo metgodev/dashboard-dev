@@ -28,10 +28,10 @@ const CropImage = ({ cropper, setCropper, src, onClick, style }) => {
     return (
         <div className={style}>
             <Cropper
-                style={{ width: "50vw", height: "400px", margin: "auto", display: "block" }}
+                style={{ width: '100%', margin: "auto", display: "block" }}
                 highlight={false}
                 zoomTo={0.5}
-                // aspectRatio={1}
+                aspectRatio={1}
                 src={src}
                 viewMode={1}
                 minCropBoxHeight={10}
@@ -51,7 +51,7 @@ const CropImage = ({ cropper, setCropper, src, onClick, style }) => {
                 color="primary"
                 onClick={() => { handleClick(cropper, onClick) }}
             >
-                {term('crop_image')}
+                {term('send')}
             </Button>
         </div>
     )

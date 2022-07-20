@@ -9,37 +9,35 @@ import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../REDUX/actions/main.actions'
 
 
-export default function MyImageList({ type, tab, setLoadingImage, editTabData, media, setMedia, getGallery }) {
+export default function MyImageList({ type, tab, setLoadingImage, businessId, media }) {
 
     const classes = useStyles()
     const dispatch = useDispatch()
 
-
     const deleteItem = async (item) => {
         setLoadingImage(true)
-        let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
-        let ids = newMedia.map((item) => {
-            return { fileId: item.file._id, metadata: { type: item.metadata.type } }
-        })
-        const dataToSend = { galleryFileIds: [...ids], gallery: [...newMedia] }
-        await client.service(tab).patch(editTabData._id, dataToSend)
-            .then((res) => {
+        try {
+            let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
+            let ids = newMedia.map((item) => { return { fileId: item.file._id, metadata: { type: item.metadata.type } } })
+            const dataToSend = { galleryFileIds: [...ids], gallery: [...newMedia] }
+            const res = await client.service(tab).patch(businessId, dataToSend)
+            if (res) {
                 dispatch(set_table_changed("upload_media"))
-                getGallery().then(res => {
-                    res?.gallery ? setMedia(res.gallery) : setMedia([])
-                })
-            })
-        setLoadingImage(false)
+            }
+        } catch (e) {
+            console.log(e)
+            setLoadingImage(false)
+        }
     }
 
     return (
         <>
-            <ImageList className={classes.imageList} cols={3} rowHeight={200}>
+            <ImageList style={{ padding: '20px' }} className={classes.imageList} cols={4} rowHeight={200}>
                 {media.map((item, index) => {
                     if (item.metadata.type === type && type !== 'video' && type !== 'files') {
                         return (
-                            <ImageListItem key={index} id={item.file._id}>
-                                <a href={item.file.url} target="_blank">
+                            <ImageListItem cols={1} key={index} id={item.file._id} className={classes.item}>
+                                <a href={item.file.url} target="_blank" style={{ position: 'relative' }}>
                                     <img
                                         src={item.file.url}
                                         loading="lazy"
@@ -53,7 +51,7 @@ export default function MyImageList({ type, tab, setLoadingImage, editTabData, m
                         )
                     } else if (item.metadata.type === type && item.metadata.type === 'video') {
                         return (
-                            <ImageListItem key={index} id={item.file._id}>
+                            <ImageListItem key={index} id={item.file._id} className={classes.item}>
                                 <a href={item.file.url} target="_blank">
                                     <video
                                         src={item.file.url}
@@ -68,7 +66,7 @@ export default function MyImageList({ type, tab, setLoadingImage, editTabData, m
                         )
                     } else if (item.metadata.type === type && item.metadata.type === 'files') {
                         return (
-                            <ImageListItem key={index} id={item.file._id}>
+                            <ImageListItem key={index} id={item.file._id} className={classes.item}>
                                 <a href={item.file.url} target="_blank">
                                     <audio
                                         src={item.file.url}
@@ -78,9 +76,6 @@ export default function MyImageList({ type, tab, setLoadingImage, editTabData, m
                                 </a>
                                 <Box className={classes.deleteWrapper}>
                                     <   DeleteOutlineOutlinedIcon onClick={() => deleteItem({ item })} />
-                                </Box>
-                                <Box className={classes.deleteWrapper}>
-                                    <DeleteOutlineOutlinedIcon onClick={() => deleteItem({ item })} />
                                 </Box>
                             </ImageListItem>
                         )

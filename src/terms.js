@@ -1218,6 +1218,21 @@ const active_lexicon = {
         he: 'כותרת',
         ar: 'العنوان',
     },
+    images: {
+        en: 'Images',
+        he: 'תמונות',
+        ar: 'الصور',
+    },
+    files: {
+        en: 'Files',
+        he: 'קבצים',
+        ar: 'الملفات',
+    },
+    videos: {
+        en: 'Videos',
+        he: 'סרטונים',
+        ar: 'أشرطة فيديو',
+    },
     email: {
         en: 'email',
         he: 'אימייל',

@@ -67,7 +67,8 @@ export default makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '10px'
+        gap: '10px',
+        width: '100%'
     },
     toggleButtons: {
         direction: "ltr",
@@ -91,4 +92,7 @@ export default makeStyles(theme => ({
             paddingTop: "100%",
         },
     },
+    galleryContainer: {
+        width: '100%'
+    }
 }));

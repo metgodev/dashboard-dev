@@ -93,17 +93,17 @@ export const mediaTabConfig = {
             fileTypes: ["JPG", "PNG", "PDF"],
         },
         {
-            title: term('image'),
+            title: term('images'),
             type: "image",
             fileTypes: ["JPG", "PNG", "GIF"],
         },
         {
-            title: term('video'),
+            title: term('videos'),
             type: "video",
             fileTypes: ["MP4", "AVI", "WMV"],
         },
         {
-            title: term('audio'),
+            title: term('files'),
             type: "files",
             fileTypes: ["MP3"],
         },
