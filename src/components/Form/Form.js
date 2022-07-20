@@ -38,7 +38,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
             <form onSubmit={handleSubmit} noValidate className={classes.form}>
               <Grid container spacing={2} className={classes.gridContainer}>
                 {fields.map(({ type, field, title, size }) => (
-                  <Grid item xs={size === 'small' ? 3 : size === 'medium' ? 6 : 12} className={type === 'googleAutocomplete' ? '' : classes.item}>
+                  <Grid key={field} item xs={size === 'small' ? 3 : size === 'medium' ? 6 : 12} className={type === 'googleAutocomplete' ? '' : classes.item}>
                     {type === "textfield" && (
                       <TextField
                         label={title}
@@ -70,7 +70,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                         />
                       </LocalizationProvider>
                     }
-                    {type === "tagsPicker" && (
+                    {type === "tagsPicker" && options[field].length > 0 && values[field] && (
                       <Autocomplete
                         label={title}
                         name={field}

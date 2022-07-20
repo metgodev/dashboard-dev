@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 // See: https://usehooks-ts.com/react-hook/use-event-listener
-import { useEventListener } from '../useEventListener'
+import useEventListener from './useEventListener'
 
 function useWindowSize() {
     const [windowSize, setWindowSize] = useState({

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import term from "../../../../../terms";
+import Form from '../../../../Form/Form'
+
 
 const date = new Date()
 
@@ -145,4 +147,66 @@ const getTagsForForm = (recievedTags, allTags) => {
         })
         return selectedTags
     }
+}
+
+
+export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSeconsFormPart, orientation, setValues) => {
+
+    const [forms, setForms] = useState([])
+
+    useEffect(() => {
+        if (formData && areaSpecificData) {
+            setForms(formToSend)
+        }
+    }, [formData, areaSpecificData, orientation])
+
+    let formToSend = [
+        {
+            title: term("event_details"),
+            optional: false,
+            field:
+                <Form
+                    fields={ModalInit.slice(0, 15)}
+                    data={formData}
+                    options={areaSpecificData}
+                    submitFunction={handleValues}
+                    validiationFunction={validateFirstFormPart}
+                    isPartOfStepper={true}
+                    orientation={orientation}
+                    setExternalValues={setValues}
+                />
+        },
+        {
+            title: term('contact_information'),
+            optional: false,
+            field:
+                < Form
+                    fields={ModalInit.slice(15, 19)}
+                    data={formData}
+                    options={areaSpecificData}
+                    submitFunction={handleValues}
+                    validiationFunction={validateSeconsFormPart}
+                    isPartOfStepper={true}
+                    orientation={orientation}
+                    setExternalValues={setValues}
+                />,
+        },
+        {
+            title: term('location'),
+            optional: false,
+            field:
+                < Form
+                    fields={ModalInit.slice(19)}
+                    data={formData}
+                    options={areaSpecificData}
+                    submitFunction={handleValues}
+                    validiationFunction={validateThirdFormPart}
+                    isPartOfStepper={true}
+                    orientation={orientation}
+                    setExternalValues={setValues}
+                />,
+        }
+    ]
+
+    return forms
 }

@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import term from "../../../../../terms";
+import Form from "../../../../Form/Form";
 
 export const initialState = (area, user) => {
   return (
@@ -158,3 +159,64 @@ const getTagsForForm = (recievedTags, allTags) => {
   return []
 }
 
+export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSecondFormPart, orientation, setValues) => {
+
+  const [forms, setForms] = useState([])
+
+  useEffect(() => {
+    if (formData && areaSpecificData) {
+      setForms(formsToSend)
+    }
+  }, [formData, areaSpecificData, orientation])
+
+  let formsToSend =
+    [
+      {
+        title: term("business_details"),
+        optional: false,
+        field:
+          <Form
+            fields={ModalInit.slice(0, 12)}
+            data={formData}
+            options={areaSpecificData}
+            submitFunction={handleValues}
+            validiationFunction={validateFirstFormPart}
+            isPartOfStepper={true}
+            orientation={orientation}
+            setExternalValues={setValues}
+          />
+      },
+      {
+        title: term('contact_information'),
+        optional: false,
+        field:
+          < Form
+            fields={ModalInit.slice(12, 20)}
+            data={formData}
+            options={areaSpecificData}
+            submitFunction={handleValues}
+            validiationFunction={validateSecondFormPart}
+            isPartOfStepper={true}
+            orientation={orientation}
+            setExternalValues={setValues}
+          />,
+      },
+      {
+        title: term('location'),
+        optional: false,
+        field:
+          < Form
+            fields={ModalInit.slice(20)}
+            data={formData} //Send the data in the correct format
+            options={areaSpecificData}
+            submitFunction={handleValues}
+            validiationFunction={validateThirdFormPart}
+            isPartOfStepper={true}
+            orientation={orientation}
+            setExternalValues={setValues}
+          />,
+      }
+    ]
+
+  return forms
+}

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useStyles from './styles'
 import { Box } from "@mui/material";
-import term from "../../../../../terms";
 import { ModalInit } from "../popConfig";
-import Form from "../../../../Form/Form";
 import { useSelector } from "react-redux";
 import client from "../../../../../API/metro";
 import Stepper from '../../../../Stepper/Stepper'
@@ -11,7 +9,7 @@ import { useDispatch } from "react-redux";
 import get_orientation from '../../../../../utils/get_orientation'
 import { set_table_changed } from "../../../../../REDUX/actions/main.actions";
 import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
-import { initialState } from './HandleBusinessData'
+import { initialState, GetFormFields } from './HandleBusinessData'
 import { GetValuesForForm, getTagIdsToSend } from "../../CategoryConfig";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
@@ -92,65 +90,17 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
         setStep(prev => prev + 1)
     }
 
-    let formFields =
-        [
-            {
-                title: term("business_details"),
-                optional: false,
-                field:
-                    <Form
-                        fields={ModalInit.slice(0, 12)}
-                        data={formData}
-                        options={areaSpecificData}
-                        submitFunction={handleValues}
-                        validiationFunction={validateFirstFormPart}
-                        isPartOfStepper={true}
-                        orientation={orientation}
-                        setExternalValues={setValues}
-                    />
-            },
-            {
-                title: term('contact_information'),
-                optional: false,
-                field:
-                    < Form
-                        fields={ModalInit.slice(12, 20)}
-                        data={formData}
-                        options={areaSpecificData}
-                        submitFunction={handleValues}
-                        validiationFunction={validateSeconsFormPart}
-                        isPartOfStepper={true}
-                        orientation={orientation}
-                        setExternalValues={setValues}
-                    />,
-            },
-            {
-                title: term('location'),
-                optional: false,
-                field:
-                    < Form
-                        fields={ModalInit.slice(20)}
-                        data={formData} //Send the data in the correct format
-                        options={areaSpecificData}
-                        submitFunction={handleValues}
-                        validiationFunction={validateThirdFormPart}
-                        isPartOfStepper={true}
-                        orientation={orientation}
-                        setExternalValues={setValues}
-                    />,
-            }
-        ]
+    let formFields = GetFormFields(ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSeconsFormPart, orientation, setValues)
 
     return (
         <Box className={classes.container}>
-            {formFields &&
-                <Stepper
-                    fields={formFields}
-                    submitFunction={submitValues}
-                    externalActiveStep={step}
-                    setExternalActiveStep={setStep}
-                    orientation={orientation}
-                />}
+            <Stepper
+                fields={formFields}
+                submitFunction={submitValues}
+                externalActiveStep={step}
+                setExternalActiveStep={setStep}
+                orientation={orientation}
+            />
         </Box>
     );
 });
