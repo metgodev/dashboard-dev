@@ -17,7 +17,11 @@ function MetroStats({ title, ammount, svg, setSelectedCategory }) {
     let img = svgArr.find(s => Object.keys(s)[0] == svg && s)
 
     return (
-        <div className={classes.box} onClick={() => setSelectedCategory(svg)}>
+        <div className={classes.box} onClick={() => {
+            if (setSelectedCategory) {
+                setSelectedCategory(svg)
+            }
+        }}>
             <img src={img[svg]} alt={svg} className={classes.logotype} />
             <div className={classes.title}>
                 <Typography variant="h5">{title}</Typography>

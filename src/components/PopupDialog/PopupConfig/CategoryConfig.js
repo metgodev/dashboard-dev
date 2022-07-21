@@ -218,7 +218,7 @@ const initialData = {
   phoneNumber: "",
   websitesUrl: "",
   locationName: "",
-  point: [0, 0],
+  point: [32.109333, 34.855499],
   free: false,
   openHour: date.toISOString(),
   endDate: date.toISOString(),

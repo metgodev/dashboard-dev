@@ -2,16 +2,15 @@ import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
   imageList: {
-    width: '100%',
-    height: '100%',
   },
   image: {
-    width: "200px",
-    height: "200px",
+    width: "100%",
+    height: "100%",
     position: "relative",
+    padding: '7px'
   },
   audio: {
-    width: "200px",
+    width: "210px",
     height: "100px",
     position: "relative",
   },
@@ -30,5 +29,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    boxShadow: '0 0 0.2rem rgba(0,0,0,0.5)',
+    gap: 15
   }
 }));

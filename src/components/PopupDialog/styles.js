@@ -68,7 +68,8 @@ export default makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         gap: '10px',
-        width: '100%'
+        width: '100%',
+        padding: '40px'
     },
     toggleButtons: {
         direction: "ltr",

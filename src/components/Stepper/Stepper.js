@@ -71,8 +71,9 @@ const HorizontalLinearStepper = ({ fields, submitFunction, externalActiveStep, s
               disabled={activeStep === 0}
               onClick={() => handleBack(externalActiveStep, setExternalActiveStep, setActiveStep)}
               //sx={{ mr: 1 }}
-              sx={{ position: 'absolute', bottom: 10 }}
+              sx={{ bottom: 10 }}
               variant="contained"
+              style={{ position: 'absolute' }}
             >
               {term('back')}
             </Button>

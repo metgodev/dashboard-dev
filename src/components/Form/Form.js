@@ -20,9 +20,11 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
   const [resizableText, setResizableText] = useState("")
+  const [times, setTimes] = useState({})
 
   useEffect(() => {
     setResizableText(data['description'])
+    setTimes(data.openingHours)
   }, [data])
 
   return (
@@ -30,7 +32,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
       {
         <Form
           onSubmit={(values) => {
-            submitFunction({ ...values, description: resizableText })
+            submitFunction({ ...values, description: resizableText, openingHours: times })
           }}
           initialValues={data}
           validate={validiationFunction}
@@ -126,9 +128,9 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                     {type === 'timesPicker' && (
                       <TimePicker
                         title={title}
-                        realData={data.openingHours}
+                        realData={times}
                         setTimes={(newTimes) => {
-                          setExternalValues(prev => ({ ...prev, openingHours: newTimes }))
+                          setTimes(newTimes)
                         }}
                       />
                     )}
