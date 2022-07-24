@@ -3,13 +3,18 @@ import { Collapse, Divider, List, ListItem, ListItemIcon, ListItemText, Typograp
 import { Inbox as InboxIcon } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
+import { useDispatch } from "react-redux";
 // styles
 import useStyles from "./styles";
 // components
 import Dot from "../../Dot/Dot";
+import { set_sidebar_toggle } from "../../../REDUX/actions/main.actions";
 
 export default function SidebarLink({ link, icon, label, children, location, sidebar, nested, type, }) {
   let classes = useStyles();
+  let dispatch = useDispatch()
+
+  const toggleSideBar = () => dispatch(set_sidebar_toggle(!sidebar))
 
   // local
   let [isOpen, setIsOpen] = useState(false);
@@ -120,7 +125,11 @@ export default function SidebarLink({ link, icon, label, children, location, sid
   function toggleCollapse(e) {
     if (sidebar) {
       e.preventDefault();
-      setIsOpen(!isOpen);
+      setIsOpen(true)
+    } else {
+      setIsOpen(true)
+      e.preventDefault();
+      toggleSideBar(!sidebar)
     }
   }
 }

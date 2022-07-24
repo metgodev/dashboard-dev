@@ -117,7 +117,7 @@ export const GetValuesForForm = (values, allTags) => {
 
 
 const getTagsForForm = (recievedTags, allTags) => {
-  if (recievedTags.length > 0 && allTags.length > 0) {
+  if (recievedTags && allTags && recievedTags.length > 0 && allTags.length > 0) {
     let selectedTags = recievedTags.map(item => (
       item._id
     ))
