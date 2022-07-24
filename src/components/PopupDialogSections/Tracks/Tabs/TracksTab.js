@@ -1,65 +1,54 @@
 import React, { useEffect, useState } from 'react'
-import { ModalInit, FormTabs } from '../popConfig';
-import client from '../../../../API/metro';
+import { ModalInit } from '../popConfig'
 import { useDispatch, useSelector } from 'react-redux';
-import { set_table_changed } from '../../../../REDUX/actions/main.actions';
-import term from '../../../../terms';
+import { Box } from '@mui/material';
+import useStyles from './styles'
+import Stepper from '../../../Stepper/Stepper'
+import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } from './Validations'
+import { GetFormFields } from './HandleTracksData'
+import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
+import get_orientation from '../../../../utils/get_orientation'
 
-let { user } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer')) || {}
-const picker = {
-    relevantTo: [
-        { value: 'INFANCY', name: term('infancy') },
-        { value: 'KIDS', name: term('kids') },
-        { value: 'YOUTH', name: term('youth') },
-        { value: 'ALL_FAMILY', name: term('all_family') },
-        { value: 'YOUNG_ADULTS', name: term('young_adults') },
-        { value: 'ADULTS', name: term('adults') },
-        { value: 'FAMALIES', name: term('families') },
-        { value: 'GOLDEN_AGE', name: term('golden_age') },
-        { value: 'WOMEN_ONLY', name: term('women_only') },
-        { value: 'MEN_ONLY', name: term('men_only') },
-    ],
-    authorityId: [],
-    pois: [{ value: 'something', name: 'something' }]
-};
-
-export const TracksTab = ({ handleClose, type }) => {
+export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
     //global
     let dispatch = useDispatch()
-    const { area } = useSelector(state => state.mainRememberReducer)
+    const init = useSelector((s) => s.mainReducer.editTabData);
+    const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
     //local
-    const initialState = {
-        userId: user.id,
-        relevantTo: "GOLDEN_AGE"
-    }
-    const [values, setValues] = useState(initialState);
+    const classes = useStyles()
 
-    const handleChange = (e, field, tags, type) => {
-        if (tags) setValues(prevState => ({ ...prevState, [field]: Object.keys(tags).map(key => tags[key].id) }));
-        else if (type === 'toggle' || type === 'checkbox') setValues(prevState => ({ ...prevState, [field]: e.target.checked }));
-        else setValues(prevState => ({ ...prevState, [field]: e.target.value }));
-    };
-    const modify = async (type, id) => {
-        if (type === 'add')
-            client.service('tracks').create(values)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-        else
-            client.service('tracks').patch(id, values)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-    }
+    const [values, setValues] = useState({});
+    const [step, setStep] = useState(0)
+    const [orientation, setOrientation] = useState('ltr')
 
     useEffect(() => {
-        (async () => {
-            client.service("authorities").find({ query: { areaId: area.id } })
-                .then((res) => res.data.map(({ name, _id }) => ({ value: _id, name })))
-                .then((authorities => picker.authorityId = authorities))
-        })();
-    }, [area])
+        setValues(init)
+        setStep(0)
+        setOrientation(get_orientation(lang))
+    }, [init]);
 
-    let maxSizeElements = ['MapPicker', 'divider']
+    const formData = GetValuesForForm(values)
+
+    const handleValues = (formValues) => {
+        setValues(prev => ({ ...prev, ...formValues }))
+        setStep(prev => prev + 1)
+    }
+
+    const submitValues = async () => {
+
+    }
+
+    let formFields = GetFormFields(ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSecondFormPart, orientation, setValues)
+
     return (
-        <></>
+        <Box className={classes.container}>
+            <Stepper
+                fields={formFields}
+                submitFunction={submitValues}
+                externalActiveStep={step}
+                setExternalActiveStep={setStep}
+                orientation={orientation}
+            />
+        </Box>
     )
 }

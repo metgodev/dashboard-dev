@@ -8,15 +8,21 @@ import { TracksTab } from './Tabs/TracksTab';
 import { UploadMediaTab } from '../uploadMediaTab';
 import { CircularProgress } from '@material-ui/core'
 import { mediaTabConfig } from './popConfig'
-
+import { Picker } from './Tabs/HandleTracksData'
+import client from '../../../API/metro'
+import { useSelector } from 'react-redux';
 //styles
 import useStyles from "../styles";
 
 const TracksPop = ({ handleClose, type, open }) => {
 
+    const { area } = useSelector((state) => state.mainRememberReducer);
+
     const classes = useStyles()
+
     const [tab, setTab] = useState(0);
     const [loadingImage, setLoadingImage] = useState(false)
+    const [picker, setPicker] = useState(Picker)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
@@ -24,6 +30,17 @@ const TracksPop = ({ handleClose, type, open }) => {
 
     useEffect(() => {
         { !open && setTab(0) }
+        (async () => {
+            try {
+                const auth = await client.service("authorities").find({ query: { areaId: area.id } })
+                if (auth.total > 0) {
+                    const results = auth.data.map(({ name, _id }) => ({ value: _id, name }))
+                    setPicker(prev => ({ ...prev, authorityId: results }))
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        })()
     }, [handleClose])
 
     return (
@@ -38,7 +55,7 @@ const TracksPop = ({ handleClose, type, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <TracksTab handleClose={handleClose} type={type} />
+                    {picker.authorityId.length > 0 && <TracksTab areaSpecificData={picker} handleClose={handleClose} type={type} />}
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <UploadMediaTab setLoadingImage={setLoadingImage} tab={"tracks"} config={mediaTabConfig} />

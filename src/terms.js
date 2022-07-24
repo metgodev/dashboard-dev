@@ -1947,6 +1947,11 @@ const active_lexicon = {
         he: 'יום שבת',
         ar: 'يوم السبت'
     },
+    track_details: {
+        en: 'Track Details',
+        he: 'פרטי המסלול',
+        ar: 'تفاصيل المسار'
+    },
     business_details: {
         en: 'Business details',
         he: 'פרטי העסק',
