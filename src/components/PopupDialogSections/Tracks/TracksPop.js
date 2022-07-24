@@ -16,7 +16,6 @@ const TracksPop = ({ handleClose, type, open }) => {
 
     const classes = useStyles()
     const [tab, setTab] = useState(0);
-    const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
 
     const handleTabs = (event, newValue) => {
@@ -24,7 +23,6 @@ const TracksPop = ({ handleClose, type, open }) => {
     };
 
     useEffect(() => {
-        setMedia([])
         { !open && setTab(0) }
     }, [handleClose])
 

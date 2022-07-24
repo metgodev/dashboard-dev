@@ -20,7 +20,6 @@ const EventsPop = ({ handleClose, type, open }) => {
     //local
     const { area } = useSelector((state) => state.mainRememberReducer);
     const [tab, setTab] = useState(0);
-    const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
     const [picker, setPicker] = useState(Picker)
 
@@ -29,7 +28,6 @@ const EventsPop = ({ handleClose, type, open }) => {
     };
 
     useEffect(() => {
-        setMedia([])
         { !open && setTab(0) }
         (async () => {
             try {

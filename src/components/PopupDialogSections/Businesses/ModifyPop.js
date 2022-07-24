@@ -24,7 +24,6 @@ const ModifyPop = ({ handleClose, type, open }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
-    const [media, setMedia] = useState([]);
     const [loadingImage, setLoadingImage] = useState(false)
     const [picker, setPicker] = useState(Picker)
 
@@ -33,7 +32,6 @@ const ModifyPop = ({ handleClose, type, open }) => {
     };
 
     useEffect(() => {
-        setMedia([])
         { !open && setTab(0) }
     }, [handleClose])
 
