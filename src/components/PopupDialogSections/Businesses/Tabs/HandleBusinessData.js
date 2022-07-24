@@ -53,7 +53,7 @@ export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValue
   let formsToSend =
     [
       {
-        title: term("business_details"),
+        title: term("details"),
         optional: false,
         field:
           <Form

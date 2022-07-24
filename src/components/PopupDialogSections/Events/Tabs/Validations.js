@@ -35,11 +35,12 @@ export async function validateFirstFormPart(values) {
     if (!values.reservations || values.reservations.length < 1) {
         return { reservations: term('please_choose_a_resevation_option') }
     }
+    if (values.price && values.free) {
+        return { free: term('cant_be_free_and_have_a_price') }
+    }
 }
 export async function validateSecondFormPart(values) {
-    if (!values.registrationLink) {
-        return { registrationLink: term('please_enter_a_registration_link') }
-    }
+
 }
 export async function validateThirdFormPart(values) {
 

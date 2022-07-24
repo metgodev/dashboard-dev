@@ -15,7 +15,7 @@ export const ModalInit = [
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker', maxItems: 3, required: true },
     { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker', maxItems: 5, required: true },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 5, maxRows: 5, size: 'medium', type: 'textAreaSizeable', required: true },
-    { title: term('activities_in_place'), id: createRandomId(), field: 'activitiesInPlace', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: false },
+    //{ title: term('activities_in_place'), id: createRandomId(), field: 'activitiesInPlace', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: false },
     { title: term('exclusive_for'), id: createRandomId(), field: 'exclusiveFor', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: false },
     { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: true },
     { title: term('tip'), id: createRandomId(), field: 'tip', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: false },

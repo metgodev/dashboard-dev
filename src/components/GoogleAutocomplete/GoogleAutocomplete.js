@@ -4,10 +4,11 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { useSelector } from "react-redux";
 import term from "../../terms";
+import { Typography } from "../Wrappers/Wrappers";
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
-const Component = ({ setFatherValue }) => {
+const Component = ({ setFatherValue, text }) => {
 
   const [value, setValue] = useState(null);
   const { lang } = useSelector((s) => s.mainRememberReducer);
@@ -38,6 +39,11 @@ const Component = ({ setFatherValue }) => {
         }}
         apiOptions={{ language: lang }}
       />
+      {text &&
+        <Typography size="md" style={{ paddingTop: '10px', paddingRight: '3px' }}>
+          {text}
+        </Typography>
+      }
     </div>
   );
 };

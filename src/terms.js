@@ -914,9 +914,9 @@ const active_lexicon = {
         ar: 'الموسم المفضل',
     },
     shady: {
-        en: 'Shady',
-        he: 'מוצל',
-        ar: 'ظليلة',
+        en: 'Is there shade',
+        he: 'האם יש צל',
+        ar: 'هل يوجد ظل؟',
     },
     arrival_recommendations: {
         en: 'Arrival recommendations',
@@ -1911,6 +1911,21 @@ const active_lexicon = {
         en: 'Yes',
         he: 'כן',
         ar: 'نعم'
+    },
+    or_search_on_map: {
+        en: 'Or search on the map',
+        he: 'או חפש על המפה',
+        ar: 'أو ابحث على الخريطة'
+    },
+    location_description: {
+        en: 'Location Description',
+        he: 'תיאור מיקום',
+        ar: 'وصف الموقع'
+    },
+    cant_be_free_and_have_a_price: {
+        en: 'Cant be free and have a price',
+        he: "לא יכול להיות בחינם ויש לו מחיר",
+        ar: 'لا يمكن أن تكون حرة ولها ثمن'
     },
     sunday: {
         en: 'Sunday',

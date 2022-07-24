@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
-import { TextField, Select, Checkboxes, Autocomplete, TimePicker as MuiRffTimePicker, DatePicker } from "mui-rff";
+import { TextField, Select, Autocomplete, TimePicker as MuiRffTimePicker, DatePicker, Switches } from "mui-rff";
 import { MenuItem, Checkbox as MuiCheckbox } from "@material-ui/core";
 import { Box, Button, Grid, TextareaAutosize } from "@mui/material";
 import GoogleAutocomplete from "../GoogleAutocomplete/GoogleAutocomplete";
@@ -76,6 +76,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           label={title}
                           name={field}
                           closeOnSelect={true}
+                          ampm={false}
                         />
                       </LocalizationProvider>
                     }
@@ -106,20 +107,17 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                       />
                     )}
                     {type === "checkbox" && (
-                      <Checkboxes
-                        label={title}
+                      <Switches
                         key={field}
                         name={field}
-                        data={{
-                          label:
-                            values[field] === false ? term('no') : term('yes'),
-                          value: values[field],
-                        }}
+                        required={true}
+                        data={{ label: title, value: true }}
                       />
                     )}
                     {type === "googleAutocomplete" && (
                       <GoogleAutocomplete
                         setFatherValue={setExternalValues}
+                        text={term('or_search_on_map')}
                       />
                     )}
                     {type === "MapPicker" && (
