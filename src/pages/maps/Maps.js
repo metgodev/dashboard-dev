@@ -17,6 +17,7 @@ import foodIcon from '../../Assets/images/icons/food.png'
 import localIcon from '../../Assets/images/icons/local.png'
 import lodgingIcon from '../../Assets/images/icons/lodging.png'
 import travelIcon from '../../Assets/images/icons/travel.png'
+import useGetWindowSize from '../../hooks/useGetWindowSize'
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
@@ -26,6 +27,8 @@ const Maps = () => {
   //local
   const [data, setData] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
+
+  const { width, height } = useGetWindowSize()
 
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
@@ -97,12 +100,14 @@ const Maps = () => {
       <PageTitle title={term('map')} />
       {data ?
         <>
-          <MapPick
-            containerStyle={{ width: '100%', height: '60vh' }}
-            markers={selectedCategory ? data[selectedCategory] : [...data.culture, ...data.food, ...data.travel, ...data.local, ...data.lodging, ...data.attraction]}
-            zoom={8}
-            isLoaded={isLoaded}
-          />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '20px' }}>
+            <MapPick
+              containerStyle={{ width: width - 300, height: '55vh' }}
+              markers={selectedCategory ? data[selectedCategory] : [...data.culture, ...data.food, ...data.travel, ...data.local, ...data.lodging, ...data.attraction]}
+              zoom={8}
+              isLoaded={isLoaded}
+            />
+          </div>
           <Grid container
             direction="row"
             justifyContent="space-evenly"

@@ -22,10 +22,9 @@ import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 // admin pages
 import { reAuth } from '../API/metro';
-import { useSelector } from 'react-redux';
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 
 const Root = () => {
@@ -35,8 +34,6 @@ const Root = () => {
 
     let { pathname } = location;
     const [loggedIn, setLoggedIn] = useState(false);
-    //global 
-    const { user } = useSelector(s => s.mainRememberReducer);
 
     const Protecte = ({ auth, children }) => {
         return auth ? children : <Navigate to="/login" />;
