@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { set_user } from "../../REDUX/actions/main.actions";
 import { loginWithEmailAndPassword } from "../../API/firebase";
 
-function SignIn() {
+function SignIn({ setLoggedIn }) {
     let classes = useStyles();
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -35,6 +35,7 @@ function SignIn() {
                         id: res._id
                     }
                     dispatch(set_user(user));
+                    setLoggedIn(true)
                     setIsLoading(false);
                 }
             })

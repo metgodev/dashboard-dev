@@ -9,7 +9,7 @@ import Register from "./Register";
 import SignIn from "./SignIn";
 import term from "../../terms"
 
-function Login() {
+function Login({ setLoggedIn }) {
   let classes = useStyles();
 
   // local
@@ -29,7 +29,7 @@ function Login() {
             <Tab label={term("log_in")} classes={{ root: classes.tab }} />
             <Tab label={term("sign_up")} classes={{ root: classes.tab }} />
           </Tabs>
-          {activeTabId === 0 && (<SignIn />)}
+          {activeTabId === 0 && (<SignIn setLoggedIn={setLoggedIn} />)}
           {activeTabId === 1 && (<Register />)}
         </div>
       </div>

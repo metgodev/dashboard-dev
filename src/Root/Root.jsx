@@ -25,6 +25,7 @@ import { reAuth } from '../API/metro';
 import { useSelector } from 'react-redux';
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
+import { useEffect } from 'react';
 
 
 const Root = () => {
@@ -44,19 +45,14 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
-
     useLayoutEffect(() => {
         reAuth().then((res) => {
             setLoggedIn(true);
-            if (location.pathname !== '/login') {
-                navigate(location.pathname);
-            } else {
-                navigate('/dashboard');
-            }
+            navigate('/dashboard');
         }).catch((err) => {
             setLoggedIn(false);
         })
-    }, [])
+    }, [loggedIn])
 
 
     return (
@@ -84,7 +80,7 @@ const Root = () => {
                     <Route exact path="/map" element={<Protecte auth={loggedIn}><Maps /></Protecte>} />
                     <Route exact path="/support" element={<Protecte auth={loggedIn}><Support /></Protecte>} />
                     <Route exact path="/FAQ" element={<Protecte auth={loggedIn}><FAQ /></Protecte>} />
-                    <Route exact path="/login" element={<Login />} />
+                    <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
                     <Route path='*' element={<Protecte auth={loggedIn}><Error /></Protecte>} />
                     {isSuperAdmin &&
                         <>
