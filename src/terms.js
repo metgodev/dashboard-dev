@@ -868,6 +868,16 @@ const active_lexicon = {
         he: 'מטבע',
         ar: 'عملة',
     },
+    reservation_center_email: {
+        en: 'Reservation center email',
+        he: 'כתובת דואר אלקטרוני להזמנות',
+        ar: 'البريد الإلكتروني لمركز الحجز',
+    },
+    online_meeting_u_r_l: {
+        en: 'Online meeting URL',
+        he: 'לינק לפגישה אונליין',
+        ar: 'عنوان URL للاجتماع عبر الإنترنت',
+    },
     producer: {
         en: 'Producer',
         he: 'מפיק',
