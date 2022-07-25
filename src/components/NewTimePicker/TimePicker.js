@@ -30,7 +30,7 @@ const TimePicker = ({ title, realData, setTimes }) => {
             <Collapse in={open} orientation="vertical">
                 <div className={classes.container}>
                     {Object.keys(data).length > 0 && Object.keys(data).map(key => (
-                        <SingleDayTime day={key} hours={data[key]} setDayData={(newDayData) => {
+                        <SingleDayTime key={key} day={key} hours={data[key]} setDayData={(newDayData) => {
                             setTimes({ ...realData, [key]: newDayData })
                         }} />
                     ))}
