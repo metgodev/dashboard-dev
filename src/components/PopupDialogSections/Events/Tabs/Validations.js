@@ -15,9 +15,6 @@ export async function validateFirstFormPart(values) {
     if (!values.authorityId) {
         return { authorityId: term('please_choose_an_authority') }
     }
-    if (!values.description) {
-        return { description: term('please_add_a_description') }
-    }
     if (!values.shortDescription) {
         return { shortDescription: term('please_add_a_short_description') }
     }
