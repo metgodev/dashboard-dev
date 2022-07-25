@@ -29,9 +29,6 @@ export async function validateFirstFormPart(values) {
     if (values.tagsIds.length > 5) {
         return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
-    if (!values.reservations || values.reservations.length < 1) {
-        return { reservations: term('please_choose_a_resevation_option') }
-    }
     if (values.price && values.free) {
         return { free: term('cant_be_free_and_have_a_price') }
     }

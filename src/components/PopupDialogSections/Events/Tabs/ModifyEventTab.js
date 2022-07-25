@@ -43,7 +43,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
             isAccessable: values.isAccessable,
             free: values.free,
             authorityId: values.authorityId,
-            address: values.address,
+            address: values.locationName,
             startDate: values.startDate,
             description: values.description,
             shortDescription: values.shortDescription,
@@ -53,7 +53,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 type: "Point",
                 coordinates: values.locationInfo.coordinates
             },
-            openHour: values.openHour,
+            openHour: getFormattedHour(values.openHour),
             relevantTo: values.relevantTo,
             price: values.price,
             currency: configurationValues.currency,
@@ -78,6 +78,19 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
         } catch (e) {
             console.log(e)
         }
+    }
+
+    const getFormattedHour = (hour) => {
+        const date = new Date(hour)
+        let hours = date.getHours()
+        let minutes = date.getMinutes()
+        if (hours < 10) {
+            hours = "0" + hours
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes
+        }
+        return `${hours}:${minutes}`
     }
 
     const handleValues = (formValues) => {

@@ -26,9 +26,6 @@ export async function validateFirstFormPart(values) {
             shortDescription: term('short_description_cannot_exceed') + " " + MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION + " " + term('words')
         }
     }
-    if (values.reservations.length < 1) {
-        return { reservations: term("please_select_a_reservation_option") }
-    }
     if (values.tagsIds.length < 1) {
         return { tagsIds: term('please_choose_at_least_one_tag') }
     }
