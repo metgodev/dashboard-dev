@@ -28,7 +28,7 @@ function HeaderButtons({ btns, mobile }) {
                             color="primary"
                             onClick={() => !input && func()}
                             component="label"
-                            disabled={name === term("add") ? false : true}
+                            disabled={name === term("export") || name === term("import") ? true : false}
                         >
                             {mobile ? name : buttonIcon}
                             {input && <input
