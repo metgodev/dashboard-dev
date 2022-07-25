@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, IconButton } from '@mui/material'
 import { Button } from '../Wrappers/Wrappers'
+import term from "../../terms";
 
 // styles
 import useStyles from "./styles";
@@ -27,6 +28,7 @@ function HeaderButtons({ btns, mobile }) {
                             color="primary"
                             onClick={() => !input && func()}
                             component="label"
+                            disabled={name === term("add") ? false : true}
                         >
                             {mobile ? name : buttonIcon}
                             {input && <input
