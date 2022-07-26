@@ -18,8 +18,15 @@ import localIcon from '../../Assets/images/icons/local.png'
 import lodgingIcon from '../../Assets/images/icons/lodging.png'
 import travelIcon from '../../Assets/images/icons/travel.png'
 import useGetWindowSize from '../../hooks/useGetWindowSize'
+import useGetService from "../../hooks/useGetService";
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
+
+const select = ['location', 'tags', 'shortDescription', 'name', 'gallery', '_id', 'galleryFileIds', 'tagsIds']
+const business_points = 'business_points',
+  events_points = 'events_points',
+  pois_points = 'pois_points'
+
 
 const Maps = () => {
   //style 
@@ -27,8 +34,9 @@ const Maps = () => {
   //local
   const [data, setData] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const { _get_data, cancel_requests, is_cached, loading, _data } = useGetService()
 
-  const { width, height } = useGetWindowSize()
+  const { width } = useGetWindowSize()
 
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
@@ -51,6 +59,21 @@ const Maps = () => {
       }
     })()
   }, [])
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       await _get_data('business', { $select: select, $limit: 500, status: 'PUBLIC' }, business_points)
+  //       await _get_data('events', { $select: select, $limit: 500, status: 'PUBLIC' }, events_points)
+  //       await _get_data('pois', { $select: select, $limit: 500, status: 'PUBLIC' }, pois_points)
+  //       // 
+  //       console.log(_data)
+  //     } catch (err) {
+  //       console.log(err, 'error by fetching data in map')
+  //     }
+  //   })()
+  //   return () => cancel_requests();
+  // }, [])
 
   const sortDataByCategory = (data) => {
 
