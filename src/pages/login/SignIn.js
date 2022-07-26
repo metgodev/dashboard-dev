@@ -22,7 +22,10 @@ function SignIn({ setLoggedIn }) {
     const loginUser = async () => {
         setIsLoading(true)
         loginWithEmailAndPassword(email, password).then(res => {
-            if (!res?.user) return setIsLoading(false);
+            if (!res?.user) {
+                setIsLoading(false)
+                return
+            }
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
                     setError(res.error)
@@ -36,6 +39,7 @@ function SignIn({ setLoggedIn }) {
                     }
                     dispatch(set_user(user));
                     setLoggedIn(true)
+                    navigate('/dashboard')
                     setIsLoading(false);
                 }
             })

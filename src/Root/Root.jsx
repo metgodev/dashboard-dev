@@ -42,15 +42,18 @@ const Root = () => {
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
-    useLayoutEffect(() => {
+    const reauthenticate = () => {
         reAuth().then((res) => {
             setLoggedIn(true);
             navigate('/dashboard');
         }).catch((err) => {
             setLoggedIn(false);
         })
-    }, [loggedIn])
+    }
 
+    useLayoutEffect(() => {
+        reauthenticate()
+    }, [])
 
     return (
         <Box className={classes.Router}>
