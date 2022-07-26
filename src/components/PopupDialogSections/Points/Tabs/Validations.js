@@ -29,6 +29,12 @@ export async function validateFirstFormPart(values) {
             shortDescription: term('short_description_cannot_exceed') + " " + MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION + " " + term('words')
         }
     }
+    if (!values.arrivalRecommendations) {
+        return { arrivalRecommendations: term('please_choose_an_arrival_recommendation') }
+    }
+    if (!values.shady) {
+        return { shady: term('please_choose_a_shading_option') }
+    }
 }
 
 export async function validateSecondFormPart(values) {

@@ -868,6 +868,16 @@ const active_lexicon = {
         he: 'מטבע',
         ar: 'عملة',
     },
+    please_choose_a_shading_option: {
+        en: 'Please choose a shading option',
+        he: 'אנא בחר אפשרות הצללה',
+        ar: 'الرجاء تحديد خيار التظليل',
+    },
+    please_choose_an_arrival_recommendation: {
+        en: 'Please choose an arrival recommendation',
+        he: 'אנא בחר המלצת הגעה',
+        ar: 'الرجاء اختيار توصية وصول',
+    },
     reservation_center_email: {
         en: 'Reservation center email',
         he: 'כתובת דואר אלקטרוני להזמנות',
