@@ -1819,6 +1819,11 @@ const active_lexicon = {
         he: 'חבוי',
         ar: 'مختفي'
     },
+    please_enter_an_address: {
+        en: 'Please enter an address',
+        he: 'אנא הזן כתובת',
+        ar: 'يرجى إدخال عنوان'
+    },
     hour: {
         en: 'Hour',
         he: 'שעה',

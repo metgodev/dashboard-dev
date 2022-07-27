@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ModalInit } from '../popConfig';
 import Form from '../../../Form/Form'
 import { validateForm } from './Validations'
 import get_orientation from '../../../../utils/get_orientation'
 import { GetFormData } from './HandleAuthorityData'
+import client from '../../../../API/metro'
+import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 
-
-export const AuthorityTab = ({ handleClose, type, options }) => {
+export const AuthorityTab = ({ handleClose, type, }) => {
     //global
 
     const init = useSelector((s) => s.mainReducer.editTabData);
-    const { lang } = useSelector((state) => state.mainRememberReducer);
+    const { lang, area } = useSelector((state) => state.mainRememberReducer);
+    const dispatch = useDispatch()
     //local
     const [values, setValues] = useState({});
     const [orientation, setOrientation] = useState('ltr')
 
-    const formData = GetFormData(values, options)
+    const formData = GetFormData(values)
 
     useEffect(() => {
         setValues(init)
@@ -24,36 +26,32 @@ export const AuthorityTab = ({ handleClose, type, options }) => {
     }, [init]);
 
     const modify = async (formValues) => {
-        const areaId = options.areaId.find(item => item.name === formValues.areaId).value
+
         const valuesToSend = {
             ...formValues,
-            areaId: areaId
+            areaId: area?.id?.toString()
         }
 
-
-        // if (type === 'add')
-        //     client.service('authorities').create(valuesToSend)
-        //         .then(() => dispatch(set_table_changed(type)))
-        //         .then(() => handleClose(false))
-        // else
-        //     client.service('authorities').patch(areaId, valuesToSend)
-        //         .then(() => dispatch(set_table_changed(type)))
-        //         .then(() => handleClose(false))
+        if (type === 'add')
+            client.service('authorities').create(valuesToSend)
+                .then(() => dispatch(set_table_changed(type)))
+                .then(() => handleClose(false))
+        else
+            client.service('authorities').patch(values['_id'], valuesToSend)
+                .then(() => dispatch(set_table_changed(type)))
+                .then(() => handleClose(false))
     }
 
     return (
         <div>
-            {options !== null &&
-                <Form
-                    fields={ModalInit}
-                    data={formData}
-                    options={{ areaId: options.areaId.map(item => item.name) }}
-                    submitFunction={modify}
-                    validiationFunction={validateForm}
-                    isPartOfStepper={false}
-                    orientation={orientation}
-                />
-            }
+            <Form
+                fields={ModalInit}
+                data={formData}
+                options={[]}
+                submitFunction={modify}
+                validiationFunction={validateForm}
+                orientation={orientation}
+            />
         </div >
     )
 }
