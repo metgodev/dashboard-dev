@@ -69,7 +69,7 @@ export const GetValuesForForm = (values, allTags) => {
     name: values.length || Object.keys(values).length ? values.hasOwnProperty('name') ? values.name : initialData.name : initialData.name,
     authorityId: values.length || Object.keys(values).length ? values.hasOwnProperty('authority') ? values.authority._id : values.hasOwnProperty('authorityId') ? values.authorityId : initialData.authority : initialData.authority,
     relevantTo: values.length || Object.keys(values).length ? values.hasOwnProperty('relevantTo') ? values.relevantTo : initialData.relevantTo : initialData.relevantTo,
-    tagsIds: values.length || Object.keys(values).length ? values.hasOwnProperty('tags') ? values.hasOwnProperty('tagsIds') ? values.tagsIds : getTagsForForm(values.tags, allTags) : initialData.tags : initialData.tags,
+    tagsIds: values.length || Object.keys(values).length ? values.hasOwnProperty('tags') ? getTagsForForm(values.tags, allTags) : values.hasOwnProperty('tagsIds') ? values.tagsIds : initialData.tags : initialData.tags,
     openingHours: values.length || Object.keys(values).length ? values.hasOwnProperty('openingHours') ? values.openingHours : initialData.openingHours : initialData.openingHours,
     description: values.length || Object.keys(values).length ? values.hasOwnProperty('description') ? values.description : initialData.description : initialData.description,
     shortDescription: values.length || Object.keys(values).length ? values.hasOwnProperty('shortDescription') ? values.shortDescription : initialData.shortDescription : initialData.shortDescription,
