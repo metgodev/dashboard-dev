@@ -1,6 +1,7 @@
-import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_FILTER_TABLE, SET_CURRENT_ID, SET_EDIT_TAB_DATA } from "../actions/main.actions";
+import { SET_CACHE_DATA, SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_FILTER_TABLE, SET_CURRENT_ID, SET_EDIT_TAB_DATA } from "../actions/main.actions";
 
 const initialState = {
+    cache: {},
     sidebar: false,
     mobile: false,
     initialData: {},
@@ -14,6 +15,10 @@ export default (state = initialState, action) => {
 
     switch (action.type) {
 
+        case SET_CACHE_DATA:
+            return {
+                ...state, cache: { ...state.cache, ...action.payload }
+            }
         case SET_SIDEBAR_TOGGLE:
             return {
                 ...state, sidebar: action.payload

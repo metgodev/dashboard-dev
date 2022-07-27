@@ -1,3 +1,4 @@
+export const SET_CACHE_DATA = 'SET_CACHE_DATA';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_THEME_COLOR = 'SET_THEME_COLOR';
 export const SET_SIDEBAR_TOGGLE = 'SET_SIDEBAR_TOGGLE';
@@ -11,7 +12,10 @@ export const SET_CURRENT_ID = 'SET_CURRENT_ID';
 export const SET_EDIT_TAB_DATA = 'SET_EDIT_TAB_DATA';
 export const SET_AREA_ID = 'SET_AREA_ID'
 
-
+export const set_cache_data = (value) => ({
+    type: SET_CACHE_DATA,
+    payload: value
+})
 
 export const set_theme_color = (value) => ({
     type: SET_THEME_COLOR,
@@ -71,3 +75,5 @@ export const set_edit_tab_data = (value) => ({
     type: SET_EDIT_TAB_DATA,
     payload: value
 })
+
+
