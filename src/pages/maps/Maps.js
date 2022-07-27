@@ -34,7 +34,7 @@ const Maps = () => {
   //local
   const [data, setData] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const { _get_data, cancel_requests, is_cached, loading, _data } = useGetService()
+  const { _get_service, cancel_requests, is_cached, cache, error, loading, _data } = useGetService()
 
   const { width } = useGetWindowSize()
 
@@ -63,11 +63,9 @@ const Maps = () => {
   // useEffect(() => {
   //   (async () => {
   //     try {
-  //       await _get_data('business', { $select: select, $limit: 500, status: 'PUBLIC' }, business_points)
-  //       await _get_data('events', { $select: select, $limit: 500, status: 'PUBLIC' }, events_points)
-  //       await _get_data('pois', { $select: select, $limit: 500, status: 'PUBLIC' }, pois_points)
-  //       // 
-  //       console.log(_data)
+  //       await _get_service('business', { $select: select, $limit: 1000, status: 'PUBLIC' }, business_points)
+  //       await _get_service('events', { $select: select, $limit: 1000, status: 'PUBLIC' }, events_points)
+  //       await _get_service('pois', { $select: select, $limit: 1000, status: 'PUBLIC' }, pois_points)
   //     } catch (err) {
   //       console.log(err, 'error by fetching data in map')
   //     }
