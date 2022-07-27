@@ -898,6 +898,11 @@ const active_lexicon = {
         he: 'מפיק',
         ar: 'منتج',
     },
+    add_connection: {
+        en: 'Add connection',
+        he: 'הוסף קישור',
+        ar: 'أضف الاتصال',
+    },
     producer_phone: {
         en: 'Producer phone',
         he: 'מספר מפיק',
@@ -919,9 +924,9 @@ const active_lexicon = {
         ar: 'بريد الحجز',
     },
     category_id: {
-        en: 'Category',
-        he: 'קטגוריה',
-        ar: 'الفئة',
+        en: 'Category ID',
+        he: 'מזהה קטגוריה',
+        ar: 'معرف الفئة',
     },
     activities_in_place: {
         en: 'Activities in place',
@@ -1828,6 +1833,11 @@ const active_lexicon = {
         en: 'Hour',
         he: 'שעה',
         ar: 'ساعة'
+    },
+    tag_id: {
+        en: 'Tag ID',
+        he: 'מזהה תגית',
+        ar: 'معرف العلامة'
     },
     edit_tags: {
         en: 'Edit tags',

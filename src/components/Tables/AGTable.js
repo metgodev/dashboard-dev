@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
+import term from '../../terms';
 
 const AGTable = ({ display, action }) => {
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
@@ -50,7 +51,12 @@ const AGTable = ({ display, action }) => {
                 let cols = Cols(res.data[0], ignore);
                 let keys = Keys(cols, idOptions, display, onUpdate);
                 setRowData(res.data.map(item => {
-                    let newItem = { ...item };
+                    let newItem;
+                    if (item.tag && item.category) {
+                        newItem = { ...item, tag: item?.tag?.title, category: term(item?.category?.title) };
+                    } else {
+                        newItem = { ...item };
+                    }
                     ignore.forEach(key => {
                         delete newItem[key];
                     })

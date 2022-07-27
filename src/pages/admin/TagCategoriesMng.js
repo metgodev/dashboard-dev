@@ -41,7 +41,7 @@ function TagCategoriesMng() {
 
     let headerBtns = [
         { name: term('add_tags'), func: openTagDialog, buttonIcon: <AddCircleOutline /> },
-        { name: term('edit_tags'), func: openLinkingDialog, buttonIcon: <AddCircleOutline /> },
+        { name: term('add_connection'), func: openLinkingDialog, buttonIcon: <AddCircleOutline /> },
     ]
 
     return (
