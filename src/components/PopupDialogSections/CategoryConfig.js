@@ -53,6 +53,8 @@ const initialData = {
   timeDurationDays: 0,
   timeDurationMinutes: 0,
   timeDurationHours: 0,
+  tagId: "",
+  categoryId: ""
 }
 
 
@@ -108,6 +110,8 @@ export const GetValuesForForm = (values, allTags) => {
     timeDurationDays: values.length || Object.keys(values).length ? values.hasOwnProperty('timeDurationDays') ? values.timeDurationDays : initialData.timeDurationDays : initialData.timeDurationDays,
     timeDurationMinutes: values.length || Object.keys(values).length ? values.hasOwnProperty('timeDurationMinutes') ? values.timeDurationMinutes : initialData.timeDurationMinutes : initialData.timeDurationMinutes,
     timeDurationHours: values.length || Object.keys(values).length ? values.hasOwnProperty('timeDurationHours') ? values.timeDurationHours : initialData.timeDurationHours : initialData.timeDurationHours,
+    tagId: values.length || Object.keys(values).length ? values.hasOwnProperty('tagId') ? values.tagId : initialData.tagId : initialData.tagId,
+    categoryId: values.length || Object.keys(values).length ? values.hasOwnProperty('categoryId') ? values.categoryId : initialData.categoryId : initialData.categoryId,
   }
 
 

@@ -47,7 +47,7 @@ function TagCategoriesMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('area_related_tags')} />
-            <AGTable display={'tag-categories'} action={openTagDialog} />
+            <AGTable display={'tag-categories'} action={openLinkingDialog} />
             <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
             <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={'tags_link'} maxWidth={'sm'} />
         </Box>

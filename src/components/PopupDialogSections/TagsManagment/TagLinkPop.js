@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../TabPanel/TabPanel';
 import { ModalTabs } from './popConfig';
-import { NewTagTab } from './Tabs/NewTagTab';
+import { LinkTabsTab } from './Tabs/LinkTabsTab';
 //styles
 import useStyles from "../styles";
 import { Picker } from './Tabs/HandleTagData'
@@ -28,10 +28,12 @@ const TagLinkPop = ({ handleClose, type, initialData, open }) => {
         (async () => {
             try {
                 let tag_categories_res = await client.service("tag-categories").find({ query: { areaId: area?.id } })
-                if ((tag_categories_res.total > 0)) {
+                let tags_res = await client.service('tags').find({ query: { areaId: area?.id } })
+                if ((tag_categories_res.total > 0) && (tags_res.total > 0)) {
                     let tagCategories = await tag_categories_res.data.map(({ category }) => ({ value: category._id, name: category.title }))
+                    let tags = await tags_res.data.map((tag) => ({ value: tag._id, name: tag.title }))
                     removeDuplicateObjectsFromArray(tagCategories)
-                    setPicker(prev => ({ ...prev, tagCategories: removeDuplicateObjectsFromArray(tagCategories) }))
+                    setPicker(prev => ({ ...prev, categoryId: removeDuplicateObjectsFromArray(tagCategories), tagId: tags }))
                 }
             } catch (e) {
                 console.log(e)
@@ -48,8 +50,8 @@ const TagLinkPop = ({ handleClose, type, initialData, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    {picker.tagCategories &&
-                        <NewTagTab areaSpecificData={picker} handleClose={handleClose} initialData={initialData} type={type} />
+                    {picker.categoryId && picker.tagId &&
+                        <LinkTabsTab areaSpecificData={picker} handleClose={handleClose} initialData={initialData} type={type} />
                     }
                 </TabPanel>
             </Box>
