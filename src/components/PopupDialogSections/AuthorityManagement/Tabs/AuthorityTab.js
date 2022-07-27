@@ -43,15 +43,13 @@ export const AuthorityTab = ({ handleClose, type, }) => {
     }
 
     return (
-        <div>
-            <Form
-                fields={ModalInit}
-                data={formData}
-                options={[]}
-                submitFunction={modify}
-                validiationFunction={validateForm}
-                orientation={orientation}
-            />
-        </div >
+        <Form
+            fields={ModalInit}
+            data={formData}
+            options={[]}
+            submitFunction={modify}
+            validiationFunction={validateForm}
+            orientation={orientation}
+        />
     )
 }

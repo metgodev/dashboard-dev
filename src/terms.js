@@ -1829,6 +1829,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    edit_tags: {
+        en: 'Edit tags',
+        he: 'ערוך תגיות',
+        ar: 'تعديل العلامات'
+    },
     more_than_two_days: {
         en: 'More than two days',
         he: 'יומיים ומעלה',

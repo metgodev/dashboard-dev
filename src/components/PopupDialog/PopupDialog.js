@@ -11,7 +11,7 @@ import PointsPop from '../PopupDialogSections/Points/PointsPop';
 import TracksPop from '../PopupDialogSections/Tracks/TracksPop';
 import AuthorityPop from '../PopupDialogSections/AuthorityManagement/AuthorityPop';
 import TagPop from '../PopupDialogSections/TagsManagment/TagPop';
-import { TagLinkPop } from '../PopupDialogSections/TagsManagment/Tabs/TagLinkPop';
+import TagLinkPop from '../PopupDialogSections/TagsManagment/TagLinkPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
