@@ -7,13 +7,12 @@ import useStyles from './styles'
 //Constants
 const NUMBER_OF_COLUMNS_IN_IMAGE_LIST = 4
 
-function ImagePicker({ title, pictures }) {
+const ImagePicker = ({ title, pictures, setChosenImage, chosenImage }) => {
 
 
     const classes = useStyles()
 
     const [open, setOpen] = useState(false)
-    const [chosenImage, setChosenImage] = useState(null)
 
     // DATA ITEM EXAMPLE
     // {

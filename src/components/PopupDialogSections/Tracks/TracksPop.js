@@ -32,11 +32,7 @@ const TracksPop = ({ handleClose, type, open }) => {
         { !open && setTab(0) }
         (async () => {
             try {
-                const auth = await client.service("authorities").find({ query: { areaId: area.id } })
-                if (auth.total > 0) {
-                    const results = auth.data.map(({ name, _id }) => ({ value: _id, name }))
-                    setPicker(prev => ({ ...prev, authorityId: results }))
-                }
+
             } catch (e) {
                 console.log(e)
             }
@@ -55,7 +51,7 @@ const TracksPop = ({ handleClose, type, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    {picker.authorityId.length > 0 && <TracksTab areaSpecificData={picker} handleClose={handleClose} type={type} />}
+                    {<TracksTab areaSpecificData={picker} handleClose={handleClose} type={type} />}
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <UploadMediaTab setLoadingImage={setLoadingImage} tab={"tracks"} config={mediaTabConfig} />

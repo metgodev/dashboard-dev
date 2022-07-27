@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import term from "../../../../terms";
-import Form from '../../../Form/Form'
 
 export const initialState = (area, user) => {
     return (
@@ -25,54 +23,12 @@ export const Picker = {
         { id: 'WOMEN_ONLY', title: term('women_only') },
         { id: 'MEN_ONLY', title: term('men_only') },
     ],
-    authorityId: [],
-    pois: [{ value: 'something', name: 'something' }],
-    tagsIds: []
+    pois: [{ id: 'something', title: 'something' }],
+    timeDurationDays: [
+        { values: 'HOUR', name: term('hour') },
+        { values: 'HOUR_TO_THREE', name: term('between_an_hour_and_three_hours') },
+        { values: 'HALF_A_DAY', name: term('half_a_day') },
+        { values: 'FULL_DAY', name: term('full_day') },
+        { values: 'MORE_THAN_TWO_DAYS', name: term('more_than_two_days') },
+    ]
 };
-
-export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSecondFormPart, orientation, setValues) => {
-
-    const [forms, setForms] = useState([])
-
-    useEffect(() => {
-        if (formData && areaSpecificData) {
-            setForms(formToSend)
-        }
-    }, [formData, areaSpecificData, orientation])
-
-    let formToSend =
-        [
-            {
-                title: term("details"),
-                optional: false,
-                field:
-                    <Form
-                        fields={ModalInit.slice(0, 9)}
-                        data={formData}
-                        options={areaSpecificData}
-                        submitFunction={handleValues}
-                        validiationFunction={validateFirstFormPart}
-                        isPartOfStepper={true}
-                        orientation={orientation}
-                        setExternalValues={setValues}
-                    />
-            },
-            {
-                title: term("location"),
-                optional: false,
-                field:
-                    <Form
-                        fields={ModalInit.slice(9)}
-                        data={formData}
-                        options={areaSpecificData}
-                        submitFunction={handleValues}
-                        validiationFunction={validateSecondFormPart}
-                        isPartOfStepper={true}
-                        orientation={orientation}
-                        setExternalValues={setValues}
-                    />
-            },
-        ]
-
-    return forms
-}

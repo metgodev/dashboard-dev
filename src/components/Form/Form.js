@@ -11,6 +11,11 @@ import term from "../../terms";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useJsApiLoader } from '@react-google-maps/api';
+import ImagePicker from "../imagePicker/ImagePicker";
+import { getPicturesForImagePicker } from "./FormFunctions";
+
+//Constants
+const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
 
 const MyForm = React.memo(({ fields, data, options, submitFunction, validiationFunction, isPartOfStepper, orientation, setExternalValues }) => {
 
@@ -21,6 +26,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
 
   const [resizableText, setResizableText] = useState("")
   const [times, setTimes] = useState({})
+  const [chosenImage, setChosenImage] = useState(null)
 
   useEffect(() => {
     setResizableText(data['description'])
@@ -148,6 +154,14 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                         value={resizableText}
                         minRows={3}
                         onChange={(e) => { setResizableText(e.target.value) }}
+                      />
+                    )}
+                    {type === 'imagePicker' && (
+                      <ImagePicker
+                        title={IMAGE_PICKER_TITLE}
+                        pictures={getPicturesForImagePicker(values)}
+                        setChosenImage={setChosenImage}
+                        chosenImage={chosenImage}
                       />
                     )}
                   </Grid>

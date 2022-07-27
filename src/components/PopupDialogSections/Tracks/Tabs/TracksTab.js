@@ -3,11 +3,10 @@ import { ModalInit } from '../popConfig'
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@mui/material';
 import useStyles from './styles'
-import Stepper from '../../../Stepper/Stepper'
-import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } from './Validations'
-import { GetFormFields } from './HandleTracksData'
-import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
+import { validateFirstFormPart } from './Validations'
+import { GetValuesForForm } from '../../CategoryConfig'
 import get_orientation from '../../../../utils/get_orientation'
+import Form from '../../../Form/Form'
 
 export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
     //global
@@ -29,24 +28,18 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
 
     const formData = GetValuesForForm(values)
 
-    const handleValues = (formValues) => {
-        setValues(prev => ({ ...prev, ...formValues }))
-        setStep(prev => prev + 1)
-    }
-
-    const submitValues = async () => {
+    const submit = async () => {
 
     }
-
-    let formFields = GetFormFields(ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSecondFormPart, orientation, setValues)
 
     return (
         <Box className={classes.container}>
-            <Stepper
-                fields={formFields}
-                submitFunction={submitValues}
-                externalActiveStep={step}
-                setExternalActiveStep={setStep}
+            <Form
+                fields={ModalInit}
+                data={formData}
+                options={areaSpecificData}
+                submitFunction={submit}
+                validiationFunction={validateFirstFormPart}
                 orientation={orientation}
             />
         </Box>

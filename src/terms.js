@@ -497,6 +497,11 @@ const active_lexicon = {
         he: "סגור",
         ar: "مغلق",
     },
+    time: {
+        en: "Time",
+        he: "זמן",
+        ar: "زمن",
+    },
     closing_time: {
         en: "Closing Time",
         he: "שעת סגירה",
@@ -978,6 +983,11 @@ const active_lexicon = {
         he: 'קבוצות',
         ar: 'مجموعات',
     },
+    choose_a_theme_image: {
+        en: 'Choose a theme image',
+        he: 'בחר תמונת נושא',
+        ar: 'اختر صورة موضوع',
+    },
     golden_age: {
         en: 'Golden age',
         he: 'גיל הזהב',
@@ -1002,6 +1012,11 @@ const active_lexicon = {
         en: 'Point of intrest',
         he: 'נקודת עניין',
         ar: 'نقطة الأهتمام',
+    },
+    points_of_intrest: {
+        en: 'Points of intrest',
+        he: 'נקודות עניין',
+        ar: 'نقاط الاهتمام',
     },
     featured: {
         en: 'Featured',
@@ -1798,6 +1813,41 @@ const active_lexicon = {
         en: 'Words',
         he: 'מילים',
         ar: 'كلمات'
+    },
+    hidden: {
+        en: 'Hidden',
+        he: 'חבוי',
+        ar: 'مختفي'
+    },
+    hour: {
+        en: 'Hour',
+        he: 'שעה',
+        ar: 'ساعة'
+    },
+    more_than_two_days: {
+        en: 'More than two days',
+        he: 'יומיים ומעלה',
+        ar: 'أكثر من يومين'
+    },
+    full_day: {
+        en: 'Full day',
+        he: 'יום שלם',
+        ar: 'يوم كامل'
+    },
+    half_a_day: {
+        en: 'Half a day',
+        he: 'חצי יום',
+        ar: 'نصف يوم'
+    },
+    between_an_hour_and_three_hours: {
+        en: 'An hour to three hours',
+        he: 'בין שעה לשלוש שעות',
+        ar: 'من ساعة إلى ثلاث ساعات'
+    },
+    choose_an_image: {
+        en: 'Choose an image',
+        he: 'בחר תמונה',
+        ar: 'اختر صورة'
     },
     please_enter_a_name: {
         en: 'Please enter a name',
