@@ -11,11 +11,17 @@ function SingleDayTime({ day, hours, setDayData }) {
     return (
         <div className={classes.day}>
             <div className={classes.dayLeftSide}>
-                <Checkbox checked={true} />
+                <Checkbox
+                    checked={hours.open}
+                    onChange={(e) => {
+                        setDayData({ start: hours.start, end: hours.end, open: e.target.checked })
+                    }}
+                />
                 <Typography>{term(day)}</Typography>
             </div>
             <div className={classes.dayRightSide}>
                 <TextField
+                    disabled={hours.open ? false : true}
                     id="openTime"
                     label={term('opening_time')}
                     type="time"
@@ -24,10 +30,11 @@ function SingleDayTime({ day, hours, setDayData }) {
                         shrink: true,
                     }}
                     onChange={(e) => {
-                        setDayData({ start: e.target.value, end: hours.end })
+                        setDayData({ start: e.target.value, end: hours.end, open: hours?.open ? hours.open : true })
                     }}
                 />
                 <TextField
+                    disabled={hours.open ? false : true}
                     id="closeTime"
                     label={term('closing_time')}
                     type="time"
@@ -36,7 +43,7 @@ function SingleDayTime({ day, hours, setDayData }) {
                         shrink: true,
                     }}
                     onChange={(e) => {
-                        setDayData({ end: e.target.value, start: hours.start })
+                        setDayData(prev => ({ ...prev, end: e.target.value, open: hours?.open ? hours.open : true }))
                     }}
                 />
             </div>

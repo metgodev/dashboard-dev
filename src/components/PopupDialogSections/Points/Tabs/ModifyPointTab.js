@@ -32,7 +32,7 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
     }, [init]);
 
     const handleValues = (formValues) => {
-        setValues(prev => ({ ...prev, ...formValues }))
+        setValues(prev => ({ ...prev, ...formValues, websitesUrl: [formValues.websitesUrl] }))
         setStep(prev => prev + 1)
     }
 

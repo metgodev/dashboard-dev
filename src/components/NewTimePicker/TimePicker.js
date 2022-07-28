@@ -15,6 +15,12 @@ const TimePicker = ({ title, realData, setTimes }) => {
 
     useEffect(() => {
         if (realData !== undefined && realData !== null && Object.keys(realData).length > 0) {
+            const realDataWithOpenOrClosed = { ...realData }
+            for (let i = 0; i < Object.keys(realDataWithOpenOrClosed).length; i++) {
+                if (realDataWithOpenOrClosed[Object.keys(realDataWithOpenOrClosed)[i]].open === undefined) {
+                    realDataWithOpenOrClosed[Object.keys(realDataWithOpenOrClosed)[i]].open = true
+                }
+            }
             setData(realData)
         } else {
             setData(placeholderData)
