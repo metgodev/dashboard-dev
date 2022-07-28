@@ -31,7 +31,6 @@ const CropImage = ({ cropper, setCropper, src, onClick, style }) => {
                 style={{ width: '100%', margin: "auto", display: "block" }}
                 highlight={false}
                 zoomTo={0.5}
-                aspectRatio={1}
                 src={src}
                 viewMode={1}
                 minCropBoxHeight={10}
