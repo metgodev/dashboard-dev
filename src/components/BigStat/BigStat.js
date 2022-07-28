@@ -12,8 +12,7 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers/Wrappers";
 import Widget from "../Widget/Widget";
 
-export default function BigStat(props) {
-  let { product, total, color, registrations, bounce } = props;
+export default function BigStat({ product, total, color, registrations }) {
   let classes = useStyles();
   let theme = useTheme();
 
@@ -48,7 +47,7 @@ export default function BigStat(props) {
       <div className={classes.totalValueContainer}>
         <div className={classes.totalValue}>
           <Typography size="xxl" color="text" colorBrightness="secondary">
-            {total[value]}
+            {total.count}
           </Typography>
         </div>
         <BarChart width={100} height={50} data={getRandomData()}>
