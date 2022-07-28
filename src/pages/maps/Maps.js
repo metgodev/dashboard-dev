@@ -46,6 +46,7 @@ const Maps = () => {
         let businesses = await client.service("business").find({ query: { $limit: 135, status: 'PUBLIC' } })
         let points = await client.service("pois").find({ query: { $limit: 135, status: 'PUBLIC' } });
         let events = await client.service("events").find({ query: { $limit: 135, status: 'PUBLIC' } });
+        console.log(businesses)
         let data = [...businesses.data, ...points.data, ...events.data]
         data = data.filter(item => item.tags && item.tags[0] && item.tags[0].category)
         data = data.map(item => {

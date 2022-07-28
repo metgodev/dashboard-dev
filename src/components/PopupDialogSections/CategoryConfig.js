@@ -139,7 +139,7 @@ const getTagsForForm = (recievedTags, allTags) => {
 export const getTagIdsToSend = (tagCategoryIds, areaSpecificData) => {
   let x = areaSpecificData.tagsIds.filter(item => tagCategoryIds.includes(item.id))
   x = x.map(item => {
-    return item.idToSend
+    return item.id
   })
   return x
 }
