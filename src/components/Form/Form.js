@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Form } from "react-final-form";
 import { TextField, Select, Autocomplete, TimePicker as MuiRffTimePicker, DatePicker, Switches } from "mui-rff";
 import { MenuItem, Checkbox as MuiCheckbox } from "@material-ui/core";
@@ -35,9 +35,9 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
     setChosenImage(data.coverImageFileId)
   }, [data])
 
-  const getDataForForm = () => {
+  const getDataForForm = useCallback(() => {
     return { ...data }
-  }
+  }, [data])
 
   return (
     <>

@@ -8,10 +8,10 @@
 
 export function deep_copy(obj, max_depth = 50, depth = 0) {
 	// depth limit exceeded
-	if (depth > max_depth) throw 'failed to copy object: max copy depth exceeded';
+	if (depth > max_depth) throw Error('failed to copy object: max copy depth exceeded');
 	// handle array
 	if (Array.isArray(obj)) {
-		copy = obj.slice(0);
+		let copy = obj.slice(0);
 		for (let i = 0; i < copy.length; i++) {
 			let item = copy[i];
 			if (typeof item == 'object') copy[i] = deep_copy(item, max_depth, depth + 1)
