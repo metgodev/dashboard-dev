@@ -51,15 +51,10 @@ const AGTable = ({ display, action }) => {
                 let cols = Cols(res.data[0], ignore);
                 let keys = Keys(cols, idOptions, display, onUpdate);
                 setRowData(res.data.map(item => {
-                    let newItem;
+                    let newItem = { ...item };
                     if (item.tag && item.category) {
-                        newItem = { ...item, tag: item?.tag?.title, category: term(item?.category?.title) };
-                    } else {
-                        newItem = { ...item };
+                        newItem = { ...newItem, tag: item?.tag?.title, category: term(item?.category?.title) };
                     }
-                    ignore.forEach(key => {
-                        delete newItem[key];
-                    })
                     return newItem;
                 }));
                 setColumnDefs(keys);

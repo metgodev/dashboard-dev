@@ -743,6 +743,11 @@ const active_lexicon = {
         he: 'SDK',
         ar: 'SDK',
     },
+    '2_days_and_above': {
+        en: 'Two days and above',
+        he: 'יומיים ומעלה',
+        ar: 'يومين وما فوق',
+    },
     suitable_for: {
         en: 'suitable for',
         he: 'מתאים ל',
@@ -982,6 +987,11 @@ const active_lexicon = {
         en: 'For all the family',
         he: 'לכל המשפחה',
         ar: 'لجميع أفراد الأسرة',
+    },
+    half_day: {
+        en: 'Half a day',
+        he: 'חצי יום',
+        ar: 'نصف يوم',
     },
     groups: {
         en: 'Groups',
@@ -1858,6 +1868,16 @@ const active_lexicon = {
         en: 'Hour',
         he: 'שעה',
         ar: 'ساعة'
+    },
+    hour: {
+        en: 'Hour',
+        he: 'שעה',
+        ar: 'ساعة'
+    },
+    '1_to_3_hours': {
+        en: 'One to three hours',
+        he: 'שעה עד שלוש שעות',
+        ar: 'من ساعة إلى ثلاث ساعات'
     },
     tag_id: {
         en: 'Tag ID',

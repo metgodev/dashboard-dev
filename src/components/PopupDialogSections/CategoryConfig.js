@@ -114,7 +114,7 @@ export const GetValuesForForm = (values, allTags) => {
     arrivalRecommendations: values.length || Object.keys(values).length ? values.hasOwnProperty('arrivalRecommendations') ? values.arrivalRecommendations : initialData.arrivalRecommendations : initialData.arrivalRecommendations,
     tip: values.length || Object.keys(values).length ? values.hasOwnProperty('tip') ? values.tip : initialData.tip : initialData.tip,
     inPlace: values.length || Object.keys(values).length ? values.hasOwnProperty('inPlace') && values.inPlace.enum === undefined ? values.inPlace : initialData.inPlace : initialData.inPlace,
-    prefferedSeason: values.length || Object.keys(values).length ? values.hasOwnProperty('prefferedSeason') ? values.prefferedSeason : initialData.prefferedSeason : initialData.prefferedSeason,
+    prefferedSeason: values.length || Object.keys(values).length ? values.hasOwnProperty('prefferedSeason') && values.prefferedSeason.enum === undefined ? values.prefferedSeason : initialData.prefferedSeason : initialData.prefferedSeason,
     time: values.length || Object.keys(values).length ? values.hasOwnProperty('time') ? values.time : initialData.time : initialData.time,
     tagId: values.length || Object.keys(values).length ? values.hasOwnProperty('tagId') ? values.tagId : initialData.tagId : initialData.tagId,
     categoryId: values.length || Object.keys(values).length ? values.hasOwnProperty('categoryId') ? values.categoryId : initialData.categoryId : initialData.categoryId,
