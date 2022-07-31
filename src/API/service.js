@@ -1,6 +1,5 @@
 import client from './metro';
 
-
 export const _get = async (service, options) => {
     const res = await client.service(service).find({ query: { ...options } })
     return res;
