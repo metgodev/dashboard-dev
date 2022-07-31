@@ -86,7 +86,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     }
 
     const handleValues = (formValues) => {
-        setValues(prev => ({ ...prev, ...formValues }))
+        setValues(prev => ({ ...prev, ...formValues, websitesUrl: [formValues.websitesUrl] }))
         setStep(prev => prev + 1)
     }
 

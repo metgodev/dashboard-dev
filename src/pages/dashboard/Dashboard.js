@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -12,14 +12,51 @@ import Download from "../../components/Download/Download";
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import client from '../../API/metro'
+import useGetService from '../../hooks/useGetService'
 
 export default function Dashboard() {
+
+  const { _get_service, cancel_requests, is_cached, cache, error, loading, data } = useGetService()
+  const [entitiesCount, setEntitiesCount] = useState([
+    0, 0, 0, 0
+  ])
+
   let headerBtns = [
     //can get name, func, input, icon 
-    { name: term('daily'), func: () => console.log('Days') ,  buttonIcon: <TodayOutlinedIcon />},
-    { name: term('weekly'), func: () => console.log('Week') , buttonIcon: <DateRangeOutlinedIcon />},
-    { name: term('monthly'), func: () => console.log('Months'),  buttonIcon: <CalendarTodayOutlinedIcon /> },
+    { name: term('daily'), func: () => console.log('Days'), buttonIcon: <TodayOutlinedIcon /> },
+    { name: term('weekly'), func: () => console.log('Week'), buttonIcon: <DateRangeOutlinedIcon /> },
+    { name: term('monthly'), func: () => console.log('Months'), buttonIcon: <CalendarTodayOutlinedIcon /> },
   ]
+
+  const getEntitiesCount = async () => {
+    const res = await Promise.all([
+      client.service("business").find({ query: { $limit: 0 } }),
+      client.service("events").find({ query: { $limit: 0 } }),
+      client.service("pois").find({ query: { $limit: 0 } }),
+      client.service("tracks").find({ query: { $limit: 0 } })
+    ])
+    setEntitiesCount([res[0].total, res[1].total, res[2].total, res[3].total])
+  }
+
+  const getEntitiesData = async () => {
+    try {
+      Promise.all
+        ([_get_service('business', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] }),
+        _get_service('events', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] }),
+        _get_service('pois', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] })
+        ])
+    } catch (e) {
+      console.log(`Problem fetching entities data in dashboard: ${e}`)
+    }
+  }
+
+  useEffect(() => {
+    getEntitiesCount()
+    if (Object.keys(cache).length < 3) {
+      getEntitiesData()
+    }
+  }, [])
 
   return (
     <>
@@ -31,9 +68,9 @@ export default function Dashboard() {
         <Grid item lg={8} md={7} sm={12} xs={12}>
           <BigChart />
         </Grid>
-        {config.bigStat.map(stat => (
+        {config.bigStat.map((stat, index) => (
           <Grid item lg={3} md={3} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
+            <BigStat product={stat.product} total={{ ...stat.total, count: entitiesCount[index] }} color={stat.color} registrations={stat.registrations} />
           </Grid>
         ))}
         <Grid container

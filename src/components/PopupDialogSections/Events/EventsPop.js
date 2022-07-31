@@ -35,7 +35,7 @@ const EventsPop = ({ handleClose, type, open }) => {
                 let tag_categories_res = await client.service("tag-categories").find({ query: { areaId: area.id } })
                 if ((authorities_res.total > 0) && (tag_categories_res.total > 0)) {
                     let authorities = await authorities_res.data.map(({ name, _id }) => ({ value: _id, name }))
-                    let tag_categories = await tag_categories_res.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id, idToSend: data.tag._id }));
+                    let tag_categories = await tag_categories_res.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
                     setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
                 }
             } catch (e) {
