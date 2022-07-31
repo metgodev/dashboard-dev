@@ -23,12 +23,12 @@ export const Picker = {
         { id: 'WOMEN_ONLY', title: term('women_only') },
         { id: 'MEN_ONLY', title: term('men_only') },
     ],
-    pois: [{ id: 'something', title: 'something' }],
-    timeDurationDays: [
-        { values: 'HOUR', name: term('hour') },
-        { values: 'HOUR_TO_THREE', name: term('between_an_hour_and_three_hours') },
-        { values: 'HALF_A_DAY', name: term('half_a_day') },
-        { values: 'FULL_DAY', name: term('full_day') },
-        { values: 'MORE_THAN_TWO_DAYS', name: term('more_than_two_days') },
+    objectIds: [],
+    time: [
+        { value: 'HOUR', name: term('hour') },
+        { value: '1_TO_3_HOURS', name: term('between_an_hour_and_three_hours') },
+        { value: 'HALF_DAY', name: term('half_a_day') },
+        { value: 'FULL_DAY', name: term('full_day') },
+        { value: '2_DAYS_AND_ABOVE', name: term('more_than_two_days') },
     ]
 };

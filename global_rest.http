@@ -295,3 +295,9 @@ Authorization: {{authorization}}
 GET https://{{hostname}}/tag-categories
 content-type: {{contentType}}
 Authorization: {{authorization}}
+
+###
+# get tracks
+GET https://{{hostname}}/tracks
+content-type: {{contentType}}
+Authorization: {{authorization}}

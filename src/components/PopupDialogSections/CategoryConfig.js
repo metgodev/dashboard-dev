@@ -50,11 +50,13 @@ const initialData = {
   facebookPageUrl: "",
   instagramPageUrl: "",
   youtubePageUrl: "",
-  timeDurationDays: 0,
-  timeDurationMinutes: 0,
-  timeDurationHours: 0,
+  time: "",
   tagId: "",
-  categoryId: ""
+  categoryId: "",
+  isRecommended: false,
+  isHidden: false,
+  objectIds: [],
+  coverImageFileId: '',
 }
 
 
@@ -71,7 +73,13 @@ export const GetValuesForForm = (values, allTags) => {
     name: values.length || Object.keys(values).length ? values.hasOwnProperty('name') ? values.name : initialData.name : initialData.name,
     authorityId: values.length || Object.keys(values).length ? values.hasOwnProperty('authority') ? values.authority._id : values.hasOwnProperty('authorityId') ? values.authorityId : initialData.authority : initialData.authority,
     relevantTo: values.length || Object.keys(values).length ? values.hasOwnProperty('relevantTo') ? values.relevantTo : initialData.relevantTo : initialData.relevantTo,
-    tagsIds: values.length || Object.keys(values).length ? values.hasOwnProperty('tags') && !values.hasOwnProperty('tagsIds') ? getTagsForForm(values.tags, allTags) : values.hasOwnProperty('tagsIds') ? values.tagsIds : initialData.tags : initialData.tags,
+    tagsIds: values.length || Object.keys(values).length ?
+      (values.hasOwnProperty('tags') && !values.hasOwnProperty('tagsIds') ?
+        getTagsForForm(values.tags, allTags) : values.hasOwnProperty('tagsIds') ? values.tagsIds
+          :
+          initialData.tags)
+      :
+      (initialData.tags),
     openingHours: values.length || Object.keys(values).length ? values.hasOwnProperty('openingHours') ? values.openingHours : initialData.openingHours : initialData.openingHours,
     description: values.length || Object.keys(values).length ? values.hasOwnProperty('description') ? values.description : initialData.description : initialData.description,
     shortDescription: values.length || Object.keys(values).length ? values.hasOwnProperty('shortDescription') ? values.shortDescription : initialData.shortDescription : initialData.shortDescription,
@@ -105,15 +113,17 @@ export const GetValuesForForm = (values, allTags) => {
     shady: values.length || Object.keys(values).length ? values.hasOwnProperty('shady') ? values.shady : initialData.shady : initialData.shady,
     arrivalRecommendations: values.length || Object.keys(values).length ? values.hasOwnProperty('arrivalRecommendations') ? values.arrivalRecommendations : initialData.arrivalRecommendations : initialData.arrivalRecommendations,
     tip: values.length || Object.keys(values).length ? values.hasOwnProperty('tip') ? values.tip : initialData.tip : initialData.tip,
-    inPlace: values.length || Object.keys(values).length ? values.hasOwnProperty('inPlace') ? values.inPlace : initialData.inPlace : initialData.inPlace,
+    inPlace: values.length || Object.keys(values).length ? values.hasOwnProperty('inPlace') && values.inPlace.enum === undefined ? values.inPlace : initialData.inPlace : initialData.inPlace,
     prefferedSeason: values.length || Object.keys(values).length ? values.hasOwnProperty('prefferedSeason') ? values.prefferedSeason : initialData.prefferedSeason : initialData.prefferedSeason,
-    timeDurationDays: values.length || Object.keys(values).length ? values.hasOwnProperty('timeDurationDays') ? values.timeDurationDays : initialData.timeDurationDays : initialData.timeDurationDays,
-    timeDurationMinutes: values.length || Object.keys(values).length ? values.hasOwnProperty('timeDurationMinutes') ? values.timeDurationMinutes : initialData.timeDurationMinutes : initialData.timeDurationMinutes,
-    timeDurationHours: values.length || Object.keys(values).length ? values.hasOwnProperty('timeDurationHours') ? values.timeDurationHours : initialData.timeDurationHours : initialData.timeDurationHours,
+    time: values.length || Object.keys(values).length ? values.hasOwnProperty('time') ? values.time : initialData.time : initialData.time,
     tagId: values.length || Object.keys(values).length ? values.hasOwnProperty('tagId') ? values.tagId : initialData.tagId : initialData.tagId,
     categoryId: values.length || Object.keys(values).length ? values.hasOwnProperty('categoryId') ? values.categoryId : initialData.categoryId : initialData.categoryId,
+    isRecommended: values.length || Object.keys(values).length ? values.hasOwnProperty('isRecommended') ? values.isRecommended : initialData.isRecommended : initialData.isRecommended,
+    isHidden: values.length || Object.keys(values).length ? values.hasOwnProperty('isHidden') ? values.isHidden : initialData.isHidden : initialData.isHidden,
+    pois: values.length || Object.keys(values).length ? values.hasOwnProperty('pois') ? values.pois : initialData.pois : initialData.pois,
+    objectIds: values.length || Object.keys(values).length ? values.hasOwnProperty('objectIds') ? values.objectIds : initialData.objectIds : initialData.objectIds,
+    coverImageFileId: values.length || Object.keys(values).length ? values.hasOwnProperty('coverImageFileId') ? values.coverImageFileId : initialData.coverImageFileId : initialData.coverImageFileId,
   }
-
 
 
   return returnValues

@@ -11,12 +11,11 @@ export const ModalTabs = [term('locations')]
 export const ModalInit = [
     // ------------------ info ------------------
     { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'medium', type: 'textfield' },
-    { title: term('points_of_intrest'), id: createRandomId(), field: 'pois', rows: 1, maxRows: 1, size: 'medium', type: 'picker' },
+    { title: term('time'), id: createRandomId(), field: 'time', rows: 1, maxRows: 1, size: 'medium', type: 'picker' },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'medium', type: 'textAreaSizeable' },
-    { title: term('time'), id: createRandomId(), field: 'timeDurationDays', rows: 1, maxRows: 1, size: 'medium', type: 'picker' },
-    { title: term('image'), id: createRandomId(), field: 'image', rows: 1, maxRows: 1, size: 'medium', type: 'imagePicker' },
-    { title: term('featured'), id: createRandomId(), field: 'featured', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
-    { title: term('hidden'), id: createRandomId(), field: 'hidden', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
+    { title: term('points_of_intrest'), id: createRandomId(), field: 'objectIds', rows: 1, maxRows: 1, size: 'medium', type: 'draggableListWithPickerAndImages' },
+    { title: term('featured'), id: createRandomId(), field: 'isRecommended', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
+    { title: term('hidden'), id: createRandomId(), field: 'isHidden', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
 ]
 
 

@@ -32,7 +32,13 @@ const TracksPop = ({ handleClose, type, open }) => {
         { !open && setTab(0) }
         (async () => {
             try {
-
+                let points_res = await client.service("pois").find({ query: { $limit: 100, areaId: area.id, $select: ['_id', 'name', 'location', 'galleryFileIds'] } })
+                if ((points_res.total > 0)) {
+                    setPicker(prev => ({
+                        ...prev,
+                        objectIds: points_res.data.map(item => ({ ...item, id: item._id, title: item.name })),
+                    }))
+                }
             } catch (e) {
                 console.log(e)
             }
@@ -51,7 +57,7 @@ const TracksPop = ({ handleClose, type, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    {<TracksTab areaSpecificData={picker} handleClose={handleClose} type={type} />}
+                    {picker.objectIds.length > 0 && <TracksTab areaSpecificData={picker} handleClose={handleClose} type={type} />}
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <UploadMediaTab setLoadingImage={setLoadingImage} tab={"tracks"} config={mediaTabConfig} />

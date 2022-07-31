@@ -12,7 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useJsApiLoader } from '@react-google-maps/api';
 import ImagePicker from "../imagePicker/ImagePicker";
-import { getPicturesForImagePicker } from "./FormFunctions";
+import DraggableList from '../DraggableList/DraggableList'
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -27,10 +27,12 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   const [resizableText, setResizableText] = useState("")
   const [times, setTimes] = useState({})
   const [chosenImage, setChosenImage] = useState(null)
+  const [itemsToSend, setItemsToSend] = useState([])
 
   useEffect(() => {
     setResizableText(data['description'])
     setTimes(data.openingHours)
+    setChosenImage(data.coverImageFileId)
   }, [data])
 
   return (
@@ -38,7 +40,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
       {
         <Form
           onSubmit={(values) => {
-            submitFunction({ ...values, description: resizableText, openingHours: times })
+            submitFunction({ ...values, description: resizableText, openingHours: times, objectIds: itemsToSend, coverImageFileId: chosenImage })
           }}
           initialValues={data}
           validate={validiationFunction}
@@ -159,22 +161,83 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                     {type === 'imagePicker' && (
                       <ImagePicker
                         title={IMAGE_PICKER_TITLE}
-                        pictures={getPicturesForImagePicker(values)}
+                        pictures={values[field]}
                         setChosenImage={setChosenImage}
                         chosenImage={chosenImage}
                       />
                     )}
+                    {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && values[field] && (
+                      <>
+                        <Autocomplete
+                          label={title}
+                          name={field}
+                          multiple={true}
+                          variant="outlined"
+                          options={
+                            options[field].map((item) => ({
+                              label: item.title,
+                              value: item.id,
+                            }))
+                          }
+                          getOptionValue={(option) => option.value}
+                          getOptionLabel={(option) => option.label}
+                          disableCloseOnSelect={true}
+                          renderOption={(props, option, { selected }) => (
+                            <li {...props}>
+                              <MuiCheckbox
+                                style={{ marginRight: 8 }}
+                                checked={selected}
+                              />
+                              {option.label}
+                            </li>
+                          )}
+                        />
+                        <DraggableList
+                          items={values[field]}
+                          names={options[field]}
+                          setItemsToSend={setItemsToSend}
+                          itemsToSend={itemsToSend}
+                        />
+                        <ImagePicker
+                          title={IMAGE_PICKER_TITLE}
+                          data={
+                            {
+                              ids: values[field],
+                              pictures: options[field].map(item => ({
+                                id: item?.id,
+                                url: item?.gallery[0]?.file?.url,
+                                pictureId: item?.gallery[0]?.fileId
+                              }))
+                            }
+                          }
+                          setChosenImage={setChosenImage}
+                          chosenImage={chosenImage}
+                        />
+                      </>
+                    )
+                    }
                   </Grid>
                 ))}
               </Grid>
-              <Box className={
-                orientation === 'rtl' ?
-                  classes.submitButtonLeft : classes.submitButtonRight
-              }>
-                <Button variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
-              </Box>
+              {isPartOfStepper &&
+                <Box className={
+                  orientation === 'rtl' ?
+                    classes.submitButtonLeft : classes.submitButtonRight
+                }>
+                  <Button variant="contained" type="submit">{term('next')}</Button>
+                </Box>
+              }
+              {!isPartOfStepper &&
+                <Box className={
+                  orientation === 'rtl' ?
+                    classes.submitButtonLeft : classes.submitButtonRight
+                }>
+                  <Button variant="contained" type="submit">{term('submit')}</Button>
+                </Box>
+              }
             </form >
-          )}
+          )
+          }
         />
       }
     </>

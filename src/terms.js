@@ -988,6 +988,31 @@ const active_lexicon = {
         he: 'קבוצות',
         ar: 'مجموعات',
     },
+    is_hidden: {
+        en: 'Is hidden',
+        he: 'מוחבא',
+        ar: 'مخفيا',
+    },
+    cover_image_file_id: {
+        en: 'Cover image ID',
+        he: 'מזהה תמונת נושא',
+        ar: 'معرف صورة الغلاف',
+    },
+    object_ids: {
+        en: 'Object IDs',
+        he: 'מזהי אובייקטים',
+        ar: 'معرفات الكائن',
+    },
+    is_recommended: {
+        en: 'Is recommended',
+        he: 'מומלץ',
+        ar: 'موصى به',
+    },
+    please_choose_a_time_frame: {
+        en: 'Please choose a time frame',
+        he: 'אנא בחר מסגרת זמן',
+        ar: 'الرجاء اختيار إطار زمني',
+    },
     choose_a_theme_image: {
         en: 'Choose a theme image',
         he: 'בחר תמונת נושא',

@@ -7,18 +7,11 @@ import useStyles from './styles'
 //Constants
 const NUMBER_OF_COLUMNS_IN_IMAGE_LIST = 4
 
-const ImagePicker = ({ title, pictures, setChosenImage, chosenImage }) => {
-
+const ImagePicker = ({ title, data, setChosenImage, chosenImage }) => {
 
     const classes = useStyles()
 
     const [open, setOpen] = useState(false)
-
-    // DATA ITEM EXAMPLE
-    // {
-    //     url: "https://www.stockvault.net/data/2015/07/09/174522/preview16.jpg",
-    //     title: "first"
-    // }
 
     return (
         <Box>
@@ -29,17 +22,16 @@ const ImagePicker = ({ title, pictures, setChosenImage, chosenImage }) => {
             <Collapse in={open} orientation="vertical">
                 <Box className={classes.imageListContainer}>
                     <ImageList variant="quilted" cols={NUMBER_OF_COLUMNS_IN_IMAGE_LIST} >
-                        {pictures.map(picture => {
+                        {data?.ids?.map(entityId => {
                             return (
-                                <Box className={chosenImage === picture.title ? classes.chosenImage : classes.image}>
-                                    <ImageListItem key={picture.url} cols={1} rows={1}>
+                                <Box className={chosenImage === data.pictures.find(pic => pic.id === entityId).pictureId ? classes.chosenImage : classes.image}>
+                                    <ImageListItem key={entityId} cols={1} rows={1}>
                                         <img
-                                            src={picture.url}
-                                            alt={picture.title}
-                                            onClick={() => setChosenImage(picture.title)}
+                                            src={data.pictures.find(pic => pic.id === entityId).url}
+                                            alt={data.pictures.find(pic => pic.id === entityId).url}
+                                            onClick={() => setChosenImage(data.pictures.find(pic => pic.id === entityId).pictureId)}
                                         />
                                     </ImageListItem>
-                                    {picture.title}
                                 </Box>
                             )
                         })}
