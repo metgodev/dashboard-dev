@@ -2,15 +2,11 @@ import React, { useEffect } from 'react';
 import DraggableListItem from './DraggableListItem';
 import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd';
 import { reorder } from './helpers'
+import useStyles from './styles'
 
 const DraggableList = React.memo(({ items, names, setItemsToSend, itemsToSend }) => {
 
-    const onDragEnd = ({ destination, source }) => {
-        // dropped outside the list
-        if (!destination) return;
-        const newItems = reorder(itemsToSend, source.index, destination.index);
-        setItemsToSend(newItems);
-    };
+    const classes = useStyles()
 
     useEffect(() => {
         if (items !== undefined) {
@@ -33,11 +29,18 @@ const DraggableList = React.memo(({ items, names, setItemsToSend, itemsToSend })
         }
     }, [items])
 
+    const onDragEnd = ({ destination, source }) => {
+        if (!destination) return; // dropped outside the list
+        const newItems = reorder(itemsToSend, source.index, destination.index);
+        setItemsToSend(newItems);
+    };
+
+
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable-list">
                 {provided => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                    <div ref={provided.innerRef} {...provided.droppableProps} className={classes.draggableContainer}>
                         {itemsToSend.map((item, index) => (
                             <DraggableListItem
                                 item={names.filter(fullItem => fullItem.id === item)[0]}
