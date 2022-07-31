@@ -18,11 +18,11 @@ import localIcon from '../../Assets/images/icons/local.png'
 import lodgingIcon from '../../Assets/images/icons/lodging.png'
 import travelIcon from '../../Assets/images/icons/travel.png'
 import useGetWindowSize from '../../hooks/useGetWindowSize'
-// import useGetService from "../../hooks/useGetService";
+import useGetService from "../../hooks/useGetService";
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
-// const select = ['location', 'tags', 'shortDescription', 'name', 'gallery', '_id', 'galleryFileIds', 'tagsIds']
+const select = ['location', 'tags', 'shortDescription', 'name', 'gallery', '_id', 'galleryFileIds', 'tagsIds']
 
 const Maps = () => {
   //style 
@@ -34,16 +34,14 @@ const Maps = () => {
   const { width } = useGetWindowSize()
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
-  // const {  } = useGetService()
+  const business = useGetService('business', { $select: select, $limit: 1000, status: 'PUBLIC' })
+  const events = useGetService('events', { $select: select, $limit: 1000, status: 'PUBLIC' })
+  const points = useGetService('pois', { $select: select, $limit: 1000, status: 'PUBLIC' })
 
   useEffect(() => {
     (async () => {
       try {
-        let businesses = await client.service("business").find({ query: { $limit: 1000, status: 'PUBLIC' } })
-        let points = await client.service("pois").find({ query: { $limit: 1000, status: 'PUBLIC' } });
-        let events = await client.service("events").find({ query: { $limit: 1000, status: 'PUBLIC' } });
-        console.log(businesses)
-        let data = [...businesses.data, ...points.data, ...events.data]
+        let data = [...business.data, ...events.data, ...points.data]
         data = data.filter(item => item.tags && item.tags[0] && item.tags[0].category)
         data = data.map(item => {
           return (
@@ -55,27 +53,15 @@ const Maps = () => {
         console.log(err, 'error by fetching data in map')
       }
     })()
-  }, [])
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       await Promise.all([
-  //         _getService('business', request.business, { $limit: 1, status: 'PUBLIC' }),
-  //         _getService('event', request.event, { $limit: 1, status: 'PUBLIC' }),
-  //         _getService('point', request.point, { $limit: 1, status: 'PUBLIC' })
-  //       ])
-  //       console.log(payload, 'payload')
-  //     } catch (err) {
-  //       console.log(err, 'error by fetching data in map')
-  //     }
-  //   }
-  //   )()
-  // }, [])
+    return () => {
+      business.cancelRequest()
+      events.cancelRequest()
+      points.cancelRequest()
+    }
+  }, [business, events, points])
 
 
   const sortDataByCategory = (data) => {
-
     let culture = []
     let food = []
     let local = []
