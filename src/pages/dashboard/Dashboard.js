@@ -17,7 +17,7 @@ import useGetService from '../../hooks/useGetService'
 
 export default function Dashboard() {
 
-  const { _get_service, cancel_requests, is_cached, cache, error, loading, data } = useGetService()
+  // const {  } = useGetService()
   const [entitiesCount, setEntitiesCount] = useState([
     0, 0, 0, 0
   ])
@@ -29,34 +29,34 @@ export default function Dashboard() {
     { name: term('monthly'), func: () => console.log('Months'), buttonIcon: <CalendarTodayOutlinedIcon /> },
   ]
 
-  const getEntitiesCount = async () => {
-    const res = await Promise.all([
-      client.service("business").find({ query: { $limit: 0 } }),
-      client.service("events").find({ query: { $limit: 0 } }),
-      client.service("pois").find({ query: { $limit: 0 } }),
-      client.service("tracks").find({ query: { $limit: 0 } })
-    ])
-    setEntitiesCount([res[0].total, res[1].total, res[2].total, res[3].total])
-  }
+  // const getEntitiesCount = async () => {
+  //   const res = await Promise.all([
+  //     client.service("business").find({ query: { $limit: 0 } }),
+  //     client.service("events").find({ query: { $limit: 0 } }),
+  //     client.service("pois").find({ query: { $limit: 0 } }),
+  //     client.service("tracks").find({ query: { $limit: 0 } })
+  //   ])
+  //   setEntitiesCount([res[0].total, res[1].total, res[2].total, res[3].total])
+  // }
 
-  const getEntitiesData = async () => {
-    try {
-      Promise.all
-        ([_get_service('business', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] }),
-        _get_service('events', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] }),
-        _get_service('pois', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] })
-        ])
-    } catch (e) {
-      console.log(`Problem fetching entities data in dashboard: ${e}`)
-    }
-  }
+  // const getEntitiesData = async () => {
+  //   try {
+  //     Promise.all
+  //       ([_get_service('business', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] }),
+  //       _get_service('events', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] }),
+  //       _get_service('pois', { $limit: 1000, status: 'PUBLIC', $select: ['_id', 'description', 'shortDescription', 'location', 'name', 'tags'] })
+  //       ])
+  //   } catch (e) {
+  //     console.log(`Problem fetching entities data in dashboard: ${e}`)
+  //   }
+  // }
 
-  useEffect(() => {
-    getEntitiesCount()
-    if (Object.keys(cache).length < 3) {
-      getEntitiesData()
-    }
-  }, [])
+  // useEffect(() => {
+  //   getEntitiesCount()
+  //   if (Object.keys(cache).length < 3) {
+  //     getEntitiesData()
+  //   }
+  // }, [])
 
   return (
     <>
