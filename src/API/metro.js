@@ -25,4 +25,3 @@ export const Auth = async (access_token) => app.authenticate({
 export const reAuth = async () => app.reAuthenticate();
 
 export default app;
-

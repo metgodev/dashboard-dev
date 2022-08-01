@@ -1,15 +1,19 @@
-import { Navigate } from 'react-router-dom'
 import { reAuth } from '../API/metro';
 
 export const Protecte = ({ auth, children }) => {
-    return auth ? children : <Navigate to="/login" />;
+    return auth ? children : <></>;
 }
 
 export const Reauthenticate = (setLoggedIn, navigate, pathname) => {
     reAuth().then((res) => {
         setLoggedIn(true);
-        navigate(pathname);
+        if (pathname !== '/login') {
+            navigate(pathname);
+        } else {
+            navigate('/dashboard');
+        }
     }).catch((err) => {
         setLoggedIn(false);
+        navigate('/login')
     })
 }
