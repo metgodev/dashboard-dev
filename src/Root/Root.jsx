@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
+//MUI
 import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import { Box } from '@material-ui/core';
 //pages
@@ -21,38 +22,25 @@ import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 // admin pages
-import { reAuth } from '../API/metro';
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
-import { useSelector } from 'react-redux';
-
+//Helper
+import { Protecte, Reauthenticate } from './rootHelper.js';
 
 const Root = () => {
+    //Styles
     let classes = useStyles();
+    //Global state
     let navigate = useNavigate()
     let location = useLocation();
-
     let { pathname } = location;
+    //Local state
     const [loggedIn, setLoggedIn] = useState(false);
-
-    const Protecte = ({ auth, children }) => {
-        return auth ? children : <Navigate to="/login" />;
-    }
-
     const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
     let isSuperAdmin = true;
 
-    const reauthenticate = () => {
-        reAuth().then((res) => {
-            setLoggedIn(true);
-            navigate('/dashboard');
-        }).catch((err) => {
-            setLoggedIn(false);
-        })
-    }
-
     useLayoutEffect(() => {
-        reauthenticate()
+        Reauthenticate(setLoggedIn, navigate, pathname)
     }, [])
 
     return (
