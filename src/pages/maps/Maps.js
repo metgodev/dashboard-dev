@@ -5,24 +5,14 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import config from "../../config";
 import term from "../../terms";
 import MapPick from '../../components/MapPicker.js/MapPick'
-import client from '../../API/metro'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useJsApiLoader } from '@react-google-maps/api';
 // styles
 import useStyles from "./styles";
-//png
-import attractionIcon from '../../Assets/images/icons/attractions.png'
-import cultureIcon from '../../Assets/images/icons/culture.png'
-import foodIcon from '../../Assets/images/icons/food.png'
-import localIcon from '../../Assets/images/icons/local.png'
-import lodgingIcon from '../../Assets/images/icons/lodging.png'
-import travelIcon from '../../Assets/images/icons/travel.png'
 import useGetWindowSize from '../../hooks/useGetWindowSize'
 import useGetService from "../../hooks/useGetService";
-
+import { requestParams, sortDataByCategory } from "./mapsHelpers";
 const { REACT_APP_GOOGLE_API_KEY } = process.env
-
-const select = ['location', 'tags', 'shortDescription', 'name', 'gallery', '_id', 'galleryFileIds', 'tagsIds']
 
 const Maps = () => {
   //style 
@@ -34,74 +24,25 @@ const Maps = () => {
   const { width } = useGetWindowSize()
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
-  const business = useGetService('business', { $select: select, $limit: 1000, status: 'PUBLIC' })
-  const events = useGetService('events', { $select: select, $limit: 1000, status: 'PUBLIC' })
-  const points = useGetService('pois', { $select: select, $limit: 1000, status: 'PUBLIC' })
+  const businesses = useGetService("business", requestParams)
+  const events = useGetService("events", requestParams)
+  const points = useGetService("pois", requestParams)
 
   useEffect(() => {
-    (async () => {
-      try {
-        let data = [...business.data, ...events.data, ...points.data]
-        data = data.filter(item => item.tags && item.tags[0] && item.tags[0].category)
-        data = data.map(item => {
-          return (
-            { category: item.tags[0].category.title, location: item.location.coordinates }
-          )
-        })
-        sortDataByCategory(data)
-      } catch (err) {
-        console.log(err, 'error by fetching data in map')
-      }
-    })()
-    return () => {
-      business.cancelRequest()
-      events.cancelRequest()
-      points.cancelRequest()
-    }
-  }, [business, events, points])
-
-
-  const sortDataByCategory = (data) => {
-    let culture = []
-    let food = []
-    let local = []
-    let attraction = []
-    let lodging = []
-    let travel = []
-
-    data.forEach(item => {
-      switch (item.category) {
-        case "Travel":
-          travel.push({ location: item.location, icon: travelIcon })
-          break;
-        case "Food":
-          food.push({ location: item.location, icon: foodIcon })
-          break;
-        case "Local":
-          local.push({ location: item.location, icon: localIcon })
-          break;
-        case "Attraction":
-          attraction.push({ location: item.location, icon: attractionIcon })
-          break;
-        case "Culture":
-          culture.push({ location: item.location, icon: cultureIcon })
-          break;
-        case "Lodging":
-          lodging.push({ location: item.location, icon: lodgingIcon })
-          break;
-      }
-    })
-
-    setData(
-      {
-        culture: culture,
-        food: food,
-        travel: travel,
-        local: local,
-        lodging: lodging,
-        attraction: attraction
+    if (!businesses.loading && !events.loading && !points.loading) {
+      let data = [...businesses.data, ...events.data, ...points.data]
+      data = data.filter(item => item.tags && item.tags[0] && item.tags[0].category)
+      data = data.map(item => {
+        return (
+          {
+            category: item.tags[0].category.title,
+            location: item?.location?.coordinates ? item?.location?.coordinates : item?.locationInfo?.coordinates ? item?.locationInfo.coordinates : [0, 0]
+          }
+        )
       })
-  }
+      sortDataByCategory(data, setData)
+    }
+  }, [businesses, events, points])
 
   return (
     <div className={classes.container}>
