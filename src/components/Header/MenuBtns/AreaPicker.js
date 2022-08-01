@@ -8,6 +8,9 @@ import client from "../../../API/metro";
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
+
+import useGetService from "../../../hooks/useGetService";
+
 function AreaMenu() {
     //global 
     const { area: currentArea } = useSelector(s => s.mainRememberReducer)
@@ -18,24 +21,25 @@ function AreaMenu() {
     let [area, setArea] = useState('');
     let classes = useStyles();
 
+    const areas = useGetService("area")
+
     useLayoutEffect(() => {
         (async () => {
             setMenuItem([])
             if (Object.keys(currentArea).length) {
                 setArea({ name: currentArea["name"], id: currentArea["id"] })
             }
-            await client.service("area").find().then(({ data }) => {
-                if (!data) return;
-                data?.map(({ name, _id }, i) => {
-                    setMenuItem(pervState => [...pervState, { name, id: _id }]);
-                    if (i === 0 && !Object.keys(currentArea).length) {
-                        setArea({ name, id: _id });
-                        dispatch(set_area({ name, id: _id }));
-                    }
-                })
-            });
         })();
-    }, []);
+        if (areas.data.length > 0) {
+            areas.data?.map(({ name, _id }, i) => {
+                setMenuItem(pervState => [...pervState, { name, id: _id }]);
+                if (i === 0 && !Object.keys(currentArea).length) {
+                    setArea({ name, id: _id });
+                    dispatch(set_area({ name, id: _id }));
+                }
+            })
+        }
+    }, [areas]);
 
     const changeArea = async (area) => {
         dispatch(set_area(area));

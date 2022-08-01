@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// MUI
 import { Grid } from "@material-ui/core";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -9,8 +10,10 @@ import term from "../../terms";
 import config from "../../config";
 import MetroStats from "../../components/MetroStats/MetroStats";
 import Download from "../../components/Download/Download";
+//Service
 import useGetService from '../../hooks/useGetService'
-import { headerBtns, getEntitiesCount, requestParams } from "./dashboardHelpers";
+//Helper functions
+import { headerBtns, requestParams, setNumberOfBusinesses, setNumberOfEvents, setNumberOfPoints, setNumberOfTracks } from "./dashboardHelpers";
 
 export default function Dashboard() {
 
@@ -24,8 +27,11 @@ export default function Dashboard() {
   const tracks = useGetService("tracks", requestParams)
 
   useEffect(() => {
-    getEntitiesCount(setEntitiesCount)
-  }, [])
+    setNumberOfBusinesses(businesses, setEntitiesCount)
+    setNumberOfEvents(events, setEntitiesCount)
+    setNumberOfPoints(points, setEntitiesCount)
+    setNumberOfTracks(tracks, setEntitiesCount)
+  }, [businesses, events, points, tracks])
 
   return (
     <>

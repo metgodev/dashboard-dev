@@ -48,3 +48,17 @@ export const sortDataByCategory = (data, setData) => {
             attraction: attraction
         })
 }
+
+export const sortDataForMap = (businesses, events, points, setData) => {
+    let data = [...businesses.data, ...events.data, ...points.data]
+    data = data.filter(item => item.tags && item.tags[0] && item.tags[0].category)
+    data = data.map(item => {
+        return (
+            {
+                category: item.tags[0].category.title,
+                location: item?.location?.coordinates ? item?.location?.coordinates : item?.locationInfo?.coordinates ? item?.locationInfo.coordinates : [0, 0]
+            }
+        )
+    })
+    sortDataByCategory(data, setData)
+}

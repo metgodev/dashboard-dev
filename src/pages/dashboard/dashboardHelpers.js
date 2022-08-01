@@ -2,7 +2,6 @@ import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import term from '../../terms';
-import client from '../../API/metro'
 
 export const headerBtns = [
     //can get name, func, input, icon 
@@ -11,14 +10,18 @@ export const headerBtns = [
     { name: term('monthly'), func: () => console.log('Months'), buttonIcon: <CalendarTodayOutlinedIcon /> },
 ]
 
-export const getEntitiesCount = async (setEntitiesCount) => {
-    const res = await Promise.all([
-        client.service("business").find({ query: { $limit: 0 } }),
-        client.service("events").find({ query: { $limit: 0 } }),
-        client.service("pois").find({ query: { $limit: 0 } }),
-        client.service("tracks").find({ query: { $limit: 0 } })
-    ])
-    setEntitiesCount([res[0].total, res[1].total, res[2].total, res[3].total])
-}
+export const requestParams = { $limit: 1000, $select: ['_id', 'location', 'locationInfo', 'tags', 'tagsIds'] }
 
-export const requestParams = { $limit: 1000 }
+
+export const setNumberOfBusinesses = (businesses, setEntitiesCount) => {
+    businesses.data.length > 0 && setEntitiesCount(prev => { return [businesses.data.length, prev[1], prev[2], prev[3]] })
+}
+export const setNumberOfEvents = (events, setEntitiesCount) => {
+    events.data.length > 0 && setEntitiesCount(prev => { return [prev[0], events.data.length, prev[2], prev[3]] })
+}
+export const setNumberOfPoints = (points, setEntitiesCount) => {
+    points.data.length > 0 && setEntitiesCount(prev => { return [prev[0], prev[1], points.data.length, prev[3]] })
+}
+export const setNumberOfTracks = (tracks, setEntitiesCount) => {
+    tracks.data.length > 0 && setEntitiesCount(prev => { return [prev[0], prev[1], prev[2], tracks.data.length] })
+}
