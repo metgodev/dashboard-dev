@@ -30,11 +30,11 @@ function TagCategoriesMng() {
     const openLinkingDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('link')
+            setDialogType('edit')
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType('edit')
+            setDialogType('link')
         }
         setTagLink(!tagOpen)
     }

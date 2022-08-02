@@ -31,10 +31,8 @@ const AGTable = ({ display, action }) => {
     }, []);
 
     useEffect(() => {
-        if (tableChanged) {
-            onGridReady(gridRef.current.api);
-        }
-    }, [tableChanged])
+        onGridReady(gridRef.current.api);
+    }, [tableChanged, area])
 
     const onGridReady = useCallback(async () => {
         try {
@@ -62,7 +60,7 @@ const AGTable = ({ display, action }) => {
         } catch (e) {
             console.log(e)
         }
-    }, [tableChanged]);
+    }, [tableChanged, area]);
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>

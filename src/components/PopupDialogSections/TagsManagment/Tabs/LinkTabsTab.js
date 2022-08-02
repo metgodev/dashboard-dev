@@ -25,17 +25,17 @@ export const LinkTabsTab = ({ handleClose, type, areaSpecificData }) => {
         setOrientation(get_orientation(lang))
     }, [init]);
 
-    const submit = async (values) => {
+    const submit = async (formValues) => {
 
         const valuesToSend = {
             areaId: area?.id,
-            tagId: values.tagId,
-            categoryId: values.categoryId,
+            tagId: formValues.tagId,
+            categoryId: formValues.categoryId,
             userId: user?.id,
         }
 
         try {
-            if (type === "add") {
+            if (type === "link") {
                 await client.service("tag-categories").create(valuesToSend)
                 dispatch(set_table_changed(type))
                 handleClose(false)

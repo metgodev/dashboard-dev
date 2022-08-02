@@ -301,3 +301,8 @@ Authorization: {{authorization}}
 GET https://{{hostname}}/tracks
 content-type: {{contentType}}
 Authorization: {{authorization}}
+###
+# get categories
+GET https://{{hostname}}/categories
+content-type: {{contentType}}
+Authorization: {{authorization}}

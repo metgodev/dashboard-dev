@@ -10,7 +10,7 @@ import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 export const NewTagTab = ({ handleClose, type }) => {
     //global
     // const dispatch = useDispatch()
-    const { area, lang } = useSelector(state => state.mainRememberReducer)
+    const { area, lang, user } = useSelector(state => state.mainRememberReducer)
     const init = useSelector((s) => s.mainReducer.editTabData);
     const dispatch = useDispatch()
     // //local
@@ -24,7 +24,9 @@ export const NewTagTab = ({ handleClose, type }) => {
 
         const valuesToSend = {
             title: values.title,
-            areaId: area?.id
+            areaId: area?.id,
+            userId: user?.id,
+            categoryIds: ['61e94815f49adf4a20db7ca7']
         }
 
         try {
