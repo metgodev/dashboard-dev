@@ -21,6 +21,7 @@ function SignIn({ setLoggedIn }) {
 
     const loginUser = async () => {
         setIsLoading(true)
+        window.localStorage.clear()
         loginWithEmailAndPassword(email, password).then(res => {
             if (!res?.user) {
                 setIsLoading(false)

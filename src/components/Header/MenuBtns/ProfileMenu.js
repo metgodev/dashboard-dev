@@ -25,6 +25,7 @@ function ProfileMenu() {
 
     const logout = () => {
         client.logout();
+        window.localStorage.clear()
         navigate('/login')
     }
 
