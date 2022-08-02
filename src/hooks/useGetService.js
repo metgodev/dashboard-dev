@@ -4,7 +4,7 @@ import { _get } from '../API/service';
 import { set_app_data } from '../REDUX/actions/data.actions';
 
 
-const useGetService = (url, query) => {
+const useGetService = (url, query, reload) => {
     // global
     const _dispatch = useDispatch();
     let _data = useSelector(s => s.dataReducer.app_data);
@@ -44,7 +44,7 @@ const useGetService = (url, query) => {
         const fetchData = async () => {
             dispatch({ type: 'loading' })
             // If a cache exists for this url, return it
-            if (_data[url]) {
+            if (_data[url] && !reload) {
                 console.log('Using cache for ' + url)
                 dispatch({ type: 'fetched', payload: _data[url] })
                 return

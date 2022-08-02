@@ -30,6 +30,10 @@ const AGTable = ({ display, action }) => {
         }
     }, []);
 
+    // const exportToXl = useCallback(() => {  
+    //     gridRef.current.api.exportDataAsCsv({ fileName: `${display}.csv` });
+    // }, []);
+
     useEffect(() => {
         if (tableChanged) {
             onGridReady(gridRef.current.api);

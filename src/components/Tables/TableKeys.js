@@ -77,6 +77,8 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 valueFormatter: (params) => params?.data?.inPlace?.type,
                 editable: false,
             }
+        case 'isHidden':
+        case 'isRecommended':
         case 'online':
         case 'isAccessable':
         case 'isKosher':
