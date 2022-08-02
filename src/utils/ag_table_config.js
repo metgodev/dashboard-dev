@@ -480,7 +480,6 @@ export const gridOptions = {
                 },
             },
         ],
-        defaultToolPanel: 'columns',
     },
     statusBar: {
         statusPanels: [
