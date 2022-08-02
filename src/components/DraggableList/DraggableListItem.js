@@ -9,7 +9,7 @@ const DraggableListItem = ({ item, index }) => {
     const classes = useStyles();
 
     return (
-        <Draggable draggableId={item.id} index={index}>
+        <Draggable draggableId={item?.id} index={index}>
             {(provided, snapshot) => (
                 <ListItem
                     ref={provided.innerRef}
@@ -17,7 +17,7 @@ const DraggableListItem = ({ item, index }) => {
                     {...provided.dragHandleProps}
                     className={snapshot.isDragging ? classes.draggingListItem : classes.regularListItem}
                 >
-                    <ListItemText primary={item.name} />
+                    <ListItemText primary={item?.name} />
                 </ListItem>
             )}
         </Draggable>

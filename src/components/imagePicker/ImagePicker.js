@@ -24,12 +24,12 @@ const ImagePicker = ({ title, data, setChosenImage, chosenImage }) => {
                     <ImageList variant="quilted" cols={NUMBER_OF_COLUMNS_IN_IMAGE_LIST} >
                         {data?.ids?.map(entityId => {
                             return (
-                                <Box className={chosenImage === data.pictures.find(pic => pic.id === entityId).pictureId ? classes.chosenImage : classes.image}>
+                                <Box className={chosenImage === data?.pictures?.find(pic => pic.id === entityId)?.pictureId ? classes.chosenImage : classes.image}>
                                     <ImageListItem key={entityId} cols={1} rows={1}>
                                         <img
-                                            src={data.pictures.find(pic => pic.id === entityId).url}
-                                            alt={data.pictures.find(pic => pic.id === entityId).url}
-                                            onClick={() => setChosenImage(data.pictures.find(pic => pic.id === entityId).pictureId)}
+                                            src={data?.pictures?.find(pic => pic?.id === entityId)?.url}
+                                            alt={data?.pictures?.find(pic => pic?.id === entityId)?.url}
+                                            onClick={() => setChosenImage(data?.pictures?.find(pic => pic.id === entityId)?.pictureId)}
                                         />
                                     </ImageListItem>
                                 </Box>

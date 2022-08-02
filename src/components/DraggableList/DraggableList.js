@@ -35,7 +35,6 @@ const DraggableList = React.memo(({ items, names, setItemsToSend, itemsToSend })
         setItemsToSend(newItems);
     };
 
-
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable-list">
