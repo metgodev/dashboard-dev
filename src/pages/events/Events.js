@@ -14,6 +14,7 @@ function Events() {
     //dialog
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
+    const [exportToExcel, setExportToExcel] = useState(() => { })
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -30,7 +31,7 @@ function Events() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => { }, buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('export'), func: () => exportToExcel(), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: () => { }, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
     ]
@@ -38,7 +39,7 @@ function Events() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />
-            <AGTable display={'events'} action={openDialog} />
+            <AGTable setExportToExcel={setExportToExcel} display={'events'} action={openDialog} />
             <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={'events'} type={dialogType} />
         </Box>
     )

@@ -13,6 +13,7 @@ import AGTable from '../../components/Tables/AGTable'
 function Businesses() {
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
+    const [exportToExcel, setExportToExcel] = useState(() => { })
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -29,7 +30,7 @@ function Businesses() {
 
     let headerBtns = [
         //can get name, func, input, icon ,buttonIcon
-        { name: term('export'), func: () => { }, buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('export'), func: () => exportToExcel(), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: () => { }, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
     ]
@@ -38,7 +39,7 @@ function Businesses() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            <AGTable display={'business'} action={openDialog} />
+            <AGTable setExportToExcel={setExportToExcel} display={'business'} action={openDialog} />
             <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} type={dialogType} />
         </Box>
     )

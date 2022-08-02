@@ -13,6 +13,7 @@ import AGTable from '../../components/Tables/AGTable'
 function Tracks() {
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
+    const [exportToExcel, setExportToExcel] = useState(() => { })
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -29,7 +30,7 @@ function Tracks() {
 
     let headerBtns = [
         //can get name, func, input, icon 
-        { name: term('export'), func: () => { }, buttonIcon: <GetAppOutlinedIcon /> },
+        { name: term('export'), func: () => exportToExcel(), buttonIcon: <GetAppOutlinedIcon /> },
         { name: term('import'), func: () => { }, input: true, buttonIcon: <PublishOutlinedIcon /> },
         { name: term('add'), func: openDialog, buttonIcon: <AddCircleOutlineOutlinedIcon /> },
     ]
@@ -37,7 +38,7 @@ function Tracks() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('routes')} />
-            <AGTable display={'tracks'} action={openDialog} />
+            <AGTable setExportToExcel={setExportToExcel} display={'tracks'} action={openDialog} />
             <PopupDialog title={term('routes')} open={open} setOpen={setOpen} tabs={'tracks'} type={dialogType} />
         </Box>
     )

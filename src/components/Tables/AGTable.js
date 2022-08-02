@@ -10,7 +10,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CS
 import 'ag-grid-enterprise';
 import term from '../../terms';
 
-const AGTable = ({ display, action }) => {
+const AGTable = ({ display, action, setExportToExcel }) => {
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
     const gridRef = useRef();
@@ -30,11 +30,14 @@ const AGTable = ({ display, action }) => {
         }
     }, []);
 
-    // const exportToXl = useCallback(() => {  
-    //     gridRef.current.api.exportDataAsCsv({ fileName: `${display}.csv` });
-    // }, []);
+    const exportToXl = () => {
+        gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
+    }
 
     useEffect(() => {
+        if (setExportToExcel !== undefined) {
+            setExportToExcel(() => exportToXl)
+        }
         onGridReady(gridRef.current.api);
     }, [tableChanged, area])
 
