@@ -7,8 +7,6 @@ import {
   signInWithPhoneNumber,
   RecaptchaVerifier
 } from "firebase/auth";
-import { toast } from "react-toastify";
-import term from "../terms";
 
 
 const firebaseConfig = {
@@ -31,14 +29,12 @@ const appVerifier = window.recaptchaVerifier;
 const loginWithEmailAndPassword = async (email, password) => {
   return signInWithEmailAndPassword(auth, email, password).catch((error) => {
     const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
-    toast.error(term(errorCode));
   });
 };
 
 const registerUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password).catch((error) => {
     const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
-    toast.error(term(errorCode));
   });
 };
 

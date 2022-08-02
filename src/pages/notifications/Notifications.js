@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 const Notify = ({ text, type, id }) => {
   //create a function to show toast
   const notifyWithOptions = (text) => {

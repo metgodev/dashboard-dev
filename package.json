@@ -46,7 +46,6 @@
     "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
     "react-syntax-highlighter": "^15.4.5",
-    "react-toastify": "^8.1.0",
     "recharts": "^2.1.6",
     "redux": "^4.1.2",
     "redux-remember": "^3.0.1",
