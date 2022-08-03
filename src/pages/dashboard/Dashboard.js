@@ -21,10 +21,10 @@ export default function Dashboard() {
     0, 0, 0, 0
   ])
 
-  const businesses = useGetService("business", requestParams)
-  const events = useGetService("events", requestParams)
-  const points = useGetService("pois", requestParams)
-  const tracks = useGetService("tracks", requestParams)
+  const businesses = useGetService("business", "businessDashMap", requestParams)
+  const events = useGetService("events", "eventsDashMap", requestParams)
+  const points = useGetService("pois", "pointsDashMap", requestParams)
+  const tracks = useGetService("tracks", "tracksDashMap", requestParams)
 
   useEffect(() => {
     setNumberOfBusinesses(businesses, setEntitiesCount)

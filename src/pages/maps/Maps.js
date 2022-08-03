@@ -31,9 +31,9 @@ const Maps = () => {
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
   //service data
-  const businesses = useGetService("business", requestParams)
-  const events = useGetService("events", requestParams)
-  const points = useGetService("pois", requestParams)
+  const businesses = useGetService("business", "businessDashMap", requestParams)
+  const events = useGetService("events", "eventsDashMap", requestParams)
+  const points = useGetService("pois", "pointsDashMap", requestParams)
 
   //lifecycle
   useEffect(() => {

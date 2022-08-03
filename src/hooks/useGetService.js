@@ -4,7 +4,7 @@ import { _get } from '../API/service';
 import { set_app_data } from '../REDUX/actions/data.actions';
 
 
-const useGetService = (url, query, reload) => {
+const useGetService = (url, name, query, reload) => {
     // global
     const _dispatch = useDispatch();
     let _data = useSelector(s => s.dataReducer.app_data);
@@ -37,27 +37,27 @@ const useGetService = (url, query, reload) => {
 
     useMemo(() => {
         // Do nothing if the url is not given
-        if (!url) return
+        if (!url || !name) return
 
         cancelRequest.current = false
 
         const fetchData = async () => {
             dispatch({ type: 'loading' })
             // If a cache exists for this url, return it
-            if (_data[url] && !reload) {
-                console.log('Using cache for ' + url)
-                dispatch({ type: 'fetched', payload: _data[url] })
+            if (_data[name] && !reload) {
+                console.log('Using cache for ' + name)
+                dispatch({ type: 'fetched', payload: _data[name] })
                 return
             }
 
             try {
-                console.log('Fetching ' + url)
+                console.log('Fetching ' + name)
                 const res = await _get(url, query);
                 if (!res.total) {
                     dispatch({ type: 'error', payload: 'No data found' })
                     return
                 }
-                _dispatch(set_app_data({ ..._data, [url]: res?.data || [] }))
+                _dispatch(set_app_data({ ..._data, [name]: res?.data || [] }))
                 if (cancelRequest.current) return
 
                 dispatch({ type: 'fetched', payload: res.data })
@@ -76,7 +76,7 @@ const useGetService = (url, query, reload) => {
             cancelRequest.current = true
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [url])
+    }, [name])
 
     return state
 }

@@ -48,7 +48,7 @@ function TagCategoriesMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('area_related_tags')} />
-            <AGTable setSelectedColumn={setSelectedColumn} display={'tag-categories'} action={openLinkingDialog} />
+            <AGTable setSelectedColumn={setSelectedColumn} selectedColumn={selectedColumn} display={'tag-categories'} action={openLinkingDialog} />
             <PopupDialog setSelectedColumn={setSelectedColumn} open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
             <PopupDialog setSelectedColumn={setSelectedColumn} open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={'tags_link'} maxWidth={'sm'} />
         </Box>
