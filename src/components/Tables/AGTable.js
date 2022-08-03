@@ -17,15 +17,6 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
     const [rowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
 
-
-    const getRowId = useCallback(params => {
-        return params.data._id;
-    }, []);
-
-    const exportToXl = () => {
-        gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
-    }
-
     useEffect(() => {
         if (setExportToExcel !== undefined) {
             setExportToExcel(() => exportToXl)
@@ -36,20 +27,31 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
             onGridReady();
         }
         else if (Object.keys(selectedColumn).length !== 0) {
-            (async () => {
-                try {
-                    let res = await client.service(display).find({ query: { _id: selectedColumn.data._id } })
-                    if (res) {
-                        gridRef.current.api.getRowNode(selectedColumn.data._id).setData(res.data[0])
-                    }
-                } catch (e) {
-                    console.log(e)
-                } finally {
-                    setSelectedColumn([])
-                }
-            })();
+            onChangeRow()
         }
     }, [area, tableChanged])
+
+    const getRowId = useCallback(params => {
+        return params.data._id;
+    }, []);
+
+    const exportToXl = () => {
+        gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
+    }
+
+
+    const onChangeRow = useCallback(async () => {
+        try {
+            let res = await client.service(display).find({ query: { _id: selectedColumn.data._id } })
+            if (res) {
+                gridRef.current.api.getRowNode(selectedColumn.data._id).setData(res.data[0])
+            }
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setSelectedColumn([])
+        }
+    }, [tableChanged])
 
     const onGridReady = useCallback(async () => {
         try {

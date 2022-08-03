@@ -19,9 +19,10 @@ function AreaMenu() {
     let [areaMenu, setAreaMenu] = useState(null);
     let [areaMenuItem, setMenuItem] = useState([]);
     let [area, setArea] = useState('');
+
     let classes = useStyles();
 
-    const areas = useGetService("area")
+    const areas = useGetService("area", "area")
 
     useLayoutEffect(() => {
         (async () => {

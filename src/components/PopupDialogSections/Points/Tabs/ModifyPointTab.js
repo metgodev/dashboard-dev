@@ -63,7 +63,7 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
             tip: values.tip,
             relevantTo: values.relevantTo,
             activitiesInPlace: values.activitiesInPlace,
-            prefferedSeason: [values.prefferedSeason],
+            prefferedSeason: typeof values.prefferedSeason === 'object' ? values.prefferedSeason : [values.prefferedSeason],
         }
         try {
             if (type === "add") {
