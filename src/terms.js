@@ -258,9 +258,9 @@ const active_lexicon = {
         ar: 'حدث',
     },
     points: {
-        en: 'Points of interest',
-        he: 'נקודות עניין',
-        ar: 'النقاط المثيرة للاهتمام',
+        en: 'Points',
+        he: 'נקודות',
+        ar: 'نقاط',
     },
     locations: {
         en: 'Locations',
@@ -1512,6 +1512,11 @@ const active_lexicon = {
         en: 'Reservations',
         he: 'הזמנות',
         ar: 'الحجوزات'
+    },
+    pinned: {
+        en: 'Pinned',
+        he: 'נעוץ',
+        ar: 'مثبت'
     },
     picnic_tables: {
         en: 'Picnic tables',

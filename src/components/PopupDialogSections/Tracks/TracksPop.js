@@ -13,6 +13,7 @@ import client from '../../../API/metro'
 import { useSelector } from 'react-redux';
 //styles
 import useStyles from "../styles";
+import term from '../../../terms';
 
 const TracksPop = ({ handleClose, type, open }) => {
 
@@ -28,15 +29,20 @@ const TracksPop = ({ handleClose, type, open }) => {
         setTab(newValue);
     };
 
+    const query = { $limit: 1000, areaId: area.id, $select: ['_id', 'name', 'location', 'galleryFileIds'] }
+
     useEffect(() => {
         { !open && setTab(0) }
         (async () => {
             try {
-                let points_res = await client.service("pois").find({ query: { $limit: 100, areaId: area.id, $select: ['_id', 'name', 'location', 'galleryFileIds'] } })
-                if ((points_res.total > 0)) {
+                const res = await Promise.all([client.service("pois").find({ query: query }), client.service("business").find({ query: query })])
+                if ((res[0]?.total > 0) && (res[1]?.total) > 0) {
                     setPicker(prev => ({
                         ...prev,
-                        objectIds: points_res.data.map(item => ({ ...item, id: item._id, title: item.name })),
+                        objectIds: [
+                            ...res[0].data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("points")}` })),
+                            ...res[1].data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("businesses")}` }))
+                        ]
                     }))
                 }
             } catch (e) {

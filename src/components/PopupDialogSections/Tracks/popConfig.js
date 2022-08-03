@@ -13,8 +13,8 @@ export const ModalInit = [
     { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'medium', type: 'textfield' },
     { title: term('time'), id: createRandomId(), field: 'time', rows: 1, maxRows: 1, size: 'medium', type: 'picker' },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'medium', type: 'textAreaSizeable' },
-    { title: term('points_of_intrest'), id: createRandomId(), field: 'objectIds', rows: 1, maxRows: 1, size: 'medium', type: 'draggableListWithPickerAndImages' },
-    { title: term('featured'), id: createRandomId(), field: 'isRecommended', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
+    { title: term('points'), id: createRandomId(), field: 'objectIds', rows: 1, maxRows: 1, size: 'medium', type: 'draggableListWithPickerAndImages' },
+    { title: term('pinned'), id: createRandomId(), field: 'isRecommended', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
     { title: term('hidden'), id: createRandomId(), field: 'isHidden', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
 ]
 

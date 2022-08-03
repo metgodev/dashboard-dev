@@ -9,12 +9,12 @@ export default makeStyles(theme => ({
         borderRadius: '5px'
     },
     draggingListItem: {
-        background: 'rgb(235,235,235)',
+        background: 'rgba(0,0,0,0.3)',
     },
     regularListItem: {
-        border: '1px solid rgba(0,0,0,0.3)',
-        borderRadius: '5px',
+        background: 'rgba(0,0,0,0.05)',
         marginBottom: '5px',
-        height: '40px'
+        height: '40px',
+        textAlign: 'right'
     }
 }));

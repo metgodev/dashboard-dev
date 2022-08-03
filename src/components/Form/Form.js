@@ -180,6 +180,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                             variant="outlined"
                             options={
                               options[field].map((item) => ({
+                                key: item.id,
                                 label: item.title,
                                 value: item.id,
                               }))
@@ -192,6 +193,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                                 <MuiCheckbox
                                   style={{ marginRight: 8 }}
                                   checked={selected}
+                                  key={option.label}
                                 />
                                 {option.label}
                               </li>
@@ -208,11 +210,19 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                             data={
                               {
                                 ids: values[field],
-                                pictures: options[field].map(item => ({
-                                  id: item?.id,
-                                  url: item?.gallery[0]?.file?.url,
-                                  pictureId: item?.gallery[0]?.fileId
-                                }))
+                                pictures: options[field]
+                                  .filter(item => {
+                                    return item.gallery !== null || item.gallery !== undefined
+                                  })
+                                  .map(item => {
+                                    return (
+                                      {
+                                        id: item?.id,
+                                        url: item?.gallery ? item.gallery[0]?.file?.url : null,
+                                        pictureId: item?.gallery ? item.gallery[0].fileId : null
+                                      }
+                                    )
+                                  })
                               }
                             }
                             setChosenImage={setChosenImage}
