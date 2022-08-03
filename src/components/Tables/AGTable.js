@@ -16,19 +16,11 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     const gridRef = useRef();
     const [rowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
+    const [selectedColumn, setSelectedColumn] = useState({})
 
     const getRowId = useCallback(params => {
         return params.data._id;
     }, []);
-
-    const onUpdate = useCallback(async (params) => {
-        try {
-            let res = await client.service(display).patch(params?.data?._id, params?.data)
-            gridRef.current.api.updateRowData({ update: [res] });
-        } catch (e) {
-            console.log(e)
-        }
-    }, [tableChanged]);
 
     const exportToXl = () => {
         gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
@@ -38,7 +30,23 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         if (setExportToExcel !== undefined) {
             setExportToExcel(() => exportToXl)
         }
-        onGridReady();
+        if (columnDefs.length === 0) {
+            onGridReady();
+        }
+        else if (Object.keys(selectedColumn).length !== 0) {
+            (async () => {
+                try {
+                    let res = await client.service(display).find({ query: { _id: selectedColumn.data._id } })
+                    if (res) {
+                        gridRef.current.api.getRowNode(selectedColumn.data._id).setData(res.data[0])
+                    }
+                } catch (e) {
+                    console.log(e)
+                } finally {
+                    setSelectedColumn([])
+                }
+            })();
+        }
     }, [area, tableChanged])
 
     const onGridReady = useCallback(async () => {
@@ -54,7 +62,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             });
             if (res.data) {
                 let cols = Cols(res.data[0], ignore);
-                let keys = Keys(cols, idOptions, display, onUpdate);
+                let keys = Keys(cols, idOptions, display);
                 setRowData(res.data.map(item => {
                     let newItem = { ...item };
                     if (item.tag && item.category) {
@@ -75,14 +83,16 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                 <AgGridReact
                     onGridReady={onGridReady}
                     // listen to changes in the table
-                    onCellDoubleClicked={(event) => { action(event.data, 'edit') }}
+                    onCellDoubleClicked={(event) => {
+                        setSelectedColumn(event)
+                        action(event.data, 'edit')
+                    }}
                     columnDefs={columnDefs}
                     rowData={rowData}
                     rowSelection='multiple'
                     rowDragManaged={true}
                     getRowId={getRowId}
                     getRowNodeId={getRowId}
-                    onCellValueChanged={onUpdate}
                     ref={gridRef}
                     gridOptions={gridOptions}
                     suppressColumnVirtualisation={true}

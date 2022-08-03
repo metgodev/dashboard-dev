@@ -71,7 +71,7 @@ export const GetValuesForForm = (values, allTags) => {
 
   let valuesForForm = {
     name: values.length || Object.keys(values).length ? values.hasOwnProperty('name') ? values.name : initialData.name : initialData.name,
-    authorityId: values.length || Object.keys(values).length ? values.hasOwnProperty('authority') ? values.authority._id : values.hasOwnProperty('authorityId') ? values.authorityId : initialData.authority : initialData.authority,
+    authorityId: values.length || Object.keys(values).length ? values.hasOwnProperty('authorityId') ? values.authorityId : values.hasOwnProperty('authority') ? values.authority._id : initialData.authority : initialData.authority,
     relevantTo: values.length || Object.keys(values).length ? values.hasOwnProperty('relevantTo') ? values.relevantTo : initialData.relevantTo : initialData.relevantTo,
     tagsIds: values.length || Object.keys(values).length ?
       (values.hasOwnProperty('tags') && !values.hasOwnProperty('tagsIds') ?
