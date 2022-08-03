@@ -14,6 +14,8 @@ function Businesses() {
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
     const [exportToExcel, setExportToExcel] = useState(() => { })
+    const [selectedColumn, setSelectedColumn] = useState({})
+
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -39,8 +41,8 @@ function Businesses() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'business'} action={openDialog} />
-            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} type={dialogType} />
+            <AGTable setSelectedColumn={setSelectedColumn} selectedColumn={selectedColumn} setExportToExcel={setExportToExcel} display={'business'} action={openDialog} />
+            <PopupDialog setSelectedColumn={setSelectedColumn} title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} type={dialogType} />
         </Box>
     )
 }

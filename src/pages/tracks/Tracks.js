@@ -14,6 +14,8 @@ function Tracks() {
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
     const [exportToExcel, setExportToExcel] = useState(() => { })
+    const [selectedColumn, setSelectedColumn] = useState({})
+
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -38,8 +40,8 @@ function Tracks() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('routes')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'tracks'} action={openDialog} />
-            <PopupDialog title={term('routes')} open={open} setOpen={setOpen} tabs={'tracks'} type={dialogType} />
+            <AGTable setSelectedColumn={setSelectedColumn} selectedColumn={selectedColumn} setExportToExcel={setExportToExcel} display={'tracks'} action={openDialog} />
+            <PopupDialog setSelectedColumn={setSelectedColumn} title={term('routes')} open={open} setOpen={setOpen} tabs={'tracks'} type={dialogType} />
         </Box>
     )
 }

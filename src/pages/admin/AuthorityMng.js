@@ -13,6 +13,7 @@ function AuthorityMng() {
     //dialog
     const [autorityOpen, setAutorityOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
+    const [selectedColumn, setSelectedColumn] = useState({})
 
     const openAuthorityDialog = (data) => {
         if (data) {
@@ -36,8 +37,8 @@ function AuthorityMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('authorities')} />
-            <AGTable display={'authorities'} action={openAuthorityDialog} />
-            <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} maxWidth={'sm'} />
+            <AGTable setSelectedColumn={setSelectedColumn} selectedColumn={selectedColumn} display={'authorities'} action={openAuthorityDialog} />
+            <PopupDialog setSelectedColumn={setSelectedColumn} open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={'authority'} maxWidth={'sm'} />
         </Box>
     )
 }

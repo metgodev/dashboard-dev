@@ -22,7 +22,7 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth }) {
+export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth, setSelectedColumn }) {
     //styles
     const classes = useStyles()
     const theme = useTheme();
@@ -31,6 +31,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
         let clearButton = document.querySelector(clearButtonId);
         if (clearButton) clearButton.click();
         setOpen(false);
+        setSelectedColumn({})
     }
 
     return (

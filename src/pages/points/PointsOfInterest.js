@@ -14,6 +14,8 @@ function PointsOfInterest() {
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
     const [exportToExcel, setExportToExcel] = useState(() => { })
+    const [selectedColumn, setSelectedColumn] = useState({})
+
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -37,8 +39,8 @@ function PointsOfInterest() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('points')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'pois'} action={openDialog} />
-            <PopupDialog title={term('points')} open={open} setOpen={setOpen} tabs={'points'} type={dialogType} />
+            <AGTable setSelectedColumn={setSelectedColumn} selectedColumn={selectedColumn} setExportToExcel={setExportToExcel} display={'pois'} action={openDialog} />
+            <PopupDialog setSelectedColumn={setSelectedColumn} title={term('points')} open={open} setOpen={setOpen} tabs={'points'} type={dialogType} />
         </Box>
     )
 }

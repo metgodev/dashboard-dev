@@ -15,6 +15,8 @@ function Events() {
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState('add');
     const [exportToExcel, setExportToExcel] = useState(() => { })
+    const [selectedColumn, setSelectedColumn] = useState({})
+
     const dispatch = useDispatch();
 
     const openDialog = (data) => {
@@ -39,8 +41,8 @@ function Events() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'events'} action={openDialog} />
-            <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={'events'} type={dialogType} />
+            <AGTable setSelectedColumn={setSelectedColumn} selectedColumn={selectedColumn} setExportToExcel={setExportToExcel} display={'events'} action={openDialog} />
+            <PopupDialog setSelectedColumn={setSelectedColumn} title={term('events')} open={open} setOpen={setOpen} tabs={'events'} type={dialogType} />
         </Box>
     )
 }

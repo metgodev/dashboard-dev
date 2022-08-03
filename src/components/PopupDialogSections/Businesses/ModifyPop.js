@@ -66,7 +66,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
             </Box>
             <Box sx={{ height: '90%' }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
-                    <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />
+                    {picker.authorityId.length > 0 && <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />}
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <StatisticsTab />

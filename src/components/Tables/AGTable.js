@@ -10,13 +10,13 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CS
 import 'ag-grid-enterprise';
 import term from '../../terms';
 
-const AGTable = ({ display, action, setExportToExcel }) => {
+const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelectedColumn }) => {
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
     const gridRef = useRef();
     const [rowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
-    const [selectedColumn, setSelectedColumn] = useState({})
+
 
     const getRowId = useCallback(params => {
         return params.data._id;
@@ -30,7 +30,9 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         if (setExportToExcel !== undefined) {
             setExportToExcel(() => exportToXl)
         }
-        if (columnDefs.length === 0) {
+        if (Object.keys(selectedColumn).length === 0) {
+            setColumnDefs([])
+            setRowData([])
             onGridReady();
         }
         else if (Object.keys(selectedColumn).length !== 0) {
@@ -85,7 +87,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     // listen to changes in the table
                     onCellDoubleClicked={(event) => {
                         setSelectedColumn(event)
-                        action(event.data, 'edit')
+                        action(event.data, setSelectedColumn)
                     }}
                     columnDefs={columnDefs}
                     rowData={rowData}
