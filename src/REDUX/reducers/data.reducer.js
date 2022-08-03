@@ -8,9 +8,13 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case SET_APP_DATA:
-            return {
-                ...state,
-                app_data: { ...state.app_data, ...action.payload },
+            if (action.payload === 'reset') {
+                return { ...state, app_data: {} }
+            } else {
+                return {
+                    ...state,
+                    app_data: { ...state.app_data, ...action.payload },
+                }
             }
         default:
             return state

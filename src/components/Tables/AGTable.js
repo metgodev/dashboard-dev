@@ -4,6 +4,8 @@ import { AgGridReact } from 'ag-grid-react';
 import client from '../../API/metro';
 import { Cols, Keys } from './TableKeys';
 import { useSelector } from 'react-redux';
+import useGetService from '../../hooks/useGetService';
+import { BLOCK_SIZE } from './tableConfig'
 
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
@@ -11,11 +13,19 @@ import 'ag-grid-enterprise';
 import term from '../../terms';
 
 const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelectedColumn }) => {
-    const tableChanged = useSelector(state => state.mainReducer.tableChanged)
-    const area = useSelector(s => s.mainRememberReducer.area)
+
+
     const gridRef = useRef();
+
     const [rowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
+
+    const tableChanged = useSelector(state => state.mainReducer.tableChanged)
+    const area = useSelector(s => s.mainRememberReducer.area)
+
+    const requestParams = { areaId: area.id.toString(), $limit: 1000, $sort: { createdAt: -1 } }
+
+    let pageData = useGetService(display, display, requestParams, area)
 
     useEffect(() => {
         if (setExportToExcel !== undefined) {
@@ -26,10 +36,10 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
             setRowData([])
             onGridReady();
         }
-        else if (Object.keys(selectedColumn).length !== 0) {
+        else if (Object.keys(selectedColumn).length !== 0 && pageData.data.length > 0) {
             onChangeRow()
         }
-    }, [area, tableChanged])
+    }, [area, tableChanged, pageData])
 
     const getRowId = useCallback(params => {
         return params.data._id;
@@ -38,7 +48,6 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
     const exportToXl = () => {
         gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
     }
-
 
     const onChangeRow = useCallback(async () => {
         try {
@@ -53,33 +62,20 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
         }
     }, [tableChanged])
 
-    const onGridReady = useCallback(async () => {
-        try {
-            const res = await client.service(display).find({
-                query: {
-                    areaId: area.id.toString(),
-                    $limit: 1000,
-                    $sort: {
-                        createdAt: -1
-                    }
+    const onGridReady = () => {
+        if (pageData.data.length > 0) {
+            let cols = Cols(pageData.data[0], ignore);
+            let keys = Keys(cols, idOptions, display);
+            setRowData(pageData.data.map(item => {
+                let newItem = { ...item };
+                if (item.tag && item.category) {
+                    newItem = { ...newItem, tag: item?.tag?.title, category: term(item?.category?.title) };
                 }
-            });
-            if (res.data) {
-                let cols = Cols(res.data[0], ignore);
-                let keys = Keys(cols, idOptions, display);
-                setRowData(res.data.map(item => {
-                    let newItem = { ...item };
-                    if (item.tag && item.category) {
-                        newItem = { ...newItem, tag: item?.tag?.title, category: term(item?.category?.title) };
-                    }
-                    return newItem;
-                }));
-                setColumnDefs(keys);
-            }
-        } catch (e) {
-            console.log(e)
+                return newItem;
+            }));
+            setColumnDefs(keys);
         }
-    }, [tableChanged, area]);
+    }
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>

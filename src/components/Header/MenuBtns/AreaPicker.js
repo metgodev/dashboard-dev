@@ -3,6 +3,7 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch, useSelector } from "react-redux";
 import { set_area } from "../../../REDUX/actions/main.actions";
+import { set_app_data } from "../../../REDUX/actions/data.actions";
 import client from "../../../API/metro";
 // styles
 import useStyles from "../styles";
@@ -44,6 +45,7 @@ function AreaMenu() {
 
     const changeArea = async (area) => {
         dispatch(set_area(area));
+        dispatch(set_app_data('reset'))
         setArea(area);
         setAreaMenu(null);
     }
