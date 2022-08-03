@@ -23,12 +23,12 @@ const AGTable = ({ display, action, setExportToExcel }) => {
 
     const onUpdate = useCallback(async (params) => {
         try {
-            let res = await client.service(display).patch(params.data._id, params.data)
+            let res = await client.service(display).patch(params?.data?._id, params?.data)
             gridRef.current.api.updateRowData({ update: [res] });
         } catch (e) {
             console.log(e)
         }
-    }, []);
+    }, [tableChanged]);
 
     const exportToXl = () => {
         gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
@@ -38,8 +38,8 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         if (setExportToExcel !== undefined) {
             setExportToExcel(() => exportToXl)
         }
-        onGridReady(gridRef.current.api);
-    }, [tableChanged, area])
+        onGridReady();
+    }, [area, tableChanged])
 
     const onGridReady = useCallback(async () => {
         try {

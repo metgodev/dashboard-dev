@@ -37,7 +37,7 @@ const TimePicker = ({ title, realData, setTimes }) => {
                 <div className={classes.container}>
                     {Object.keys(data).length > 0 && Object.keys(data).map(key => (
                         <SingleDayTime key={key} day={key} hours={data[key]} setDayData={(newDayData) => {
-                            setTimes({ ...realData, [key]: newDayData })
+                            setTimes({ ...data, [key]: newDayData })
                         }} />
                     ))}
                 </div>
