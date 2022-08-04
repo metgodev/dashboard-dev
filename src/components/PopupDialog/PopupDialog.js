@@ -15,6 +15,8 @@ import TagLinkPop from '../PopupDialogSections/TagsManagment/TagLinkPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
+import { useDispatch } from 'react-redux';
+import { set_edit_tab_data } from '../../REDUX/actions/main.actions';
 
 export const clearButtonId = '.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.MuiAutocomplete-clearIndicator.css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator'
 
@@ -26,12 +28,14 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
     //styles
     const classes = useStyles()
     const theme = useTheme();
+    const dispatch = useDispatch();
 
     const handleClose = () => {
         let clearButton = document.querySelector(clearButtonId);
         if (clearButton) clearButton.click();
         setOpen(false);
         setSelectedColumn({})
+        dispatch(set_edit_tab_data({}))
     }
 
     return (
