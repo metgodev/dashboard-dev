@@ -1518,6 +1518,11 @@ const active_lexicon = {
         he: 'נעוץ',
         ar: 'مثبت'
     },
+    phone_number_whatsapp: {
+        en: 'Phone number / Whatsapp ( appears on app )',
+        he: 'מספר נייד / ואאטסאפ ( מופיע באפליקציה ) ',
+        ar: 'رقم الهاتف / Whatsapp (يظهر في التطبيق)'
+    },
     picnic_tables: {
         en: 'Picnic tables',
         he: 'שולחנות פיקניק',
