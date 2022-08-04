@@ -9,6 +9,7 @@ import client from '../../API/metro';
 import axios from 'axios'
 //styles
 import useStyles from "./styles";
+import useGetService from '../../hooks/useGetService';
 
 export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
 
@@ -18,6 +19,7 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
   const dispatch = useDispatch();
   const editTabData = useSelector((s) => s.mainReducer.editTabData);
   const tableChanged = useSelector((s) => s.mainReducer.tableChanged);
+  const { area } = useSelector(s => s.mainRememberReducer)
   //local state
   const [media, setMedia] = useState([])
   const [uploadCategory, setUploadCategory] = useState(config.initialMediaType)
@@ -25,19 +27,19 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
   const [imageToCrop, setImageToCrop] = useState(null)
   const [cropper, setCropper] = useState();
 
+  const data = useGetService(tab, `${tab}_media_ID`, { _id: editTabData._id }, area, true)
+
   useEffect(() => {
     (async () => {
       setLoadingImage(true)
-      try {
-        const data = await client.service(tab).get(editTabData._id)
-        data && data?.galleryFileIds?.length > 0 ? setMedia(data.gallery) : setMedia([])
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setLoadingImage(false)
+      if (data?.data?.length === 1 && data?.data[0]?.galleryFileIds?.length > 0) {
+        setMedia(data.data[0].gallery)
+      } else {
+        setMedia([])
       }
+      setLoadingImage(false)
     })()
-  }, [editTabData, tableChanged])
+  }, [editTabData, data])
 
   const handleCategoryChange = (event, newCategory) => {
     if (newCategory !== null) {

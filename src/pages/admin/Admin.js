@@ -8,6 +8,7 @@ import { add_new_area, add_new_authority, tags } from './adminConfig';
 import { Button } from '@material-ui/core';
 import client from '../../API/metro';
 import Notify from '../notifications/Notifications';
+import useGetService from '../../hooks/useGetService';
 
 const styleBtn = {
     marginTop: 10,
@@ -20,23 +21,21 @@ const GetForm = ({ data, values, handleChange, form, callAgain }) => {
         categoryId: [],
     })
 
-    useEffect(() => {
-        (async () => {
-            client.service("area").find().then((res) => {
-                res?.data.map(({ name, _id }) => setPicker(pervState => ({ ...pervState, areaId: [...pervState.areaId, { title: name, id: _id }] })))
-            })
+    const areaData = useGetService('area', 'area', {}, callAgain, false)
+    const categoriesData = useGetService('categories', 'categories', {}, callAgain, false)
 
-            client.service("categories").find().then((res) => {
-                res?.data.map(({ title, _id }) => setPicker(pervState => ({ ...pervState, categoryId: [...pervState.categoryId, { title, id: _id }] })))
-            })
-        })();
+    useEffect(() => {
+        if (areaData.data.length > 0 && categoriesData.data.length > 0) {
+            areaData.data.map(({ name, _id }) => setPicker(pervState => ({ ...pervState, areaId: [...pervState.areaId, { title: name, id: _id }] })))
+            categoriesData.data.map(({ title, _id }) => setPicker(pervState => ({ ...pervState, categoryId: [...pervState.categoryId, { title, id: _id }] })))
+        }
         return () => {
             setPicker({
                 areaId: [],
                 categoryId: [],
             })
         }
-    }, [callAgain])
+    }, [callAgain, areaData, categoriesData])
 
     return (
         <>

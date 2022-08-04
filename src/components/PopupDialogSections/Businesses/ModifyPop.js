@@ -16,42 +16,37 @@ import promotions from '../../../Assets/placeholders/promotions.png'
 //styles
 import useStyles from "../styles";
 import { useSelector } from 'react-redux';
-import client from "../../../API/metro";
 import { Picker } from './Tabs/HandleBusinessData';
-
+import useGetService from '../../../hooks/useGetService'
 
 const ModifyPop = ({ handleClose, type, open }) => {
+    //Styles
     const classes = useStyles()
-    //local
+    //Global
+    const { area } = useSelector((state) => state.mainRememberReducer);
+    //Local
     const [tab, setTab] = useState(0);
     const [loadingImage, setLoadingImage] = useState(false)
     const [picker, setPicker] = useState(Picker)
+    //Lifecycle
+    useEffect(() => {
+        { !open && setTab(0) }
+    }, [handleClose])
+    //Service data
+    const authoritiesData = useGetService("authorities", "authorities", { query: { areaId: area.id } }, area, false)
+    const tagCategories = useGetService("tag-categories", "tag-categories", { query: { areaId: area.id } }, area, false)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
 
     useEffect(() => {
-        { !open && setTab(0) }
-    }, [handleClose])
-
-    const { area } = useSelector((state) => state.mainRememberReducer);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                let authorities_res = await client.service("authorities").find({ query: { areaId: area.id } })
-                let tag_categories_res = await client.service("tag-categories").find({ query: { areaId: area.id } })
-                if ((authorities_res.total > 0) && (tag_categories_res.total > 0)) {
-                    let authorities = await authorities_res.data.map(({ name, _id }) => ({ value: _id, name }))
-                    let tag_categories = await tag_categories_res.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
-                    setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        })();
-    }, []);
+        if (authoritiesData.data.length && tagCategories.data.length) {
+            let authorities = authoritiesData.data.map(({ name, _id }) => ({ value: _id, name }))
+            let tag_categories = tagCategories.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
+            setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
+        }
+    }, [authoritiesData, tagCategories]);
 
     return (
         <div style={{ height: '100%' }}>

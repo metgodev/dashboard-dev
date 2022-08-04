@@ -9,8 +9,8 @@ import { LinkTabsTab } from './Tabs/LinkTabsTab';
 import useStyles from "../styles";
 import { Picker } from './Tabs/HandleTagData'
 import { useSelector } from 'react-redux';
-import client from '../../../API/metro'
 import { removeDuplicateObjectsFromArray } from '../../../utils/object'
+import useGetService from '../../../hooks/useGetService'
 
 const TagLinkPop = ({ handleClose, type, initialData, open }) => {
     const classes = useStyles()
@@ -23,23 +23,17 @@ const TagLinkPop = ({ handleClose, type, initialData, open }) => {
         setTab(newValue);
     };
 
+    const tagCategoriesData = useGetService("tag-categories", "tag-categories", { query: { areaId: area.id } }, area, false)
+    const tagsData = useGetService("tags", "tags", { query: { areaId: area.id } }, area, false)
+
     useEffect(() => {
         { !open && setTab(0) }
-        (async () => {
-            try {
-                let tag_categories_res = await client.service("tag-categories").find({ query: { areaId: area?.id } })
-                let tags_res = await client.service('tags').find({ query: { areaId: area?.id } })
-                if ((tag_categories_res.total > 0) && (tags_res.total > 0)) {
-                    let tagCategories = await tag_categories_res.data.map(({ category }) => ({ value: category._id, name: category.title }))
-                    let tags = await tags_res.data.map((tag) => ({ value: tag._id, name: tag.title }))
-                    removeDuplicateObjectsFromArray(tagCategories)
-                    setPicker(prev => ({ ...prev, categoryId: removeDuplicateObjectsFromArray(tagCategories), tagId: tags }))
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        })();
-    }, [handleClose])
+        if ((tagCategoriesData.data.length > 0) && (tagsData.data.length > 0)) {
+            let tagCategories = tagCategoriesData.data.map(({ category }) => ({ value: category._id, name: category.title }))
+            let tags = tagsData.data.map((tag) => ({ value: tag._id, name: tag.title }))
+            setPicker(prev => ({ ...prev, categoryId: removeDuplicateObjectsFromArray(tagCategories), tagId: tags }))
+        }
+    }, [handleClose, tagCategoriesData, tagsData])
 
     return (
         <Box>

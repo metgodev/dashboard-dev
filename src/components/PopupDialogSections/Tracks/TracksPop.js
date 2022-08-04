@@ -9,11 +9,11 @@ import { UploadMediaTab } from '../uploadMediaTab';
 import { CircularProgress } from '@material-ui/core'
 import { mediaTabConfig } from './popConfig'
 import { Picker } from './Tabs/HandleTracksData'
-import client from '../../../API/metro'
 import { useSelector } from 'react-redux';
 //styles
 import useStyles from "../styles";
 import term from '../../../terms';
+import useGetService from '../../../hooks/useGetService';
 
 const TracksPop = ({ handleClose, type, open }) => {
 
@@ -31,25 +31,21 @@ const TracksPop = ({ handleClose, type, open }) => {
 
     const query = { $limit: 1000, areaId: area.id, $select: ['_id', 'name', 'location', 'galleryFileIds'] }
 
+    const businessData = useGetService('business', 'business-tracks-data', query, area, false)
+    const poisData = useGetService('pois', 'pois-tracks-data', query, area, false)
+
     useEffect(() => {
         { !open && setTab(0) }
-        (async () => {
-            try {
-                const res = await Promise.all([client.service("pois").find({ query: query }), client.service("business").find({ query: query })])
-                if ((res[0]?.total > 0) && (res[1]?.total) > 0) {
-                    setPicker(prev => ({
-                        ...prev,
-                        objectIds: [
-                            ...res[0].data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("points")}` })),
-                            ...res[1].data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("businesses")}` }))
-                        ]
-                    }))
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        })()
-    }, [handleClose])
+        if ((businessData.data.length > 0) && (poisData.data.length) > 0) {
+            setPicker(prev => ({
+                ...prev,
+                objectIds: [
+                    ...poisData.data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("points")}` })),
+                    ...businessData.data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("businesses")}` }))
+                ]
+            }))
+        }
+    }, [handleClose, businessData, poisData])
 
     return (
         <Box>
