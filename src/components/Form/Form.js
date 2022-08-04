@@ -173,6 +173,29 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                       )}
                       {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && values[field] && (
                         <>
+                          <ImagePicker
+                            title={IMAGE_PICKER_TITLE}
+                            data={
+                              {
+                                ids: values[field],
+                                pictures: options[field]
+                                  .filter(item => {
+                                    return item.gallery !== null || item.gallery !== undefined
+                                  })
+                                  .map(item => {
+                                    return (
+                                      {
+                                        id: item?.id,
+                                        url: item?.gallery ? item.gallery[0]?.file?.url : null,
+                                        pictureId: item?.gallery ? item.gallery[0].fileId : null
+                                      }
+                                    )
+                                  })
+                              }
+                            }
+                            setChosenImage={setChosenImage}
+                            chosenImage={chosenImage}
+                          />
                           <Autocomplete
                             label={title}
                             name={field}
@@ -204,29 +227,6 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                             names={options[field]}
                             setItemsToSend={setItemsToSend}
                             itemsToSend={itemsToSend}
-                          />
-                          <ImagePicker
-                            title={IMAGE_PICKER_TITLE}
-                            data={
-                              {
-                                ids: values[field],
-                                pictures: options[field]
-                                  .filter(item => {
-                                    return item.gallery !== null || item.gallery !== undefined
-                                  })
-                                  .map(item => {
-                                    return (
-                                      {
-                                        id: item?.id,
-                                        url: item?.gallery ? item.gallery[0]?.file?.url : null,
-                                        pictureId: item?.gallery ? item.gallery[0].fileId : null
-                                      }
-                                    )
-                                  })
-                              }
-                            }
-                            setChosenImage={setChosenImage}
-                            chosenImage={chosenImage}
                           />
                         </>
                       )

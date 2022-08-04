@@ -66,7 +66,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, zoom, isLoade
                         <Marker
                             icon={{
                                 url: marker.icon,
-                                scaledSize: new window.google.maps.Size(30, 40)
+                                scaledSize: new window.google.maps.Size(20, 30)
                             }}
                             key={marker.location[0] + index}
                             position={{ lat: marker.location[0], lng: marker.location[1] }}

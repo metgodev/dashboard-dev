@@ -15,7 +15,7 @@ const ImagePicker = ({ title, data, setChosenImage, chosenImage }) => {
 
     return (
         <Box>
-            <Button variant="outlined" sx={classes.toggleButton} onClick={() => setOpen(prev => !prev)} style={{ width: '100%' }}>
+            <Button variant="outlined" sx={{ marginBottom: '20px' }} className={classes.toggleButton} onClick={() => setOpen(prev => !prev)} style={{ width: '100%' }}>
                 {title}
                 {open ? <ExpandLess /> : <ExpandMore />}
             </Button>

@@ -40,13 +40,17 @@ const DraggableList = React.memo(({ items, names, setItemsToSend, itemsToSend })
             <Droppable droppableId="droppable-list">
                 {provided => (
                     <div ref={provided.innerRef} {...provided.droppableProps} className={classes.draggableContainer}>
-                        {itemsToSend.map((item, index) => (
-                            <DraggableListItem
-                                item={names.filter(fullItem => fullItem.id === item)[0]}
-                                index={index}
-                                key={item}
-                            />
-                        ))}
+                        {itemsToSend.map((item, index) => {
+                            return (
+                                (
+                                    <DraggableListItem
+                                        item={names.filter(fullItem => fullItem.id === item)[0]}
+                                        index={index}
+                                        key={item}
+                                    />
+                                )
+                            )
+                        })}
                     </div>
                 )}
             </Droppable>
