@@ -4,10 +4,11 @@ import { _get } from '../API/service';
 import { set_app_data } from '../REDUX/actions/data.actions';
 
 
-const useGetService = (url, name, query, area) => {
+const useGetService = (url, name, query, area, reload) => {
     // global
     const _dispatch = useDispatch();
     let _data = useSelector(s => s.dataReducer.app_data);
+    let dataChanged = useSelector(s => s.mainReducer.tableChanged)
 
     // Used to prevent state update if the component is unmounted
     let cancelRequest = useRef(false)
@@ -44,7 +45,7 @@ const useGetService = (url, name, query, area) => {
         const fetchData = async () => {
             dispatch({ type: 'loading' })
             // If a cache exists for this url, return it
-            if (_data[name]) {
+            if (_data[name] && !reload) {
                 console.log('Using cache for ' + name)
                 dispatch({ type: 'fetched', payload: _data[name] })
                 return
@@ -74,7 +75,7 @@ const useGetService = (url, name, query, area) => {
             cancelRequest.current = true
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, area])
+    }, [name, area, dataChanged])
 
     return state
 }

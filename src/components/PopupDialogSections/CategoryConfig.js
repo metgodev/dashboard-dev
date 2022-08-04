@@ -96,7 +96,7 @@ export const GetValuesForForm = (values, allTags) => {
     instagramPageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('instagramPageUrl') ? values.instagramPageUrl : initialData.instagramPageUrl : initialData.instagramPageUrl,
     youtubePageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('youtubePageUrl') ? values.youtubePageUrl : initialData.youtubePageUrl : initialData.youtubePageUrl,
     locationName: values.length || Object.keys(values).length ? values.hasOwnProperty('address') ? values.address : initialData.locationName : initialData.locationName,
-    point: values.length || Object.keys(values).length && values.hasOwnProperty('locationInfo') && values.locationInfo.hasOwnProperty("coordinates") ? values.locationInfo.coordinates : initialData.point,
+    point: values.length || Object.keys(values).length && values.hasOwnProperty('locationInfo') && values.locationInfo.hasOwnProperty("coordinates") ? values.locationInfo.coordinates : values.hasOwnProperty("location") ? values.location.coordinates : initialData.point,
     free: values.length || Object.keys(values).length ? values.hasOwnProperty('free') ? values.free : initialData.free : initialData.free,
     openHour: values.length || Object.keys(values).length ? values.hasOwnProperty('openHour') ? values.openHour.length < 7 ? new Date(values.openHour + ' 2016-01-01') : values.openHour : initialData.openHour : initialData.openHour,
     endDate: values.length || Object.keys(values).length ? values.hasOwnProperty('endDate') ? values.endDate : initialData.endDate : initialData.endDate,

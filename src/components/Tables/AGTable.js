@@ -14,7 +14,6 @@ import term from '../../terms';
 
 const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelectedColumn }) => {
 
-
     const gridRef = useRef();
 
     const [rowData, setRowData] = useState([]);
@@ -25,7 +24,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
 
     const requestParams = { areaId: area.id.toString(), $limit: 1000, $sort: { createdAt: -1 } }
 
-    let pageData = useGetService(display, display, requestParams, area)
+    let pageData = useGetService(display, display, requestParams, area, false)
 
     useEffect(() => {
         if (setExportToExcel !== undefined) {
