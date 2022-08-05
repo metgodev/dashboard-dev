@@ -31,7 +31,7 @@ export default {
   ],
   bigStat: [
     {
-      product: term('businesses'),
+      product: 'businesses',
       total: {
         monthly: 4232,
         weekly: 1465,
@@ -51,7 +51,7 @@ export default {
       }
     },
     {
-      product: term('events'),
+      product: 'events',
       total: {
         monthly: 754,
         weekly: 180,
@@ -71,7 +71,7 @@ export default {
       }
     },
     {
-      product: term('points'),
+      product: 'points',
       total: {
         monthly: 1025,
         weekly: 301,
@@ -91,7 +91,7 @@ export default {
       }
     },
     {
-      product: term('routes'),
+      product: 'tracks',
       total: {
         monthly: 1025,
         weekly: 301,

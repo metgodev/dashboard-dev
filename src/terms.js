@@ -1518,6 +1518,26 @@ const active_lexicon = {
         he: 'נעוץ',
         ar: 'مثبت'
     },
+    tracks: {
+        en: 'Tracks',
+        he: 'מסלולים',
+        ar: 'المسارات'
+    },
+    added_last_month: {
+        en: 'Added last month',
+        he: 'נוספו חודש שעבר',
+        ar: 'أضيف الشهر الماضي'
+    },
+    added_yesterday: {
+        en: 'Added yesterday',
+        he: 'נוספו אתמול',
+        ar: 'أضيف أمس'
+    },
+    added_last_week: {
+        en: 'Added last week',
+        he: 'נוספו שבוע שעבר',
+        ar: 'أضيفت الأسبوع الماضي'
+    },
     phone_number_whatsapp: {
         en: 'Phone number / Whatsapp ( appears on app )',
         he: 'מספר נייד / ואאטסאפ ( מופיע באפליקציה ) ',

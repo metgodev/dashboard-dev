@@ -10,7 +10,7 @@ import local from '../../Assets/svgs/local.svg'
 import lodging from '../../Assets/svgs/lodging.svg'
 import travel from '../../Assets/svgs/travel.svg'
 
-function MetroStats({ title, ammount, svg, setSelectedCategory }) {
+function MetroStats({ title, ammount, svg, setSelectedCategory, clickable }) {
 
     let classes = useStyles();
     let svgArr = [{ attraction }, { culture }, { food }, { local }, { lodging }, { travel }];
@@ -22,7 +22,7 @@ function MetroStats({ title, ammount, svg, setSelectedCategory }) {
                 setSelectedCategory(svg)
             }
         }}>
-            <img src={img[svg]} alt={svg} className={classes.logotype} />
+            <img src={img[svg]} alt={svg} className={clickable ? classes.logotypeClickable : classes.logotype} />
             <div className={classes.title}>
                 <Typography variant="h5">{title}</Typography>
             </div>

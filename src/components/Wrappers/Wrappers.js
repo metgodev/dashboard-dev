@@ -48,6 +48,7 @@ function Typography({
   size,
   colorBrightness,
   color,
+  marginLeft,
   ...props
 }) {
   let theme = useTheme();
@@ -58,6 +59,7 @@ function Typography({
         color: getColor(color, theme, colorBrightness),
         fontWeight: getFontWeight(weight),
         fontSize: getFontSize(size, props.variant, theme),
+        marginLeft: marginLeft
       }}
       {...props}
     >

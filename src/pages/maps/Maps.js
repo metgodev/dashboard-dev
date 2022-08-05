@@ -65,7 +65,9 @@ const Maps = () => {
                   setSelectedCategory={setSelectedCategory}
                   ammount={data[stat.svg].length}
                   svg={stat.svg}
-                  title={stat.product} />
+                  title={stat.product}
+                  clickable={true}
+                />
               </Grid>
             ))}
           </Grid>

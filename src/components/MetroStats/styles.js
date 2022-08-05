@@ -11,10 +11,14 @@ export default makeStyles(theme => ({
         alignItems: "center",
         width: "100%",
     },
-    logotype: {
+    logotypeClickable: {
         width: '100%',
         height: '6rem',
         cursor: 'pointer'
+    },
+    logotype: {
+        width: '100%',
+        height: '6rem',
     },
     h: {
         padding: 1, margin: 1,

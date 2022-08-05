@@ -10,7 +10,7 @@ export const headerBtns = [
     { name: term('monthly'), func: () => console.log('Months'), buttonIcon: <CalendarTodayOutlinedIcon /> },
 ]
 
-export const requestParams = { $limit: 1000, $select: ['_id', 'location', 'locationInfo', 'tags', 'tagsIds'] }
+export const requestParams = { $limit: 1000, $select: ['_id', 'location', 'locationInfo', 'tags', 'tagsIds', 'createdAt'] }
 
 
 export const setNumberOfBusinesses = (businesses, setEntitiesCount) => {

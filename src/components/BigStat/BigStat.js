@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Grid, Select, MenuItem, Input } from "@material-ui/core";
 import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
 import term from "../../terms";
+import { getNumberOfEntities, getNumberOfEntitiesToCompare, getTextForComparison } from './bigStatHelper'
 // styles
 import useStyles from "./styles";
 
@@ -12,18 +13,30 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers/Wrappers";
 import Widget from "../Widget/Widget";
 
-export default function BigStat({ product, total, color, registrations }) {
+export default function BigStat({ type, data, color, registrations }) {
   let classes = useStyles();
   let theme = useTheme();
 
   // local
   let [value, setValue] = useState("daily");
 
+  const useGetNumberOfEntitiesBasedOnTimePeriod = useCallback((timePeriod) => {
+    return getNumberOfEntities(timePeriod, data);
+  }, [value])
+
+  const useGetNumberOfEntitiesToCompareBasedOnTimePeriod = useCallback((timePeriod) => {
+    return getNumberOfEntitiesToCompare(timePeriod, data);
+  }, [value])
+
+  const useGetTextForComparison = useCallback((value) => {
+    return getTextForComparison(value)
+  }, [value])
+
   return (
     <Widget
       header={
         <div className={classes.title}>
-          <Typography variant="h5">{product}</Typography>
+          <Typography variant="h5">{type}</Typography>
 
           <Select
             value={value}
@@ -42,18 +55,19 @@ export default function BigStat({ product, total, color, registrations }) {
           </Select>
         </div>
       }
-      uppertitle
     >
       <div className={classes.totalValueContainer}>
         <div className={classes.totalValue}>
           <Typography size="xxl" color="text" colorBrightness="secondary">
-            {total.count}
+            {useGetNumberOfEntitiesBasedOnTimePeriod(value)}
           </Typography>
         </div>
         <BarChart width={100} height={50} data={getRandomData()}>
           <Bar
             dataKey="value"
-            fill={theme.palette[color].main}
+            fill={
+              useGetNumberOfEntitiesBasedOnTimePeriod(value) > 0 ? 'green' : 'red'
+            }
             radius={10}
             barSize={10}
           />
@@ -62,20 +76,18 @@ export default function BigStat({ product, total, color, registrations }) {
       <div className={classes.bottomStatsContainer}>
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
-            <Typography color={total.percent.profit ? "secondary" : "default"}>
-              &nbsp;{total.percent.profit ? "+" : "-"}
-              {total.percent.value}%
+            <Typography marginLeft={"5px"} color="text" >
+              {useGetNumberOfEntitiesToCompareBasedOnTimePeriod(value)}
             </Typography>
-            <ArrowForwardIcon
+            {/* <ArrowForwardIcon
               className={classnames(classes.profitArrow, {
-                [classes.profitArrowDanger]: !registrations[value].profit,
+                [classes.profitArrowDanger]: useGetNumberOfEntitiesToCompareBasedOnTimePeriod(value) > useGetNumberOfEntitiesBasedOnTimePeriod(value),
               })}
-            />
+            /> */}
             <Typography size="sm" color="text" colorBrightness="secondary">
-              {term('last_then_year')}
+              {useGetTextForComparison(value)}
             </Typography>
           </Grid>
-
         </div>
       </div>
     </Widget>
