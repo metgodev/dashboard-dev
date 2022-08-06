@@ -43,6 +43,11 @@ const Maps = () => {
     }
   }, [businesses, events, points])
 
+  const handleSelectedCategory = (category) => {
+    setSelectedCategory(category)
+    setInfoWindow(null)
+  }
+
   return (
     <div className={classes.container}>
       <PageTitle title={term('map')} />
@@ -66,7 +71,7 @@ const Maps = () => {
             {config.MetroStats.map((stat) => (
               <Grid item lg={1} md={12} sm={12} xs={12} key={stat.product}>
                 <MetroStats
-                  setSelectedCategory={setSelectedCategory}
+                  setSelectedCategory={handleSelectedCategory}
                   selectedCategory={selectedCategory}
                   ammount={data[stat.svg].length}
                   svg={stat.svg}

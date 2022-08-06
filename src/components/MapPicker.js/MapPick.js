@@ -59,8 +59,8 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
         }
     }
 
-    const renderMarkers = useCallback(() => {
-        return markers.map((marker, index) => {
+    const renderMarkers = useCallback(
+        markers && markers.map((marker, index) => {
             return (
                 <Marker
                     icon={{
@@ -77,7 +77,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
                 />
             )
         })
-    }, [selectedCategory])
+        , [selectedCategory])
 
     return isLoaded ? (
         <GoogleMap
@@ -93,7 +93,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
                 }
             }}
         >
-            {markers &&
+            {
                 renderMarkers
             }
             {marker && <Marker position={{ lat: point[0], lng: point[1] }} />}
