@@ -25,6 +25,7 @@ const Maps = () => {
   //local
   const [data, setData] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [infoWindow, setInfoWindow] = useState(null)
 
   //hooks
   const { width } = useGetWindowSize()
@@ -42,6 +43,8 @@ const Maps = () => {
     }
   }, [businesses, events, points])
 
+  console.log(businesses)
+
   return (
     <div className={classes.container}>
       <PageTitle title={term('map')} />
@@ -51,8 +54,11 @@ const Maps = () => {
             <MapPick
               containerStyle={{ width: width - 300, height: '55vh' }}
               markers={selectedCategory ? data[selectedCategory] : [...data.culture, ...data.food, ...data.travel, ...data.local, ...data.lodging, ...data.attraction]}
-              zoom={8}
+              initialZoom={8}
               isLoaded={isLoaded}
+              setInfoWindow={setInfoWindow}
+              infoWindow={infoWindow}
+              selectedCategory={selectedCategory}
             />
           </div>
           <Grid container
@@ -63,6 +69,7 @@ const Maps = () => {
               <Grid item lg={1} md={12} sm={12} xs={12} key={stat.product}>
                 <MetroStats
                   setSelectedCategory={setSelectedCategory}
+                  selectedCategory={selectedCategory}
                   ammount={data[stat.svg].length}
                   svg={stat.svg}
                   title={stat.product}
@@ -80,4 +87,4 @@ const Maps = () => {
   );
 }
 
-export default Maps;
+export default React.memo(Maps);

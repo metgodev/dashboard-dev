@@ -13,7 +13,7 @@ import Download from "../../components/Download/Download";
 //Service
 import useGetService from '../../hooks/useGetService'
 //Helper functions
-import { headerBtns, requestParams, setNumberOfBusinesses, setNumberOfEvents, setNumberOfPoints, setNumberOfTracks } from "./dashboardHelpers";
+import { headerBtns, requestParams } from "./dashboardHelpers";
 import { sortDataForMap } from "../maps/mapsHelpers";
 
 export default function Dashboard() {

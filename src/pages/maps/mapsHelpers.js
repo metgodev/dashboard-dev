@@ -5,7 +5,7 @@ import localIcon from '../../Assets/images/icons/local.png'
 import lodgingIcon from '../../Assets/images/icons/lodging.png'
 import travelIcon from '../../Assets/images/icons/travel.png'
 
-export const requestParams = { $limit: 1000 }
+export const requestParams = { $limit: 1000, $select: ['_id', 'location', 'locationInfo', 'tags', 'tagsIds', 'createdAt', 'name', 'shortDescription'] }
 
 export const sortDataByCategory = (data, setData) => {
     let culture = []
@@ -18,22 +18,22 @@ export const sortDataByCategory = (data, setData) => {
     data.forEach(item => {
         switch (item.category) {
             case "Travel":
-                travel.push({ location: item.location, icon: travelIcon })
+                travel.push({ location: item.location, icon: travelIcon, name: item.name, description: item.description })
                 break;
             case "Food":
-                food.push({ location: item.location, icon: foodIcon })
+                food.push({ location: item.location, icon: foodIcon, name: item.name, description: item.description })
                 break;
             case "Local":
-                local.push({ location: item.location, icon: localIcon })
+                local.push({ location: item.location, icon: localIcon, name: item.name, description: item.description })
                 break;
             case "Attraction":
-                attraction.push({ location: item.location, icon: attractionIcon })
+                attraction.push({ location: item.location, icon: attractionIcon, name: item.name, description: item.description })
                 break;
             case "Culture":
-                culture.push({ location: item.location, icon: cultureIcon })
+                culture.push({ location: item.location, icon: cultureIcon, name: item.name, description: item.description })
                 break;
             case "Lodging":
-                lodging.push({ location: item.location, icon: lodgingIcon })
+                lodging.push({ location: item.location, icon: lodgingIcon, name: item.name, description: item.description })
                 break;
         }
     })
@@ -56,7 +56,9 @@ export const sortDataForMap = (businesses, events, points, setData) => {
         return (
             {
                 category: item.tags[0].category.title,
-                location: item?.location?.coordinates ? item?.location?.coordinates : item?.locationInfo?.coordinates ? item?.locationInfo.coordinates : [0, 0]
+                location: item?.location?.coordinates ? item?.location?.coordinates : item?.locationInfo?.coordinates ? item?.locationInfo.coordinates : [0, 0],
+                name: item.name,
+                description: item.shortDescription
             }
         )
     })
