@@ -43,8 +43,6 @@ const Maps = () => {
     }
   }, [businesses, events, points])
 
-  console.log(businesses)
-
   return (
     <div className={classes.container}>
       <PageTitle title={term('map')} />
