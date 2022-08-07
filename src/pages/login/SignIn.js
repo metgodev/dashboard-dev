@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
 // styles
@@ -18,6 +18,13 @@ function SignIn({ setLoggedIn }) {
     let [error, setError] = useState(null);
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+
+    const LISTENER_TYPE = 'keydown'
+    const LISTENER_FUNCTION = (e) => {
+        if (e.key === 'Enter' && email.length !== 0 && password.length !== 0) {
+            loginUser()
+        }
+    }
 
     const loginUser = async () => {
         setIsLoading(true)
@@ -46,6 +53,14 @@ function SignIn({ setLoggedIn }) {
             })
         })
     }
+
+    useEffect(() => {
+        document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
+        document.addEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
+        return () => {
+            document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
+        }
+    }, [email, password])
 
     return (
         <>
