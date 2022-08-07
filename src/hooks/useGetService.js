@@ -4,11 +4,10 @@ import { _get } from '../API/service';
 import { set_app_data } from '../REDUX/actions/data.actions';
 
 
-const useGetService = (url, name, query, area, reload) => {
+const useGetService = (url, query) => {
     // global
     const _dispatch = useDispatch();
     let _data = useSelector(s => s.dataReducer.app_data);
-    let dataChanged = useSelector(s => s.mainReducer.tableChanged)
 
     // Used to prevent state update if the component is unmounted
     let cancelRequest = useRef(false)
@@ -38,27 +37,29 @@ const useGetService = (url, name, query, area, reload) => {
 
     useMemo(() => {
         // Do nothing if the url is not given
-        if (!url || !name) return
+        if (!url) return
 
         cancelRequest.current = false
 
         const fetchData = async () => {
             dispatch({ type: 'loading' })
             // If a cache exists for this url, return it
-            if (_data[name] && !reload) {
-                console.log('Using cache for ' + name)
-                dispatch({ type: 'fetched', payload: _data[name] })
+            if (_data[url]) {
+                console.log('Using cache for ' + url)
+                dispatch({ type: 'fetched', payload: _data[url] })
                 return
             }
+
             try {
-                console.log('Fetching ' + name)
+                console.log('Fetching ' + url)
                 const res = await _get(url, query);
                 if (!res.total) {
                     dispatch({ type: 'error', payload: 'No data found' })
                     return
                 }
-                _dispatch(set_app_data({ ..._data, [name]: res?.data || [] }))
+                _dispatch(set_app_data({ ..._data, [url]: res?.data || [] }))
                 if (cancelRequest.current) return
+
                 dispatch({ type: 'fetched', payload: res.data })
             } catch (error) {
                 if (cancelRequest.current) return
@@ -75,7 +76,7 @@ const useGetService = (url, name, query, area, reload) => {
             cancelRequest.current = true
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, area, dataChanged])
+    }, [url])
 
     return state
 }
