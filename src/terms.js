@@ -1523,6 +1523,26 @@ const active_lexicon = {
         he: 'מסלולים',
         ar: 'المسارات'
     },
+    added_this_month: {
+        en: 'Added this month',
+        he: 'נוספו החודש',
+        ar: 'أضيف هذا الشهر'
+    },
+    tracks: {
+        en: 'Tracks',
+        he: 'מסלולים',
+        ar: 'المسارات'
+    },
+    added_this_week: {
+        en: 'Added this week',
+        he: 'נוספו השבוע',
+        ar: 'أضيف هذا الأسبوع'
+    },
+    added_today: {
+        en: 'Added Today',
+        he: 'נוספו היום',
+        ar: 'أضيف اليوم'
+    },
     added_last_month: {
         en: 'Added last month',
         he: 'נוספו חודש שעבר',

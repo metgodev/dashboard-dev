@@ -46,58 +46,17 @@ export const getNumberOfEntities = (timePeriod, data) => {
     return number
 }
 
-export const getNumberOfEntitiesToCompare = (timePeriod, data) => {
-
-    let number = 0
-    const today = new Date()
-
-    switch (timePeriod) {
-        case 'daily':
-            number = data.filter(item => {
-                const date = new Date(item.createdAt)
-                return (
-                    isYesterday(date)
-                )
-            }).length
-            break;
-        case 'weekly':
-            number = data.filter(item => {
-                const date = new Date(item.createdAt)
-                const firstDay = previousSunday(startOfYesterday(previousSunday(today)))
-                const lastDay = startOfYesterday(previousSunday(today))
-                return (
-                    compareAsc(date, firstDay) === 1 &&
-                    compareAsc(lastDay, date) === 1
-                )
-            }).length
-            break;
-        case 'monthly':
-            number = data.filter(item => {
-                const date = new Date(item.createdAt)
-                return (
-                    date.getFullYear() === today.getFullYear() &&
-                        today.getMonth() === 0 ? date.getMonth() === 11 : date.getMonth() === today.getMonth() - 1
-                )
-            }).length
-            break;
-        default:
-            break;
-    }
-
-    return number
-}
-
 export const getTextForComparison = (value) => {
     let text = ''
     switch (value) {
         case 'daily':
-            text = term('added_yesterday')
+            text = term('added_today')
             break;
         case 'weekly':
-            text = term('added_last_week')
+            text = term('added_this_week')
             break;
         case 'monthly':
-            text = term('added_last_month')
+            text = term('added_this_month')
             break;
         default:
             break;

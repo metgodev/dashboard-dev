@@ -5,7 +5,7 @@ import { useTheme } from "@material-ui/styles";
 import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
 import term from "../../terms";
-import { getNumberOfEntities, getNumberOfEntitiesToCompare, getTextForComparison } from './bigStatHelper'
+import { getNumberOfEntities, getTextForComparison } from './bigStatHelper'
 // styles
 import useStyles from "./styles";
 
@@ -22,10 +22,6 @@ export default function BigStat({ type, data, color, registrations }) {
 
   const useGetNumberOfEntitiesBasedOnTimePeriod = useCallback((timePeriod) => {
     return getNumberOfEntities(timePeriod, data);
-  }, [value])
-
-  const useGetNumberOfEntitiesToCompareBasedOnTimePeriod = useCallback((timePeriod) => {
-    return getNumberOfEntitiesToCompare(timePeriod, data);
   }, [value])
 
   const useGetTextForComparison = useCallback((value) => {
@@ -59,14 +55,14 @@ export default function BigStat({ type, data, color, registrations }) {
       <div className={classes.totalValueContainer}>
         <div className={classes.totalValue}>
           <Typography size="xxl" color="text" colorBrightness="secondary">
-            {useGetNumberOfEntitiesBasedOnTimePeriod(value)}
+            {data.length}
           </Typography>
         </div>
         <BarChart width={100} height={50} data={getRandomData()}>
           <Bar
             dataKey="value"
             fill={
-              useGetNumberOfEntitiesBasedOnTimePeriod(value) > 0 ? 'green' : 'red'
+              'green'
             }
             radius={10}
             barSize={10}
@@ -77,13 +73,11 @@ export default function BigStat({ type, data, color, registrations }) {
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
             <Typography marginLeft={"5px"} color="text" >
-              {useGetNumberOfEntitiesToCompareBasedOnTimePeriod(value)}
+              {useGetNumberOfEntitiesBasedOnTimePeriod(value)}
             </Typography>
-            {/* <ArrowForwardIcon
-              className={classnames(classes.profitArrow, {
-                [classes.profitArrowDanger]: useGetNumberOfEntitiesToCompareBasedOnTimePeriod(value) > useGetNumberOfEntitiesBasedOnTimePeriod(value),
-              })}
-            /> */}
+            <ArrowForwardIcon
+              className={classnames(classes.profitArrow)}
+            />
             <Typography size="sm" color="text" colorBrightness="secondary">
               {useGetTextForComparison(value)}
             </Typography>
