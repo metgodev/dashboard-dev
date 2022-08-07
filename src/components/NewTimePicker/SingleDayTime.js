@@ -43,7 +43,7 @@ function SingleDayTime({ day, hours, setDayData }) {
                         shrink: true,
                     }}
                     onChange={(e) => {
-                        setDayData(prev => ({ ...prev, end: e.target.value, open: hours?.open ? hours.open : true }))
+                        setDayData({ start: hours.start, end: e.target.value, open: hours?.open ? hours.open : true })
                     }}
                 />
             </div>

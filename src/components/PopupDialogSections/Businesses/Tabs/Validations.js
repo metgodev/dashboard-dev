@@ -32,15 +32,15 @@ export async function validateFirstFormPart(values) {
     if (values.tagsIds.length > 5) {
         return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
-}
-
-export async function validateSeconsFormPart(values) {
     if (values.phoneNumber === undefined) {
         return
     }
     if ((values?.phoneNumber[0] !== '0' && values?.phoneNumber?.slice(0, 4) !== "+972") || /[a-zA-Z]/.test(values.phoneNumber) || values.phoneNumber.length < 9) {
         return { phoneNumber: term("please_enter_a_valid_phone_number") }
     }
+}
+
+export async function validateSeconsFormPart(values) {
     if (!values.contactPersonName) {
         return { contactPersonName: term("please_enter_the_contact_persons_name") }
     }
