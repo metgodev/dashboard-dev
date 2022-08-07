@@ -54,8 +54,6 @@ export default function Dashboard() {
             <BigStat
               type={term(stat.product)}
               data={entitiesCount[stat.product]}
-              color={stat.color}
-              registrations={stat.registrations}
             />
           </Grid>
         ))}

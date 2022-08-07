@@ -24,10 +24,16 @@ export const getNumberOfEntities = (timePeriod, data) => {
         case 'weekly':
             number = data.filter(item => {
                 const date = new Date(item.createdAt)
-                const firstDayOfWeek = previousSunday(today)
-                return (
-                    compareAsc(date, firstDayOfWeek) === 1
-                )
+                if (today.getDay() === 0) {
+                    return date.getFullYear() === today.getFullYear() &&
+                        date.getMonth() === today.getMonth() &&
+                        date.getDate() === today.getDate()
+                } else {
+                    const firstDayOfWeek = previousSunday(today)
+                    return (
+                        compareAsc(date, firstDayOfWeek) === 1
+                    )
+                }
             }).length
             break;
         case 'monthly':

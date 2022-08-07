@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Grid, Select, MenuItem, Input } from "@material-ui/core";
 import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
-import { useTheme } from "@material-ui/styles";
 import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
 import term from "../../terms";
@@ -13,9 +12,8 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers/Wrappers";
 import Widget from "../Widget/Widget";
 
-export default function BigStat({ type, data, color, registrations }) {
+export default function BigStat({ type, data }) {
   let classes = useStyles();
-  let theme = useTheme();
 
   // local
   let [value, setValue] = useState("daily");
