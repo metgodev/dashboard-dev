@@ -40,6 +40,15 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
         }
     }, [area, tableChanged, pageData])
 
+    const onUpdate = useCallback(async (params) => {
+        try {
+            let res = await client.service(display).patch(params?.data?._id, params?.data)
+            gridRef.current.api.updateRowData({ update: [res] });
+        } catch (e) {
+            console.log(e)
+        }
+    }, [tableChanged]);
+
     const getRowId = useCallback(params => {
         return params.data._id;
     }, []);
@@ -64,7 +73,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
     const onGridReady = () => {
         if (pageData.data.length > 0) {
             let cols = Cols(pageData.data[0], ignore);
-            let keys = Keys(cols, idOptions, display);
+            let keys = Keys(cols, idOptions, display, onUpdate);
             setRowData(pageData.data.map(item => {
                 let newItem = { ...item };
                 if (item.tag && item.category) {
