@@ -81,5 +81,3 @@ const useGetService = (url, name, query, area, reload) => {
 }
 
 export default useGetService;
-
-

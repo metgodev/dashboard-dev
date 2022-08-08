@@ -18,6 +18,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
 
     const [rowData, setRowData] = useState([]);
     const [columnDefs, setColumnDefs] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
@@ -27,6 +28,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
     let pageData = useGetService(display, display, requestParams, area, false)
 
     useEffect(() => {
+        setLoading(true)
         if (setExportToExcel !== undefined) {
             setExportToExcel(() => exportToXl)
         }
@@ -34,9 +36,15 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
             setColumnDefs([])
             setRowData([])
             onGridReady();
+            setLoading(false)
         }
         else if (Object.keys(selectedColumn).length !== 0 && pageData.data.length > 0) {
             onChangeRow()
+            setLoading(false)
+        }
+        return () => {
+            pageData.cancelRequest();
+            setLoading(false)
         }
     }, [area, tableChanged, pageData])
 
@@ -88,7 +96,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 120, direction: 'rtl' }} >
-                <AgGridReact
+                {loading ? <></> : <AgGridReact
                     onGridReady={onGridReady}
                     // listen to changes in the table
                     onCellDoubleClicked={(event) => {
@@ -106,7 +114,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
                     suppressColumnVirtualisation={true}
                     suppressRowVirtualisation={true}
                     debounceVerticalScrollbar={true}
-                />
+                />}
             </div>
         </div>
     )
