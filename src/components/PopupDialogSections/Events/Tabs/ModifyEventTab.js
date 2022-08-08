@@ -53,6 +53,10 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 type: "Point",
                 coordinates: values.locationInfo.coordinates
             },
+            location: {
+                type: "Point",
+                coordinates: values.locationInfo.coordinates
+            },
             openHour: getFormattedHour(values.openHour),
             relevantTo: values.relevantTo,
             price: values.price,
