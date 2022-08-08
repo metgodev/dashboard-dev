@@ -177,10 +177,10 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                             title={IMAGE_PICKER_TITLE}
                             data={
                               {
-                                ids: values[field],
+                                ids: values[field].filter(value => options[field].find(pic => pic?.id === value && pic.galleryFileIds.length > 0)),
                                 pictures: options[field]
                                   .filter(item => {
-                                    return item.gallery !== null || item.gallery !== undefined
+                                    return item.galleryFileIds !== null && item.galleryFileIds !== undefined && item.galleryFileIds.length > 0
                                   })
                                   .map(item => {
                                     return (
