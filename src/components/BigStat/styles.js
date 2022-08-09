@@ -42,4 +42,10 @@ export default makeStyles(theme => ({
       backgroundColor: "white",
     },
   },
+  spinner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: '100%'
+  }
 }));
