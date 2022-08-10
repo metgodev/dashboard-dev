@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
+import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, IconButton } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
@@ -18,6 +20,10 @@ function SignIn({ setLoggedIn }) {
     let [error, setError] = useState(null);
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     const LISTENER_TYPE = 'keydown'
     const LISTENER_FUNCTION = (e) => {
@@ -99,8 +105,21 @@ function SignIn({ setLoggedIn }) {
                 onChange={e => setPassword(e.target.value)}
                 margin="normal"
                 placeholder={term('password')}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 fullWidth
+                InputProps={{ // <-- This is where the toggle button is added.
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }}
             />
             <div className={classes.formButtons}>
                 {isLoading ? (

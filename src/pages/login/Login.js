@@ -30,7 +30,7 @@ function Login({ setLoggedIn }) {
             <Tab label={term("sign_up")} classes={{ root: classes.tab }} />
           </Tabs>
           {activeTabId === 0 && (<SignIn setLoggedIn={setLoggedIn} />)}
-          {activeTabId === 1 && (<Register />)}
+          {activeTabId === 1 && (<Register setLoggedIn={setLoggedIn} />)}
         </div>
       </div>
       <div className={classes.logotypeContainer}>

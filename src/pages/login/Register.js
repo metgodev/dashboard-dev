@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Typography, Button, TextField, Fade, } from "@material-ui/core";
+import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, IconButton } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import term from "../../terms";
 import client, { Auth } from '../../API/metro';
 import { useDispatch } from 'react-redux';
@@ -9,7 +11,7 @@ import { set_user } from '../../REDUX/actions/main.actions';
 import useStyles from "./styles";
 import { registerUserWithEmailAndPassword } from '../../API/firebase';
 
-function Register() {
+function Register({ setLoggedIn }) {
     let dispatch = useDispatch()
 
     let navigate = useNavigate()
@@ -20,6 +22,25 @@ function Register() {
     let [lastName, setLastName] = useState("");
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+    const LISTENER_TYPE = 'keydown'
+    const LISTENER_FUNCTION = (e) => {
+        if (e.key === 'Enter' && email.length !== 0 && password.length !== 0 && firstName.length !== 0 && lastName.length !== 0) {
+            registerUser()
+        }
+    }
+
+    useEffect(() => {
+        document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
+        document.addEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
+        return () => {
+            document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
+        }
+    }, [email, password])
 
 
     const registerUser = async () => {
@@ -37,6 +58,8 @@ function Register() {
                         id: res._id
                     }
                     dispatch(set_user(user));
+                    setLoggedIn(true)
+                    navigate('/dashboard')
                     setIsLoading(false);
                 }
             })
@@ -114,9 +137,22 @@ function Register() {
                     onChange={e => setPassword(e.target.value)}
                     margin="normal"
                     placeholder={term("password")}
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     helperText={term("password_must_be_at_least_6_characters_long_helper")}
                     fullWidth
+                    InputProps={{ // <-- This is where the toggle button is added.
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
                 />
                 <div className={classes.creatingButtonContainer}>
                     {isLoading ? (
