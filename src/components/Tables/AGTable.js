@@ -35,8 +35,8 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
         }
         if (Object.keys(selectedColumn).length === 0) {
             setColumnDefs([])
-            onGridReady();
         }
+        onGridReady()
     }, [area, tableChanged, pageData])
 
     const onUpdate = useCallback(async (params) => {
