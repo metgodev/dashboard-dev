@@ -33,8 +33,8 @@ const ModifyPop = ({ handleClose, type, open }) => {
         { !open && setTab(0) }
     }, [handleClose])
     //Service data
-    const authoritiesData = useGetService("authorities", "authorities", { query: { areaId: area.id } }, area, false)
-    const tagCategories = useGetService("tag-categories", "tag-categories", { query: { areaId: area.id } }, area, false)
+    const authoritiesData = useGetService("authorities", "authorities", { areaId: area.id }, area, false)
+    const tagCategories = useGetService("tag-categories", "tag-categories", { areaId: area.id }, area, false)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);

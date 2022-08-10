@@ -67,6 +67,10 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                 type: "Point",
                 coordinates: values.locationInfo.coordinates
             },
+            location: {
+                type: "Point",
+                coordinates: values.locationInfo.coordinates
+            },
             reservations: values.reservations
         }
         try {

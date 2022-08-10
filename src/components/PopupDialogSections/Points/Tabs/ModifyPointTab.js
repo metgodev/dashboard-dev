@@ -47,7 +47,14 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
             authorityId: values.authorityId,
             name: values.name,
             address: values.locationName,
-            locationInfo: values.locationInfo,
+            locationInfo: {
+                type: "Point",
+                coordinates: values.locationInfo.coordinates
+            },
+            location: {
+                type: "Point",
+                coordinates: values.locationInfo.coordinates
+            },
             locationName: values.address,
             isAccessable: values.isAccessable,
             description: values.description,

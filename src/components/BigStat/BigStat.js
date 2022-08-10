@@ -5,6 +5,7 @@ import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
 import term from "../../terms";
 import { getNumberOfEntities, getTextForComparison } from './bigStatHelper'
+import CircularProgress from '@mui/material/CircularProgress';
 // styles
 import useStyles from "./styles";
 
@@ -51,21 +52,25 @@ export default function BigStat({ type, data }) {
       }
     >
       <div className={classes.totalValueContainer}>
-        <div className={classes.totalValue}>
-          <Typography size="xxl" color="text" colorBrightness="secondary">
-            {data.length}
-          </Typography>
-        </div>
-        <BarChart width={100} height={50} data={drawGraph(data)}>
-          <Bar
-            dataKey="value"
-            fill={
-              'green'
-            }
-            radius={10}
-            barSize={10}
-          />
-        </BarChart>
+        {data.length > 0 ?
+          <>
+            <div className={classes.totalValue}>
+              <Typography size="xxl" color="text" colorBrightness="secondary">
+                {data.length}
+              </Typography>
+            </div>
+            <BarChart width={100} height={50} data={getRandomData()}>
+              <Bar
+                dataKey="value"
+                fill={
+                  'green'
+                }
+                radius={10}
+                barSize={10}
+              />
+            </BarChart>
+          </>
+          : <div className={classes.spinner}><CircularProgress size={50} /></div>}
       </div>
       <div className={classes.bottomStatsContainer}>
         <div className={classnames(classes.statCell, classes.borderRight)}>
