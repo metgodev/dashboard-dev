@@ -20,8 +20,14 @@ export default function BigStat({ type, data }) {
   let [value, setValue] = useState("daily");
 
   const useGetNumberOfEntitiesBasedOnTimePeriod = useCallback((timePeriod) => {
-    return getNumberOfEntities(timePeriod, data);
-  }, [value])
+    if (data.length === 0) {
+      return (
+        <CircularProgress size={10} />
+      )
+    } else {
+      return getNumberOfEntities(timePeriod, data);
+    }
+  }, [value, data])
 
   const useGetTextForComparison = useCallback((value) => {
     return getTextForComparison(value)
