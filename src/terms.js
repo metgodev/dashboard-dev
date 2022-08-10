@@ -188,8 +188,8 @@ const active_lexicon = {
         ar: 'انهيار إيرادات',
     },
     something_went_wrong: {
-        en: 'Something is wrong with your login or password',
-        he: 'שם משתמש או סיסמא לא נכונים',
+        en: 'Something went wrong',
+        he: 'משהו השתבש',
         ar: 'اسم المستخدم او الرقم السري غير صحيح',
     },
     plase_make_sure_that_your_details_are_correct: {

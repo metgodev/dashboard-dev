@@ -1,15 +1,18 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import toast from 'react-hot-toast';
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
+//Server
 import { Auth } from "../../API/metro";
+import { loginWithEmailAndPassword } from "../../API/firebase";
+//Redux
 import { useDispatch } from "react-redux";
 import { set_user } from "../../REDUX/actions/main.actions";
-import { loginWithEmailAndPassword } from "../../API/firebase";
 
 function SignIn({ setLoggedIn }) {
     let classes = useStyles();
@@ -38,11 +41,13 @@ function SignIn({ setLoggedIn }) {
         loginWithEmailAndPassword(email, password).then(res => {
             if (!res?.user) {
                 setIsLoading(false)
+                wrongCredentialsToast()
                 return
             }
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
                     setError(res.error)
+                    wrongCredentialsToast()
                 } else {
                     let user = {
                         e: res.email,
@@ -56,8 +61,8 @@ function SignIn({ setLoggedIn }) {
                     navigate('/dashboard')
                     setIsLoading(false);
                 }
-            })
-        })
+            }).catch((e) => errorToast())
+        }).catch((e) => errorToast())
     }
 
     useEffect(() => {
@@ -67,6 +72,9 @@ function SignIn({ setLoggedIn }) {
             document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
         }
     }, [email, password])
+
+    const wrongCredentialsToast = () => toast(term("plase_make_sure_that_your_details_are_correct"));
+    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <>

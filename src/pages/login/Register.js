@@ -4,9 +4,10 @@ import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, 
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import term from "../../terms";
-import client, { Auth } from '../../API/metro';
+import { Auth } from '../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../REDUX/actions/main.actions';
+import toast from 'react-hot-toast';
 // styles
 import useStyles from "./styles";
 import { registerUserWithEmailAndPassword } from '../../API/firebase';
@@ -62,9 +63,11 @@ function Register({ setLoggedIn }) {
                     navigate('/dashboard')
                     setIsLoading(false);
                 }
-            })
-        })
+            }).catch(e => errorToast())
+        }).catch(e => errorToast())
     }
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <div>

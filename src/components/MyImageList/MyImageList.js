@@ -7,7 +7,8 @@ import { Box } from '@mui/material'
 import useStyles from './styles'
 import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../REDUX/actions/main.actions'
-
+import toast from 'react-hot-toast';
+import term from '../../terms';
 
 export default function MyImageList({ type, tab, setLoadingImage, businessId, media }) {
 
@@ -25,10 +26,12 @@ export default function MyImageList({ type, tab, setLoadingImage, businessId, me
                 dispatch(set_table_changed("upload_media"))
             }
         } catch (e) {
-            console.log(e)
+            errorToast()
             setLoadingImage(false)
         }
     }
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <>

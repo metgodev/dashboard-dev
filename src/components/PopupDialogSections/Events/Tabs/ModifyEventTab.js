@@ -10,6 +10,8 @@ import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } 
 import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 import client from '../../../../API/metro'
 import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
+import toast from 'react-hot-toast';
+import term from "../../../../terms";
 
 export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
 
@@ -21,7 +23,6 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
     const dispatch = useDispatch()
-
 
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
@@ -80,9 +81,11 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 handleClose(false)
             }
         } catch (e) {
-            console.log(e)
+            errorToast()
         }
     }
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     const getFormattedHour = (hour) => {
         const date = new Date(hour)

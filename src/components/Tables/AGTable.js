@@ -5,7 +5,7 @@ import client from '../../API/metro';
 import { Cols, Keys } from './TableKeys';
 import { useSelector } from 'react-redux';
 import useGetService from '../../hooks/useGetService';
-import { BLOCK_SIZE } from './tableConfig'
+import toast from 'react-hot-toast';
 
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
@@ -54,6 +54,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
             gridRef.current.api.updateRowData({ update: [res] });
         } catch (e) {
             console.log(e)
+            errorToast()
         }
     }, [tableChanged]);
 
@@ -73,10 +74,13 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
             }
         } catch (e) {
             console.log(e)
+            errorToast()
         } finally {
             setSelectedColumn([])
         }
     }, [tableChanged])
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     const onGridReady = () => {
         if (pageData.data.length > 0) {

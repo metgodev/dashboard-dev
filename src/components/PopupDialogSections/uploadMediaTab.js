@@ -7,6 +7,8 @@ import MyImageList from '../MyImageList/MyImageList';
 import CropImage from "../../hooks/CropImage";
 import client from '../../API/metro';
 import axios from 'axios'
+import toast from 'react-hot-toast';
+import term from '../../terms';
 //styles
 import useStyles from "./styles";
 import useGetService from '../../hooks/useGetService';
@@ -105,12 +107,13 @@ export const UploadMediaTab = ({ tab, setLoadingImage, config }) => {
           dispatch(set_table_changed('upload-image'))
         }
       } catch (e) {
-        console.log(e)
+        errorToast()
       }
     }
     setImageToCrop(null)
   }
 
+  const errorToast = () => toast(term("something_went_wrong"));
 
   return (
     <Box className={classes.uploadMediaTabWrapper}>

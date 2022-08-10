@@ -7,6 +7,8 @@ import get_orientation from '../../../../utils/get_orientation'
 import { GetFormData } from './HandleAuthorityData'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
+import toast from 'react-hot-toast';
+import term from '../../../../terms';
 
 export const AuthorityTab = ({ handleClose, type, }) => {
     //global
@@ -31,16 +33,23 @@ export const AuthorityTab = ({ handleClose, type, }) => {
             ...formValues,
             areaId: area?.id?.toString()
         }
-
-        if (type === 'add')
-            client.service('authorities').create(valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
-        else
-            client.service('authorities').patch(values['_id'], valuesToSend)
-                .then(() => dispatch(set_table_changed(type)))
-                .then(() => handleClose(false))
+        try {
+            if (type === 'add') {
+                await client.service('authorities').create(valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+            else {
+                await client.service('authorities').patch(values['_id'], valuesToSend)
+                dispatch(set_table_changed(type))
+                handleClose(false)
+            }
+        } catch {
+            errorToast()
+        }
     }
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Form

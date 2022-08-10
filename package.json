@@ -40,6 +40,7 @@
     "react-google-map-picker": "^1.2.3",
     "react-google-maps": "^9.4.5",
     "react-google-places-autocomplete": "^3.3.2",
+    "react-hot-toast": "^2.3.0",
     "react-image-file-resizer": "^0.4.7",
     "react-lottie": "^1.2.3",
     "react-redux": "^7.2.6",

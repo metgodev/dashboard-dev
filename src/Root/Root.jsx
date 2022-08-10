@@ -21,6 +21,7 @@ import UsersTable from '../pages/userstable/UsersTable';
 import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
+import { Toaster } from 'react-hot-toast';
 // admin pages
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
@@ -45,6 +46,9 @@ const Root = () => {
 
     return (
         <Box className={classes.Router}>
+            <Toaster
+                position={'bottom-center'}
+            />
             <Main >
                 {shouldDisplay &&
                     <>
