@@ -14,6 +14,7 @@ const stats = {
 };
 
 const StatusMenu = (element) => {
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     let classes = useStyles();
@@ -23,13 +24,18 @@ const StatusMenu = (element) => {
     };
 
     const handleClose = async (status) => {
-        try {
-            element.onUpdate({ data: { status, _id: element.data._id }, node: element.node })
+        if (status === null) {
             setAnchorEl(null);
-        } catch (e) {
-            console.log(e)
+        } else {
+            try {
+                element.onUpdate({ data: { status, _id: element.data._id }, setStatus: element.setValue })
+                setAnchorEl(null);
+            } catch (e) {
+                console.log(e)
+            }
         }
     };
+
     return (
         element.data ?
             <div key={element.data._id} style={{ display: 'flex', flex: 1, width: '100%', height: '100%' }}>
@@ -52,6 +58,7 @@ const StatusMenu = (element) => {
                     id="basic-menu"
                     anchorEl={anchorEl}
                     open={open}
+                    onClose={() => handleClose(null)}
                     MenuListProps={{
                         'aria-labelledby': 'basic-button',
                     }}

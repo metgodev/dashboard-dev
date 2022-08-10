@@ -46,12 +46,10 @@ const useGetService = (url, name, query, area, reload) => {
             dispatch({ type: 'loading' })
             // If a cache exists for this url, return it
             if (_data[name] && !reload) {
-                console.log('Using cache for ' + name)
                 dispatch({ type: 'fetched', payload: _data[name] })
                 return
             }
             try {
-                console.log('Fetching ' + name)
                 const res = await _get(url, query);
                 if (!res.total) {
                     dispatch({ type: 'error', payload: 'No data found' })

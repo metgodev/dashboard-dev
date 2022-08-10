@@ -483,8 +483,6 @@ export const gridOptions = {
     },
     statusBar: {
         statusPanels: [
-            { statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left' },
-            { statusPanel: 'agAggregationComponent' },
         ],
     },
     paginationAutoPageSize: true,
