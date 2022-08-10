@@ -27,12 +27,8 @@ const StatusMenu = (element) => {
         if (status === null) {
             setAnchorEl(null);
         } else {
-            try {
-                element.onUpdate({ data: { status, _id: element.data._id }, setStatus: element.setValue })
-                setAnchorEl(null);
-            } catch (e) {
-                console.log(e)
-            }
+            element.onUpdate({ data: { status, _id: element.data._id }, setStatus: element.setValue })
+            setAnchorEl(null);
         }
     };
 
