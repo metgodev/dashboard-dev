@@ -25,8 +25,8 @@ const EventsPop = ({ handleClose, type, open }) => {
     const [loadingImage, setLoadingImage] = useState(false)
     const [picker, setPicker] = useState(Picker)
     //Service data
-    const authoritiesData = useGetService("authorities", "authorities", { query: { areaId: area.id } }, area, false)
-    const tagCategories = useGetService("tag-categories", "tag-categories", { query: { areaId: area.id } }, area, false)
+    const authoritiesData = useGetService("authorities", "authorities", { areaId: area.id }, area, false)
+    const tagCategories = useGetService("tag-categories", "tag-categories", { areaId: area.id }, area, false)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);

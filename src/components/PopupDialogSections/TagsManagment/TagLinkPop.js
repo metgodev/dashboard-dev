@@ -23,8 +23,8 @@ const TagLinkPop = ({ handleClose, type, initialData, open }) => {
         setTab(newValue);
     };
 
-    const tagCategoriesData = useGetService("tag-categories", "tag-categories", { query: { areaId: area.id } }, area, false)
-    const tagsData = useGetService("tags", "tags", { query: { areaId: area.id } }, area, false)
+    const tagCategoriesData = useGetService("tag-categories", "tag-categories", { areaId: area.id }, area, false)
+    const tagsData = useGetService("tags", "tags", { areaId: area.id }, area, false)
 
     useEffect(() => {
         { !open && setTab(0) }

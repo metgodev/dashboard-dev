@@ -9,7 +9,8 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         case 'status':
             return {
                 headerName: term(key), field: key, pinned: 'right',
-                cellRenderer: StatusMenu, cellRendererParams: {
+                cellRenderer: StatusMenu,
+                cellRendererParams: {
                     display,
                     onUpdate,
                 },

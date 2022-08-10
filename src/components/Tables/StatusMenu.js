@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import useStyles from "./styles";
+import { CircularProgress } from '@mui/material';
 
 const stats = {
     'PRIVATE': "error",
@@ -30,35 +31,40 @@ const StatusMenu = (element) => {
         }
     };
     return (
-        <div key={element.data._id} style={{ display: 'flex', flex: 1, width: '100%', height: '100%' }}>
-            <Button
-                className={classes.statusBtns}
-                color={stats[element.value]}
-                size="small"
-                style={{ borderWidth: 2 }}
-                variant="outlined"
-                id="basic-button"
-                aria-controls="basic-menu"
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-                fullWidth
-            >
-                {term(element.value.toLowerCase())}
-            </Button>
-            <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-            >
-                <MenuItem onClick={() => handleClose('PRIVATE')}>{term('private')}</MenuItem>
-                <MenuItem onClick={() => handleClose('PUBLIC')}>{term('public')}</MenuItem>
-                <MenuItem onClick={() => handleClose('PENDING_APPROVAL')}>{term('pending_approval')}</MenuItem>
-            </Menu>
-        </div>
+        element.data ?
+            <div key={element.data._id} style={{ display: 'flex', flex: 1, width: '100%', height: '100%' }}>
+                <Button
+                    className={classes.statusBtns}
+                    color={stats[element.value]}
+                    size="small"
+                    style={{ borderWidth: 2 }}
+                    variant="outlined"
+                    id="basic-button"
+                    aria-controls="basic-menu"
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    fullWidth
+                >
+                    {term(element.value.toLowerCase())}
+                </Button>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    <MenuItem onClick={() => handleClose('PRIVATE')}>{term('private')}</MenuItem>
+                    <MenuItem onClick={() => handleClose('PUBLIC')}>{term('public')}</MenuItem>
+                    <MenuItem onClick={() => handleClose('PENDING_APPROVAL')}>{term('pending_approval')}</MenuItem>
+                </Menu>
+            </div>
+            :
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                <CircularProgress size={20} />
+            </div>
     );
 };
 
