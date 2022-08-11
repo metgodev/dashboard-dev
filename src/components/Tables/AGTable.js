@@ -13,7 +13,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always nee
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
 
-const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelectedColumn }) => {
+const AGTable = ({ display, action, setExportToExcel }) => {
 
 
     const gridRef = useRef();
@@ -114,8 +114,7 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
                 <AgGridReact
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
-                        setSelectedColumn(event)
-                        action(event.data, setSelectedColumn)
+                        action(event.data)
                     }}
                     columnDefs={columnDefs}
                     ref={gridRef}
