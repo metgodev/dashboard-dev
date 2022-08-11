@@ -75,6 +75,30 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 filterable: false,
                 field: key,
             }
+        case "tag":
+            return {
+                headerName: term(key),
+                valueFormatter: (params) => {
+                    console.log(params)
+                    if (params?.data === undefined) return
+                    return params.value.title
+                },
+                sortable: false,
+                filterable: false,
+                field: key,
+            }
+        case "category":
+            return {
+                headerName: term(key),
+                valueFormatter: (params) => {
+                    console.log(params)
+                    if (params?.data === undefined) return
+                    return term(params.data.category.title.toLowerCase())
+                },
+                sortable: false,
+                filterable: false,
+                field: key,
+            }
         case "startDate":
             return {
                 headerName: term(key),

@@ -70,7 +70,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                       {type === "picker" && (
                         <Select label={title} name={field} required={true}>
                           {options && options[field].map((item) => (
-                            <MenuItem key={item.value} value={item.value}>{item.name}</MenuItem>
+                            <MenuItem key={item.value} value={item.value}>{term(item.name)}</MenuItem>
                           ))}
                         </Select>
                       )}
