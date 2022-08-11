@@ -12,10 +12,10 @@ import useStyles from "./styles";
 // components
 import { Typography } from "../Wrappers/Wrappers";
 import Widget from "../Widget/Widget";
+import { array } from "yup";
 
 export default function BigStat({ type, data }) {
   let classes = useStyles();
-
   // local
   let [value, setValue] = useState("daily");
 
@@ -104,3 +104,24 @@ function getRandomData() {
     .fill()
     .map(() => ({ value: Math.floor(Math.random() * 10) + 1 }));
 }
+
+
+// const drawGraph = (data) => {
+//   let result = []
+//   let sumofresult = []
+//   // take only last 7 results
+//   for (let i = 0; i < data.length; i++) {
+//     result.push({ createdAt: new Date(data[i].createdAt).toLocaleDateString() })
+//   }
+//   result.splice(0, result.length - 7)
+
+//   //use reduce to push the same date to sumofresult
+//   sumofresult = result.reduce((acc, curr) => {
+//     if (!acc.find(item => item.createdAt === curr.createdAt)) {
+//       acc.push(curr.createdAt)
+//     }
+//     return acc
+//   }, [])
+//   console.log(sumofresult.length)
+// }
+
