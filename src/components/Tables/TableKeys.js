@@ -2,13 +2,15 @@ import StatusMenu from './StatusMenu';
 import term from '../../terms';
 
 
-export const Cols = (cols, ignore) => Object.keys(cols).filter(x => !ignore.includes(x))
+export const Cols = (cols, ignore) => Object.keys(cols).filter(x => !ignore.includes(x)).sort()
 
 export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
     switch (key) {
         case 'status':
             return {
-                headerName: term(key), field: key, pinned: 'right',
+                headerName: term(key),
+                field: key,
+                pinned: 'right',
                 cellRenderer: StatusMenu,
                 cellRendererParams: {
                     display,
@@ -30,6 +32,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 editable: false,
                 sortable: false,
                 filterable: false,
+                field: key,
             }
         case 'relevantTo':
             return {
@@ -38,10 +41,12 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 editable: false,
                 sortable: false,
                 filterable: false,
+                field: key,
             }
         case 'createdAt':
             return {
                 headerName: term(key), field: key, editable: false,
+                field: key,
                 valueFormatter: (params) => {
                     if (!params.data) return
                     return new Date(params.value).toLocaleString('he-IL')
@@ -50,7 +55,9 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             }
         case 'updatedAt':
             return {
-                headerName: term(key), field: key, editable: false,
+                headerName: term(key),
+                field: key,
+                editable: false,
                 valueFormatter: (params) => {
                     if (!params.data) return
                     return new Date(params.value).toLocaleString('he-IL')
@@ -66,10 +73,13 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 },
                 sortable: false,
                 filterable: false,
+                field: key,
             }
         case "startDate":
             return {
-                headerName: term(key), field: key, editable: false,
+                headerName: term(key),
+                field: key,
+                editable: false,
                 valueFormatter: (params) => {
                     if (!params.data) return ""
                     return new Date(params.value).toLocaleString('he-IL').split(',')[0]
@@ -78,13 +88,19 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             }
         case "endDate":
             return {
-                headerName: term(key), field: key, editable: false,
-                valueFormatter: (params) => { return new Date(params.value).toLocaleString('he-IL').split(',')[0] },
+                headerName: term(key),
+                field: key,
+                editable: false,
+                valueFormatter: (params) => {
+                    if (!params.data) return ""
+                    return new Date(params.value).toLocaleString('he-IL').split(',')[0]
+                },
                 filterable: false,
             }
         case 'authority':
             return {
-                headerName: term(key), field: key,
+                headerName: term(key),
+                field: key,
                 valueFormatter: (params) => params?.data?.authority?.name,
                 editable: false,
                 filterable: false,
@@ -92,29 +108,52 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         case 'locationInfo':
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params?.data?.locationInfo?.description || params?.data?.locationInfo?.formattedAddress,
+                valueFormatter: (params) => {
+                    return params?.data?.locationInfo?.description || params?.data?.locationInfo?.formattedAddress
+                },
                 editable: false,
                 sortable: false,
                 filterable: false,
+                field: key,
             }
         case 'inPlace':
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params?.data?.inPlace?.type,
+                valueFormatter: (params) => {
+                    if (!params || !params.value) return
+                    return params?.data[key]?.map(place => term(place.toLowerCase()))
+                },
                 editable: false,
                 filterable: false,
+                field: key,
             }
         case 'shady':
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params?.data?.shady?.type,
+                valueFormatter: (params) => {
+                    if (!params || !params.value) return
+                    return term(params?.value.toLowerCase())
+                },
+                field: key,
+                filterable: false,
+            }
+        case 'prefferedSeason':
+            return {
+                headerName: term(key),
+                valueFormatter: (params) => {
+                    if (!params || !params.value || typeof params.value[0] === 'object') return
+                    return term(params?.value[0].toLowerCase())
+                },
                 field: key,
                 filterable: false,
             }
         case 'arrivalRecommendations':
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params?.data?.arrivalRecommendations?.type,
+                valueFormatter: (params) => {
+                    if (!params || !params.value) return
+                    return term(params?.value.toLowerCase())
+                },
                 field: key,
                 filterable: false,
             }
@@ -132,6 +171,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     if (!params.data) return ""
                     return params.data && params?.data[key] ? term('yes') : term('no')
                 },
+                field: key,
                 editable: false,
                 sortable: false,
                 filterable: false,
@@ -148,6 +188,6 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             }
     }
 }).sort((a, b) => {
-    if (a.field === 'status' || a.field === 'name') return -1;
+    if (a.field === 'name') return -1;
     return 0;
 }) 
