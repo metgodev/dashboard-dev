@@ -78,8 +78,8 @@ function AreaMenu() {
                 <div className={classes.langMenuUser}>
                     <div>
                         {areaMenuItem.map((a) => (
-                            <MenuItem key={a.id} className={classes.messageNotification}>
-                                <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" onClick={() => changeArea(a)} >
+                            <MenuItem key={a.id} className={classes.messageNotification} onClick={() => changeArea(a)}>
+                                <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" >
                                     {a.name}
                                 </Typography>
                             </MenuItem>

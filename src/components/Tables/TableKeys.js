@@ -42,26 +42,38 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         case 'createdAt':
             return {
                 headerName: term(key), field: key, editable: false,
-                valueFormatter: (params) => { return new Date(params.value).toLocaleString('he-IL') },
+                valueFormatter: (params) => {
+                    if (!params.data) return
+                    return new Date(params.value).toLocaleString('he-IL')
+                },
                 filterable: false,
             }
         case 'updatedAt':
             return {
                 headerName: term(key), field: key, editable: false,
-                valueFormatter: (params) => { return new Date(params.value).toLocaleString('he-IL') },
+                valueFormatter: (params) => {
+                    if (!params.data) return
+                    return new Date(params.value).toLocaleString('he-IL')
+                },
                 filterable: false,
             }
         case "tags":
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params?.data[key]?.map(tag => [tag?.tag?.title, term(tag?.category?.title)])?.join(' - '),
+                valueFormatter: (params) => {
+                    if (params?.data === undefined) return
+                    return params?.data[key]?.map(tag => [tag?.tag?.title, term(tag?.category?.title)])?.join(' - ')
+                },
                 sortable: false,
                 filterable: false,
             }
         case "startDate":
             return {
                 headerName: term(key), field: key, editable: false,
-                valueFormatter: (params) => { return new Date(params.value).toLocaleString('he-IL').split(',')[0] },
+                valueFormatter: (params) => {
+                    if (!params.data) return ""
+                    return new Date(params.value).toLocaleString('he-IL').split(',')[0]
+                },
                 filterable: false,
             }
         case "endDate":
@@ -116,7 +128,10 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         case 'free':
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params.data && params?.data[key] ? term('yes') : term('no'),
+                valueFormatter: (params) => {
+                    if (!params.data) return ""
+                    return params.data && params?.data[key] ? term('yes') : term('no')
+                },
                 editable: false,
                 sortable: false,
                 filterable: false,
@@ -128,10 +143,11 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         default:
             return {
                 headerName: term(key),
-                field: key, sortable: false, filterable: false,
+                field: key,
+                filterable: false,
             }
     }
 }).sort((a, b) => {
-    if (a.field === 'status') return -1;
+    if (a.field === 'status' || a.field === 'name') return -1;
     return 0;
 }) 

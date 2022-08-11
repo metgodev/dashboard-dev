@@ -16,28 +16,28 @@ import 'ag-grid-enterprise';
 const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelectedColumn }) => {
 
     const gridRef = useRef();
-
-    const [columnDefs, setColumnDefs] = useState([]);
-
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
 
-    let requestParams = {
-        areaId: area.id.toString(),
-        $limit: 1
-    }
-
+    let requestParams = { areaId: area.id.toString(), $limit: 1 }
     let pageData = useGetService(display, display, requestParams, area, false)
+
+    const [columnDefs, setColumnDefs] = useState([]);
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     useEffect(() => {
         if (setExportToExcel !== undefined) {
             setExportToExcel(() => exportToXl)
         }
-        if (Object.keys(selectedColumn).length === 0) {
-            setColumnDefs([])
-        }
         onGridReady()
-    }, [area, tableChanged, pageData])
+    }, [pageData])
+
+    useEffect(() => {
+        if (columnDefs.length > 0 && columnDefs.length < 9) {
+            gridRef.current.api.sizeColumnsToFit()
+        }
+    }, [columnDefs])
 
     const onUpdate = useCallback(async (params) => {
         try {
@@ -66,7 +66,6 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
                 case 'desc':
                     return { [params?.sortModel[0].colId]: 1 }
             }
-
         }
     }
 
@@ -93,22 +92,20 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
         }
     }
 
-    const errorToast = () => toast(term("something_went_wrong"));
-
     const onGridReady = useCallback(() => {
-        if (pageData.data.length > 0) {
-            let cols = Cols(pageData.data[0], ignore);
-            let keys = Keys(cols, idOptions, display, onUpdate);
-            setColumnDefs(keys);
-        }
         if (gridRef.current.api !== undefined) {
+            if (pageData.data.length > 0) {
+                let cols = Cols(pageData.data[0], ignore);
+                let keys = Keys(cols, idOptions, display, onUpdate);
+                setColumnDefs(keys);
+            }
             let datasource = {
                 rowCount: undefined,
                 getRows: rows
             }
             gridRef.current.api.setDatasource(datasource);
         }
-    }, [pageData.data, gridRef, area])
+    }, [pageData.data, gridRef, area, columnDefs])
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
@@ -130,7 +127,6 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
                     maxConcurrentDatasourceRequests={1}
                     infiniteInitialRowCount={1}
                     rowId={getRowId}
-                //onChangeRow={onChangeRow}
                 />
             </div>
         </div>

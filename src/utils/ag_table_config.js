@@ -445,8 +445,6 @@ export const gridOptions = {
     defaultColDef: {
         editable: false,
         sortable: true,
-        filter: true,
-        floatingFilter: true,
         resizable: true,
         rowGroupPanelShow: 'always',
         enableRangeSelection: true,
