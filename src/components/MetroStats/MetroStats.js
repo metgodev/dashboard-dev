@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '../Wrappers/Wrappers'
-import { Box, Divider } from '@material-ui/core';
+import { Box, CircularProgress, Divider } from '@material-ui/core';
 // styles
 import useStyles from "./styles";
 import attraction from '../../Assets/svgs/attraction.svg'
@@ -28,7 +28,7 @@ function MetroStats({ title, ammount, svg, setSelectedCategory, selectedCategory
             </div>
             <Divider />
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                <h2 className={classes.h}>{ammount}</h2>
+                <h2 className={classes.h}>{ammount > 0 ? ammount : <CircularProgress size={10} />}</h2>
             </Box>
         </div >
     )
