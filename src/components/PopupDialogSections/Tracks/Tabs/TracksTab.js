@@ -16,7 +16,7 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
     //global
     let dispatch = useDispatch()
     const init = useSelector((s) => s.mainReducer.editTabData);
-    const { lang } = useSelector((state) => state.mainRememberReducer);
+    const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
     //local
     const classes = useStyles()
 
@@ -31,14 +31,26 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
     const formData = GetValuesForForm(values)
 
     const submit = async (formValues) => {
+        let valuesToSend = {
+            areaId: area?.id?.toString(),
+            userId: user.id,
+            status: "PENDING_APPROVAL",
+            name: formValues.name,
+            time: formValues.time,
+            description: formValues.description,
+            objectIds: formValues.objectIds,
+            coverImageFileId: formValues.coverImageFileId,
+            isHidden: formValues.isHidden,
+            isRecommended: formValues.isRecommended,
+        }
         try {
             if (type === "add") {
-                await client.service("tracks").create(formValues)
+                await client.service("tracks").create(valuesToSend)
                 dispatch(set_table_changed(type))
                 handleClose(false)
             }
             else {
-                await client.service("tracks").patch(values['_id'], formValues)
+                await client.service("tracks").patch(values['_id'], valuesToSend)
                 dispatch(set_table_changed(type))
                 handleClose(false)
             }

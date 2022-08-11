@@ -15,6 +15,7 @@ import 'ag-grid-enterprise';
 
 const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelectedColumn }) => {
 
+
     const gridRef = useRef();
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
@@ -74,9 +75,9 @@ const AGTable = ({ display, action, setExportToExcel, selectedColumn, setSelecte
         try {
             const rowsThisPage = await _get(display,
                 {
+                    areaId: area.id.toString(),
                     $limit: params.endRow - params.startRow,
                     $skip: params.startRow,
-                    areaId: area.id,
                     $sort: getSortingParams(params)
                 }
             )
