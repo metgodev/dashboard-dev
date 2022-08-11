@@ -40,6 +40,7 @@ export default function SidebarLink({ link, icon, label, children, location, sid
       <ListItem
         button
         component={link && Link}
+        onClick={() => dispatch(set_sidebar_toggle(false))}
         to={link}
         className={classes.link}
         classes={{
@@ -74,7 +75,7 @@ export default function SidebarLink({ link, icon, label, children, location, sid
       <ListItem
         button
         component={link && Link}
-        onClick={toggleCollapse}
+        onClick={(e) => toggleCollapse(e)}
         className={classes.link}
         to={link}
         disableRipple
@@ -126,6 +127,7 @@ export default function SidebarLink({ link, icon, label, children, location, sid
     if (sidebar) {
       e.preventDefault();
       setIsOpen(true)
+      toggleSideBar(sidebar)
     } else {
       setIsOpen(true)
       e.preventDefault();
