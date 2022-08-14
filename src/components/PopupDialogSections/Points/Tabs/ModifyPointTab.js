@@ -48,7 +48,7 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
             status: configurationValues.status,
             authorityId: values.authorityId,
             name: values.name,
-            address: values.locationName,
+            address: values.address,
             locationInfo: {
                 type: "Point",
                 coordinates: values.locationInfo.coordinates
@@ -57,7 +57,7 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
                 type: "Point",
                 coordinates: values.locationInfo.coordinates
             },
-            locationName: values.address,
+            locationName: values.locationName,
             isAccessable: values.isAccessable,
             description: values.description,
             exclusiveFor: typeof values.exclusiveFor === 'string' ? [values.exclusiveFor] : values.exclusiveFor[0],

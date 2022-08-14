@@ -46,7 +46,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
             description: values.description,
             authorityId: values.authorityId,
             address: values.locationName,
-            locationName: values.name,
+            locationName: values.locationName,
             phoneNumber: values.phoneNumber,
             contactPersonName: values.contactPersonName,
             contactPersonPhoneNumber: values.contactPersonPhoneNumber,

@@ -10,7 +10,37 @@ export const SET_FILTER_TABLE = 'SET_FILTER_TABLE';
 export const SET_CURRENT_ID = 'SET_CURRENT_ID';
 export const SET_EDIT_TAB_DATA = 'SET_EDIT_TAB_DATA';
 export const SET_AREA_ID = 'SET_AREA_ID'
+export const SET_TAGS_TABLE_PREFERENCES = 'SET_TAGS_TABLE_PREFERENCES'
+export const SET_AUTHORITIES_TABLE_PREFERENCES = 'SET_AUTHORITIES_TABLE_PREFERENCES'
+export const SET_BUSINESS_TABLE_PREFERENCES = 'SET_BUSINESS_TABLE_PREFERENCES'
+export const SET_EVENTS_TABLE_PREFERENCES = 'SET_EVENTS_TABLE_PREFERENCES'
+export const SET_POINTS_TABLE_PREFERENCES = 'SET_POINTS_TABLE_PREFERENCES'
+export const SET_TRACKS_TABLE_PREFERENCES = 'SET_TRACKS_TABLE_PREFERENCES'
 
+export const set_tracks_table_preferences = (value) => ({
+    type: SET_TRACKS_TABLE_PREFERENCES,
+    payload: value
+})
+export const set_points_table_preferences = (value) => ({
+    type: SET_POINTS_TABLE_PREFERENCES,
+    payload: value
+})
+export const set_events_table_preferences = (value) => ({
+    type: SET_EVENTS_TABLE_PREFERENCES,
+    payload: value
+})
+export const set_business_table_preferences = (value) => ({
+    type: SET_BUSINESS_TABLE_PREFERENCES,
+    payload: value
+})
+export const set_authorities_table_preferences = (value) => ({
+    type: SET_AUTHORITIES_TABLE_PREFERENCES,
+    payload: value
+})
+export const set_tags_table_preferences = (value) => ({
+    type: SET_TAGS_TABLE_PREFERENCES,
+    payload: value
+})
 export const set_theme_color = (value) => ({
     type: SET_THEME_COLOR,
     payload: value

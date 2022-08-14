@@ -1,31 +1,36 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-import { gridOptions, idOptions, ignore } from '../../utils/ag_table_config';
+import { Box } from '@mui/system';
+import { gridOptions, idOptions, ignore } from './ag_table_config';
 import { AgGridReact } from 'ag-grid-react';
-import client from '../../API/metro';
 import { Cols, Keys } from './TableKeys';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useGetService from '../../hooks/useGetService';
-import toast from 'react-hot-toast';
 import term from '../../terms';
 import { _get } from '../../API/service'
+import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams } from './tableFunctions'
 
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
+import { set_tags_table_preferences, set_authorities_table_preferences, set_business_table_preferences, set_events_table_preferences, set_points_table_preferences, set_tracks_table_preferences } from '../../REDUX/actions/main.actions';
 
 const AGTable = ({ display, action, setExportToExcel }) => {
 
-
     const gridRef = useRef();
+
+    const dispatch = useDispatch()
+
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
+    const preferences = useSelector(s => s.mainRememberReducer[`${display}TablePreferences`])
 
     let requestParams = { areaId: area.id.toString(), $limit: 1 }
     let pageData = useGetService(display, display, requestParams, area, false)
+    const authorities = useGetService("authorities", "authorities", { areaId: area.id }, area, false)
 
     const [columnDefs, setColumnDefs] = useState([]);
-
-    const errorToast = () => toast(term("something_went_wrong"));
+    const [totalNumber, setTotalNumber] = useState(0)
+    const [columns, setColumns] = useState(null)
 
     useEffect(() => {
         if (setExportToExcel !== undefined) {
@@ -35,52 +40,63 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }, [pageData])
 
     useEffect(() => {
+        document.addEventListener('mouseup', dragged)
+        return () => {
+            document.removeEventListener('mouseup', dragged)
+        }
+    }, [])
+
+    useEffect(() => {
         if (columnDefs.length > 0 && columnDefs.length < 9) {
             gridRef.current.api.sizeColumnsToFit()
         }
-    }, [columnDefs])
-
-    const onUpdate = useCallback(async (params) => {
-        try {
-            await client.service(display).patch(params?.data?._id, params?.data)
-            params.setStatus(params.data.status)
-        } catch (e) {
-            errorToast()
+        if (preferences?.length !== 0 && gridRef.current.columnApi !== undefined && columns === null) {
+            gridRef.current.columnApi.applyColumnState({
+                state: preferences,
+                applyOrder: true,
+            });
+            setColumns(gridRef.current.columnApi.getColumnState())
         }
-    }, [tableChanged]);
+    }, [columnDefs, preferences])
 
-    const getRowId = useCallback(params => {
-        return params.data._id;
-    }, []);
-
-    const exportToXl = () => {
-        gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
+    async function dragged(e) {
+        switch (display) {
+            case 'authorities':
+                dispatch(set_authorities_table_preferences(gridRef.current.columnApi.getColumnState()))
+                break;
+            case 'tag-categories':
+                dispatch(set_tags_table_preferences(gridRef.current.columnApi.getColumnState()))
+                break;
+            case 'business':
+                dispatch(set_business_table_preferences(gridRef.current.columnApi.getColumnState()))
+                break;
+            case 'events':
+                dispatch(set_events_table_preferences(gridRef.current.columnApi.getColumnState()))
+                break;
+            case 'pois':
+                dispatch(set_points_table_preferences(gridRef.current.columnApi.getColumnState()))
+                break;
+            case 'tracks':
+                dispatch(set_tracks_table_preferences(gridRef.current.columnApi.getColumnState()))
+                break;
+        }
     }
 
-    const getSortingParams = (params) => {
-        if (params === undefined || params?.sortModel?.length === 0) {
-            return { createdAt: -1 }
-        } else {
-            switch (params?.sortModel[0].sort) {
-                case 'asc':
-                    return { [params?.sortModel[0].colId]: -1 }
-                case 'desc':
-                    return { [params?.sortModel[0].colId]: 1 }
-            }
-        }
-    }
+    const onUpdate = useCallback((params) => updateFunction(params, display), [tableChanged]);
+    const exportToXl = useCallback((gridRef, display) => exportToExcellFunction(gridRef, display), [gridRef])
 
     const rows = async (params) => {
+        const filterParams = getFilterParams(params.filterModel, authorities)
+        const skip = params.startRow === 0 ? {} : { $skip: params.startRow }
+        let valuesToSend = Object.assign({}, filterParams, {
+            areaId: area.id.toString(),
+            $limit: params.endRow - params.startRow,
+            $sort: getSortingParams(params),
+        }, skip)
         // take a slice of the total rows
         try {
-            const rowsThisPage = await _get(display,
-                {
-                    areaId: area.id.toString(),
-                    $limit: params.endRow - params.startRow,
-                    $skip: params.startRow,
-                    $sort: getSortingParams(params)
-                }
-            )
+            const rowsThisPage = await _get(display, valuesToSend)
+            setTotalNumber(rowsThisPage.total)
             // if on or after the last page, work out the last row.
             let lastRow = -1;
             if (params.endRow >= rowsThisPage.total) {
@@ -89,6 +105,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             // call the success callback
             params.successCallback(rowsThisPage.data, lastRow);
         } catch (e) {
+            console.log(e)
             errorToast()
         }
     }
@@ -110,7 +127,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
-            <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 120, direction: 'rtl' }} >
+            <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 170, direction: 'rtl' }} >
                 <AgGridReact
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
@@ -128,8 +145,11 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     infiniteInitialRowCount={1}
                     rowId={getRowId}
                 />
+                <Box sx={{ width: '100%', height: '50px', backgroundColor: '#F1F0F0', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ marginRight: '20px', fontWeight: 'bold', fontSize: '13px' }}>{`${term('total')}: ${totalNumber}`}</span>
+                </Box>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -27,6 +27,10 @@ const Component = ({ setFatherValue, text }) => {
     <div>
       <GooglePlacesAutocomplete
         apiKey={REACT_APP_GOOGLE_API_KEY}
+        apiOptions={{
+          language: 'iw',
+          region: 'il'
+        }}
         selectProps={{
           onChange: setValue,
           styles: {
@@ -37,7 +41,6 @@ const Component = ({ setFatherValue, text }) => {
           },
           placeholder: term("search_for_a_place"),
         }}
-        apiOptions={{ language: lang }}
       />
       {text &&
         <Typography size="md" style={{ paddingTop: '10px', paddingRight: '3px' }}>

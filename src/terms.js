@@ -22,6 +22,11 @@ const active_lexicon = {
         he: 'כן',
         ar: 'نعم',
     },
+    total: {
+        en: 'Total',
+        he: 'סה"כ',
+        ar: 'المجموع',
+    },
     dashboard: {
         en: 'Dashboard',
         he: 'לוח הבקרה',
@@ -508,7 +513,7 @@ const active_lexicon = {
         ar: "وقت مفتوح",
     },
     opening_time: {
-        en: "Closing Time",
+        en: "Opening Time",
         he: "שעת פתיחה",
         ar: "وقت الإغلاق"
     },

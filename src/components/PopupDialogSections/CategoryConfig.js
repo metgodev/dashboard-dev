@@ -95,7 +95,7 @@ export const GetValuesForForm = (values, allTags) => {
     facebookPageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('facebookPageUrl') ? values.facebookPageUrl : initialData.facebookPageUrl : initialData.facebookPageUrl,
     instagramPageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('instagramPageUrl') ? values.instagramPageUrl : initialData.instagramPageUrl : initialData.instagramPageUrl,
     youtubePageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('youtubePageUrl') ? values.youtubePageUrl : initialData.youtubePageUrl : initialData.youtubePageUrl,
-    locationName: values.length || Object.keys(values).length ? values.hasOwnProperty('address') ? values.address : initialData.locationName : initialData.locationName,
+    locationName: values.length || Object.keys(values).length ? values.hasOwnProperty('locationName') ? values.locationName : initialData.locationName : initialData.locationName,
     point: values.length || Object.keys(values).length && values.hasOwnProperty('locationInfo') && values.locationInfo.hasOwnProperty("coordinates") ? values.locationInfo.coordinates : values.hasOwnProperty("location") ? values.location.coordinates : initialData.point,
     free: values.length || Object.keys(values).length ? values.hasOwnProperty('free') ? values.free : initialData.free : initialData.free,
     openHour: values.length || Object.keys(values).length ? values.hasOwnProperty('openHour') ? values.openHour.length < 7 ? new Date(values.openHour + ' 2016-01-01') : values.openHour : initialData.openHour : initialData.openHour,
@@ -124,7 +124,6 @@ export const GetValuesForForm = (values, allTags) => {
     objectIds: values.length || Object.keys(values).length ? values.hasOwnProperty('objectIds') ? values.objectIds : initialData.objectIds : initialData.objectIds,
     coverImageFileId: values.length || Object.keys(values).length ? values.hasOwnProperty('coverImageFileId') ? values.coverImageFileId : initialData.coverImageFileId : initialData.coverImageFileId,
   }
-
 
   return returnValues
 }

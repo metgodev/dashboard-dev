@@ -16,6 +16,11 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     display,
                     onUpdate,
                 },
+                filter: 'agSetColumnFilter',
+                filterParams: {
+                    values: ['PENDING_APPROVAL', 'PUBLIC', 'PRIVATE'],
+                    valueFormatter: statusValueFormatter
+                }
             }
         case 'openingHours':
             return {
@@ -79,7 +84,6 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
-                    console.log(params)
                     if (params?.data === undefined) return
                     return params.value.title
                 },
@@ -91,7 +95,6 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
-                    console.log(params)
                     if (params?.data === undefined) return
                     return term(params.data.category.title.toLowerCase())
                 },
@@ -108,7 +111,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     if (!params.data) return ""
                     return new Date(params.value).toLocaleString('he-IL').split(',')[0]
                 },
-                filterable: false,
+                filterable: false
             }
         case "endDate":
             return {
@@ -119,7 +122,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     if (!params.data) return ""
                     return new Date(params.value).toLocaleString('he-IL').split(',')[0]
                 },
-                filterable: false,
+                filterable: false
             }
         case 'authority':
             return {
@@ -127,7 +130,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 field: key,
                 valueFormatter: (params) => params?.data?.authority?.name,
                 editable: false,
-                filterable: false,
+                filter: 'agTextColumnFilter',
             }
         case 'locationInfo':
             return {
@@ -148,7 +151,6 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     return params?.data[key]?.map(place => term(place.toLowerCase()))
                 },
                 editable: false,
-                filterable: false,
                 field: key,
             }
         case 'shady':
@@ -159,7 +161,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     return term(params?.value.toLowerCase())
                 },
                 field: key,
-                filterable: false,
+                filter: 'agTextColumnFilter',
             }
         case 'prefferedSeason':
             return {
@@ -169,9 +171,10 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     return term(params?.value[0].toLowerCase())
                 },
                 field: key,
-                filterable: false,
+                filter: 'agTextColumnFilter',
             }
         case 'arrivalRecommendations':
+        case 'time':
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
@@ -179,7 +182,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                     return term(params?.value.toLowerCase())
                 },
                 field: key,
-                filterable: false,
+                filter: 'agTextColumnFilter',
             }
         case 'isHidden':
         case 'isRecommended':
@@ -198,7 +201,14 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 field: key,
                 editable: false,
                 sortable: false,
-                filterable: false,
+                filter: 'agTextColumnFilter',
+            }
+        case "activitiesInPlace":
+        case "exclusiveFor":
+        case "websitesUrl":
+            return {
+                headerName: term(key),
+                field: key,
             }
         case '_id':
             return {
@@ -208,10 +218,15 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             return {
                 headerName: term(key),
                 field: key,
-                filterable: false,
+                filter: 'agTextColumnFilter',
             }
     }
 }).sort((a, b) => {
     if (a.field === 'name') return -1;
     return 0;
-}) 
+})
+
+const statusValueFormatter = (params) => {
+    const status = params.value
+    return term(status.toLowerCase())
+}
