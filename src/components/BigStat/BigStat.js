@@ -17,7 +17,7 @@ import { array } from "yup";
 export default function BigStat({ type, data }) {
   let classes = useStyles();
   // local
-  let [value, setValue] = useState("daily");
+  let [value, setValue] = useState("weekly");
 
   const useGetNumberOfEntitiesBasedOnTimePeriod = useCallback((timePeriod) => {
     if (data.length === 0) {
@@ -50,7 +50,6 @@ export default function BigStat({ type, data }) {
             }
             className={classes.select}
           >
-            <MenuItem value="daily">{term('daily')}</MenuItem>
             <MenuItem value="weekly">{term('weekly')}</MenuItem>
             <MenuItem value="monthly">{term('monthly')}</MenuItem>
           </Select>
