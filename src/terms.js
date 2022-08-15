@@ -27,6 +27,11 @@ const active_lexicon = {
         he: 'סה"כ',
         ar: 'المجموع',
     },
+    main_tag: {
+        en: 'The blue bordered tag is the main tag',
+        he: 'התג עם המסגרת הכחולה הוא התג הראשי',
+        ar: 'العلامة ذات الحدود الزرقاء هي العلامة الرئيسية ، اختر بحكمة :)',
+    },
     dashboard: {
         en: 'Dashboard',
         he: 'לוח הבקרה',

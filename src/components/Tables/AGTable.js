@@ -8,7 +8,7 @@ import useGetService from '../../hooks/useGetService';
 import term from '../../terms';
 import { _get } from '../../API/service'
 import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams } from './tableFunctions'
-
+import toast from 'react-hot-toast';
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
@@ -128,12 +128,21 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         }
     }, [pageData.data, gridRef, area, columnDefs])
 
+    const tagInfoToast = () => toast(term("main_tag"), {
+        duration: 4000,
+        style: { fontSize: '16px', fontWeight: 'bold' },
+        position: 'top-center',
+    });
+
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 170, direction: 'rtl' }} >
                 <AgGridReact
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
+                        if (display !== 'authorities' && display !== 'tag-categories') {
+                            tagInfoToast()
+                        }
                         action(event.data)
                     }}
                     columnDefs={columnDefs}
