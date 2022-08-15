@@ -60,6 +60,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }, [columnDefs, preferences])
 
     async function dragged(e) {
+        if (typeof e.target.className === 'string' && e.target.className.includes('MuiButton')) return
         switch (display) {
             case 'authorities':
                 dispatch(set_authorities_table_preferences(gridRef.current.columnApi.getColumnState()))
@@ -83,7 +84,9 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }
 
     const onUpdate = useCallback((params) => updateFunction(params, display), [tableChanged]);
-    const exportToXl = useCallback((gridRef, display) => exportToExcellFunction(gridRef, display), [gridRef])
+    const exportToXl = useCallback((gridRef, display) => {
+        exportToExcellFunction(gridRef, display)
+    }, [gridRef])
 
     const rows = async (params) => {
         const filterParams = getFilterParams(params.filterModel, authorities)
@@ -105,7 +108,6 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             // call the success callback
             params.successCallback(rowsThisPage.data, lastRow);
         } catch (e) {
-            console.log(e)
             errorToast()
         }
     }
