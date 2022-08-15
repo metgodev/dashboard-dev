@@ -42,6 +42,8 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     useEffect(() => {
         document.addEventListener('mouseup', dragged)
         return () => {
+            authorities.cancelRequest()
+            pageData.cancelRequest()
             document.removeEventListener('mouseup', dragged)
         }
     }, [])
