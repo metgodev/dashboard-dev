@@ -3,7 +3,6 @@ export const getPicturesForImagePicker = (values) => {
 }
 
 export const getTagColor = (tagName) => {
-    console.log(tagName.split(' ')[tagName.split(' ').length - 1])
     switch (tagName.split(' ')[tagName.split(' ').length - 1]) {
         case 'אטרקציה':
             return `rgba(52, 235, 229, 0.2)`
