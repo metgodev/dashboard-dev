@@ -62,7 +62,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }, [columnDefs, preferences])
 
     async function dragged(e) {
-        if (typeof e.target.className === 'string' && e.target.className.includes('MuiButton')) return
+        if (typeof e.target.className === 'string' && (e.target.className.includes('MuiButton') || e.target.className.includes('MuiSwitch-input'))) return
         switch (display) {
             case 'authorities':
                 dispatch(set_authorities_table_preferences(gridRef.current.columnApi.getColumnState()))
