@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Form } from "react-final-form";
 import { TextField, Select, Autocomplete, TimePicker as MuiRffTimePicker, DatePicker, Switches } from "mui-rff";
-import { MenuItem, Checkbox as MuiCheckbox } from "@material-ui/core";
+import { MenuItem, Checkbox as MuiCheckbox, Chip } from "@material-ui/core";
 import { Box, Button, Grid, TextareaAutosize } from "@mui/material";
 import GoogleAutocomplete from "../GoogleAutocomplete/GoogleAutocomplete";
 import MapPick from "../MapPicker.js/MapPick";
@@ -13,6 +13,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useJsApiLoader } from '@react-google-maps/api';
 import ImagePicker from "../imagePicker/ImagePicker";
 import DraggableList from '../DraggableList/DraggableList'
+import { getTagColor } from './FormFunctions'
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -105,6 +106,21 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                               value: item.id,
                             }))
                           }
+                          renderTags={(tagValue, getTagProps, y) => {
+                            return tagValue.map((option, index) => {
+                              return (
+                                <Chip
+                                  style={{
+                                    border: index === 0 ? `2px solid #00f7ff` : `1px solid grey`,
+                                    padding: '10px',
+                                    backgroundColor: `${getTagColor(option.label)}`,
+                                  }}
+                                  {...getTagProps({ index })}
+                                  label={option.label}
+                                />
+                              )
+                            });
+                          }}
                           getOptionValue={(option) => option.value}
                           getOptionLabel={(option) => option.label}
                           disableCloseOnSelect={true}
@@ -208,6 +224,21 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                                 value: item.id,
                               }))
                             }
+                            renderTags={(tagValue, getTagProps, y) => {
+                              return tagValue.map((option, index) => {
+                                return (
+                                  <Chip
+                                    style={{
+                                      border: index === 0 ? `2px solid #00f7ff` : `1px solid grey`,
+                                      padding: '10px',
+                                      backgroundColor: `${getTagColor(option.label)}`,
+                                    }}
+                                    {...getTagProps({ index })}
+                                    label={option.label}
+                                  />
+                                )
+                              });
+                            }}
                             getOptionValue={(option) => option.value}
                             getOptionLabel={(option) => option.label}
                             disableCloseOnSelect={true}
