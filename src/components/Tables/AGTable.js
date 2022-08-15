@@ -84,7 +84,8 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }
 
     const onUpdate = useCallback((params) => updateFunction(params, display), [tableChanged]);
-    const exportToXl = useCallback((gridRef, display) => {
+
+    const exportToXl = useCallback(() => {
         exportToExcellFunction(gridRef, display)
     }, [gridRef])
 
