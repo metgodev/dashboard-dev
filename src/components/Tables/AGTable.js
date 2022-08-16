@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useGetService from '../../hooks/useGetService';
 import term from '../../terms';
 import { _get } from '../../API/service'
-import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams } from './tableFunctions'
+import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged } from './tableFunctions'
 import toast from 'react-hot-toast';
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
@@ -62,26 +62,27 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }, [columnDefs, preferences])
 
     async function dragged(e) {
-        if (typeof e.target.className === 'string' && (e.target.className.includes('MuiButton') || e.target.className.includes('MuiSwitch-input'))) return
-        switch (display) {
-            case 'authorities':
-                dispatch(set_authorities_table_preferences(gridRef.current.columnApi.getColumnState()))
-                break;
-            case 'tag-categories':
-                dispatch(set_tags_table_preferences(gridRef.current.columnApi.getColumnState()))
-                break;
-            case 'business':
-                dispatch(set_business_table_preferences(gridRef.current.columnApi.getColumnState()))
-                break;
-            case 'events':
-                dispatch(set_events_table_preferences(gridRef.current.columnApi.getColumnState()))
-                break;
-            case 'pois':
-                dispatch(set_points_table_preferences(gridRef.current.columnApi.getColumnState()))
-                break;
-            case 'tracks':
-                dispatch(set_tracks_table_preferences(gridRef.current.columnApi.getColumnState()))
-                break;
+        if (checkIfTablePrefsChanged(e)) {
+            switch (display) {
+                case 'authorities':
+                    dispatch(set_authorities_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
+                case 'tag-categories':
+                    dispatch(set_tags_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
+                case 'business':
+                    dispatch(set_business_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
+                case 'events':
+                    dispatch(set_events_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
+                case 'pois':
+                    dispatch(set_points_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
+                case 'tracks':
+                    dispatch(set_tracks_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
+            }
         }
     }
 

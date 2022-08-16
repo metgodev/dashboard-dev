@@ -9,7 +9,8 @@ import { CircularProgress } from '@material-ui/core'
 import { UploadMediaTab } from '../uploadMediaTab'
 import term from '../../../terms';
 import { mediaTabConfig } from './popConfig'
-import { Button, Tabs } from '@mui/material';
+import { Tabs } from '@mui/material';
+import AddProductsTab from './Tabs/AddProductsTab';
 import chat from '../../../Assets/placeholders/contact_bussines.png'
 import comments from '../../../Assets/placeholders/comments.png'
 import promotions from '../../../Assets/placeholders/promotions.png'
@@ -80,15 +81,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     <img src={comments} alt="comments" />
                 </TabPanel>
                 <TabPanel value={tab} index={6}>
-                    <Box
-                        style={{ //middkle of the screen
-                            top: '30%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            position: 'absolute',
-                        }}>
-                        <Button variant="contained" color="primary" >{term('add_product')}</Button>
-                    </Box>
+                    <AddProductsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={7}>
                 </TabPanel>

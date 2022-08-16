@@ -50,7 +50,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                 keepMounted
                 aria-describedby="alert-dialog-slide-description"
                 fullWidth
-                maxWidth={maxWidth || "lg"}
+                maxWidth={maxWidth || "xl"}
             >
                 <DialogTitle className={classes.dialogHeader}>
                     {title}

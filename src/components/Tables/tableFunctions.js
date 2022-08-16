@@ -188,3 +188,15 @@ const getTimeValue = (time) => {
             return '2_DAYS_AND_ABOVE'
     }
 }
+
+
+export const checkIfTablePrefsChanged = (e) => {
+    if (typeof e.target.className === 'string' &&
+        (e.target.className === 'ag-header-cell-resize' ||
+            e.target.className === 'ag-input-field-input ag-checkbox-input' ||
+            e.target.className === 'ag-dnd-ghost ag-unselectable ag-theme-alpine')
+    ) {
+        return true
+    }
+    return false
+}

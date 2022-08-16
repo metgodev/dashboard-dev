@@ -229,7 +229,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                                 return (
                                   <Chip
                                     style={{
-                                      border: index === 0 ? `2px solid #00f7ff` : `1px solid grey`,
+                                      border: index === 0 ? `2px solid #0000ff` : `1px solid grey`,
                                       padding: '10px',
                                       backgroundColor: `${getTagColor(option.label)}`,
                                     }}
