@@ -37,6 +37,26 @@ export const ModalInit = [
     { title: term('location'), id: createRandomId(), field: 'location', rows: 1, maxRows: 4, size: 'large', type: 'MapPicker', required: false },
 ]
 
+export const productFields = [
+    [
+        { title: term('name'), id: createRandomId(), field: 'name', size: 'medium', type: 'textfield' },
+        { title: term('price'), id: createRandomId(), field: 'price', size: 'medium', type: 'textfield' },
+        { title: term('description'), id: createRandomId(), field: 'description', size: 'medium', type: 'textAreaSizeable' },
+        { title: term('tags'), id: createRandomId(), field: 'tagsIds', size: 'medium', type: 'tagsPicker' },
+    ],
+    [
+        { title: term('product_includes'), id: createRandomId(), field: 'includes', size: 'medium', type: 'textfield' },
+        { title: term('kosher_style'), id: createRandomId(), field: 'style', size: 'medium', type: 'textfield' },
+        { title: term('days_and_hours'), id: createRandomId(), field: 'hours', size: 'medium', type: 'textfield' },
+        { title: term('shipping'), id: createRandomId(), field: 'shipping', size: 'medium', type: 'picker' },
+        { title: term('sizes'), id: createRandomId(), field: 'sizes', size: 'medium', type: 'textfield' },
+        { title: term('product_materials'), id: createRandomId(), field: 'material', size: 'medium', type: 'textfield' },
+        { title: term('relevantTo'), id: createRandomId(), field: 'relevantTo', size: 'medium', type: 'textfield' },
+        { title: term('usage_limitations'), id: createRandomId(), field: 'limitations', size: 'medium', type: 'textfield' },
+        { title: term('different_product_options'), id: createRandomId(), field: 'options', size: 'medium', type: 'checkbox' },
+    ],
+]
+
 export const duplicateField = (field, maxFileds) => {
     const index = ModalInit.findIndex(({ field: f }) => f === field)
     if (index !== -1) {
@@ -90,12 +110,12 @@ export const mediaTabConfig = {
         {
             title: term('logo'),
             type: "logo",
-            fileTypes: ["JPG", "PNG", "PDF"],
+            fileTypes: ["JPG", "PNG", "JPEG"],
         },
         {
             title: term('images'),
             type: "image",
-            fileTypes: ["JPG", "PNG", "GIF"],
+            fileTypes: ["JPG", "PNG", "JPEG"],
         },
         {
             title: term('videos'),
@@ -108,7 +128,11 @@ export const mediaTabConfig = {
             fileTypes: ["MP3"],
         },
     ],
-    initialMediaType: "logo",
+    initialMediaType: {
+        title: term('logo'),
+        type: "logo",
+        fileTypes: ["JPG", "PNG", "JPEG"],
+    }
 }
 
 

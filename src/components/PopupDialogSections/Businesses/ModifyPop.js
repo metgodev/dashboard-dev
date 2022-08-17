@@ -27,7 +27,6 @@ const ModifyPop = ({ handleClose, type, open }) => {
     const { area } = useSelector((state) => state.mainRememberReducer);
     //Local
     const [tab, setTab] = useState(0);
-    const [loadingImage, setLoadingImage] = useState(false)
     const [picker, setPicker] = useState(Picker)
     //Lifecycle
     useEffect(() => {
@@ -51,10 +50,6 @@ const ModifyPop = ({ handleClose, type, open }) => {
 
     return (
         <div style={{ height: '100%' }}>
-            {loadingImage &&
-                <Box className={classes.loadingImage}>
-                    <CircularProgress size={50} />
-                </Box>}
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
                     {ModalTabs.map(b => <Tab key={b} label={b} disabled={b === term('gallery') && type === 'add'} />)}
@@ -68,7 +63,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab setLoadingImage={setLoadingImage} tab={"business"} config={mediaTabConfig} />
+                    <UploadMediaTab type={'gallery'} tab={"business"} config={mediaTabConfig} />
                 </TabPanel>
                 <TabPanel value={tab} index={3}>
                     <img src={promotions} alt="promotions"
@@ -81,7 +76,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     <img src={comments} alt="comments" />
                 </TabPanel>
                 <TabPanel value={tab} index={6}>
-                    <AddProductsTab />
+                    {picker.tagsIds.length > 0 && <AddProductsTab areaSpecificData={picker} />}
                 </TabPanel>
                 <TabPanel value={tab} index={7}>
                 </TabPanel>

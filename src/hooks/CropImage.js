@@ -1,30 +1,22 @@
+import { useState } from 'react'
 import { Button } from '@material-ui/core';
 import term from '../terms';
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
-export const cropFile = (file, setImage) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-        setImage(reader.result);
-    };
-    fetch(file).then((res) => {
-        res.blob().then((res) => {
-            reader.readAsDataURL(res);
-        })
-    });
-}
 
-const handleClick = (cropper, onClick) => {
-    fetch(cropper.getCroppedCanvas().toDataURL()).then((res) => {
-        res.blob().then((res) => {
-            let fileToUpload = new File([res], "imageFile", { type: "image/png" })
-            onClick(fileToUpload)
-        })
-    })
-}
+const CropImage = ({ src, onClick, style }) => {
 
-const CropImage = ({ cropper, setCropper, src, onClick, style }) => {
+    const [cropper, setCropper] = useState(null)
+
+    const handleClick = () => {
+        fetch(cropper.getCroppedCanvas().toDataURL()).then((res) => {
+            res.blob().then((res) => {
+                let fileToUpload = new File([res], "imageFile", { type: "image/png" })
+                onClick(fileToUpload)
+            })
+        })
+    }
     return (
         <div className={style}>
             <Cropper

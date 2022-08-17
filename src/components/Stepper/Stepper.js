@@ -70,7 +70,6 @@ const HorizontalLinearStepper = ({ fields, submitFunction, externalActiveStep, s
             <Button
               disabled={activeStep === 0}
               onClick={() => handleBack(externalActiveStep, setExternalActiveStep, setActiveStep)}
-              //sx={{ mr: 1 }}
               sx={{ bottom: 10 }}
               variant="contained"
               style={{ position: 'absolute' }}
@@ -84,8 +83,8 @@ const HorizontalLinearStepper = ({ fields, submitFunction, externalActiveStep, s
               </Button>
             )}
             {externalActiveStep === undefined &&
-              <Button variant="contained" onClick={() => handleNext(skipped, activeStep, setActiveStep, setSkipped)}>
-                {activeStep === fields.length - 1 ? 'Finish' : 'Next'}
+              <Button style={{ position: 'absolute' }} sx={{ bottom: 10, left: 15 }} variant="contained" onClick={() => handleNext(skipped, activeStep, setActiveStep, setSkipped)}>
+                {term('next')}
               </Button>
             }
           </Box>

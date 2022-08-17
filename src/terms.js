@@ -97,6 +97,11 @@ const active_lexicon = {
         he: 'העתק',
         ar: 'ينسخ',
     },
+    duplicate: {
+        en: 'Duplicate',
+        he: 'שכפל',
+        ar: 'ينسخ',
+    },
     delete: {
         en: 'Delete',
         he: 'מחק',
@@ -392,6 +397,36 @@ const active_lexicon = {
         he: 'סטטוס',
         ar: 'تحميل',
     },
+    product_materials: {
+        en: 'The materials from which the product is made, a brief description',
+        he: 'החומרים מהם עשוי המוצר, תיאור קצר',
+        ar: 'المواد التي صنع منها المنتج ، وصفا موجزا',
+    },
+    kosher_style: {
+        en: 'Style - milky/meaty/neutral',
+        he: 'סגנון - חלבי/בשרי/פרווה',
+        ar: 'النمط - حليبي / لحمي / فروي',
+    },
+    sizes: {
+        en: 'Sizes',
+        he: 'מידות וגדלים',
+        ar: 'الأحجام',
+    },
+    product_includes: {
+        en: 'Product includes',
+        he: 'מה כולל המוצר',
+        ar: 'يشمل المنتج',
+    },
+    more_you_specify_more_sales_you_get: {
+        en: 'The more you detail, the more sales you will make of the product',
+        he: 'ככל שתפרטו יותר, תגדילו את המכירות של המוצר',
+        ar: 'كلما زادت التفاصيل ، زادت مبيعاتك من المنتج',
+    },
+    add_specific_details_to_product: {
+        en: 'Add specific details about your product',
+        he: 'הוספת מאפיינים ספציפיים למוצר',
+        ar: 'أضف تفاصيل محددة حول منتجك',
+    },
     action_buttons: {
         en: 'Action Buttons',
         he: 'כפתורי פעולה',
@@ -571,6 +606,46 @@ const active_lexicon = {
         en: "Description",
         he: "תיאור",
         ar: "وصف",
+    },
+    shipping: {
+        en: "Shipping",
+        he: "משלוח",
+        ar: "شحن",
+    },
+    pick_up_point: {
+        en: "Pick up point",
+        he: "נקודת איסוף",
+        ar: "نقطة الالتقاط",
+    },
+    pay_for_delivery: {
+        en: "Pay for delivery",
+        he: "משלוח בתשלום",
+        ar: "الدفع للتسليم",
+    },
+    pick_up_from_business: {
+        en: "Pick up from business",
+        he: "איסוף מבית העסק",
+        ar: "تلتقط من الأعمال",
+    },
+    delivery_to_cusomer_door: {
+        en: "Delivery to customer door",
+        he: "משלוח לבית הלקוח",
+        ar: "التوصيل إلى باب العميل",
+    },
+    different_product_options: {
+        en: "Different product options",
+        he: "יש במלאי מבחר עיצובים / צבעים שונים",
+        ar: "هناك مجموعة مختارة من التصاميم / الألوان المختلفة في المخزون",
+    },
+    usage_limitations: {
+        en: "limitations",
+        he: "מגלות למימוש",
+        ar: "قيود على ممارسة الرياضة",
+    },
+    days_and_hours: {
+        en: "Days and hours",
+        he: "ימים ושעות",
+        ar: "أيام وساعات",
     },
     opening_hours: {
         en: "Opening hours",

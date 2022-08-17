@@ -36,10 +36,6 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
     setChosenImage(data.coverImageFileId)
   }, [data])
 
-  const getDataForForm = useCallback(() => {
-    return { ...data }
-  }, [data])
-
   return (
     <>
       {
@@ -47,7 +43,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
           onSubmit={(values) => {
             submitFunction({ ...values, description: resizableText, openingHours: times, objectIds: itemsToSend, coverImageFileId: chosenImage })
           }}
-          initialValues={getDataForForm}
+          initialValues={data}
           validate={validiationFunction}
           render={({ handleSubmit, values }) => {
             return (
