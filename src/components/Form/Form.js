@@ -60,6 +60,12 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           name={field}
                         />
                       )}
+                      {type === 'divider' && (
+                        <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(0,0,0,0.3' }}></div>
+                      )}
+                      {type === 'text' && (
+                        <p style={{ margin: 0, fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{title}</p>
+                      )}
                       {type === "number" && (
                         <TextField
                           label={title}

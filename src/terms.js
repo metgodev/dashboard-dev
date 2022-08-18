@@ -1994,6 +1994,11 @@ const active_lexicon = {
         he: 'חבוי',
         ar: 'مختفي'
     },
+    hidden_fields: {
+        en: 'Those fields are hidden from the user',
+        he: 'שדות חבויים מהמשתמש',
+        ar: 'هذه الحقول مخفية عن المستخدم'
+    },
     please_enter_an_address: {
         en: 'Please enter an address',
         he: 'אנא הזן כתובת',

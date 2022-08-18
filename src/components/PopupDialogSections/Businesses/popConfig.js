@@ -25,13 +25,17 @@ export const ModalInit = [
     { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false, relaredToggle: 'open_on_weekend' },
     { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     //------------------ More Information ------------------ 
-    { title: term('contact'), id: createRandomId(), field: 'contactPersonName', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
-    { title: term('contact_number'), id: createRandomId(), field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
     { title: term('email_address'), id: createRandomId(), field: 'emailAddress', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
     { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
     { title: term('instagram_link'), id: createRandomId(), field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
     { title: term('youtube_link'), id: createRandomId(), field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
     { title: term('site_link'), id: createRandomId(), field: 'websitesUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
+    ///Divider
+    { id: createRandomId(), field: 'divider', size: 'large', type: 'divider' },
+    { title: term('hidden_fields'), id: createRandomId(), field: 'text', size: 'large', type: 'text' },
+
+    { title: term('contact'), id: createRandomId(), field: 'contactPersonName', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
+    { title: term('contact_number'), id: createRandomId(), field: 'contactPersonPhoneNumber', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
     // ------------------ map ------------------
     { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 4, size: 'medium', type: 'googleAutocomplete', required: true },
     { title: term('location_description'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
