@@ -32,10 +32,7 @@ export async function validateFirstFormPart(values) {
     if (values.tagsIds.length > 5) {
         return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
-    if (values.phoneNumber === undefined) {
-        return
-    }
-    if ((values?.phoneNumber[0] !== '0' && values?.phoneNumber?.slice(0, 4) !== "+972") || /[a-zA-Z]/.test(values.phoneNumber) || values.phoneNumber.length < 9) {
+    if (!/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/.test(values.phoneNumber) || values.phoneNumber.length < 9) {
         return { phoneNumber: term("please_enter_a_valid_phone_number") }
     }
 }
