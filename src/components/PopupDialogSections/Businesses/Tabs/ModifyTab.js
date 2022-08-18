@@ -29,7 +29,6 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     useEffect(() => {
-        console.log(init)
         handleSetValues(init)
         setStep(0)
         setOrientation(get_orientation(lang))

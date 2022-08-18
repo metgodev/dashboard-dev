@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import { sendPositionToInfoWindow } from './MapPickHelpers'
+import toast from 'react-hot-toast';
+import term from '../../terms';
 
 const DEFAULT_LOCATION = { lat: 32.0713, lng: 34.7886 }
 const DEFAULT_ZOOM = 15;
@@ -41,23 +44,33 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
         setMyMap(null)
     }, [])
 
-    const sendPositionToInfoWindow = (position, title, description) => {
-        setInfoWindow({ position, title, description })
+    const getFormattedAddress = (res) => {
+        return res.results[0].address_components.filter(item => !item.types.includes('country') && !item.types.includes('plus_code') && !item.types.includes('administrative_area_level_2') && !item.types.includes('administrative_area_level_1'))
+            .map(item => item.long_name).join(', ')
     }
 
-    const handleClick = (event) => {
+
+
+    const handleClick = async (event) => {
         if (setInfoWindow !== undefined) {
             setInfoWindow(null)
         }
         const newLat = event.latLng.lat()
         const newLng = event.latLng.lng()
         if (setFatherValue !== undefined) {
-            geocoder.geocode({ location: { lat: newLat, lng: newLng } }).then((res) => {
-                setFatherValue(prev => ({ ...prev, locationName: res.results[0]['formatted_address'], address: res.results[0]['formatted_address'] }))
-            })
-            setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [newLat, newLng] } }))
+            try {
+                const res = await geocoder.geocode({ location: { lat: newLat, lng: newLng } })
+                if (res) {
+                    console.log('changed')
+                    setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [newLat, newLng] }, locationName: getFormattedAddress(res), address: res.results[0]['formatted_address'] }))
+                }
+            } catch (e) {
+                errorToast(e)
+            }
         }
     }
+
+    const errorToast = (e) => toast(term(e.code.toLowerCase()));
 
     const renderMarkers = useCallback(
         markers && markers.map((marker, index) => {
@@ -72,7 +85,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
                     position={{ lat: marker.location[0], lng: marker.location[1] }}
                     onClick={
                         () => {
-                            sendPositionToInfoWindow({ lat: marker.location[0], lng: marker.location[1] }, marker.name, marker.description)
+                            sendPositionToInfoWindow({ lat: marker.location[0], lng: marker.location[1] }, marker.name, marker.description, setInfoWindow)
                         }
                     }
                 />

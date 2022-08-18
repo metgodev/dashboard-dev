@@ -1994,6 +1994,11 @@ const active_lexicon = {
         he: 'חבוי',
         ar: 'مختفي'
     },
+    over_query_limit: {
+        en: 'You have reached the query limit, please wait a couple of seconds',
+        he: 'הגעתה למספר פניות מקסימלי, אנא חכה מספר שניות',
+        ar: 'لقد وصلت إلى حد الاستعلام ، يرجى الانتظار بضع ثوان'
+    },
     hidden_fields: {
         en: 'Those fields are hidden from the user',
         he: 'שדות חבויים מהמשתמש',

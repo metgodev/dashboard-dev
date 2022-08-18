@@ -11,7 +11,6 @@ const { REACT_APP_GOOGLE_API_KEY } = process.env
 const Component = ({ setFatherValue, text }) => {
 
   const [value, setValue] = useState(null);
-  const { lang } = useSelector((s) => s.mainRememberReducer);
 
   useEffect(() => {
     if (value !== null) {
