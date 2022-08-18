@@ -42,7 +42,9 @@ const TracksPop = ({ handleClose, type, open }) => {
                 objectIds: [
                     ...poisData.data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("points")}` })),
                     ...businessData.data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("businesses")}` }))
-                ]
+                ],
+                pois: poisData.data.map(item => item._id),
+                business: businessData.data.map(item => item._id)
             }))
         }
     }, [handleClose, businessData, poisData])

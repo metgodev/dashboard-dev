@@ -13,7 +13,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useJsApiLoader } from '@react-google-maps/api';
 import ImagePicker from "../imagePicker/ImagePicker";
 import DraggableList from '../DraggableList/DraggableList'
-import { getTagColor } from './FormFunctions'
+import { getTagColor, formatObjects } from './FormFunctions'
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -36,13 +36,16 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
     setChosenImage(data.coverImageFileId)
   }, [data])
 
+  const formatValuesToSend = (values) => {
+    const formattedItemsToSend = formatObjects(itemsToSend, options)
+    submitFunction({ ...values, description: resizableText, openingHours: times, objectIds: formattedItemsToSend, coverImageFileId: chosenImage })
+  }
+
   return (
     <>
       {
         <Form
-          onSubmit={(values) => {
-            submitFunction({ ...values, description: resizableText, openingHours: times, objectIds: itemsToSend, coverImageFileId: chosenImage })
-          }}
+          onSubmit={(values) => formatValuesToSend(values)}
           initialValues={data}
           validate={validiationFunction}
           render={({ handleSubmit, values }) => {
@@ -214,11 +217,13 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                             multiple={true}
                             variant="outlined"
                             options={
-                              options[field].map((item) => ({
-                                key: item.id,
-                                label: item.title,
-                                value: item.id,
-                              }))
+                              options[field].map((item) => {
+                                return ({
+                                  key: item.id,
+                                  label: item.title,
+                                  value: item.id,
+                                })
+                              })
                             }
                             renderTags={(tagValue, getTagProps, y) => {
                               return tagValue.map((option, index) => {

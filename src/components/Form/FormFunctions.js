@@ -20,3 +20,13 @@ export const getTagColor = (tagName) => {
             return 'rbga(0,0,0,0.1)'
     }
 }
+
+export const formatObjects = (itemsToSend, options) => {
+    return itemsToSend.map(item => {
+        if (options.business.includes(item)) {
+            return { id: item, type: 'BUSINESS' }
+        } else if (options.pois.includes(item)) {
+            return { id: item, type: 'POI' }
+        }
+    })
+}

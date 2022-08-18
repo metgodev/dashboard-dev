@@ -121,7 +121,7 @@ export const GetValuesForForm = (values, allTags) => {
     isRecommended: values.length || Object.keys(values).length ? values.hasOwnProperty('isRecommended') ? values.isRecommended : initialData.isRecommended : initialData.isRecommended,
     isHidden: values.length || Object.keys(values).length ? values.hasOwnProperty('isHidden') ? values.isHidden : initialData.isHidden : initialData.isHidden,
     pois: values.length || Object.keys(values).length ? values.hasOwnProperty('pois') ? values.pois : initialData.pois : initialData.pois,
-    objectIds: values.length || Object.keys(values).length ? values.hasOwnProperty('objectIds') ? values.objectIds : initialData.objectIds : initialData.objectIds,
+    objectIds: values.length || Object.keys(values).length ? values.hasOwnProperty('objectIds') ? values.objectIds.map(item => item.id) : initialData.objectIds : initialData.objectIds,
     coverImageFileId: values.length || Object.keys(values).length ? values.hasOwnProperty('coverImageFileId') ? values.coverImageFileId : initialData.coverImageFileId : initialData.coverImageFileId,
   }
 
