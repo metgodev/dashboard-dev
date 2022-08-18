@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
-import { useSelector } from "react-redux";
 import term from "../../terms";
 import { Typography } from "../Wrappers/Wrappers";
+import toast from 'react-hot-toast';
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
@@ -13,14 +13,22 @@ const Component = ({ setFatherValue, text }) => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
-    if (value !== null) {
-      geocodeByAddress(value.label)
-        .then(locationInfo => getLatLng(locationInfo[0]))
-        .then(latLang => {
-          setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [latLang['lat'], latLang['lng']] }, point: [latLang['lat'], latLang['lng']], locationName: value.label, address: value.label }))
-        })
-    }
+    (async () => {
+      try {
+        const res = await geocodeByAddress(value.label)
+        if (res) {
+          const latLang = await getLatLng(res[0])
+          if (latLang) {
+            setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [latLang['lat'], latLang['lng']] }, point: [latLang['lat'], latLang['lng']], locationName: value.label, address: value.label }))
+          }
+        }
+      } catch (e) {
+        errorToast(e)
+      }
+    })()
   }, [value])
+
+  const errorToast = (e) => toast(term(e.toLowerCase()));
 
   return (
     <div>
