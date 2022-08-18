@@ -15,14 +15,18 @@ const Component = ({ setFatherValue, text }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await geocodeByAddress(value.label)
-        if (res) {
-          const latLang = await getLatLng(res[0])
-          if (latLang) {
-            setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [latLang['lat'], latLang['lng']] }, point: [latLang['lat'], latLang['lng']], locationName: value.label, address: value.label }))
+        if (value?.label !== undefined) {
+          const res = await geocodeByAddress(value.label)
+          if (res) {
+            const latLang = await getLatLng(res[0])
+            if (latLang) {
+              setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [latLang['lat'], latLang['lng']] }, point: [latLang['lat'], latLang['lng']], locationName: value.label, address: value.label }))
+            }
           }
         }
+
       } catch (e) {
+        console.log(e)
         errorToast(e)
       }
     })()
