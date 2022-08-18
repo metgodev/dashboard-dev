@@ -29,6 +29,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     useEffect(() => {
+        console.log(init)
         handleSetValues(init)
         setStep(0)
         setOrientation(get_orientation(lang))
@@ -65,6 +66,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
             areaId: configurationValues.areaId,
             userId: configurationValues.userId,
             status: configurationValues.status,
+            whatsAppPhoneNumber: values.whatsAppPhoneNumber,
             locationInfo: {
                 type: "Point",
                 coordinates: values.locationInfo.coordinates

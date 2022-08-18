@@ -57,6 +57,7 @@ const initialData = {
   isHidden: false,
   objectIds: [],
   coverImageFileId: '',
+  whatsAppPhoneNumber: ''
 }
 
 
@@ -107,6 +108,7 @@ export const GetValuesForForm = (values, allTags) => {
     reservationCenterPhone: values.length || Object.keys(values).length ? values.hasOwnProperty('reservationCenterPhone') ? values.reservationCenterPhone : initialData.reservationCenterPhone : initialData.reservationCenterPhone,
     reservationCenterEmail: values.length || Object.keys(values).length ? values.hasOwnProperty('reservationCenterEmail') ? values.reservationCenterEmail : initialData.reservationCenterEmail : initialData.reservationCenterEmail,
     websitesUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('websitesUrl') && values.websitesUrl !== undefined && values.websitesUrl[0] !== undefined ? values.websitesUrl[0] : initialData.websitesUrl : initialData.websitesUrl,
+    whatsAppPhoneNumber: values.length || Object.keys(values).length ? values.hasOwnProperty('whatsAppPhoneNumber') ? values.whatsAppPhoneNumber : initialData.whatsAppPhoneNumber : initialData.whatsAppPhoneNumber,
     registrationLink: values.length || Object.keys(values).length ? values.hasOwnProperty('registrationLink') ? values.registrationLink : initialData.registrationLink : initialData.registrationLink,
     activitiesInPlace: values.length || Object.keys(values).length ? values.hasOwnProperty('activitiesInPlace') ? values.activitiesInPlace : initialData.activitiesInPlace : initialData.activitiesInPlace,
     exclusiveFor: values.length || Object.keys(values).length ? values.hasOwnProperty('exclusiveFor') ? values.exclusiveFor : initialData.exclusiveFor : initialData.exclusiveFor,
