@@ -5,7 +5,6 @@ import term from '../../terms';
 
 export const headerBtns = [
     //can get name, func, input, icon 
-    { name: term('daily'), func: () => console.log('Days'), buttonIcon: <TodayOutlinedIcon /> },
     { name: term('weekly'), func: () => console.log('Week'), buttonIcon: <DateRangeOutlinedIcon /> },
     { name: term('monthly'), func: () => console.log('Months'), buttonIcon: <CalendarTodayOutlinedIcon /> },
 ]
