@@ -42,6 +42,7 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
             coverImageFileId: formValues.coverImageFileId,
             isHidden: formValues.isHidden,
             isRecommended: formValues.isRecommended,
+            shortDescription: formValues.shortDescription
         }
         try {
             if (type === "add") {
