@@ -31,5 +31,16 @@ export default makeStyles(theme => ({
         justifyContent: 'center',
         boxShadow: '0 0 0.2rem rgba(0,0,0,0.5)',
         gap: 15
+    },
+    dragDropWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    cropBox: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
     }
 }));

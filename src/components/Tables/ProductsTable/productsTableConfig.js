@@ -2,10 +2,18 @@ import term from '../../../terms';
 import ImageRenderer from './CellRenderers/ImageRenderer'
 import CopyRenderer from './CellRenderers/CopyRenderer'
 import StatusRenderer from './CellRenderers/StatusRenderer'
+import InStockRenderer from './CellRenderers/InStockRenderer'
+import ShipmentTypeRenderer from './CellRenderers/ShipmentTypeRenderer'
+import TagsRenderer from './CellRenderers/TagsRenderer'
+import RelevantToRenderer from './CellRenderers/RelevantToRenderer'
+import { updateStringValue, updateNumberValue } from './ProductsTableHelpers'
+
+export const SERVICE = 'products'
 
 const cellStyle = {
     display: 'flex',
     alignItems: 'center',
+    cursor: 'pointer'
 }
 
 export const rowData = [
@@ -21,45 +29,176 @@ const columnDefs = [
         headerName: term('status'),
         field: 'status',
         resizable: true,
-        cellStyle: cellStyle,
+        cellStyle: { ...cellStyle, cursor: 'auto' },
         cellRenderer: StatusRenderer
-    },
-    {
-        headerName: term('image'),
-        field: 'image',
-        resizable: true,
-        cellRenderer: ImageRenderer,
-        cellStyle: cellStyle,
     },
     {
         headerName: term('name'),
         field: 'name',
         resizable: true,
         cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.name
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'name', params)
+            return false
+        }
+    },
+    {
+        headerName: term('image'),
+        field: 'gallery',
+        cellRenderer: ImageRenderer,
+        resizable: true,
+        cellStyle: cellStyle,
+    },
+    {
+        headerName: term('in_stock'),
+        field: 'inStock',
+        resizable: false,
+        cellStyle: { ...cellStyle, justifyContent: 'center ' },
+        cellRenderer: InStockRenderer,
+    },
+    {
+        headerName: term('tags'),
+        field: 'tags',
+        cellStyle: cellStyle,
+        cellRenderer: TagsRenderer
+    },
+    {
+        headerName: term('relevantTo'),
+        field: 'relevantTo',
+        cellStyle: cellStyle,
+        cellRenderer: RelevantToRenderer
+    },
+    {
+        headerName: term('size_and_dimension'),
+        field: 'sizeAndDimension',
+        resizable: true,
+        cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.sizeAndDimension
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'sizeAndDimension', params)
+            return false
+        }
+    },
+    {
+        headerName: term('style'),
+        field: 'style',
+        resizable: true,
+        cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.style
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'style', params)
+            return false
+        }
+    },
+    {
+        headerName: term('usage_restrictions'),
+        field: 'useageRestrictions',
+        resizable: true,
+        cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.useageRestrictions
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'useageRestrictions', params)
+            return false
+        }
+    },
+    {
+        headerName: term('shipment_type'),
+        field: 'shipmentType',
+        valueFormatter: (params) => {
+            return term(params.value.toLowerCase())
+        },
+        resizable: true,
+        cellStyle: cellStyle,
+        cellRenderer: ShipmentTypeRenderer
+    },
+    {
+        headerName: term('price'),
+        field: 'price',
+        resizable: true,
+        cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.price
+        },
+        valueSetter: (params) => {
+            updateNumberValue(params.data._id, 'price', params)
+            return false
+        }
     },
     {
         headerName: term('description'),
         field: 'description',
         resizable: true,
         cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.description
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'description', params)
+            return false
+        }
     },
     {
-        headerName: term('category'),
-        field: 'category',
+        headerName: term('product_components'),
+        field: 'productComponents',
         resizable: true,
         cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.productComponents
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'productComponents', params)
+            return false
+        }
     },
     {
-        headerName: term('tags'),
-        field: 'tags',
+        headerName: term('product_includes'),
+        field: 'productIncludes',
         resizable: true,
         cellStyle: cellStyle,
+        editable: true,
+        valueGetter: (params) => {
+            return params.data.productIncludes
+        },
+        valueSetter: (params) => {
+            updateStringValue(params.data._id, 'productIncludes', params)
+            return false
+        }
     },
     {
         headerName: term('created_at'),
-        field: 'created_at',
+        field: 'createdAt',
+        valueFormatter: (params) => {
+            if (!params.data) return
+            return new Date(params.value).toLocaleString('he-IL')
+        },
         resizable: true,
-        cellStyle: cellStyle,
+        cellStyle: { ...cellStyle, cursor: 'auto' },
+    },
+    {
+        headerName: term('updated_at'),
+        field: 'updatedAt',
+        valueFormatter: (params) => {
+            if (!params.data) return
+            return new Date(params.value).toLocaleString('he-IL')
+        },
+        resizable: true,
+        cellStyle: { ...cellStyle, cursor: 'auto' },
     },
     {
         headerName: term('duplicate'),

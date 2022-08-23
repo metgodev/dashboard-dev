@@ -15,7 +15,7 @@ import useGetService from '../../hooks/useGetService'
 //Helper functions
 import { headerBtns, requestParams } from "./dashboardHelpers";
 import { sortDataForMap } from "../maps/mapsHelpers";
-
+import client from '../../API/metro'
 export default function Dashboard() {
 
   const [entitiesCount, setEntitiesCount] = useState({
@@ -71,9 +71,9 @@ export default function Dashboard() {
               />
             </Grid>
           ))}
-          <Grid item lg={2} md={12} sm={12} xs={12}>
+          {/* <Grid item lg={2} md={12} sm={12} xs={12}>
             <Download />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </>

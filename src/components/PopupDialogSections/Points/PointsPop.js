@@ -38,7 +38,7 @@ const PointsPop = ({ handleClose, type, open }) => {
             let tag_categories = tagCategories.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
             setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
         }
-    }, [authoritiesData, tagCategories]);
+    }, [authoritiesData, tagCategories, handleClose]);
 
     return (
         <Box sx={{ height: '100%' }}>

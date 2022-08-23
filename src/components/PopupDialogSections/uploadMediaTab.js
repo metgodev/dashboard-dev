@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, CircularProgress } from '@mui/material'
-import { handleCategoryChange, UploadFile, uploadMedia } from './uploadMediaTabHelper'
+import { handleCategoryChange, UploadFile } from './uploadMediaTabHelper'
 import { set_table_changed } from '../../REDUX/actions/main.actions';
 //styles
 import useStyles from "./styles";
@@ -9,7 +9,7 @@ import useGetService from '../../hooks/useGetService';
 import MediaHandler from '../MediaHandler/MediaHandler';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
 
-export const UploadMediaTab = ({ tab, config, type }) => {
+export const UploadMediaTab = ({ tab, config, setExternalValues, externalValues }) => {
 
   //styles
   const classes = useStyles()
@@ -22,26 +22,31 @@ export const UploadMediaTab = ({ tab, config, type }) => {
   const [uploadCategory, setUploadCategory] = useState(config.initialMediaType)
   const [loadingImage, setLoadingImage] = useState(false)
 
-  const data = useGetService(tab, `${tab}_media_ID`, { _id: editTabData._id }, area, true)
+  const getId = useCallback(() => {
+    return { _id: editTabData._id }
+  }, [editTabData])
+
+  const data = useGetService(tab, `${tab}_media_ID`, getId(), area, true)
 
   useEffect(() => {
     (async () => {
       setLoadingImage(true)
+      if (tab === 'products' && externalValues) {
+        setMedia(externalValues)
+        setLoadingImage(false)
+        return
+      }
       if (data?.data?.length === 1 && data?.data[0]?.galleryFileIds?.length > 0) {
-        if (type === 'gallery') {
-          setMedia(data.data[0].gallery)
-        } else if (type === 'products') {
-
-        }
+        setMedia(data.data[0].gallery)
       } else {
         setMedia([])
       }
       setLoadingImage(false)
     })()
-  }, [editTabData, data])
+  }, [editTabData, data, externalValues])
 
   const handleUploadFile = async (fileToUpload) => {
-    const res = await UploadFile(fileToUpload, setLoadingImage, editTabData, media, uploadCategory, tab)
+    const res = await UploadFile(fileToUpload, setLoadingImage, editTabData, media, uploadCategory, tab, area.id, setExternalValues)
     if (res) {
       dispatch(set_table_changed('upload-image'))
     }
@@ -68,6 +73,8 @@ export const UploadMediaTab = ({ tab, config, type }) => {
         setLoadingImage={setLoadingImage}
         tab={tab}
         uploadCategory={uploadCategory}
+        setExternalValues={setExternalValues}
+        externalValues={externalValues}
       />
     </Box>
   )

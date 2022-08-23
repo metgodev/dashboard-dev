@@ -52,3 +52,19 @@ export async function validateSeconsFormPart(values) {
 export async function validateThirdFormPart(values) {
 
 }
+
+
+export async function validateFirstProductTab(values) {
+    if (!values.name) {
+        return { name: term("please_enter_a_business_name") };
+    }
+    if (!values.price) {
+        return { price: term("please_enter_a_price") };
+    }
+    if (values.tagsIds.length < 1) {
+        return { tagsIds: term('please_choose_at_least_one_tag') }
+    }
+    if (values.tagsIds.length > 5) {
+        return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
+    }
+}

@@ -24,3 +24,8 @@ export const _search = async (service, options) => {
     const res = await client.service(service).find({ query: { ...options } })
     return res;
 }
+
+export const _patch = async (service, id, data) => {
+    const res = await client.service(service).patch(id, data)
+    return res
+}

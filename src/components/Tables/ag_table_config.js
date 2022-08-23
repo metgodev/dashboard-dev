@@ -515,4 +515,4 @@ export const idOptions = {
     suppressColumnsToolPanel: true,
 };
 
-export const ignore = ['coverImage', 'locationInfo', 'categoryId', 'tagId', 'reservations', 'coverImageFileId', 'objectIds', '__v', 'areaId', 'authorityId', 'location', 'tagsIds', 'galleryFileIds', 'gallery', 'userId', 'relatedBusinessId', 'area']
+export const ignore = ['objects', 'coverImage', 'locationInfo', 'categoryId', 'tagId', 'reservations', 'coverImageFileId', 'objectIds', '__v', 'areaId', 'authorityId', 'location', 'tagsIds', 'galleryFileIds', 'gallery', 'userId', 'relatedBusinessId', 'area']

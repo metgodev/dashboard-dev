@@ -57,7 +57,15 @@ const initialData = {
   isHidden: false,
   objectIds: [],
   coverImageFileId: '',
-  whatsAppPhoneNumber: ''
+  whatsAppPhoneNumber: '',
+  productIncludes: '',
+  style: '',
+  shipmentType: '',
+  sizeAndDimension: '',
+  useageRestrictions: "",
+  productComponents: "",
+  inStock: true,
+  galleryFileIds: [],
 }
 
 
@@ -125,6 +133,14 @@ export const GetValuesForForm = (values, allTags) => {
     pois: values.length || Object.keys(values).length ? values.hasOwnProperty('pois') ? values.pois : initialData.pois : initialData.pois,
     objectIds: values.length || Object.keys(values).length ? values.hasOwnProperty('objectIds') ? values.objectIds.map(item => item.id) : initialData.objectIds : initialData.objectIds,
     coverImageFileId: values.length || Object.keys(values).length ? values.hasOwnProperty('coverImageFileId') ? values.coverImageFileId : initialData.coverImageFileId : initialData.coverImageFileId,
+    productIncludes: values.length || Object.keys(values).length ? values.hasOwnProperty('productIncludes') ? values.productIncludes : initialData.productIncludes : initialData.productIncludes,
+    style: values.length || Object.keys(values).length ? values.hasOwnProperty('style') ? values.style : initialData.style : initialData.style,
+    shipmentType: values.length || Object.keys(values).length ? values.hasOwnProperty('shipmentType') ? values.shipmentType : initialData.shipmentType : initialData.shipmentType,
+    sizeAndDimension: values.length || Object.keys(values).length ? values.hasOwnProperty('sizeAndDimension') ? values.sizeAndDimension : initialData.sizeAndDimension : initialData.sizeAndDimension,
+    productComponents: values.length || Object.keys(values).length ? values.hasOwnProperty('productComponents') ? values.productComponents : initialData.productComponents : initialData.productComponents,
+    useageRestrictions: values.length || Object.keys(values).length ? values.hasOwnProperty('useageRestrictions') ? values.useageRestrictions : initialData.useageRestrictions : initialData.useageRestrictions,
+    inStock: values.length || Object.keys(values).length ? values.hasOwnProperty('inStock') ? values.inStock : initialData.inStock : initialData.inStock,
+    galleryFileIds: values.length || Object.keys(values).length ? values.hasOwnProperty('galleryFileIds') ? values.galleryFileIds : initialData.galleryFileIds : initialData.galleryFileIds,
   }
 
   return returnValues

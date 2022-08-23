@@ -45,20 +45,20 @@ export const ModalInit = [
 export const productFields = [
     [
         { title: term('name'), id: createRandomId(), field: 'name', size: 'medium', type: 'textfield' },
-        { title: term('price'), id: createRandomId(), field: 'price', size: 'medium', type: 'textfield' },
+        { title: term('price'), id: createRandomId(), field: 'price', size: 'medium', type: 'number' },
         { title: term('description'), id: createRandomId(), field: 'description', size: 'medium', type: 'textAreaSizeable' },
         { title: term('tags'), id: createRandomId(), field: 'tagsIds', size: 'medium', type: 'tagsPicker' },
     ],
     [
-        { title: term('product_includes'), id: createRandomId(), field: 'includes', size: 'medium', type: 'textfield' },
-        { title: term('kosher_style'), id: createRandomId(), field: 'style', size: 'medium', type: 'textfield' },
-        { title: term('days_and_hours'), id: createRandomId(), field: 'hours', size: 'medium', type: 'textfield' },
-        { title: term('shipping'), id: createRandomId(), field: 'shipping', size: 'medium', type: 'picker' },
-        { title: term('sizes'), id: createRandomId(), field: 'sizes', size: 'medium', type: 'textfield' },
-        { title: term('product_materials'), id: createRandomId(), field: 'material', size: 'medium', type: 'textfield' },
-        { title: term('relevantTo'), id: createRandomId(), field: 'relevantTo', size: 'medium', type: 'textfield' },
-        { title: term('usage_limitations'), id: createRandomId(), field: 'limitations', size: 'medium', type: 'textfield' },
-        { title: term('different_product_options'), id: createRandomId(), field: 'options', size: 'medium', type: 'checkbox' },
+        { title: term('product_includes'), id: createRandomId(), field: 'productIncludes', size: 'medium', type: 'textfield' },
+        { title: term('style'), id: createRandomId(), field: 'style', size: 'medium', type: 'textfield' },
+        //{ title: term('days_and_hours'), id: createRandomId(), field: 'hours', size: 'medium', type: 'textfield' },
+        { title: term('shipping'), id: createRandomId(), field: 'shipmentType', size: 'medium', type: 'picker' },
+        { title: term('sizeAndDimension'), id: createRandomId(), field: 'sizeAndDimension', size: 'medium', type: 'textfield' },
+        { title: term('product_materials'), id: createRandomId(), field: 'productComponents', size: 'medium', type: 'textfield' },
+        { title: term('relevantTo'), id: createRandomId(), field: 'relevantTo', size: 'medium', type: 'tagsPicker' },
+        { title: term('usage_restrictions'), id: createRandomId(), field: 'useageRestrictions', size: 'medium', type: 'textfield' },
+        { title: term('in_stock'), id: createRandomId(), field: 'inStock', size: 'medium', type: 'checkbox' },
     ],
 ]
 

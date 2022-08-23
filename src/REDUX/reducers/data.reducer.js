@@ -1,7 +1,8 @@
-import { SET_APP_DATA } from '../actions/data.actions';
+import { SET_APP_DATA, SET_COPY_PRODUCT_DATA } from '../actions/data.actions';
 
 const initialState = {
     app_data: {},
+    copy_product_data: {},
 }
 
 
@@ -18,5 +19,10 @@ export default (state = initialState, action) => {
             }
         default:
             return state
+        case SET_COPY_PRODUCT_DATA:
+            return {
+                ...state,
+                copy_product_data: { ...action.payload }
+            }
     }
 }

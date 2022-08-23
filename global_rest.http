@@ -306,3 +306,8 @@ Authorization: {{authorization}}
 GET https://{{hostname}}/categories
 content-type: {{contentType}}
 Authorization: {{authorization}}
+###
+# get products
+GET https://{{hostname}}/products
+content-type: {{contentType}}
+Authorization: {{authorization}}

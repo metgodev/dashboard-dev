@@ -62,7 +62,11 @@ export const mediaTabConfig = {
             fileTypes: ["MP4", "AVI", "WMV"],
         },
     ],
-    initialMediaType: "image",
+    initialMediaType: {
+        title: term('image'),
+        type: "image",
+        fileTypes: ["JPG", "PNG", "JPEG"],
+    }
 }
 
 export const fixPhoneNumber = (num) => {

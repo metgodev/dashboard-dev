@@ -10,24 +10,30 @@ import { set_table_changed } from '../../REDUX/actions/main.actions'
 import toast from 'react-hot-toast';
 import term from '../../terms';
 
-export default function MyImageList({ type, media, tab, setLoadingImage, id }) {
+export default function MyImageList({ type, media, tab, setLoadingImage, id, setExternalValues, externalValues }) {
 
     const classes = useStyles()
     const dispatch = useDispatch()
 
     const deleteItem = async (item) => {
-        setLoadingImage(true)
-        try {
-            let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
-            let ids = newMedia.map((item) => { return { fileId: item.file._id, metadata: { type: item.metadata.type } } })
-            const dataToSend = { galleryFileIds: [...ids], gallery: [...newMedia] }
-            const res = await client.service(tab).patch(id, dataToSend)
-            if (res) {
-                dispatch(set_table_changed("upload_media"))
+        if (setExternalValues !== undefined) {
+            const newValues = externalValues.filter(i => i.fileId !== item.item.fileId)
+            setExternalValues({ dontSkipStep: true, galleryFileIds: newValues })
+        } else {
+            setLoadingImage(true)
+            try {
+                let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
+                let ids = newMedia.map((item) => { return { fileId: item.file._id, metadata: { type: item.metadata.type } } })
+                const dataToSend = { galleryFileIds: [...ids], gallery: [...newMedia] }
+                const res = await client.service(tab).patch(id, dataToSend)
+                if (res) {
+                    dispatch(set_table_changed("upload_media"))
+                }
+                setLoadingImage(false)
+            } catch (e) {
+                errorToast()
+                setLoadingImage(false)
             }
-        } catch (e) {
-            errorToast()
-            setLoadingImage(false)
         }
     }
 

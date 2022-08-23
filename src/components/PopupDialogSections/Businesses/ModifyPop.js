@@ -44,15 +44,15 @@ const ModifyPop = ({ handleClose, type, open }) => {
         if (authoritiesData.data.length && tagCategories.data.length) {
             let authorities = authoritiesData.data.map(({ name, _id }) => ({ value: _id, name }))
             let tag_categories = tagCategories.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
-            setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories }))
+            setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories, areaId: area.id }))
         }
-    }, [authoritiesData, tagCategories]);
+    }, [authoritiesData, tagCategories, handleClose]);
 
     return (
         <div style={{ height: '100%' }}>
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
-                    {ModalTabs.map(b => <Tab key={b} label={b} disabled={b === term('gallery') && type === 'add'} />)}
+                    {ModalTabs.map(b => <Tab key={b} label={b} disabled={(b === term('gallery') || b === term('products')) && type === 'add'} />)}
                 </Tabs>
             </Box>
             <Box sx={{ height: '90%' }} id="alert-dialog-slide-description">
@@ -76,7 +76,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     <img src={comments} alt="comments" />
                 </TabPanel>
                 <TabPanel value={tab} index={6}>
-                    {picker.tagsIds.length > 0 && <AddProductsTab areaSpecificData={picker} />}
+                    {picker.tagsIds.length > 0 && <AddProductsTab type={type} areaSpecificData={picker} handleClose={handleClose} />}
                 </TabPanel>
                 <TabPanel value={tab} index={7}>
                 </TabPanel>

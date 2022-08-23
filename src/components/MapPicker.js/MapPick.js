@@ -61,7 +61,6 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
             try {
                 const res = await geocoder.geocode({ location: { lat: newLat, lng: newLng } })
                 if (res) {
-                    console.log('changed')
                     setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [newLat, newLng] }, locationName: getFormattedAddress(res), address: res.results[0]['formatted_address'] }))
                 }
             } catch (e) {
@@ -70,7 +69,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
         }
     }
 
-    const errorToast = (e) => toast(term(e.code.toLowerCase()));
+    const errorToast = (e) => toast(term(e?.code?.toLowerCase()));
 
     const renderMarkers = useCallback(
         markers && markers.map((marker, index) => {

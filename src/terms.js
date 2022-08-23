@@ -42,6 +42,11 @@ const active_lexicon = {
         he: 'MetGo',
         ar: 'MetGo',
     },
+    please_enter_a_price: {
+        en: 'Please enter a price',
+        he: 'אנא הכנס מחיר',
+        ar: 'الرجاء إدخال السعر',
+    },
     new_messages: {
         en: 'New Messages',
         he: 'הודעות חדשות',
@@ -397,17 +402,22 @@ const active_lexicon = {
         he: 'סטטוס',
         ar: 'تحميل',
     },
+    product_components: {
+        en: 'Product components',
+        he: 'מרכיבי המוצר',
+        ar: 'مكونات المنتج',
+    },
     product_materials: {
         en: 'The materials from which the product is made, a brief description',
         he: 'החומרים מהם עשוי המוצר, תיאור קצר',
         ar: 'المواد التي صنع منها المنتج ، وصفا موجزا',
     },
-    kosher_style: {
+    style: {
         en: 'Style - milky/meaty/neutral',
         he: 'סגנון - חלבי/בשרי/פרווה',
         ar: 'النمط - حليبي / لحمي / فروي',
     },
-    sizes: {
+    size_and_dimension: {
         en: 'Sizes',
         he: 'מידות וגדלים',
         ar: 'الأحجام',
@@ -612,22 +622,32 @@ const active_lexicon = {
         he: "משלוח",
         ar: "شحن",
     },
-    pick_up_point: {
+    in_stock: {
+        en: "In stock",
+        he: "קיים במלאי",
+        ar: "في الأوراق المالية",
+    },
+    shipment_type: {
+        en: "Shipment type",
+        he: "שיטת משלוח",
+        ar: "نوع الشحن",
+    },
+    dropoff: {
         en: "Pick up point",
         he: "נקודת איסוף",
         ar: "نقطة الالتقاط",
     },
-    pay_for_delivery: {
+    payed_shipping: {
         en: "Pay for delivery",
         he: "משלוח בתשלום",
         ar: "الدفع للتسليم",
     },
-    pick_up_from_business: {
+    pickup: {
         en: "Pick up from business",
         he: "איסוף מבית העסק",
         ar: "تلتقط من الأعمال",
     },
-    delivery_to_cusomer_door: {
+    free_shipping: {
         en: "Delivery to customer door",
         he: "משלוח לבית הלקוח",
         ar: "التوصيل إلى باب العميل",
@@ -637,9 +657,9 @@ const active_lexicon = {
         he: "יש במלאי מבחר עיצובים / צבעים שונים",
         ar: "هناك مجموعة مختارة من التصاميم / الألوان المختلفة في المخزون",
     },
-    usage_limitations: {
+    usage_restrictions: {
         en: "limitations",
-        he: "מגלות למימוש",
+        he: "מגבלות למימוש",
         ar: "قيود على ممارسة الرياضة",
     },
     days_and_hours: {
@@ -1047,6 +1067,11 @@ const active_lexicon = {
         en: 'Number',
         he: 'מספר',
         ar: 'رقم التليفون',
+    },
+    please_enter_a_valid_number: {
+        en: 'Please enter a valid number',
+        he: 'אנא הכנס מספר חוקי',
+        ar: 'من فضلك أدخل رقما صالحا',
     },
     webpage_url: {
         en: 'Webpage URL',
@@ -1645,7 +1670,7 @@ const active_lexicon = {
     },
     phone_number_whatsapp: {
         en: 'Phone number / Whatsapp ( appears on app )',
-        he: 'מספר נייד / ואאטסאפ ( מופיע באפליקציה ) ',
+        he: 'מספר נייד ( מופיע באפליקציה בוואטסאפ ) ',
         ar: 'رقم الهاتف / Whatsapp (يظهر في التطبيق)'
     },
     picnic_tables: {

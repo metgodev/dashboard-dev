@@ -14,7 +14,7 @@ export default function TabPanel({ children, value, index, ...other }) {
             {...other}
         >
             {value === index && (
-                <Box style={{ height: '90%' }}>{children}</Box>
+                <Box style={{ height: '100%' }}>{children}</Box>
             )}
         </div>
     );

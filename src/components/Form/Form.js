@@ -99,7 +99,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           />
                         </LocalizationProvider>
                       }
-                      {type === "tagsPicker" && options[field].length > 0 && values[field] && (
+                      {type === "tagsPicker" && options[field].length > 0 && (
                         <Autocomplete
                           label={title}
                           name={field}

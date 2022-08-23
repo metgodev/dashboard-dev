@@ -5,7 +5,7 @@ import DragDrop from '../../hooks/DragDropFiles'
 import MyImageList from '../MyImageList/MyImageList'
 import useStyles from './styles'
 
-function MediaHandler({ uploadFile, media, editTabData, setLoadingImage, tab, uploadCategory }) {
+function MediaHandler({ uploadFile, media, editTabData, setLoadingImage, tab, uploadCategory, setExternalValues, externalValues }) {
 
     const classes = useStyles()
 
@@ -39,6 +39,8 @@ function MediaHandler({ uploadFile, media, editTabData, setLoadingImage, tab, up
                 setLoadingImage={setLoadingImage}
                 tab={tab}
                 type={uploadCategory.type}
+                setExternalValues={setExternalValues}
+                externalValues={externalValues}
             />
         </>
     )

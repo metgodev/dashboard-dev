@@ -41,11 +41,11 @@ export const Picker = {
     { value: "ON_PLACE", name: term("on_place") },
   ],
   authorityId: [],
-  shipping: [
-    { value: "FREE_SHIPPING", name: term("delivery_to_cusomer_door") },
-    { value: "PICKUP", name: term("pick_up_from_business") },
-    { value: "PAYED_SHIPPING", name: term("pay_for_delivery") },
-    { value: "DROPOFF", name: term("pick_up_point") },
+  shipmentType: [
+    { value: "FREE_SHIPPING", name: term("free_shipping") },
+    { value: "PICKUP", name: term("pickup") },
+    { value: "PAYED_SHIPPING", name: term("payed_shipping") },
+    { value: "DROPOFF", name: term("dropoff") },
   ],
 };
 
@@ -110,7 +110,9 @@ export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValue
 
   return forms
 }
-export const GetProductFormFields = (productFields, formData, areaSpecificData, orientation, setValues, setStep) => {
+
+
+export const GetProductFormFields = (productFields, formData, areaSpecificData, orientation, setValues, setStep, validateFirstProductTab) => {
 
   const [forms, setForms] = useState([])
   const classes = useStyles()
@@ -119,18 +121,19 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
     if (formData !== null && areaSpecificData !== null) {
       setForms(fields)
     }
-  }, [formData, productFields, orientation])
+  }, [formData, orientation, areaSpecificData])
 
   const fields = [
     {
       title: term('details'),
+      optional: false,
       field:
         <Form
           fields={productFields[0]}
           data={formData}
           options={areaSpecificData}
           submitFunction={setValues}
-          validiationFunction={() => { }}
+          validiationFunction={validateFirstProductTab}
           isPartOfStepper={true}
           orientation={orientation}
           setExternalValues={setValues}
@@ -138,6 +141,7 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
     },
     {
       title: term('description'),
+      optional: false,
       field:
         <>
           <p style={{ fontWeight: 'bold', marginBottom: '2px' }}>{term('add_specific_details_to_product')}</p>
@@ -147,7 +151,7 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
             data={formData}
             options={areaSpecificData}
             submitFunction={setValues}
-            validiationFunction={() => { }}
+            validiationFunction={(values) => { }}
             isPartOfStepper={true}
             orientation={orientation}
             setExternalValues={setValues}
@@ -156,11 +160,11 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
     },
     {
       title: term('images'),
+      optional: false,
       field:
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
           <UploadMediaTab
-            tab='business'
-            type='products'
+            tab='products'
             config={
               {
                 mediaTypes: [
@@ -177,6 +181,8 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
                 }
               }
             }
+            setExternalValues={setValues}
+            externalValues={formData.galleryFileIds}
           />
           <Box className={
             orientation === 'rtl' ?
