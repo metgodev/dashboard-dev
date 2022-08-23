@@ -8,7 +8,7 @@ const tost = (e) => toast(term(e));
 
 export const updateStringValue = async (id, field, params) => {
     try {
-        const res = await _patch(SERVICE, id, { [field]: params.newValue })
+        const res = await _patch(SERVICE, id, { [field]: params.newValue, status: "PENDING_APPROVAL" })
         if (res) {
             params.data[field] = params.newValue
             params.api.refreshCells({
@@ -31,7 +31,7 @@ export const updateNumberValue = async (id, field, params) => {
             tost('please_enter_a_valid_number')
             return false
         }
-        const res = await _patch(SERVICE, id, { [field]: params.newValue })
+        const res = await _patch(SERVICE, id, { [field]: params.newValue, status: "PENDING_APPROVAL" })
         if (res) {
             params.data[field] = params.newValue
             params.api.refreshCells({
@@ -50,7 +50,7 @@ export const updateNumberValue = async (id, field, params) => {
 
 export const updateEnumValue = async (id, field, newValue, params) => {
     try {
-        const res = await _patch(SERVICE, id, { [field]: newValue })
+        const res = await _patch(SERVICE, id, { [field]: newValue, status: "PENDING_APPROVAL" })
         if (res) {
             params.data[field] = newValue
             params.api.refreshCells({

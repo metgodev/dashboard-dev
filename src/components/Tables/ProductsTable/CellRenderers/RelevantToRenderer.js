@@ -25,7 +25,7 @@ function RelevantToRenderer(props) {
 
     const handleChange = async () => {
         try {
-            const res = await _patch('products', props.data._id, { relevantTo: values.map(tag => tag.id) })
+            const res = await _patch('products', props.data._id, { relevantTo: values.map(tag => tag.id), status: "PENDING_APPROVAL" })
             if (res) {
                 dispatch(set_table_changed('upload_media'))
             }

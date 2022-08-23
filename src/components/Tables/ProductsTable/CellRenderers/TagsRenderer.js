@@ -18,7 +18,7 @@ function TagsRenderer(props) {
 
     const handleChange = async () => {
         try {
-            const res = await _patch('products', props.data._id, { tagsIds: values.map(tag => tag.value) })
+            const res = await _patch('products', props.data._id, { tagsIds: values.map(tag => tag.value), status: 'PENDING_APPROVAL' })
             if (res) {
                 dispatch(set_table_changed('upload_media'))
                 props.api.refreshCells()

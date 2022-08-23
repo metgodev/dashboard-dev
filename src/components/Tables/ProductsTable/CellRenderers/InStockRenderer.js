@@ -12,7 +12,7 @@ function InStockRenderer(params) {
     const handleChange = async () => {
         setLoading(true)
         try {
-            const res = await _patch(SERVICE, params.data._id, { inStock: !value })
+            const res = await _patch(SERVICE, params.data._id, { inStock: !value, status: "PENDING_APPROVAL" })
             if (res) {
                 setValue(prev => !prev)
             }
