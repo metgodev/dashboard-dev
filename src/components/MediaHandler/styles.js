@@ -41,6 +41,7 @@ export default makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: '100%'
     }
 }));

@@ -20,7 +20,7 @@ const CropImage = ({ src, onClick, style }) => {
     return (
         <div className={style}>
             <Cropper
-                style={{ width: '100%', margin: "auto", display: "block" }}
+                style={{ width: '30%', margin: "auto", display: "block" }}
                 highlight={false}
                 zoomTo={0.5}
                 src={src}
@@ -36,7 +36,7 @@ const CropImage = ({ src, onClick, style }) => {
                 guides={true}
             />
             <Button
-                style={{ width: 150 }}
+                style={{ width: 150, marginTop: '5px' }}
                 size="large"
                 variant="contained"
                 color="primary"
