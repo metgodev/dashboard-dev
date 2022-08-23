@@ -15,7 +15,6 @@ function ImageRenderer(props) {
     const handleUpload = async (file) => {
         await UploadFile(file, setLoadingImage, { _id: props.data._id }, props.value, { type: 'image' }, 'products', props.data.areaId)
         dispatch(set_table_changed('upload_media'))
-        props.api.refreshCells()
         setLoadingImage(false)
     }
 

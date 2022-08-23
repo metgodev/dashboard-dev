@@ -27,7 +27,9 @@ function RelevantToRenderer(props) {
         try {
             const res = await _patch('products', props.data._id, { relevantTo: values.map(tag => tag.id), status: "PENDING_APPROVAL" })
             if (res) {
-                dispatch(set_table_changed('upload_media'))
+                const rowNode = props.api.getRowNode(props.node.data._id);
+                rowNode.setData({ ...rowNode.data, relevantTo: values.map(value => value.id) });
+                setOpen(false)
             }
         } catch (e) {
             console.log(e)

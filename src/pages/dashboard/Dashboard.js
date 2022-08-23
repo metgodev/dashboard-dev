@@ -15,7 +15,7 @@ import useGetService from '../../hooks/useGetService'
 //Helper functions
 import { headerBtns, requestParams } from "./dashboardHelpers";
 import { sortDataForMap } from "../maps/mapsHelpers";
-import client from '../../API/metro'
+
 export default function Dashboard() {
 
   const [entitiesCount, setEntitiesCount] = useState({
@@ -32,7 +32,6 @@ export default function Dashboard() {
   const tracks = useGetService("tracks", "tracksDashMap", requestParams)
 
   useEffect(() => {
-
     if (!businesses.loading && !events.loading && !points.loading && !tracks.loading) {
       setEntitiesCount({ businesses: businesses.data, events: events.data, points: points.data, tracks: tracks.data })
       sortDataForMap(businesses, events, points, setTagCategoriesData)
