@@ -24,6 +24,7 @@ export const ModalInit = [
     { title: term('open_24_hours'), id: createRandomId(), field: 'open24Hours', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false, relaredToggle: 'open_on_weekend' },
     { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
+    { title: term('approve_content'), id: createRandomId(), field: 'approveContent', rows: 1, maxRows: 4, size: 'medium', type: 'checkbox', required: false },
     //------------------ More Information ------------------ 
     { title: term('email_address'), id: createRandomId(), field: 'emailAddress', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
     { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },

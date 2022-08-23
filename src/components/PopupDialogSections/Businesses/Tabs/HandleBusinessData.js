@@ -66,7 +66,7 @@ export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValue
         optional: false,
         field:
           <Form
-            fields={ModalInit.slice(0, 14)}
+            fields={ModalInit.slice(0, 15)}
             data={formData}
             options={areaSpecificData}
             submitFunction={handleValues}
@@ -81,7 +81,7 @@ export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValue
         optional: false,
         field:
           < Form
-            fields={ModalInit.slice(14, 23)}
+            fields={ModalInit.slice(15, 14)}
             data={formData}
             options={areaSpecificData}
             submitFunction={handleValues}

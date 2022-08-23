@@ -66,6 +66,7 @@ const initialData = {
   productComponents: "",
   inStock: true,
   galleryFileIds: [],
+  approveContent: true
 }
 
 
@@ -141,6 +142,7 @@ export const GetValuesForForm = (values, allTags) => {
     useageRestrictions: values.length || Object.keys(values).length ? values.hasOwnProperty('useageRestrictions') ? values.useageRestrictions : initialData.useageRestrictions : initialData.useageRestrictions,
     inStock: values.length || Object.keys(values).length ? values.hasOwnProperty('inStock') ? values.inStock : initialData.inStock : initialData.inStock,
     galleryFileIds: values.length || Object.keys(values).length ? values.hasOwnProperty('galleryFileIds') ? values.galleryFileIds : initialData.galleryFileIds : initialData.galleryFileIds,
+    approveContent: values.length || Object.keys(values).length ? values.hasOwnProperty('approveContent') ? values.approveContent : initialData.approveContent : initialData.approveContent,
   }
 
   return returnValues

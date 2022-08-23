@@ -517,6 +517,11 @@ const active_lexicon = {
         he: 'ציבורי',
         ar: 'عام',
     },
+    approve_content: {
+        en: 'I approve email texts and whatsapp messages from MetroNegev',
+        he: 'אני מאשר/ת קבלת דיוור, סמס והודעות וואטסאפ מחברת מטרונגב',
+        ar: 'أوافق على تلقي الرسائل البريدية والرسائل النصية القصيرة ورسائل WhatsApp من Matrongb',
+    },
     pending_approval: {
         en: 'pending approval',
         he: 'ממתין לאישור',
