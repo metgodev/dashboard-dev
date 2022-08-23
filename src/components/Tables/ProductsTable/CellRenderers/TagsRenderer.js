@@ -73,6 +73,13 @@ function TagsRenderer(props) {
                                 getOptionLabel={(option) => option.label}
                                 value={values}
                                 disableCloseOnSelect
+                                isOptionEqualToValue={(option, value) => {
+                                    if (option.value === value.value) {
+                                        return true
+                                    } else {
+                                        return false
+                                    }
+                                }}
                                 onChange={(e, v) => {
                                     setValues(v)
                                 }}

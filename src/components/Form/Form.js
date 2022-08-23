@@ -111,6 +111,13 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                               value: item.id,
                             }))
                           }
+                          isOptionEqualToValue={(option, value) => {
+                            if (option.value === value.value) {
+                              return true
+                            } else {
+                              return false
+                            }
+                          }}
                           renderTags={(tagValue, getTagProps, y) => {
                             return tagValue.map((option, index) => {
                               return (
@@ -222,6 +229,13 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                             name={field}
                             multiple={true}
                             variant="outlined"
+                            isOptionEqualToValue={(option, value) => {
+                              if (option.value === value.value) {
+                                return true
+                              } else {
+                                return false
+                              }
+                            }}
                             options={
                               options[field].map((item) => {
                                 return ({
