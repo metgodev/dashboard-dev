@@ -15,9 +15,9 @@ import { useDispatch } from "react-redux";
 import useGetService from '../../../../hooks/useGetService'
 import { set_copy_product_data } from '../../../../REDUX/actions/data.actions'
 import { GetValuesForForm } from '../../CategoryConfig'
-import { validateFirstProductTab } from './Validations'
+import { validateFirstProductTab, validateSecondProductTab } from './Validations'
 
-function AddProductsTab({ areaSpecificData, handleClose, type }) {
+function AddProductsTab({ areaSpecificData, type }) {
 
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -43,7 +43,7 @@ function AddProductsTab({ areaSpecificData, handleClose, type }) {
     }
 
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
-    const formFields = GetProductFormFields(productFields, formData, areaSpecificData, orientation, handleValues, setStep, validateFirstProductTab)
+    const formFields = GetProductFormFields(productFields, formData, areaSpecificData, orientation, handleValues, setStep, validateFirstProductTab, validateSecondProductTab)
 
     useEffect(() => {
         setOrientation(get_orientation(lang))
@@ -65,9 +65,10 @@ function AddProductsTab({ areaSpecificData, handleClose, type }) {
         }
         try {
             await client.service("products").create(valuesToSend)
+            setListOrNewProduct(true)
             dispatch(set_table_changed(type))
-            handleClose(false)
         } catch (e) {
+            console.log(e)
             errorToast()
         }
     }

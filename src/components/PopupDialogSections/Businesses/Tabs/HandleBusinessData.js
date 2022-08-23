@@ -112,7 +112,7 @@ export const GetFormFields = (ModalInit, formData, areaSpecificData, handleValue
 }
 
 
-export const GetProductFormFields = (productFields, formData, areaSpecificData, orientation, setValues, setStep, validateFirstProductTab) => {
+export const GetProductFormFields = (productFields, formData, areaSpecificData, orientation, setValues, setStep, validateFirstProductTab, validateSecondProductTab) => {
 
   const [forms, setForms] = useState([])
   const classes = useStyles()
@@ -151,7 +151,7 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
             data={formData}
             options={areaSpecificData}
             submitFunction={setValues}
-            validiationFunction={(values) => { }}
+            validiationFunction={validateSecondProductTab}
             isPartOfStepper={true}
             orientation={orientation}
             setExternalValues={setValues}

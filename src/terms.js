@@ -2217,6 +2217,11 @@ const active_lexicon = {
         he: 'כן',
         ar: 'نعم'
     },
+    please_choose_shipment_type: {
+        en: 'Please choose a shipment type',
+        he: 'אנא בחר צורת משלוח',
+        ar: 'الرجاء اختيار نوع الشحنة'
+    },
     or_search_on_map: {
         en: 'Or search on the map',
         he: 'או חפש על המפה',

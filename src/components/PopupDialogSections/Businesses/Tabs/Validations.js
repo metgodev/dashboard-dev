@@ -68,3 +68,9 @@ export async function validateFirstProductTab(values) {
         return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
 }
+
+export async function validateSecondProductTab(values) {
+    if (!values.shipmentType) {
+        return { shipmentType: term('please_choose_shipment_type') }
+    }
+}

@@ -42,7 +42,7 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
     return (
         <>
             <ImageList style={{ padding: '20px' }} className={classes.imageList} cols={4} gap={20} variant={'quilted'}>
-                {media.map((item, index) => {
+                {media?.map((item, index) => {
                     if (item.metadata.type === type && type !== 'video' && type !== 'files') {
                         return (
                             <ImageListItem style={{ height: '200px', width: '200px' }} cols={1} key={index} id={item.file._id} className={classes.item}>
