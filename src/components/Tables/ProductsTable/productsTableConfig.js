@@ -29,6 +29,7 @@ const columnDefs = [
         headerName: term('status'),
         field: 'status',
         resizable: true,
+        sortable: true,
         cellStyle: { ...cellStyle, cursor: 'auto' },
         cellRenderer: StatusRenderer
     },
@@ -38,6 +39,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.name
         },
@@ -56,7 +58,8 @@ const columnDefs = [
     {
         headerName: term('in_stock'),
         field: 'inStock',
-        resizable: false,
+        resizable: true,
+        sortable: true,
         cellStyle: { ...cellStyle, justifyContent: 'center ' },
         cellRenderer: InStockRenderer,
     },
@@ -64,12 +67,14 @@ const columnDefs = [
         headerName: term('tags'),
         field: 'tags',
         cellStyle: cellStyle,
+        resizable: true,
         cellRenderer: TagsRenderer
     },
     {
         headerName: term('relevantTo'),
         field: 'relevantTo',
         cellStyle: cellStyle,
+        resizable: true,
         cellRenderer: RelevantToRenderer
     },
     {
@@ -78,6 +83,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.sizeAndDimension
         },
@@ -92,6 +98,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.style
         },
@@ -106,6 +113,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.useageRestrictions
         },
@@ -122,6 +130,7 @@ const columnDefs = [
         },
         resizable: true,
         cellStyle: cellStyle,
+        sortable: true,
         cellRenderer: ShipmentTypeRenderer
     },
     {
@@ -130,6 +139,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.price
         },
@@ -144,6 +154,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.description
         },
@@ -158,6 +169,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.productComponents
         },
@@ -172,6 +184,7 @@ const columnDefs = [
         resizable: true,
         cellStyle: cellStyle,
         editable: true,
+        sortable: true,
         valueGetter: (params) => {
             return params.data.productIncludes
         },
@@ -188,6 +201,7 @@ const columnDefs = [
             return new Date(params.value).toLocaleString('he-IL')
         },
         resizable: true,
+        sortable: true,
         cellStyle: { ...cellStyle, cursor: 'auto' },
     },
     {
@@ -198,6 +212,7 @@ const columnDefs = [
             return new Date(params.value).toLocaleString('he-IL')
         },
         resizable: true,
+        sortable: true,
         cellStyle: { ...cellStyle, cursor: 'auto' },
     },
     {
