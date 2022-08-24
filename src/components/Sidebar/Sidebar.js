@@ -25,6 +25,7 @@ import SidebarLink from "./SidebarLink/SidebarLink";
 import { useSelector, useDispatch } from "react-redux";
 import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.actions";
 import term from "../../terms";
+import GetPermissions from "../../hooks/GetPermissions";
 
 const structure = [
     {
@@ -33,20 +34,21 @@ const structure = [
             { label: term('manage_area'), link: "/admin/authority" },
             { label: term('manage_tags'), link: "/admin/tagcategories" },
         ],
+        permission: 'admin'
     },
-    { id: 1, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon /> },
-    { id: 2, label: term('businesses'), link: "/businesses", icon: <Businesses />, },
-    { id: 3, label: term('events'), link: "/events", icon: <Event /> },
-    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, },
-    { id: 5, label: term('routes'), link: "/routes", icon: <Route />, },
-    { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, },
+    { id: 1, label: term('dashboard'), link: "/dashboard", icon: <HomeIcon />, permission: 'dashboard' },
+    { id: 2, label: term('businesses'), link: "/businesses", icon: <Businesses />, permission: 'business' },
+    { id: 3, label: term('events'), link: "/events", icon: <Event />, permission: 'events' },
+    { id: 4, label: term('points'), link: "/locations", icon: <Locations />, permission: 'locations' },
+    { id: 5, label: term('routes'), link: "/routes", icon: <Route />, permission: 'routes' },
+    { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, permission: 'vouchers' },
     // { id: 7, label: term('users'), link: "/users", icon: <People />, },
-    { id: 7, label: term('local_campaigns'), link: "/campaign", icon: <CampaignOutlinedIcon />, },
-    { id: 8, label: term('map'), link: "/map", icon: <Map />, },
-    { id: 9, type: "divider" },
+    { id: 7, label: term('local_campaigns'), link: "/campaign", icon: <CampaignOutlinedIcon />, permission: 'campaign' },
+    { id: 8, label: term('map'), link: "/map", icon: <Map />, permission: 'map' },
+    { id: 9, type: "divider", },
     { id: 10, type: 'title', label: term('help') },
-    { id: 11, label: term('support'), link: "/support", icon: <Support />, },
-    { id: 13, label: term('faq'), link: "/FAQ", icon: <FAQIcon /> },
+    { id: 11, label: term('support'), link: "/support", icon: <Support />, permission: 'support' },
+    { id: 13, label: term('faq'), link: "/FAQ", icon: <FAQIcon />, support: 'faq' },
     { id: 14, type: "divider" },
 ];
 
@@ -57,6 +59,8 @@ const Sidebar = React.memo(({ location }) => {
     //global
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
     const toggleSideBar = () => dispatch(set_sidebar_toggle(!sidebar))
+    const user = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(user)
 
     useEffect(() => {
         window.addEventListener("resize", handleWindowWidthChange);
@@ -89,14 +93,21 @@ const Sidebar = React.memo(({ location }) => {
                 </IconButton>
             </div>
             <List >
-                {structure.map(link => (
-                    <SidebarLink
-                        key={link.id}
-                        location={location}
-                        sidebar={sidebar}
-                        {...link}
-                    />
-                ))}
+                {structure.map(link => {
+                    if (link.permission === undefined || permissions[link.permission]) {
+                        return (
+                            (
+                                <SidebarLink
+                                    key={link.id}
+                                    location={location}
+                                    sidebar={sidebar}
+                                    {...link}
+                                />
+                            )
+                        )
+                    }
+
+                })}
             </List>
         </Drawer>
     );

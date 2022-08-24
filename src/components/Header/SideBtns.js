@@ -6,10 +6,6 @@ import MailMenu from "./MenuBtns/MailMenu";
 import NotifyMenu from "./MenuBtns/NotifyMenu";
 import ProfileMenu from "./MenuBtns/ProfileMenu";
 
-
-
-
-
 function SideBtns() {
     return (
         <>

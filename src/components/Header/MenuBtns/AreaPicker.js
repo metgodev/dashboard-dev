@@ -11,6 +11,7 @@ import useStyles from "../styles";
 import { Typography } from "../../Wrappers/Wrappers";
 
 import useGetService from "../../../hooks/useGetService";
+import GetPermissions from "../../../hooks/GetPermissions";
 
 function AreaMenu() {
     //global 
@@ -24,6 +25,9 @@ function AreaMenu() {
     let classes = useStyles();
 
     const areas = useGetService("area", "area")
+
+    const user = useSelector(s => s.userReducer)
+    const permissions = GetPermissions(user)
 
     useLayoutEffect(() => {
         (async () => {
@@ -59,34 +63,35 @@ function AreaMenu() {
                 onClick={e => {
                     setAreaMenu(e.currentTarget);
                 }}
-                className={classes.headerMenuButton}
+                className={permissions?.navigationBar?.area ? classes.headerMenuButton : classes.headerText}
             >
                 {area && area.name + "-"}
                 <LocationCityOutlinedIcon classes={{ root: classes.headerIcon }} />
             </IconButton >
-            <Menu
-                id="lang-menu"
-                open={Boolean(areaMenu)}
-                anchorEl={areaMenu}
-                onClose={() => setAreaMenu(null)}
-                MenuListProps={{ className: classes.headerMenuList }}
-                className={classes.headerMenu}
-                classes={{ paper: classes.langMenu }}
-                disableAutoFocusItem
-                disablescrolllock={true.toString()}
-            >
-                <div className={classes.langMenuUser}>
-                    <div>
-                        {areaMenuItem.map((a) => (
-                            <MenuItem key={a.id} className={classes.messageNotification} onClick={() => changeArea(a)}>
-                                <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" >
-                                    {a.name}
-                                </Typography>
-                            </MenuItem>
-                        ))}
+            {permissions?.navigationBar?.area &&
+                <Menu
+                    id="lang-menu"
+                    open={Boolean(areaMenu)}
+                    anchorEl={areaMenu}
+                    onClose={() => setAreaMenu(null)}
+                    MenuListProps={{ className: classes.headerMenuList }}
+                    className={classes.headerMenu}
+                    classes={{ paper: classes.langMenu }}
+                    disableAutoFocusItem
+                    disablescrolllock={true.toString()}
+                >
+                    <div className={classes.langMenuUser}>
+                        <div>
+                            {areaMenuItem.map((a) => (
+                                <MenuItem key={a.id} className={classes.messageNotification} onClick={() => changeArea(a)}>
+                                    <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" >
+                                        {a.name}
+                                    </Typography>
+                                </MenuItem>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </Menu>
+                </Menu>}
         </>
     )
 }

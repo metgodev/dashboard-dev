@@ -8,9 +8,10 @@ import { Auth } from '../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../REDUX/actions/main.actions';
 import toast from 'react-hot-toast';
+import { registerUserWithEmailAndPassword } from '../../API/firebase';
+import { set_user_details } from '../../REDUX/actions/user.actions'
 // styles
 import useStyles from "./styles";
-import { registerUserWithEmailAndPassword } from '../../API/firebase';
 
 function Register({ setLoggedIn }) {
     let dispatch = useDispatch()
@@ -59,6 +60,7 @@ function Register({ setLoggedIn }) {
                         id: res._id
                     }
                     dispatch(set_user(user));
+                    dispatch(set_user_details(res))
                     setLoggedIn(true)
                     navigate('/dashboard')
                     setIsLoading(false);

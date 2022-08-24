@@ -60,6 +60,9 @@ export default makeStyles(theme => ({
   headerMenu: {
     marginTop: theme.spacing(7),
   },
+  headerText: {
+    cursor: 'auto',
+  },
   headerMenuList: {
     display: "flex",
     flexDirection: "column",

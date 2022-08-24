@@ -2,7 +2,7 @@
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app           
 # metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NjA2NDM3MDEsImlhdCI6MTY2MDcxNjYwNiwiZXhwIjoxNjYxMzIxNDA2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjdiZTkxMDM3Y2Q4YjA2ZjEwMTQzOGQiLCJqdGkiOiIwNzY5NmRkNC05MzlkLTRhYzUtODBlNi0wZDFjMWQyZjBlNzQifQ.s0he-8KSPwiRwqY2hQmonXQT475h5OfvrGV3sWyOlYI
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NjEzMjcyNjcsImlhdCI6MTY2MTMyNzI2NywiZXhwIjoxNjYxOTMyMDY3LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjdiZTkxMDM3Y2Q4YjA2ZjEwMTQzOGQiLCJqdGkiOiI5ZDM4NTg4NC0wOTExLTQ3ZWUtYjcyZS0xZGYwZTk5NDVhYzMifQ.daqE-4hRRdiw9I56f47HOJ-sbf2jjcDeGqk50oOrNuI
 
 @email = "celeja6810@showbaz.com"
 @password = "5656"
@@ -309,5 +309,10 @@ Authorization: {{authorization}}
 ###
 # get products
 GET https://{{hostname}}/products
+content-type: {{contentType}}
+Authorization: {{authorization}}
+###
+# get roles
+GET https://{{hostname}}/roles
 content-type: {{contentType}}
 Authorization: {{authorization}}

@@ -21,27 +21,41 @@ import UsersTable from '../pages/userstable/UsersTable';
 import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
-import { Toaster } from 'react-hot-toast';
 // admin pages
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
 //Helper
-import { Protecte, Reauthenticate } from './rootHelper.js';
+import { Protecte } from './rootHelper.js';
+//Components
+import { Toaster } from 'react-hot-toast';
+//Redux
+import { reAuth } from '../API/metro';
+import { set_user_details } from '../REDUX/actions/user.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import GetPermissions from '../hooks/GetPermissions'
 
 const Root = () => {
     //Styles
     let classes = useStyles();
     //Global state
+    const dispatch = useDispatch()
     let navigate = useNavigate()
     let location = useLocation();
-    let { pathname } = location;
     //Local state
     const [loggedIn, setLoggedIn] = useState(false);
-    const shouldDisplay = pathname !== '/login' && pathname !== '/verification';
-    let isSuperAdmin = true;
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails ? userDetails : null)
 
     useLayoutEffect(() => {
-        Reauthenticate(setLoggedIn, navigate, pathname)
+        (async () => {
+            try {
+                const user = await reAuth()
+                dispatch(set_user_details(user))
+                setLoggedIn(true)
+            } catch (e) {
+                console.log(e)
+            }
+        })()
     }, [])
 
     return (
@@ -50,36 +64,30 @@ const Root = () => {
                 position={'bottom-center'}
             />
             <Main >
-                {shouldDisplay &&
+                {loggedIn &&
                     <>
-                        <Protecte auth={loggedIn}>
-                            <Header />
-                            <SideBar location={location} />
-                        </Protecte>
+                        <Header />
+                        <SideBar location={location} />
                     </>
                 }
                 <Routes>
-                    <Route exact path="/" element={<Protecte auth={loggedIn}><Navigate to="/dashboard" /></Protecte>} />
-                    <Route exact path="/dashboard" element={<Protecte auth={loggedIn}><Dashboard /></Protecte>} />
-                    <Route exact path="/verification" element={< Protecte auth={loggedIn}><Verification /></Protecte>} />
-                    <Route exact path="/businesses" element={<Protecte auth={loggedIn}><Businesses /></Protecte>} />
-                    <Route exact path="/events" element={<Protecte auth={loggedIn}><Events /></ Protecte >} />
-                    <Route exact path="/locations" element={<Protecte auth={loggedIn}><PointsOfInterest /></Protecte>} />
-                    <Route exact path="/routes" element={<Protecte auth={loggedIn}><Tracks /></Protecte>} />
-                    <Route exact path="/voucher" element={<Protecte auth={loggedIn}><Voucher /></Protecte>} />
-                    <Route exact path="/users" element={<Protecte auth={loggedIn}><UsersTable /></Protecte>} />
-                    <Route exact path="/campaign" element={<Protecte auth={loggedIn}><LocalCampaigns /></Protecte>} />
-                    <Route exact path="/map" element={<Protecte auth={loggedIn}><Maps /></Protecte>} />
-                    <Route exact path="/support" element={<Protecte auth={loggedIn}><Support /></Protecte>} />
-                    <Route exact path="/FAQ" element={<Protecte auth={loggedIn}><FAQ /></Protecte>} />
+                    <Route exact path="/" element={<Protecte auth={permissions.main}><Navigate to="/dashboard" /></Protecte>} />
+                    <Route exact path="/dashboard" element={<Protecte auth={permissions.dashboard}><Dashboard /></Protecte>} />
+                    <Route exact path="/verification" element={< Protecte auth={permissions.verification}><Verification /></Protecte>} />
+                    <Route exact path="/businesses" element={<Protecte auth={permissions.business}><Businesses /></Protecte>} />
+                    <Route exact path="/events" element={<Protecte auth={permissions.events}><Events /></ Protecte >} />
+                    <Route exact path="/locations" element={<Protecte auth={permissions.locations}><PointsOfInterest /></Protecte>} />
+                    <Route exact path="/routes" element={<Protecte auth={permissions.routes}><Tracks /></Protecte>} />
+                    <Route exact path="/voucher" element={<Protecte auth={permissions.voucher}><Voucher /></Protecte>} />
+                    <Route exact path="/users" element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />
+                    <Route exact path="/campaign" element={<Protecte auth={permissions.campaign}><LocalCampaigns /></Protecte>} />
+                    <Route exact path="/map" element={<Protecte auth={permissions.map}><Maps /></Protecte>} />
+                    <Route exact path="/support" element={<Protecte auth={permissions.support}><Support /></Protecte>} />
+                    <Route exact path="/FAQ" element={<Protecte auth={permissions.faq}><FAQ /></Protecte>} />
                     <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
-                    <Route path='*' element={<Protecte auth={loggedIn}><Error /></Protecte>} />
-                    {isSuperAdmin &&
-                        <>
-                            <Route exact path="/admin/authority" element={<Protecte auth={loggedIn}><AuthorityMng /></Protecte>} />
-                            <Route exact path="/admin/tagcategories" element={<Protecte auth={loggedIn}><TagCategoriesMng /></Protecte>} />
-                        </>
-                    }
+                    <Route path='*' element={<Protecte auth={permissions.error}><Error /></Protecte>} />
+                    <Route exact path="/admin/authority" element={<Protecte auth={permissions.authority}><AuthorityMng /></Protecte>} />
+                    <Route exact path="/admin/tagcategories" element={<Protecte auth={permissions.tagcategories}><TagCategoriesMng /></Protecte>} />
                 </Routes>
             </Main>
         </Box >

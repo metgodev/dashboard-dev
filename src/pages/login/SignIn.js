@@ -13,6 +13,7 @@ import { loginWithEmailAndPassword } from "../../API/firebase";
 //Redux
 import { useDispatch } from "react-redux";
 import { set_user } from "../../REDUX/actions/main.actions";
+import { set_user_details } from '../../REDUX/actions/user.actions'
 
 function SignIn({ setLoggedIn }) {
     let classes = useStyles();
@@ -49,14 +50,15 @@ function SignIn({ setLoggedIn }) {
                     setError(res.error)
                     wrongCredentialsToast()
                 } else {
-                    let user = {
+                    let userDetails = {
                         e: res.email,
                         fn: term('welcome_guest'),
                         ln: '',
                         v: res.isVerified,
                         id: res._id
                     }
-                    dispatch(set_user(user));
+                    dispatch(set_user(userDetails));
+                    dispatch(set_user_details(res))
                     setLoggedIn(true)
                     navigate('/dashboard')
                     setIsLoading(false);
