@@ -1,13 +1,14 @@
 import React from 'react'
+import ENTITY_STATUS from '../../../../data/entity_status'
 import term from '../../../../terms'
 
 const getColorValue = (props) => {
     switch (props.value) {
-        case 'PENDING_APPROVAL':
+        case ENTITY_STATUS.PENDING_APPROVAL:
             return 'orange'
-        case 'PUBLIC':
+        case ENTITY_STATUS.PUBLIC:
             return 'green'
-        case 'PRIVATE':
+        case ENTITY_STATUS.PRIVATE:
             return 'red'
     }
 }

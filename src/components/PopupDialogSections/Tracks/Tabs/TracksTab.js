@@ -56,6 +56,7 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
                 handleClose(false)
             }
         } catch (e) {
+            console.log('tracksTab', e)
             errorToast()
         }
     }

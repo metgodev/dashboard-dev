@@ -18,8 +18,8 @@ import useStyles from "./styles";
 import { useDispatch } from 'react-redux';
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions';
 import toast from 'react-hot-toast';
-
-export const clearButtonId = '.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.MuiAutocomplete-clearIndicator.css-1glvl0p-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-clearIndicator'
+import MODAL_TYPES from '../../data/modal_types';
+import { clearButtonId } from './config';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -59,14 +59,14 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === 'businesess' && <ModifyPop open={open} handleClose={handleClose} type={type} />}
-                    {tabs === 'events' && <EventsPop open={open} handleClose={handleClose} type={type} />}
-                    {tabs === 'points' && <PointsPop open={open} handleClose={handleClose} type={type} />}
-                    {tabs === 'tracks' && <TracksPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.BUSINESS && <ModifyPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.EVENTS && <EventsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.POINTS && <PointsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.TRACKS && <TracksPop open={open} handleClose={handleClose} type={type} />}
                     {/* authority management */}
-                    {tabs === 'authority' && <AuthorityPop open={open} handleClose={handleClose} type={type} />}
-                    {tabs === 'tags' && <TagPop open={open} handleClose={handleClose} type={type} />}
-                    {tabs === 'tags_link' && <TagLinkPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.AUTHORITY && <AuthorityPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.TAGS && <TagPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.TAGS_LINK && <TagLinkPop open={open} handleClose={handleClose} type={type} />}
                 </DialogContent>
             </Dialog>
         </Box >

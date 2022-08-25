@@ -89,6 +89,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                 handleClose(false)
             }
         } catch (e) {
+            console.log('modifyTab', e)
             errorToast()
         }
     }

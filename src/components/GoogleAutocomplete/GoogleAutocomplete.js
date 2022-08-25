@@ -5,6 +5,7 @@ import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import term from "../../terms";
 import { Typography } from "../Wrappers/Wrappers";
 import toast from 'react-hot-toast';
+import { apiOptions, textStyle } from "./config";
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
@@ -20,13 +21,13 @@ const Component = ({ setFatherValue, text }) => {
           if (res) {
             const latLang = await getLatLng(res[0])
             if (latLang) {
-              setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [latLang['lat'], latLang['lng']] }, point: [latLang['lat'], latLang['lng']], locationName: value.label, address: value.label }))
+              setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [latLang.lat, latLang.lng] }, point: [latLang.lat, latLang.lng], locationName: value.label, address: value.label }))
             }
           }
         }
 
       } catch (e) {
-        console.log(e)
+        console.log('googleAutocomplete', e)
         errorToast(e)
       }
     })()
@@ -38,10 +39,7 @@ const Component = ({ setFatherValue, text }) => {
     <div>
       <GooglePlacesAutocomplete
         apiKey={REACT_APP_GOOGLE_API_KEY}
-        apiOptions={{
-          language: 'iw',
-          region: 'il'
-        }}
+        apiOptions={apiOptions}
         selectProps={{
           onChange: setValue,
           styles: {
@@ -54,7 +52,7 @@ const Component = ({ setFatherValue, text }) => {
         }}
       />
       {text &&
-        <Typography size="md" style={{ paddingTop: '10px', paddingRight: '3px' }}>
+        <Typography size="md" style={textStyle}>
           {text}
         </Typography>
       }

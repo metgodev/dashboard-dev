@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 import MediaHandler from '../../../MediaHandler/MediaHandler'
 import { UploadFile } from '../../../PopupDialogSections/uploadMediaTabHelper'
+import MEDIA_TYPES from '../../../../data/media_types'
+import BACK_ROUTES from '../../../../data/back_routes'
 
 function ImageRenderer(props) {
 
@@ -13,7 +15,7 @@ function ImageRenderer(props) {
     const dispatch = useDispatch()
 
     const handleUpload = async (file) => {
-        await UploadFile(file, setLoadingImage, { _id: props.data._id }, props.value, { type: 'image' }, 'products', props.data.areaId)
+        await UploadFile(file, setLoadingImage, { _id: props.data._id }, props.value, { type: MEDIA_TYPES.IMAGE }, BACK_ROUTES.PRODUCTS, props.data.areaId)
         dispatch(set_table_changed('upload_media'))
         setLoadingImage(false)
     }
@@ -32,8 +34,8 @@ function ImageRenderer(props) {
                             media={props.value}
                             editTabData={{ _id: props.data._id, id: props.data._id }}
                             setLoadingImage={setLoadingImage}
-                            tab={'products'}
-                            uploadCategory={{ type: 'image' }}
+                            tab={BACK_ROUTES.PRODUCTS}
+                            uploadCategory={{ type: MEDIA_TYPES.IMAGES }}
                             uploadFile={(file) => handleUpload(file)}
                         />
                     }

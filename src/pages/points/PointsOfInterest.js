@@ -9,10 +9,13 @@ import { useDispatch } from 'react-redux'
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import term from '../../terms'
 import AGTable from '../../components/Tables/AGTable'
+import MODAL_STATES from '../../data/modal_states';
+import MODAL_TYPES from '../../data/modal_types';
+import BACK_ROUTES from '../../data/back_routes';
 
 function PointsOfInterest() {
     const [open, setOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
+    const [dialogType, setDialogType] = useState(MODAL_STATES.ADD);
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
@@ -20,11 +23,11 @@ function PointsOfInterest() {
     const openDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('edit')
+            setDialogType(MODAL_STATES.EDIT)
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType('add')
+            setDialogType(MODAL_STATES.ADD)
         }
         setOpen(!open)
     }
@@ -38,8 +41,8 @@ function PointsOfInterest() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('points')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'pois'} action={openDialog} />
-            <PopupDialog title={term('points')} open={open} setOpen={setOpen} tabs={'points'} type={dialogType} />
+            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.POINTS} action={openDialog} />
+            <PopupDialog title={term('points')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.POINTS} type={dialogType} />
         </Box>
     )
 }

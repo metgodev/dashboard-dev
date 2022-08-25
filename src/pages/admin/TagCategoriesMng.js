@@ -7,22 +7,25 @@ import { AddCircleOutline } from '@material-ui/icons'
 import { useDispatch } from 'react-redux'
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import AGTable from '../../components/Tables/AGTable'
+import MODAL_STATES from '../../data/modal_states'
+import BACK_ROUTES from '../../data/back_routes'
+import MODAL_TYPES from '../../data/modal_types'
 
 function TagCategoriesMng() {
     const dispatch = useDispatch()
     //dialog
     const [tagLink, setTagLink] = useState(false)
     const [tagOpen, setTagOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
+    const [dialogType, setDialogType] = useState(MODAL_STATES.ADD);
 
     const openTagDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('edit')
+            setDialogType(MODAL_STATES.EDIT)
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType('add')
+            setDialogType(MODAL_STATES.ADD)
         }
         setTagOpen(!tagOpen)
     }
@@ -30,11 +33,11 @@ function TagCategoriesMng() {
     const openLinkingDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('edit')
+            setDialogType(MODAL_STATES.EDIT)
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType('link')
+            setDialogType(MODAL_STATES.LINK)
         }
         setTagLink(!tagOpen)
     }
@@ -47,9 +50,9 @@ function TagCategoriesMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('area_related_tags')} />
-            <AGTable display={'tag-categories'} action={openLinkingDialog} />
-            <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={'tags'} maxWidth={'sm'} />
-            <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={'tags_link'} maxWidth={'sm'} />
+            <AGTable display={BACK_ROUTES.TAG_CATEGORIES} action={openLinkingDialog} />
+            <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={MODAL_TYPES.TAGS} maxWidth={'sm'} />
+            <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={MODAL_TYPES.TAGS_LINK} maxWidth={'sm'} />
         </Box>
     )
 }

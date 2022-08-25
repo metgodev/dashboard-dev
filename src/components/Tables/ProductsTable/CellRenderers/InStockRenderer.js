@@ -2,7 +2,8 @@ import { React, useState } from 'react'
 import Switch from '@mui/material/Switch';
 import { CircularProgress } from '@mui/material';
 import { _patch } from '../../../../API/service';
-import { SERVICE } from '../productsTableConfig'
+import ENTITY_STATUS from '../../../../data/entity_status';
+import BACK_ROUTES from '../../../../data/back_routes';
 
 function InStockRenderer(params) {
 
@@ -12,7 +13,7 @@ function InStockRenderer(params) {
     const handleChange = async () => {
         setLoading(true)
         try {
-            const res = await _patch(SERVICE, params.data._id, { inStock: !value, status: "PENDING_APPROVAL" })
+            const res = await _patch(BACK_ROUTES.PRODUCTS, params.data._id, { inStock: !value, status: ENTITY_STATUS.PENDING_APPROVAL })
             if (res) {
                 setValue(prev => !prev)
             }

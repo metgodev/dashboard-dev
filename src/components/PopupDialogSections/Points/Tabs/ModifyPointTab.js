@@ -86,6 +86,7 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
                 handleClose(false)
             }
         } catch (e) {
+            console.log('modifyPointTab', e)
             errorToast()
         }
     }

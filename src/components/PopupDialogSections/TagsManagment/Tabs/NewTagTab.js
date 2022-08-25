@@ -36,6 +36,7 @@ export const NewTagTab = ({ handleClose, type }) => {
             dispatch(set_table_changed(type))
             handleClose(false)
         } catch (e) {
+            console.log('newTagTab', e)
             errorToast()
         }
     }

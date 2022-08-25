@@ -11,38 +11,7 @@ import useStyles from "../styles";
 import { Badge, Typography } from "../../Wrappers/Wrappers";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import term from "../../../terms";
-
-const messages = [
-    {
-        id: 0,
-        variant: "warning",
-        name: "Jane Hew",
-        message: "Hey! How is it going?",
-        time: "9:32",
-    },
-    {
-        id: 1,
-        variant: "success",
-        name: "Lloyd Brown",
-        message: "Check out my new Dashboard",
-        time: "9:18",
-    },
-    {
-        id: 2,
-        variant: "primary",
-        name: "Mark Winstein",
-        message: "I want rearrange the appointment",
-        time: "9:15",
-    },
-    {
-        id: 3,
-        variant: "secondary",
-        name: "Liana Dutti",
-        message: "Good news from sale department",
-        time: "9:09",
-    },
-];
-
+import { messages } from '../config'
 function MailMenu() {
     // local
     let [mailMenu, setMailMenu] = useState(null);

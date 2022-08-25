@@ -48,6 +48,7 @@ export const LinkTabsTab = ({ handleClose, type, areaSpecificData }) => {
                 handleClose(false)
             }
         } catch (e) {
+            console.log('linkTabsTab', e)
             errorToast()
         }
     }

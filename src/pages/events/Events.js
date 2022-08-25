@@ -9,11 +9,14 @@ import PopupDialog from '../../components/PopupDialog/PopupDialog'
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AGTable from '../../components/Tables/AGTable'
+import MODAL_STATES from '../../data/modal_states'
+import BACK_ROUTES from '../../data/back_routes'
+import MODAL_TYPES from '../../data/modal_types'
 
 function Events() {
     //dialog
     const [open, setOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
+    const [dialogType, setDialogType] = useState(MODAL_STATES.ADD);
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
@@ -21,11 +24,11 @@ function Events() {
     const openDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('edit')
+            setDialogType(MODAL_STATES.EDIT)
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType('add')
+            setDialogType(MODAL_STATES.ADD)
         }
         setOpen(!open)
     }
@@ -40,8 +43,8 @@ function Events() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'events'} action={openDialog} />
-            <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={'events'} type={dialogType} />
+            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.EVENTS} action={openDialog} />
+            <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.EVENTS} type={dialogType} />
         </Box>
     )
 }

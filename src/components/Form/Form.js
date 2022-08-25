@@ -1,20 +1,24 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
-import { TextField, Select, Autocomplete, TimePicker as MuiRffTimePicker, DatePicker, Switches } from "mui-rff";
-import { MenuItem, Checkbox as MuiCheckbox, Chip } from "@material-ui/core";
-import { Box, Button, Grid, TextareaAutosize } from "@mui/material";
+import { TextField } from "mui-rff";
+import { Box, Button, Grid } from "@mui/material";
 import GoogleAutocomplete from "../GoogleAutocomplete/GoogleAutocomplete";
-import MapPick from "../MapPicker.js/MapPick";
 import useStyles from "./styles";
-import TimePicker from '../NewTimePicker/TimePicker'
+import TimesPicker from '../NewTimePicker/TimePicker'
 import term from "../../terms";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useJsApiLoader } from '@react-google-maps/api';
 import ImagePicker from "../imagePicker/ImagePicker";
-import DraggableList from '../DraggableList/DraggableList'
-import { getTagColor, formatObjects } from './FormFunctions'
-
+import { formatObjects } from './FormFunctions'
+import Divider from "./FormFields/Divider";
+import Text from './FormFields/Text'
+import Picker from "./FormFields/Picker";
+import DatePicker from "./FormFields/DatePicker";
+import TimePicker from './FormFields/TimePicker'
+import TagsPicker from "./FormFields/TagsPicker";
+import Checkbox from "./FormFields/Checkbox";
+import Map from "./FormFields/Map";
+import SizableText from "./FormFields/SizableText";
+import DraggableListWithImages from "./FormFields/DraggableListWithImages";
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
 
@@ -55,141 +59,43 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                   {fields.map(({ type, field, title, size }) => (
                     <Grid key={field} item xs={12} md={size === 'small' ? 3 : size === 'medium' ? 6 : 12} className={type === 'googleAutocomplete' ? '' : classes.item}>
                       {type === "textfield" && (
-                        <TextField
-                          label={title}
-                          name={field}
-                        />
-                      )}
-                      {type === 'divider' && (
-                        <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(0,0,0,0.3' }}></div>
-                      )}
-                      {type === 'text' && (
-                        <p style={{ margin: 0, fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{title}</p>
+                        <TextField label={title} name={field} />
                       )}
                       {type === "number" && (
-                        <TextField
-                          label={title}
-                          name={field}
-                          type={'number'}
-                        />
+                        <TextField label={title} name={field} type={'number'} />
+                      )}
+                      {type === 'divider' && (
+                        <Divider />
+                      )}
+                      {type === 'text' && (
+                        <Text title={title} />
                       )}
                       {type === "picker" && (
-                        <Select label={title} name={field} required={true}>
-                          {options && options[field].map((item) => (
-                            <MenuItem key={item.value} value={item.value}>{term(item.name)}</MenuItem>
-                          ))}
-                        </Select>
+                        <Picker title={title} field={field} options={options} />
                       )}
                       {type === 'datePicker' &&
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                          <DatePicker
-                            label={title}
-                            name={field}
-                            inputFormat={'dd/MM/yyyy'}
-                          />
-                        </LocalizationProvider >
+                        <DatePicker title={title} field={field} />
                       }
                       {type === 'timePicker' &&
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                          <MuiRffTimePicker
-                            label={title}
-                            name={field}
-                            closeOnSelect={true}
-                            ampm={false}
-                          />
-                        </LocalizationProvider>
+                        <TimePicker title={title} field={field} />
                       }
                       {type === "tagsPicker" && options[field].length > 0 && (
-                        <Autocomplete
-                          label={title}
-                          name={field}
-                          multiple={true}
-                          variant="outlined"
-                          options={
-                            options[field].map((item) => ({
-                              label: item.title,
-                              value: item.id,
-                            }))
-                          }
-                          isOptionEqualToValue={(option, value) => {
-                            if (option.value === value.value) {
-                              return true
-                            } else {
-                              return false
-                            }
-                          }}
-                          renderTags={(tagValue, getTagProps, y) => {
-                            return tagValue.map((option, index) => {
-                              return (
-                                <Chip
-                                  style={{
-                                    border: index === 0 ? `2px solid #01A1FC` : `1px solid grey`,
-                                    padding: '10px',
-                                    backgroundColor: `${getTagColor(option.label)}`,
-                                  }}
-                                  {...getTagProps({ index })}
-                                  label={option.label}
-                                />
-                              )
-                            });
-                          }}
-                          getOptionValue={(option) => option.value}
-                          getOptionLabel={(option) => option.label}
-                          disableCloseOnSelect={true}
-                          renderOption={(props, option, { selected }) => (
-                            <li {...props}>
-                              <MuiCheckbox
-                                style={{ marginRight: 8 }}
-                                checked={selected}
-                              />
-                              {option.label}
-                            </li>
-                          )}
-                        />
+                        <TagsPicker field={field} title={title} options={options} />
                       )}
                       {type === "checkbox" && (
-                        <Switches
-                          key={field}
-                          name={field}
-                          required={true}
-                          data={{ label: title, value: true }}
-                        />
+                        <Checkbox field={field} title={title} />
                       )}
                       {type === "googleAutocomplete" && (
-                        <GoogleAutocomplete
-                          setFatherValue={setExternalValues}
-                          text={term('or_search_on_map')}
-                        />
+                        <GoogleAutocomplete setFatherValue={setExternalValues} text={term('or_search_on_map')} />
                       )}
                       {type === "MapPicker" && (
-                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                          <MapPick
-                            setFatherValue={setExternalValues}
-                            point={data["point"]}
-                            containerStyle={{ width: '90vw', height: '50vh' }}
-                            isLoaded={isLoaded}
-                          />
-                        </div>
+                        <Map field={field} setExternalValues={setExternalValues} data={data} isLoaded={isLoaded} />
                       )}
                       {type === 'timesPicker' && (
-                        <TimePicker
-                          title={title}
-                          realData={times}
-                          setTimes={(newTimes) => {
-                            setTimes(newTimes)
-                          }}
-                        />
+                        <TimesPicker title={title} realData={times} setTimes={(newTimes) => { setTimes(newTimes) }} />
                       )}
                       {type === 'textAreaSizeable' && (
-                        <TextareaAutosize
-                          aria-label={field}
-                          style={{ height: '200px', fontSize: '16px', paddingTop: '10px', overflowY: 'hidden' }}
-                          className={classes.resizeTextField}
-                          placeholder={term('description')}
-                          value={resizableText}
-                          minRows={3}
-                          onChange={(e) => { setResizableText(e.target.value) }}
-                        />
+                        <SizableText field={field} classes={classes} resizableText={resizableText} setResizableText={setResizableText} />
                       )}
                       {type === 'imagePicker' && (
                         <ImagePicker
@@ -200,116 +106,34 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                         />
                       )}
                       {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && values[field] && (
-                        <>
-                          <ImagePicker
-                            title={IMAGE_PICKER_TITLE}
-                            data={
-                              {
-                                ids: values[field].filter(value => options[field].find(pic => pic?.id === value && pic.galleryFileIds.length > 0)),
-                                pictures: options[field]
-                                  .filter(item => {
-                                    return item.galleryFileIds !== null && item.galleryFileIds !== undefined && item.galleryFileIds.length > 0
-                                  })
-                                  .map(item => {
-                                    return (
-                                      {
-                                        id: item?.id,
-                                        url: item?.gallery ? item.gallery[0]?.file?.url : null,
-                                        pictureId: item?.gallery ? item.gallery[0].fileId : null
-                                      }
-                                    )
-                                  })
-                              }
-                            }
-                            setChosenImage={setChosenImage}
-                            chosenImage={chosenImage}
-                          />
-                          <Autocomplete
-                            label={title}
-                            name={field}
-                            multiple={true}
-                            variant="outlined"
-                            isOptionEqualToValue={(option, value) => {
-                              if (option.value === value.value) {
-                                return true
-                              } else {
-                                return false
-                              }
-                            }}
-                            options={
-                              options[field].map((item) => {
-                                return ({
-                                  key: item.id,
-                                  label: item.title,
-                                  value: item.id,
-                                })
-                              })
-                            }
-                            renderTags={(tagValue, getTagProps, y) => {
-                              return tagValue.map((option, index) => {
-                                return (
-                                  <Chip
-                                    style={{
-                                      border: index === 0 ? `2px solid #01A1FC` : `1px solid grey`,
-                                      padding: '10px',
-                                      backgroundColor: `${getTagColor(option.label)}`,
-                                    }}
-                                    {...getTagProps({ index })}
-                                    label={option.label}
-                                  />
-                                )
-                              });
-                            }}
-                            getOptionValue={(option) => option.value}
-                            getOptionLabel={(option) => option.label}
-                            disableCloseOnSelect={true}
-                            renderOption={(props, option, { selected }) => (
-                              <li {...props}>
-                                <MuiCheckbox
-                                  style={{ marginRight: 8 }}
-                                  checked={selected}
-                                  key={option.label}
-                                />
-                                {option.label}
-                              </li>
-                            )}
-                          />
-                          <DraggableList
-                            items={values[field]}
-                            names={options[field]}
-                            setItemsToSend={setItemsToSend}
-                            itemsToSend={itemsToSend}
-                          />
-                        </>
-                      )
-                      }
+                        <DraggableListWithImages
+                          IMAGE_PICKER_TITLE={IMAGE_PICKER_TITLE}
+                          values={values}
+                          field={field}
+                          title={title}
+                          options={options}
+                          chosenImage={chosenImage}
+                          setChosenImage={setChosenImage}
+                          setItemsToSend={setItemsToSend}
+                          itemsToSend={itemsToSend}
+                        />
+                      )}
                     </Grid>
                   ))}
                 </Grid>
-                {isPartOfStepper &&
-                  <Box className={
-                    orientation === 'rtl' ?
-                      classes.submitButtonLeft : classes.submitButtonRight
-                  }>
-                    <Button variant="contained" type="submit">{term('next')}</Button>
-                  </Box>
-                }
-                {!isPartOfStepper &&
-                  <Box className={
-                    orientation === 'rtl' ?
-                      classes.submitButtonLeft : classes.submitButtonRight
-                  }>
-                    <Button variant="contained" type="submit">{term('submit')}</Button>
-                  </Box>
-                }
+                <Box className={
+                  orientation === 'rtl' ?
+                    classes.submitButtonLeft : classes.submitButtonRight
+                }>
+                  <Button variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
+                </Box>
               </form >
             )
-          }
-          }
+          }}
         />
       }
     </>
-  );
-});
+  )
+})
 
 export default MyForm;

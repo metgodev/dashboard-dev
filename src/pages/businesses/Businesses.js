@@ -9,10 +9,13 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import PublishOutlinedIcon from '@mui/icons-material/PublishOutlined';
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import AGTable from '../../components/Tables/AGTable'
+import MODAL_STATES from '../../data/modal_states'
+import BACK_ROUTES from '../../data/back_routes'
+import MODAL_TYPES from '../../data/modal_types'
 
 function Businesses() {
     const [open, setOpen] = useState(false);
-    const [dialogType, setDialogType] = useState('add');
+    const [dialogType, setDialogType] = useState(MODAL_STATES.ADD);
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
@@ -20,11 +23,11 @@ function Businesses() {
     const openDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))
-            setDialogType('edit')
+            setDialogType(MODAL_STATES.EDIT)
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType('add')
+            setDialogType(MODAL_STATES.EDIT)
         }
         setOpen(!open)
     }
@@ -40,8 +43,8 @@ function Businesses() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            <AGTable setExportToExcel={setExportToExcel} display={'business'} action={openDialog} />
-            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={'businesess'} type={dialogType} />
+            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.BUSINESS} action={openDialog} />
+            <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.BUSINESS} type={dialogType} />
         </Box>
     )
 }

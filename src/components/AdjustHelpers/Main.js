@@ -1,8 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-
-const sideBarSize = 240;
-const sideBarSmallSize = 100;
+import { sideBarSize, sideBarSmallSize } from '../../data/constants'
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme }) => {

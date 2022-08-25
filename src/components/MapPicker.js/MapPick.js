@@ -3,11 +3,7 @@ import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { sendPositionToInfoWindow } from './MapPickHelpers'
 import toast from 'react-hot-toast';
 import term from '../../terms';
-
-const DEFAULT_LOCATION = { lat: 32.0713, lng: 34.7886 }
-const DEFAULT_ZOOM = 15;
-const { innerWidth: windowWidth, innerHeight: windowHeight } = window
-const DEFAULT_CONTANER_STYLE = { width: windowWidth, height: windowHeight / 2 }
+import { DEFAULT_LOCATION, DEFAULT_ZOOM, DEFAULT_CONTANER_STYLE } from './config';
 
 const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, isLoaded, infoWindow, setInfoWindow, selectedCategory }) => {
 
@@ -45,7 +41,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
     }, [])
 
     const getFormattedAddress = (res) => {
-        return res.results[0].address_components.filter(item => !item.types.includes('country') && !item.types.includes('plus_code') && !item.types.includes('administrative_area_level_2') && !item.types.includes('administrative_area_level_1'))
+        return res.results[0].address_components.filter(item => !item.types.includes('country') && !item.types.includes('plus_code'))
             .map(item => item.long_name).join(', ')
     }
 
@@ -64,6 +60,7 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
                     setFatherValue(prev => ({ ...prev, locationInfo: { ...prev.locationInfo, coordinates: [newLat, newLng] }, locationName: getFormattedAddress(res), address: res.results[0]['formatted_address'] }))
                 }
             } catch (e) {
+                console.log('mapPick', e)
                 errorToast(e)
             }
         }

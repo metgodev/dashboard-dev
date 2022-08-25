@@ -68,7 +68,7 @@ function AddProductsTab({ areaSpecificData, type }) {
             setListOrNewProduct(true)
             dispatch(set_table_changed(type))
         } catch (e) {
-            console.log(e)
+            console.log('addProductsTab', e)
             errorToast()
         }
     }

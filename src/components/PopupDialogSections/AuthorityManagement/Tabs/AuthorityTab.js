@@ -44,7 +44,8 @@ export const AuthorityTab = ({ handleClose, type, }) => {
                 dispatch(set_table_changed(type))
                 handleClose(false)
             }
-        } catch {
+        } catch (e) {
+            console.log('authorityTab', e)
             errorToast()
         }
     }

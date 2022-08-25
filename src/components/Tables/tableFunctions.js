@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import term from '../../terms';
-import client from '../../API/metro';
+import { _patch } from '../../API/service'
 
 export const getRowId = params => {
     return params.data._id;
@@ -10,9 +10,10 @@ export const errorToast = () => toast(term("something_went_wrong"));
 
 export const updateFunction = async (params, display) => {
     try {
-        await client.service(display).patch(params?.data?._id, params?.data)
+        await _patch(display, params?.data?._id, params?.data)
         params.setStatus(params.data.status)
     } catch (e) {
+        console.log('tableFunction', e)
         errorToast()
     }
 }

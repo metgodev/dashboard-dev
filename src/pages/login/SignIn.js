@@ -14,8 +14,10 @@ import { loginWithEmailAndPassword } from "../../API/firebase";
 import { useDispatch } from "react-redux";
 import { set_user } from "../../REDUX/actions/main.actions";
 import { set_user_details } from '../../REDUX/actions/user.actions'
+import LISTENER from "../../data/listener";
+import ROUTES from "../../data/routes";
 
-function SignIn({ setLoggedIn }) {
+function SignIn() {
     let classes = useStyles();
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -29,9 +31,9 @@ function SignIn({ setLoggedIn }) {
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-    const LISTENER_TYPE = 'keydown'
+    const LISTENER_TYPE = LISTENER.TYPES.KEYDOWN
     const LISTENER_FUNCTION = (e) => {
-        if (e.key === 'Enter' && email.length !== 0 && password.length !== 0) {
+        if (e.key === LISTENER.KEYS.ENTER && email.length !== 0 && password.length !== 0) {
             loginUser()
         }
     }
@@ -59,12 +61,17 @@ function SignIn({ setLoggedIn }) {
                     }
                     dispatch(set_user(userDetails));
                     dispatch(set_user_details(res))
-                    setLoggedIn(true)
-                    navigate('/dashboard')
+                    navigate(ROUTES.DASHBOARD)
                     setIsLoading(false);
                 }
-            }).catch((e) => errorToast())
-        }).catch((e) => errorToast())
+            }).catch((e) => {
+                console.log('signin', e)
+                errorToast()
+            })
+        }).catch((e) => {
+            console.log('signin', e)
+            errorToast()
+        })
     }
 
     useEffect(() => {

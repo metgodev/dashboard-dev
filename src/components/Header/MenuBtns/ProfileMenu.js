@@ -11,7 +11,10 @@ import { Typography } from "../../Wrappers/Wrappers";
 import client from "../../../API/metro";
 import { useNavigate } from "react-router";
 import term from "../../../terms";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { set_user_details } from "../../../REDUX/actions/user.actions";
+import { AVATAR_URL } from "../config";
+import ROUTES from '../../../data/routes'
 
 function ProfileMenu() {
     // local
@@ -20,13 +23,15 @@ function ProfileMenu() {
     const { user } = useSelector(state => state.mainRememberReducer)
 
     let classes = useStyles();
-    let avatar = `https://ui-avatars.com/api/?name=${user.fn + " " + user.ln}`
+    let avatar = `${AVATAR_URL + user.fn}`
     let navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const logout = () => {
+        dispatch(set_user_details({}))
         client.logout();
         window.localStorage.clear()
-        navigate('/login')
+        navigate(ROUTES.LOGIN)
     }
 
     return (

@@ -60,7 +60,6 @@ const useGetService = (url, name, query, area, reload) => {
                 dispatch({ type: 'fetched', payload: res.data })
             } catch (error) {
                 if (cancelRequest.current) return
-
                 dispatch({ type: 'error', payload: error })
             }
         }

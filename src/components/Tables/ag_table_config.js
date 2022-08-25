@@ -1,3 +1,11 @@
+const DATA_LIMIT = 1
+
+export const requestParams = (area) => {
+    return (
+        { areaId: area.id.toString(), $limit: DATA_LIMIT }
+    )
+}
+
 export const AG_GRID_LOCALE_HE = {
     // Set Filter
     // selectAll: '(Select All)',

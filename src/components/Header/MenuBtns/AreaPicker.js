@@ -4,14 +4,17 @@ import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch, useSelector } from "react-redux";
 import { set_area } from "../../../REDUX/actions/main.actions";
 import { set_app_data } from "../../../REDUX/actions/data.actions";
-import client from "../../../API/metro";
 // styles
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
-
+//API
 import useGetService from "../../../hooks/useGetService";
+//Permissions
 import GetPermissions from "../../../hooks/GetPermissions";
+//Data
+import BACK_ROUTES from "../../../data/back_routes";
+import CACHED_DATA_ROUTES from "../../../data/cached_data_routes";
 
 function AreaMenu() {
     //global 
@@ -24,7 +27,7 @@ function AreaMenu() {
 
     let classes = useStyles();
 
-    const areas = useGetService("area", "area")
+    const areas = useGetService(BACK_ROUTES.AREA, CACHED_DATA_ROUTES.AREA)
 
     const user = useSelector(s => s.userReducer)
     const permissions = GetPermissions(user)
@@ -33,7 +36,7 @@ function AreaMenu() {
         (async () => {
             setMenuItem([])
             if (Object.keys(currentArea).length) {
-                setArea({ name: currentArea["name"], id: currentArea["id"] })
+                setArea({ name: currentArea.name, id: currentArea.id })
             }
         })();
         if (areas.data.length > 0) {

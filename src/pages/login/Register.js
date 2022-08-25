@@ -12,6 +12,8 @@ import { registerUserWithEmailAndPassword } from '../../API/firebase';
 import { set_user_details } from '../../REDUX/actions/user.actions'
 // styles
 import useStyles from "./styles";
+import LISTENER from '../../data/listener';
+import ROUTES from '../../data/routes';
 
 function Register({ setLoggedIn }) {
     let dispatch = useDispatch()
@@ -29,9 +31,9 @@ function Register({ setLoggedIn }) {
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-    const LISTENER_TYPE = 'keydown'
+    const LISTENER_TYPE = LISTENER.TYPES.KEYDOWN
     const LISTENER_FUNCTION = (e) => {
-        if (e.key === 'Enter' && email.length !== 0 && password.length !== 0 && firstName.length !== 0 && lastName.length !== 0) {
+        if (e.key === LISTENER.KEYS.ENTER && email.length !== 0 && password.length !== 0 && firstName.length !== 0 && lastName.length !== 0) {
             registerUser()
         }
     }
@@ -61,12 +63,17 @@ function Register({ setLoggedIn }) {
                     }
                     dispatch(set_user(user));
                     dispatch(set_user_details(res))
-                    setLoggedIn(true)
-                    navigate('/dashboard')
+                    navigate(ROUTES.DASHBOARD)
                     setIsLoading(false);
                 }
-            }).catch(e => errorToast())
-        }).catch(e => errorToast())
+            }).catch(e => {
+                console.log('register', e)
+                errorToast()
+            })
+        }).catch(e => {
+            console.log('register', e)
+            errorToast()
+        })
     }
 
     const errorToast = () => toast(term("something_went_wrong"));

@@ -82,6 +82,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 handleClose(false)
             }
         } catch (e) {
+            console.log('modifyEventTab', e)
             errorToast()
         }
     }

@@ -12,9 +12,11 @@ import MetroStats from "../../components/MetroStats/MetroStats";
 import Download from "../../components/Download/Download";
 //Service
 import useGetService from '../../hooks/useGetService'
-//Helper functions
+//Helper
 import { headerBtns, requestParams } from "./dashboardHelpers";
 import { sortDataForMap } from "../maps/mapsHelpers";
+import BACK_ROUTES from '../../data/back_routes'
+import CACHED_DATA_ROUTES from '../../data/cached_data_routes'
 
 export default function Dashboard() {
 
@@ -26,10 +28,10 @@ export default function Dashboard() {
   })
   const [tagCategoriesData, setTagCategoriesData] = useState(null)
 
-  const businesses = useGetService("business", "businessDashMap", requestParams)
-  const events = useGetService("events", "eventsDashMap", requestParams)
-  const points = useGetService("pois", "pointsDashMap", requestParams)
-  const tracks = useGetService("tracks", "tracksDashMap", requestParams)
+  const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.DASH_MAP_BUSINESSES, requestParams)
+  const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.DASH_MAP_EVENTS, requestParams)
+  const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.DASH_MAP_POINTS, requestParams)
+  const tracks = useGetService(BACK_ROUTES.TRACKS, CACHED_DATA_ROUTES.DASH_MAP_TRACKS, requestParams)
 
   useEffect(() => {
     if (!businesses.loading && !events.loading && !points.loading && !tracks.loading) {

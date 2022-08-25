@@ -1,98 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { TimePicker } from "@material-ui/pickers";
-import { ThemeProvider } from "@material-ui/styles";
-import { useTheme } from "@material-ui/styles";
-import { ar, he } from "date-fns/locale";
-import { useSelector } from 'react-redux';
-import { Checkbox } from '@material-ui/core';
-import { Box } from '@mui/system';
-//styles
+import React, { useEffect, useState } from 'react'
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import { Button, Collapse } from '@mui/material';
+import { placeholderData } from './config'
 import useStyles from "./styles";
-// Component
-import Widget from "../Widget/Widget";
-import term from '../../terms';
+import SingleDayTime from './SingleDayTime';
 
+const TimePicker = ({ title, realData, setTimes }) => {
 
-export default function TimeSelector({ warp, label, type, times, timeref, setTimes, setTime, removeDay, setChecked, checked, field }) {
-    let openingTime = times?.start ? parseInt(times.start) : 8
-    let closingTime = times?.end ? parseInt(times.end) : 16
+    const [open, setOpen] = useState(false)
+    const [data, setData] = useState({})
 
-    const [selectedDate, handleDateChange] = useState(new Date().setHours(type === 1 ? openingTime : closingTime, 0, 0));
-    const { lang } = useSelector(state => state.mainRememberReducer)
-    let classes = useStyles();
-    let theme = useTheme();
-
-    const calendarLang = () => {
-        switch (lang) {
-            case 'ar':
-                return ar;
-            case 'he':
-                return he;
-            default:
-                break;
-        }
-    }
-    const Warp = warp ? Widget : Box;
-
+    const classes = useStyles()
 
     useEffect(() => {
-        let hours = new Date(selectedDate).toLocaleTimeString([], {
-            hourCycle: 'h23',
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-        if (setTimes) {
-            setTimes(hours, timeref, type)
+        if (realData !== undefined && realData !== null && Object.keys(realData).length > 0) {
+            const realDataWithOpenOrClosed = { ...realData }
+            for (let i = 0; i < Object.keys(realDataWithOpenOrClosed).length; i++) {
+                if (realDataWithOpenOrClosed[Object.keys(realDataWithOpenOrClosed)[i]].open === undefined) {
+                    realDataWithOpenOrClosed[Object.keys(realDataWithOpenOrClosed)[i]].open = true
+                }
+            }
+            setData(realData)
         } else {
-            setTime(hours, field)
+            setData(placeholderData)
         }
-    }, [selectedDate])
+    }, [realData])
 
-    useEffect(() => {
-        if (!setTimes) return
-        handleDateChange(new Date().setHours(type === 1 ? openingTime : closingTime, 0, 0))
-    }, [checked])
-
-    const handleCheck = (e, timeref) => {
-        if (!e.target.checked) {
-            setChecked([...checked, timeref]);
-        } else {
-            setChecked(checked.filter(time => time !== timeref));
-        }
-    }
     return (
-        <Warp title={term('time')} uppertitle className={classes.card} >
-            <ThemeProvider theme={theme}>
-                <MuiPickersUtilsProvider locale={calendarLang()} utils={DateFnsUtils}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <TimePicker
-                            style={{ width: '100%' }}
-                            ampm={false}
-                            inputVariant="outlined"
-                            autoOk={true}
-                            todayLabel={term('today')}
-                            label={label || term("sunday_opening")}
-                            value={selectedDate}
-                            minutesStep={5}
-                            okLabel={term('confirm')}
-                            cancelLabel={term('cancel')}
-                            onChange={handleDateChange}
-                            disabled={checked?.includes(timeref) || false}
-                            error={(!times || !times.start || !times.end) && checked?.includes(timeref) ? true : false}
-                        />
-                        {type === 2 && <Checkbox
-                            onClick={(e) => {
-                                removeDay(timeref, e)
-                                handleCheck(e, timeref)
-                            }}
-                            defaultChecked={true}
-                        />}
-                    </div>
-                </MuiPickersUtilsProvider>
-            </ThemeProvider>
-        </Warp>
-    );
+        <div>
+            <Button variant="outlined" sx={{ color: 'rgba(0,0,0,0.6)', borderColor: 'rgba(0,0,0,0.3)', height: '50px' }} onClick={() => setOpen(prev => !prev)} style={{ width: '100%' }}>
+                {title}
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </Button>
+            <Collapse in={open} orientation="vertical">
+                <div className={classes.container}>
+                    {Object.keys(data).length > 0 && Object.keys(data).map(key => (
+                        <SingleDayTime key={key} day={key} hours={data[key]} setDayData={(newDayData) => {
+                            setTimes({ ...data, [key]: newDayData })
+                        }} />
+                    ))}
+                </div>
+            </Collapse >
+        </div >
+    )
 }
 
+export default TimePicker

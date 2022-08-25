@@ -15,6 +15,8 @@ import useGetService from "../../hooks/useGetService";
 import { requestParams, sortDataForMap } from "./mapsHelpers";
 // styles
 import useStyles from "./styles";
+import BACK_ROUTES from "../../data/back_routes";
+import CACHED_DATA_ROUTES from "../../data/cached_data_routes";
 //CONSTS
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
@@ -32,9 +34,9 @@ const Maps = () => {
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
   //service data
-  const businesses = useGetService("business", "businessDashMap", requestParams)
-  const events = useGetService("events", "eventsDashMap", requestParams)
-  const points = useGetService("pois", "pointsDashMap", requestParams)
+  const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.DASH_MAP_BUSINESSES, requestParams)
+  const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.DASH_MAP_EVENTS, requestParams)
+  const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.DASH_MAP_POINTS, requestParams)
 
   //lifecycle
   useEffect(() => {

@@ -2,6 +2,7 @@ import React from 'react'
 import PageTitle from '../../components/PageTitle/PageTitle'
 import term from '../../terms';
 import giv_tav from '../../Assets/placeholders/give_tav.png'
+
 const Voucher = () => {
     return (
         <div >

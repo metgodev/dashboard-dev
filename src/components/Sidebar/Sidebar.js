@@ -26,6 +26,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.actions";
 import term from "../../terms";
 import GetPermissions from "../../hooks/GetPermissions";
+import LISTENER from "../../data/listener";
 
 const structure = [
     {
@@ -63,10 +64,10 @@ const Sidebar = React.memo(({ location }) => {
     const permissions = GetPermissions(user)
 
     useEffect(() => {
-        window.addEventListener("resize", handleWindowWidthChange);
+        window.addEventListener(LISTENER.TYPES.RESIZE, handleWindowWidthChange);
         handleWindowWidthChange();
         return function cleanup() {
-            window.removeEventListener("resize", handleWindowWidthChange);
+            window.removeEventListener(LISTENER.TYPES.RESIZE, handleWindowWidthChange);
         };
     });
 

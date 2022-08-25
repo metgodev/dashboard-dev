@@ -1,8 +1,7 @@
 import previousSunday from 'date-fns/previousSunday'
 import compareAsc from 'date-fns/compareAsc'
-import isYesterday from 'date-fns/isYesterday'
-import startOfYesterday from 'date-fns/startOfYesterday'
 import term from "../../terms";
+import TIME_PERIODS from '../../data/time_periods';
 
 
 export const getNumberOfEntities = (timePeriod, data) => {
@@ -11,7 +10,7 @@ export const getNumberOfEntities = (timePeriod, data) => {
     const today = new Date()
 
     switch (timePeriod) {
-        case 'daily':
+        case TIME_PERIODS.DAILY:
             number = data.filter(item => {
                 const date = new Date(item.createdAt)
                 return (
@@ -21,7 +20,7 @@ export const getNumberOfEntities = (timePeriod, data) => {
                 )
             }).length
             break;
-        case 'weekly':
+        case TIME_PERIODS.WEEKLY:
             number = data.filter(item => {
                 const date = new Date(item.createdAt)
                 if (today.getDay() === 0) {
@@ -36,7 +35,7 @@ export const getNumberOfEntities = (timePeriod, data) => {
                 }
             }).length
             break;
-        case 'monthly':
+        case TIME_PERIODS.MONTHLY:
             number = data.filter(item => {
                 const date = new Date(item.createdAt)
                 return (
@@ -55,13 +54,13 @@ export const getNumberOfEntities = (timePeriod, data) => {
 export const getTextForComparison = (value) => {
     let text = ''
     switch (value) {
-        case 'daily':
+        case TIME_PERIODS.DAILY:
             text = term('added_today')
             break;
-        case 'weekly':
+        case TIME_PERIODS.WEEKLY:
             text = term('added_this_week')
             break;
-        case 'monthly':
+        case TIME_PERIODS.MONTHLY:
             text = term('added_this_month')
             break;
         default:

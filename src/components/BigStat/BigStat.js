@@ -8,16 +8,15 @@ import { getNumberOfEntities, getTextForComparison } from './bigStatHelper'
 import CircularProgress from '@mui/material/CircularProgress';
 // styles
 import useStyles from "./styles";
-
 // components
 import { Typography } from "../Wrappers/Wrappers";
 import Widget from "../Widget/Widget";
-import { array } from "yup";
+import TIME_PERIODS from "../../data/time_periods";
 
 export default function BigStat({ type, data }) {
   let classes = useStyles();
   // local
-  let [value, setValue] = useState("weekly");
+  let [value, setValue] = useState(TIME_PERIODS.WEEKLY);
 
   const useGetNumberOfEntitiesBasedOnTimePeriod = useCallback((timePeriod) => {
     if (data.length === 0) {
@@ -50,8 +49,8 @@ export default function BigStat({ type, data }) {
             }
             className={classes.select}
           >
-            <MenuItem value="weekly">{term('weekly')}</MenuItem>
-            <MenuItem value="monthly">{term('monthly')}</MenuItem>
+            <MenuItem value={TIME_PERIODS.WEEKLY}>{term('weekly')}</MenuItem>
+            <MenuItem value={TIME_PERIODS.MONTHLY}>{term('monthly')}</MenuItem>
           </Select>
         </div>
       }

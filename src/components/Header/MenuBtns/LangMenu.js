@@ -4,14 +4,11 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import { useDispatch } from "react-redux";
 import { set_language } from "../../../REDUX/actions/main.actions";
 import { useNavigate } from 'react-router-dom';
-
+import { languages } from "../config";
 // styles
 import useStyles from "../styles";
 // components
 import { Typography } from "../../Wrappers/Wrappers";
-
-const languages = [{ lang: 'עברית', id: 0, short: 'he' }, { lang: 'English', id: 1, short: 'en' }, { lang: 'عربيه', id: 2, short: 'ar' }]
-
 
 function LangMenu() {
     // local
@@ -50,10 +47,6 @@ function LangMenu() {
                 disablescrolllock={true.toString()}
             >
                 <div className={classes.langMenuUser}>
-                    {/* header */}
-                    {/* <Typography variant="h4" weight="medium">
-                        {term('language')}
-                    </Typography> */}
                     {languages.map(({ lang, id, short }) => (
                         <MenuItem key={id} className={classes.messageNotification}>
                             <Typography color="text" colorBrightness="secondary" onClick={() => changeLanguage(short)}>

@@ -8,8 +8,6 @@ import TagsRenderer from './CellRenderers/TagsRenderer'
 import RelevantToRenderer from './CellRenderers/RelevantToRenderer'
 import { updateStringValue, updateNumberValue } from './ProductsTableHelpers'
 
-export const SERVICE = 'products'
-
 const cellStyle = {
     display: 'flex',
     alignItems: 'center',

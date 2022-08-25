@@ -13,9 +13,11 @@ import Widget from "../Widget/Widget";
 import term from '../../terms';
 import { Box } from '@mui/system';
 import { useEffect } from 'react';
+import LANGUAGES from '../../data/languages';
 
 
 export default function Calendar({ type, warp, setDate, setDateTwo, field, disableHelpers }) {
+
     const [date, changeDate] = useState(new Date());
     const [datetwo, changeDateTwo] = useState(new Date());
     const { lang } = useSelector(state => state.mainRememberReducer)
@@ -24,9 +26,9 @@ export default function Calendar({ type, warp, setDate, setDateTwo, field, disab
 
     const calendarLang = () => {
         switch (lang) {
-            case 'ar':
+            case LANGUAGES.ARABIC:
                 return ar;
-            case 'he':
+            case LANGUAGES.HEBREW:
                 return he;
             default:
                 break;

@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import useStyles from "./styles";
 import { CircularProgress } from '@mui/material';
+import ENTITY_STATUS from '../../data/entity_status';
 
 const stats = {
     'PRIVATE': "error",
@@ -59,9 +60,9 @@ const StatusMenu = (element) => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={() => handleClose('PRIVATE')}>{term('private')}</MenuItem>
-                    <MenuItem onClick={() => handleClose('PUBLIC')}>{term('public')}</MenuItem>
-                    <MenuItem onClick={() => handleClose('PENDING_APPROVAL')}>{term('pending_approval')}</MenuItem>
+                    <MenuItem onClick={() => handleClose(ENTITY_STATUS.PRIVATE)}>{term('private')}</MenuItem>
+                    <MenuItem onClick={() => handleClose(ENTITY_STATUS.PUBLIC)}>{term('public')}</MenuItem>
+                    <MenuItem onClick={() => handleClose(ENTITY_STATUS.PENDING_APPROVAL)}>{term('pending_approval')}</MenuItem>
                 </Menu>
             </div>
             :

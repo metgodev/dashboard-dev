@@ -6,6 +6,8 @@ import term from '../../../../terms'
 import { Picker } from '../../../PopupDialogSections/Businesses/Tabs/HandleBusinessData'
 import { getTagColor } from '../../../Form/FormFunctions'
 import { _patch } from '../../../../API/service';
+import BACK_ROUTES from '../../../../data/back_routes'
+import ENTITY_STATUS from '../../../../data/entity_status'
 
 function RelevantToRenderer(props) {
 
@@ -25,7 +27,7 @@ function RelevantToRenderer(props) {
 
     const handleChange = async () => {
         try {
-            const res = await _patch('products', props.data._id, { relevantTo: values.map(tag => tag.id), status: "PENDING_APPROVAL" })
+            const res = await _patch(BACK_ROUTES.PRODUCTS, props.data._id, { relevantTo: values.map(tag => tag.id), status: ENTITY_STATUS.PENDING_APPROVAL })
             if (res) {
                 const rowNode = props.api.getRowNode(props.node.data._id);
                 rowNode.setData({ ...rowNode.data, relevantTo: values.map(value => value.id) });

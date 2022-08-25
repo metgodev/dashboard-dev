@@ -42,6 +42,7 @@ export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, med
         }
     } catch (e) {
         setLoadingImage(false)
+        console.log('uploadMediaHelper', e)
         errorToast()
     }
 }

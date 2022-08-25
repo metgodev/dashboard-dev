@@ -6,6 +6,10 @@ import useGetService from '../../../../hooks/useGetService'
 import { getTagColor } from '../../../Form/FormFunctions'
 import { _patch } from '../../../../API/service';
 import toast from 'react-hot-toast';
+import BACK_ROUTES from '../../../../data/back_routes';
+import ENTITY_STATUS from '../../../../data/entity_status';
+import CACHED_DATA_ROUTES from '../../../../data/cached_data_routes'
+import MODAL_STATES from '../../../../data/modal_states';
 
 function TagsRenderer(props) {
 
@@ -23,7 +27,7 @@ function TagsRenderer(props) {
             return
         }
         try {
-            const res = await _patch('products', props.data._id, { tagsIds: values.map(tag => tag.value), status: 'PENDING_APPROVAL' })
+            const res = await _patch(BACK_ROUTES.products, props.data._id, { tagsIds: values.map(tag => tag.value), status: ENTITY_STATUS.PENDING_APPROVAL })
             if (res) {
                 const rowNode = props.api.getRowNode(props.node.data._id);
                 let vals = []
@@ -34,13 +38,14 @@ function TagsRenderer(props) {
                 setOpen(false)
             }
         } catch (e) {
-            console.log(e)
+            console.log('tagsRendered', e)
+            errorToast('something_went_wrong')
         }
     }
 
     const errorToast = (val) => toast(term(val));
 
-    const tagCategories = useGetService("tag-categories", "tag-categories", { areaId: props.data.areaId }, props.data.areaId, false)
+    const tagCategories = useGetService(BACK_ROUTES.TAG_CATEGORIES, CACHED_DATA_ROUTES.TAG_CATEGORIES, { areaId: props.data.areaId }, props.data.areaId, false)
 
     useEffect(() => {
         setValues(
@@ -127,7 +132,7 @@ function TagsRenderer(props) {
                                 </li>
                             )}
                         />
-                        <Button variant='contained' onClick={handleChange}>{term('edit')}</Button>
+                        <Button variant='contained' onClick={handleChange}>{term(MODAL_STATES.EDIT)}</Button>
                     </div>
                 </Box>
 

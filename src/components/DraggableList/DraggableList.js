@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import DraggableListItem from './DraggableListItem';
-import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { reorder } from './helpers'
 import useStyles from './styles'
 

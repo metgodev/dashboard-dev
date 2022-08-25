@@ -1,18 +1,26 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
+//MUI
 import { Box } from '@mui/system';
-import { gridOptions, idOptions, ignore } from './ag_table_config';
-import { AgGridReact } from 'ag-grid-react';
+//AG Grid
+import { gridOptions, idOptions, ignore, requestParams } from './ag_table_config';
 import { Cols, Keys } from './TableKeys';
-import { useDispatch, useSelector } from 'react-redux';
-import useGetService from '../../hooks/useGetService';
-import term from '../../terms';
-import { _get } from '../../API/service'
-import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged } from './tableFunctions'
-import toast from 'react-hot-toast';
+import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, } from './tableFunctions'
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
+import { AgGridReact } from 'ag-grid-react';
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import useGetService from '../../hooks/useGetService';
 import { set_tags_table_preferences, set_authorities_table_preferences, set_business_table_preferences, set_events_table_preferences, set_points_table_preferences, set_tracks_table_preferences } from '../../REDUX/actions/main.actions';
+//Helper
+import term from '../../terms';
+import toast from 'react-hot-toast';
+import BACK_ROUTES from '../../data/back_routes';
+import CACHED_DATA_ROUTES from '../../data/cached_data_routes';
+import LISTENER from '../../data/listener';
+//Service
+import { _get } from '../../API/service'
 
 const AGTable = ({ display, action, setExportToExcel }) => {
 
@@ -24,9 +32,8 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     const area = useSelector(s => s.mainRememberReducer.area)
     const preferences = useSelector(s => s.mainRememberReducer[`${display}TablePreferences`])
 
-    let requestParams = { areaId: area.id.toString(), $limit: 1 }
-    let pageData = useGetService(display, display, requestParams, area, false)
-    const authorities = useGetService("authorities", "authorities", { areaId: area.id }, area, false)
+    let pageData = useGetService(display, display, requestParams(area), area, false)
+    const authorities = useGetService(BACK_ROUTES.AUTHORITIES, CACHED_DATA_ROUTES.AUTHORITIES, { areaId: area.id }, area, false)
 
     const [columnDefs, setColumnDefs] = useState([]);
     const [totalNumber, setTotalNumber] = useState(0)
@@ -40,11 +47,11 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     }, [pageData])
 
     useEffect(() => {
-        document.addEventListener('mouseup', dragged)
+        document.addEventListener(LISTENER.TYPES.MOUSEUP, dragged)
         return () => {
             authorities.cancelRequest()
             pageData.cancelRequest()
-            document.removeEventListener('mouseup', dragged)
+            document.removeEventListener(LISTENER.TYPES.MOUSEUP, dragged)
         }
     }, [])
 
@@ -64,22 +71,22 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     async function dragged(e) {
         if (checkIfTablePrefsChanged(e)) {
             switch (display) {
-                case 'authorities':
+                case BACK_ROUTES.AUTHORITIES:
                     dispatch(set_authorities_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
-                case 'tag-categories':
+                case BACK_ROUTES.TAG_CATEGORIES:
                     dispatch(set_tags_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
-                case 'business':
+                case BACK_ROUTES.BUSINESS:
                     dispatch(set_business_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
-                case 'events':
+                case BACK_ROUTES.EVENTS:
                     dispatch(set_events_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
-                case 'pois':
+                case BACK_ROUTES.POINTS:
                     dispatch(set_points_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
-                case 'tracks':
+                case BACK_ROUTES.TRACKS:
                     dispatch(set_tracks_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
             }
@@ -112,6 +119,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             // call the success callback
             params.successCallback(rowsThisPage.data, lastRow);
         } catch (e) {
+            console.log('agTable', e)
             errorToast()
         }
     }
@@ -143,7 +151,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                 <AgGridReact
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
-                        if (display !== 'authorities' && display !== 'tag-categories') {
+                        if (display !== BACK_ROUTES.AUTHORITIES && display !== BACK_ROUTES.TAG_CATEGORIES) {
                             tagInfoToast()
                         }
                         action(event.data)

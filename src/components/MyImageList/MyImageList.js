@@ -2,13 +2,13 @@ import React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import client from '../../API/metro'
 import { Box } from '@mui/material'
 import useStyles from './styles'
 import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../REDUX/actions/main.actions'
 import toast from 'react-hot-toast';
 import term from '../../terms';
+import { _patch } from '../../API/service';
 
 export default function MyImageList({ type, media, tab, setLoadingImage, id, setExternalValues, externalValues }) {
 
@@ -25,12 +25,13 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
                 let newMedia = media.filter(mediaItem => item.item.file._id !== mediaItem.file._id)
                 let ids = newMedia.map((item) => { return { fileId: item.file._id, metadata: { type: item.metadata.type } } })
                 const dataToSend = { galleryFileIds: [...ids], gallery: [...newMedia] }
-                const res = await client.service(tab).patch(id, dataToSend)
+                const res = await _patch(tab, id, dataToSend)
                 if (res) {
                     dispatch(set_table_changed("upload_media"))
                 }
                 setLoadingImage(false)
             } catch (e) {
+                console.log('myImageList', e)
                 errorToast()
                 setLoadingImage(false)
             }

@@ -6,13 +6,14 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers/Wrappers";
 import Dot from "../Dot/Dot";
 import term from "../../terms";
+import TIME_PERIODS from "../../data/time_periods";
 
 
 function BigChartHeader() {
     let classes = useStyles();
 
     //local
-    let [mainChartState, setMainChartState] = useState("monthly");
+    let [mainChartState, setMainChartState] = useState(TIME_PERIODS.MONTHLY);
 
     return (
         <div className={classes.mainChartHeader} >
@@ -57,9 +58,9 @@ function BigChartHeader() {
                 }
                 autoWidth
             >
-                <MenuItem value="daily">{term('daily')}</MenuItem>
-                <MenuItem value="weekly">{term('weekly')}</MenuItem>
-                <MenuItem value="monthly">{term('monthly')}</MenuItem>
+                <MenuItem value={TIME_PERIODS.DAILY}>{term('daily')}</MenuItem>
+                <MenuItem value={TIME_PERIODS.WEEKLY}>{term('weekly')}</MenuItem>
+                <MenuItem value={TIME_PERIODS.MONTHLY}>{term('monthly')}</MenuItem>
             </Select>
         </div>
     )
