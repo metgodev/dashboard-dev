@@ -102,6 +102,11 @@ const active_lexicon = {
         he: 'העתק',
         ar: 'ينسخ',
     },
+    is_anonymous: {
+        en: 'Anonymous',
+        he: 'אנונימי',
+        ar: 'مجهول',
+    },
     duplicate: {
         en: 'Duplicate',
         he: 'שכפל',
@@ -181,6 +186,11 @@ const active_lexicon = {
         en: 'Today',
         he: 'היום',
         ar: 'اليوم',
+    },
+    roles: {
+        en: 'Roles',
+        he: 'תפקידים',
+        ar: 'الأدوار',
     },
     back_home: {
         en: 'Back To Home',
@@ -2222,6 +2232,11 @@ const active_lexicon = {
         he: 'כן',
         ar: 'نعم'
     },
+    metro_member: {
+        en: 'Member',
+        he: 'משתמש',
+        ar: 'مستخدم'
+    },
     please_choose_shipment_type: {
         en: 'Please choose a shipment type',
         he: 'אנא בחר צורת משלוח',
@@ -2297,6 +2312,7 @@ const active_lexicon = {
 let { lang } = JSON.parse(localStorage.getItem('@@remember-mainRememberReducer'))
 
 export default function term(name, default_val, lng = lang || 'he') {
+    if (name === undefined) return ""
     let _name = camelToSnakeCase(name);
     return (_name in active_lexicon ? active_lexicon[_name][lng]
         : (default_val === undefined ? _name

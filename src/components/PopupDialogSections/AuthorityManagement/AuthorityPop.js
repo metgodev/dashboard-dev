@@ -8,7 +8,7 @@ import { AuthorityTab } from './Tabs/AuthorityTab';
 //styles
 import useStyles from "../styles";
 
-const AuthorityPop = ({ handleClose, type, initialData, open }) => {
+const AuthorityPop = ({ handleClose, type }) => {
     const classes = useStyles()
     //local
     const [tab, setTab] = useState(0);
@@ -26,7 +26,7 @@ const AuthorityPop = ({ handleClose, type, initialData, open }) => {
             </Box>
             <Box id="alert-dialog-slide-description" sx={{ height: '80%' }}>
                 <TabPanel value={tab} index={0} style={{ height: '100%' }}>
-                    <AuthorityTab handleClose={handleClose} initialData={initialData} type={type} />
+                    <AuthorityTab handleClose={handleClose} type={type} />
                 </TabPanel>
             </Box>
         </Box >

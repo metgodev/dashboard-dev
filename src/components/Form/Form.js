@@ -4,7 +4,7 @@ import { TextField } from "mui-rff";
 import { Box, Button, Grid } from "@mui/material";
 import GoogleAutocomplete from "../GoogleAutocomplete/GoogleAutocomplete";
 import useStyles from "./styles";
-import TimesPicker from '../NewTimePicker/TimePicker'
+import TimesPicker from '../TimePicker/TimePicker'
 import term from "../../terms";
 import { useJsApiLoader } from '@react-google-maps/api';
 import ImagePicker from "../imagePicker/ImagePicker";

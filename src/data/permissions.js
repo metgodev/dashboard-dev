@@ -5,7 +5,7 @@ const PERMISSIONS = {
         map: true,
         navigationBar: {
             area: false
-        }
+        },
     },
     METRO_AREA_OWNER: {
         role: 'metro area owner'
@@ -36,7 +36,8 @@ const PERMISSIONS = {
         navigationBar: {
             area: true,
         },
-        admin: true
+        admin: true,
+        users: true
     }
 }
 

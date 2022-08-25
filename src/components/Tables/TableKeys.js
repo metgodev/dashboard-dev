@@ -102,6 +102,15 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 filterable: false,
                 field: key,
             }
+        case "roles":
+            return {
+                headerName: term(key),
+                valueFormatter: (params) => {
+                    return term(params?.data?.roles[0]?.roleName.toLowerCase())
+                },
+                filterable: false,
+                field: key,
+            }
         case "startDate":
             return {
                 headerName: term(key),
@@ -192,6 +201,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         case 'open24Hours':
         case 'openOnWeekend':
         case 'free':
+        case 'isAnonymous':
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {

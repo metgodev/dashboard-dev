@@ -5,6 +5,7 @@ const MODAL_TYPES = {
     TRACKS: 'tracks',
     AUTHORITY: 'authority',
     TAGS: 'tags',
-    TAGS_LINK: 'tags_link'
+    TAGS_LINK: 'tags_link',
+    USERS: 'users'
 }
 export default MODAL_TYPES

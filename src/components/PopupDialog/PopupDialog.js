@@ -12,6 +12,7 @@ import TracksPop from '../PopupDialogSections/Tracks/TracksPop';
 import AuthorityPop from '../PopupDialogSections/AuthorityManagement/AuthorityPop';
 import TagPop from '../PopupDialogSections/TagsManagment/TagPop';
 import TagLinkPop from '../PopupDialogSections/TagsManagment/TagLinkPop';
+import UsersPop from '../PopupDialogSections/Users/UsersPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
@@ -67,6 +68,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                     {tabs === MODAL_TYPES.AUTHORITY && <AuthorityPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.TAGS && <TagPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.TAGS_LINK && <TagLinkPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.USERS && <UsersPop open={open} handleClose={handleClose} type={type} />}
                 </DialogContent>
             </Dialog>
         </Box >

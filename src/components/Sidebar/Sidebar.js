@@ -34,6 +34,7 @@ const structure = [
         children: [
             { label: term('manage_area'), link: "/admin/authority" },
             { label: term('manage_tags'), link: "/admin/tagcategories" },
+            { label: term('manage_users'), link: "/admin/users" },
         ],
         permission: 'admin'
     },
@@ -43,7 +44,6 @@ const structure = [
     { id: 4, label: term('points'), link: "/locations", icon: <Locations />, permission: 'locations' },
     { id: 5, label: term('routes'), link: "/routes", icon: <Route />, permission: 'routes' },
     { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, permission: 'vouchers' },
-    // { id: 7, label: term('users'), link: "/users", icon: <People />, },
     { id: 7, label: term('local_campaigns'), link: "/campaign", icon: <CampaignOutlinedIcon />, permission: 'campaign' },
     { id: 8, label: term('map'), link: "/map", icon: <Map />, permission: 'map' },
     { id: 9, type: "divider", },

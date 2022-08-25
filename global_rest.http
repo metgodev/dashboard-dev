@@ -316,3 +316,8 @@ Authorization: {{authorization}}
 GET https://{{hostname}}/roles
 content-type: {{contentType}}
 Authorization: {{authorization}}
+###
+# get users
+GET https://{{hostname}}/users
+content-type: {{contentType}}
+Authorization: {{authorization}}

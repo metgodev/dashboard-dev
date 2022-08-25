@@ -86,6 +86,7 @@ const Root = () => {
                     <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error}><Error /></Protecte>} />
                     <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority}><AuthorityMng /></Protecte>} />
                     <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories}><TagCategoriesMng /></Protecte>} />
+                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />
                 </Routes>
             </Main>
         </Box >
