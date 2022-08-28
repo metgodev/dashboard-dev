@@ -632,6 +632,11 @@ const active_lexicon = {
         he: "תיאור",
         ar: "وصف",
     },
+    please_fill_description: {
+        en: "Please fill the description field",
+        he: "אנא מלא את השדה 'תיאור'",
+        ar: "يرجى ملء حقل الوصف",
+    },
     shipping: {
         en: "Shipping",
         he: "משלוח",
