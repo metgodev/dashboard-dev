@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import useStyles from "../styles";
 import term from '../../../terms';
 import useGetService from '../../../hooks/useGetService';
+import ENTITY_STATUS from '../../../data/entity_status';
 
 const TracksPop = ({ handleClose, type, open }) => {
 
@@ -29,7 +30,7 @@ const TracksPop = ({ handleClose, type, open }) => {
         setTab(newValue);
     };
 
-    const query = { $limit: 1000, areaId: area.id, $select: ['_id', 'name', 'location', 'galleryFileIds'] }
+    const query = { $limit: 1000, areaId: area.id, status: ENTITY_STATUS.PUBLIC, $select: ['_id', 'name', 'location', 'galleryFileIds', 'locationName'] }
 
     const businessData = useGetService('business', 'business-tracks-data', query, area, false)
     const poisData = useGetService('pois', 'pois-tracks-data', query, area, false)
@@ -40,8 +41,8 @@ const TracksPop = ({ handleClose, type, open }) => {
             setPicker(prev => ({
                 ...prev,
                 objectIds: [
-                    ...poisData.data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("points")}` })),
-                    ...businessData.data.map(item => ({ ...item, id: item._id, title: `${item.name}  -  ${term("businesses")}` }))
+                    ...poisData.data.map(item => ({ ...item, id: item._id, title: `${item.name} - ${item.locationName} - ${term("points")}` })),
+                    ...businessData.data.map(item => ({ ...item, id: item._id, title: `${item.name} - ${item.locationName} - ${term("businesses")}` }))
                 ],
                 pois: poisData.data.map(item => item._id),
                 business: businessData.data.map(item => item._id)

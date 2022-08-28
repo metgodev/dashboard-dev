@@ -30,5 +30,7 @@ export const Picker = {
         { value: 'HALF_DAY', name: term('half_a_day') },
         { value: 'FULL_DAY', name: term('full_day') },
         { value: '2_DAYS_AND_ABOVE', name: term('more_than_two_days') },
-    ]
+    ],
+    pois: [],
+    business: [],
 };

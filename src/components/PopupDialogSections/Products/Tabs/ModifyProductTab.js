@@ -10,6 +10,8 @@ import { validate } from './Validations'
 import client from '../../../../API/metro'
 import { set_table_changed } from '../../../../REDUX/actions/main.actions';
 import BACK_ROUTES from '../../../../data/back_routes';
+import toast from 'react-hot-toast';
+import term from '../../../../terms';
 
 function ModifyProductTab({ areaSpecificData, handleClose }) {
 
@@ -56,8 +58,11 @@ function ModifyProductTab({ areaSpecificData, handleClose }) {
             handleClose(false)
         } catch (e) {
             console.log(e)
+            errorToast()
         }
     }
+
+    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Box className={classes.container}>
