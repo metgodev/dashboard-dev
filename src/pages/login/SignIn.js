@@ -16,6 +16,7 @@ import { set_user_details } from '../../REDUX/actions/user.actions'
 import LISTENER from "../../data/listener";
 import ROUTES from "../../data/routes";
 import Toast from "../../utils/useToast";
+import ERRORS from "../../data/errors";
 
 function SignIn() {
     let classes = useStyles();
@@ -44,13 +45,13 @@ function SignIn() {
         loginWithEmailAndPassword(email, password).then(res => {
             if (!res?.user) {
                 setIsLoading(false)
-                Toast("please_make_sure_that_your_details_are_correct")
+                Toast(ERRORS.WRONG_DETAILS)
                 return
             }
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
                     setError(res.error)
-                    Toast("please_make_sure_that_your_details_are_correct")
+                    Toast(ERRORS.WRONG_DETAILS)
                 } else {
                     let userDetails = {
                         e: res.email,

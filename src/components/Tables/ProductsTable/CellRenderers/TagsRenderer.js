@@ -10,6 +10,7 @@ import ENTITY_STATUS from '../../../../data/entity_status';
 import CACHED_DATA_ROUTES from '../../../../data/cached_data_routes'
 import MODAL_STATES from '../../../../data/modal_states';
 import Toast from '../../../../utils/useToast';
+import ERRORS from '../../../../data/errors';
 
 function TagsRenderer(props) {
 
@@ -19,7 +20,7 @@ function TagsRenderer(props) {
 
     const handleChange = async () => {
         if (values.length < 1) {
-            Toast('please_choose_at_least_one_tag')
+            Toast(ERRORS.ONE_TAG)
             return
         }
         if (values.length > 5) {

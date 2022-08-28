@@ -2,10 +2,26 @@ const PERMISSIONS = {
     METRO_MEMBER: {
         main: true,
         dashboard: true,
+        verification: true,
+        business: true,
+        events: true,
+        locations: true,
+        routes: true,
+        vouchers: true,
+        users: false,
+        campaign: false,
         map: true,
+        support: true,
+        faq: true,
+        error: true,
+        authority: false,
+        tagcategories: false,
         navigationBar: {
-            area: false
+            area: false,
         },
+        admin: false,
+        users: false,
+        products: false
     },
     METRO_AREA_OWNER: {
         role: 'metro area owner'

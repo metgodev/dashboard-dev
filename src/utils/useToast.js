@@ -1,12 +1,13 @@
 import toast from "react-hot-toast";
 import term from "../terms";
+import ERRORS from "../data/errors";
 
-const Toast = (message, style, term) => {
+const Toast = (message, style, isTerm) => {
     if (message === undefined) {
-        toast(term('something_went_wrong'), style)
+        toast(term(ERRORS.GENERAL), style)
         return
     }
-    else if (term === false) {
+    else if (isTerm === false) {
         toast(message, style)
         return
     }

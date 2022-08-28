@@ -20,6 +20,7 @@ import Map from "./FormFields/Map";
 import SizableText from "./FormFields/SizableText";
 import DraggableListWithImages from "./FormFields/DraggableListWithImages";
 import Toast from "../../utils/useToast";
+import ERRORS from "../../data/errors";
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -44,7 +45,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
 
   const formatValuesToSend = (values) => {
     if (fields.description !== null && resizableText.length < 1) {
-      Toast('please_fill_description')
+      Toast(ERRORS.EMPTY_DESCRIPTION)
       return
     }
     const formattedItemsToSend = formatObjects(itemsToSend, options)

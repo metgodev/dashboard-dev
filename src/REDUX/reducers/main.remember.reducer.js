@@ -8,6 +8,7 @@ import {
     SET_BUSINESS_TABLE_PREFERENCES,
     SET_EVENTS_TABLE_PREFERENCES,
     SET_POINTS_TABLE_PREFERENCES,
+    SET_PRODUCTS_TABLE_PREFERENCES,
     SET_TRACKS_TABLE_PREFERENCES
 } from "../actions/main.actions";
 
@@ -22,6 +23,7 @@ let rememberState = {
     eventsTablePreferences: [],
     poisTablePreferences: [],
     tracksTablePreferences: [],
+    productsTablePreferences: [],
 }
 
 //initial remember 
@@ -69,6 +71,10 @@ export default (state = rememberState, action) => {
         case SET_TRACKS_TABLE_PREFERENCES:
             return {
                 ...state, tracksTablePreferences: action.payload
+            }
+        case SET_PRODUCTS_TABLE_PREFERENCES:
+            return {
+                ...state, productsTablePreferences: action.payload
             }
         default:
             return state

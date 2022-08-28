@@ -14,6 +14,7 @@ import useStyles from "./styles";
 import LISTENER from '../../data/listener';
 import ROUTES from '../../data/routes';
 import Toast from '../../utils/useToast';
+import ERRORS from '../../data/errors';
 
 function Register({ setLoggedIn }) {
     let dispatch = useDispatch()
@@ -48,13 +49,13 @@ function Register({ setLoggedIn }) {
 
     const registerUser = async () => {
         if (password.length < 6) {
-            Toast('password_must_be_at_least_6_characters_long_helper')
+            Toast(ERRORS.SIX_CHARACTERS_PASSWORD)
             return
         }
         setIsLoading(true)
         registerUserWithEmailAndPassword(email, password).then(res => {
             if (res === undefined) {
-                Toast('email_is_invalid_or_taken')
+                Toast(ERRORS.INVALID_EMAIL)
                 setIsLoading(false);
                 return
             }

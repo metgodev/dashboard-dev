@@ -1,6 +1,7 @@
 import { _patch } from "../../../API/service"
 import BACK_ROUTES from "../../../data/back_routes";
 import ENTITY_STATUS from "../../../data/entity_status";
+import ERRORS from "../../../data/errors";
 import Toast from "../../../utils/useToast";
 
 export const updateStringValue = async (id, field, params) => {
@@ -26,7 +27,7 @@ export const updateStringValue = async (id, field, params) => {
 export const updateNumberValue = async (id, field, params) => {
     try {
         if (isNaN(parseInt(params.newValue))) {
-            Toast('please_enter_a_valid_number')
+            Toast(ERRORS.INVALID_NUMBER)
             return false
         }
         const res = await _patch(BACK_ROUTES.PRODUCTS, id, { [field]: params.newValue, status: ENTITY_STATUS.PENDING_APPROVAL })

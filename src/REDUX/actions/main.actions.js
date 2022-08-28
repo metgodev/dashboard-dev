@@ -16,9 +16,14 @@ export const SET_BUSINESS_TABLE_PREFERENCES = 'SET_BUSINESS_TABLE_PREFERENCES'
 export const SET_EVENTS_TABLE_PREFERENCES = 'SET_EVENTS_TABLE_PREFERENCES'
 export const SET_POINTS_TABLE_PREFERENCES = 'SET_POINTS_TABLE_PREFERENCES'
 export const SET_TRACKS_TABLE_PREFERENCES = 'SET_TRACKS_TABLE_PREFERENCES'
+export const SET_PRODUCTS_TABLE_PREFERENCES = 'SET_PRODUCTS_TABLE_PREFERENCES'
 
 export const set_tracks_table_preferences = (value) => ({
     type: SET_TRACKS_TABLE_PREFERENCES,
+    payload: value
+})
+export const set_products_table_preferences = (value) => ({
+    type: SET_PRODUCTS_TABLE_PREFERENCES,
     payload: value
 })
 export const set_points_table_preferences = (value) => ({

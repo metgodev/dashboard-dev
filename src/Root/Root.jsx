@@ -60,7 +60,7 @@ const Root = () => {
         })()
     }, [])
 
-    const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location]())
+    const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location])
 
     return (
         <Box className={classes.Router}>

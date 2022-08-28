@@ -12,7 +12,7 @@ import { AgGridReact } from 'ag-grid-react';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import useGetService from '../../hooks/useGetService';
-import { set_tags_table_preferences, set_authorities_table_preferences, set_business_table_preferences, set_events_table_preferences, set_points_table_preferences, set_tracks_table_preferences } from '../../REDUX/actions/main.actions';
+import { set_tags_table_preferences, set_authorities_table_preferences, set_business_table_preferences, set_events_table_preferences, set_points_table_preferences, set_tracks_table_preferences, set_products_table_preferences } from '../../REDUX/actions/main.actions';
 //Helper
 import term from '../../terms';
 import BACK_ROUTES from '../../data/back_routes';
@@ -21,6 +21,7 @@ import LISTENER from '../../data/listener';
 import Toast from '../../utils/useToast'
 //Service
 import { _get } from '../../API/service'
+import ERRORS from '../../data/errors';
 
 const AGTable = ({ display, action, setExportToExcel }) => {
 
@@ -89,6 +90,9 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                 case BACK_ROUTES.TRACKS:
                     dispatch(set_tracks_table_preferences(gridRef.current.columnApi.getColumnState()))
                     break;
+                case BACK_ROUTES.PRODUCTS:
+                    dispatch(set_products_table_preferences(gridRef.current.columnApi.getColumnState()))
+                    break;
             }
         }
     }
@@ -146,7 +150,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
                         if (display !== BACK_ROUTES.AUTHORITIES && display !== BACK_ROUTES.TAG_CATEGORIES) {
-                            Toast("main_tag", {
+                            Toast(ERRORS.MAIN_TAG, {
                                 duration: 4000,
                                 style: { fontSize: '16px', fontWeight: 'bold' },
                                 position: 'top-center',
