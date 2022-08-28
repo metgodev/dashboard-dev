@@ -7,8 +7,8 @@ import { validate } from './Validations'
 import client from '../../../../API/metro'
 import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 import { GetValuesForForm } from "../../CategoryConfig";
-import toast from 'react-hot-toast';
 import term from "../../../../terms";
+import Toast from '../../../../utils/useToast'
 
 export const LinkTabsTab = ({ handleClose, type, areaSpecificData }) => {
     //global
@@ -49,11 +49,9 @@ export const LinkTabsTab = ({ handleClose, type, areaSpecificData }) => {
             }
         } catch (e) {
             console.log('linkTabsTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Form

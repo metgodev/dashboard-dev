@@ -1,11 +1,7 @@
-import toast from "react-hot-toast"
 import { _patch } from "../../../API/service"
 import BACK_ROUTES from "../../../data/back_routes";
 import ENTITY_STATUS from "../../../data/entity_status";
-import term from "../../../terms";
-
-const tost = (e) => toast(term(e));
-
+import Toast from "../../../utils/useToast";
 
 export const updateStringValue = async (id, field, params) => {
     try {
@@ -22,7 +18,7 @@ export const updateStringValue = async (id, field, params) => {
         }
     } catch (e) {
         console.log('productTableHelpers', e)
-        tost('something_went_wrong')
+        Toast()
         return false
     }
 }
@@ -30,7 +26,7 @@ export const updateStringValue = async (id, field, params) => {
 export const updateNumberValue = async (id, field, params) => {
     try {
         if (isNaN(parseInt(params.newValue))) {
-            tost('please_enter_a_valid_number')
+            Toast('please_enter_a_valid_number')
             return false
         }
         const res = await _patch(BACK_ROUTES.PRODUCTS, id, { [field]: params.newValue, status: ENTITY_STATUS.PENDING_APPROVAL })
@@ -45,7 +41,7 @@ export const updateNumberValue = async (id, field, params) => {
             return false
         }
     } catch (e) {
-        tost('something_went_wrong')
+        Toast()
         return false
     }
 }
@@ -64,7 +60,7 @@ export const updateEnumValue = async (id, field, newValue, params) => {
             return false
         }
     } catch (e) {
-        tost('something_went_wrong')
+        Toast()
         return false
     }
 }

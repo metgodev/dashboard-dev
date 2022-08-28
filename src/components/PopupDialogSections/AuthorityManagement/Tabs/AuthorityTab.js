@@ -7,8 +7,8 @@ import get_orientation from '../../../../utils/get_orientation'
 import { GetFormData } from './HandleAuthorityData'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
-import toast from 'react-hot-toast';
 import term from '../../../../terms';
+import Toast from '../../../../utils/useToast';
 
 export const AuthorityTab = ({ handleClose, type, }) => {
     //global
@@ -46,11 +46,9 @@ export const AuthorityTab = ({ handleClose, type, }) => {
             }
         } catch (e) {
             console.log('authorityTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Form

@@ -26,7 +26,7 @@ import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
 //Helper
 import { Protecte, getHeaderAndSidebar } from './rootHelper.js';
 import ROUTES from '../data/routes';
-import term from '../terms';
+import Toast from '../utils/useToast';
 //Components
 import { Toaster } from 'react-hot-toast';
 //Redux
@@ -36,7 +36,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reAuth } from '../API/metro';
 //Hooks
 import GetPermissions from '../hooks/GetPermissions'
-import { toast } from 'react-hot-toast';
 
 const Root = () => {
 
@@ -56,13 +55,12 @@ const Root = () => {
                 dispatch(set_user_details(user))
             } catch (e) {
                 console.log('root', e)
-                authError()
+                Toast()
             }
         })()
     }, [])
 
-    const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location])
-    const authError = () => toast(term('something_went_wrong'))
+    const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location]())
 
     return (
         <Box className={classes.Router}>

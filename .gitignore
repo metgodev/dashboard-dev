@@ -25,3 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 /dist
 delete.js
+TESTS
+TESTS.txt

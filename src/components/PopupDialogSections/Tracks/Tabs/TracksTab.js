@@ -9,8 +9,7 @@ import get_orientation from '../../../../utils/get_orientation'
 import Form from '../../../Form/Form'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
-import toast from 'react-hot-toast';
-import term from "../../../../terms";
+import Toast from '../../../../utils/useToast';
 
 export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
     //global
@@ -57,11 +56,9 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
             }
         } catch (e) {
             console.log('tracksTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Box className={classes.container}>

@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 //AG Grid
 import { gridOptions, idOptions, ignore, requestParams } from './ag_table_config';
 import { Cols, Keys } from './TableKeys';
-import { getRowId, errorToast, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, } from './tableFunctions'
+import { getRowId, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, } from './tableFunctions'
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
@@ -15,10 +15,10 @@ import useGetService from '../../hooks/useGetService';
 import { set_tags_table_preferences, set_authorities_table_preferences, set_business_table_preferences, set_events_table_preferences, set_points_table_preferences, set_tracks_table_preferences } from '../../REDUX/actions/main.actions';
 //Helper
 import term from '../../terms';
-import toast from 'react-hot-toast';
 import BACK_ROUTES from '../../data/back_routes';
 import CACHED_DATA_ROUTES from '../../data/cached_data_routes';
 import LISTENER from '../../data/listener';
+import Toast from '../../utils/useToast'
 //Service
 import { _get } from '../../API/service'
 
@@ -120,7 +120,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             params.successCallback(rowsThisPage.data, lastRow);
         } catch (e) {
             console.log('agTable', e)
-            errorToast()
+            Toast()
         }
     }
 
@@ -139,12 +139,6 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         }
     }, [pageData.data, gridRef, area, columnDefs])
 
-    const tagInfoToast = () => toast(term("main_tag"), {
-        duration: 4000,
-        style: { fontSize: '16px', fontWeight: 'bold' },
-        position: 'top-center',
-    });
-
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 170, direction: 'rtl' }} >
@@ -152,7 +146,11 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
                         if (display !== BACK_ROUTES.AUTHORITIES && display !== BACK_ROUTES.TAG_CATEGORIES) {
-                            tagInfoToast()
+                            Toast("main_tag", {
+                                duration: 4000,
+                                style: { fontSize: '16px', fontWeight: 'bold' },
+                                position: 'top-center',
+                            })
                         }
                         action(event.data)
                     }}

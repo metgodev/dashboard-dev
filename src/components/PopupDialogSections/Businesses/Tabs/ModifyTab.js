@@ -11,8 +11,8 @@ import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
 import { initialState, GetFormFields } from './HandleBusinessData'
 import { GetValuesForForm, getTagIdsToSend } from "../../CategoryConfig";
-import toast from 'react-hot-toast';
 import term from "../../../../terms";
+import Toast from "../../../../utils/useToast";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
@@ -90,11 +90,9 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
             }
         } catch (e) {
             console.log('modifyTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     const handleValues = (formValues) => {
         setValues(prev => ({ ...prev, ...formValues, websitesUrl: [formValues.websitesUrl] }))

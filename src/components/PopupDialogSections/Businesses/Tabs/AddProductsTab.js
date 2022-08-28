@@ -8,7 +8,6 @@ import get_orientation from '../../../../utils/get_orientation'
 import { productFields } from '../popConfig'
 import useStyles from './styles'
 import { GetProductFormFields } from './HandleBusinessData'
-import toast from 'react-hot-toast';
 import client from "../../../../API/metro";
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import { useDispatch } from "react-redux";
@@ -16,6 +15,7 @@ import useGetService from '../../../../hooks/useGetService'
 import { set_copy_product_data } from '../../../../REDUX/actions/data.actions'
 import { GetValuesForForm } from '../../CategoryConfig'
 import { validateFirstProductTab, validateSecondProductTab } from './Validations'
+import Toast from '../../../../utils/useToast'
 
 function AddProductsTab({ areaSpecificData, type }) {
 
@@ -69,11 +69,9 @@ function AddProductsTab({ areaSpecificData, type }) {
             dispatch(set_table_changed(type))
         } catch (e) {
             console.log('addProductsTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     const handleButtonClick = () => {
         setStep(0)

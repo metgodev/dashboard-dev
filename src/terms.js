@@ -2064,6 +2064,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    email_is_invalid_or_taken: {
+        en: 'Email is invalid or taken',
+        he: 'כתובת אימייל לא חוקית או תפוסה',
+        ar: 'البريد الإلكتروني غير صالح أو مأخوذ'
+    },
     hour: {
         en: 'Hour',
         he: 'שעה',
@@ -2240,6 +2245,11 @@ const active_lexicon = {
     yes: {
         en: 'Yes',
         he: 'כן',
+        ar: 'نعم'
+    },
+    please_make_sure_that_your_details_are_correct: {
+        en: 'Please make sure your details are correct',
+        he: 'אנא וודא שפרטיך נכונים',
         ar: 'نعم'
     },
     metro_member: {

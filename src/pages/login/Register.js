@@ -7,13 +7,13 @@ import term from "../../terms";
 import { Auth } from '../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../REDUX/actions/main.actions';
-import toast from 'react-hot-toast';
 import { registerUserWithEmailAndPassword } from '../../API/firebase';
 import { set_user_details } from '../../REDUX/actions/user.actions'
 // styles
 import useStyles from "./styles";
 import LISTENER from '../../data/listener';
 import ROUTES from '../../data/routes';
+import Toast from '../../utils/useToast';
 
 function Register({ setLoggedIn }) {
     let dispatch = useDispatch()
@@ -21,7 +21,6 @@ function Register({ setLoggedIn }) {
     let navigate = useNavigate()
     let classes = useStyles();
     let [isLoading, setIsLoading] = useState(false);
-    let [error, setError] = useState(null);
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
     let [email, setEmail] = useState("");
@@ -48,13 +47,20 @@ function Register({ setLoggedIn }) {
 
 
     const registerUser = async () => {
-        if (password.length < 6) return setError(true)
+        if (password.length < 6) {
+            Toast('password_must_be_at_least_6_characters_long_helper')
+            return
+        }
         setIsLoading(true)
         registerUserWithEmailAndPassword(email, password).then(res => {
+            if (res === undefined) {
+                Toast('email_is_invalid_or_taken')
+                setIsLoading(false);
+                return
+            }
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
                     setIsLoading(false);
-                    setError(res.error)
                 } else {
                     let user = {
                         e: res.email,
@@ -68,15 +74,13 @@ function Register({ setLoggedIn }) {
                 }
             }).catch(e => {
                 console.log('register', e)
-                errorToast()
+                Toast()
             })
         }).catch(e => {
             console.log('register', e)
-            errorToast()
+            Toast()
         })
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <div>
@@ -87,11 +91,6 @@ function Register({ setLoggedIn }) {
                 <Typography variant="h2" className={classes.subGreeting}>
                     {term('create_your_account')}
                 </Typography>
-                <Fade in={error}>
-                    <Typography color="secondary" className={classes.errorMessage}>
-                        {term('plase_make_sure_that_your_details_are_correct')}
-                    </Typography>
-                </Fade>
                 <TextField
                     variant="outlined"
                     id="first name"

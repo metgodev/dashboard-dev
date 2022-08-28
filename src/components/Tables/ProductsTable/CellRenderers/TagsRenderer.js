@@ -5,11 +5,11 @@ import term from '../../../../terms'
 import useGetService from '../../../../hooks/useGetService'
 import { getTagColor } from '../../../Form/FormFunctions'
 import { _patch } from '../../../../API/service';
-import toast from 'react-hot-toast';
 import BACK_ROUTES from '../../../../data/back_routes';
 import ENTITY_STATUS from '../../../../data/entity_status';
 import CACHED_DATA_ROUTES from '../../../../data/cached_data_routes'
 import MODAL_STATES from '../../../../data/modal_states';
+import Toast from '../../../../utils/useToast';
 
 function TagsRenderer(props) {
 
@@ -19,11 +19,11 @@ function TagsRenderer(props) {
 
     const handleChange = async () => {
         if (values.length < 1) {
-            errorToast('please_choose_at_least_one_tag')
+            Toast('please_choose_at_least_one_tag')
             return
         }
         if (values.length > 5) {
-            errorToast(`${term(`please_choose_up_to`)} 5 ${term('tags')}`)
+            Toast(`${term(`please_choose_up_to`)} 5 ${term('tags')}`, {}, true)
             return
         }
         try {
@@ -39,11 +39,9 @@ function TagsRenderer(props) {
             }
         } catch (e) {
             console.log('tagsRendered', e)
-            errorToast('something_went_wrong')
+            Toast()
         }
     }
-
-    const errorToast = (val) => toast(term(val));
 
     const tagCategories = useGetService(BACK_ROUTES.TAG_CATEGORIES, CACHED_DATA_ROUTES.TAG_CATEGORIES, { areaId: props.data.areaId }, props.data.areaId, false)
 

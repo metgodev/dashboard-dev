@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { sendPositionToInfoWindow } from './MapPickHelpers'
-import toast from 'react-hot-toast';
-import term from '../../terms';
 import { DEFAULT_LOCATION, DEFAULT_ZOOM, DEFAULT_CONTANER_STYLE } from './config';
+import Toast from '../../utils/useToast';
 
 const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, isLoaded, infoWindow, setInfoWindow, selectedCategory }) => {
 
@@ -61,12 +60,10 @@ const MapPick = ({ point, containerStyle, markers, setFatherValue, initialZoom, 
                 }
             } catch (e) {
                 console.log('mapPick', e)
-                errorToast(e)
+                Toast(e?.code?.toLowerCase())
             }
         }
     }
-
-    const errorToast = (e) => toast(term(e?.code?.toLowerCase()));
 
     const renderMarkers = useCallback(
         markers && markers.map((marker, index) => {

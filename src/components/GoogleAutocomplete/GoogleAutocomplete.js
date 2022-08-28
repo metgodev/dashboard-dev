@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import term from "../../terms";
+import Toast from "../../utils/useToast";
 import { Typography } from "../Wrappers/Wrappers";
-import toast from 'react-hot-toast';
 import { apiOptions, textStyle } from "./config";
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
@@ -28,12 +28,10 @@ const Component = ({ setFatherValue, text }) => {
 
       } catch (e) {
         console.log('googleAutocomplete', e)
-        errorToast(e)
+        Toast(e.toLowerCase())
       }
     })()
   }, [value])
-
-  const errorToast = (e) => toast(term(e.toLowerCase()));
 
   return (
     <div>

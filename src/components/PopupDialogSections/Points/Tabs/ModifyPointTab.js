@@ -10,8 +10,8 @@ import Stepper from '../../../Stepper/Stepper'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
-import toast from 'react-hot-toast';
 import term from "../../../../terms";
+import Toast from '../../../../utils/useToast'
 
 const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
     //global
@@ -87,11 +87,9 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
             }
         } catch (e) {
             console.log('modifyPointTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     let formFields = GetFormFields(ModalInit, formData, areaSpecificData, handleValues, validateFirstFormPart, validateThirdFormPart, validateSecondFormPart, orientation, setValues)
 

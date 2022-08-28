@@ -6,9 +6,8 @@ import { Box } from '@mui/material'
 import useStyles from './styles'
 import { useDispatch } from 'react-redux';
 import { set_table_changed } from '../../REDUX/actions/main.actions'
-import toast from 'react-hot-toast';
-import term from '../../terms';
 import { _patch } from '../../API/service';
+import Toast from '../../utils/useToast';
 
 export default function MyImageList({ type, media, tab, setLoadingImage, id, setExternalValues, externalValues }) {
 
@@ -32,13 +31,11 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
                 setLoadingImage(false)
             } catch (e) {
                 console.log('myImageList', e)
-                errorToast()
+                Toast()
                 setLoadingImage(false)
             }
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <>

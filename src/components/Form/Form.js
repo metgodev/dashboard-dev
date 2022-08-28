@@ -19,7 +19,7 @@ import Checkbox from "./FormFields/Checkbox";
 import Map from "./FormFields/Map";
 import SizableText from "./FormFields/SizableText";
 import DraggableListWithImages from "./FormFields/DraggableListWithImages";
-import toast from "react-hot-toast";
+import Toast from "../../utils/useToast";
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -44,14 +44,12 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
 
   const formatValuesToSend = (values) => {
     if (fields.description !== null && resizableText.length < 1) {
-      descriptionFieldToast()
+      Toast('please_fill_description')
       return
     }
     const formattedItemsToSend = formatObjects(itemsToSend, options)
     submitFunction({ ...values, description: resizableText, openingHours: times, objectIds: formattedItemsToSend, coverImageFileId: chosenImage })
   }
-
-  const descriptionFieldToast = () => toast(term('please_fill_description'))
 
   return (
     <>

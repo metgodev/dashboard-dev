@@ -1,15 +1,12 @@
 import client from '../../API/metro';
 import axios from 'axios'
-import toast from 'react-hot-toast';
-import term from '../../terms';
+import Toast from '../../utils/useToast';
 
 export const handleCategoryChange = (event, newCategory, setUploadCategory, config) => {
     if (newCategory !== null) {
         setUploadCategory(config.find(item => item.type === newCategory))
     }
 }
-
-const errorToast = () => toast(term("something_went_wrong"));
 
 export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, media, uploadCategory, tab, areaId, setExternalValues) => {
     setLoadingImage(true)
@@ -43,6 +40,6 @@ export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, med
     } catch (e) {
         setLoadingImage(false)
         console.log('uploadMediaHelper', e)
-        errorToast()
+        Toast()
     }
 }

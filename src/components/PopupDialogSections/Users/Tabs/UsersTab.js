@@ -1,6 +1,5 @@
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import term from '../../../../terms';
 import get_orientation from '../../../../utils/get_orientation';
@@ -8,6 +7,7 @@ import { GetValuesForForm } from '../../CategoryConfig';
 import useStyles from '../../styles'
 import Form from '../../../Form/Form'
 import { ModalInit } from '../PopConfig'
+
 function UsersTab({ handleClose, type }) {
 
     const classes = useStyles()
@@ -28,8 +28,6 @@ function UsersTab({ handleClose, type }) {
     const submit = async (formValues) => {
 
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Box className={classes.container}>

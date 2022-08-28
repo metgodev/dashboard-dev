@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { validate } from './Validations'
 import client from '../../../../API/metro'
 import { set_table_changed } from '../../../../REDUX/actions/main.actions'
-import toast from 'react-hot-toast';
 import term from "../../../../terms";
+import Toast from '../../../../utils/useToast'
 
 export const NewTagTab = ({ handleClose, type }) => {
     //global
@@ -37,11 +37,9 @@ export const NewTagTab = ({ handleClose, type }) => {
             handleClose(false)
         } catch (e) {
             console.log('newTagTab', e)
-            errorToast()
+            Toast()
         }
     }
-
-    const errorToast = () => toast(term("something_went_wrong"));
 
     return (
         <Form

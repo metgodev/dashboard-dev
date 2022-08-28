@@ -1,12 +1,10 @@
-import toast from 'react-hot-toast';
 import term from '../../terms';
 import { _patch } from '../../API/service'
+import Toast from '../../utils/useToast';
 
 export const getRowId = params => {
     return params.data._id;
 }
-
-export const errorToast = () => toast(term("something_went_wrong"));
 
 export const updateFunction = async (params, display) => {
     try {
@@ -14,7 +12,7 @@ export const updateFunction = async (params, display) => {
         params.setStatus(params.data.status)
     } catch (e) {
         console.log('tableFunction', e)
-        errorToast()
+        Toast()
     }
 }
 
