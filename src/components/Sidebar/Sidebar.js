@@ -15,6 +15,7 @@ import {
 } from "@material-ui/icons";
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 // styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -43,6 +44,7 @@ const structure = [
     { id: 3, label: term('events'), link: "/events", icon: <Event />, permission: 'events' },
     { id: 4, label: term('points'), link: "/locations", icon: <Locations />, permission: 'locations' },
     { id: 5, label: term('routes'), link: "/routes", icon: <Route />, permission: 'routes' },
+    { id: 5, label: term('products'), link: "/products", icon: <ShoppingCartOutlinedIcon />, permission: 'products' },
     { id: 6, label: term('voucher'), link: "/voucher", icon: <CardGiftcard />, permission: 'vouchers' },
     { id: 7, label: term('local_campaigns'), link: "/campaign", icon: <CampaignOutlinedIcon />, permission: 'campaign' },
     { id: 8, label: term('map'), link: "/map", icon: <Map />, permission: 'map' },

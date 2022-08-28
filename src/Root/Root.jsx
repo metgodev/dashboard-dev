@@ -19,6 +19,7 @@ import UsersTable from '../pages/userstable/UsersTable';
 import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
+import Products from '../pages/products/Products'
 //Admin pages
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
@@ -76,6 +77,7 @@ const Root = () => {
                     <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events}><Events /></ Protecte >} />
                     <Route exact path={ROUTES.POINTS} element={<Protecte auth={permissions.locations}><PointsOfInterest /></Protecte>} />
                     <Route exact path={ROUTES.TRACKS} element={<Protecte auth={permissions.routes}><Tracks /></Protecte>} />
+                    <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products}><Products /></Protecte>} />
                     <Route exact path={ROUTES.VOUCHER} element={<Protecte auth={permissions.vouchers}><Voucher /></Protecte>} />
                     <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />
                     <Route exact path={ROUTES.CAMPAIGN} element={<Protecte auth={permissions.campaign}><LocalCampaigns /></Protecte>} />
@@ -84,6 +86,7 @@ const Root = () => {
                     <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq}><FAQ /></Protecte>} />
                     <Route exact path={ROUTES.LOGIN} element={<Login />} />
                     <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error}><Error /></Protecte>} />
+                    {/* Admin sections */}
                     <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority}><AuthorityMng /></Protecte>} />
                     <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories}><TagCategoriesMng /></Protecte>} />
                     <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />

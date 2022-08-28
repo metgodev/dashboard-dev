@@ -37,7 +37,8 @@ const PERMISSIONS = {
             area: true,
         },
         admin: true,
-        users: true
+        users: true,
+        products: true
     }
 }
 

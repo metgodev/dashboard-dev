@@ -27,7 +27,7 @@ function TagsRenderer(props) {
             return
         }
         try {
-            const res = await _patch(BACK_ROUTES.products, props.data._id, { tagsIds: values.map(tag => tag.value), status: ENTITY_STATUS.PENDING_APPROVAL })
+            const res = await _patch(BACK_ROUTES.PRODUCTS, props.data._id, { tagsIds: values.map(tag => tag.value), status: ENTITY_STATUS.PENDING_APPROVAL })
             if (res) {
                 const rowNode = props.api.getRowNode(props.node.data._id);
                 let vals = []

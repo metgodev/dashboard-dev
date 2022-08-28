@@ -66,7 +66,7 @@ const initialData = {
   productComponents: "",
   inStock: true,
   galleryFileIds: [],
-  approveContent: true
+  approveContent: true,
 }
 
 

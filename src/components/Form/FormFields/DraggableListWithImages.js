@@ -29,7 +29,11 @@ function DraggableListWithImages({ IMAGE_PICKER_TITLE, values, field, title, opt
                 setChosenImage={setChosenImage}
                 chosenImage={chosenImage}
             />
-            <TagsPicker title={title} field={field} options={options} />
+            <TagsPicker
+                title={title}
+                field={field}
+                options={options}
+            />
             <DraggableList
                 items={values[field]}
                 names={options[field]}

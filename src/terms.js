@@ -677,6 +677,11 @@ const active_lexicon = {
         he: "מגבלות למימוש",
         ar: "قيود على ممارسة الرياضة",
     },
+    useage_restrictions: {
+        en: "limitations",
+        he: "מגבלות למימוש",
+        ar: "قيود على ممارسة الرياضة",
+    },
     days_and_hours: {
         en: "Days and hours",
         he: "ימים ושעות",

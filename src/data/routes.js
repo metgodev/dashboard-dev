@@ -16,7 +16,8 @@ const ROUTES = {
     ERROR: '*',
     AUTHORITY: '/admin/authority',
     TAG_CATEGORIES: '/admin/tagcategories',
-    USERS: '/admin/users'
+    USERS: '/admin/users',
+    PRODUCTS: '/products'
 }
 
 export default ROUTES

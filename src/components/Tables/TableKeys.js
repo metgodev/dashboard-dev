@@ -184,6 +184,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             }
         case 'arrivalRecommendations':
         case 'time':
+        case 'shipmentType':
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
@@ -202,6 +203,7 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
         case 'openOnWeekend':
         case 'free':
         case 'isAnonymous':
+        case 'inStock':
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
