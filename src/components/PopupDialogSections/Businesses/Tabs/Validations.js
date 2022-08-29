@@ -6,7 +6,6 @@ const MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION = 4
 const MAXIMUM_AMMOUNT_OF_TAGS = 5
 
 export async function validateFirstFormPart(values) {
-    console.log(values)
     if (!values.name) {
         return { name: term("please_enter_a_business_name") };
     }
@@ -42,7 +41,6 @@ export async function validateFirstFormPart(values) {
 }
 
 export async function validateSeconsFormPart(values) {
-    console.log(values)
     if (!values.contactPersonName) {
         return { contactPersonName: term("please_enter_the_contact_persons_name") }
     }

@@ -194,6 +194,13 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 field: key,
                 filter: 'agTextColumnFilter',
             }
+        case 'contactPersonPhoneNumber':
+            return {
+                headerName: term(key),
+                field: key,
+                filter: 'agTextColumnFilter',
+                cellClass: 'stringType'
+            }
         case 'isHidden':
         case 'isRecommended':
         case 'online':
@@ -208,6 +215,9 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 headerName: term(key),
                 valueFormatter: (params) => {
                     if (!params.data) return ""
+                    return params.data && params?.data[key] ? term('yes') : term('no')
+                },
+                valueGetter: (params) => {
                     return params.data && params?.data[key] ? term('yes') : term('no')
                 },
                 field: key,

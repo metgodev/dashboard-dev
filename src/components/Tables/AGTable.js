@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react'
 //MUI
 import { Box } from '@mui/system';
 //AG Grid
-import { gridOptions, idOptions, ignore, requestParams } from './ag_table_config';
+import { gridOptions, idOptions, ignore, requestParams, excelStyles } from './ag_table_config';
 import { Cols, Keys } from './TableKeys';
 import { getRowId, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, } from './tableFunctions'
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
@@ -169,6 +169,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     maxConcurrentDatasourceRequests={1}
                     infiniteInitialRowCount={1}
                     rowId={getRowId}
+                    excelStyles={excelStyles}
                 />
                 <Box sx={{ width: '100%', height: '50px', backgroundColor: '#F1F0F0', display: 'flex', alignItems: 'center' }}>
                     <span style={{ marginRight: '20px', fontWeight: 'bold', fontSize: '13px' }}>{`${term('total')}: ${totalNumber}`}</span>

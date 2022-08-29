@@ -17,7 +17,58 @@ export const updateFunction = async (params, display) => {
 }
 
 export const exportToExcellFunction = (gridRef, display) => {
-    gridRef?.current?.api?.exportDataAsCsv({ fileName: `${display}.csv` });
+    gridRef?.current?.api?.exportDataAsCsv({
+        fileName: `${display}.csv`,
+        processCellCallback: (params) => {
+            switch (params.column.colId) {
+                case 'status':
+                case "arrivalRecommendations":
+                case "prefferedSeason":
+                case "shady":
+                case "time":
+                case "shipmentType":
+                    if (typeof params.value === 'object') {
+                        if (params.value[0]) {
+                            return term(params?.value[0]?.toLowerCase())
+                        }
+                        return ''
+                    }
+                    return params.value ? term(params?.value?.toLowerCase()) : ''
+                case 'authority':
+                    return params.value.name
+                case "contactPersonPhoneNumber":
+                    return params.value.toString()
+                case "relevantTo":
+                case 'inPlace':
+                    let formattedRelevantTo = ''
+                    if (params.value) {
+                        for (let i = 0; i < params.value.length; i++) {
+                            formattedRelevantTo = formattedRelevantTo + ` ${term(params.value[i].toLowerCase())}`
+                        }
+                    }
+
+                    return formattedRelevantTo
+                case "tags":
+                    let formattedTags = ''
+                    if (params.value) {
+                        for (let i = 0; i < params.value.length; i++) {
+                            formattedTags = formattedTags + ` [${term(params.value[i].category.title.toLowerCase())} - ${params.value[i].tag.title}] `
+                        }
+                    }
+                    return formattedTags
+                case "openingHours":
+                    let formattedOpeningHours = '';
+                    for (let i = 0; i < Object.keys(params.value).length; i++) {
+                        if (params.value[Object.keys(params.value)[i]].open) {
+                            formattedOpeningHours = formattedOpeningHours + ` ${term(Object.keys(params.value)[i])} : ${params.value[Object.keys(params.value)[i]].start} - ${params.value[Object.keys(params.value)[i]].end}`
+                        }
+                    }
+                    return formattedOpeningHours
+                default:
+                    return params.value
+            }
+        }
+    });
 }
 
 export const getSortingParams = (params) => {

@@ -17,7 +17,8 @@ const ROUTES = {
     AUTHORITY: '/admin/authority',
     TAG_CATEGORIES: '/admin/tagcategories',
     USERS: '/admin/users',
-    PRODUCTS: '/products'
+    PRODUCTS: '/products',
+    CALENDAR: '/calendar'
 }
 
 export default ROUTES

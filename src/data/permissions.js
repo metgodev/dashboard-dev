@@ -21,7 +21,8 @@ const PERMISSIONS = {
         },
         admin: false,
         users: false,
-        products: false
+        products: false,
+        calendar: true,
     },
     METRO_AREA_OWNER: {
         role: 'metro area owner'
@@ -54,7 +55,8 @@ const PERMISSIONS = {
         },
         admin: true,
         users: true,
-        products: true
+        products: true,
+        calendar: true
     }
 }
 

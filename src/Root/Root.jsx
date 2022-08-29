@@ -20,6 +20,7 @@ import Maps from '../pages/maps/Maps';
 import Support from '../pages/support/Support';
 import FAQ from '../pages/FAQ/FAQ';
 import Products from '../pages/products/Products'
+import Calendar from '../pages/calendar/Calendar'
 //Admin pages
 import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
@@ -78,6 +79,7 @@ const Root = () => {
                     <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products}><Products /></Protecte>} />
                     <Route exact path={ROUTES.VOUCHER} element={<Protecte auth={permissions.vouchers}><Voucher /></Protecte>} />
                     <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />
+                    <Route exact path={ROUTES.CALENDAR} element={<Protecte auth={permissions.calendar}><Calendar /></Protecte>} />
                     <Route exact path={ROUTES.CAMPAIGN} element={<Protecte auth={permissions.campaign}><LocalCampaigns /></Protecte>} />
                     <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map}><Maps /></Protecte>} />
                     <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support}><Support /></Protecte>} />

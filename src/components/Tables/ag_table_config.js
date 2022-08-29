@@ -524,3 +524,36 @@ export const idOptions = {
 };
 
 export const ignore = ['businessId', 'firebaseId', 'objects', 'coverImage', 'locationInfo', 'categoryId', 'tagId', 'reservations', 'coverImageFileId', 'objectIds', '__v', 'areaId', 'authorityId', 'location', 'tagsIds', 'galleryFileIds', 'gallery', 'userId', 'relatedBusinessId', 'area']
+
+export const excelStyles = [
+    {
+        id: 'numberType',
+        numberFormat: {
+            format: '0',
+        },
+    },
+    {
+        id: 'currencyFormat',
+        numberFormat: {
+            format: '#,##0.00 €',
+        },
+    },
+    {
+        id: 'negativeInBrackets',
+        numberFormat: {
+            format: '$[blue] #,##0;$ [red](#,##0)',
+        },
+    },
+    {
+        id: 'booleanType',
+        dataType: 'Boolean',
+    },
+    {
+        id: 'stringType',
+        dataType: 'String',
+    },
+    {
+        id: 'dateType',
+        dataType: 'DateTime',
+    },
+];
