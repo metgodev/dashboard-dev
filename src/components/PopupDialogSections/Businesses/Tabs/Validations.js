@@ -1,11 +1,12 @@
 import term from '../../../../terms';
 import { removeSpacesFromBeginingAndEndOfString } from '../../../../utils/string_parse'
-
+import { validateIsraelPhoneNumber } from '../../../../utils/validate_phone';
 const MAXIMUM_BUSINESS_NAME_LENGTH = 30
 const MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION = 4
 const MAXIMUM_AMMOUNT_OF_TAGS = 5
 
 export async function validateFirstFormPart(values) {
+    console.log(values)
     if (!values.name) {
         return { name: term("please_enter_a_business_name") };
     }
@@ -32,12 +33,16 @@ export async function validateFirstFormPart(values) {
     if (values.tagsIds.length > 5) {
         return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
-    if (!/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/.test(values.phoneNumber) || values.phoneNumber.length < 9) {
+    if (!validateIsraelPhoneNumber(values.phoneNumber)) {
         return { phoneNumber: term("please_enter_a_valid_phone_number") }
+    }
+    if (values.whatsAppPhoneNumber && !validateIsraelPhoneNumber(values.whatsAppPhoneNumber)) {
+        return { whatsAppPhoneNumber: term("please_enter_a_valid_phone_number") }
     }
 }
 
 export async function validateSeconsFormPart(values) {
+    console.log(values)
     if (!values.contactPersonName) {
         return { contactPersonName: term("please_enter_the_contact_persons_name") }
     }
@@ -46,6 +51,9 @@ export async function validateSeconsFormPart(values) {
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.emailAddress)) {
         return { emailAddress: term("please_enter_a_valid_email_address") }
+    }
+    if (!validateIsraelPhoneNumber(values.contactPersonPhoneNumber)) {
+        return { contactPersonPhoneNumber: term("please_enter_a_valid_phone_number") }
     }
 }
 

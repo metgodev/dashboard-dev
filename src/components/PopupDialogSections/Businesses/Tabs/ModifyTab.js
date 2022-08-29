@@ -11,7 +11,6 @@ import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
 import { initialState, GetFormFields } from './HandleBusinessData'
 import { GetValuesForForm, getTagIdsToSend } from "../../CategoryConfig";
-import term from "../../../../terms";
 import Toast from "../../../../utils/useToast";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {

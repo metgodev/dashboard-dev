@@ -1,5 +1,6 @@
 import term from '../../../../terms'
 import { removeSpacesFromBeginingAndEndOfString } from '../../../../utils/string_parse'
+import { validateIsraelPhoneNumber } from '../../../../utils/validate_phone'
 
 const MAXIMUM_BUSINESS_NAME_LENGTH = 30
 const MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION = 4
@@ -38,7 +39,9 @@ export async function validateFirstFormPart(values) {
 }
 
 export async function validateSecondFormPart(values) {
-
+    if (values.phoneNumber && !validateIsraelPhoneNumber(values.phoneNumber)) {
+        return { phoneNumber: term("please_enter_a_valid_phone_number") }
+    }
 }
 
 export async function validateThirdFormPart(values) {
