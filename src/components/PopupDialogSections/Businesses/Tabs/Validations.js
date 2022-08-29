@@ -62,7 +62,7 @@ export async function validateThirdFormPart(values) {
 
 export async function validateFirstProductTab(values) {
     if (!values.name) {
-        return { name: term("please_enter_a_business_name") };
+        return { name: term("please_enter_a_product_name") };
     }
     if (values.price < 0) {
         return { price: term("please_enter_a_price") };

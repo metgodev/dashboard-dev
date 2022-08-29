@@ -2074,6 +2074,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    please_enter_a_product_name: {
+        en: 'Please enter a product name',
+        he: 'אנא הכנס שם מוצר',
+        ar: 'الرجاء إدخال اسم المنتج'
+    },
     password_reset_sent: {
         en: 'A link to reset your password has been sent to your email',
         he: 'לינק לשינוי סיסמא נשלח אליך בדואר האלקטרוני',
