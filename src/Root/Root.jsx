@@ -56,7 +56,6 @@ const Root = () => {
                 dispatch(set_user_details(user))
             } catch (e) {
                 console.log('root', e)
-                Toast()
             }
         })()
     }, [])

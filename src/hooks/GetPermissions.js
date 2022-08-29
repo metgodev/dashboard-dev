@@ -17,7 +17,6 @@ const GetPermissions = (roleId) => {
                     setPermissions(PERMISSIONS.METRO_SUPER_ADMIN) //CHANGE WHEN BACK CHANGE
                 } catch (e) {
                     console.log(e)
-                    Toast()
                 }
             })()
         }
