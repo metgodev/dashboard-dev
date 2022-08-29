@@ -5,9 +5,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
-  RecaptchaVerifier
+  RecaptchaVerifier,
+  sendPasswordResetEmail
 } from "firebase/auth";
-
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -32,6 +32,16 @@ const loginWithEmailAndPassword = async (email, password) => {
   });
 };
 
+const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email)
+    return true
+  } catch (e) {
+    console.log(e)
+    return false
+  }
+}
+
 const registerUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password).catch((error) => {
     const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
@@ -45,5 +55,6 @@ const loginWithPhoneNumber = (phoneNumber) => {
 export {
   registerUserWithEmailAndPassword,
   loginWithEmailAndPassword,
-  loginWithPhoneNumber
+  loginWithPhoneNumber,
+  resetPassword
 };

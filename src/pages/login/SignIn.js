@@ -17,6 +17,8 @@ import LISTENER from "../../data/listener";
 import ROUTES from "../../data/routes";
 import Toast from "../../utils/useToast";
 import ERRORS from "../../data/errors";
+import MESSAGES from '../../data/messages'
+import { resetPassword } from '../../API/firebase'
 
 function SignIn() {
     let classes = useStyles();
@@ -82,6 +84,15 @@ function SignIn() {
             document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
         }
     }, [email, password])
+
+    const handleResetPassword = async () => {
+        const res = await resetPassword(email)
+        if (res) {
+            Toast(MESSAGES.PASSWORD_RESET_SENT)
+        } else {
+            Toast()
+        }
+    }
 
     return (
         <>
@@ -156,6 +167,7 @@ function SignIn() {
                     color="primary"
                     size="large"
                     className={classes.forgetButton}
+                    onClick={() => handleResetPassword()}
                 >
                     {term('forgot_password')}
                 </Button>

@@ -2074,6 +2074,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    password_reset_sent: {
+        en: 'A link to reset your password has been sent to your email',
+        he: 'לינק לשינוי סיסמא נשלח אליך בדואר האלקטרוני',
+        ar: 'تم إرسال رابط لإعادة تعيين كلمة المرور الخاصة بك إلى بريدك الإلكتروني'
+    },
     '1_to_3_hours': {
         en: 'One to three hours',
         he: 'שעה עד שלוש שעות',
