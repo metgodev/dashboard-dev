@@ -2074,6 +2074,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    maximum_file_upload_size_is: {
+        en: 'Maximum file size is',
+        he: 'גודל קובץ מקסימלי הוא',
+        ar: 'الحجم الأقصى للملف هو'
+    },
     please_enter_a_product_name: {
         en: 'Please enter a product name',
         he: 'אנא הכנס שם מוצר',

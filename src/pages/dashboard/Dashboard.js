@@ -26,6 +26,7 @@ export default function Dashboard() {
     points: [],
     tracks: []
   })
+
   const [tagCategoriesData, setTagCategoriesData] = useState(null)
 
   const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.DASH_MAP_BUSINESSES, requestParams)

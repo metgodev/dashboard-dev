@@ -5,8 +5,8 @@ export default makeStyles(theme => ({
         cursor: "pointer",
         borderRadius: "10px",
         border: "2px dashed #c1c1c1",
-        height: "100p",
-        width: "40vw",
+        height: "30vh",
+        width: "90vw",
         textAlign: "center",
         display: "flex",
         justifyContent: "center",
@@ -15,5 +15,10 @@ export default makeStyles(theme => ({
     innerText: {
         fontSize: "1.3rem",
         fontWeight: "500",
+    },
+    maximumUploadText: {
+        padding: 0,
+        marginTop: 30,
+        marginBottom: 0
     }
 }));

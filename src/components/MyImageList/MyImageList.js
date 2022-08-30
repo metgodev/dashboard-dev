@@ -39,11 +39,11 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
 
     return (
         <>
-            <ImageList style={{ padding: '20px' }} className={classes.imageList} cols={4} gap={20} variant={'quilted'}>
+            <ImageList style={{ padding: '20px' }} className={classes.imageList} cols={6} gap={20} variant={'quilted'}>
                 {media?.map((item, index) => {
                     if (item.metadata.type === type && type !== 'video' && type !== 'files') {
                         return (
-                            <ImageListItem style={{ height: '200px', width: '200px' }} cols={1} key={index} id={item.file._id} className={classes.item}>
+                            <ImageListItem cols={1} key={index} id={item.file._id} className={classes.item}>
                                 <a href={item.file.url} target="_blank" style={{ position: 'relative' }}>
                                     <img
                                         src={item.file.url}
@@ -58,7 +58,7 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
                         )
                     } else if (item.metadata.type === type && item.metadata.type === 'video') {
                         return (
-                            <ImageListItem style={{ height: '150px', width: '220px' }} key={index} id={item.file._id} className={classes.item}>
+                            <ImageListItem key={index} id={item.file._id} className={classes.item}>
                                 <a href={item.file.url} target="_blank">
                                     <video
                                         src={item.file.url}
@@ -73,7 +73,7 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
                         )
                     } else if (item.metadata.type === type && item.metadata.type === 'files') {
                         return (
-                            <ImageListItem style={{ height: '150px', width: '220px', display: 'flex' }} key={index} id={item.file._id} className={classes.item}>
+                            <ImageListItem style={{ padding: '5px' }} key={index} id={item.file._id} className={classes.item}>
                                 <a href={item.file.url} target="_blank">
                                     <audio
                                         src={item.file.url}
