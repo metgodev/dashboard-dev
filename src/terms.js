@@ -2074,6 +2074,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    cant_change_status_please_add_tags: {
+        en: 'Cannot change status, please add at least one tag',
+        he: 'לא יכול לשנות סטטוס, אנא הוסף לפחות תגית אחת',
+        ar: 'لا يمكن تغيير الحالة ، يرجى إضافة علامة واحدة على الأقل'
+    },
     maximum_file_upload_size_is: {
         en: 'Maximum file size is',
         he: 'גודל קובץ מקסימלי הוא',

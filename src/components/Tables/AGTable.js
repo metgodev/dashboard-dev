@@ -97,7 +97,13 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         }
     }
 
-    const onUpdate = useCallback((params) => updateFunction(params, display), [tableChanged]);
+    const onUpdate = useCallback((params) => {
+        const rowData = gridRef.current.api.getRowNode(params.data._id)
+        if (rowData?.data?.tagsIds?.length === 0) {
+            Toast('cant_change_status_please_add_tags')
+        }
+        updateFunction(params, display)
+    }, [tableChanged]);
 
     const exportToXl = useCallback(() => {
         exportToExcellFunction(gridRef, display)
@@ -168,7 +174,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     cacheBlockSize={30}
                     maxConcurrentDatasourceRequests={1}
                     infiniteInitialRowCount={1}
-                    rowId={getRowId}
+                    getRowId={getRowId}
                     excelStyles={excelStyles}
                 />
                 <Box sx={{ width: '100%', height: '50px', backgroundColor: '#F1F0F0', display: 'flex', alignItems: 'center' }}>
