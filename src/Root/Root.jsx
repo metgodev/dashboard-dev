@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useCallback } from 'react';
+import React, { useLayoutEffect, useCallback } from 'react';
 //MUI
 import { Routes, Route, useLocation, Navigate, } from 'react-router-dom'
 import { Box } from '@material-ui/core';
@@ -39,15 +39,15 @@ import { reAuth } from '../API/metro';
 import GetPermissions from '../hooks/GetPermissions'
 
 const Root = () => {
-
     //Styles
     let classes = useStyles();
     //Global state
     const dispatch = useDispatch()
     let location = useLocation();
     const userDetails = useSelector(s => s.userReducer.userDetails)
+    const user = useSelector(s => s.mainRememberReducer.user)
     //Permission management
-    const permissions = GetPermissions(userDetails ? userDetails : null)
+    const permissions = GetPermissions(userDetails)
 
     useLayoutEffect(() => {
         (async () => {
@@ -60,35 +60,35 @@ const Root = () => {
         })()
     }, [])
 
-    const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location])
+    const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location, user])
 
     return (
         <Box className={classes.Router}>
             <Toaster position={'bottom-center'} />
             <Main >
-                {Boolean(Object.keys(userDetails).length) && HeaderAndSideBar}
+                {Boolean(Object.keys(user).length) && HeaderAndSideBar}
                 <Routes>
-                    <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />
-                    <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard}><Dashboard /></Protecte>} />
-                    {/* <Route exact path={ROUTES.VERIFICATION} element={< Protecte auth={permissions.verification}><Verification /></Protecte>} /> */}
-                    <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business}><Businesses /></Protecte>} />
-                    <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events}><Events /></ Protecte >} />
-                    <Route exact path={ROUTES.POINTS} element={<Protecte auth={permissions.locations}><PointsOfInterest /></Protecte>} />
-                    <Route exact path={ROUTES.TRACKS} element={<Protecte auth={permissions.routes}><Tracks /></Protecte>} />
-                    <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products}><Products /></Protecte>} />
-                    <Route exact path={ROUTES.VOUCHER} element={<Protecte auth={permissions.vouchers}><Voucher /></Protecte>} />
-                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />
-                    <Route exact path={ROUTES.CALENDAR} element={<Protecte auth={permissions.calendar}><Calendar /></Protecte>} />
-                    <Route exact path={ROUTES.CAMPAIGN} element={<Protecte auth={permissions.campaign}><LocalCampaigns /></Protecte>} />
-                    <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map}><Maps /></Protecte>} />
-                    <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support}><Support /></Protecte>} />
-                    <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq}><FAQ /></Protecte>} />
+                    <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />
+                    <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
+                    {/* <Route exact path={ROUTES.VERIFICATION} element={< Protecte auth={permissions.verification} loggedIn={user}><Verification /></Protecte>} /> */}
+                    <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
+                    <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
+                    <Route exact path={ROUTES.POINTS} element={<Protecte auth={permissions.locations} loggedIn={user}><PointsOfInterest /></Protecte>} />
+                    <Route exact path={ROUTES.TRACKS} element={<Protecte auth={permissions.routes} loggedIn={user}><Tracks /></Protecte>} />
+                    <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products} loggedIn={user}><Products /></Protecte>} />
+                    <Route exact path={ROUTES.VOUCHER} element={<Protecte auth={permissions.vouchers} loggedIn={user}><Voucher /></Protecte>} />
+                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
+                    <Route exact path={ROUTES.CALENDAR} element={<Protecte auth={permissions.calendar} loggedIn={user}><Calendar /></Protecte>} />
+                    <Route exact path={ROUTES.CAMPAIGN} element={<Protecte auth={permissions.campaign} loggedIn={user}><LocalCampaigns /></Protecte>} />
+                    <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
+                    <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
+                    <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
                     <Route exact path={ROUTES.LOGIN} element={<Login />} />
-                    <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error}><Error /></Protecte>} />
+                    <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
                     {/* Admin sections */}
-                    <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority}><AuthorityMng /></Protecte>} />
-                    <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories}><TagCategoriesMng /></Protecte>} />
-                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users}><UsersTable /></Protecte>} />
+                    <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority} loggedIn={user}><AuthorityMng /></Protecte>} />
+                    <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories} loggedIn={user}><TagCategoriesMng /></Protecte>} />
+                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
                 </Routes>
             </Main>
         </Box >
