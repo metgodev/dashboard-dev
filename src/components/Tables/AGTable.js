@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 //AG Grid
 import { gridOptions, idOptions, ignore, requestParams, excelStyles } from './ag_table_config';
 import { Cols, Keys } from './TableKeys';
-import { getRowId, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, } from './tableFunctions'
+import { getRowId, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, proccessCellToExport } from './tableFunctions'
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
@@ -22,6 +22,7 @@ import Toast from '../../utils/useToast'
 //Service
 import { _get } from '../../API/service'
 import ERRORS from '../../data/errors';
+import { CircularProgress } from '@mui/material';
 
 const AGTable = ({ display, action, setExportToExcel }) => {
 
@@ -149,6 +150,12 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         }
     }, [pageData.data, gridRef, area, columnDefs])
 
+    // useEffect(() => {
+    //     if (gridRef?.current !== undefined && gridRef?.current?.defaultExcelExportParams === undefined) {
+    //             gridRef.current.defaultExcelExportParams = 
+    //     }
+    // }, [gridRef])
+
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>
             <div className='ag-table' style={{ width: '100%', height: window.innerHeight - 170, direction: 'rtl' }} >
@@ -176,9 +183,18 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                     infiniteInitialRowCount={1}
                     getRowId={getRowId}
                     excelStyles={excelStyles}
+                    defaultExportParams={
+                        {
+                            fileName: `${display} data`,
+                            processCellCallback: (params) => proccessCellToExport(params)
+                        }
+                    }
                 />
                 <Box sx={{ width: '100%', height: '50px', backgroundColor: '#F1F0F0', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ marginRight: '20px', fontWeight: 'bold', fontSize: '13px' }}>{`${term('total')}: ${totalNumber}`}</span>
+                    {pageData.loading ?
+                        <CircularProgress size={20} sx={{ marginRight: '20px' }} />
+                        :
+                        <span style={{ marginRight: '20px', fontWeight: 'bold', fontSize: '13px' }}>{`${term('total')}: ${totalNumber}`}</span>}
                 </Box>
             </div>
         </div >
