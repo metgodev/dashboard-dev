@@ -31,7 +31,7 @@ function TagsPicker({ title, field, options }) {
                             style={{
                                 border: index === 0 ? `2px solid #01A1FC` : `1px solid grey`,
                                 padding: '10px',
-                                backgroundColor: `${getTagColor(option.label)}`,
+                                backgroundColor: `${getTagColor(options?.tagsIds?.find(tag => tag.id === option.value)?.category)}`,
                             }}
                             {...getTagProps({ index })}
                             label={option.label}

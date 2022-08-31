@@ -43,7 +43,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
     useEffect(() => {
         if (authoritiesData.data.length && tagCategories.data.length) {
             let authorities = authoritiesData.data.map(({ name, _id }) => ({ value: _id, name }))
-            let tag_categories = tagCategories.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
+            let tag_categories = tagCategories.data.map((data) => ({ category: data.category.title, title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
             setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories, areaId: area.id }))
         }
     }, [authoritiesData, tagCategories, handleClose]);

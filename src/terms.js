@@ -1288,9 +1288,14 @@ const active_lexicon = {
         he: 'מחיר',
         ar: 'السعر',
     },
+    no_events_on_this_date: {
+        en: 'No events on selected date',
+        he: 'אין אירועים בתאריך זה',
+        ar: 'لا توجد أحداث في التاريخ المحدد',
+    },
     open_hour: {
-        en: 'open hour',
-        he: 'שעה פתיחה',
+        en: 'Start time',
+        he: 'שעה התחלה',
         ar: 'ساعة مفتوحة',
     },
     end_date: {

@@ -45,10 +45,10 @@ export default function Dashboard() {
     <>
       <PageTitle calendar title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
       <Grid container spacing={2}>
-        <Grid item lg={4} md={5} sm={12} xs={12}>
-          <Calendar type={1} warp={true} />
+        <Grid item lg={6} md={5} sm={12} xs={12}>
+          <Calendar events={events} type={1} warp={true} />
         </Grid>
-        <Grid item lg={8} md={7} sm={12} xs={12}>
+        <Grid item lg={6} md={7} sm={12} xs={12}>
           <BigChart />
         </Grid>
         {config.bigStat.map((stat, index) => (
