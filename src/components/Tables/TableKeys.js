@@ -1,8 +1,18 @@
 import StatusMenu from './StatusMenu';
 import term from '../../terms';
+import BACK_ROUTES from '../../data/back_routes';
 
 
-export const Cols = (cols, ignore) => Object.keys(cols).filter(x => !ignore.includes(x)).sort()
+export const Cols = (cols, ignore, display) => {
+    if (display === BACK_ROUTES.USERS) {
+        return (
+            ['email', 'roles', 'createdAt', 'updatedAt']
+        )
+    }
+    return (
+        Object.keys(cols).filter(x => !ignore.includes(x)).sort()
+    )
+}
 
 export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
     switch (key) {
@@ -106,7 +116,8 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
-                    return term(params?.data?.roles[0]?.roleName.toLowerCase())
+                    console.log(params)
+                    return params?.data?.roles?.map(role => term(role.roleName.toLowerCase())).join(' , ')
                 },
                 filterable: false,
                 field: key,

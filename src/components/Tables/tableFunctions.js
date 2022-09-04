@@ -16,6 +16,13 @@ export const updateFunction = async (params, display) => {
     }
 }
 
+export const useGetParams = (display) => {
+    if (display === 'users') {
+        return { isAnonymous: false }
+    }
+    return {}
+}
+
 export const proccessCellToExport = (params) => {
     switch (params.column.colId) {
         case 'status':

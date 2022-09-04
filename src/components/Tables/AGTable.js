@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 //AG Grid
 import { gridOptions, idOptions, ignore, requestParams, excelStyles } from './ag_table_config';
 import { Cols, Keys } from './TableKeys';
-import { getRowId, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, proccessCellToExport } from './tableFunctions'
+import { getRowId, updateFunction, exportToExcellFunction, getSortingParams, getFilterParams, checkIfTablePrefsChanged, proccessCellToExport, useGetParams } from './tableFunctions'
 import 'ag-grid-community/dist/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'; // Optional theme CSS
 import 'ag-grid-enterprise';
@@ -36,6 +36,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
 
     let pageData = useGetService(display, display, requestParams(area), area, false)
     const authorities = useGetService(BACK_ROUTES.AUTHORITIES, CACHED_DATA_ROUTES.AUTHORITIES, { areaId: area.id }, area, false)
+    const additionalParams = useGetParams(display)
 
     const [columnDefs, setColumnDefs] = useState([]);
     const [totalNumber, setTotalNumber] = useState(0)
@@ -115,9 +116,10 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         const skip = params.startRow === 0 ? {} : { $skip: params.startRow }
         let valuesToSend = Object.assign({}, filterParams, {
             areaId: area.id.toString(),
+            isAnonymous: false,
             $limit: params.endRow - params.startRow,
             $sort: getSortingParams(params),
-        }, skip)
+        }, skip, additionalParams)
         // take a slice of the total rows
         try {
             const rowsThisPage = await _get(display, valuesToSend)
@@ -138,7 +140,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
     const onGridReady = useCallback(() => {
         if (gridRef.current.api !== undefined) {
             if (pageData.data.length > 0) {
-                let cols = Cols(pageData.data[0], ignore);
+                let cols = Cols(pageData.data[0], ignore, display);
                 let keys = Keys(cols, idOptions, display, onUpdate);
                 setColumnDefs(keys);
             }

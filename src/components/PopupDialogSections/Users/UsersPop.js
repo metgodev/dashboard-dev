@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
 import { ModalTabs } from './PopConfig'
 import useStyles from '../styles'
@@ -6,16 +6,28 @@ import Tabs from '@mui/material/Tabs';
 import TabPanel from '../../TabPanel/TabPanel';
 import Tab from '@mui/material/Tab';
 import UsersTab from './Tabs/UsersTab'
+import useGetService from '../../../hooks/useGetService';
+import term from '../../../terms';
 
 const UsersPop = ({ handleClose, type, open }) => {
 
     const classes = useStyles()
 
     const [tab, setTab] = useState(0);
+    const [picker, setPicker] = useState({ roles: [] })
+
+    const roles = useGetService("roles", "roles", {}, false, false)
 
     const handleTabs = (event, newValue) => {
         setTab(newValue);
     };
+
+    useEffect(() => {
+        if (roles.data.length) {
+            let userRoles = roles.data.map(({ name, _id }) => ({ id: _id, title: term(name.toLowerCase()) }))
+            setPicker({ roles: userRoles })
+        }
+    }, [roles, handleClose]);
 
     return (
         <Box sx={{ height: '100%' }}>
@@ -27,7 +39,7 @@ const UsersPop = ({ handleClose, type, open }) => {
                 </Box>
                 <Box id="alert-dialog-slide-description">
                     <TabPanel value={tab} index={0}>
-                        <UsersTab handleClose={handleClose} type={type} />
+                        {picker.roles.length > 0 && <UsersTab handleClose={handleClose} type={type} areaSpecificData={picker} />}
                     </TabPanel>
                 </Box>
             </Box >

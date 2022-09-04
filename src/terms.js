@@ -1288,6 +1288,26 @@ const active_lexicon = {
         he: 'מחיר',
         ar: 'السعر',
     },
+    metro_super_admin: {
+        en: 'Admin',
+        he: 'מנהל',
+        ar: 'مسؤل',
+    },
+    metro_business_owner: {
+        en: 'Business owner',
+        he: 'בעל עסק',
+        ar: 'صاحب العمل',
+    },
+    metro_area_owner: {
+        en: 'Area owner',
+        he: 'בעל איזור',
+        ar: 'مالك المنطقة',
+    },
+    metro_authority_owner: {
+        en: 'Authority owner',
+        he: 'בעל רשות',
+        ar: 'صاحب السلطة',
+    },
     no_events_on_this_date: {
         en: 'No events on selected date',
         he: 'אין אירועים בתאריך זה',
@@ -2073,6 +2093,21 @@ const active_lexicon = {
         en: 'Email is invalid or taken',
         he: 'כתובת אימייל לא חוקית או תפוסה',
         ar: 'البريد الإلكتروني غير صالح أو مأخوذ'
+    },
+    hour: {
+        en: 'Hour',
+        he: 'שעה',
+        ar: 'ساعة'
+    },
+    every_user_must_be_a_member: {
+        en: 'Every user must be a member',
+        he: 'כל משתמש חייב להיות "משתמש"',
+        ar: 'ساعة'
+    },
+    please_choose_one_extra_role_per_user: {
+        en: 'Please choose one extra role per user',
+        he: 'אנא בחר תפקיד אחד נוסף למשתמש',
+        ar: 'الرجاء اختيار دور إضافي واحد لكل مستخدم'
     },
     hour: {
         en: 'Hour',

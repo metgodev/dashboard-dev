@@ -8,7 +8,8 @@ const BACK_ROUTES = {
     TAG_CATEGORIES: 'tag-categories',
     AREA: 'area',
     PRODUCTS: 'products',
-    USERS: 'users'
+    USERS: 'users',
+    USER_ROLES: 'user-roles'
 }
 
 export default BACK_ROUTES

@@ -27,7 +27,6 @@ import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
 //Helper
 import { Protecte, getHeaderAndSidebar } from './rootHelper.js';
 import ROUTES from '../data/routes';
-import Toast from '../utils/useToast';
 //Components
 import { Toaster } from 'react-hot-toast';
 //Redux

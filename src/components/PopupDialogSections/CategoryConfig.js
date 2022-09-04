@@ -67,6 +67,8 @@ const initialData = {
   inStock: true,
   galleryFileIds: [],
   approveContent: true,
+  email: '',
+  roles: []
 }
 
 
@@ -101,6 +103,7 @@ export const GetValuesForForm = (values, allTags) => {
     phoneNumber: values.length || Object.keys(values).length ? values.hasOwnProperty('phoneNumber') ? values.phoneNumber : initialData.phoneNumber : initialData.phoneNumber,
     contactPersonName: values.length || Object.keys(values).length ? values.hasOwnProperty('contactPersonName') ? values.contactPersonName : initialData.contactPersonName : initialData.contactPersonName,
     contactPersonPhoneNumber: values.length || Object.keys(values).length ? values.hasOwnProperty('contactPersonPhoneNumber') ? values.contactPersonPhoneNumber : initialData.contactPersonPhoneNumber : initialData.contactPersonPhoneNumber,
+    email: values.length || Object.keys(values).length ? values.hasOwnProperty('email') ? values.email : initialData.email : initialData.email,
     emailAddress: values.length || Object.keys(values).length ? values.hasOwnProperty('emailAddress') ? values.emailAddress : initialData.emailAddress : initialData.emailAddress,
     facebookPageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('facebookPageUrl') ? values.facebookPageUrl : initialData.facebookPageUrl : initialData.facebookPageUrl,
     instagramPageUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('instagramPageUrl') ? values.instagramPageUrl : initialData.instagramPageUrl : initialData.instagramPageUrl,
@@ -143,6 +146,7 @@ export const GetValuesForForm = (values, allTags) => {
     inStock: values.length || Object.keys(values).length ? values.hasOwnProperty('inStock') ? values.inStock : initialData.inStock : initialData.inStock,
     galleryFileIds: values.length || Object.keys(values).length ? values.hasOwnProperty('galleryFileIds') ? values.galleryFileIds : initialData.galleryFileIds : initialData.galleryFileIds,
     approveContent: values.length || Object.keys(values).length ? values.hasOwnProperty('approveContent') ? values.approveContent : initialData.approveContent : initialData.approveContent,
+    roles: values.length || Object.keys(values).length ? values.hasOwnProperty('roles') ? values.roles.map(role => role.roleId) : initialData.roles : initialData.roles,
   }
 
   return returnValues
