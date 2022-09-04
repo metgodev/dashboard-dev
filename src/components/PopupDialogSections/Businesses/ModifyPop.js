@@ -25,6 +25,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
     const classes = useStyles()
     //Global
     const { area } = useSelector((state) => state.mainRememberReducer);
+    const businessData = useSelector(s => s.mainReducer.editTabData)
     //Local
     const [tab, setTab] = useState(0);
     const [picker, setPicker] = useState(Picker)
@@ -52,7 +53,19 @@ const ModifyPop = ({ handleClose, type, open }) => {
         <div style={{ height: '100%' }}>
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
-                    {ModalTabs.map(b => <Tab key={b} label={b} disabled={(b === term('gallery') || b === term('products')) && type === 'add'} />)}
+                    {ModalTabs.map(b =>
+                        <Tab
+                            key={b}
+                            label={b}
+                            disabled={
+                                ((b === term('gallery') || b === term('products')) && type === 'add')
+                                ||
+                                (b === term('products') && !businessData.isPremium)
+                                ||
+                                (b === term('invitation_manager') && !businessData.isPremium)
+                            }
+                        />
+                    )}
                 </Tabs>
             </Box>
             <Box sx={{ height: '90%' }} id="alert-dialog-slide-description">

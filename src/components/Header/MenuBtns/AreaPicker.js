@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useCallback } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import LocationCityOutlinedIcon from '@mui/icons-material/LocationCityOutlined';
 import { useDispatch, useSelector } from "react-redux";
@@ -29,8 +29,8 @@ function AreaMenu() {
 
     const areas = useGetService(BACK_ROUTES.AREA, CACHED_DATA_ROUTES.AREA)
 
-    const user = useSelector(s => s.userReducer)
-    const permissions = GetPermissions(user)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     useLayoutEffect(() => {
         (async () => {

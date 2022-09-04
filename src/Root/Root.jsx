@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useCallback } from 'react';
+import React, { useLayoutEffect, useCallback, useEffect } from 'react';
 //MUI
 import { Routes, Route, useLocation, Navigate, } from 'react-router-dom'
 import { Box } from '@material-ui/core';
@@ -6,7 +6,6 @@ import { Box } from '@material-ui/core';
 import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
 import Login from '../pages/login/Login';
-import Verification from '../pages/login/Verification';
 import Dashboard from '../pages/dashboard/Dashboard';
 import useStyles from "./styles";
 import Businesses from '../pages/businesses/Businesses';
@@ -36,6 +35,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reAuth } from '../API/metro';
 //Hooks
 import GetPermissions from '../hooks/GetPermissions'
+import ROLES from '../data/roles';
 
 const Root = () => {
     //Styles
@@ -61,34 +61,81 @@ const Root = () => {
 
     const HeaderAndSideBar = useCallback(getHeaderAndSidebar(location), [userDetails, location, user])
 
+    const getRoutes = useCallback(() => {
+        if (Object.keys(userDetails).length === 0) {
+            return (
+                <Routes>
+                    <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.LOGIN} /></Protecte>} />
+                    <Route exact path={ROUTES.LOGIN} element={<Login />} />
+                    <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                </Routes>
+            )
+        }
+        else if (userDetails.roles.length === 1 && userDetails.roles[0].roleName === ROLES.MEMBER) {
+            return (
+                <Routes>
+                    <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />
+                    <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
+                    <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
+                    <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
+                    <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
+                    <Route exact path={ROUTES.LOGIN} element={<Login />} />
+                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
+                    <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                </Routes>
+            )
+        }
+        else if (userDetails.roles.length === 2) {
+            switch (userDetails.roles[1].roleName) {
+                case ROLES.BUSINESS_OWNER:
+                    return (
+                        <Routes>
+                            <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.BUSINESSES} /></Protecte>} />
+                            <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
+                            <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
+                            <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
+                            <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products} loggedIn={user}><Products /></Protecte>} />
+                            <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
+                            <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
+                            <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
+                            <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
+                            <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                        </Routes>
+                    )
+                case ROLES.SUPER_ADMIN:
+                    return (
+                        <Routes>
+                            <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />
+                            <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
+                            <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
+                            <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
+                            <Route exact path={ROUTES.POINTS} element={<Protecte auth={permissions.locations} loggedIn={user}><PointsOfInterest /></Protecte>} />
+                            <Route exact path={ROUTES.TRACKS} element={<Protecte auth={permissions.routes} loggedIn={user}><Tracks /></Protecte>} />
+                            <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products} loggedIn={user}><Products /></Protecte>} />
+                            <Route exact path={ROUTES.VOUCHER} element={<Protecte auth={permissions.vouchers} loggedIn={user}><Voucher /></Protecte>} />
+                            <Route exact path={ROUTES.CALENDAR} element={<Protecte auth={permissions.calendar} loggedIn={user}><Calendar /></Protecte>} />
+                            <Route exact path={ROUTES.CAMPAIGN} element={<Protecte auth={permissions.campaign} loggedIn={user}><LocalCampaigns /></Protecte>} />
+                            <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
+                            <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
+                            <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
+                            <Route exact path={ROUTES.LOGIN} element={<Login />} />
+                            <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                            {/* Admin sections */}
+                            <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority} loggedIn={user}><AuthorityMng /></Protecte>} />
+                            <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories} loggedIn={user}><TagCategoriesMng /></Protecte>} />
+                            <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
+                        </Routes>
+                    )
+            }
+        }
+    }, [userDetails, permissions, user])
+
     return (
         <Box className={classes.Router}>
             <Toaster position={'bottom-center'} />
             <Main >
                 {Boolean(Object.keys(user).length) && HeaderAndSideBar}
-                <Routes>
-                    <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />
-                    <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
-                    {/* <Route exact path={ROUTES.VERIFICATION} element={< Protecte auth={permissions.verification} loggedIn={user}><Verification /></Protecte>} /> */}
-                    <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
-                    <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
-                    <Route exact path={ROUTES.POINTS} element={<Protecte auth={permissions.locations} loggedIn={user}><PointsOfInterest /></Protecte>} />
-                    <Route exact path={ROUTES.TRACKS} element={<Protecte auth={permissions.routes} loggedIn={user}><Tracks /></Protecte>} />
-                    <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products} loggedIn={user}><Products /></Protecte>} />
-                    <Route exact path={ROUTES.VOUCHER} element={<Protecte auth={permissions.vouchers} loggedIn={user}><Voucher /></Protecte>} />
-                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
-                    <Route exact path={ROUTES.CALENDAR} element={<Protecte auth={permissions.calendar} loggedIn={user}><Calendar /></Protecte>} />
-                    <Route exact path={ROUTES.CAMPAIGN} element={<Protecte auth={permissions.campaign} loggedIn={user}><LocalCampaigns /></Protecte>} />
-                    <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
-                    <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
-                    <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
-                    <Route exact path={ROUTES.LOGIN} element={<Login />} />
-                    <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
-                    {/* Admin sections */}
-                    <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority} loggedIn={user}><AuthorityMng /></Protecte>} />
-                    <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories} loggedIn={user}><TagCategoriesMng /></Protecte>} />
-                    <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
-                </Routes>
+                {getRoutes()}
             </Main>
         </Box >
     );

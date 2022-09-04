@@ -116,7 +116,6 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
             return {
                 headerName: term(key),
                 valueFormatter: (params) => {
-                    console.log(params)
                     return params?.data?.roles?.map(role => term(role.roleName.toLowerCase())).join(' , ')
                 },
                 filterable: false,

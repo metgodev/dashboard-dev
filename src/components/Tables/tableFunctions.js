@@ -1,10 +1,13 @@
 import term from '../../terms';
 import { _patch } from '../../API/service'
 import Toast from '../../utils/useToast';
+import ROLES from '../../data/roles';
 
 export const getRowId = params => {
     return params.data._id;
 }
+
+const FAKE_ID = 'a0a0a0a0a0a0a0a0a0a0a0a0'
 
 export const updateFunction = async (params, display) => {
     try {
@@ -16,11 +19,18 @@ export const updateFunction = async (params, display) => {
     }
 }
 
-export const useGetParams = (display) => {
+export const useGetParams = (display, user) => {
+    if (user?.roles === undefined) return {}
+    let paramsToSend = {}
     if (display === 'users') {
-        return { isAnonymous: false }
+        paramsToSend.isAnonymous = false
     }
-    return {}
+    if (user.roles.length === 2 && user.roles[1].roleName === ROLES.BUSINESS_OWNER) {
+        user.roles[1].resourceIds.length > 0 ? paramsToSend._id = {
+            $in: user.roles[1].resourceIds
+        } : paramsToSend._id = FAKE_ID
+    }
+    return paramsToSend
 }
 
 export const proccessCellToExport = (params) => {

@@ -36,7 +36,8 @@ const AGTable = ({ display, action, setExportToExcel }) => {
 
     let pageData = useGetService(display, display, requestParams(area), area, false)
     const authorities = useGetService(BACK_ROUTES.AUTHORITIES, CACHED_DATA_ROUTES.AUTHORITIES, { areaId: area.id }, area, false)
-    const additionalParams = useGetParams(display)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const additionalParams = useCallback(useGetParams(display, userDetails), [userDetails])
 
     const [columnDefs, setColumnDefs] = useState([]);
     const [totalNumber, setTotalNumber] = useState(0)
@@ -151,12 +152,6 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             gridRef.current.api.setDatasource(datasource);
         }
     }, [pageData.data, gridRef, area, columnDefs])
-
-    // useEffect(() => {
-    //     if (gridRef?.current !== undefined && gridRef?.current?.defaultExcelExportParams === undefined) {
-    //             gridRef.current.defaultExcelExportParams = 
-    //     }
-    // }, [gridRef])
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>

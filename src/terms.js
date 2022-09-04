@@ -2099,6 +2099,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    premium: {
+        en: 'Premium',
+        he: 'פרימיום',
+        ar: 'الممتازة'
+    },
     every_user_must_be_a_member: {
         en: 'Every user must be a member',
         he: 'כל משתמש חייב להיות "משתמש"',

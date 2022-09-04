@@ -44,7 +44,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   }, [data])
 
   const formatValuesToSend = (values) => {
-    if ((fields.description !== undefined) && resizableText.length < 1) {
+    if ((fields.description !== undefined && fields.description !== null) && resizableText.length < 1) {
       Toast(ERRORS.EMPTY_DESCRIPTION)
       return
     }

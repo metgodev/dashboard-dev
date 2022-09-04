@@ -10,8 +10,9 @@ import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } 
 import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 import client from '../../../../API/metro'
 import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
-import term from "../../../../terms";
 import Toast from '../../../../utils/useToast'
+import ROLES from '../../../../data/roles'
+import { set_user_details } from '../../../../REDUX/actions/user.actions'
 
 export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
 
@@ -72,7 +73,17 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
         }
         try {
             if (type === "add") {
-                await client.service("events").create(valuesToSend)
+                const userBusinessRole = await client.service('user-roles').find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
+                if (userBusinessRole.data.length === 1) {
+                    const roleId = userBusinessRole.data[0]._id
+                    const eventsRes = await client.service("events").create(valuesToSend)
+                    await client.service('user-roles').patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, eventsRes._id] })
+                    const newUserDetails = await client.service('users').find({ query: { _id: user.id } })
+                    dispatch(set_user_details(newUserDetails.data[0]))
+                    dispatch(set_table_changed(type))
+                } else {
+                    Toast()
+                }
                 dispatch(set_table_changed(type))
                 handleClose(false)
             }

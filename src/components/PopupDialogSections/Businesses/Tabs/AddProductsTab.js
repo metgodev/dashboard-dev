@@ -89,7 +89,7 @@ function AddProductsTab({ areaSpecificData, type }) {
                 {listOrNewProduct ? term('add') : term('cancel')}
             </Button>
             {listOrNewProduct ?
-                <AgTableProducts products={products.data} />
+                <AgTableProducts products={products} />
                 :
                 <Box className={classes.container} >
                     <Stepper

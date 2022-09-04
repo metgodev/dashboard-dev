@@ -48,7 +48,7 @@ const structure = [
     { id: 4, label: term('points'), link: ROUTES.POINTS, icon: <Locations />, permission: 'locations' },
     { id: 5, label: term('routes'), link: ROUTES.TRACKS, icon: <Route />, permission: 'routes' },
     { id: 5, label: term('products'), link: ROUTES.PRODUCTS, icon: <ShoppingCartOutlinedIcon />, permission: 'products' },
-    { id: 5, label: term('calendar'), link: ROUTES.CALENDAR, icon: <CalendarMonthOutlinedIcon />, permission: 'products' },
+    { id: 5, label: term('calendar'), link: ROUTES.CALENDAR, icon: <CalendarMonthOutlinedIcon />, permission: 'calendar' },
     { id: 6, label: term('voucher'), link: ROUTES.VOUCHER, icon: <CardGiftcard />, permission: 'vouchers' },
     { id: 7, label: term('local_campaigns'), link: ROUTES.CAMPAIGN, icon: <CampaignOutlinedIcon />, permission: 'campaign' },
     { id: 8, label: term('map'), link: ROUTES.MAP, icon: <Map />, permission: 'map' },

@@ -68,7 +68,8 @@ const initialData = {
   galleryFileIds: [],
   approveContent: true,
   email: '',
-  roles: []
+  roles: [],
+  isPremium: false
 }
 
 
@@ -147,6 +148,7 @@ export const GetValuesForForm = (values, allTags) => {
     galleryFileIds: values.length || Object.keys(values).length ? values.hasOwnProperty('galleryFileIds') ? values.galleryFileIds : initialData.galleryFileIds : initialData.galleryFileIds,
     approveContent: values.length || Object.keys(values).length ? values.hasOwnProperty('approveContent') ? values.approveContent : initialData.approveContent : initialData.approveContent,
     roles: values.length || Object.keys(values).length ? values.hasOwnProperty('roles') ? values.roles.map(role => role.roleId) : initialData.roles : initialData.roles,
+    isPremium: values.length || Object.keys(values).length ? values.hasOwnProperty('isPremium') ? values.isPremium : initialData.isPremium : initialData.isPremium,
   }
 
   return returnValues

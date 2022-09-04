@@ -12,6 +12,8 @@ import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } 
 import { initialState, GetFormFields } from './HandleBusinessData'
 import { GetValuesForForm, getTagIdsToSend } from "../../CategoryConfig";
 import Toast from "../../../../utils/useToast";
+import ROLES from "../../../../data/roles";
+import { set_user_details } from "../../../../REDUX/actions/user.actions";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
@@ -74,12 +76,22 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                 coordinates: values.locationInfo.coordinates
             },
             reservations: values.reservations,
-            approveContent: values.approveContent
+            approveContent: values.approveContent,
+            isPremium: values.isPremium
         }
         try {
             if (type === "add") {
-                await client.service("business").create(valuesToSend)
-                dispatch(set_table_changed(type))
+                const userBusinessRole = await client.service('user-roles').find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
+                if (userBusinessRole.data.length === 1) {
+                    const roleId = userBusinessRole.data[0]._id
+                    const businessRes = await client.service("business").create(valuesToSend)
+                    await client.service('user-roles').patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, businessRes._id] })
+                    const newUserDetails = await client.service('users').find({ query: { _id: user.id } })
+                    dispatch(set_user_details(newUserDetails.data[0]))
+                    dispatch(set_table_changed(type))
+                } else {
+                    Toast()
+                }
                 handleClose(false)
             }
             else {

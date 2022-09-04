@@ -20,10 +20,10 @@ const AgTableProducts = ({ products }) => {
 
     return (
         <div className="ag-theme-alpine" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: "100%", width: '100%' }}>
-            {products.length > 0 ? <div className='ag-table' style={{ width: '100%', height: '100%' }} >
+            {!products.loading ? <div className='ag-table' style={{ width: '100%', height: '100%' }} >
                 <AgGridReact
                     ref={gridRef}
-                    rowData={products}
+                    rowData={products.data}
                     gridOptions={gridOptions}
                     getRowId={getRowId}
                 />
