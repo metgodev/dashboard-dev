@@ -2139,6 +2139,11 @@ const active_lexicon = {
         he: 'פרימיום',
         ar: 'الممتازة'
     },
+    you_dont_have_permission: {
+        en: 'You dont have permission',
+        he: 'אין לך הרשאות מספקות',
+        ar: 'ليس لديك إذن'
+    },
     every_user_must_be_a_member: {
         en: 'Every user must be a member',
         he: 'כל משתמש חייב להיות "משתמש"',

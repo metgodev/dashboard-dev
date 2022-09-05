@@ -19,6 +19,7 @@ import Toast from "../../../utils/useToast";
 import ERRORS from "../../../data/errors";
 import MESSAGES from '../../../data/messages'
 import { resetPassword } from '../../../API/firebase'
+import ROLES from "../../../data/roles";
 
 function SignIn() {
 
@@ -55,7 +56,12 @@ function SignIn() {
                 if (res.error) {
                     setError(res.error)
                     Toast(ERRORS.WRONG_DETAILS)
-                } else {
+                }
+                else if (res.roles[1].roleName !== ROLES.BUSINESS_OWNER) {
+                    setIsLoading(false)
+                    Toast(term('you_dont_have_permission'))
+                }
+                else {
                     let userDetails = {
                         e: res.email,
                         fn: term('welcome_guest'),
