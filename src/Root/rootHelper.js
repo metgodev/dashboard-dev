@@ -1,6 +1,6 @@
 import Header from '../components/Header/Header';
 import SideBar from '../components/Sidebar/Sidebar';
-import ROUTES from '../data/routes';
+import { ROUTES } from '../data/routes';
 import Login from '../pages/login/Login';
 
 export const Protecte = ({ auth, loggedIn, children }) => {

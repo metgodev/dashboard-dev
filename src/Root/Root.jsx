@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useCallback, useEffect } from 'react';
+import React, { useLayoutEffect, useCallback } from 'react';
 //MUI
 import { Routes, Route, useLocation, Navigate, } from 'react-router-dom'
 import { Box } from '@material-ui/core';
@@ -25,7 +25,7 @@ import AuthorityMng from '../pages/admin/AuthorityMng';
 import TagCategoriesMng from '../pages/admin/TagCategoriesMng';
 //Helper
 import { Protecte, getHeaderAndSidebar } from './rootHelper.js';
-import ROUTES from '../data/routes';
+import { ROUTES, BUSINESS_OWNER_ROUTES } from '../data/routes';
 //Components
 import { Toaster } from 'react-hot-toast';
 //Redux
@@ -43,6 +43,7 @@ const Root = () => {
     //Global state
     const dispatch = useDispatch()
     let location = useLocation();
+    //User details
     const userDetails = useSelector(s => s.userReducer.userDetails)
     const user = useSelector(s => s.mainRememberReducer.user)
     //Permission management
@@ -66,6 +67,7 @@ const Root = () => {
             return (
                 <Routes>
                     <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.LOGIN} /></Protecte>} />
+                    <Route exact path={BUSINESS_OWNER_ROUTES.LOGIN} element={<Login />} />
                     <Route exact path={ROUTES.LOGIN} element={<Login />} />
                     <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
                 </Routes>
@@ -90,16 +92,14 @@ const Root = () => {
                 case ROLES.BUSINESS_OWNER:
                     return (
                         <Routes>
-                            <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.BUSINESSES} /></Protecte>} />
-                            <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
-                            <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
-                            <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
-                            <Route exact path={ROUTES.PRODUCTS} element={<Protecte auth={permissions.products} loggedIn={user}><Products /></Protecte>} />
-                            <Route exact path={ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
-                            <Route exact path={ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
-                            <Route exact path={ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
-                            <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
-                            <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={BUSINESS_OWNER_ROUTES.DASHBOARD} /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
+                            <Route path={BUSINESS_OWNER_ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
                         </Routes>
                     )
                 case ROLES.SUPER_ADMIN:

@@ -3,6 +3,7 @@ const CACHED_DATA_ROUTES = {
     DASH_MAP_EVENTS: "eventsDashMap",
     DASH_MAP_POINTS: "pointsDashMap",
     DASH_MAP_TRACKS: "tracksDashMap",
+    PRODUCTS_MAP_TRACKS: 'productsDashMap',
     AUTHORITIES: 'authorities',
     AREA: 'area',
     TAG_CATEGORIES: 'tag-categories'

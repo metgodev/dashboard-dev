@@ -14,13 +14,16 @@ import term from "../../../terms";
 import { useDispatch, useSelector } from "react-redux";
 import { set_user_details } from "../../../REDUX/actions/user.actions";
 import { AVATAR_URL } from "../config";
-import ROUTES from '../../../data/routes'
+import { ROUTES } from '../../../data/routes'
+import ProfileModal from "../../ProfileModal/ProfileModal";
 
 function ProfileMenu() {
     // local
     let [profileMenu, setProfileMenu] = useState(null);
+    const [openProfileModal, setOpenProfileModal] = useState(false)
     //global 
     const { user } = useSelector(state => state.mainRememberReducer)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
 
     let classes = useStyles();
     let avatar = `${AVATAR_URL + user.fn}`
@@ -36,6 +39,7 @@ function ProfileMenu() {
 
     return (
         <>
+            <ProfileModal open={openProfileModal} setOpen={setOpenProfileModal} user={userDetails} />
             <IconButton
                 aria-haspopup="true"
                 color="inherit"
@@ -61,15 +65,16 @@ function ProfileMenu() {
                         {`${user.fn} ${user.ln}`}
                     </Typography>
                 </div>
-                {/* <MenuItem
+                <MenuItem
                     className={classNames(
                         classes.profileMenuItem,
                         classes.headerMenuItem,
                     )}
+                    onClick={() => setOpenProfileModal(true)}
                 >
                     <AccountIcon className={classes.profileMenuIcon} /> {term('profile')}
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                     className={classNames(
                         classes.profileMenuItem,
                         classes.headerMenuItem,

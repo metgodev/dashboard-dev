@@ -2099,6 +2099,41 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    notifications: {
+        en: 'Notifications',
+        he: 'התראות',
+        ar: 'إشعارات'
+    },
+    unapproved_businesses: {
+        en: 'businesses waiting for approval',
+        he: 'עסקים ממתינים לאישור',
+        ar: 'الشركات غير المعتمدة'
+    },
+    unapproved_events: {
+        en: 'businesses waiting for approval',
+        he: 'אירועים ממתינים לאישור',
+        ar: 'الأحداث غير المعتمدة'
+    },
+    unapproved_points: {
+        en: 'points waiting for approval',
+        he: 'נקודות ממתינות לאישור',
+        ar: 'النقاط غير المعتمدة'
+    },
+    unapproved_tracks: {
+        en: 'tracks waiting for approval',
+        he: 'מסלולים ממתינים לאישור',
+        ar: 'المسارات غير المعتمدة'
+    },
+    unapproved_products: {
+        en: 'products waiting for approval',
+        he: 'מוצרים ממתינים לאישור',
+        ar: 'المنتجات غير المعتمدة'
+    },
+    you_have: {
+        en: 'You have',
+        he: 'יש לך',
+        ar: 'عندك'
+    },
     premium: {
         en: 'Premium',
         he: 'פרימיום',

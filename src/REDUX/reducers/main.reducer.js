@@ -1,4 +1,4 @@
-import { SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_FILTER_TABLE, SET_CURRENT_ID, SET_EDIT_TAB_DATA } from "../actions/main.actions";
+import { SET_ADMIN_NOTIFICATION, SET_SIDEBAR_TOGGLE, SET_MOBILE_TOGGLE, SET_INITIAL_DATA_DIALOG, SET_TABLE_CHANGED, SET_FILTER_TABLE, SET_CURRENT_ID, SET_EDIT_TAB_DATA } from "../actions/main.actions";
 
 const initialState = {
     sidebar: false,
@@ -8,12 +8,12 @@ const initialState = {
     filterTable: {},
     currentID: '',
     editTabData: {},
+    adminNotification: true
 }
 
 export default (state = initialState, action) => {
 
     switch (action.type) {
-
         case SET_SIDEBAR_TOGGLE:
             return {
                 ...state, sidebar: action.payload
@@ -41,6 +41,10 @@ export default (state = initialState, action) => {
         case SET_EDIT_TAB_DATA:
             return {
                 ...state, editTabData: action.payload
+            }
+        case SET_ADMIN_NOTIFICATION:
+            return {
+                ...state, adminNotification: action.payload
             }
         default:
             return state

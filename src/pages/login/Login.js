@@ -5,15 +5,19 @@ import useStyles from "./styles";
 
 // logo
 import logo from "../../Assets/svgs/MTN.svg";
-import Register from "./Register";
-import SignIn from "./SignIn";
+import Register from "./adminLogin/Register";
+import SignIn from "./adminLogin/SignIn";
 import term from "../../terms"
+import PATHS from "../../data/paths";
+import BusinessLogin from './businessLogin/BusinessLogin'
+import BusinessRegister from './businessLogin/BusinessRegister'
 
 function Login() {
   let classes = useStyles();
 
   // local
   let [activeTabId, setActiveTabId] = useState(0);
+  const currentHref = window.location.href
 
   return (
     <Grid container className={classes.container}>
@@ -29,8 +33,8 @@ function Login() {
             <Tab label={term("log_in")} classes={{ root: classes.tab }} />
             <Tab label={term("sign_up")} classes={{ root: classes.tab }} />
           </Tabs>
-          {activeTabId === 0 && (<SignIn />)}
-          {activeTabId === 1 && (<Register />)}
+          {activeTabId === 0 && (currentHref === PATHS.BUSINESS_LOGIN ? <BusinessLogin /> : <SignIn />)}
+          {activeTabId === 1 && (currentHref === PATHS.BUSINESS_LOGIN ? <BusinessRegister /> : <Register />)}
         </div>
       </div>
       <div className={classes.logotypeContainer}>

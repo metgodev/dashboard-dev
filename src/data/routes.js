@@ -1,4 +1,4 @@
-const ROUTES = {
+export const ROUTES = {
     ROOT: '/',
     DASHBOARD: '/dashboard',
     VERIFICATION: '/verification',
@@ -21,4 +21,14 @@ const ROUTES = {
     CALENDAR: '/calendar'
 }
 
-export default ROUTES
+export const BUSINESS_OWNER_ROUTES = {
+    ROOT: '/',
+    LOGIN: '/business/login',
+    DASHBOARD: '/business/dashboard',
+    BUSINESSES: '/business/businesses',
+    MAP: '/business/maps',
+    EVENTS: '/business/events',
+    SUPPORT: '/business/support',
+    FAQ: '/business/FAQ',
+    ERROR: '*'
+}

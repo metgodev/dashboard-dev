@@ -13,10 +13,6 @@ import {
     MapOutlined as Map,
     HelpOutlineOutlined as Support,
 } from "@material-ui/icons";
-import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
-import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 // styles
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
@@ -26,38 +22,10 @@ import SidebarLink from "./SidebarLink/SidebarLink";
 //global
 import { useSelector, useDispatch } from "react-redux";
 import { set_mobile_toggle, set_sidebar_toggle } from "../../REDUX/actions/main.actions";
-import term from "../../terms";
 import GetPermissions from "../../hooks/GetPermissions";
 import LISTENER from "../../data/listener";
-import ROUTES from '../../data/routes'
 import { Box } from "@mui/system";
-
-const structure = [
-    {
-        id: 0, label: term('admin'), icon: <AdminPanelSettingsOutlinedIcon />,
-        children: [
-            { label: term('manage_area'), link: ROUTES.AUTHORITY },
-            { label: term('manage_tags'), link: ROUTES.TAG_CATEGORIES },
-            { label: term('manage_users'), link: ROUTES.USERS },
-        ],
-        permission: 'admin'
-    },
-    { id: 1, label: term('dashboard'), link: ROUTES.DASHBOARD, icon: <HomeIcon />, permission: 'dashboard' },
-    { id: 2, label: term('businesses'), link: ROUTES.BUSINESSES, icon: <Businesses />, permission: 'business' },
-    { id: 3, label: term('events'), link: ROUTES.EVENTS, icon: <Event />, permission: 'events' },
-    { id: 4, label: term('points'), link: ROUTES.POINTS, icon: <Locations />, permission: 'locations' },
-    { id: 5, label: term('routes'), link: ROUTES.TRACKS, icon: <Route />, permission: 'routes' },
-    { id: 5, label: term('products'), link: ROUTES.PRODUCTS, icon: <ShoppingCartOutlinedIcon />, permission: 'products' },
-    { id: 5, label: term('calendar'), link: ROUTES.CALENDAR, icon: <CalendarMonthOutlinedIcon />, permission: 'calendar' },
-    { id: 6, label: term('voucher'), link: ROUTES.VOUCHER, icon: <CardGiftcard />, permission: 'vouchers' },
-    { id: 7, label: term('local_campaigns'), link: ROUTES.CAMPAIGN, icon: <CampaignOutlinedIcon />, permission: 'campaign' },
-    { id: 8, label: term('map'), link: ROUTES.MAP, icon: <Map />, permission: 'map' },
-    { id: 9, type: "divider", },
-    { id: 10, type: 'title', label: term('help') },
-    { id: 11, label: term('support'), link: ROUTES.SUPPORT, icon: <Support />, permission: 'support' },
-    { id: 13, label: term('faq'), link: ROUTES.FAQ, icon: <FAQIcon />, support: 'faq' },
-    { id: 14, type: "divider" },
-];
+import { getLink } from "./sidebarConfig";
 
 const Sidebar = React.memo(({ location }) => {
     let classes = useStyles();
@@ -67,6 +35,7 @@ const Sidebar = React.memo(({ location }) => {
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
     const toggleSideBar = () => dispatch(set_sidebar_toggle(!sidebar))
     const user = useSelector(s => s.userReducer.userDetails)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
     const permissions = GetPermissions(user)
 
     useEffect(() => {
@@ -100,20 +69,21 @@ const Sidebar = React.memo(({ location }) => {
                 </IconButton>
             </div>
             <List >
-                {Boolean(Object.keys(permissions).length) ? structure.map(link => {
-                    if (link.permission === undefined || permissions[link.permission]) {
-                        return (
-                            (
-                                <SidebarLink
-                                    key={link.id}
-                                    location={location}
-                                    sidebar={sidebar}
-                                    {...link}
-                                />
+                {Boolean(Object.keys(permissions).length) && Boolean(Object.keys(userDetails).length) ?
+                    getLink(userDetails).map(link => {
+                        if (link.permission === undefined || permissions[link.permission]) {
+                            return (
+                                (
+                                    <SidebarLink
+                                        key={link.id}
+                                        location={location}
+                                        sidebar={sidebar}
+                                        {...link}
+                                    />
+                                )
                             )
-                        )
-                    }
-                })
+                        }
+                    })
                     :
                     <Box sx={{ marginTop: '20px', width: '100%', display: 'flex', justifyContent: 'center' }}>
                         <CircularProgress />

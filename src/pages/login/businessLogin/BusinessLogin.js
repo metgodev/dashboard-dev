@@ -4,23 +4,24 @@ import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, 
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // styles
-import useStyles from "./styles";
-import term from "../../terms";
+import useStyles from "../styles";
+import term from "../../../terms";
 //Server
-import { Auth } from "../../API/metro";
-import { loginWithEmailAndPassword } from "../../API/firebase";
+import { Auth } from "../../../API/metro";
+import { loginWithEmailAndPassword } from "../../../API/firebase";
 //Redux
 import { useDispatch } from "react-redux";
-import { set_user } from "../../REDUX/actions/main.actions";
-import { set_user_details } from '../../REDUX/actions/user.actions'
-import LISTENER from "../../data/listener";
-import ROUTES from "../../data/routes";
-import Toast from "../../utils/useToast";
-import ERRORS from "../../data/errors";
-import MESSAGES from '../../data/messages'
-import { resetPassword } from '../../API/firebase'
+import { set_user } from "../../../REDUX/actions/main.actions";
+import { set_user_details } from '../../../REDUX/actions/user.actions'
+import LISTENER from "../../../data/listener";
+import { BUSINESS_OWNER_ROUTES, ROUTES } from "../../../data/routes";
+import Toast from "../../../utils/useToast";
+import ERRORS from "../../../data/errors";
+import MESSAGES from '../../../data/messages'
+import { resetPassword } from '../../../API/firebase'
 
 function SignIn() {
+
     let classes = useStyles();
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -64,7 +65,7 @@ function SignIn() {
                     }
                     dispatch(set_user(userDetails));
                     dispatch(set_user_details(res))
-                    navigate(ROUTES.DASHBOARD)
+                    navigate(BUSINESS_OWNER_ROUTES.DASHBOARD)
                     setIsLoading(false);
                 }
             }).catch((e) => {

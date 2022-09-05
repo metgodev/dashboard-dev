@@ -17,8 +17,15 @@ import { headerBtns, requestParams } from "./dashboardHelpers";
 import { sortDataForMap } from "../maps/mapsHelpers";
 import BACK_ROUTES from '../../data/back_routes'
 import CACHED_DATA_ROUTES from '../../data/cached_data_routes'
+import AdminNotifications from "../../components/AdminNotifications/AdminNotifications";
+import { useSelector } from "react-redux";
+import GetPermissions from "../../hooks/GetPermissions";
 
 export default function Dashboard() {
+
+  const userDetails = useSelector(s => s.userReducer.userDetails)
+  const permissions = GetPermissions(userDetails)
+  const adminNotification = useSelector(s => s.mainReducer.adminNotification)
 
   const [entitiesCount, setEntitiesCount] = useState({
     businesses: [],
@@ -33,6 +40,7 @@ export default function Dashboard() {
   const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.DASH_MAP_EVENTS, requestParams)
   const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.DASH_MAP_POINTS, requestParams)
   const tracks = useGetService(BACK_ROUTES.TRACKS, CACHED_DATA_ROUTES.DASH_MAP_TRACKS, requestParams)
+  const products = useGetService(BACK_ROUTES.PRODUCTS, CACHED_DATA_ROUTES.PRODUCTS_MAP_TRACKS, requestParams)
 
   useEffect(() => {
     if (!businesses.loading && !events.loading && !points.loading && !tracks.loading) {
@@ -43,6 +51,10 @@ export default function Dashboard() {
 
   return (
     <>
+      {permissions?.adminNotification &&
+        adminNotification &&
+        <AdminNotifications open={adminNotification} businesses={businesses} events={events} points={points} tracks={tracks} products={products} />
+      }
       <PageTitle calendar title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
       <Grid container spacing={2}>
         <Grid item lg={6} md={5} sm={12} xs={12}>

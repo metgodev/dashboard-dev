@@ -9,4 +9,4 @@ export const headerBtns = [
     { name: term('monthly'), func: () => console.log('Months'), buttonIcon: <CalendarTodayOutlinedIcon /> },
 ]
 
-export const requestParams = { $limit: 1000, $select: ['shortDescription', 'price', 'locationName', 'openHour', 'startDate', '_id', 'location', 'locationInfo', 'tags', 'tagsIds', 'createdAt', 'name', 'shortDescription'] }
+export const requestParams = { $limit: 1000, $select: ['status', 'shortDescription', 'price', 'locationName', 'openHour', 'startDate', '_id', 'location', 'locationInfo', 'tags', 'tagsIds', 'createdAt', 'name', 'shortDescription'] }
