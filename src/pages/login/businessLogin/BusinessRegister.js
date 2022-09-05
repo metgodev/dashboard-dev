@@ -12,9 +12,12 @@ import { set_user_details } from '../../../REDUX/actions/user.actions'
 // styles
 import useStyles from "../styles";
 import LISTENER from '../../../data/listener';
-import { ROUTES } from '../../../data/routes';
+import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes';
 import Toast from '../../../utils/useToast';
 import ERRORS from '../../../data/errors';
+import ROLES from '../../../data/roles';
+import client from '../../../API/metro'
+import BACK_ROUTES from '../../../data/back_routes';
 
 function Register() {
 
@@ -49,39 +52,71 @@ function Register() {
 
 
     const registerUser = async () => {
+
         if (password.length < 6) {
             Toast(ERRORS.SIX_CHARACTERS_PASSWORD)
             return
         }
         setIsLoading(true)
-        registerUserWithEmailAndPassword(email, password).then(res => {
-            if (res === undefined) {
+        try {
+            const firstRes = await registerUserWithEmailAndPassword(email, password)
+            if (firstRes === undefined) {
                 Toast(ERRORS.INVALID_EMAIL)
                 setIsLoading(false);
                 return
-            }
-            Auth(res.user.accessToken).then(res => {
-                if (res.error) {
-                    setIsLoading(false);
+            } else {
+                const secondRes = await Auth(firstRes.user.accessToken)
+                if (secondRes.error) {
+                    setIsLoading(false)
                 } else {
                     let user = {
-                        e: res.email,
-                        v: res.isVerified,
-                        id: res._id
+                        e: secondRes.email,
+                        v: secondRes.isVerified,
+                        id: secondRes._id
                     }
+                    await client.service(BACK_ROUTES.USER_ROLES).create({ userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID })
+                    const userDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
                     dispatch(set_user(user));
-                    dispatch(set_user_details(res))
-                    navigate(ROUTES.DASHBOARD)
+                    dispatch(set_user_details(userDetails.data[0]))
+                    navigate(BUSINESS_OWNER_ROUTES.DASHBOARD)
                     setIsLoading(false);
                 }
-            }).catch(e => {
-                console.log('register', e)
-                Toast()
-            })
-        }).catch(e => {
+            }
+        } catch (e) {
             console.log('register', e)
             Toast()
-        })
+        }
+        //---------------------------------------------------------------------------------
+        // registerUserWithEmailAndPassword(email, password).then(res => {
+        //     if (res === undefined) {
+        //         Toast(ERRORS.INVALID_EMAIL)
+        //         setIsLoading(false);
+        //         return
+        //     }
+        //     Auth(res.user.accessToken).then(res => {
+        //         if (res.error) {
+        //             setIsLoading(false);
+        //         } else {
+        //             let user = {
+        //                 e: res.email,
+        //                 v: res.isVerified,
+        //                 id: res._id
+        //             }
+        //             await client.service(BACK_ROUTES.USER_ROLES).create({ userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID })
+        //             const userDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
+        //             dispatch(set_user(user));
+        //             dispatch(set_user_details(userDetails))
+        //             navigate(ROUTES.DASHBOARD)
+        //             setIsLoading(false);
+        //         }
+        //     }).catch(e => {
+        //         console.log('register', e)
+        //         Toast()
+        //     })
+        // }).catch(e => {
+        //     console.log('register', e)
+        //     Toast()
+        // })
     }
 
     return (

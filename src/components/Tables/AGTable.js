@@ -151,7 +151,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
             }
             gridRef.current.api.setDatasource(datasource);
         }
-    }, [pageData.data, gridRef, area, columnDefs])
+    }, [pageData.data, gridRef, area, columnDefs, tableChanged])
 
     return (
         <div className="ag-theme-alpine" style={{ width: '99.7%' }}>

@@ -90,6 +90,8 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
                     dispatch(set_user_details(newUserDetails.data[0]))
                     dispatch(set_table_changed(type))
                 } else {
+                    await client.service("business").create(valuesToSend)
+                    dispatch(set_table_changed(type))
                     Toast()
                 }
                 handleClose(false)

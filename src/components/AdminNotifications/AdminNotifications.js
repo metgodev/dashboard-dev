@@ -66,12 +66,12 @@ function AdminNotifications({ open, businesses, events, points, tracks, products
                                 <NotificationItem
                                     text={`${term('you_have')} ${numberOfPoints} ${term('unapproved_points')}`}
                                     buttonText={term('points')}
-                                    onClick={() => buttonPressed('/points')}
+                                    onClick={() => buttonPressed('/locations')}
                                 />
                                 <NotificationItem
                                     text={`${term('you_have')} ${numberOfTracks} ${term('unapproved_tracks')}`}
                                     buttonText={term('tracks')}
-                                    onClick={() => buttonPressed('/tracks')}
+                                    onClick={() => buttonPressed('/routes')}
                                 />
                                 <NotificationItem
                                     text={`${term('you_have')} ${numberOfProducts} ${term('unapproved_products')}`}

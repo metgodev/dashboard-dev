@@ -39,7 +39,7 @@ function UsersTab({ handleClose, type, areaSpecificData }) {
                     client.service(BACK_ROUTES.USER_ROLES).remove(role._id)
                 }
             })
-            const newRoles = areaSpecificData.roles.filter(role => role.id !== '61d2e32a04f66555eab743fc' && formValues.roles.includes(role.id))
+            const newRoles = areaSpecificData.roles.filter(role => role.id !== ROLES.MEMBER_ROLE_ID && formValues.roles.includes(role.id))
             newRoles.forEach(role => {
                 client.service(BACK_ROUTES.USER_ROLES).create({ userId: init._id, roleId: role.id })
             })
