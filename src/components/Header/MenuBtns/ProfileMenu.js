@@ -14,7 +14,7 @@ import term from "../../../terms";
 import { useDispatch, useSelector } from "react-redux";
 import { set_user_details } from "../../../REDUX/actions/user.actions";
 import { AVATAR_URL } from "../config";
-import { ROUTES } from '../../../data/routes'
+import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes'
 import ProfileModal from "../../ProfileModal/ProfileModal";
 
 function ProfileMenu() {
@@ -29,12 +29,18 @@ function ProfileMenu() {
     let avatar = `${AVATAR_URL + user.fn}`
     let navigate = useNavigate()
     const dispatch = useDispatch()
+    let currentHref = window.location.href
 
     const logout = () => {
         dispatch(set_user_details({}))
         client.logout();
         window.localStorage.clear()
-        navigate(ROUTES.LOGIN)
+        if (currentHref.split('/').includes('business')) {
+            navigate(BUSINESS_OWNER_ROUTES.LOGIN)
+        } else {
+            navigate(ROUTES.LOGIN)
+        }
+
     }
 
     return (

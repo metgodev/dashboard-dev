@@ -1,6 +1,6 @@
 import Header from '../components/Header/Header';
 import SideBar from '../components/Sidebar/Sidebar';
-import { ROUTES } from '../data/routes';
+import { BUSINESS_OWNER_ROUTES, ROUTES } from '../data/routes';
 import Login from '../pages/login/Login';
 
 export const Protecte = ({ auth, loggedIn, children }) => {
@@ -12,7 +12,7 @@ export const Protecte = ({ auth, loggedIn, children }) => {
 }
 
 export const getHeaderAndSidebar = (location) => {
-    if (location?.pathname === ROUTES.LOGIN) {
+    if (location?.pathname === ROUTES.LOGIN || location?.pathname === BUSINESS_OWNER_ROUTES.LOGIN) {
         return <></>
     }
     return (
