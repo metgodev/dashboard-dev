@@ -6,26 +6,27 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { set_admin_notification } from '../../REDUX/actions/main.actions'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import useGetService from '../../hooks/useGetService';
+import BACK_ROUTES from '../../data/back_routes';
+import CACHED_DATA_ROUTES from '../../data/cached_data_routes';
 
-function AdminNotifications({ open, businesses, events, points, tracks, products }) {
+function AdminNotifications({ open }) {
+
+    const requestParams = { $limit: 10000, status: 'PENDING_APPROVAL', $select: ['status'] }
 
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.NOTIFICATION_BUSINESSES, requestParams)
+    const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.NOTIFICATION_EVENTS, requestParams)
+    const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.NOTIFICATION_POINTS, requestParams)
+    const tracks = useGetService(BACK_ROUTES.TRACKS, CACHED_DATA_ROUTES.NOTIFICATION_TRACKS, requestParams)
+    const products = useGetService(BACK_ROUTES.PRODUCTS, CACHED_DATA_ROUTES.NOTIFICATION_PRODUCTS, requestParams)
+
     const [loading, setLoading] = useState(true)
-    const [numberOfBusinesses, setNumberOfBusinesses] = useState(0)
-    const [numberOfEvents, setNumberOfEvents] = useState(0)
-    const [numberOfPoints, setNumberOfPoints] = useState(0)
-    const [numberOfTracks, setNumberOfTracks] = useState(0)
-    const [numberOfProducts, setNumberOfProducts] = useState(0)
 
     useEffect(() => {
         if (!businesses.loading && !events.loading && !points.loading && !tracks.loading && !products.loading) {
-            setNumberOfBusinesses(businesses.data.filter(business => business.status === 'PENDING_APPROVAL').length)
-            setNumberOfEvents(events.data.filter(event => event.status === 'PENDING_APPROVAL').length)
-            setNumberOfPoints(points.data.filter(point => point.status === 'PENDING_APPROVAL').length)
-            setNumberOfTracks(tracks.data.filter(track => track.status === 'PENDING_APPROVAL').length)
-            setNumberOfProducts(products.data.filter(product => product.status === 'PENDING_APPROVAL').length)
             setLoading(false)
         }
     }, [businesses, events, points, tracks, products])
@@ -57,26 +58,31 @@ function AdminNotifications({ open, businesses, events, points, tracks, products
                             <CircularProgress size={50} />
                             :
                             <div>
-                                <NotificationItem
-                                    text={`${term('you_have')} ${numberOfBusinesses} ${term('unapproved_businesses')}`}
-                                    onClick={() => buttonPressed('/businesses')}
-                                />
-                                <NotificationItem
-                                    text={`${term('you_have')} ${numberOfEvents} ${term('unapproved_events')}`}
-                                    onClick={() => buttonPressed('/events')}
-                                />
-                                <NotificationItem
-                                    text={`${term('you_have')} ${numberOfPoints} ${term('unapproved_points')}`}
-                                    onClick={() => buttonPressed('/locations')}
-                                />
-                                <NotificationItem
-                                    text={`${term('you_have')} ${numberOfTracks} ${term('unapproved_tracks')}`}
-                                    onClick={() => buttonPressed('/routes')}
-                                />
-                                <NotificationItem
-                                    text={`${term('you_have')} ${numberOfProducts} ${term('unapproved_products')}`}
-                                    onClick={() => buttonPressed('/products')}
-                                />
+                                {businesses.data.length > 0 &&
+                                    <NotificationItem
+                                        text={`${term('you_have')} ${businesses.data.length} ${term('unapproved_businesses')}`}
+                                        onClick={() => buttonPressed('/businesses')}
+                                    />}
+                                {events.data.length > 0 &&
+                                    <NotificationItem
+                                        text={`${term('you_have')} ${events.data.length} ${term('unapproved_events')}`}
+                                        onClick={() => buttonPressed('/events')}
+                                    />}
+                                {points.data.length > 0 &&
+                                    <NotificationItem
+                                        text={`${term('you_have')} ${points.data.length} ${term('unapproved_points')}`}
+                                        onClick={() => buttonPressed('/locations')}
+                                    />}
+                                {tracks.data.length > 0 &&
+                                    <NotificationItem
+                                        text={`${term('you_have')} ${tracks.data.length} ${term('unapproved_tracks')}`}
+                                        onClick={() => buttonPressed('/routes')}
+                                    />}
+                                {products.data.length > 0 &&
+                                    <NotificationItem
+                                        text={`${term('you_have')} ${products.data.length} ${term('unapproved_products')}`}
+                                        onClick={() => buttonPressed('/products')}
+                                    />}
                             </div>
                         }
                     </Box>

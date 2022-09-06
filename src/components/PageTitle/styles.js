@@ -6,6 +6,7 @@ export default makeStyles(theme => ({
     justifyContent: "space-between",
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
+    width: '100%'
   },
   typo: {
     color: theme.palette.text.hint,

@@ -52,8 +52,7 @@ export default function Dashboard() {
   return (
     <>
       {permissions?.adminNotification &&
-        adminNotification &&
-        <AdminNotifications open={adminNotification} businesses={businesses} events={events} points={points} tracks={tracks} products={products} />
+        <AdminNotifications open={adminNotification} />
       }
       <PageTitle calendar title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
       <Grid container spacing={2}>

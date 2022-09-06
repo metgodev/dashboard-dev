@@ -15,15 +15,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { set_user_details } from "../../../REDUX/actions/user.actions";
 import { AVATAR_URL } from "../config";
 import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes'
-import ProfileModal from "../../ProfileModal/ProfileModal";
+import { set_admin_notification } from "../../../REDUX/actions/main.actions";
+import AdminNotifications from "../../AdminNotifications/AdminNotifications";
+import GetPermissions from "../../../hooks/GetPermissions";
 
 function ProfileMenu() {
     // local
     let [profileMenu, setProfileMenu] = useState(null);
-    const [openProfileModal, setOpenProfileModal] = useState(false)
     //global 
     const { user } = useSelector(state => state.mainRememberReducer)
+    const adminNotification = useSelector(s => s.mainReducer.adminNotification)
     const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     let classes = useStyles();
     let avatar = `${AVATAR_URL + user.fn}`
@@ -40,12 +43,27 @@ function ProfileMenu() {
         } else {
             navigate(ROUTES.LOGIN)
         }
+    }
 
+    const handleProfileClicked = () => {
+        if (currentHref.split('/').includes('business')) {
+            navigate(BUSINESS_OWNER_ROUTES.PROFILE)
+        } else {
+            navigate(ROUTES.PROFILE)
+        }
+        setProfileMenu(null)
+    }
+
+    const handleNotificationClicked = () => {
+        dispatch(set_admin_notification(true))
+        setProfileMenu(null)
     }
 
     return (
         <>
-            <ProfileModal open={openProfileModal} setOpen={setOpenProfileModal} user={userDetails} />
+            {permissions?.adminNotification &&
+                <AdminNotifications open={adminNotification} />
+            }
             <IconButton
                 aria-haspopup="true"
                 color="inherit"
@@ -76,19 +94,20 @@ function ProfileMenu() {
                         classes.profileMenuItem,
                         classes.headerMenuItem,
                     )}
-                    onClick={() => setOpenProfileModal(true)}
+                    onClick={() => handleProfileClicked()}
                 >
                     <AccountIcon className={classes.profileMenuIcon} /> {term('profile')}
                 </MenuItem>
-                {/* <MenuItem
+                <MenuItem
                     className={classNames(
                         classes.profileMenuItem,
                         classes.headerMenuItem,
                     )}
+                    onClick={() => handleNotificationClicked()}
                 >
                     <AccountIcon className={classes.profileMenuIcon} /> {term('tasks')}
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                     className={classNames(
                         classes.profileMenuItem,
                         classes.headerMenuItem,

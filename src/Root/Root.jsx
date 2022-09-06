@@ -36,6 +36,7 @@ import { reAuth } from '../API/metro';
 //Hooks
 import GetPermissions from '../hooks/GetPermissions'
 import ROLES from '../data/roles';
+import Profile from '../pages/profile/Profile';
 
 const Root = () => {
     //Styles
@@ -84,6 +85,7 @@ const Root = () => {
                     <Route exact path={ROUTES.LOGIN} element={<Login />} />
                     <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
                     <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                    <Route exact path={ROUTES.PROFILE} element={<Protecte auth={permissions.profile} loggedIn={user}><Profile /></Protecte>} />
                 </Routes>
             )
         }
@@ -99,7 +101,7 @@ const Root = () => {
                             <Route exact path={BUSINESS_OWNER_ROUTES.MAP} element={<Protecte auth={permissions.map} loggedIn={user}><Maps /></Protecte>} />
                             <Route exact path={BUSINESS_OWNER_ROUTES.SUPPORT} element={<Protecte auth={permissions.support} loggedIn={user}><Support /></Protecte>} />
                             <Route exact path={BUSINESS_OWNER_ROUTES.FAQ} element={<Protecte auth={permissions.faq} loggedIn={user}><FAQ /></Protecte>} />
-                            <Route path={BUSINESS_OWNER_ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                            <Route exact path={BUSINESS_OWNER_ROUTES.PROFILE} element={<Protecte auth={permissions.profile} loggedIn={user}><Profile /></Protecte>} />
                         </Routes>
                     )
                 case ROLES.SUPER_ADMIN:
@@ -107,6 +109,7 @@ const Root = () => {
                         <Routes>
                             <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />
                             <Route exact path={ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
+                            <Route exact path={ROUTES.PROFILE} element={<Protecte auth={permissions.profile} loggedIn={user}><Profile /></Protecte>} />
                             <Route exact path={ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />
                             <Route exact path={ROUTES.EVENTS} element={<Protecte auth={permissions.events} loggedIn={user}><Events /></ Protecte >} />
                             <Route exact path={ROUTES.POINTS} element={<Protecte auth={permissions.locations} loggedIn={user}><PointsOfInterest /></Protecte>} />

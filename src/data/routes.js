@@ -18,7 +18,8 @@ export const ROUTES = {
     TAG_CATEGORIES: '/admin/tagcategories',
     USERS: '/admin/users',
     PRODUCTS: '/products',
-    CALENDAR: '/calendar'
+    CALENDAR: '/calendar',
+    PROFILE: '/profile'
 }
 
 export const BUSINESS_OWNER_ROUTES = {
@@ -30,5 +31,6 @@ export const BUSINESS_OWNER_ROUTES = {
     EVENTS: '/business/events',
     SUPPORT: '/business/support',
     FAQ: '/business/FAQ',
-    ERROR: '*'
+    ERROR: '*',
+    PROFILE: '/business/profile'
 }
