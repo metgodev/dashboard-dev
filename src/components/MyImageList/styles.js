@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
   imageList: {
+    width: '95%'
   },
   image: {
     width: "100%",
@@ -17,8 +18,8 @@ export default makeStyles(theme => ({
   deleteWrapper: {
     borderRadius: '5px',
     position: "absolute",
-    bottom: "5px",
-    right: "46%",
+    top: "10px",
+    right: "10px",
     opacity: '0.8',
     backgroundColor: theme.palette.background.default,
     cursor: "pointer",

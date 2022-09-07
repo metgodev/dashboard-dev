@@ -3,18 +3,18 @@ export const getPicturesForImagePicker = (values) => {
 }
 
 export const getTagColor = (tagName) => {
-    switch (tagName.split(' ')[tagName.split(' ').length - 1]) {
-        case 'אטרקציה':
+    switch (tagName) {
+        case 'Attraction':
             return `rgba(52, 235, 229, 0.2)`
-        case 'לינה':
+        case 'Lodging':
             return 'rgba(197, 66, 245, 0.2)'
-        case 'תרבות':
+        case 'Culture':
             return 'rgba(250, 97, 247, 0.2)'
-        case 'מקומי':
+        case 'Local':
             return 'rgba(238, 255, 0, 0.2)'
-        case 'לטייל':
+        case 'Travel':
             return 'rgba(0, 255, 30, 0.2)'
-        case 'אוכל':
+        case 'Food':
             return 'rgba(255, 17, 0, 0.2)'
         default:
             return 'rbga(0,0,0,0.1)'

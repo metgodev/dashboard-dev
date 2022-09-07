@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Drawer, IconButton, List } from "@material-ui/core";
+import { CircularProgress, Drawer, IconButton, List } from "@material-ui/core";
 import {
     HomeOutlined as HomeIcon,
     EventOutlined as Event,
@@ -30,6 +30,8 @@ import term from "../../terms";
 import GetPermissions from "../../hooks/GetPermissions";
 import LISTENER from "../../data/listener";
 import ROUTES from '../../data/routes'
+import { Box } from "@mui/system";
+
 const structure = [
     {
         id: 0, label: term('admin'), icon: <AdminPanelSettingsOutlinedIcon />,
@@ -98,7 +100,7 @@ const Sidebar = React.memo(({ location }) => {
                 </IconButton>
             </div>
             <List >
-                {structure.map(link => {
+                {Boolean(Object.keys(permissions).length) ? structure.map(link => {
                     if (link.permission === undefined || permissions[link.permission]) {
                         return (
                             (
@@ -111,8 +113,12 @@ const Sidebar = React.memo(({ location }) => {
                             )
                         )
                     }
-
-                })}
+                })
+                    :
+                    <Box sx={{ marginTop: '20px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <CircularProgress />
+                    </Box>
+                }
             </List>
         </Drawer>
     );

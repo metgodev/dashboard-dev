@@ -1288,9 +1288,14 @@ const active_lexicon = {
         he: 'מחיר',
         ar: 'السعر',
     },
+    no_events_on_this_date: {
+        en: 'No events on selected date',
+        he: 'אין אירועים בתאריך זה',
+        ar: 'لا توجد أحداث في التاريخ المحدد',
+    },
     open_hour: {
-        en: 'open hour',
-        he: 'שעה פתיחה',
+        en: 'Start time',
+        he: 'שעה התחלה',
         ar: 'ساعة مفتوحة',
     },
     end_date: {
@@ -2073,6 +2078,16 @@ const active_lexicon = {
         en: 'Hour',
         he: 'שעה',
         ar: 'ساعة'
+    },
+    cant_change_status_please_add_tags: {
+        en: 'Cannot change status, please add at least one tag',
+        he: 'לא יכול לשנות סטטוס, אנא הוסף לפחות תגית אחת',
+        ar: 'لا يمكن تغيير الحالة ، يرجى إضافة علامة واحدة على الأقل'
+    },
+    maximum_file_upload_size_is: {
+        en: 'Maximum file size is',
+        he: 'גודל קובץ מקסימלי הוא',
+        ar: 'الحجم الأقصى للملف هو'
     },
     please_enter_a_product_name: {
         en: 'Please enter a product name',

@@ -27,7 +27,7 @@ function Businesses() {
         }
         else {
             dispatch(set_edit_tab_data({}))
-            setDialogType(MODAL_STATES.EDIT)
+            setDialogType(MODAL_STATES.ADD)
         }
         setOpen(!open)
     }

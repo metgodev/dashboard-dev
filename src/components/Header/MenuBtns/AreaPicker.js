@@ -79,7 +79,6 @@ function AreaMenu() {
                     onClose={() => setAreaMenu(null)}
                     MenuListProps={{ className: classes.headerMenuList }}
                     className={classes.headerMenu}
-                    classes={{ paper: classes.langMenu }}
                     disableAutoFocusItem
                     disablescrolllock={true.toString()}
                 >
