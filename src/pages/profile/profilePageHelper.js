@@ -1,5 +1,4 @@
-import axios from "axios";
-import client from '../../API/metro'
+import { uploadImageToFirebase, _patch } from "../../API/service";
 import BACK_ROUTES from "../../data/back_routes";
 import Toast from "../../utils/useToast";
 
@@ -30,18 +29,8 @@ export const uploadImage = async (file, area, user) => {
     formData.append("file", file);
     formData.append("areaId", area.id);
     try {
-        const bucketRes = await axios.post(`${process.env.REACT_APP_STRAPI}/files`, formData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    Authorization: window.localStorage.getItem("metgo-jwt")
-                },
-                params: {
-                    areaId: area.id
-                }
-            }
-        )
-        const updatedUser = await client.service(BACK_ROUTES.USERS).patch(user.id, { profilePictureFileId: bucketRes.data[0]._id })
+        const bucketRes = await uploadImageToFirebase(formData, area)
+        const updatedUser = await _patch(BACK_ROUTES.USERS, user.id, { profilePictureFileId: bucketRes.data[0]._id })
         return updatedUser
     }
     catch (e) {

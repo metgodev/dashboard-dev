@@ -1,4 +1,5 @@
 import client from './metro';
+import axios from 'axios';
 
 export const _get = async (service, options) => {
     const res = await client.service(service).find({ query: { ...options } })
@@ -28,4 +29,24 @@ export const _search = async (service, options) => {
 export const _patch = async (service, id, data) => {
     const res = await client.service(service).patch(id, data)
     return res
+}
+
+export const uploadImageToFirebase = async (formData, area) => {
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_STRAPI}/files`, formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: window.localStorage.getItem("metgo-jwt")
+                },
+                params: {
+                    areaId: area.id
+                }
+            })
+        if (res) {
+            return res
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
