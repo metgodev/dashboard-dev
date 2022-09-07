@@ -94,6 +94,7 @@ const Root = () => {
                 case ROLES.BUSINESS_OWNER:
                     return (
                         <Routes>
+                            <Route exact path={BUSINESS_OWNER_ROUTES.LOGIN} element={<Login />} />
                             <Route exact path={BUSINESS_OWNER_ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={BUSINESS_OWNER_ROUTES.DASHBOARD} /></Protecte>} />
                             <Route exact path={BUSINESS_OWNER_ROUTES.DASHBOARD} element={<Protecte auth={permissions.dashboard} loggedIn={user}><Dashboard /></Protecte>} />
                             <Route exact path={BUSINESS_OWNER_ROUTES.BUSINESSES} element={<Protecte auth={permissions.business} loggedIn={user}><Businesses /></Protecte>} />

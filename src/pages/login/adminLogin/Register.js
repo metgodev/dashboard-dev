@@ -15,6 +15,8 @@ import LISTENER from '../../../data/listener';
 import { ROUTES } from '../../../data/routes';
 import Toast from '../../../utils/useToast';
 import ERRORS from '../../../data/errors';
+import BACK_ROUTES from '../../../data/back_routes'
+import client from '../../../API/metro'
 
 function Register() {
 
@@ -54,34 +56,29 @@ function Register() {
             return
         }
         setIsLoading(true)
-        registerUserWithEmailAndPassword(email, password).then(res => {
-            if (res === undefined) {
+        try {
+            const register = await registerUserWithEmailAndPassword(email, password)
+            if (!register) {
                 Toast(ERRORS.INVALID_EMAIL)
                 setIsLoading(false);
                 return
-            }
-            Auth(res.user.accessToken).then(res => {
-                if (res.error) {
+            } else {
+                const authenticate = await Auth(register.user.accessToken)
+                if (authenticate.error) {
                     setIsLoading(false);
                 } else {
-                    let user = {
-                        e: res.email,
-                        v: res.isVerified,
-                        id: res._id
-                    }
+                    const userDetails = await client.service(BACK_ROUTES.USERS).patch(authenticate._id, { firstName: firstName, lastName: lastName })
+                    let user = { e: authenticate.email, v: authenticate.isVerified, id: authenticate._id }
                     dispatch(set_user(user));
-                    dispatch(set_user_details(res))
+                    dispatch(set_user_details(userDetails.data[0]))
                     navigate(ROUTES.DASHBOARD)
                     setIsLoading(false);
                 }
-            }).catch(e => {
-                console.log('register', e)
-                Toast()
-            })
-        }).catch(e => {
-            console.log('register', e)
+            }
+        } catch (e) {
             Toast()
-        })
+            setIsLoading(false);
+        }
     }
 
     return (
