@@ -15,7 +15,7 @@ export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, med
     formData.append("file", fileToUpload);
     formData.append("areaId", areaId);
     try {
-        const bucketRes = uploadImageToFirebase(formData, areaId)
+        const bucketRes = await uploadImageToFirebase(formData, areaId)
         if (tab === 'products' && setExternalValues !== undefined) {
             setExternalValues({ dontSkipStep: true, galleryFileIds: [...media, { file: bucketRes.data[0], fileId: bucketRes["data"][0]._id, metadata: { type: uploadCategory.type } }] })
             setLoadingImage(false)
@@ -23,7 +23,7 @@ export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, med
         }
         else {
             let currentFileIds = media !== undefined ? media.map((item) => { return ({ fileId: item.file._id, metadata: { type: item.metadata.type } }) }) : []
-            let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: bucketRes["data"][0]._id, metadata: { type: uploadCategory.type } }] }
+            let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: bucketRes.data[0]._id, metadata: { type: uploadCategory.type } }] }
             const res = await client.service(tab).patch(editTabData._id, mediaToUpload)
             setLoadingImage(false)
             return res

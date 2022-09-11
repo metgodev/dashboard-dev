@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useCallback } from 'react';
 //MUI
 import { Routes, Route, useLocation, Navigate, } from 'react-router-dom'
-import { Box } from '@material-ui/core';
+import { Box, CircularProgress } from '@material-ui/core';
 //Pages
 import Main from '../components/AdjustHelpers/Main';
 import Error from '../pages/error/Error';
@@ -67,10 +67,10 @@ const Root = () => {
         if (Object.keys(userDetails).length === 0) {
             return (
                 <Routes>
-                    <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.LOGIN} /></Protecte>} />
+                    <Route exact path={ROUTES.ROOT} element={<Navigate to={ROUTES.LOGIN} />} />
                     <Route exact path={BUSINESS_OWNER_ROUTES.LOGIN} element={<Login />} />
                     <Route exact path={ROUTES.LOGIN} element={<Login />} />
-                    <Route path={ROUTES.ERROR} element={<Protecte auth={permissions.error} loggedIn={user}><Error /></Protecte>} />
+                    <Route path={ROUTES.ERROR} element={<Box style={{ height: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CircularProgress size={50} /></Box>} />
                 </Routes>
             )
         }
