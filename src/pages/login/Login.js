@@ -8,7 +8,6 @@ import logo from "../../Assets/svgs/MTN.svg";
 import Register from "./adminLogin/Register";
 import SignIn from "./adminLogin/SignIn";
 import term from "../../terms"
-import PATHS from "../../data/paths";
 import BusinessLogin from './businessLogin/BusinessLogin'
 import BusinessRegister from './businessLogin/BusinessRegister'
 
@@ -33,8 +32,8 @@ function Login() {
             <Tab label={term("log_in")} classes={{ root: classes.tab }} />
             <Tab label={term("sign_up")} classes={{ root: classes.tab }} />
           </Tabs>
-          {activeTabId === 0 && (currentHref === PATHS.BUSINESS_LOGIN ? <BusinessLogin /> : <SignIn />)}
-          {activeTabId === 1 && (currentHref === PATHS.BUSINESS_LOGIN ? <BusinessRegister /> : <Register />)}
+          {activeTabId === 0 && (currentHref.split('/').includes('business') ? <BusinessLogin /> : <SignIn />)}
+          {activeTabId === 1 && (currentHref.split('/').includes('business') ? <BusinessRegister /> : <Register />)}
         </div>
       </div>
       <div className={classes.logotypeContainer}>
