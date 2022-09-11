@@ -22,10 +22,25 @@ const active_lexicon = {
         he: 'כן',
         ar: 'نعم',
     },
+    terms: {
+        en: 'Terms and conditions',
+        he: 'תקנון',
+        ar: 'قواعد',
+    },
+    agree_to_terms: {
+        en: 'I approve the regulations',
+        he: 'אני מאשר/ת את התקנון',
+        ar: 'أوافق على اللوائح',
+    },
     total: {
         en: 'Total',
         he: 'סה"כ',
         ar: 'المجموع',
+    },
+    go_to_products: {
+        en: 'Go to products',
+        he: 'עבור למוצרים',
+        ar: 'انتقل إلى المنتجات',
     },
     main_tag: {
         en: 'The blue bordered tag is the main tag',
@@ -1278,6 +1293,16 @@ const active_lexicon = {
         he: 'אחר',
         ar: 'آخر',
     },
+    metro_admin: {
+        en: 'Metro admin',
+        he: 'מנהל',
+        ar: 'آخر',
+    },
+    is_premium: {
+        en: 'Premium',
+        he: 'פרמיום',
+        ar: 'الممتازة',
+    },
     start_date: {
         en: 'start date',
         he: 'תאריך התחלה',
@@ -1289,9 +1314,9 @@ const active_lexicon = {
         ar: 'السعر',
     },
     metro_super_admin: {
-        en: 'Admin',
-        he: 'מנהל',
-        ar: 'مسؤل',
+        en: 'Super admin',
+        he: 'מנהל ראשי',
+        ar: 'مشرف متميز',
     },
     metro_business_owner: {
         en: 'Business owner',
@@ -1336,7 +1361,7 @@ const active_lexicon = {
     admin: {
         en: 'admin',
         he: 'מנהל',
-        ar: 'مدير',
+        ar: 'مشرف',
     },
     admin_page: {
         en: 'Admin Page',
@@ -1653,6 +1678,26 @@ const active_lexicon = {
         he: 'בתשלום',
         ar: 'الدفع'
     },
+    confirmation: {
+        en: 'Confirmation',
+        he: 'אישור',
+        ar: 'تأكيد'
+    },
+    bank_transfer: {
+        en: 'Bank transfer',
+        he: 'העברה בנקאית לחשבון',
+        ar: 'حوالة بنكية'
+    },
+    bit_transfer: {
+        en: 'Transfer by "Bit"',
+        he: 'העברה בביט לטלפון',
+        ar: 'نقل عن طريق "بت"'
+    },
+    payment_method: {
+        en: 'Payment method',
+        he: 'שיטת תשלום',
+        ar: 'طريقة الدفع او السداد'
+    },
     payment_with_reservation: {
         en: 'Payment with reservation',
         he: 'בתשלום עם הזמנה',
@@ -1732,6 +1777,31 @@ const active_lexicon = {
         en: 'Benches',
         he: 'ספסלים',
         ar: 'مقاعد'
+    },
+    businesses_requesting_premium: {
+        en: 'Businesses to review for premium status',
+        he: 'עסקים שממתינים לאישור פרימיום',
+        ar: 'الشركات التي تنتظر الموافقة الممتازة'
+    },
+    soon_you_will_be_able_to_add_products: {
+        en: 'Soon you will be able to add products',
+        he: 'ותוכל להוסיף מוצרים בהקדם',
+        ar: 'قريبا سوف تكون قادرا على إضافة المنتجات'
+    },
+    you_will_get_details_by_mail: {
+        en: 'Further instructions will be sent by Email',
+        he: 'ישלך לך מייל עם הוראות ',
+        ar: 'سيتم إرسال مزيد من التعليمات عن طريق البريد الإلكتروني'
+    },
+    details_received: {
+        en: 'Details Received',
+        he: 'הפרטים התקבלו בהצלחה',
+        ar: 'وردت التفاصيل'
+    },
+    mail_for_receipts: {
+        en: 'The receipts will be sent to this email address',
+        he: 'הקבלות יישלחו לכתובת דוא"ל זו',
+        ar: 'سيتم إرسال الإيصالات إلى عنوان البريد الإلكتروني هذا'
     },
     tins: {
         en: 'Tins',
@@ -2104,6 +2174,11 @@ const active_lexicon = {
         he: 'התראות',
         ar: 'إشعارات'
     },
+    approved: {
+        en: 'Approved',
+        he: 'מאושר',
+        ar: 'وافق'
+    },
     unapproved_businesses: {
         en: 'businesses waiting for approval',
         he: 'עסקים ממתינים לאישור',
@@ -2138,6 +2213,16 @@ const active_lexicon = {
         en: 'Premium',
         he: 'פרימיום',
         ar: 'الممتازة'
+    },
+    add_products_premium_agreement_text: {
+        en: 'Want to set up an online store? Add products to your profile, sell them online and enjoy our clearing services? All you have to do is register and confirm the joining regulations',
+        he: 'רוצה להקים חנות אינטרנטית? להוסיף מוצרים לפרופיל שלך, למכור אותם אונליין ולהנות משירותי הסליקה שלנו? כל מה שצריך לעשות זה להרשם ולאשר את תקנון ההצטרפות',
+        ar: 'هل تريد إنشاء متجر على الإنترنت؟ أضف منتجات إلى ملفك التعريفي ، وقم ببيعها عبر الإنترنت واستمتع بخدمات المقاصة لدينا؟ كل ما عليك فعله هو التسجيل وتأكيد لوائح الانضمام'
+    },
+    add_products: {
+        en: 'Add products',
+        he: 'הוספת מוצרים',
+        ar: 'أضف المنتجات'
     },
     you_dont_have_permission: {
         en: 'You dont have permission',

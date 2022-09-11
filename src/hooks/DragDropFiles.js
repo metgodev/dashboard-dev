@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { resizeFile } from './FileResizer.js'
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
@@ -5,10 +6,22 @@ import term from '../terms'
 import useStyles from './styles'
 import { Box } from "@mui/system";
 
-function DragDrop({ fileTypes, onRecieveFile }) {
+function DragDrop({ uploadCategory, onRecieveFile }) {
 
     const classes = useStyles()
-    const MAXIMUM_FILE_SIZE = 40
+
+    const getMaximumFileSize = useCallback(() => {
+        switch (uploadCategory.type) {
+            case 'image':
+                return 5
+            case 'logo':
+                return 5
+            case 'video':
+                return 40
+            case 'files':
+                return 10
+        }
+    }, [uploadCategory])
 
     const handleChange = (file) => {
         if (file.type.substring(0, 5) === 'image') {
@@ -21,7 +34,7 @@ function DragDrop({ fileTypes, onRecieveFile }) {
     }
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <FileUploader
                 children={
                     <div className={classes.dragAndDrop}>
@@ -32,10 +45,10 @@ function DragDrop({ fileTypes, onRecieveFile }) {
                 multiple={true}
                 handleChange={handleChange}
                 name={'file'}
-                types={fileTypes}
-                maxSize={MAXIMUM_FILE_SIZE} //size in mb
+                types={uploadCategory.fileTypes}
+                maxSize={getMaximumFileSize()} //size in mb
             />
-            <p className={classes.maximumUploadText}>{`${term('maximum_file_upload_size_is')} ${MAXIMUM_FILE_SIZE} MB.`}</p>
+            <p className={classes.maximumUploadText}>{`${term('maximum_file_upload_size_is')} ${getMaximumFileSize()} MB.`}</p>
         </Box>
     )
 }

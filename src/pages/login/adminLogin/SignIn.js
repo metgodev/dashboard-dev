@@ -57,7 +57,7 @@ function SignIn() {
                     setError(res.error)
                     Toast(ERRORS.WRONG_DETAILS)
                 }
-                else if (res.roles.length < 2 || res.roles[1].roleName !== ROLES.SUPER_ADMIN) {
+                else if ((res.roles.length < 2) || (res.roles[1].roleName !== ROLES.SUPER_ADMIN && res.roles[1].roleName !== ROLES.ADMIN)) {
                     setIsLoading(false)
                     Toast(term('you_dont_have_permission'))
                 }

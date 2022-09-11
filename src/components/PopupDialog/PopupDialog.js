@@ -17,7 +17,7 @@ import ProductsPop from '../PopupDialogSections/Products/ProductsPop';
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions';
 import toast from 'react-hot-toast';
 import MODAL_TYPES from '../../data/modal_types';
@@ -61,7 +61,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers={true} className={classes.dialogContent}>
-                    {tabs === MODAL_TYPES.BUSINESS && <ModifyPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.BUSINESS && <ModifyPop open={open} handleClose={handleClose} type={type} title={'businesses'} />}
                     {tabs === MODAL_TYPES.EVENTS && <EventsPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.POINTS && <PointsPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.TRACKS && <TracksPop open={open} handleClose={handleClose} type={type} />}

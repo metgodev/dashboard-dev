@@ -27,7 +27,7 @@ function Profile() {
         try {
             const resized64Image = await resizeFile(file, 1200, 1200, "PNG")
             const resizedFile = await urltoFile(resized64Image, 'profileImage.png', 'image')
-            const res = await uploadImage(resizedFile, area, user, setLoading, setFile)
+            const res = await uploadImage(resizedFile, area.id, user.id)
             if (res) {
                 dispatch(set_user_details(res))
             }

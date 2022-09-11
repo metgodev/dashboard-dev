@@ -18,6 +18,8 @@ import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes'
 import { set_admin_notification } from "../../../REDUX/actions/main.actions";
 import AdminNotifications from "../../AdminNotifications/AdminNotifications";
 import GetPermissions from "../../../hooks/GetPermissions";
+import GetRole from "../../../hooks/GetRole";
+import ROLES from "../../../data/roles";
 
 function ProfileMenu() {
     // local
@@ -27,6 +29,7 @@ function ProfileMenu() {
     const adminNotification = useSelector(s => s.mainReducer.adminNotification)
     const userDetails = useSelector(s => s.userReducer.userDetails)
     const permissions = GetPermissions(userDetails)
+    const role = GetRole(userDetails)
 
     let classes = useStyles();
     let avatar = `${AVATAR_URL + user.fn}`
@@ -98,15 +101,16 @@ function ProfileMenu() {
                 >
                     <AccountIcon className={classes.profileMenuIcon} /> {term('profile')}
                 </MenuItem>
-                <MenuItem
-                    className={classNames(
-                        classes.profileMenuItem,
-                        classes.headerMenuItem,
-                    )}
-                    onClick={() => handleNotificationClicked()}
-                >
-                    <AccountIcon className={classes.profileMenuIcon} /> {term('tasks')}
-                </MenuItem>
+                {permissions?.adminNotification &&
+                    <MenuItem
+                        className={classNames(
+                            classes.profileMenuItem,
+                            classes.headerMenuItem,
+                        )}
+                        onClick={() => handleNotificationClicked()}
+                    >
+                        <AccountIcon className={classes.profileMenuIcon} /> {term('tasks')}
+                    </MenuItem>}
                 {/* <MenuItem
                     className={classNames(
                         classes.profileMenuItem,

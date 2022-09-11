@@ -88,6 +88,31 @@ const PERMISSIONS = {
         status_change: true,
         adminNotification: true,
         profile: true
+    },
+    METRO_ADMIN: {
+        main: true,
+        dashboard: true,
+        verification: true,
+        business: true,
+        events: true,
+        locations: true,
+        routes: true,
+        vouchers: true,
+        users: true,
+        campaign: true,
+        map: true,
+        support: true,
+        faq: true,
+        error: true,
+        navigationBar: {
+            area: true,
+        },
+        admin: true,
+        products: true,
+        calendar: true,
+        status_change: true,
+        adminNotification: true,
+        profile: true
     }
 }
 

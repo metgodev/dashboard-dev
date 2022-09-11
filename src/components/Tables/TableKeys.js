@@ -1,12 +1,17 @@
 import StatusMenu from './StatusMenu';
 import term from '../../terms';
 import BACK_ROUTES from '../../data/back_routes';
+import ENTITY_STATUS from '../../data/entity_status';
 
 
 export const Cols = (cols, ignore, display) => {
     if (display === BACK_ROUTES.USERS) {
         return (
             ['email', 'roles', 'createdAt', 'updatedAt']
+        )
+    } else if (display === BACK_ROUTES.BUSINESS) {
+        return (
+            ['status', 'name', 'address', 'authority', 'isPremium', 'contactPersonName', 'contactPersonPhoneNumber', 'createdAt', 'description', 'emailAddress', 'facebookPageUrl', 'instagramPageUrl', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'phoneNumber', 'relevantTo', 'shortDescription', 'tags', 'updatedAt', 'websitesUrl', 'youtubePageUrl']
         )
     }
     return (
@@ -110,6 +115,16 @@ export const Keys = (cols, idOptions, display, onUpdate) => cols.map(key => {
                 },
                 sortable: false,
                 filterable: false,
+                field: key,
+            }
+        case "isPremium":
+            return {
+                headerName: term(key),
+                valueFormatter: (params) => {
+                    if (params?.value === undefined) return
+                    if (params.value === false) return term(ENTITY_STATUS.PRIVATE.toLowerCase())
+                    return term(params.value.toLowerCase())
+                },
                 field: key,
             }
         case "roles":

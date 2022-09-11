@@ -35,7 +35,8 @@ export default makeStyles(theme => ({
     dragDropWrapper: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '90%'
     },
     cropBox: {
         display: 'flex',

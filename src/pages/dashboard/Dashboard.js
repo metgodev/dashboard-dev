@@ -20,6 +20,7 @@ import CACHED_DATA_ROUTES from '../../data/cached_data_routes'
 import AdminNotifications from "../../components/AdminNotifications/AdminNotifications";
 import { useSelector } from "react-redux";
 import GetPermissions from "../../hooks/GetPermissions";
+import client from '../../API/metro'
 
 export default function Dashboard() {
 

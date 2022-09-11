@@ -7,7 +7,18 @@ export const FormTabs = [{
     value: term('map_location'),
 }];
 
-export const ModalTabs = [term('details'), term('statistics'), term('gallery'), term('promotion'), term('calls'), term('reviews'), term('products'), term('invitation_manager')];
+export const ModalTabs = [
+    term('details'),
+    //term('statistics'),
+    term('gallery'),
+    //term('promotion'),
+    //term('calls'),
+    //term('reviews'),
+    term('products'),
+    //term('invitation_manager')
+    term('premium')
+];
+
 export const ModalInit = [
     //------------------ General Information ------------------
     { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
@@ -25,7 +36,6 @@ export const ModalInit = [
     { title: term('is_kosher'), id: createRandomId(), field: 'isKosher', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false, relaredToggle: 'open_on_weekend' },
     { title: term('is_accessable'), id: createRandomId(), field: 'isAccessable', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     { title: term('approve_content'), id: createRandomId(), field: 'approveContent', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
-    { title: term('premium'), id: createRandomId(), field: 'isPremium', rows: 1, maxRows: 4, size: 'small', type: 'checkbox', required: false },
     //------------------ More Information ------------------ 
     { title: term('email_address'), id: createRandomId(), field: 'emailAddress', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
     { title: term('facebook_link'), id: createRandomId(), field: 'facebookPageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },

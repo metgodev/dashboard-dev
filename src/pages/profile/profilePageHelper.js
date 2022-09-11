@@ -24,13 +24,13 @@ export const handleImageClick = () => {
     uploadButton.click()
 }
 
-export const uploadImage = async (file, area, user) => {
+export const uploadImage = async (file, areaId, userId) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("areaId", area.id);
+    formData.append("areaId", areaId);
     try {
-        const bucketRes = await uploadImageToFirebase(formData, area)
-        const updatedUser = await _patch(BACK_ROUTES.USERS, user.id, { profilePictureFileId: bucketRes.data[0]._id })
+        const bucketRes = await uploadImageToFirebase(formData, areaId)
+        const updatedUser = await _patch(BACK_ROUTES.USERS, userId, { profilePictureFileId: bucketRes.data[0]._id })
         return updatedUser
     }
     catch (e) {

@@ -69,7 +69,7 @@ const initialData = {
   approveContent: true,
   email: '',
   roles: [],
-  isPremium: false
+  isPremium: "PRIVATE"
 }
 
 

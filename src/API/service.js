@@ -31,7 +31,7 @@ export const _patch = async (service, id, data) => {
     return res
 }
 
-export const uploadImageToFirebase = async (formData, area) => {
+export const uploadImageToFirebase = async (formData, areaId) => {
     try {
         const res = await axios.post(`${process.env.REACT_APP_STRAPI}/files`, formData,
             {
@@ -40,7 +40,7 @@ export const uploadImageToFirebase = async (formData, area) => {
                     Authorization: window.localStorage.getItem("metgo-jwt")
                 },
                 params: {
-                    areaId: area.id
+                    areaId: areaId
                 }
             })
         if (res) {

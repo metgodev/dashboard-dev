@@ -14,11 +14,18 @@ import AddProductsTab from './Tabs/AddProductsTab';
 import chat from '../../../Assets/placeholders/contact_bussines.png'
 import comments from '../../../Assets/placeholders/comments.png'
 import promotions from '../../../Assets/placeholders/promotions.png'
+import AdminPremiumTab from './Tabs/AdminPremiumTab';
 //styles
 import useStyles from "../styles";
 import { useSelector } from 'react-redux';
 import { Picker } from './Tabs/HandleBusinessData';
 import useGetService from '../../../hooks/useGetService'
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import PremiumTab from './Tabs/PremiumTab';
+import MODAL_STATES from '../../../data/modal_states';
+import GetRole from '../../../hooks/GetRole';
+import ROLES from '../../../data/roles';
+import ENTITY_STATUS from '../../../data/entity_status';
 
 const ModifyPop = ({ handleClose, type, open }) => {
     //Styles
@@ -26,6 +33,8 @@ const ModifyPop = ({ handleClose, type, open }) => {
     //Global
     const { area } = useSelector((state) => state.mainRememberReducer);
     const businessData = useSelector(s => s.mainReducer.editTabData)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const role = GetRole(userDetails)
     //Local
     const [tab, setTab] = useState(0);
     const [picker, setPicker] = useState(Picker)
@@ -53,48 +62,60 @@ const ModifyPop = ({ handleClose, type, open }) => {
         <div style={{ height: '100%' }}>
             <Box className={classes.stickyBox} >
                 <Tabs value={tab} onChange={handleTabs} aria-label="tabs" variant="scrollable" scrollButtons="auto">
-                    {ModalTabs.map(b =>
-                        <Tab
-                            key={b}
-                            label={b}
-                            disabled={
-                                ((b === term('gallery') || b === term('products')) && type === 'add')
-                                ||
-                                (b === term('products') && !businessData.isPremium)
-                                ||
-                                (b === term('invitation_manager') && !businessData.isPremium)
-                            }
-                        />
-                    )}
+                    {type === MODAL_STATES.ADD ?
+                        [
+                            <Tab
+                                key={term('details')}
+                                label={term('details')}
+                            />
+                        ]
+                        :
+                        ModalTabs.map(tab =>
+                            <Tab
+                                key={tab}
+                                label={tab}
+                                style={tab === term('products') ? { backgroundColor: '#D2FED1' } : tab === term('premium') ? { backgroundColor: '#68FD01', color: 'white' } : {}}
+                                icon={tab === term('premium') ? <LockOpenIcon /> : null}
+                                iconPosition='top'
+                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || businessData.isPremium === false) && tab === term('products')}
+                            />
+                        )
+                    }
                 </Tabs>
             </Box>
             <Box sx={{ height: '90%' }} id="alert-dialog-slide-description">
                 <TabPanel value={tab} index={0}>
                     {picker.authorityId.length > 0 && <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />}
                 </TabPanel>
-                <TabPanel value={tab} index={1}>
+                {/* <TabPanel value={tab} index={1}>
                     <StatisticsTab />
-                </TabPanel>
-                <TabPanel value={tab} index={2}>
+                </TabPanel> */}
+                <TabPanel value={tab} index={1}>
                     <UploadMediaTab type={'gallery'} tab={"business"} config={mediaTabConfig} />
                 </TabPanel>
-                <TabPanel value={tab} index={3}>
+                {/* <TabPanel value={tab} index={3}>
                     <img src={promotions} alt="promotions"
                     />
+                </TabPanel> */}
+                {/* <TabPanel value={tab} index={4}>
+                    <img src={chat} alt="chat" />
+                </TabPanel> */}
+                {/* <TabPanel value={tab} index={5}>
+                    <img src={comments} alt="comments" />
+                </TabPanel> */}
+                <TabPanel value={tab} index={2}>
+                    {picker.tagsIds.length > 0 &&
+                        <AddProductsTab type={type} areaSpecificData={picker} handleClose={handleClose} />
+                    }
+                </TabPanel>
+                <TabPanel value={tab} index={3}>
+                    {role === ROLES.BUSINESS_OWNER && <PremiumTab handleClose={handleClose} />}
+                    {(role === ROLES.SUPER_ADMIN || role === ROLES.ADMIN) && <AdminPremiumTab handleClose={handleClose} />}
+                </TabPanel>
+                {/* <TabPanel value={tab} index={3}>
                 </TabPanel>
                 <TabPanel value={tab} index={4}>
-                    <img src={chat} alt="chat" />
-                </TabPanel>
-                <TabPanel value={tab} index={5}>
-                    <img src={comments} alt="comments" />
-                </TabPanel>
-                <TabPanel value={tab} index={6}>
-                    {picker.tagsIds.length > 0 && <AddProductsTab type={type} areaSpecificData={picker} handleClose={handleClose} />}
-                </TabPanel>
-                <TabPanel value={tab} index={7}>
-                </TabPanel>
-                <TabPanel value={tab} index={8}>
-                </TabPanel>
+                </TabPanel> */}
             </Box>
         </div >
     )

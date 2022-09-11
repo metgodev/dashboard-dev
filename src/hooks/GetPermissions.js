@@ -13,9 +13,11 @@ const GetPermissions = (user) => {
                 setPermissions(PERMISSIONS.METRO_BUSINESS_OWNER)
             } else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.SUPER_ADMIN) {
                 setPermissions(PERMISSIONS.METRO_SUPER_ADMIN)
-            } else {
-                setPermissions(PERMISSIONS.METRO_MEMBER)
+            } else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.ADMIN) {
+                setPermissions(PERMISSIONS.METRO_ADMIN)
             }
+        } else {
+            setPermissions(PERMISSIONS.METRO_MEMBER)
         }
     }, [user])
 

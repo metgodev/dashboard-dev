@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
         borderRadius: "10px",
         border: "2px dashed #c1c1c1",
         height: "30vh",
-        width: "90vw",
+        width: "100%",
         textAlign: "center",
         display: "flex",
         justifyContent: "center",

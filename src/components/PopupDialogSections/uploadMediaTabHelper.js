@@ -1,6 +1,7 @@
 import client from '../../API/metro';
 import axios from 'axios'
 import Toast from '../../utils/useToast';
+import { uploadImageToFirebase } from '../../API/service';
 
 export const handleCategoryChange = (event, newCategory, setUploadCategory, config) => {
     if (newCategory !== null) {
@@ -14,17 +15,7 @@ export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, med
     formData.append("file", fileToUpload);
     formData.append("areaId", areaId);
     try {
-        const bucketRes = await axios.post(`${process.env.REACT_APP_STRAPI}/files`, formData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    Authorization: window.localStorage.getItem("metgo-jwt")
-                },
-                params: {
-                    areaId: areaId
-                }
-            }
-        )
+        const bucketRes = uploadImageToFirebase(formData, areaId)
         if (tab === 'products' && setExternalValues !== undefined) {
             setExternalValues({ dontSkipStep: true, galleryFileIds: [...media, { file: bucketRes.data[0], fileId: bucketRes["data"][0]._id, metadata: { type: uploadCategory.type } }] })
             setLoadingImage(false)

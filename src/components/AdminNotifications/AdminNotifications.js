@@ -12,7 +12,7 @@ import CACHED_DATA_ROUTES from '../../data/cached_data_routes';
 
 function AdminNotifications({ open }) {
 
-    const requestParams = { $limit: 10000, status: 'PENDING_APPROVAL', $select: ['status'] }
+    const requestParams = { $limit: 10000, status: 'PENDING_APPROVAL', $select: ['status', 'isPremium'] }
 
     let navigate = useNavigate()
     const dispatch = useDispatch()
@@ -22,6 +22,18 @@ function AdminNotifications({ open }) {
     const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.NOTIFICATION_POINTS, requestParams)
     const tracks = useGetService(BACK_ROUTES.TRACKS, CACHED_DATA_ROUTES.NOTIFICATION_TRACKS, requestParams)
     const products = useGetService(BACK_ROUTES.PRODUCTS, CACHED_DATA_ROUTES.NOTIFICATION_PRODUCTS, requestParams)
+
+    const getNumberOfBusinessesToApprovePremium = useCallback(() => {
+        let number = 0
+        if (businesses.data.length > 0) {
+            businesses.data.forEach(business => {
+                if (business.isPremium === "PENDING_APPROVAL") {
+                    number++
+                }
+            })
+        }
+        return number
+    }, [businesses])
 
     const [loading, setLoading] = useState(true)
 
@@ -58,11 +70,18 @@ function AdminNotifications({ open }) {
                             <CircularProgress size={50} />
                             :
                             <div>
+                                {getNumberOfBusinessesToApprovePremium() > 0 &&
+                                    <NotificationItem
+                                        text={`${term('you_have')} ${getNumberOfBusinessesToApprovePremium()} ${term('businesses_requesting_premium')}`}
+                                        onClick={() => buttonPressed('/businesses')}
+                                    />
+                                }
                                 {businesses.data.length > 0 &&
                                     <NotificationItem
                                         text={`${term('you_have')} ${businesses.data.length} ${term('unapproved_businesses')}`}
                                         onClick={() => buttonPressed('/businesses')}
-                                    />}
+                                    />
+                                }
                                 {events.data.length > 0 &&
                                     <NotificationItem
                                         text={`${term('you_have')} ${events.data.length} ${term('unapproved_events')}`}

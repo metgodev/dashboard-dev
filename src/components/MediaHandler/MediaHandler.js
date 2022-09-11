@@ -28,7 +28,7 @@ function MediaHandler({ uploadFile, media, editTabData, setLoadingImage, tab, up
         <>
             {file === null &&
                 <Box className={classes.dragDropWrapper}>
-                    <DragDrop onRecieveFile={(file) => handleUpload(file)} fileTypes={uploadCategory.fileTypes} />
+                    <DragDrop onRecieveFile={(file) => handleUpload(file)} uploadCategory={uploadCategory} />
                 </Box>}
             {file !== null &&
                 <CropImage src={file} onClick={(fileToUpload) => handleImageUpload(fileToUpload)} style={classes.cropBox} />
