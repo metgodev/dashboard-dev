@@ -77,7 +77,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                                 style={tab === term('products') ? { backgroundColor: '#D2FED1' } : tab === term('premium') ? { backgroundColor: '#68FD01', color: 'white' } : {}}
                                 icon={tab === term('premium') ? <LockOpenIcon /> : null}
                                 iconPosition='top'
-                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || businessData.isPremium === false) && tab === term('products')}
+                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || Boolean(businessData.isPremium) === false) && tab === term('products')}
                             />
                         )
                     }
