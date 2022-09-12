@@ -1453,6 +1453,16 @@ const active_lexicon = {
         he: 'מיקום',
         ar: 'الموقع',
     },
+    last_name: {
+        en: 'Last name',
+        he: 'שם משפחה',
+        ar: 'اللقب',
+    },
+    first_name: {
+        en: 'First name',
+        he: 'שם פרטי',
+        ar: 'الاسم الاول',
+    },
     location_name: {
         en: 'location name',
         he: 'שם יעד',

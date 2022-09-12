@@ -5,9 +5,9 @@ export default makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         width: '100%',
-        height: '100vh'
+        height: '100vh',
     },
     pageTitleContainer: {
         position: 'absolute',
@@ -27,12 +27,10 @@ export default makeStyles(theme => ({
         justifyContent: 'start',
         flexDirection: 'column',
         height: '60vh',
-        width: '100%'
+        width: '100%',
+        gap: 50
     },
     profileImage: {
-        width: '250px',
-        height: '250px',
-        borderRadius: '50%',
         cursor: 'pointer',
         '&:hover': {
             opacity: 0.7
@@ -41,9 +39,11 @@ export default makeStyles(theme => ({
     },
     details: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: 10,
+        marginTop: '20px'
     },
     text: {
         textAlign: 'center'
