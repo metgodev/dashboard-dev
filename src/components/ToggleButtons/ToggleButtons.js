@@ -17,7 +17,7 @@ function ToggleButtons({ buttons, size, color, value, onChange, exclusive }) {
         >
             {buttons.length > 1 && buttons.map(({ title, type }) => {
                 return (
-                    <ToggleButton value={type} key={type}>
+                    <ToggleButton value={type} key={type} className={classes.toggleButton}>
                         {title}
                     </ToggleButton>
                 )

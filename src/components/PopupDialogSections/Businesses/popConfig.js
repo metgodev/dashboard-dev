@@ -9,13 +9,13 @@ export const FormTabs = [{
 
 export const ModalTabs = [
     term('details'),
-    //term('statistics'),
+    term('statistics'),
     term('gallery'),
-    //term('promotion'),
-    //term('calls'),
-    //term('reviews'),
+    term('promotion'),
+    term('calls'),
+    term('reviews'),
     term('products'),
-    //term('invitation_manager')
+    term('invitation_manager'),
     term('premium')
 ];
 
@@ -140,7 +140,7 @@ export const mediaTabConfig = {
             fileTypes: ["MP4", "AVI", "WMV"],
         },
         {
-            title: term('files'),
+            title: term('audio_files'),
             type: "files",
             fileTypes: ["MP3"],
         },

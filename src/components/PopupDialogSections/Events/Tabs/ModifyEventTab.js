@@ -13,6 +13,8 @@ import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
 import Toast from '../../../../utils/useToast'
 import ROLES from '../../../../data/roles'
 import { set_user_details } from '../../../../REDUX/actions/user.actions'
+import GetPermissions from '../../../../hooks/GetPermissions'
+import term from '../../../../terms'
 
 export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
 
@@ -24,6 +26,8 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
     const dispatch = useDispatch()
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
@@ -72,27 +76,32 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
             registrationLink: values.registrationLink
         }
         try {
-            if (type === "add") {
-                const userBusinessRole = await client.service('user-roles').find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
-                if (userBusinessRole.data.length === 1) {
-                    const roleId = userBusinessRole.data[0]._id
-                    const eventsRes = await client.service("events").create(valuesToSend)
-                    await client.service('user-roles').patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, eventsRes._id] })
-                    const newUserDetails = await client.service('users').find({ query: { _id: user.id } })
-                    dispatch(set_user_details(newUserDetails.data[0]))
+            if (permissions.edit) {
+                if (type === "add") {
+                    const userBusinessRole = await client.service('user-roles').find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
+                    if (userBusinessRole.data.length === 1) {
+                        const roleId = userBusinessRole.data[0]._id
+                        const eventsRes = await client.service("events").create(valuesToSend)
+                        await client.service('user-roles').patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, eventsRes._id] })
+                        const newUserDetails = await client.service('users').find({ query: { _id: user.id } })
+                        dispatch(set_user_details(newUserDetails.data[0]))
+                        dispatch(set_table_changed(type))
+                    } else {
+                        await client.service("events").create(valuesToSend)
+                        dispatch(set_table_changed(type))
+                        Toast()
+                    }
                     dispatch(set_table_changed(type))
-                } else {
-                    await client.service("events").create(valuesToSend)
-                    dispatch(set_table_changed(type))
-                    Toast()
+                    handleClose(false)
                 }
-                dispatch(set_table_changed(type))
-                handleClose(false)
+                else {
+                    await client.service("events").patch(values['_id'], valuesToSend)
+                    dispatch(set_table_changed(type))
+                    handleClose(false)
+                }
             }
             else {
-                await client.service("events").patch(values['_id'], valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
+                Toast(term('you_dont_have_permission'))
             }
         } catch (e) {
             console.log('modifyEventTab', e)

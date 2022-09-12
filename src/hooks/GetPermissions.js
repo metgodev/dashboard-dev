@@ -11,10 +11,15 @@ const GetPermissions = (user) => {
         if (user !== undefined && user !== null && Object.keys(user).length > 0 && user?.roles !== undefined) {
             if (user.roles.length === 2 && user.roles[1].roleName === ROLES.BUSINESS_OWNER) {
                 setPermissions(PERMISSIONS.METRO_BUSINESS_OWNER)
-            } else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.SUPER_ADMIN) {
+            }
+            else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.SUPER_ADMIN) {
                 setPermissions(PERMISSIONS.METRO_SUPER_ADMIN)
-            } else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.ADMIN) {
+            }
+            else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.ADMIN) {
                 setPermissions(PERMISSIONS.METRO_ADMIN)
+            }
+            else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.VIEWER) {
+                setPermissions(PERMISSIONS.METRO_VIEWER)
             }
         } else {
             setPermissions(PERMISSIONS.METRO_MEMBER)

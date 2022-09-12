@@ -131,6 +131,7 @@ const Root = () => {
                         </Routes>
                     )
                 case ROLES.ADMIN:
+                case ROLES.VIEWER:
                     return (
                         <Routes>
                             <Route exact path={ROUTES.ROOT} element={<Protecte auth={permissions.main} loggedIn={user}><Navigate to={ROUTES.DASHBOARD} /></Protecte>} />

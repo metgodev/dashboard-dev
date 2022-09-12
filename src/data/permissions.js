@@ -25,7 +25,8 @@ const PERMISSIONS = {
         calendar: true,
         status_change: false,
         adminNotification: false,
-        profile: true
+        profile: true,
+        edit: false
     },
     METRO_AREA_OWNER: {
         role: 'metro area owner'
@@ -59,7 +60,8 @@ const PERMISSIONS = {
         calendar: false,
         status_change: false,
         adminNotification: false,
-        profile: true
+        profile: true,
+        edit: true
     },
     METRO_SUPER_ADMIN: {
         main: true,
@@ -87,7 +89,8 @@ const PERMISSIONS = {
         calendar: true,
         status_change: true,
         adminNotification: true,
-        profile: true
+        profile: true,
+        edit: true
     },
     METRO_ADMIN: {
         main: true,
@@ -112,7 +115,34 @@ const PERMISSIONS = {
         calendar: true,
         status_change: true,
         adminNotification: true,
-        profile: true
+        profile: true,
+        edit: true
+    },
+    METRO_VIEWER: {
+        main: true,
+        dashboard: true,
+        verification: true,
+        business: true,
+        events: true,
+        locations: true,
+        routes: true,
+        vouchers: true,
+        users: true,
+        campaign: true,
+        map: true,
+        support: true,
+        faq: true,
+        error: true,
+        navigationBar: {
+            area: true,
+        },
+        admin: true,
+        products: true,
+        calendar: true,
+        status_change: false,
+        adminNotification: true,
+        profile: true,
+        edit: false
     }
 }
 

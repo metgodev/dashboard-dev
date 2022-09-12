@@ -3,17 +3,15 @@ import term from "../terms";
 import ERRORS from "../data/errors";
 
 const Toast = (message, style, isTerm) => {
+    toast.remove()
     if (message === undefined) {
         toast(term(ERRORS.GENERAL), style)
-        return
     }
     else if (isTerm === false) {
         toast(message, style)
-        return
     }
     else {
         toast(term(message), style)
-        return
     }
 }
 

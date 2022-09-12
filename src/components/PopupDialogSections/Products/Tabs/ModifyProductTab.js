@@ -11,12 +11,16 @@ import client from '../../../../API/metro'
 import { set_table_changed } from '../../../../REDUX/actions/main.actions';
 import BACK_ROUTES from '../../../../data/back_routes';
 import Toast from '../../../../utils/useToast';
+import term from '../../../../terms';
+import GetPermissions from '../../../../hooks/GetPermissions';
 
 function ModifyProductTab({ areaSpecificData, handleClose }) {
 
     let dispatch = useDispatch()
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     const classes = useStyles()
 
@@ -50,9 +54,13 @@ function ModifyProductTab({ areaSpecificData, handleClose }) {
             tagsIds: formValues.tagsIds,
         }
         try {
-            await client.service(BACK_ROUTES.PRODUCTS).patch(values._id, valuesToSend)
-            dispatch(set_table_changed('changed'))
-            handleClose(false)
+            if (permissions.edit) {
+                await client.service(BACK_ROUTES.PRODUCTS).patch(values._id, valuesToSend)
+                dispatch(set_table_changed('changed'))
+                handleClose(false)
+            } else {
+                Toast(term('you_dont_have_permission'))
+            }
         } catch (e) {
             console.log(e)
             Toast()

@@ -5,10 +5,15 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import term from '../terms'
 import useStyles from './styles'
 import { Box } from "@mui/system";
+import Toast from '../utils/useToast'
+import { useSelector } from "react-redux"
+import GetPermissions from "./GetPermissions"
 
 function DragDrop({ uploadCategory, onRecieveFile }) {
 
     const classes = useStyles()
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     const getMaximumFileSize = useCallback(() => {
         switch (uploadCategory.type) {
@@ -24,12 +29,17 @@ function DragDrop({ uploadCategory, onRecieveFile }) {
     }, [uploadCategory])
 
     const handleChange = (file) => {
-        if (file.type.substring(0, 5) === 'image') {
-            resizeFile(file, 1200, 1200, "PNG").then((resizedFile) => {
-                onRecieveFile(resizedFile, "Image")
-            })
-        } else {
-            onRecieveFile(file, "file")
+        if (permissions.edit) {
+            if (file.type.substring(0, 5) === 'image') {
+                resizeFile(file, 1200, 1200, "PNG").then((resizedFile) => {
+                    onRecieveFile(resizedFile, "Image")
+                })
+            } else {
+                onRecieveFile(file, "file")
+            }
+        }
+        else {
+            Toast(term('you_dont_have_permission'))
         }
     }
 

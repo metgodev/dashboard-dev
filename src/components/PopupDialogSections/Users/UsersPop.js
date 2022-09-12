@@ -8,6 +8,7 @@ import Tab from '@mui/material/Tab';
 import UsersTab from './Tabs/UsersTab'
 import useGetService from '../../../hooks/useGetService';
 import term from '../../../terms';
+import ROLES from '../../../data/roles';
 
 const UsersPop = ({ handleClose, type, open }) => {
 
@@ -24,7 +25,11 @@ const UsersPop = ({ handleClose, type, open }) => {
 
     useEffect(() => {
         if (roles.data.length) {
-            let userRoles = roles.data.map(({ name, _id }) => ({ id: _id, title: term(name.toLowerCase()) }))
+            let userRoles = roles.data.filter(({ name }) => { return (name !== ROLES.MEMBER) }).map(({ name, _id }) => {
+                return (
+                    { value: _id, name: term(name.toLowerCase()) }
+                )
+            })
             setPicker({ roles: userRoles })
         }
     }, [roles, handleClose]);

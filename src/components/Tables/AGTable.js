@@ -21,10 +21,9 @@ import LISTENER from '../../data/listener';
 import Toast from '../../utils/useToast'
 //Service
 import { _get } from '../../API/service'
-import ERRORS from '../../data/errors';
 import { CircularProgress } from '@mui/material';
 
-const AGTable = ({ display, action, setExportToExcel }) => {
+const AGTable = ({ display, action, setExportToExcel, options }) => {
 
     const gridRef = useRef();
 
@@ -142,7 +141,7 @@ const AGTable = ({ display, action, setExportToExcel }) => {
         if (gridRef.current.api !== undefined) {
             if (pageData.data.length > 0) {
                 let cols = Cols(pageData.data[0], ignore, display);
-                let keys = Keys(cols, idOptions, display, onUpdate);
+                let keys = Keys(cols, idOptions, display, onUpdate, options);
                 setColumnDefs(keys);
             }
             let datasource = {
@@ -159,13 +158,6 @@ const AGTable = ({ display, action, setExportToExcel }) => {
                 <AgGridReact
                     onGridReady={onGridReady}
                     onCellDoubleClicked={(event) => {
-                        if (display !== BACK_ROUTES.AUTHORITIES && display !== BACK_ROUTES.TAG_CATEGORIES) {
-                            Toast(ERRORS.MAIN_TAG, {
-                                duration: 4000,
-                                style: { fontSize: '16px', fontWeight: 'bold' },
-                                position: 'top-center',
-                            })
-                        }
                         action(event.data)
                     }}
                     columnDefs={columnDefs}

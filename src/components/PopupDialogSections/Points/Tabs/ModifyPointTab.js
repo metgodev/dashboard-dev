@@ -12,6 +12,7 @@ import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
 import term from "../../../../terms";
 import Toast from '../../../../utils/useToast'
+import GetPermissions from '../../../../hooks/GetPermissions'
 
 const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
     //global
@@ -26,6 +27,8 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
     const [orientation, setOrientation] = useState('ltr')
 
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     useEffect(() => {
         setValues(init)
@@ -75,15 +78,19 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
             prefferedSeason: typeof values.prefferedSeason === 'object' ? values.prefferedSeason : [values.prefferedSeason],
         }
         try {
-            if (type === "add") {
-                await client.service("pois").create(valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
-            }
-            else {
-                await client.service("pois").patch(values['_id'], valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
+            if (permissions.edit) {
+                if (type === "add") {
+                    await client.service("pois").create(valuesToSend)
+                    dispatch(set_table_changed(type))
+                    handleClose(false)
+                }
+                else {
+                    await client.service("pois").patch(values['_id'], valuesToSend)
+                    dispatch(set_table_changed(type))
+                    handleClose(false)
+                }
+            } else {
+                Toast(term('you_dont_have_permission'))
             }
         } catch (e) {
             console.log('modifyPointTab', e)

@@ -33,16 +33,17 @@ function UsersTab({ handleClose, type, areaSpecificData }) {
 
     const submit = async (formValues) => {
         try {
-            const currentUserRoles = await client.service(BACK_ROUTES.USER_ROLES).find({ query: { userId: init._id } })
-            currentUserRoles.data.forEach(role => {
-                if (role.roleName !== ROLES.MEMBER) {
-                    client.service(BACK_ROUTES.USER_ROLES).remove(role._id)
-                }
-            })
-            const newRoles = areaSpecificData.roles.filter(role => role.id !== ROLES.MEMBER_ROLE_ID && formValues.roles.includes(role.id))
-            newRoles.forEach(role => {
-                client.service(BACK_ROUTES.USER_ROLES).create({ userId: init._id, roleId: role.id })
-            })
+            await client.service('users').patch(init._id, { email: formValues.email })
+            if (formValues.roles.length !== 0) {
+                const currentUserRoles = await client.service(BACK_ROUTES.USER_ROLES).find({ query: { userId: init._id } })
+                currentUserRoles.data.forEach(role => {
+                    if (role.roleName !== ROLES.MEMBER) {
+                        client.service(BACK_ROUTES.USER_ROLES).remove(role._id)
+                    }
+                })
+                const newRole = formValues.roles
+                await client.service(BACK_ROUTES.USER_ROLES).create({ userId: init._id, roleId: newRole })
+            }
             dispatch(set_table_changed(type))
             handleClose(false)
         } catch (e) {
@@ -52,14 +53,15 @@ function UsersTab({ handleClose, type, areaSpecificData }) {
 
     return (
         <Box className={classes.container}>
-            {Object.keys(values).length > 0 && <Form
-                fields={ModalInit}
-                data={formData}
-                options={areaSpecificData}
-                submitFunction={submit}
-                validiationFunction={validate}
-                orientation={orientation}
-            />}
+            {Object.keys(values).length > 0 &&
+                <Form
+                    fields={ModalInit}
+                    data={formData}
+                    options={areaSpecificData}
+                    submitFunction={submit}
+                    validiationFunction={validate}
+                    orientation={orientation}
+                />}
         </Box>
     )
 }

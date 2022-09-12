@@ -5,5 +5,8 @@ export default makeStyles(theme => ({
         direction: "ltr",
         marginTop: "20px",
         marginBottom: "20px"
+    },
+    toggleButton: {
+        width: '10vw'
     }
 }));

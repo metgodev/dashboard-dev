@@ -19,7 +19,7 @@ import { set_admin_notification } from "../../../REDUX/actions/main.actions";
 import AdminNotifications from "../../AdminNotifications/AdminNotifications";
 import GetPermissions from "../../../hooks/GetPermissions";
 import GetRole from "../../../hooks/GetRole";
-import ROLES from "../../../data/roles";
+import { PLACEHOLDER_PROFILE_IMAGE } from '../../../data/constants'
 
 function ProfileMenu() {
     // local
@@ -32,7 +32,7 @@ function ProfileMenu() {
     const role = GetRole(userDetails)
 
     let classes = useStyles();
-    let avatar = `${AVATAR_URL + user.fn}`
+    let avatar = userDetails?.profilePicture ? userDetails.profilePicture.url : PLACEHOLDER_PROFILE_IMAGE
     let navigate = useNavigate()
     const dispatch = useDispatch()
     let currentHref = window.location.href

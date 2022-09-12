@@ -94,5 +94,14 @@ export default makeStyles(theme => ({
     },
     galleryContainer: {
         width: '100%'
+    },
+    soonContainer: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        width: '100%',
+        height: '30vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 }));

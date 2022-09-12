@@ -10,6 +10,8 @@ import Form from '../../../Form/Form'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import Toast from '../../../../utils/useToast';
+import term from '../../../../terms';
+import GetPermissions from '../../../../hooks/GetPermissions';
 
 export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
     //global
@@ -21,6 +23,8 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
 
     const [values, setValues] = useState({});
     const [orientation, setOrientation] = useState('ltr')
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     useEffect(() => {
         setValues(init)
@@ -44,15 +48,19 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
             shortDescription: formValues.shortDescription
         }
         try {
-            if (type === "add") {
-                await client.service("tracks").create(valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
-            }
-            else {
-                await client.service("tracks").patch(values['_id'], valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
+            if (permissions.edit) {
+                if (type === "add") {
+                    await client.service("tracks").create(valuesToSend)
+                    dispatch(set_table_changed(type))
+                    handleClose(false)
+                }
+                else {
+                    await client.service("tracks").patch(values['_id'], valuesToSend)
+                    dispatch(set_table_changed(type))
+                    handleClose(false)
+                }
+            } else {
+                Toast(term('you_dont_have_permission'))
             }
         } catch (e) {
             console.log('tracksTab', e)

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ROLES from '../../data/roles'
 
 const date = new Date()
 
@@ -147,7 +148,7 @@ export const GetValuesForForm = (values, allTags) => {
     inStock: values.length || Object.keys(values).length ? values.hasOwnProperty('inStock') ? values.inStock : initialData.inStock : initialData.inStock,
     galleryFileIds: values.length || Object.keys(values).length ? values.hasOwnProperty('galleryFileIds') ? values.galleryFileIds : initialData.galleryFileIds : initialData.galleryFileIds,
     approveContent: values.length || Object.keys(values).length ? values.hasOwnProperty('approveContent') ? values.approveContent : initialData.approveContent : initialData.approveContent,
-    roles: values.length || Object.keys(values).length ? values.hasOwnProperty('roles') ? values.roles.map(role => role.roleId) : initialData.roles : initialData.roles,
+    roles: values.length || Object.keys(values).length ? values.hasOwnProperty('roles') ? values.roles.filter(({ roleName }) => { return roleName !== ROLES.MEMBER }).map(role => role.roleId) : initialData.roles : initialData.roles,
     isPremium: values.length || Object.keys(values).length ? values.hasOwnProperty('isPremium') ? values.isPremium : initialData.isPremium : initialData.isPremium,
   }
 

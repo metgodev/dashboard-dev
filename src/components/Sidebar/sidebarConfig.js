@@ -86,7 +86,7 @@ export const getLink = (user) => {
     else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.SUPER_ADMIN) {
         return superAdminLinks
     }
-    else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.ADMIN) {
+    else if (user.roles.length === 2 && (user.roles[1].roleName === ROLES.ADMIN || user.roles[1].roleName === ROLES.VIEWER)) {
         return adminLinks
     }
 }

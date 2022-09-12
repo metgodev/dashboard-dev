@@ -1298,6 +1298,16 @@ const active_lexicon = {
         he: 'מנהל',
         ar: 'آخر',
     },
+    metro_banned: {
+        en: 'Banned',
+        he: 'מושהה',
+        ar: 'محظور',
+    },
+    metro_viewer: {
+        en: 'Viewer',
+        he: 'צופה',
+        ar: 'مشاهد',
+    },
     is_premium: {
         en: 'Premium',
         he: 'פרמיום',
@@ -1777,6 +1787,16 @@ const active_lexicon = {
         en: 'Benches',
         he: 'ספסלים',
         ar: 'مقاعد'
+    },
+    audio_files: {
+        en: 'Audio files',
+        he: 'קבצי קול',
+        ar: 'ملفات صوتية'
+    },
+    soon: {
+        en: 'Soon',
+        he: 'בקרוב',
+        ar: 'هكذا'
     },
     businesses_requesting_premium: {
         en: 'Businesses to review for premium status',

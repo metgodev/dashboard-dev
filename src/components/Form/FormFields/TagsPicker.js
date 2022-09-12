@@ -1,8 +1,10 @@
 import React from 'react'
 import { Autocomplete } from 'mui-rff'
-import { Checkbox } from '@material-ui/core'
+import { Box, Checkbox } from '@material-ui/core'
 import { getTagColor } from '../FormFunctions'
 import { Chip } from '@mui/material'
+import ERRORS from '../../../data/errors'
+import Toast from '../../../utils/useToast'
 
 function TagsPicker({ title, field, options }) {
     return (
@@ -43,13 +45,19 @@ function TagsPicker({ title, field, options }) {
             getOptionLabel={(option) => option.label}
             disableCloseOnSelect={true}
             renderOption={(props, option, { selected }) => (
-                <li {...props}>
-                    <Checkbox
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                    />
-                    {option.label}
-                </li>
+                <Box onClick={() => Toast(ERRORS.MAIN_TAG, {
+                    duration: 4000,
+                    style: { fontSize: '16px', fontWeight: 'bold' },
+                    position: 'top-center',
+                })}>
+                    <li {...props}>
+                        <Checkbox
+                            style={{ marginRight: 8 }}
+                            checked={selected}
+                        />
+                        {option.label}
+                    </li>
+                </Box>
             )}
         />
     )

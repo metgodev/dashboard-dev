@@ -6,15 +6,18 @@ import PageTitle from '../../components/PageTitle/PageTitle'
 import CropImage from '../../hooks/CropImage'
 import useStyles from './styles'
 import { set_user_details } from '../../REDUX/actions/user.actions'
-import { handleChooseImage, PLACEHOLDER_IMAGE, handleImageClick, uploadImage, LOADER_SIZE } from './profilePageHelper'
+import { handleChooseImage, handleImageClick, uploadImage, LOADER_SIZE } from './profilePageHelper'
 import { resizeFile } from '../../hooks/FileResizer'
 import { urltoFile } from '../../utils/base64toFile'
 import Toast from '../../utils/useToast'
+import { PLACEHOLDER_PROFILE_IMAGE } from '../../data/constants'
+import GetPermissions from "../../hooks/GetPermissions";
 
 function Profile() {
 
-    const userDetails = useSelector(s => s.userReducer.userDetails)
     const { area, user } = useSelector(s => s.mainRememberReducer)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
+    const permissions = GetPermissions(userDetails)
 
     const dispatch = useDispatch()
     const classes = useStyles()
@@ -58,8 +61,8 @@ function Profile() {
                 {file === null && !loading &&
                     <img
                         className={classes.profileImage}
-                        src={userDetails?.profilePicture ? userDetails.profilePicture.url : PLACEHOLDER_IMAGE}
-                        onClick={() => handleImageClick()}
+                        src={userDetails?.profilePicture ? userDetails.profilePicture.url : PLACEHOLDER_PROFILE_IMAGE}
+                        onClick={() => handleImageClick(permissions.edit)}
                     />
                 }
                 <Box className={classes.details}>

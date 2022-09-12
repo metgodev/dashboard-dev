@@ -62,5 +62,5 @@ export default makeStyles(theme => ({
     adminPremiumContainer: {
         width: '100%',
         padding: '20px'
-    }
+    },
 }));

@@ -74,10 +74,10 @@ const ModifyPop = ({ handleClose, type, open }) => {
                             <Tab
                                 key={tab}
                                 label={tab}
-                                style={tab === term('products') ? { backgroundColor: '#D2FED1' } : tab === term('premium') ? { backgroundColor: '#68FD01', color: 'white' } : {}}
+                                style={tab === term('products') || tab === term('invitation_manager') ? { backgroundColor: '#D2FED1' } : tab === term('premium') ? { backgroundColor: '#68FD01', color: 'white' } : {}}
                                 icon={tab === term('premium') ? <LockOpenIcon /> : null}
                                 iconPosition='top'
-                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || Boolean(businessData.isPremium) === false) && tab === term('products')}
+                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || Boolean(businessData.isPremium) === false) && (tab === term('products') || tab === term('invitation_manager'))}
                             />
                         )
                     }
@@ -87,34 +87,34 @@ const ModifyPop = ({ handleClose, type, open }) => {
                 <TabPanel value={tab} index={0}>
                     {picker.authorityId.length > 0 && <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />}
                 </TabPanel>
-                {/* <TabPanel value={tab} index={1}>
-                    <StatisticsTab />
-                </TabPanel> */}
                 <TabPanel value={tab} index={1}>
+                    <StatisticsTab />
+                </TabPanel>
+                <TabPanel value={tab} index={2}>
                     <UploadMediaTab type={'gallery'} tab={"business"} config={mediaTabConfig} />
                 </TabPanel>
-                {/* <TabPanel value={tab} index={3}>
-                    <img src={promotions} alt="promotions"
-                    />
-                </TabPanel> */}
-                {/* <TabPanel value={tab} index={4}>
-                    <img src={chat} alt="chat" />
-                </TabPanel> */}
-                {/* <TabPanel value={tab} index={5}>
-                    <img src={comments} alt="comments" />
-                </TabPanel> */}
-                <TabPanel value={tab} index={2}>
+                <TabPanel value={tab} index={3}>
+                    <span className={classes.soonContainer}>{term('soon')}</span>
+                </TabPanel>
+                <TabPanel value={tab} index={4}>
+                    <span className={classes.soonContainer}>{term('soon')}</span>
+                </TabPanel>
+                <TabPanel value={tab} index={5}>
+                    <span className={classes.soonContainer}>{term('soon')}</span>
+                </TabPanel>
+                <TabPanel value={tab} index={6}>
                     {picker.tagsIds.length > 0 &&
                         <AddProductsTab type={type} areaSpecificData={picker} handleClose={handleClose} />
                     }
                 </TabPanel>
-                <TabPanel value={tab} index={3}>
+                <TabPanel value={tab} index={7}>
+                    <span className={classes.soonContainer}>{term('soon')}</span>
+                </TabPanel>
+                <TabPanel value={tab} index={8}>
                     {role === ROLES.BUSINESS_OWNER && <PremiumTab handleClose={handleClose} />}
                     {(role === ROLES.SUPER_ADMIN || role === ROLES.ADMIN) && <AdminPremiumTab handleClose={handleClose} />}
                 </TabPanel>
-                {/* <TabPanel value={tab} index={3}>
-                </TabPanel>
-                <TabPanel value={tab} index={4}>
+                {/* <TabPanel value={tab} index={4}>
                 </TabPanel> */}
             </Box>
         </div >

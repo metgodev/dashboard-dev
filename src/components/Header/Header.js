@@ -13,10 +13,13 @@ import term from "../../terms";
 // global
 import { useDispatch, useSelector } from "react-redux";
 import { set_sidebar_toggle } from "../../REDUX/actions/main.actions"
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../data/routes";
 
 //additional commit
 const Header = React.memo(() => {
   let classes = useStyles();
+  const navigate = useNavigate()
   let { sidebar } = useSelector(s => s.mainReducer)
   let dispatch = useDispatch();
 
@@ -24,15 +27,20 @@ const Header = React.memo(() => {
     dispatch(set_sidebar_toggle(!sidebar))
   }
 
+  const handleLogoClick = () => {
+    navigate(ROUTES.DASHBOARD)
+  }
 
   return (
     <Box style={{ direction: 'ltr', paddingTop: em(1) }}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <img src={Logo} alt="logo" className={classes.logotype} width={em(2)} />
-          <Typography variant="h3" weight="medium" color="text" className={classes.logotype}>
-            {term('met_go')}
-          </Typography>
+          <Box className={classes.logoContainer} onClick={() => handleLogoClick()}>
+            <img src={Logo} alt="logo" className={classes.logotype} width={em(2)} />
+            <Typography variant="h3" weight="medium" color="text" className={classes.logotype}>
+              {term('met_go')}
+            </Typography>
+          </Box>
           <div className={classes.grow} />
           <SideBtns />
           <IconButton

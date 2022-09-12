@@ -2,7 +2,6 @@ import { uploadImageToFirebase, _patch } from "../../API/service";
 import BACK_ROUTES from "../../data/back_routes";
 import Toast from "../../utils/useToast";
 
-export const PLACEHOLDER_IMAGE = 'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'
 export const LOADER_SIZE = 50
 
 export const handleChooseImage = async (event, setFile) => {
@@ -19,9 +18,12 @@ export const handleChooseImage = async (event, setFile) => {
 
 }
 
-export const handleImageClick = () => {
-    const uploadButton = document.getElementById('imgupload')
-    uploadButton.click()
+export const handleImageClick = (permission) => {
+    if (permission) {
+        const uploadButton = document.getElementById('imgupload')
+        uploadButton.click()
+    }
+
 }
 
 export const uploadImage = async (file, areaId, userId) => {
