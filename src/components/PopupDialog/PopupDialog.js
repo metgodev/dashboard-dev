@@ -32,6 +32,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
     const classes = useStyles()
     const theme = useTheme();
     const dispatch = useDispatch();
+    const entityDetails = useSelector(s => s.mainReducer.editTabData)
 
     const handleClose = () => {
         toast.dismiss()
@@ -55,7 +56,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                 maxWidth={maxWidth || "xl"}
             >
                 <DialogTitle className={classes.dialogHeader}>
-                    {title}
+                    {entityDetails?.name ? entityDetails.name : title}
                     <IconButton onClick={handleClose}>
                         < CloseOutlinedIcon />
                     </IconButton>

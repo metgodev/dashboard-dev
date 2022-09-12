@@ -85,6 +85,8 @@ function Profile() {
             } catch (e) {
                 Toast()
             }
+        } else {
+            Toast('you_dont_have_permission')
         }
     }
 
