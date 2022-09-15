@@ -13,7 +13,7 @@ export const ModalInit = [
     { title: term('event_name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: true },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 1, size: 'medium', type: 'picker', required: true },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker', maxItems: 3, required: true },
-    { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker', maxItems: 5, required: true },
+    { title: term('tags'), id: createRandomId(), field: 'tags', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker', maxItems: 5, required: true },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 5, maxRows: 5, size: 'medium', type: 'textAreaSizeable', required: true },
     { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: true },
     { title: term('reservations'), id: createRandomId(), field: 'reservations', rows: 1, maxRows: 1, size: 'medium', type: 'picker', required: false },
@@ -31,7 +31,7 @@ export const ModalInit = [
     // { title: term('currency'), id: createRandomId(), field: 'currency', rows: 1, maxRows: 1, size: 'small', type: 'picker', required: true },
     { title: term('reservations_phone'), id: createRandomId(), field: 'reservationCenterPhone', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: false },
     { title: term('reservations_mail'), id: createRandomId(), field: 'reservationCenterEmail', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: false },
-    { title: term('site_link'), id: createRandomId(), field: 'websiteUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
+    { title: term('site_link'), id: createRandomId(), field: 'websitesUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
     { title: term('registration_link'), id: createRandomId(), field: 'registrationLink', rows: 1, maxRows: 1, size: 'medium', type: 'textfield', required: true },
     // ------------------ more information ------------------
     // { title: term('map_location'), id: createRandomId(), field: 'mapLocation', type: 'divider', },

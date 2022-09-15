@@ -75,7 +75,7 @@ const initialData = {
 
 
 
-export const GetValuesForForm = (values, allTags) => {
+export const GetValuesForForm = (values) => {
 
   useEffect(() => {
     setReturnValues(valuesForForm)
@@ -87,13 +87,7 @@ export const GetValuesForForm = (values, allTags) => {
     name: values.length || Object.keys(values).length ? values.hasOwnProperty('name') ? values.name : initialData.name : initialData.name,
     authorityId: values.length || Object.keys(values).length ? values.hasOwnProperty('authorityId') ? values.authorityId : values.hasOwnProperty('authority') ? values.authority._id : initialData.authority : initialData.authority,
     relevantTo: values.length || Object.keys(values).length ? values.hasOwnProperty('relevantTo') ? values.relevantTo : initialData.relevantTo : initialData.relevantTo,
-    tagsIds: values.length || Object.keys(values).length ?
-      (values.hasOwnProperty('tags') && !values.hasOwnProperty('tagsIds') ?
-        getTagsForForm(values.tags, allTags) : values.hasOwnProperty('tagsIds') ? values.tagsIds
-          :
-          initialData.tags)
-      :
-      (initialData.tags),
+    tags: values.length || Object.keys(values).length ? values.hasOwnProperty('tags') ? values.tags : initialData.tags : initialData.tags,
     openingHours: values.length || Object.keys(values).length ? values.hasOwnProperty('openingHours') ? values.openingHours : initialData.openingHours : initialData.openingHours,
     description: values.length || Object.keys(values).length ? values.hasOwnProperty('description') ? values.description : initialData.description : initialData.description,
     shortDescription: values.length || Object.keys(values).length ? values.hasOwnProperty('shortDescription') ? values.shortDescription : initialData.shortDescription : initialData.shortDescription,
@@ -121,7 +115,7 @@ export const GetValuesForForm = (values, allTags) => {
     onlineMeetingURL: values.length || Object.keys(values).length ? values.hasOwnProperty('onlineMeetingURL') ? values.onlineMeetingURL : initialData.onlineMeetingURL : initialData.onlineMeetingURL,
     reservationCenterPhone: values.length || Object.keys(values).length ? values.hasOwnProperty('reservationCenterPhone') ? values.reservationCenterPhone : initialData.reservationCenterPhone : initialData.reservationCenterPhone,
     reservationCenterEmail: values.length || Object.keys(values).length ? values.hasOwnProperty('reservationCenterEmail') ? values.reservationCenterEmail : initialData.reservationCenterEmail : initialData.reservationCenterEmail,
-    websitesUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('websitesUrl') && values.websitesUrl !== undefined && values.websitesUrl[0] !== undefined ? values.websitesUrl[0] : initialData.websitesUrl : initialData.websitesUrl,
+    websitesUrl: values.length || Object.keys(values).length ? values.hasOwnProperty('websitesUrl') ? typeof values.websitesUrl === 'object' ? values.websitesUrl[0] : values.websitesUrl : initialData.websitesUrl : initialData.websitesUrl,
     whatsAppPhoneNumber: values.length || Object.keys(values).length ? values.hasOwnProperty('whatsAppPhoneNumber') ? values.whatsAppPhoneNumber : initialData.whatsAppPhoneNumber : initialData.whatsAppPhoneNumber,
     registrationLink: values.length || Object.keys(values).length ? values.hasOwnProperty('registrationLink') ? values.registrationLink : initialData.registrationLink : initialData.registrationLink,
     activitiesInPlace: values.length || Object.keys(values).length ? values.hasOwnProperty('activitiesInPlace') ? values.activitiesInPlace : initialData.activitiesInPlace : initialData.activitiesInPlace,
@@ -174,6 +168,7 @@ const getTagsForForm = (recievedTags, allTags) => {
 
 export const getTagIdsToSend = (tagCategoryIds, areaSpecificData) => {
   let x = areaSpecificData.tagsIds.filter(item => tagCategoryIds.includes(item.id))
+  console.log(x)
   x = x.map(item => {
     return item.id
   })

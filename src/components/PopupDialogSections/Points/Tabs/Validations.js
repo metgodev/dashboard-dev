@@ -16,12 +16,6 @@ export async function validateFirstFormPart(values) {
     if (!values.authorityId) {
         return { authorityId: term('please_choose_an_authority') }
     }
-    if (!values.tagsIds.length > 1) {
-        return { tagsIds: term('please_choose_at_least_one_tag') }
-    }
-    if (values.tagsIds.length > 5) {
-        return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
-    }
     if (!values.shortDescription) {
         return { shortDescription: term('please_add_a_short_description') }
     }

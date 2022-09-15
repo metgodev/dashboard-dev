@@ -42,7 +42,7 @@ function AddProductsTab({ areaSpecificData, type }) {
         }
     }
 
-    const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
+    const formData = GetValuesForForm(values, areaSpecificData.tags)
     const formFields = GetProductFormFields(productFields, formData, areaSpecificData, orientation, handleValues, setStep, validateFirstProductTab, validateSecondProductTab)
 
     useEffect(() => {
@@ -58,6 +58,8 @@ function AddProductsTab({ areaSpecificData, type }) {
     const submitFunction = async () => {
         const valuesToSend = {
             ...values,
+            tagsIds: values.tags.map(tag => tag.value),
+            relevantTo: values.relevantTo.map(tag => tag.value),
             galleryFileIds: values?.galleryFileIds ? values?.galleryFileIds.map(item => ({ fileId: item.fileId, metadata: { type: 'image' } })) : [],
             areaId: area.id,
             businessId: init._id,

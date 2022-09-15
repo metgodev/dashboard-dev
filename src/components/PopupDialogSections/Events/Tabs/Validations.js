@@ -4,7 +4,6 @@ import { validateIsraelPhoneNumber } from '../../../../utils/validate_phone'
 
 const MAXIMUM_BUSINESS_NAME_LENGTH = 30
 const MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION = 4
-const MAXIMUM_AMMOUNT_OF_TAGS = 5
 
 export async function validateFirstFormPart(values) {
     if (!values.name) {
@@ -23,12 +22,6 @@ export async function validateFirstFormPart(values) {
         return {
             shortDescription: term('short_description_cannot_exceed') + " " + MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION + " " + term('words')
         }
-    }
-    if (values.tagsIds.length < 1) {
-        return { tagsIds: term('please_choose_at_least_one_tag') }
-    }
-    if (values.tagsIds.length > 5) {
-        return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
     if (values.price && values.free) {
         return { free: term('cant_be_free_and_have_a_price') }

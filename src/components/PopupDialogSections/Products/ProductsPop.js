@@ -22,8 +22,8 @@ const ProductsPop = ({ handleClose, type, open }) => {
 
     useEffect(() => {
         { !open && setTab(0) }
-        let tag_categories = tagCategories.data.map((data) => ({ title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
-        setPicker(prev => ({ ...prev, tagsIds: tag_categories, areaId: area.id }))
+        let tag_categories = tagCategories.data.map((data) => ({ category: data.category.title, title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
+        setPicker(prev => ({ ...prev, tags: tag_categories, areaId: area.id }))
     }, [handleClose])
 
     const tagCategories = useGetService("tag-categories", "tag-categories", { areaId: area.id }, area, false)
@@ -42,7 +42,7 @@ const ProductsPop = ({ handleClose, type, open }) => {
                 </Box>
                 <Box id="alert-dialog-slide-description">
                     <TabPanel value={tab} index={0}>
-                        {picker.tagsIds.length > 0 && <ModifyProductTab handleClose={handleClose} areaSpecificData={picker} />}
+                        {picker.tags.length > 0 && <ModifyProductTab handleClose={handleClose} areaSpecificData={picker} />}
                     </TabPanel>
                     <TabPanel value={tab} index={1}>
                         <UploadMediaTab type={'gallery'} tab={"products"} config={mediaTabConfig} />

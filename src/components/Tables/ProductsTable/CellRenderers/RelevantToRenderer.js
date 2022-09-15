@@ -1,10 +1,9 @@
 import { Modal, Box, Button, Autocomplete, TextField, Chip, Checkbox, } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 import term from '../../../../terms'
 import { Picker } from '../../../PopupDialogSections/Businesses/Tabs/HandleBusinessData'
-import { getTagColor } from '../../../Form/FormFunctions'
+import { GetTagColor } from '../../../Form/FormFunctions'
 import { _patch } from '../../../../API/service';
 import BACK_ROUTES from '../../../../data/back_routes'
 import ENTITY_STATUS from '../../../../data/entity_status'
@@ -13,8 +12,6 @@ function RelevantToRenderer(props) {
 
     const [open, setOpen] = useState(false)
     const [values, setValues] = useState([])
-
-    const dispatch = useDispatch()
 
     useEffect(() => {
         if (props?.data?.relevantTo !== undefined) {
@@ -74,7 +71,7 @@ function RelevantToRenderer(props) {
                                             style={{
                                                 border: index === 0 ? `2px solid #01A1FC` : `1px solid grey`,
                                                 padding: '10px',
-                                                backgroundColor: `${getTagColor(option.title)}`,
+                                                backgroundColor: `${GetTagColor(option.title)}`,
                                             }}
                                             {...getTagProps({ index })}
                                             label={option.title}

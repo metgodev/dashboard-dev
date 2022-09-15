@@ -36,20 +36,66 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   const [times, setTimes] = useState({})
   const [chosenImage, setChosenImage] = useState(null)
   const [itemsToSend, setItemsToSend] = useState([])
+  const [tagsPickerItems, setTagsPickerItems] = useState({})
 
   useEffect(() => {
     setResizableText(data.description)
     setTimes(data.openingHours)
     setChosenImage(data.coverImageFileId)
+    setTagsPickerItems(() => {
+      return (
+        {
+          tags: data.tags ? data.tags.map(tag => {
+            return ({
+              category: typeof tag.category === 'string' ? tag.category : tag.category.title,
+              label: tag.label === undefined ? tag.tag.title + " - " + term(tag.category.title.toLowerCase()) : tag.label,
+              value: tag.value === undefined ? tag._id : tag.value
+            })
+          }) : [],
+          relevantTo: data.relevantTo ? data.relevantTo.length > 0 && typeof data.relevantTo[0] === 'string' ? options.relevantTo.filter(option => {
+            return data.relevantTo.includes(option.id)
+          }).map(item => ({ label: item.title, value: item.id })) : data.relevantTo : [],
+          inPlace: data.inPlace ? data.inPlace.length > 0 && typeof data.inPlace[0] === 'string' ? options.inPlace.filter(option => {
+            return data.inPlace.includes(option.id)
+          }).map(item => ({ label: item.title, value: item.id })) : data.inPlace : [],
+          objectIds: data.objectIds ? data.objectIds.length > 0 && typeof data.objectIds[0] === 'string' ? options.objectIds.filter(option => {
+            return data.objectIds.includes(option.id)
+          }).map(item => ({ label: item.title, value: item.id })) : data.objectIds : [],
+        }
+      )
+    })
   }, [data])
 
+  useEffect(() => {
+    if (Object.keys(tagsPickerItems).length > 0 && tagsPickerItems.objectIds.length > 0) {
+      setItemsToSend(tagsPickerItems.objectIds.map(obj => obj.value))
+    }
+  }, [tagsPickerItems])
+
   const formatValuesToSend = (values) => {
-    if ((fields.description !== undefined && fields.description !== null) && resizableText.length < 1) {
-      Toast(ERRORS.EMPTY_DESCRIPTION)
+    if (fields.find(item => item.field === 'description') && resizableText.length < 1) {
+      Toast(term(ERRORS.EMPTY_DESCRIPTION))
+      return
+    }
+    if (fields.find(item => item.field === 'tags') && tagsPickerItems.tags.length < 1) {
+      Toast(term(ERRORS.ONE_TAG))
+      return
+    }
+    if (fields.find(item => item.field === 'tags') && tagsPickerItems.tags.length > 5) {
+      Toast(term(`please_choose_up_to`) + '5' + term('tags'))
       return
     }
     const formattedItemsToSend = formatObjects(itemsToSend, options)
-    submitFunction({ ...values, description: resizableText, openingHours: times, objectIds: formattedItemsToSend, coverImageFileId: chosenImage })
+    submitFunction({
+      ...values,
+      description: resizableText,
+      openingHours: times,
+      objectIds: formattedItemsToSend,
+      coverImageFileId: chosenImage,
+      tags: tagsPickerItems.tags,
+      relevantTo: tagsPickerItems.relevantTo,
+      inPlace: tagsPickerItems.inPlace,
+    })
   }
 
   return (
@@ -86,8 +132,23 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                       {type === 'timePicker' &&
                         <TimePicker title={title} field={field} />
                       }
-                      {type === "tagsPicker" && options[field].length > 0 && (
-                        <TagsPicker field={field} title={title} options={options} />
+                      {type === "tagsPicker" && options[field].length > 0 && Boolean(Object.keys(tagsPickerItems).length) && tagsPickerItems[field].length > 0 && (
+                        <TagsPicker
+                          field={field}
+                          title={title}
+                          options={options[field]}
+                          values={tagsPickerItems[field]}
+                          setValues={setTagsPickerItems}
+                        />
+                      )}
+                      {type === "tagsPicker" && options[field].length > 0 && Boolean(Object.keys(tagsPickerItems).length) && tagsPickerItems[field].length === 0 && (
+                        <TagsPicker
+                          field={field}
+                          title={title}
+                          options={options[field]}
+                          values={[]}
+                          setValues={setTagsPickerItems}
+                        />
                       )}
                       {type === "checkbox" && (
                         <Checkbox field={field} title={title} />
@@ -123,6 +184,8 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           setChosenImage={setChosenImage}
                           setItemsToSend={setItemsToSend}
                           itemsToSend={itemsToSend}
+                          valuesForPicker={tagsPickerItems[field]}
+                          setValuesForPicker={setTagsPickerItems}
                         />
                       )}
                     </Grid>

@@ -7,7 +7,7 @@ import term from "../../../terms";
 import { Auth } from '../../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../../REDUX/actions/main.actions';
-import { registerUserWithEmailAndPassword } from '../../../API/firebase';
+import { loginWithPhoneNumber } from '../../../API/firebase';
 import { set_user_details } from '../../../REDUX/actions/user.actions'
 // styles
 import useStyles from "../styles";
@@ -18,6 +18,7 @@ import ERRORS from '../../../data/errors';
 import ROLES from '../../../data/roles';
 import client from '../../../API/metro'
 import BACK_ROUTES from '../../../data/back_routes';
+import { RecaptchaVerifier } from 'firebase/auth';
 
 function Register() {
 
@@ -25,20 +26,19 @@ function Register() {
 
     let navigate = useNavigate()
     let classes = useStyles();
+
     let [isLoading, setIsLoading] = useState(false);
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
-    let [email, setEmail] = useState("");
-    let [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleClickShowPassword = () => setShowPassword(!showPassword);
-    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    let [phoneNumber, setPhoneNumber] = useState("");
+    let [verifyPhoneNumber, setVerifyPhoneNumber] = useState("");
+    const [response, setResponse] = useState(null)
+    let [confirmationCode, setConfirmationCode] = useState(null);
 
     const LISTENER_TYPE = LISTENER.TYPES.KEYDOWN
     const LISTENER_FUNCTION = (e) => {
-        if (e.key === LISTENER.KEYS.ENTER && email.length !== 0 && password.length !== 0 && firstName.length !== 0 && lastName.length !== 0) {
-            registerUser()
+        if (e.key === LISTENER.KEYS.ENTER && phoneNumber.length !== 0 && verifyPhoneNumber.length !== 0 && firstName.length !== 0 && lastName.length !== 0) {
+            sendVerificationCode()
         }
     }
 
@@ -48,80 +48,78 @@ function Register() {
         return () => {
             document.removeEventListener(LISTENER_TYPE, LISTENER_FUNCTION)
         }
-    }, [email, password])
+    }, [phoneNumber, verifyPhoneNumber])
 
+    const formatPhoneNumber = (phoneNumber) => {
+        if (phoneNumber.length !== 10 || phoneNumber[0] !== '0' || phoneNumber[1] !== '5') {
+            Toast(term(ERRORS.INVALID_PHONE_NUMBER))
+            return false
+        } else {
+            return '+972'.concat(phoneNumber.substring(1, phoneNumber.length))
+        }
+    }
 
-    const registerUser = async () => {
-
-        if (password.length < 6) {
-            Toast(ERRORS.SIX_CHARACTERS_PASSWORD)
+    const sendVerificationCode = async () => {
+        if (phoneNumber !== verifyPhoneNumber) {
+            Toast(term(ERRORS.PHONE_NUMBERS_ARE_NOT_THE_SAME))
             return
         }
         setIsLoading(true)
+        const formattedPhoneNumber = formatPhoneNumber(phoneNumber)
+        if (!formattedPhoneNumber) {
+            setIsLoading(false)
+            return
+        }
         try {
-            const firstRes = await registerUserWithEmailAndPassword(email, password)
+            const firstRes = await loginWithPhoneNumber(formattedPhoneNumber)
             if (firstRes === undefined) {
-                Toast(ERRORS.INVALID_EMAIL)
+                Toast(term(ERRORS.INVALID_PHONE_NUMBER))
                 setIsLoading(false);
-                return
             } else {
-                const secondRes = await Auth(firstRes.user.accessToken)
-                if (secondRes.error) {
-                    setIsLoading(false)
-                } else {
-                    let user = {
-                        e: secondRes.email,
-                        v: secondRes.isVerified,
-                        id: secondRes._id
-                    }
-                    await client.service(BACK_ROUTES.USER_ROLES).create({ userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID })
-                    const userDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
-                    dispatch(set_user(user));
-                    dispatch(set_user_details(userDetails.data[0]))
-                    navigate(BUSINESS_OWNER_ROUTES.DASHBOARD)
-                    setIsLoading(false);
-                }
+                setResponse(firstRes)
+                setConfirmationCode("")
+                setIsLoading(false);
             }
         } catch (e) {
             console.log('register', e)
+            setIsLoading(false);
             Toast()
         }
-        //---------------------------------------------------------------------------------
-        // registerUserWithEmailAndPassword(email, password).then(res => {
-        //     if (res === undefined) {
-        //         Toast(ERRORS.INVALID_EMAIL)
-        //         setIsLoading(false);
-        //         return
-        //     }
-        //     Auth(res.user.accessToken).then(res => {
-        //         if (res.error) {
-        //             setIsLoading(false);
-        //         } else {
-        //             let user = {
-        //                 e: res.email,
-        //                 v: res.isVerified,
-        //                 id: res._id
-        //             }
-        //             await client.service(BACK_ROUTES.USER_ROLES).create({ userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID })
-        //             const userDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
-        //             dispatch(set_user(user));
-        //             dispatch(set_user_details(userDetails))
-        //             navigate(ROUTES.DASHBOARD)
-        //             setIsLoading(false);
-        //         }
-        //     }).catch(e => {
-        //         console.log('register', e)
-        //         Toast()
-        //     })
-        // }).catch(e => {
-        //     console.log('register', e)
-        //     Toast()
-        // })
+    }
+
+    const registerUser = async () => {
+        setIsLoading(true)
+        try {
+            const secondRes = await response.confirm(confirmationCode)
+            if (!secondRes) {
+                Toast()
+                setIsLoading(false)
+                return
+            }
+            let user = {
+                v: secondRes.isVerified,
+                id: secondRes._id
+            }
+            await client.service(BACK_ROUTES.USER_ROLES).create({ userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID })
+            const userDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
+            dispatch(set_user(user));
+            dispatch(set_user_details(userDetails.data[0]))
+            navigate(BUSINESS_OWNER_ROUTES.DASHBOARD)
+            setIsLoading(false)
+        } catch (e) {
+            setIsLoading(false)
+            console.log(e)
+            Toast()
+        }
     }
 
     return (
         <div>
             <>
+                <div
+                    id="recaptcha-container"
+                >
+                </div>
                 <Typography variant="h1" className={classes.greeting}>
                     {term('welcome')}
                 </Typography>
@@ -140,7 +138,6 @@ function Register() {
                     onChange={e => setFirstName(e.target.value)}
                     margin="normal"
                     placeholder={term("name")}
-                    type="email"
                     fullWidth
                 />
                 <TextField
@@ -155,62 +152,59 @@ function Register() {
                     onChange={e => setLastName(e.target.value)}
                     margin="normal"
                     placeholder={term("last_name")}
-                    type="email"
                     fullWidth
                 />
                 <TextField
                     variant="outlined"
-                    id="email"
+                    id="phone"
                     inputprops={{
                         classes: {
                             input: classes.textField,
                         },
                     }}
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    value={phoneNumber}
+                    onChange={e => setPhoneNumber(e.target.value)}
+                    placeholder={term('phone_number')}
                     margin="normal"
-                    placeholder={term("email_address")}
-                    type="email"
                     fullWidth
                 />
                 <TextField
                     variant="outlined"
-                    id="password"
+                    id="verifyPhone"
                     inputprops={{
                         classes: {
                             input: classes.textField,
                         },
                     }}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    value={verifyPhoneNumber}
+                    onChange={e => setVerifyPhoneNumber(e.target.value)}
+                    placeholder={term('verify_phone_number')}
                     margin="normal"
-                    placeholder={term("password")}
-                    type={showPassword ? "text" : "password"}
-                    helperText={term("password_must_be_at_least_6_characters_long_helper")}
                     fullWidth
-                    InputProps={{ // <-- This is where the toggle button is added.
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
                 />
+                {confirmationCode !== null && < TextField
+                    variant="outlined"
+                    id="confirmationCode"
+                    inputprops={{
+                        classes: {
+                            input: classes.textField,
+                        },
+                    }}
+                    value={confirmationCode}
+                    onChange={e => setConfirmationCode(e.target.value)}
+                    placeholder={term('confirmation_code')}
+                    margin="normal"
+                    fullWidth
+                />}
                 <div className={classes.creatingButtonContainer}>
                     {isLoading ? (
                         <CircularProgress size={26} />
                     ) : (
                         <Button
-                            onClick={() => registerUser()}
+                            onClick={confirmationCode === null ? () => sendVerificationCode() : () => registerUser()}
                             disabled={
-                                email.length === 0 ||
-                                password.length === 0 ||
+                                phoneNumber.length === 0 ||
+                                verifyPhoneNumber.length === 0 ||
                                 firstName.length === 0 ||
                                 lastName.length === 0
                             }
@@ -220,7 +214,7 @@ function Register() {
                             fullWidth
                             className={classes.createAccountButton}
                         >
-                            {term('create_your_account')}
+                            {confirmationCode === null ? term('send_verification_code') : term('send')}
                         </Button>
                     )}
                 </div>

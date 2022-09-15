@@ -23,7 +23,7 @@ export const UploadFile = async (fileToUpload, setLoadingImage, editTabData, med
         }
         else {
             let currentFileIds = media !== undefined ? media.map((item) => { return ({ fileId: item.file._id, metadata: { type: item.metadata.type } }) }) : []
-            let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: bucketRes.data[0]._id, metadata: { type: uploadCategory.type } }] }
+            let mediaToUpload = { galleryFileIds: [...currentFileIds, { fileId: bucketRes.data[0]._id, metadata: { type: uploadCategory.type || 'image' } }] }
             const res = await client.service(tab).patch(editTabData._id, mediaToUpload)
             setLoadingImage(false)
             return res

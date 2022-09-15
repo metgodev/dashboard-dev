@@ -10,22 +10,17 @@ const DraggableList = React.memo(({ items, names, setItemsToSend, itemsToSend })
 
     useEffect(() => {
         if (items !== undefined) {
-            if (itemsToSend.length === 0 || items.length === 0) {
-                setItemsToSend(items)
-            }
-            else {
-                items.forEach(element => {
-                    if (!itemsToSend.includes(element)) {
-                        setItemsToSend(prev => [...prev, element])
-                    }
-                });
-                itemsToSend.forEach(element => {
-                    if (!items.includes(element)) {
-                        const newItems = itemsToSend.filter(item => item !== element)
-                        setItemsToSend(newItems)
-                    }
-                })
-            }
+            items.forEach(element => {
+                if (!itemsToSend.includes(element)) {
+                    setItemsToSend(prev => [...prev, element])
+                }
+            });
+            itemsToSend.forEach(element => {
+                if (!items.includes(element)) {
+                    const newItems = itemsToSend.filter(item => item !== element)
+                    setItemsToSend(newItems)
+                }
+            })
         }
     }, [items])
 

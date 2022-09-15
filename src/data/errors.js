@@ -7,6 +7,8 @@ const ERRORS = {
     SIX_CHARACTERS_PASSWORD: 'password_must_be_at_least_6_characters_long_helper',
     INVALID_EMAIL: 'email_is_invalid_or_taken',
     WRONG_DETAILS: "please_make_sure_that_your_details_are_correct",
+    PHONE_NUMBERS_ARE_NOT_THE_SAME: 'phone_numbers_are_not_the_same',
+    INVALID_PHONE_NUMBER: 'please_enter_a_valid_phone_number'
 }
 
 export default ERRORS

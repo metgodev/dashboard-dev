@@ -3,7 +3,7 @@ import { Autocomplete, Button, Modal, Chip, TextField, Box } from '@mui/material
 import { Checkbox as MuiCheckbox } from "@material-ui/core";
 import term from '../../../../terms'
 import useGetService from '../../../../hooks/useGetService'
-import { getTagColor } from '../../../Form/FormFunctions'
+import { GetTagColor } from '../../../Form/FormFunctions'
 import { _patch } from '../../../../API/service';
 import BACK_ROUTES from '../../../../data/back_routes';
 import ENTITY_STATUS from '../../../../data/entity_status';
@@ -113,7 +113,7 @@ function TagsRenderer(props) {
                                             style={{
                                                 border: index === 0 ? `2px solid #01A1FC` : `1px solid grey`,
                                                 padding: '10px',
-                                                backgroundColor: `${getTagColor(option.label)}`,
+                                                backgroundColor: `${GetTagColor(option.label)}`,
                                             }}
                                             {...getTagProps({ index })}
                                             label={option.label}
@@ -136,7 +136,9 @@ function TagsRenderer(props) {
                 </Box>
 
             </Modal>
-            <div onClick={() => setOpen(true)}>
+            <div onClick={() => {
+                setOpen(true)
+            }}>
                 {props?.data?.tags?.map(tag => [`${tag?.tag?.title} - ${term(tag?.category?.title)}`])?.join(' , ')}
             </div>
         </>

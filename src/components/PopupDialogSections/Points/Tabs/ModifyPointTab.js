@@ -9,7 +9,7 @@ import { Box } from '@mui/material'
 import Stepper from '../../../Stepper/Stepper'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
-import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
+import { GetValuesForForm } from '../../CategoryConfig'
 import term from "../../../../terms";
 import Toast from '../../../../utils/useToast'
 import GetPermissions from '../../../../hooks/GetPermissions'
@@ -69,11 +69,11 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
             phoneNumber: values.phoneNumber,
             websitesUrl: typeof values.websitesUrl === 'string' ? [values.websitesUrl] : values.websitesUrl,
             contactEmail: values.contactEmail,
-            tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
+            tagsIds: values.tags.map(tag => tag.value),
             shortDescription: values.shortDescription,
-            inPlace: values.inPlace,
+            inPlace: values.inPlace.map(tag => tag.value),
             tip: values.tip,
-            relevantTo: values.relevantTo,
+            relevantTo: values.relevantTo.map(tag => tag.value),
             activitiesInPlace: values.activitiesInPlace,
             prefferedSeason: typeof values.prefferedSeason === 'object' ? values.prefferedSeason : [values.prefferedSeason],
         }

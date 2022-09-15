@@ -9,7 +9,7 @@ import { initialState, GetFormFields } from './HandleEventsData'
 import { validateFirstFormPart, validateSecondFormPart, validateThirdFormPart } from './Validations'
 import { set_table_changed } from '../../../../REDUX/actions/main.actions'
 import client from '../../../../API/metro'
-import { GetValuesForForm, getTagIdsToSend } from '../../CategoryConfig'
+import { GetValuesForForm } from '../../CategoryConfig'
 import Toast from '../../../../utils/useToast'
 import ROLES from '../../../../data/roles'
 import { set_user_details } from '../../../../REDUX/actions/user.actions'
@@ -55,7 +55,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
             description: values.description,
             shortDescription: values.shortDescription,
             endDate: values.endDate,
-            tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
+            tagsIds: values.tags.map(tag => tag.value),
             locationInfo: {
                 type: "Point",
                 coordinates: values.locationInfo.coordinates
@@ -65,14 +65,14 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
                 coordinates: values.locationInfo.coordinates
             },
             openHour: getFormattedHour(values.openHour),
-            relevantTo: values.relevantTo,
+            relevantTo: values.relevantTo.map(tag => tag.value),
             price: values.price,
             currency: configurationValues.currency,
             reservationCenterPhone: values.reservationCenterPhone,
             reservationCenterEmail: values.reservationCenterEmail,
             onlineMeetingURL: values.onlineMeetingURL,
             reservations: [values.reservations],
-            websitesUrl: values.websitesUrl,
+            websitesUrl: [values.websitesUrl],
             registrationLink: values.registrationLink
         }
         try {

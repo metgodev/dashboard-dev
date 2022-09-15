@@ -42,7 +42,7 @@ const CropImage = ({ src, onClick, style }) => {
                 color="primary"
                 onClick={() => { handleClick(cropper, onClick) }}
             >
-                {term('send')}
+                {term('confirm')}
             </Button>
         </div>
     )

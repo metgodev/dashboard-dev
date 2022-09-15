@@ -2,7 +2,7 @@ export const getPicturesForImagePicker = (values) => {
     return []
 }
 
-export const getTagColor = (tagName) => {
+export const GetTagColor = (tagName) => {
     switch (tagName) {
         case 'Attraction':
             return `rgba(52, 235, 229, 0.2)`

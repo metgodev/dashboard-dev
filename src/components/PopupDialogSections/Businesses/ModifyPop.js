@@ -54,7 +54,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
         if (authoritiesData.data.length && tagCategories.data.length) {
             let authorities = authoritiesData.data.map(({ name, _id }) => ({ value: _id, name }))
             let tag_categories = tagCategories.data.map((data) => ({ category: data.category.title, title: data.tag.title + " - " + term(data.category.title.toLowerCase()), id: data._id }));
-            setPicker(prev => ({ ...prev, authorityId: authorities, tagsIds: tag_categories, areaId: area.id }))
+            setPicker(prev => ({ ...prev, authorityId: authorities, tags: tag_categories, areaId: area.id }))
         }
     }, [authoritiesData, tagCategories, handleClose]);
 
@@ -103,7 +103,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     <span className={classes.soonContainer}>{term('soon')}</span>
                 </TabPanel>
                 <TabPanel value={tab} index={6}>
-                    {picker.tagsIds.length > 0 &&
+                    {picker.authorityId.length > 0 &&
                         <AddProductsTab type={type} areaSpecificData={picker} handleClose={handleClose} />
                     }
                 </TabPanel>

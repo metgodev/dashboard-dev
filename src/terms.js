@@ -562,6 +562,11 @@ const active_lexicon = {
         he: 'אישור',
         ar: 'تأكيد',
     },
+    confirmation_code: {
+        en: 'Confirmation code',
+        he: 'קוד אישור',
+        ar: 'تأكيد الكود',
+    },
     cancel: {
         en: 'Cancel',
         he: 'ביטול',
@@ -1272,6 +1277,11 @@ const active_lexicon = {
         en: 'Resend verification code',
         he: 'שלח קוד אימות מחדש',
         ar: 'إعادة إرسال رمز التحقق',
+    },
+    send_verification_code: {
+        en: 'Send verification code',
+        he: 'קבל קוד אימות',
+        ar: ' إرسال رمز التحقق',
     },
     verified: {
         en: 'verified',
@@ -2273,6 +2283,26 @@ const active_lexicon = {
         en: 'Hour',
         he: 'שעה',
         ar: 'ساعة'
+    },
+    verify_phone_number: {
+        en: 'Verify phone number',
+        he: 'וודא מספר טלפון',
+        ar: 'تحقق من رقم الهاتف'
+    },
+    value_exists: {
+        en: 'Value already exists',
+        he: 'הערך קיים',
+        ar: 'القيمة موجودة بالفعل'
+    },
+    please_enter_a_valid_phone_number: {
+        en: 'Please enter a valid phone number',
+        he: 'אנא הכנס מספר טלפון חוקי',
+        ar: 'يرجى إدخال رقم هاتف صالح'
+    },
+    phone_numbers_are_not_the_same: {
+        en: 'Phone numbers are not the same',
+        he: 'מספרי הטלפון שונים',
+        ar: 'أرقام الهواتف ليست هي نفسها'
     },
     cant_change_status_please_add_tags: {
         en: 'Cannot change status, please add at least one tag',

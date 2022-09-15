@@ -35,6 +35,7 @@ function ModifyProductTab({ areaSpecificData, handleClose }) {
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     const submit = async (formValues) => {
+
         const valuesToSend = {
             areaId: area?.id?.toString(),
             userId: user.id,
@@ -51,7 +52,7 @@ function ModifyProductTab({ areaSpecificData, handleClose }) {
             inStock: formValues.inStock,
             price: formValues.price,
             galleryFileIds: formValues.galleryFileIds,
-            tagsIds: formValues.tagsIds,
+            tagsIds: formValues.tags.map(tag => tag.value),
         }
         try {
             if (permissions.edit) {

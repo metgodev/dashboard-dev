@@ -24,7 +24,7 @@ export const ModalInit = [
     { title: term('name'), id: createRandomId(), field: 'name', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: true },
     { title: term('authority'), id: createRandomId(), field: 'authorityId', rows: 1, maxRows: 4, size: 'medium', type: 'picker', required: true },
     { title: term('for_whom'), id: createRandomId(), field: 'relevantTo', rows: 1, maxRows: 4, size: 'medium', type: 'tagsPicker', maxItems: 3, required: true },
-    { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 4, size: 'medium', type: 'tagsPicker', maxItems: 5, required: true },
+    { title: term('tags'), id: createRandomId(), field: 'tags', rows: 1, maxRows: 4, size: 'medium', type: 'tagsPicker', maxItems: 5, required: true },
     { title: term('opening_hours'), id: createRandomId(), field: 'openingHours', rows: 1, maxRows: 4, size: 'medium', type: 'timesPicker', required: false, relaredToggle: 'open24Hours' },
     { title: term('description'), id: createRandomId(), field: 'description', rows: 4, maxRows: 4, size: 'medium', type: 'textAreaSizeable', required: true },
     { title: term('short_description'), id: createRandomId(), field: 'shortDescription', rows: 1, maxRows: 4, size: 'small', type: 'textfield', required: true },
@@ -59,7 +59,7 @@ export const productFields = [
         { title: term('name'), id: createRandomId(), field: 'name', size: 'medium', type: 'textfield' },
         { title: term('price'), id: createRandomId(), field: 'price', size: 'medium', type: 'number' },
         { title: term('description'), id: createRandomId(), field: 'description', size: 'medium', type: 'textAreaSizeable' },
-        { title: term('tags'), id: createRandomId(), field: 'tagsIds', size: 'medium', type: 'tagsPicker' },
+        { title: term('tags'), id: createRandomId(), field: 'tags', size: 'medium', type: 'tagsPicker' },
     ],
     [
         { title: term('product_includes'), id: createRandomId(), field: 'productIncludes', size: 'medium', type: 'textfield' },

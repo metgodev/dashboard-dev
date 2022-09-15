@@ -3,14 +3,14 @@ import ImagePicker from '../../imagePicker/ImagePicker'
 import DraggableList from '../../DraggableList/DraggableList'
 import TagsPicker from './TagsPicker'
 
-function DraggableListWithImages({ IMAGE_PICKER_TITLE, values, field, title, options, chosenImage, setChosenImage, setItemsToSend, itemsToSend }) {
+function DraggableListWithImages({ IMAGE_PICKER_TITLE, field, title, options, chosenImage, setChosenImage, setItemsToSend, itemsToSend, valuesForPicker, setValuesForPicker }) {
     return (
         <>
             <ImagePicker
                 title={IMAGE_PICKER_TITLE}
                 data={
                     {
-                        ids: values[field].filter(value => options[field].find(pic => pic?.id === value && pic.galleryFileIds.length > 0)),
+                        ids: valuesForPicker.map(item => item.value).filter(value => options[field].find(pic => pic?.id === value && pic.galleryFileIds.length > 0)),
                         pictures: options[field]
                             .filter(item => {
                                 return item.galleryFileIds !== null && item.galleryFileIds !== undefined && item.galleryFileIds.length > 0
@@ -29,13 +29,24 @@ function DraggableListWithImages({ IMAGE_PICKER_TITLE, values, field, title, opt
                 setChosenImage={setChosenImage}
                 chosenImage={chosenImage}
             />
-            <TagsPicker
-                title={title}
-                field={field}
-                options={options}
-            />
+            {valuesForPicker.length > 0 &&
+                <TagsPicker
+                    title={title}
+                    field={field}
+                    options={options[field]}
+                    values={valuesForPicker}
+                    setValues={setValuesForPicker}
+                />}
+            {valuesForPicker.length === 0 &&
+                <TagsPicker
+                    title={title}
+                    field={field}
+                    options={options[field]}
+                    values={valuesForPicker}
+                    setValues={setValuesForPicker}
+                />}
             <DraggableList
-                items={values[field]}
+                items={valuesForPicker.map(item => item.value)}
                 names={options[field]}
                 setItemsToSend={setItemsToSend}
                 itemsToSend={itemsToSend}
@@ -44,4 +55,4 @@ function DraggableListWithImages({ IMAGE_PICKER_TITLE, values, field, title, opt
     )
 }
 
-export default DraggableListWithImages
+export default React.memo(DraggableListWithImages)

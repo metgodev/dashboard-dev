@@ -26,12 +26,6 @@ export async function validateFirstFormPart(values) {
             shortDescription: term('short_description_cannot_exceed') + " " + MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION + " " + term('words')
         }
     }
-    if (values.tagsIds.length < 1) {
-        return { tagsIds: term('please_choose_at_least_one_tag') }
-    }
-    if (values.tagsIds.length > 5) {
-        return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
-    }
     if (!validateIsraelPhoneNumber(values.phoneNumber)) {
         return { phoneNumber: term("please_enter_a_valid_phone_number") }
     }
@@ -66,12 +60,6 @@ export async function validateFirstProductTab(values) {
     }
     if (values.price < 0) {
         return { price: term("please_enter_a_price") };
-    }
-    if (values.tagsIds.length < 1) {
-        return { tagsIds: term('please_choose_at_least_one_tag') }
-    }
-    if (values.tagsIds.length > 5) {
-        return { tagsIds: term(`please_choose_up_to`) + ` ${MAXIMUM_AMMOUNT_OF_TAGS} ` + term('tags') }
     }
 }
 

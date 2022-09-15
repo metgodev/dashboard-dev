@@ -30,12 +30,15 @@ export const NewTagTab = ({ handleClose, type }) => {
             userId: user?.id,
             categoryIds: ['61e94815f49adf4a20db7ca7']
         }
-
         try {
             await client.service("tags").create(valuesToSend)
             dispatch(set_table_changed(type))
             handleClose(false)
         } catch (e) {
+            if (e.name === 'Conflict') {
+                Toast(term('value_exists'))
+                return
+            }
             console.log('newTagTab', e)
             Toast()
         }

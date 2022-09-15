@@ -10,7 +10,7 @@ import get_orientation from '../../../../utils/get_orientation'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } from './Validations'
 import { initialState, GetFormFields } from './HandleBusinessData'
-import { GetValuesForForm, getTagIdsToSend } from "../../CategoryConfig";
+import { GetValuesForForm } from "../../CategoryConfig";
 import Toast from "../../../../utils/useToast";
 import ROLES from "../../../../data/roles";
 import { set_user_details } from "../../../../REDUX/actions/user.actions";
@@ -47,7 +47,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
 
         const valuesToSend = {
             name: values.name,
-            tagsIds: getTagIdsToSend(values.tagsIds, areaSpecificData),
+            tagsIds: values.tags.map(tag => tag.value),
             description: values.description,
             authorityId: values.authorityId,
             address: values.address,
@@ -57,11 +57,11 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
             contactPersonPhoneNumber: values.contactPersonPhoneNumber,
             websitesUrl: values.websitesUrl,
             emailAddress: values.emailAddress,
-            relevantTo: values.relevantTo,
+            relevantTo: values.relevantTo.map(value => value.value),
             facebookPageUrl: values.facebookPageUrl,
             instagramPageUrl: values.instagramPageUrl,
             youtubePageUrl: values.youtubePageUrl,
-            openingHours: values.openingHours,
+            openingHours: values.open24Hours ? {} : values.openingHours,
             open24Hours: values.open24Hours,
             openOnWeekend: values.openOnWeekend,
             isKosher: values.isKosher,

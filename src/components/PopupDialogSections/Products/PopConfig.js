@@ -11,7 +11,7 @@ export const ModalInit = [
     { title: term('shipment_type'), id: createRandomId(), field: 'shipmentType', rows: 1, maxRows: 1, size: 'medium', type: 'picker' },
     { title: term('size_and_dimension'), id: createRandomId(), field: 'sizeAndDimension', rows: 1, maxRows: 1, size: 'medium', type: 'textfield' },
     { title: term('style'), id: createRandomId(), field: 'style', rows: 1, maxRows: 1, size: 'medium', type: 'textfield' },
-    { title: term('tags'), id: createRandomId(), field: 'tagsIds', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker' },
+    { title: term('tags'), id: createRandomId(), field: 'tags', rows: 1, maxRows: 1, size: 'medium', type: 'tagsPicker' },
     { title: term('usage_restrictions'), id: createRandomId(), field: 'useageRestrictions', rows: 1, maxRows: 1, size: 'medium', type: 'textfield' },
     { title: term('in_stock'), id: createRandomId(), field: 'inStock', rows: 1, maxRows: 1, size: 'small', type: 'checkbox' },
     { title: term('price'), id: createRandomId(), field: 'price', rows: 1, maxRows: 1, size: 'small', type: 'number' },
@@ -33,7 +33,7 @@ export const mediaTabConfig = {
 }
 
 export const Picker = {
-    tagsIds: [],
+    tags: [],
     shipmentType: [
         { value: 'DROPOFF', name: term('dropoff') },
         { value: 'PAYED_SHIPPING', name: term('payed_shipping') },
