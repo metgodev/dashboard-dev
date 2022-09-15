@@ -70,7 +70,8 @@ const initialData = {
   approveContent: true,
   email: '',
   roles: [],
-  isPremium: "PRIVATE"
+  isPremium: "PRIVATE",
+  objects: []
 }
 
 
@@ -132,6 +133,7 @@ export const GetValuesForForm = (values) => {
     isHidden: values.length || Object.keys(values).length ? values.hasOwnProperty('isHidden') ? values.isHidden : initialData.isHidden : initialData.isHidden,
     pois: values.length || Object.keys(values).length ? values.hasOwnProperty('pois') ? values.pois : initialData.pois : initialData.pois,
     objectIds: values.length || Object.keys(values).length ? values.hasOwnProperty('objectIds') ? values.objectIds.map(item => item.id) : initialData.objectIds : initialData.objectIds,
+    objects: values.length || Object.keys(values).length ? values.hasOwnProperty('objects') ? values.objects : initialData.objects : initialData.objects,
     coverImageFileId: values.length || Object.keys(values).length ? values.hasOwnProperty('coverImageFileId') ? values.coverImageFileId : initialData.coverImageFileId : initialData.coverImageFileId,
     productIncludes: values.length || Object.keys(values).length ? values.hasOwnProperty('productIncludes') ? values.productIncludes : initialData.productIncludes : initialData.productIncludes,
     style: values.length || Object.keys(values).length ? values.hasOwnProperty('style') ? values.style : initialData.style : initialData.style,

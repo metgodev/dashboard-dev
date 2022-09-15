@@ -4,30 +4,14 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { reorder } from './helpers'
 import useStyles from './styles'
 
-const DraggableList = React.memo(({ items, names, setItemsToSend, itemsToSend }) => {
+const DraggableList = React.memo(({ names, setItemsToSend, itemsToSend }) => {
 
     const classes = useStyles()
-
-    useEffect(() => {
-        if (items !== undefined) {
-            items.forEach(element => {
-                if (!itemsToSend.includes(element)) {
-                    setItemsToSend(prev => [...prev, element])
-                }
-            });
-            itemsToSend.forEach(element => {
-                if (!items.includes(element)) {
-                    const newItems = itemsToSend.filter(item => item !== element)
-                    setItemsToSend(newItems)
-                }
-            })
-        }
-    }, [items])
 
     const onDragEnd = ({ destination, source }) => {
         if (!destination) return; // dropped outside the list
         const newItems = reorder(itemsToSend, source.index, destination.index);
-        setItemsToSend(newItems);
+        setItemsToSend(prev => ({ ...prev, objectIds: newItems }));
     };
 
     return (

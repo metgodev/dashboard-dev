@@ -1,5 +1,4 @@
 import React from 'react'
-// import { Autocomplete } from 'mui-rff'
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box, Checkbox } from '@material-ui/core'
 import { GetTagColor } from '../FormFunctions'
@@ -75,7 +74,11 @@ function TagsPicker({ title, field, options, values, setValues, tooltip }) {
     })
 
     const handleChange = (event, values) => {
-        setValues(prev => ({ ...prev, [field]: values }))
+        if (field === 'objectIds') {
+            setValues(prev => ({ ...prev, [field]: values.map(tag => tag.value) }))
+        } else {
+            setValues(prev => ({ ...prev, [field]: values }))
+        }
     }
 
     return (

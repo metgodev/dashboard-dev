@@ -4,9 +4,10 @@ import DraggableList from '../../DraggableList/DraggableList'
 import TagsPicker from './TagsPicker'
 
 function DraggableListWithImages({ IMAGE_PICKER_TITLE, field, title, options, chosenImage, setChosenImage, setItemsToSend, itemsToSend, valuesForPicker, setValuesForPicker }) {
+
     return (
         <>
-            <ImagePicker
+            {valuesForPicker !== undefined && <ImagePicker
                 title={IMAGE_PICKER_TITLE}
                 data={
                     {
@@ -28,7 +29,7 @@ function DraggableListWithImages({ IMAGE_PICKER_TITLE, field, title, options, ch
                 }
                 setChosenImage={setChosenImage}
                 chosenImage={chosenImage}
-            />
+            />}
             {valuesForPicker.length > 0 &&
                 <TagsPicker
                     title={title}
@@ -45,12 +46,12 @@ function DraggableListWithImages({ IMAGE_PICKER_TITLE, field, title, options, ch
                     values={valuesForPicker}
                     setValues={setValuesForPicker}
                 />}
-            <DraggableList
-                items={valuesForPicker.map(item => item.value)}
-                names={options[field]}
-                setItemsToSend={setItemsToSend}
-                itemsToSend={itemsToSend}
-            />
+            {itemsToSend !== undefined &&
+                <DraggableList
+                    names={options[field]}
+                    setItemsToSend={setItemsToSend}
+                    itemsToSend={itemsToSend}
+                />}
         </>
     )
 }

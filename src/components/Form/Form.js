@@ -59,19 +59,12 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
           inPlace: data.inPlace ? data.inPlace.length > 0 && typeof data.inPlace[0] === 'string' ? options.inPlace.filter(option => {
             return data.inPlace.includes(option.id)
           }).map(item => ({ label: item.title, value: item.id })) : data.inPlace : [],
-          objectIds: data.objectIds ? data.objectIds.length > 0 && typeof data.objectIds[0] === 'string' ? options.objectIds.filter(option => {
-            return data.objectIds.includes(option.id)
-          }).map(item => ({ label: item.title, value: item.id })) : data.objectIds : [],
+          objectIds: data.objectIds,
         }
       )
-    })
-  }, [data])
-
-  useEffect(() => {
-    if (Object.keys(tagsPickerItems).length > 0 && tagsPickerItems.objectIds.length > 0) {
-      setItemsToSend(tagsPickerItems.objectIds.map(obj => obj.value))
     }
-  }, [tagsPickerItems])
+    )
+  }, [data])
 
   const formatValuesToSend = (values) => {
     if (fields.find(item => item.field === 'description') && resizableText.length < 1) {
@@ -86,7 +79,9 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
       Toast(term(`please_choose_up_to`) + '5' + term('tags'))
       return
     }
-    const formattedItemsToSend = formatObjects(itemsToSend, options)
+
+    const formattedItemsToSend = formatObjects(tagsPickerItems.objectIds, options)
+
     submitFunction({
       ...values,
       description: resizableText,
@@ -184,18 +179,22 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           chosenImage={chosenImage}
                         />
                       )}
-                      {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && values[field] && (
+                      {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && tagsPickerItems[field] && values && (
                         <DraggableListWithImages
                           IMAGE_PICKER_TITLE={IMAGE_PICKER_TITLE}
-                          values={values}
+                          //values={values}
                           field={field}
                           title={title}
                           options={options}
                           chosenImage={chosenImage}
                           setChosenImage={setChosenImage}
-                          setItemsToSend={setItemsToSend}
-                          itemsToSend={itemsToSend}
-                          valuesForPicker={tagsPickerItems[field]}
+                          setItemsToSend={setTagsPickerItems}
+                          itemsToSend={tagsPickerItems[field]}
+                          valuesForPicker={tagsPickerItems[field].map(object => {
+                            return (
+                              { label: options[field].find(tag => tag.id === object).title, value: options[field].find(tag => tag.id === object)._id }
+                            )
+                          })}
                           setValuesForPicker={setTagsPickerItems}
                         />
                       )}
