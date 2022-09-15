@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Button, Collapse } from '@mui/material';
+import { Button, Checkbox, Collapse, FormControlLabel, FormGroup } from '@mui/material';
 import { placeholderData } from './config'
 import useStyles from "./styles";
 import SingleDayTime from './SingleDayTime';
+import ChangeAllDays from './ChangeAllDays';
 
 const TimePicker = ({ title, realData, setTimes }) => {
 
@@ -35,6 +36,7 @@ const TimePicker = ({ title, realData, setTimes }) => {
             </Button>
             <Collapse in={open} orientation="vertical">
                 <div className={classes.container}>
+                    <ChangeAllDays setData={setTimes} />
                     {Object.keys(data).length > 0 && Object.keys(data).map(key => (
                         <SingleDayTime key={key} day={key} hours={data[key]} setDayData={(newDayData) => {
                             setTimes({ ...data, [key]: newDayData })

@@ -147,6 +147,51 @@ const active_lexicon = {
         he: 'טאבלט',
         ar: 'لوح',
     },
+    talk_to_us: {
+        en: 'Talk to us',
+        he: 'דברו איתנו',
+        ar: 'تكلم معنا',
+    },
+    we_are_here_for_every_question: {
+        en: 'We area here for every question',
+        he: 'אנחנו כאן לכל שאלה!',
+        ar: 'نحن هنا من أجل كل سؤال',
+    },
+    business_instagram_text: {
+        en: 'Username as it appears on instagram',
+        he: 'שם משתמש כפי שמופיע באינסטגרם',
+        ar: 'اسم المستخدم كما يظهر في Instagram "',
+    },
+    business_facebook_text: {
+        en: 'Full link to facebook page',
+        he: 'קישור מלא לעמוד העסק בפייסבוק',
+        ar: 'رابط كامل لصفحة الفيسبوك',
+    },
+    business_contact_person_text: {
+        en: 'This information will not show on the app',
+        he: 'מידע זה לא יוצג באפליקציה',
+        ar: 'لن تظهر هذه المعلومات في التطبيق',
+    },
+    business_main_phone_text: {
+        en: 'This is the business main bumber',
+        he: 'למספר זה יופנה כפתור החיוג בבית עסק',
+        ar: 'هذا هو العمل الرئيسي',
+    },
+    business_mobile_phone_text: {
+        en: 'The whatsapp number of the business',
+        he: 'למספר זה יופנה כפתור הוואצאפ בדף העסק',
+        ar: 'رقم الواتس اب الخاص بالنشاط التجاري',
+    },
+    main_phone: {
+        en: 'Main phone',
+        he: 'טלפון ראשי',
+        ar: 'الهاتف الرئيسي',
+    },
+    mobile_phone: {
+        en: 'Mobile phone',
+        he: 'טלפון נייד',
+        ar: 'هاتف محمول',
+    },
     mobile: {
         en: 'Mobile',
         he: 'מובייל',
@@ -778,6 +823,16 @@ const active_lexicon = {
         he: "שיחות",
         ar: "محادثات",
     },
+    by_appointment: {
+        en: "By appointnment",
+        he: "בתיאום מראש",
+        ar: "بالميعاد",
+    },
+    true_for_all_week_days_excluding_weekend: {
+        en: "True for all week days excluding weekends",
+        he: "נכון לכל ימות החול בשבוע (א - ה)",
+        ar: "صالح لجميع أيام الأسبوع (الأحد - الخميس)",
+    },
     monday_closing: {
         en: 'Monday Closing',
         he: 'שני סגירה',
@@ -893,6 +948,11 @@ const active_lexicon = {
         he: 'SDK',
         ar: 'SDK',
     },
+    business_description_tooltip_text: {
+        en: 'Add a description for your business',
+        he: 'כאן אפשר ומומלץ להוסיף תיאור מפורט של בית העסק',
+        ar: 'هنا من الممكن والموصى به إضافة وصف تفصيلي للعمل',
+    },
     '2_days_and_above': {
         en: 'Two days and above',
         he: 'יומיים ומעלה',
@@ -980,13 +1040,18 @@ const active_lexicon = {
     },
     open_on_weekend: {
         en: 'Open on weekend',
-        he: 'פתוח בסוף שבוע',
+        he: 'פתוח בשבת ',
         ar: 'مفتوح في عطلة نهاية الأسبوع',
     },
     is_kosher: {
         en: 'Is Kosher',
         he: 'כשר',
         ar: 'كوشير',
+    },
+    business_tags_tooltip_text: {
+        en: 'A classification of the buisiness or it\'s services',
+        he: 'סיווג המתאר את העסק או השירותים בו',
+        ar: 'تصنيف يصف النشاط التجاري أو الخدمات في',
     },
     submit: {
         en: 'Submit',
@@ -1027,6 +1092,16 @@ const active_lexicon = {
         en: 'Currency',
         he: 'מטבע',
         ar: 'عملة',
+    },
+    comments: {
+        en: 'Comments',
+        he: 'תגובות',
+        ar: 'تعليقات',
+    },
+    sales: {
+        en: 'Sales',
+        he: 'מכירות',
+        ar: 'مبيعات',
     },
     please_choose_a_shading_option: {
         en: 'Please choose a shading option',
@@ -1695,7 +1770,7 @@ const active_lexicon = {
     },
     free: {
         en: 'Free',
-        he: 'חינם',
+        he: 'חופשי',
         ar: 'مجاني'
     },
     free_with_reservation: {
@@ -1712,6 +1787,11 @@ const active_lexicon = {
         en: 'Confirmation',
         he: 'אישור',
         ar: 'تأكيد'
+    },
+    pre_sale_only: {
+        en: 'Pre sale only',
+        he: 'מכירה מוקדמת בלבד',
+        ar: 'بالميعاد'
     },
     bank_transfer: {
         en: 'Bank transfer',
@@ -1735,7 +1815,7 @@ const active_lexicon = {
     },
     on_place: {
         en: 'On place',
-        he: 'במקום',
+        he: 'מכירה במקום',
         ar: 'في المكان'
     },
     short_description: {
@@ -2496,6 +2576,11 @@ const active_lexicon = {
         en: 'Yes',
         he: 'כן',
         ar: 'نعم'
+    },
+    main: {
+        en: 'Main',
+        he: 'ראשי',
+        ar: 'رئيسي'
     },
     please_make_sure_that_your_details_are_correct: {
         en: 'Please make sure your details are correct',

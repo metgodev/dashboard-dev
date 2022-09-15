@@ -74,10 +74,10 @@ const ModifyPop = ({ handleClose, type, open }) => {
                             <Tab
                                 key={tab}
                                 label={tab}
-                                style={tab === term('products') || tab === term('invitation_manager') ? { backgroundColor: '#D2FED1' } : tab === term('premium') ? { backgroundColor: '#68FD01', color: 'white' } : {}}
+                                style={tab === term('products') || tab === term('invitation_manager') || tab === term('sales') ? { backgroundColor: '#E8FEDF' } : tab === term('premium') ? { backgroundColor: '#79E54A', color: 'white' } : {}}
                                 icon={tab === term('premium') ? <LockOpenIcon /> : null}
                                 iconPosition='top'
-                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || Boolean(businessData.isPremium) === false) && (tab === term('products') || tab === term('invitation_manager'))}
+                                disabled={(businessData.isPremium === ENTITY_STATUS.PRIVATE || businessData.isPremium === ENTITY_STATUS.PENDING_APPROVAL || Boolean(businessData.isPremium) === false) && (tab === term('products') || tab === term('invitation_manager') || tab === term('sales'))}
                             />
                         )
                     }
@@ -88,10 +88,10 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     {picker.authorityId.length > 0 && <ModifyTab handleClose={handleClose} type={type} areaSpecificData={picker} />}
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
-                    <StatisticsTab />
+                    <UploadMediaTab type={'gallery'} tab={"business"} config={mediaTabConfig} />
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
-                    <UploadMediaTab type={'gallery'} tab={"business"} config={mediaTabConfig} />
+                    <StatisticsTab />
                 </TabPanel>
                 <TabPanel value={tab} index={3}>
                     <span className={classes.soonContainer}>{term('soon')}</span>
@@ -111,6 +111,9 @@ const ModifyPop = ({ handleClose, type, open }) => {
                     <span className={classes.soonContainer}>{term('soon')}</span>
                 </TabPanel>
                 <TabPanel value={tab} index={8}>
+                    <span className={classes.soonContainer}>{term('soon')}</span>
+                </TabPanel>
+                <TabPanel value={tab} index={9}>
                     {role === ROLES.BUSINESS_OWNER && <PremiumTab handleClose={handleClose} />}
                     {(role === ROLES.SUPER_ADMIN || role === ROLES.ADMIN) && <AdminPremiumTab handleClose={handleClose} />}
                 </TabPanel>

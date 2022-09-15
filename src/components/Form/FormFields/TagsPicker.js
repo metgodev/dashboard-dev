@@ -6,8 +6,9 @@ import { GetTagColor } from '../FormFunctions'
 import { Chip, TextField } from '@mui/material'
 import ERRORS from '../../../data/errors'
 import Toast from '../../../utils/useToast'
+import Helper from './Helper';
 
-function TagsPicker({ title, field, options, values, setValues }) {
+function TagsPicker({ title, field, options, values, setValues, tooltip }) {
 
     const handleRenderTags = (tagValue, getTagProps, y) => {
         return tagValue.map((option, index) => {
@@ -26,11 +27,14 @@ function TagsPicker({ title, field, options, values, setValues }) {
     }
 
     const handleMuiRenderTags = (params) => (
-        <TextField
-            {...params}
-            variant="outlined"
-            label={title}
-        />
+        <Box>
+            {tooltip && <Helper tooltip={tooltip} />}
+            <TextField
+                {...params}
+                variant="outlined"
+                label={title}
+            />
+        </Box>
     )
 
     const isOptionEqualToValue = (option, value) => {

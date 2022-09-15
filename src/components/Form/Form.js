@@ -21,6 +21,7 @@ import SizableText from "./FormFields/SizableText";
 import DraggableListWithImages from "./FormFields/DraggableListWithImages";
 import Toast from "../../utils/useToast";
 import ERRORS from "../../data/errors";
+import Helper from "./FormFields/Helper";
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -109,16 +110,24 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
             return (
               <form onSubmit={handleSubmit} noValidate className={classes.form}>
                 <Grid container spacing={2} className={classes.gridContainer}>
-                  {fields.map(({ type, field, title, size }) => (
+                  {fields.map(({ type, field, title, size, tooltip, }) => (
                     <Grid key={field} item xs={12} md={size === 'small' ? 3 : size === 'medium' ? 6 : 12} className={type === 'googleAutocomplete' ? '' : classes.item}>
                       {type === "textfield" && (
-                        <TextField label={title} name={field} />
+                        <Box>
+                          {tooltip && <Helper tooltip={tooltip} />}
+                          <TextField label={title} name={field} tooltip={tooltip} />
+                        </Box>
                       )}
                       {type === "number" && (
                         <TextField label={title} name={field} type={'number'} />
                       )}
                       {type === 'divider' && (
                         <Divider />
+                      )}
+                      {type === 'placeholder' && (
+                        <Box>
+
+                        </Box>
                       )}
                       {type === 'text' && (
                         <Text title={title} />
@@ -139,6 +148,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           options={options[field]}
                           values={tagsPickerItems[field]}
                           setValues={setTagsPickerItems}
+                          tooltip={tooltip}
                         />
                       )}
                       {type === "tagsPicker" && options[field].length > 0 && Boolean(Object.keys(tagsPickerItems).length) && tagsPickerItems[field].length === 0 && (
@@ -148,6 +158,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           options={options[field]}
                           values={[]}
                           setValues={setTagsPickerItems}
+                          tooltip={tooltip}
                         />
                       )}
                       {type === "checkbox" && (
@@ -163,7 +174,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                         <TimesPicker title={title} realData={times} setTimes={(newTimes) => { setTimes(newTimes) }} />
                       )}
                       {type === 'textAreaSizeable' && (
-                        <SizableText field={field} classes={classes} resizableText={resizableText} setResizableText={setResizableText} />
+                        <SizableText tooltip={tooltip} field={field} classes={classes} resizableText={resizableText} setResizableText={setResizableText} />
                       )}
                       {type === 'imagePicker' && (
                         <ImagePicker

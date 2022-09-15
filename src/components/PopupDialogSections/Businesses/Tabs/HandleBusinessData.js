@@ -32,11 +32,11 @@ export const Picker = {
   ],
   reservations: [
     { value: "FREE", name: term("free") },
-    { value: "FREE_WITH_RESERVATION", name: term("free_with_reservation") },
+    { value: "FREE_WITH_RESERVATION", name: term("by_appointment") },
     { value: "PAYMENT", name: term("payment") },
     {
       value: "PAYMENT_WITH_RESERVATION",
-      name: term("payment_with_reservation"),
+      name: term("pre_sale_only"),
     },
     { value: "ON_PLACE", name: term("on_place") },
   ],
