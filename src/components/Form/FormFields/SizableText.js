@@ -7,7 +7,7 @@ function SizableText({ field, classes, resizableText, setResizableText, tooltip 
 
     return (
         <>
-            <Helper tooltip={tooltip} />
+            {tooltip && <Helper tooltip={tooltip} />}
             <TextareaAutosize
                 aria-label={field}
                 style={{ height: '200px', fontSize: '16px', paddingTop: '10px', overflowY: 'hidden' }}

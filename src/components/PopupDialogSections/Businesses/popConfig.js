@@ -47,7 +47,6 @@ export const ModalInit = [
     { title: term('instagram_link'), id: createRandomId(), field: 'instagramPageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false, tooltip: term('business_instagram_text') },
     { id: createRandomId(), type: 'placeholder', size: 'medium' },
     { title: term('youtube_link'), id: createRandomId(), field: 'youtubePageUrl', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
-    { id: createRandomId(), type: 'placeholder', size: 'medium' },
     // ------------------ map ------------------
     { title: term('address'), id: createRandomId(), field: 'address', rows: 1, maxRows: 4, size: 'medium', type: 'googleAutocomplete', required: true },
     { title: term('location_description'), id: createRandomId(), field: 'locationName', rows: 1, maxRows: 4, size: 'medium', type: 'textfield', required: false },
