@@ -18,7 +18,7 @@ export default makeStyles(theme => ({
     },
     logotype: {
         width: '100%',
-        height: '6rem',
+        height: '8vh',
     },
     h: {
         padding: 1, margin: 1,

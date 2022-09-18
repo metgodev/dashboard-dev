@@ -5,6 +5,7 @@ import classNames from "classnames";
 // styles
 import useStyles from "./styles";
 import Logo from "../../Assets/images/metroLogo.png"
+import FIXED_STYLES from '../../data/fixed_styles'
 // components
 import { Typography } from "../Wrappers/Wrappers";
 import SideBtns from "./SideBtns";
@@ -32,7 +33,7 @@ const Header = React.memo(() => {
   }
 
   return (
-    <Box style={{ direction: 'ltr', paddingTop: em(1) }}>
+    <Box style={{ direction: 'ltr', paddingTop: em(1), width: '100%', height: FIXED_STYLES.HEADER }}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Box className={classes.logoContainer} onClick={() => handleLogoClick()}>

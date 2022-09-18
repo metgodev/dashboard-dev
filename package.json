@@ -25,9 +25,6 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.27.0",
-    "dayjs": "^1.11.5",
-    "file-saver": "^2.0.5",
-    "final-form": "^4.20.7",
     "firebase": "^9.6.9",
     "mui-rff": "^5.3.0",
     "react": "^17.0.2",
@@ -46,13 +43,11 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
-    "react-syntax-highlighter": "^15.4.5",
     "recharts": "^2.1.6",
     "redux": "^4.1.2",
     "redux-remember": "^3.0.1",
     "tinycolor2": "^1.4.2",
-    "web-vitals": "^2.1.2",
-    "yup": "^0.32.11"
+    "web-vitals": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

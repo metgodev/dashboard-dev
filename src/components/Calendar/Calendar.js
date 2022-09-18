@@ -15,12 +15,14 @@ import LANGUAGES from '../../data/languages';
 import EventsBox from '../EventsBox/EventsBox';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { CircularProgress } from '@mui/material';
+import useWindowSize from '../../hooks/useGetWindowSize';
 
 export default function Calendar({ type, warp, disableHelpers, events }) {
 
     let classes = useStyles();
 
     const { lang } = useSelector(state => state.mainRememberReducer)
+    const { height, width } = useWindowSize()
 
     const [date, changeDate] = useState(new Date());
     const [datetwo, changeDateTwo] = useState(new Date());
@@ -107,28 +109,30 @@ export default function Calendar({ type, warp, disableHelpers, events }) {
     }, [date, events])
 
     return (
-        <Warp title={term('calendar')} uppertitle className={classes.card} >
+        <>
             {type === 1 &&
-                <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-                    {events?.loading === false ?
-                        <>
-                            <EventsBox
-                                events={getEvents()}
-                            />
-                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={calendarLang()}>
-                                <Box style={{ direction: 'ltr', flex: 1 }}>
-                                    <StaticDatePicker
-                                        displayStaticWrapperAs="desktop"
-                                        renderDay={handleRenderDay}
-                                    />
-                                </Box>
-                            </LocalizationProvider>
-                        </> :
-                        <Box style={{ width: '100%', height: '30vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <CircularProgress size={50} />
-                        </Box>
-                    }
-                </Box >
+                <Warp title={term('calendar')} uppertitle height={width > 500 ? '42vh' : '80vh'}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                        {events?.loading === false ?
+                            <Box style={{ display: 'flex', flexDirection: width > 500 ? 'row' : 'column', width: '100%' }}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns} locale={calendarLang()}>
+                                    <Box style={{ direction: 'ltr', flex: 1 }}>
+                                        <StaticDatePicker
+                                            displayStaticWrapperAs="desktop"
+                                            renderDay={handleRenderDay}
+                                        />
+                                    </Box>
+                                </LocalizationProvider>
+                                <EventsBox
+                                    events={getEvents()}
+                                />
+                            </Box> :
+                            <Box style={{ width: '100%', height: '30vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <CircularProgress size={50} />
+                            </Box>
+                        }
+                    </Box >
+                </Warp >
             }
             {
                 type === 2 &&
@@ -147,6 +151,6 @@ export default function Calendar({ type, warp, disableHelpers, events }) {
                     />
                 </MuiPickersUtilsProvider>
             }
-        </Warp >
+        </>
     );
 }

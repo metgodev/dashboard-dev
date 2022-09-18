@@ -8,11 +8,9 @@ import {
 } from "@material-ui/core";
 import { MoreVert as MoreIcon } from "@material-ui/icons";
 import classnames from "classnames";
-
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
-
 
 export default function Widget({
   children,
@@ -21,6 +19,7 @@ export default function Widget({
   bodyClass,
   disableWidgetMenu,
   header,
+  height
 }) {
   let classes = useStyles();
 
@@ -29,7 +28,7 @@ export default function Widget({
   let [isMoreMenuOpen, setMoreMenuOpen] = useState(false);
 
   return (
-    <div className={classes.widgetWrapper}>
+    <div className={classes.widgetWrapper} style={{ height: height || '100%' }}>
       <Paper className={classes.paper} classes={{ root: classes.widgetRoot }}>
         <div className={classes.widgetHeader}>
           {header ? (
@@ -78,6 +77,6 @@ export default function Widget({
           <Typography>{term('print')}</Typography>
         </MenuItem>
       </Menu>
-    </div>
+    </div >
   );
 }

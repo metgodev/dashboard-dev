@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 export default makeStyles(theme => ({
   widgetWrapper: {
     display: "flex",
-    minHeight: "100%",
+    width: '100%'
   },
   widgetHeader: {
     padding: theme.spacing(1),

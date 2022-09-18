@@ -10,7 +10,6 @@ import MapPick from '../../components/MapPicker.js/MapPick'
 import config from "../../config";
 import term from "../../terms";
 import { useJsApiLoader } from '@react-google-maps/api';
-import useGetWindowSize from '../../hooks/useGetWindowSize'
 import useGetService from "../../hooks/useGetService";
 import { requestParams, sortDataForMap } from "./mapsHelpers";
 // styles
@@ -30,7 +29,6 @@ const Maps = () => {
   const [infoWindow, setInfoWindow] = useState(null)
 
   //hooks
-  const { width } = useGetWindowSize()
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
 
   //service data
@@ -57,7 +55,7 @@ const Maps = () => {
         <>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '20px' }}>
             <MapPick
-              containerStyle={{ width: width - 300, height: '55vh' }}
+              containerStyle={{ width: '100vw', height: '55vh' }}
               markers={selectedCategory ? data[selectedCategory] : [...data.culture, ...data.food, ...data.travel, ...data.local, ...data.lodging, ...data.attraction]}
               initialZoom={8}
               isLoaded={isLoaded}

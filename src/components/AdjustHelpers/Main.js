@@ -6,6 +6,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme }) => {
         const { sidebar, mobile } = useSelector(s => s.mainReducer)
         return ({
+            height: '100%',
             flexGrow: 1,
             //animation
             // transition: theme.transitions.create('margin', {

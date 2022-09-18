@@ -12,9 +12,11 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers/Wrappers";
 import Widget from "../Widget/Widget";
 import TIME_PERIODS from "../../data/time_periods";
+import getWindowSize from '../../hooks/useGetWindowSize'
 
 export default function BigStat({ type, data }) {
   let classes = useStyles();
+  const { width, height } = getWindowSize()
   // local
   let [value, setValue] = useState(TIME_PERIODS.WEEKLY);
 
@@ -54,6 +56,7 @@ export default function BigStat({ type, data }) {
           </Select>
         </div>
       }
+      height={width > 400 ? '20vh' : '30vh'}
     >
       <div className={classes.totalValueContainer}>
         {data.length > 0 ?

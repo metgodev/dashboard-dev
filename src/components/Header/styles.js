@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import { alpha } from "@material-ui/core/styles/colorManipulator";
+import FIXED_STYLES from "../../data/fixed_styles";
 
 export default makeStyles(theme => ({
   logotype: {
@@ -20,6 +21,9 @@ export default makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    height: FIXED_STYLES.HEADER,
+    display: 'flex',
+    justifyContent: 'center',
   },
   toolbar: {
     paddingLeft: theme.spacing(2),

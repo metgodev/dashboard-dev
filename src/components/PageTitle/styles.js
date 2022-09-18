@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
+import FIXED_STYLES from "../../data/fixed_styles";
 
 export default makeStyles(theme => ({
   pageTitleContainer: {
@@ -6,7 +7,9 @@ export default makeStyles(theme => ({
     justifyContent: "space-between",
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
-    width: '100%'
+    width: '100%',
+    height: FIXED_STYLES.PAGE_TITLE,
+    alignItems: "center",
   },
   typo: {
     color: theme.palette.text.hint,

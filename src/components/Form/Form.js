@@ -36,7 +36,6 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   const [resizableText, setResizableText] = useState("")
   const [times, setTimes] = useState({})
   const [chosenImage, setChosenImage] = useState(null)
-  const [itemsToSend, setItemsToSend] = useState([])
   const [tagsPickerItems, setTagsPickerItems] = useState({})
 
   useEffect(() => {

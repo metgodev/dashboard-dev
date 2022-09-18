@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // MUI
-import { Grid } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Calendar from "../../components/Calendar/Calendar";
@@ -21,6 +21,7 @@ import AdminNotifications from "../../components/AdminNotifications/AdminNotific
 import { useSelector } from "react-redux";
 import GetPermissions from "../../hooks/GetPermissions";
 import client from '../../API/metro'
+import useGetWindowSize from '../../hooks/useGetWindowSize'
 
 export default function Dashboard() {
 
@@ -36,6 +37,7 @@ export default function Dashboard() {
   })
 
   const [tagCategoriesData, setTagCategoriesData] = useState(null)
+  const { height, width } = useGetWindowSize()
 
   const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.DASH_MAP_BUSINESSES, requestParams)
   const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.DASH_MAP_EVENTS, requestParams)
@@ -51,32 +53,36 @@ export default function Dashboard() {
   }, [businesses, events, points, tracks])
 
   return (
-    <>
+    <Box style={{ width: '100%', height: 'calc(100% - 70px)', display: 'flex', flexDirection: 'column' }}>
       {permissions?.adminNotification &&
         <AdminNotifications open={adminNotification} />
       }
       <PageTitle calendar title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
-      <Grid container spacing={2}>
-        <Grid item lg={6} md={5} sm={12} xs={12}>
-          <Calendar events={events} type={1} warp={true} />
-        </Grid>
-        <Grid item lg={6} md={7} sm={12} xs={12}>
-          <BigChart />
-        </Grid>
-        {config.bigStat.map((stat, index) => (
-          <Grid item lg={3} md={3} sm={6} xs={12} key={stat.product}>
-            <BigStat
-              type={term(stat.product)}
-              data={entitiesCount[stat.product]}
-            />
+      <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', gap: 5, height: '100%' }}>
+        <Grid spacing={1} container style={{ display: 'flex', flexDirection: 'row', justifyContent: width > 1280 ? 'space-between' : 'center', width: '100%' }}>
+          <Grid item style={{ width: '50%' }} xs={12} lg={6}>
+            <Calendar events={events} type={1} warp={true} />
           </Grid>
-        ))}
+          <Grid item style={{ width: '50%' }} xs={12} lg={6}>
+            <BigChart />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          {config.bigStat.map((stat, index) => (
+            <Grid item xs={6} md={3} key={stat.product}>
+              <BigStat
+                type={term(stat.product)}
+                data={entitiesCount[stat.product]}
+              />
+            </Grid>
+          ))}
+        </Grid>
         <Grid container
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="stretch" spacing={2}>
+          spacing={2}
+          justifyContent={'space-between'}
+        >
           {config.MetroStats.map(stat => (
-            <Grid item lg={1} md={12} sm={12} xs={12} key={stat.product}>
+            <Grid item lg={1} md={4} sm={6} xs={12} key={stat.product} style={{ width: '100%' }}>
               <MetroStats
                 ammount={tagCategoriesData === null ? 0 : tagCategoriesData[stat.svg].length}
                 svg={stat.svg}
@@ -89,8 +95,8 @@ export default function Dashboard() {
             <Download />
           </Grid> */}
         </Grid>
-      </Grid>
-    </>
+      </Box>
+    </Box>
   );
 }
 

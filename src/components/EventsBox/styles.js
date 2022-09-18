@@ -5,8 +5,8 @@ export default makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
-        maxHeight: '280px',
-        width: '50%',
+        maxHeight: '250px',
+        width: '100%',
     },
     eventContainer: {
         borderRadius: "5px",

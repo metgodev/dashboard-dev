@@ -9,6 +9,10 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import useGetService from '../../hooks/useGetService';
 import BACK_ROUTES from '../../data/back_routes';
 import CACHED_DATA_ROUTES from '../../data/cached_data_routes';
+import getWindowSize from '../../hooks/useGetWindowSize'
+import { Grid } from '@mui/material';
+import { useMemo } from 'react';
+import { ROUTES } from '../../data/routes'
 
 function AdminNotifications({ open }) {
 
@@ -16,6 +20,8 @@ function AdminNotifications({ open }) {
 
     let navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const { width, height } = getWindowSize()
 
     const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.NOTIFICATION_BUSINESSES, requestParams)
     const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.NOTIFICATION_EVENTS, requestParams)
@@ -52,6 +58,43 @@ function AdminNotifications({ open }) {
         navigate(path)
     }, [])
 
+    const config = useMemo(() => {
+        return (
+            [
+                {
+                    check: getNumberOfBusinessesToApprovePremium(),
+                    title: `${term('you_have')} ${getNumberOfBusinessesToApprovePremium()} ${term('businesses_requesting_premium')}`,
+                    route: ROUTES.BUSINESSES
+                },
+                {
+                    check: businesses.data.length,
+                    title: `${term('you_have')} ${businesses.data.length} ${term('unapproved_businesses')}`,
+                    route: ROUTES.BUSINESSES
+                },
+                {
+                    check: events.data.length,
+                    title: `${term('you_have')} ${events.data.length} ${term('unapproved_events')}`,
+                    route: ROUTES.EVENTS
+                },
+                {
+                    check: points.data.length,
+                    title: `${term('you_have')} ${points.data.length} ${term('unapproved_points')}`,
+                    route: ROUTES.POINTS
+                },
+                {
+                    check: tracks.data.length,
+                    title: `${term('you_have')} ${tracks.data.length} ${term('unapproved_tracks')}`,
+                    route: ROUTES.TRACKS
+                },
+                {
+                    check: products.data.length,
+                    title: `${term('you_have')} ${products.data.length} ${term('unapproved_products')}`,
+                    route: ROUTES.PRODUCTS
+                },
+            ]
+        )
+    }, [businesses, events, points, tracks, products])
+
     return (
         <Modal
             open={open}
@@ -60,7 +103,7 @@ function AdminNotifications({ open }) {
             aria-describedby="modal-modal-description"
         >
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ borderRadius: '10px', flexDirection: 'column', paddingTop: '40px', display: 'flex', alignItems: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '40vw', height: '70%', backgroundColor: 'white' }}>
+                <div style={{ borderRadius: '10px', flexDirection: 'column', paddingTop: '40px', display: 'flex', alignItems: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: width > 1280 ? '40vw' : '95vw', height: width > 600 ? '70%' : '90%', backgroundColor: 'white' }}>
                     <IconButton onClick={handleClose} style={{ position: 'absolute', top: 10, left: 10 }}>
                         < CloseOutlinedIcon />
                     </IconButton>
@@ -69,45 +112,22 @@ function AdminNotifications({ open }) {
                         {loading ?
                             <CircularProgress size={50} />
                             :
-                            <div>
-                                {getNumberOfBusinessesToApprovePremium() > 0 &&
-                                    <NotificationItem
-                                        text={`${term('you_have')} ${getNumberOfBusinessesToApprovePremium()} ${term('businesses_requesting_premium')}`}
-                                        onClick={() => buttonPressed('/businesses')}
-                                    />
-                                }
-                                {businesses.data.length > 0 &&
-                                    <NotificationItem
-                                        text={`${term('you_have')} ${businesses.data.length} ${term('unapproved_businesses')}`}
-                                        onClick={() => buttonPressed('/businesses')}
-                                    />
-                                }
-                                {events.data.length > 0 &&
-                                    <NotificationItem
-                                        text={`${term('you_have')} ${events.data.length} ${term('unapproved_events')}`}
-                                        onClick={() => buttonPressed('/events')}
-                                    />}
-                                {points.data.length > 0 &&
-                                    <NotificationItem
-                                        text={`${term('you_have')} ${points.data.length} ${term('unapproved_points')}`}
-                                        onClick={() => buttonPressed('/locations')}
-                                    />}
-                                {tracks.data.length > 0 &&
-                                    <NotificationItem
-                                        text={`${term('you_have')} ${tracks.data.length} ${term('unapproved_tracks')}`}
-                                        onClick={() => buttonPressed('/routes')}
-                                    />}
-                                {products.data.length > 0 &&
-                                    <NotificationItem
-                                        text={`${term('you_have')} ${products.data.length} ${term('unapproved_products')}`}
-                                        onClick={() => buttonPressed('/products')}
-                                    />}
-                            </div>
+                            <Grid container spacing={2} style={{ display: 'flex' }}>
+                                {config.map(({ check, title, route }) => {
+                                    return (check > 0 &&
+                                        <Grid item xs={12} style={{ textAlign: 'center' }}>
+                                            <NotificationItem
+                                                text={title}
+                                                onClick={() => buttonPressed(route)}
+                                            />
+                                        </Grid>)
+                                })}
+                            </Grid>
                         }
                     </Box>
                 </div>
-            </Box>
-        </Modal>
+            </Box >
+        </Modal >
     )
 }
 

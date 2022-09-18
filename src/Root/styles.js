@@ -13,7 +13,6 @@ export default makeStyles(theme => ({
     top: theme.spacing(6),
     width: "100%",
     height: "100%",
-    position: "relative",
-    paddingLeft: '5px'
+    padding: '5px'
   },
 }));

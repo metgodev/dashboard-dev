@@ -16,7 +16,7 @@ const App = () => {
   }, [lang])
 
   return (
-    <Box >
+    <Box style={{ height: '100%' }}>
       <ThemeProvider theme={type(theme)} >
         <CssBaseline />
         <Root />
