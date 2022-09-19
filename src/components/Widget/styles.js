@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/styles";
 export default makeStyles(theme => ({
   widgetWrapper: {
     display: "flex",
-    width: '100%'
+    width: '100%',
+    justifyContent: 'space-around'
   },
   widgetHeader: {
     padding: theme.spacing(1),

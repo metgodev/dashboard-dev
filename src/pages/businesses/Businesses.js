@@ -12,6 +12,7 @@ import AGTable from '../../components/Tables/AGTable'
 import MODAL_STATES from '../../data/modal_states'
 import BACK_ROUTES from '../../data/back_routes'
 import MODAL_TYPES from '../../data/modal_types'
+import getWindowSize from '../../hooks/useGetWindowSize'
 
 function Businesses() {
     const [open, setOpen] = useState(false);
@@ -19,6 +20,8 @@ function Businesses() {
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
+
+    const { width, height } = getWindowSize();
 
     const openDialog = (data) => {
         if (data) {
@@ -44,6 +47,7 @@ function Businesses() {
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
             <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.BUSINESS} action={openDialog} />
+            {/* {width <= 700 && <MoblieTable display={BACK_ROUTES.BUSINESS} action={openDialog} />} */}
             <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.BUSINESS} type={dialogType} />
         </Box>
     )

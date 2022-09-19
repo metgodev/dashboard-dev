@@ -56,13 +56,13 @@ export default function BigStat({ type, data }) {
           </Select>
         </div>
       }
-      height={width > 400 ? '20vh' : '30vh'}
+      height={'150px'}
     >
       <div className={classes.totalValueContainer}>
         {data.length > 0 ?
           <>
             <div className={classes.totalValue}>
-              <Typography size="xxl" color="text" colorBrightness="secondary">
+              <Typography size={'xl'} color="text" colorBrightness="secondary">
                 {data.length}
               </Typography>
             </div>
@@ -94,7 +94,7 @@ export default function BigStat({ type, data }) {
           </Grid>
         </div>
       </div>
-    </Widget>
+    </Widget >
   );
 }
 

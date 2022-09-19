@@ -5,8 +5,8 @@ export default makeStyles(theme => ({
   pageTitleContainer: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
+    marginTop: '5px',
+    marginBottom: '5px',
     width: '100%',
     height: FIXED_STYLES.PAGE_TITLE,
     alignItems: "center",

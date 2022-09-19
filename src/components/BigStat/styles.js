@@ -16,7 +16,7 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   statCell: {
-    padding: theme.spacing(2),
+    padding: '0px 12px',
   },
   totalValueContainer: {
     display: "flex",

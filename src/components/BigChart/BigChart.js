@@ -17,7 +17,7 @@ export default function BigChart() {
     const { height, width } = useGetWindowSize()
 
     return (
-        <Widget bodyClass={classes.mainChartBody} height={'42vh'}>
+        <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'42vh'}>
             <div style={{ direction: "ltr" }}>
                 <ResponsiveContainer width="100%" height={height / 3.2}>
                     <LineChart
