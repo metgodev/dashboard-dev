@@ -24,7 +24,8 @@ const superAdminLinks = [
     {
         id: 0, label: term('admin'), icon: <AdminPanelSettingsOutlinedIcon />,
         children: [
-            { label: term('manage_area'), link: ROUTES.AUTHORITY },
+            { label: term('manage_area'), link: ROUTES.AREA },
+            { label: term('manage_authority'), link: ROUTES.AUTHORITY },
             { label: term('manage_tags'), link: ROUTES.TAG_CATEGORIES },
             { label: term('manage_users'), link: ROUTES.USERS },
         ],

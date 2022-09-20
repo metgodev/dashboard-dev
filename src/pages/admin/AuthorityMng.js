@@ -15,6 +15,7 @@ import MobileTable from '../../components/MobileTable/MobileTable'
 import { MOBILE_WIDTH } from '../../data/constants'
 
 function AuthorityMng() {
+
     const dispatch = useDispatch()
     //dialog
     const [autorityOpen, setAutorityOpen] = useState(false);

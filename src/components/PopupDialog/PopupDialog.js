@@ -14,6 +14,7 @@ import TagPop from '../PopupDialogSections/TagsManagment/TagPop';
 import TagLinkPop from '../PopupDialogSections/TagsManagment/TagLinkPop';
 import UsersPop from '../PopupDialogSections/Users/UsersPop';
 import ProductsPop from '../PopupDialogSections/Products/ProductsPop';
+import AreaPop from '../PopupDialogSections/Area/AreaPop'
 //style
 import { useTheme } from "@material-ui/styles";
 import useStyles from "./styles";
@@ -66,12 +67,13 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                     {tabs === MODAL_TYPES.EVENTS && <EventsPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.POINTS && <PointsPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.TRACKS && <TracksPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.PRODUCTS && <ProductsPop open={open} handleClose={handleClose} type={type} />}
                     {/* authority management */}
                     {tabs === MODAL_TYPES.AUTHORITY && <AuthorityPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.TAGS && <TagPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.TAGS_LINK && <TagLinkPop open={open} handleClose={handleClose} type={type} />}
                     {tabs === MODAL_TYPES.USERS && <UsersPop open={open} handleClose={handleClose} type={type} />}
-                    {tabs === MODAL_TYPES.PRODUCTS && <ProductsPop open={open} handleClose={handleClose} type={type} />}
+                    {tabs === MODAL_TYPES.AREA && <AreaPop open={open} handleClose={handleClose} type={type} />}
                 </DialogContent>
             </Dialog>
         </Box >

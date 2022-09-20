@@ -22,6 +22,7 @@ export const GetTagColor = (tagName) => {
 }
 
 export const formatObjects = (itemsToSend, options) => {
+    if (itemsToSend === undefined) return []
     return itemsToSend.map(item => {
         if (options.business.includes(item)) {
             return { id: item, type: 'BUSINESS' }

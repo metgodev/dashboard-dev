@@ -20,6 +20,7 @@ import Tracks from '../../pages/tracks/Tracks'
 import Products from '../../pages/products/Products'
 import Voucher from '../../pages/voucher/Voucher'
 import Support from '../../pages/support/Support'
+import AreaMng from '../../pages/admin/AreaMng'
 
 function SuperAdminRoutes({ permissions, user }) {
     return (
@@ -44,6 +45,7 @@ function SuperAdminRoutes({ permissions, user }) {
             <Route exact path={ROUTES.AUTHORITY} element={<Protecte auth={permissions.authority} loggedIn={user}><AuthorityMng /></Protecte>} />
             <Route exact path={ROUTES.TAG_CATEGORIES} element={<Protecte auth={permissions.tagcategories} loggedIn={user}><TagCategoriesMng /></Protecte>} />
             <Route exact path={ROUTES.USERS} element={<Protecte auth={permissions.users} loggedIn={user}><UsersTable /></Protecte>} />
+            <Route exact path={ROUTES.AREA} element={<Protecte auth={permissions.area} loggedIn={user}><AreaMng /></Protecte>} />
         </Routes>
     )
 }

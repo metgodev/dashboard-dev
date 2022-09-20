@@ -8,5 +8,6 @@ const MODAL_TYPES = {
     TAGS_LINK: 'tags_link',
     USERS: 'users',
     PRODUCTS: 'products',
+    AREA: 'area'
 }
 export default MODAL_TYPES

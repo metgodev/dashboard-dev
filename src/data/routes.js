@@ -19,7 +19,8 @@ export const ROUTES = {
     USERS: '/admin/users',
     PRODUCTS: '/products',
     CALENDAR: '/calendar',
-    PROFILE: '/profile'
+    PROFILE: '/profile',
+    AREA: '/admin/area'
 }
 
 export const BUSINESS_OWNER_ROUTES = {

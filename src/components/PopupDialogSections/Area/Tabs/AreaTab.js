@@ -4,12 +4,12 @@ import { ModalInit } from '../popConfig';
 import Form from '../../../Form/Form'
 import { validateForm } from './Validations'
 import get_orientation from '../../../../utils/get_orientation'
-import { GetFormData } from './HandleAuthorityData'
+import { GetFormData } from './HandleAreaTabData'
 import client from '../../../../API/metro'
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
 import Toast from '../../../../utils/useToast';
 
-export const AuthorityTab = ({ handleClose, type, }) => {
+export const AreaTab = ({ handleClose, type, }) => {
     //global
 
     const init = useSelector((s) => s.mainReducer.editTabData);
@@ -27,24 +27,19 @@ export const AuthorityTab = ({ handleClose, type, }) => {
     }, [init]);
 
     const modify = async (formValues) => {
-
         const valuesToSend = {
-            ...formValues,
-            areaId: area?.id?.toString()
+            name: formValues.name,
+            location: {
+                type: 'Point',
+                coordinates: values.locationInfo ? values.locationInfo.coordinates : values.location ? values.location.coordinates : [0, 0]
+            }
         }
         try {
-            if (type === 'add') {
-                await client.service('authorities').create(valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
-            }
-            else {
-                await client.service('authorities').patch(values['_id'], valuesToSend)
-                dispatch(set_table_changed(type))
-                handleClose(false)
-            }
+            await client.service('area').patch(values._id, valuesToSend)
+            dispatch(set_table_changed(type))
+            handleClose(false)
         } catch (e) {
-            console.log('authorityTab', e)
+            console.log('areaTab', e)
             Toast()
         }
     }
@@ -57,6 +52,7 @@ export const AuthorityTab = ({ handleClose, type, }) => {
             submitFunction={modify}
             validiationFunction={validateForm}
             orientation={orientation}
+            setExternalValues={setValues}
         />
     )
 }

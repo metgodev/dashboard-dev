@@ -1488,6 +1488,11 @@ const active_lexicon = {
         he: 'אזור',
         ar: 'منطقة',
     },
+    manage_authority: {
+        en: 'Manage authority',
+        he: 'נהל רשות',
+        ar: 'إدارة السلطة',
+    },
     error_creating: {
         en: 'Error creating',
         he: 'שגיאה ביצירת',

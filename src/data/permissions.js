@@ -26,7 +26,8 @@ const PERMISSIONS = {
         status_change: false,
         adminNotification: false,
         profile: true,
-        edit: false
+        edit: false,
+        area: false
     },
     METRO_AREA_OWNER: {
         role: 'metro area owner'
@@ -61,7 +62,8 @@ const PERMISSIONS = {
         status_change: false,
         adminNotification: false,
         profile: true,
-        edit: true
+        edit: true,
+        area: false
     },
     METRO_SUPER_ADMIN: {
         main: true,
@@ -90,7 +92,8 @@ const PERMISSIONS = {
         status_change: true,
         adminNotification: true,
         profile: true,
-        edit: true
+        edit: true,
+        area: true
     },
     METRO_ADMIN: {
         main: true,
@@ -116,7 +119,8 @@ const PERMISSIONS = {
         status_change: true,
         adminNotification: true,
         profile: true,
-        edit: true
+        edit: true,
+        area: false
     },
     METRO_VIEWER: {
         main: true,
@@ -142,7 +146,8 @@ const PERMISSIONS = {
         status_change: false,
         adminNotification: true,
         profile: true,
-        edit: false
+        edit: false,
+        area: false
     }
 }
 
