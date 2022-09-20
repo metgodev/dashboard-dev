@@ -12,6 +12,9 @@ import AGTable from '../../components/Tables/AGTable'
 import MODAL_STATES from '../../data/modal_states'
 import BACK_ROUTES from '../../data/back_routes'
 import MODAL_TYPES from '../../data/modal_types'
+import MobileTable from '../../components/MobileTable/MobileTable'
+import getWindowSize from '../../hooks/useGetWindowSize'
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function Events() {
     //dialog
@@ -20,6 +23,7 @@ function Events() {
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
+    const { width, height } = getWindowSize();
 
     const openDialog = (data) => {
         if (data) {
@@ -43,7 +47,8 @@ function Events() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('events')} />
-            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.EVENTS} action={openDialog} />
+            {width > MOBILE_WIDTH && <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.EVENTS} action={openDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.EVENTS} action={openDialog} />}
             <PopupDialog title={term('events')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.EVENTS} type={dialogType} />
         </Box>
     )

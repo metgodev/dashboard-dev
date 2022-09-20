@@ -12,6 +12,9 @@ import AGTable from '../../components/Tables/AGTable'
 import MODAL_STATES from '../../data/modal_states';
 import BACK_ROUTES from '../../data/back_routes';
 import MODAL_TYPES from '../../data/modal_types';
+import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable';
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function Tracks() {
     const [open, setOpen] = useState(false);
@@ -19,6 +22,7 @@ function Tracks() {
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
+    const { width, height } = getWindowSize();
 
     const openDialog = (data) => {
         if (data) {
@@ -42,7 +46,8 @@ function Tracks() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('routes')} />
-            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.TRACKS} action={openDialog} />
+            {width > MOBILE_WIDTH && <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.TRACKS} action={openDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.TRACKS} action={openDialog} />}
             <PopupDialog title={term('routes')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.TRACKS} type={dialogType} />
         </Box>
     )

@@ -2,7 +2,7 @@
 @hostname = metro-backend-ohx3vk2ipa-ew.a.run.app           
 # metro-backend-ohx3vk2ipa-ew.a.run.app
 @contentType = application/json
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NjI4ODI4MjksImlhdCI6MTY2Mjg4MjgyOCwiZXhwIjoxNjYzNDg3NjI4LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MzE0YWIzMGQ0OTVmM2M4ZmZmOWNhMTAiLCJqdGkiOiJiMzVkYjZiNi1iYjYzLTQzNDEtYmY0ZS1iYzRjMzIwYjkxMWYifQ.0OZC-woM6mUUHzM2YsRorxlIKKRAaYck2gOl_FkcdNQ
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJvYXQiOjE2NjM0ODcwMTksImlhdCI6MTY2MzU3NDg0NiwiZXhwIjoxNjY0MTc5NjQ2LCJhdWQiOiJodHRwczovL3lvdXJkb21haW4uY29tIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MzE0YWIzMGQ0OTVmM2M4ZmZmOWNhMTAiLCJqdGkiOiJkNmE4NTVmOC1kYzFlLTRkMWYtYTA5OC00ZWNiNTM0YzE4MDcifQ.3DE5w6qgsR7wfTT54eNgvOt5Lqw4Pv-8l0zoNSbEm2A
 
 @email = "celeja6810@showbaz.com"
 @password = "5656"

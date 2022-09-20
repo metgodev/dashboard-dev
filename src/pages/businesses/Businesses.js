@@ -13,6 +13,8 @@ import MODAL_STATES from '../../data/modal_states'
 import BACK_ROUTES from '../../data/back_routes'
 import MODAL_TYPES from '../../data/modal_types'
 import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable'
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function Businesses() {
     const [open, setOpen] = useState(false);
@@ -46,8 +48,8 @@ function Businesses() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('businesses')} />
-            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.BUSINESS} action={openDialog} />
-            {/* {width <= 700 && <MoblieTable display={BACK_ROUTES.BUSINESS} action={openDialog} />} */}
+            {width > MOBILE_WIDTH && <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.BUSINESS} action={openDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.BUSINESS} action={openDialog} />}
             <PopupDialog title={term('businesses')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.BUSINESS} type={dialogType} />
         </Box>
     )

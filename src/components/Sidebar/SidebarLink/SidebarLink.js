@@ -4,6 +4,8 @@ import { Inbox as InboxIcon } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
 import { useDispatch } from "react-redux";
+import getWindowSize from '../../../hooks/useGetWindowSize'
+import { MOBILE_WIDTH } from '../../../data/constants'
 // styles
 import useStyles from "./styles";
 // components
@@ -15,6 +17,7 @@ export default function SidebarLink({ link, icon, label, children, location, sid
   let dispatch = useDispatch()
 
   const toggleSideBar = () => dispatch(set_sidebar_toggle(!sidebar))
+  const { width, height } = getWindowSize()
 
   // local
   let [isOpen, setIsOpen] = useState(false);
@@ -75,7 +78,7 @@ export default function SidebarLink({ link, icon, label, children, location, sid
       <ListItem
         button
         component={link && Link}
-        onClick={(e) => toggleCollapse(e)}
+        onClick={(e) => toggleCollapse(e, width)}
         className={classes.link}
         to={link}
         disableRipple
@@ -123,15 +126,21 @@ export default function SidebarLink({ link, icon, label, children, location, sid
 
   // ###########################################################
 
-  function toggleCollapse(e) {
-    if (sidebar) {
-      e.preventDefault();
+  function toggleCollapse(e, width) {
+    if (width <= MOBILE_WIDTH) {
       setIsOpen(true)
-      toggleSideBar(sidebar)
+      e.preventDefault();
     } else {
-      setIsOpen(true)
-      e.preventDefault();
-      toggleSideBar(!sidebar)
+      if (sidebar) {
+        e.preventDefault();
+        setIsOpen(true)
+        toggleSideBar(sidebar)
+      } else {
+        setIsOpen(true)
+        e.preventDefault();
+        toggleSideBar(!sidebar)
+      }
     }
+
   }
 }

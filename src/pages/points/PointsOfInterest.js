@@ -12,13 +12,18 @@ import AGTable from '../../components/Tables/AGTable'
 import MODAL_STATES from '../../data/modal_states';
 import MODAL_TYPES from '../../data/modal_types';
 import BACK_ROUTES from '../../data/back_routes';
+import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable';
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function PointsOfInterest() {
+
     const [open, setOpen] = useState(false);
     const [dialogType, setDialogType] = useState(MODAL_STATES.ADD);
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
+    const { width, height } = getWindowSize();
 
     const openDialog = (data) => {
         if (data) {
@@ -41,7 +46,8 @@ function PointsOfInterest() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('points')} />
-            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.POINTS} action={openDialog} />
+            {width > MOBILE_WIDTH && <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.POINTS} action={openDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.POINTS} action={openDialog} />}
             <PopupDialog title={term('points')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.POINTS} type={dialogType} />
         </Box>
     )

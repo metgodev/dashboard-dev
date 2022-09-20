@@ -1,5 +1,4 @@
 import client from '../../API/metro';
-import axios from 'axios'
 import Toast from '../../utils/useToast';
 import { uploadImageToFirebase } from '../../API/service';
 

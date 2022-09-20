@@ -11,6 +11,9 @@ import { Box } from '@mui/material';
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions';
 import { useDispatch } from 'react-redux';
 import MODAL_STATES from '../../data/modal_states';
+import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable';
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function Products() {
 
@@ -19,6 +22,7 @@ function Products() {
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
+    const { width, height } = getWindowSize();
 
     const openDialog = (data) => {
         if (data) {
@@ -40,7 +44,8 @@ function Products() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('products')} />
-            <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.PRODUCTS} action={openDialog} />
+            {width > MOBILE_WIDTH && <AGTable setExportToExcel={setExportToExcel} display={BACK_ROUTES.PRODUCTS} action={openDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.PRODUCTS} action={openDialog} />}
             <PopupDialog title={term('products')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.PRODUCTS} type={dialogType} />
         </Box>
     )

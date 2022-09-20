@@ -10,9 +10,13 @@ import AGTable from '../../components/Tables/AGTable'
 import MODAL_STATES from '../../data/modal_states'
 import BACK_ROUTES from '../../data/back_routes'
 import MODAL_TYPES from '../../data/modal_types'
+import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable'
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function TagCategoriesMng() {
     const dispatch = useDispatch()
+    const { width, height } = getWindowSize();
     //dialog
     const [tagLink, setTagLink] = useState(false)
     const [tagOpen, setTagOpen] = useState(false);
@@ -50,7 +54,8 @@ function TagCategoriesMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('area_related_tags')} />
-            <AGTable display={BACK_ROUTES.TAG_CATEGORIES} action={openLinkingDialog} />
+            {width > MOBILE_WIDTH && <AGTable display={BACK_ROUTES.TAG_CATEGORIES} action={openLinkingDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.TAG_CATEGORIES} action={openLinkingDialog} />}
             <PopupDialog open={tagOpen} setOpen={setTagOpen} type={dialogType} title={term('tags')} tabs={MODAL_TYPES.TAGS} maxWidth={'sm'} />
             <PopupDialog open={tagLink} setOpen={setTagLink} type={dialogType} title={term('link_tags')} tabs={MODAL_TYPES.TAGS_LINK} maxWidth={'sm'} />
         </Box>

@@ -10,12 +10,17 @@ import AGTable from '../../components/Tables/AGTable'
 import MODAL_STATES from '../../data/modal_states'
 import BACK_ROUTES from '../../data/back_routes'
 import MODAL_TYPES from '../../data/modal_types'
+import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable'
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function AuthorityMng() {
     const dispatch = useDispatch()
     //dialog
     const [autorityOpen, setAutorityOpen] = useState(false);
     const [dialogType, setDialogType] = useState(MODAL_STATES.ADD);
+
+    const { width, height } = getWindowSize();
 
     const openAuthorityDialog = (data) => {
         if (data) {
@@ -29,8 +34,6 @@ function AuthorityMng() {
         setAutorityOpen(!autorityOpen)
     }
 
-
-
     let headerBtns = [
         //can get name, func, input, icon ,buttonIcon
         { name: term('add_new_authority'), func: openAuthorityDialog, buttonIcon: <AddCircleOutline /> },
@@ -39,7 +42,8 @@ function AuthorityMng() {
     return (
         <Box>
             <PageTitle buttonGroup={{ btns: headerBtns }} title={term('authorities')} />
-            <AGTable display={BACK_ROUTES.AUTHORITIES} action={openAuthorityDialog} />
+            {width > MOBILE_WIDTH && <AGTable display={BACK_ROUTES.AUTHORITIES} action={openAuthorityDialog} />}
+            {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.AUTHORITIES} action={openAuthorityDialog} />}
             <PopupDialog open={autorityOpen} setOpen={setAutorityOpen} type={dialogType} title={term('authority')} tabs={MODAL_TYPES.AUTHORITY} maxWidth={'sm'} />
         </Box>
     )

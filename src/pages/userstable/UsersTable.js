@@ -9,6 +9,9 @@ import MODAL_TYPES from '../../data/modal_types'
 import useGetService from '../../hooks/useGetService'
 import { set_edit_tab_data } from '../../REDUX/actions/main.actions'
 import term from '../../terms'
+import getWindowSize from '../../hooks/useGetWindowSize'
+import MobileTable from '../../components/MobileTable/MobileTable'
+import { MOBILE_WIDTH } from '../../data/constants'
 
 function UsersTable() {
 
@@ -17,6 +20,7 @@ function UsersTable() {
     const [options, setOptions] = useState({})
 
     const { area } = useSelector(s => s.mainRememberReducer)
+    const { width, height } = getWindowSize();
 
     const roles = useGetService("roles", "roles", { areaId: area.id }, area, false)
 
@@ -43,7 +47,8 @@ function UsersTable() {
     return (
         <div>
             <PageTitle title={term('users')} />
-            {Boolean(Object.keys(options).length) && <AGTable display={BACK_ROUTES.USERS} action={openDialog} options={options} />}
+            {width > MOBILE_WIDTH && Boolean(Object.keys(options).length) && <AGTable display={BACK_ROUTES.USERS} action={openDialog} options={options} />}
+            {width <= MOBILE_WIDTH && Boolean(Object.keys(options).length) && <MobileTable display={BACK_ROUTES.USERS} action={openDialog} />}
             <PopupDialog title={term('users')} open={open} setOpen={setOpen} tabs={MODAL_TYPES.USERS} type={dialogType} />
         </div>
     )

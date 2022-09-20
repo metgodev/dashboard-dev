@@ -181,7 +181,6 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                       {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && tagsPickerItems[field] && values && (
                         <DraggableListWithImages
                           IMAGE_PICKER_TITLE={IMAGE_PICKER_TITLE}
-                          //values={values}
                           field={field}
                           title={title}
                           options={options}
@@ -191,7 +190,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           itemsToSend={tagsPickerItems[field]}
                           valuesForPicker={tagsPickerItems[field].map(object => {
                             return (
-                              { label: options[field].find(tag => tag.id === object).title, value: options[field].find(tag => tag.id === object)._id }
+                              { label: options[field].find(tag => tag.id === object)?.title, value: options[field].find(tag => tag.id === object)?._id }
                             )
                           })}
                           setValuesForPicker={setTagsPickerItems}
