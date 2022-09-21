@@ -3,6 +3,7 @@ import { Grid, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Lottie from 'react-lottie';
 import animatedErr from '../../Assets/lottie/AnimatedError404.json'
+import { ROUTES } from '../../data/routes';
 // styles
 import useStyles from "./styles";
 import term from "../../terms";
@@ -27,7 +28,7 @@ export default function Error() {
           variant="contained"
           color="secondary"
           component={Link}
-          to="/dashboard"
+          to={ROUTES.DASHBOARD}
           size="large"
           className={classes.backButton}
         >

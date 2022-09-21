@@ -7,16 +7,27 @@ import BusinessOwnerRoutes from "./routes/BusinessOwnerRoutes";
 import SuperAdminRoutes from "./routes/SuperAdminRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import ViewerRoutes from "./routes/ViewerRoutes";
+import { CircularProgress } from "@material-ui/core";
+import { Box } from "@mui/material";
+import useStyles from './styles'
 
 const GetRoutes = () => {
 
     const userDetails = useSelector(s => s.userReducer.userDetails)
     const user = useSelector(s => s.mainRememberReducer.user)
     const permissions = GetPermissions()
+    const classes = useStyles()
 
     if (Object.keys(userDetails).length === 0) {
+        if (window.localStorage.getItem('metgo-jwt')) {
+            return (
+                <Box className={classes.container}>
+                    <CircularProgress size={50} />
+                </Box>
+            )
+        }
         return (
-            <BasicRoutes />
+            <BasicRoutes permissions={permissions} user={user} />
         )
     }
     else if (userDetails.roles.length === 1 && userDetails.roles[0].roleName === ROLES.MEMBER) {

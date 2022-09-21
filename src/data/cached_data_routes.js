@@ -12,7 +12,8 @@ const CACHED_DATA_ROUTES = {
     NOTIFICATION_POINTS: 'notificationPoints',
     NOTIFICATION_TRACKS: 'notificationTracks',
     NOTIFICATION_PRODUCTS: 'notificationProducts',
-    EVENTS: 'events'
+    EVENTS: 'events',
+    EVENTS_TABLE: 'events_table'
 }
 
 export default CACHED_DATA_ROUTES

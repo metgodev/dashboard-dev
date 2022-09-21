@@ -12,10 +12,10 @@ import BusinessLogin from './businessLogin/BusinessLogin'
 import BusinessRegister from './businessLogin/BusinessRegister'
 
 function Login() {
-  let classes = useStyles();
 
+  const classes = useStyles();
   // local
-  let [activeTabId, setActiveTabId] = useState(0);
+  const [activeTabId, setActiveTabId] = useState(0);
   const currentHref = window.location.href
 
   return (

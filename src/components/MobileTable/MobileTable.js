@@ -11,6 +11,7 @@ function MobileTable({ display, action }) {
     const classes = useStyles()
 
     const { area } = useSelector(s => s.mainRememberReducer)
+    const tableChanged = useSelector(state => state.mainReducer.tableChanged)
 
     const [data, setData] = useState([])
 
@@ -27,7 +28,7 @@ function MobileTable({ display, action }) {
                 Toast()
             }
         })();
-    }, [area])
+    }, [area, tableChanged])
 
     return (
         <Box className={classes.container}>

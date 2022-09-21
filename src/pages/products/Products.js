@@ -24,6 +24,7 @@ function Products() {
     const dispatch = useDispatch();
     const { width, height } = getWindowSize();
 
+
     const openDialog = (data) => {
         if (data) {
             dispatch(set_edit_tab_data(data))

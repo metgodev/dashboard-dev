@@ -9,11 +9,9 @@ import ProfileMenu from "./MenuBtns/ProfileMenu";
 
 function SideBtns() {
 
-    const permissions = GetPermissions()
-
     return (
         <>
-            {permissions?.navigationBar?.area && <AreaMenu />}
+            <AreaMenu />
             <LangMenu />
             {/* <MailMenu /> */}
             {/* <NotifyMenu /> */}

@@ -57,41 +57,44 @@ function AreaMenu() {
 
     return (
         <>
-            <IconButton
-                color="inherit"
-                aria-haspopup="true"
-                aria-controls="lang-menu"
-                onClick={e => {
-                    setAreaMenu(e.currentTarget);
-                }}
-                className={permissions?.navigationBar?.area ? classes.headerMenuButton : classes.headerText}
-            >
-                {area && area.name + "-"}
-                <LocationCityOutlinedIcon classes={{ root: classes.headerIcon }} />
-            </IconButton >
             {permissions?.navigationBar?.area &&
-                <Menu
-                    id="lang-menu"
-                    open={Boolean(areaMenu)}
-                    anchorEl={areaMenu}
-                    onClose={() => setAreaMenu(null)}
-                    MenuListProps={{ className: classes.headerMenuList }}
-                    className={classes.headerMenu}
-                    disableAutoFocusItem
-                    disablescrolllock={true.toString()}
-                >
-                    <div className={classes.langMenuUser}>
-                        <div>
-                            {areaMenuItem.map((a) => (
-                                <MenuItem key={a.id} className={classes.messageNotification} onClick={() => changeArea(a)}>
-                                    <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" >
-                                        {a.name}
-                                    </Typography>
-                                </MenuItem>
-                            ))}
+                <>
+                    <IconButton
+                        color="inherit"
+                        aria-haspopup="true"
+                        aria-controls="lang-menu"
+                        onClick={e => {
+                            setAreaMenu(e.currentTarget);
+                        }}
+                        className={permissions?.navigationBar?.area ? classes.headerMenuButton : classes.headerText}
+                    >
+                        {area && area.name + "-"}
+                        <LocationCityOutlinedIcon classes={{ root: classes.headerIcon }} />
+                    </IconButton >
+
+                    <Menu
+                        id="lang-menu"
+                        open={Boolean(areaMenu)}
+                        anchorEl={areaMenu}
+                        onClose={() => setAreaMenu(null)}
+                        MenuListProps={{ className: classes.headerMenuList }}
+                        className={classes.headerMenu}
+                        disableAutoFocusItem
+                        disablescrolllock={true.toString()}
+                    >
+                        <div className={classes.langMenuUser}>
+                            <div>
+                                {areaMenuItem.map((a) => (
+                                    <MenuItem key={a.id} className={classes.messageNotification} onClick={() => changeArea(a)}>
+                                        <Typography variant="h6" weight="medium" color="text" colorBrightness="secondary" >
+                                            {a.name}
+                                        </Typography>
+                                    </MenuItem>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </Menu>}
+                    </Menu>
+                </>}
         </>
     )
 }
