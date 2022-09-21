@@ -25,8 +25,7 @@ import useGetWindowSize from '../../hooks/useGetWindowSize'
 
 export default function Dashboard() {
 
-  const userDetails = useSelector(s => s.userReducer.userDetails)
-  const permissions = GetPermissions(userDetails)
+  const permissions = GetPermissions()
   const adminNotification = useSelector(s => s.mainReducer.adminNotification)
 
   const [entitiesCount, setEntitiesCount] = useState({

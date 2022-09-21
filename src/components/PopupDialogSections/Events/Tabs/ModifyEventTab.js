@@ -26,8 +26,7 @@ export const ModifyEventsTab = ({ type, areaSpecificData, handleClose }) => {
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
     const dispatch = useDispatch()
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 

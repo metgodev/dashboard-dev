@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { _get } from '../API/service'
 import PERMISSIONS from '../data/permissions'
 import ROLES from "../data/roles"
 
-const GetPermissions = (user) => {
+const GetPermissions = () => {
+
+    const user = useSelector(s => s.userReducer.userDetails)
 
     const [permissions, setPermissions] = useState({})
 

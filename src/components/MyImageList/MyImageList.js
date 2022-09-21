@@ -14,8 +14,7 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
 
     const classes = useStyles()
     const dispatch = useDispatch()
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     const deleteItem = async (item) => {
         if (permissions.edit) {

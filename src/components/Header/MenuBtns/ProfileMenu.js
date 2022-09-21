@@ -28,8 +28,7 @@ function ProfileMenu() {
     const { user } = useSelector(state => state.mainRememberReducer)
     const adminNotification = useSelector(s => s.mainReducer.adminNotification)
     const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
-    const role = GetRole(userDetails)
+    const permissions = GetPermissions()
 
     let classes = useStyles();
     let avatar = userDetails?.profilePicture ? userDetails.profilePicture.url : PLACEHOLDER_PROFILE_IMAGE

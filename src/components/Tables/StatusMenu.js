@@ -22,9 +22,7 @@ const statsColors = {
 };
 
 const StatusMenu = (element) => {
-
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);

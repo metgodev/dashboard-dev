@@ -20,7 +20,7 @@ function Profile() {
 
     const { area, user } = useSelector(s => s.mainRememberReducer)
     const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     const dispatch = useDispatch()
     const classes = useStyles()

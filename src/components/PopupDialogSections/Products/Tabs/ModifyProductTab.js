@@ -19,8 +19,7 @@ function ModifyProductTab({ areaSpecificData, handleClose }) {
     let dispatch = useDispatch()
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((state) => state.mainRememberReducer);
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     const classes = useStyles()
 

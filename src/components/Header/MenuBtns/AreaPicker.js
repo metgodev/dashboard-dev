@@ -28,9 +28,7 @@ function AreaMenu() {
     let classes = useStyles();
 
     const areas = useGetService(BACK_ROUTES.AREA, CACHED_DATA_ROUTES.AREA)
-
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     useLayoutEffect(() => {
         (async () => {

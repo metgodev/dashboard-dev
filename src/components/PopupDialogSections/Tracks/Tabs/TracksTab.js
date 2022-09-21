@@ -23,8 +23,7 @@ export const TracksTab = ({ handleClose, type, areaSpecificData }) => {
 
     const [values, setValues] = useState({});
     const [orientation, setOrientation] = useState('ltr')
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     useEffect(() => {
         setValues(init)

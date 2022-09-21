@@ -27,8 +27,7 @@ const ModifyPointTab = ({ type, areaSpecificData, handleClose }) => {
     const [orientation, setOrientation] = useState('ltr')
 
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     useEffect(() => {
         setValues(init)

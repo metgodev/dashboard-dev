@@ -12,8 +12,7 @@ import GetPermissions from "./GetPermissions"
 function DragDrop({ uploadCategory, onRecieveFile }) {
 
     const classes = useStyles()
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     const getMaximumFileSize = useCallback(() => {
         switch (uploadCategory.type) {

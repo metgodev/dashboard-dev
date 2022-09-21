@@ -12,7 +12,7 @@ const GetRoutes = () => {
 
     const userDetails = useSelector(s => s.userReducer.userDetails)
     const user = useSelector(s => s.mainRememberReducer.user)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
 
     if (Object.keys(userDetails).length === 0) {
         return (

@@ -21,8 +21,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     //global
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((s) => s.mainRememberReducer);
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(userDetails)
+    const permissions = GetPermissions()
     const dispatch = useDispatch()
     //local
     const classes = useStyles()

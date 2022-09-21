@@ -34,9 +34,8 @@ const Sidebar = React.memo(({ location }) => {
     //global
     const { sidebar, mobile } = useSelector(s => s.mainReducer)
     const toggleSideBar = () => dispatch(set_sidebar_toggle(!sidebar))
-    const user = useSelector(s => s.userReducer.userDetails)
     const userDetails = useSelector(s => s.userReducer.userDetails)
-    const permissions = GetPermissions(user)
+    const permissions = GetPermissions()
 
     useEffect(() => {
         window.addEventListener(LISTENER.TYPES.RESIZE, handleWindowWidthChange);
