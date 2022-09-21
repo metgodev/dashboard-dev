@@ -54,12 +54,14 @@ function SignIn() {
             }
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
+                    window.localStorage.clear()
                     setError(res.error)
                     Toast(ERRORS.WRONG_DETAILS)
                 }
                 else if (res.roles.length < 2 || res.roles[1].roleName !== ROLES.BUSINESS_OWNER) {
+                    window.localStorage.clear()
                     setIsLoading(false)
-                    Toast(term('you_dont_have_permission'))
+                    Toast(term('you_are_not_a_business_owner'))
                 }
                 else {
                     let userDetails = {

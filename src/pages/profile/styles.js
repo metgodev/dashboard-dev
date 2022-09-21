@@ -7,7 +7,7 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'space-around',
         width: '100%',
-        height: '100vh',
+        height: '90vh',
     },
     pageTitleContainer: {
         position: 'absolute',
@@ -26,7 +26,7 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'start',
         flexDirection: 'column',
-        height: '60vh',
+        height: '80vh',
         width: '100%',
         gap: 50
     },

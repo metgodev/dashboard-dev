@@ -84,6 +84,11 @@ export const proccessCellToExport = (params) => {
 }
 
 export const exportToExcellFunction = (gridRef, display) => {
+    //Save the grid ref
+    //Get all entity data
+    //Set all data on grid ref
+    //export
+    //set gridref back to normal
     gridRef?.current?.api?.exportDataAsCsv({
         fileName: `${display} data`,
         processCellCallback: (params) => proccessCellToExport(params)

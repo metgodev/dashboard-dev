@@ -37,6 +37,11 @@ const active_lexicon = {
         he: 'סה"כ',
         ar: 'المجموع',
     },
+    event_calendar: {
+        en: 'Event calendar',
+        he: 'יומן אירועים',
+        ar: 'المجموع',
+    },
     go_to_products: {
         en: 'Go to products',
         he: 'עבור למוצרים',
@@ -1487,6 +1492,11 @@ const active_lexicon = {
         en: 'Area',
         he: 'אזור',
         ar: 'منطقة',
+    },
+    you_are_not_a_business_owner: {
+        en: 'You are not a business owner',
+        he: 'אינך בעל עסק',
+        ar: 'انت لست صاحب عمل',
     },
     manage_authority: {
         en: 'Manage authority',

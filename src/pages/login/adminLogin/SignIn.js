@@ -54,10 +54,12 @@ function SignIn() {
             }
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
+                    window.localStorage.clear()
                     setError(res.error)
                     Toast(ERRORS.WRONG_DETAILS)
                 }
                 else if ((res.roles.length < 2) || (res.roles[1].roleName !== ROLES.SUPER_ADMIN && res.roles[1].roleName !== ROLES.ADMIN && res.roles[1].roleName !== ROLES.VIEWER)) {
+                    window.localStorage.clear()
                     setIsLoading(false)
                     Toast(term('you_dont_have_permission'))
                 }
