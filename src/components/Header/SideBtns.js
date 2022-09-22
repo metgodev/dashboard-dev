@@ -1,5 +1,4 @@
 import React from "react";
-import GetPermissions from "../../hooks/GetPermissions";
 import AreaMenu from "./MenuBtns/AreaPicker";
 
 import LangMenu from "./MenuBtns/LangMenu";

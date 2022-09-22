@@ -164,5 +164,8 @@ export default makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer'
+  },
+  welcomeText: {
+    fontSize: '20px',
   }
 }));

@@ -7,7 +7,6 @@ import { set_app_data } from "../../../REDUX/actions/data.actions";
 // styles
 import useStyles from "../styles";
 // components
-import { Typography } from "../../Wrappers/Wrappers";
 //API
 import useGetService from "../../../hooks/useGetService";
 //Permissions
@@ -15,10 +14,13 @@ import GetPermissions from "../../../hooks/GetPermissions";
 //Data
 import BACK_ROUTES from "../../../data/back_routes";
 import CACHED_DATA_ROUTES from "../../../data/cached_data_routes";
+import term from "../../../terms";
+import { Typography } from "../../Wrappers/Wrappers";
 
 function AreaMenu() {
     //global 
     const { area: currentArea } = useSelector(s => s.mainRememberReducer)
+    const userDetails = useSelector(s => s.userReducer.userDetails)
     let dispatch = useDispatch();
     // local
     let [areaMenu, setAreaMenu] = useState(null);
@@ -57,7 +59,7 @@ function AreaMenu() {
 
     return (
         <>
-            {permissions?.navigationBar?.area &&
+            {permissions?.navigationBar?.area ?
                 <>
                     <IconButton
                         color="inherit"
@@ -94,7 +96,15 @@ function AreaMenu() {
                             </div>
                         </div>
                     </Menu>
-                </>}
+                </>
+                :
+                Object.keys(userDetails).length > 0 ?
+                    <p className={classes.welcomeText}>
+                        {`${term('welcome')} - ${userDetails.firstName ? userDetails.firstName : term('guest')}`}
+                    </p>
+                    :
+                    <></>
+            }
         </>
     )
 }

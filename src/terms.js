@@ -2379,6 +2379,11 @@ const active_lexicon = {
         he: 'שעה',
         ar: 'ساعة'
     },
+    guest: {
+        en: 'Guest',
+        he: 'אורח',
+        ar: 'زائر'
+    },
     verify_phone_number: {
         en: 'Verify phone number',
         he: 'וודא מספר טלפון',
