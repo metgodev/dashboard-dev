@@ -13,6 +13,7 @@ import BACK_ROUTES from '../../../../data/back_routes';
 import Toast from '../../../../utils/useToast';
 import term from '../../../../terms';
 import GetPermissions from '../../../../hooks/GetPermissions';
+import ENTITY_STATUS from '../../../../data/entity_status';
 
 function ModifyProductTab({ areaSpecificData, handleClose }) {
 
@@ -38,7 +39,7 @@ function ModifyProductTab({ areaSpecificData, handleClose }) {
         const valuesToSend = {
             areaId: area?.id?.toString(),
             userId: user.id,
-            status: "PENDING_APPROVAL",
+            status: ENTITY_STATUS.PENDING_APPROVAL,
             businessId: values.businessId,
             name: formValues.name,
             productIncludes: formValues.productIncludes,

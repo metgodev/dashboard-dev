@@ -104,7 +104,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
             return (
               <form onSubmit={handleSubmit} noValidate className={classes.form}>
                 <Grid container spacing={2} className={classes.gridContainer}>
-                  {fields.map(({ type, field, title, size, tooltip, }) => (
+                  {fields.map(({ type, field, title, size, tooltip, text }) => (
                     <Grid key={field} item xs={12} md={size === 'small' ? 3 : size === 'medium' ? 6 : 12} className={type === 'googleAutocomplete' ? '' : classes.item}>
                       {type === "textfield" && (
                         <Box>
@@ -159,7 +159,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                         <Checkbox field={field} title={title} />
                       )}
                       {type === "googleAutocomplete" && (
-                        <GoogleAutocomplete setFatherValue={setExternalValues} text={term('or_search_on_map')} />
+                        <GoogleAutocomplete setFatherValue={setExternalValues} text={text} />
                       )}
                       {type === "MapPicker" && (
                         <Map field={field} setExternalValues={setExternalValues} data={data} isLoaded={isLoaded} />

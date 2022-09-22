@@ -18,13 +18,13 @@ function Support() {
                 <h1 className={classes.h1}>{term('talk_to_us')}</h1>
                 <h2 className={classes.h2}>{term('we_are_here_for_every_question')}</h2>
                 <Box className={classes.email}>
-                    <p className={classes.text}>{INFO.METRO_EMAIL}</p>
+                    <a href={`mailto:${INFO.METRO_EMAIL}`} className={classes.text}>{INFO.METRO_EMAIL}</a>
                     <Box className={classes.mailIconContainer}>
                         <EmailIcon sx={{ color: 'white' }} />
                     </Box>
                 </Box>
                 <Box className={classes.phone}>
-                    <p className={classes.text}>{INFO.METRO_PHONE}</p>
+                    <a href={`https://api.whatsapp.com/send?phone=${INFO.METRO_PHONE_INTERNATIONAL}`} className={classes.text}>{INFO.METRO_PHONE}</a>
                     <Box className={classes.phoneIconContainer}>
                         <PhoneIphoneIcon sx={{ color: 'white' }} />
                     </Box>

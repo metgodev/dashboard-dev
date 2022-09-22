@@ -30,7 +30,9 @@ export default makeStyles(theme => ({
         marginTop: 0
     },
     text: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        color: 'black'
     },
     mailIconContainer: {
         width: '30px',

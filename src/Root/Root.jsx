@@ -18,6 +18,8 @@ import UseGetHeaderAndSideBar from './UseGetHeaderAndSideBar'
 //Navigation
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from '../data/routes';
+import getInternetStatus from '../utils/checkInternetStatus';
+import NetworkError from '../pages/networkError/NetworkError';
 
 const Root = () => {
 
@@ -47,8 +49,8 @@ const Root = () => {
         <Box className={classes.Router}>
             <Toaster position={'bottom-center'} />
             <Main >
-                {headerAndSideBar}
-                {routes}
+                {getInternetStatus() && headerAndSideBar}
+                {getInternetStatus() ? routes : <NetworkError />}
             </Main>
         </Box >
     );

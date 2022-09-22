@@ -16,6 +16,7 @@ import { set_copy_product_data } from '../../../../REDUX/actions/data.actions'
 import { GetValuesForForm } from '../../CategoryConfig'
 import { validateFirstProductTab, validateSecondProductTab } from './Validations'
 import Toast from '../../../../utils/useToast'
+import ENTITY_STATUS from '../../../../data/entity_status'
 
 function AddProductsTab({ areaSpecificData, type }) {
 
@@ -63,7 +64,7 @@ function AddProductsTab({ areaSpecificData, type }) {
             galleryFileIds: values?.galleryFileIds ? values?.galleryFileIds.map(item => ({ fileId: item.fileId, metadata: { type: 'image' } })) : [],
             areaId: area.id,
             businessId: init._id,
-            status: 'PENDING_APPROVAL'
+            status: ENTITY_STATUS.PENDING_APPROVAL
         }
         try {
             await client.service("products").create(valuesToSend)
