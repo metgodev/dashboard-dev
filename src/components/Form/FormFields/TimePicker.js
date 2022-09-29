@@ -3,7 +3,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { TimePicker } from 'mui-rff'
 
-function MyTimePicker({ title, field }) {
+function MyTimePicker({ title, field, disabled }) {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <TimePicker
@@ -11,6 +11,7 @@ function MyTimePicker({ title, field }) {
                 name={field}
                 closeOnSelect={true}
                 ampm={false}
+                disabled={disabled}
             />
         </LocalizationProvider>
     )

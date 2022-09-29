@@ -16,6 +16,7 @@ import ROLES from "../../../../data/roles";
 import { set_user_details } from "../../../../REDUX/actions/user.actions";
 import term from "../../../../terms";
 import GetPermissions from "../../../../hooks/GetPermissions";
+import BACK_ROUTES from "../../../../data/back_routes";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
@@ -85,16 +86,16 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
         try {
             if (permissions.edit) {
                 if (type === "add") {
-                    const userBusinessRole = await client.service('user-roles').find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
+                    const userBusinessRole = await client.service(BACK_ROUTES.USER_ROLES).find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
                     if (userBusinessRole.data.length === 1) {
                         const roleId = userBusinessRole.data[0]._id
-                        const businessRes = await client.service("business").create(valuesToSend)
-                        await client.service('user-roles').patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, businessRes._id] })
-                        const newUserDetails = await client.service('users').find({ query: { _id: user.id } })
+                        const businessRes = await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
+                        await client.service(BACK_ROUTES.USER_ROLES).patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, businessRes._id] })
+                        const newUserDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
                         dispatch(set_user_details(newUserDetails.data[0]))
                         dispatch(set_table_changed(type))
                     } else {
-                        await client.service("business").create(valuesToSend)
+                        await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
                         dispatch(set_table_changed(type))
                         Toast()
                     }

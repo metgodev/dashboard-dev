@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import useStyles from './styles'
 
-const DraggableListItem = ({ item, index }) => {
+const DraggableListItem = ({ item, index, disabled }) => {
 
     const classes = useStyles();
 
@@ -16,6 +16,7 @@ const DraggableListItem = ({ item, index }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     className={snapshot.isDragging ? classes.draggingListItem : classes.regularListItem}
+                    disabled={disabled}
                 >
                     <ListItemText primary={item?.name} />
                 </ListItem>

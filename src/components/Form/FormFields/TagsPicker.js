@@ -7,7 +7,7 @@ import ERRORS from '../../../data/errors'
 import Toast from '../../../utils/useToast'
 import Helper from './Helper';
 
-function TagsPicker({ title, field, options, values, setValues, tooltip }) {
+function TagsPicker({ title, field, options, values, setValues, tooltip, disabled }) {
 
     const handleRenderTags = (tagValue, getTagProps, y) => {
         return tagValue.map((option, index) => {
@@ -97,6 +97,7 @@ function TagsPicker({ title, field, options, values, setValues, tooltip }) {
             getOptionLabel={(option) => option.label}
             disableCloseOnSelect={true}
             renderOption={handleRenderOption}
+            disabled={disabled}
         />
     )
 }
