@@ -111,7 +111,7 @@ export default function Calendar({ type, warp, disableHelpers, events }) {
     return (
         <>
             {type === 1 &&
-                <Warp title={term('calendar')} uppertitle height={width > 500 ? '42vh' : '80vh'}>
+                <Warp title={term('calendar')} uppertitle height={width > 500 ? '370px' : '600px'}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
                         {events?.loading === false ?
                             <Box style={{ display: 'flex', flexDirection: width > 500 ? 'row' : 'column', width: '100%' }}>

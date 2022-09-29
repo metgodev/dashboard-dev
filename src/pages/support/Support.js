@@ -24,7 +24,7 @@ function Support() {
                     </Box>
                 </Box>
                 <Box className={classes.phone}>
-                    <a href={`https://api.whatsapp.com/send?phone=${INFO.METRO_PHONE_INTERNATIONAL}`} className={classes.text}>{INFO.METRO_PHONE}</a>
+                    <a target="_blank" href={`https://api.whatsapp.com/send?phone=${INFO.METRO_PHONE_INTERNATIONAL}`} className={classes.text}>{INFO.METRO_PHONE}</a>
                     <Box className={classes.phoneIconContainer}>
                         <PhoneIphoneIcon sx={{ color: 'white' }} />
                     </Box>

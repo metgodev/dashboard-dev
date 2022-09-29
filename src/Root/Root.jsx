@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 //Material UI
 import { Box } from '@material-ui/core';
 //Redux
@@ -33,16 +33,22 @@ const Root = () => {
     useLayoutEffect(() => {
         (async () => {
             try {
-                if (window.localStorage.getItem('metgo-jwt') === null) {
-                    dispatch(set_user_details({}))
-                    navigate(ROUTES.LOGIN)
-                }
                 const user = await reAuth()
-                dispatch(set_user_details(user))
+                if (user) {
+                    dispatch(set_user_details(user))
+                }
             } catch (e) {
                 console.log('root', e)
             }
         })()
+    }, [])
+
+    useEffect(() => {
+        if (window.localStorage.getItem('metgo-jwt') === null) {
+            window.localStorage.clear()
+            dispatch(set_user_details({}))
+            navigate(ROUTES.LOGIN)
+        }
     }, [])
 
     return (

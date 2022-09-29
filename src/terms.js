@@ -2384,6 +2384,11 @@ const active_lexicon = {
         he: 'אורח',
         ar: 'زائر'
     },
+    send_mail: {
+        en: 'Send mail',
+        he: 'שלח מייל',
+        ar: 'ارسل بريد'
+    },
     verify_phone_number: {
         en: 'Verify phone number',
         he: 'וודא מספר טלפון',

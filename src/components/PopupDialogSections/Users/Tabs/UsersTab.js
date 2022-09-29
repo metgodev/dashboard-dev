@@ -33,7 +33,7 @@ function UsersTab({ handleClose, type, areaSpecificData }) {
 
     const submit = async (formValues) => {
         try {
-            await client.service('users').patch(init._id, { email: formValues.email })
+            await client.service(BACK_ROUTES.USERS).patch(init._id, { email: formValues.email })
             if (formValues.roles.length !== 0) {
                 const currentUserRoles = await client.service(BACK_ROUTES.USER_ROLES).find({ query: { userId: init._id } })
                 currentUserRoles.data.forEach(role => {

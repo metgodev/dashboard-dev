@@ -178,6 +178,19 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           chosenImage={chosenImage}
                         />
                       )}
+                      {type === 'send_mail_button' && (
+                        <Button
+                          variant={"contained"}
+                          style={{ width: '100%', textAlign: 'center' }}
+                          onClick={() => {
+                            window.location.href =
+                              `mailto:${data.email}`
+                          }}
+                          disabled={data.email ? false : true}
+                        >
+                          {title}
+                        </Button>
+                      )}
                       {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && tagsPickerItems[field] && values && (
                         <DraggableListWithImages
                           IMAGE_PICKER_TITLE={IMAGE_PICKER_TITLE}

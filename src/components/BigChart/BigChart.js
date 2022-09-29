@@ -7,19 +7,16 @@ import useStyles from "./styles";
 import Widget from "../Widget/Widget";
 import BigChartHeader from "./BigChartHeader";
 import { lineChartData } from "./config";
-import useGetWindowSize from '../../hooks/useGetWindowSize'
 
 export default function BigChart() {
 
     let classes = useStyles();
     let theme = useTheme();
 
-    const { height, width } = useGetWindowSize()
-
     return (
-        <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'42vh'}>
+        <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'370px'}>
             <div style={{ direction: "ltr" }}>
-                <ResponsiveContainer width="100%" height={height / 3.2}>
+                <ResponsiveContainer height={300}>
                     <LineChart
                         width={500}
                         height={300}
