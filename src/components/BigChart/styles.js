@@ -12,6 +12,7 @@ export default makeStyles(theme => ({
         [theme.breakpoints.only("xs")]: {
             flexWrap: "wrap",
         },
+        marginBottom: '5px'
     },
     mainChartHeaderLabels: {
         display: "flex",

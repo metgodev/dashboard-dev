@@ -22,9 +22,9 @@ function BigChartHeader() {
                 color="text"
                 colorBrightness="secondary"
             >
-                {term('daily_line_chart')}
+                {term('weekly_line_chart')}
             </Typography>
-            <div className={classes.mainChartHeaderLabels}>
+            {/* <div className={classes.mainChartHeaderLabels}>
                 <div className={classes.mainChartHeaderLabel}>
                     <Dot color="warning" />
                     <Typography className={classes.mainChartLegentElement}>
@@ -43,8 +43,8 @@ function BigChartHeader() {
                         {term('desktop')}
                     </Typography>
                 </div>
-            </div>
-            <Select
+            </div> */}
+            {/* <Select
                 value={mainChartState}
                 onChange={e => setMainChartState(e.target.value)}
                 input={
@@ -61,7 +61,7 @@ function BigChartHeader() {
                 <MenuItem value={TIME_PERIODS.DAILY}>{term('daily')}</MenuItem>
                 <MenuItem value={TIME_PERIODS.WEEKLY}>{term('weekly')}</MenuItem>
                 <MenuItem value={TIME_PERIODS.MONTHLY}>{term('monthly')}</MenuItem>
-            </Select>
+            </Select> */}
         </div>
     )
 }

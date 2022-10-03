@@ -147,6 +147,16 @@ const active_lexicon = {
         he: 'תרשים יומי',
         ar: 'الرسم البياني الخطي اليومي',
     },
+    application_users: {
+        en: 'Application users',
+        he: 'משתמשים באפליקציה',
+        ar: 'مستخدمو التطبيق',
+    },
+    weekly_line_chart: {
+        en: 'Weekly line chart',
+        he: 'תרשים שבועי',
+        ar: 'مخطط خطي أسبوعي',
+    },
     tablet: {
         en: 'Tablet',
         he: 'טאבלט',

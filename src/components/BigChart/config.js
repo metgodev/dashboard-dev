@@ -1,44 +1,36 @@
-export const lineChartData = [
-    {
-        name: "יום ראשון",
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: "יום שני",
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: "יום שלישי",
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: "יום רביעי",
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: "יום חמישי",
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: "יום שישי",
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: "יום שבת",
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
+import term from "../../terms"
+
+export const getFormattedData = (users) => {
+    const formattedData = []
+    for (let i = 0; i < 7; i++) {
+        formattedData.push(
+            {
+                name: getDisplayName(users.data.xValues[i]),
+                pv: users.data.series[0][i],
+            }
+        )
+    }
+    return formattedData
+}
+
+const getDisplayName = (date) => {
+    const d = new Date(date)
+    switch (d.getDay()) {
+        case 0:
+            return term('sunday')
+        case 1:
+            return term('monday')
+        case 2:
+            return term('tuesday')
+        case 3:
+            return term('wednesday')
+        case 4:
+            return term('thursday')
+        case 5:
+            return term('friday')
+        case 6:
+            return term('saturday')
+        default:
+            return null
+    }
+}

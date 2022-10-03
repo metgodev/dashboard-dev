@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/styles";
 import { ResponsiveContainer, Line, YAxis, XAxis, Tooltip, CartesianGrid, LineChart, Legend } from "recharts";
 // styles
@@ -6,12 +6,22 @@ import useStyles from "./styles";
 // components
 import Widget from "../Widget/Widget";
 import BigChartHeader from "./BigChartHeader";
-import { lineChartData } from "./config";
+import { getFormattedData } from "./config";
+import { useEffect } from "react";
+import term from "../../terms";
 
-export default function BigChart() {
+export default function BigChart({ data }) {
 
     let classes = useStyles();
     let theme = useTheme();
+
+    const [activeUsersData, setActiveUsersData] = useState(null);
+
+    useEffect(() => {
+        if (data) {
+            setActiveUsersData(getFormattedData(data))
+        }
+    }, [data])
 
     return (
         <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'370px'}>
@@ -20,7 +30,7 @@ export default function BigChart() {
                     <LineChart
                         width={500}
                         height={300}
-                        data={lineChartData}
+                        data={activeUsersData}
                         margin={{
                             top: 5,
                             right: 30,
@@ -36,15 +46,9 @@ export default function BigChart() {
                         <Line
                             type="monotone"
                             dataKey="pv"
-                            name="צפיות"
+                            name={term('users')}
                             stroke={theme.palette.graphlineorange.main}
                             activeDot={{ r: 8 }}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="uv"
-                            name="משתמשים"
-                            stroke={theme.palette.graphlinegreen.main}
                         />
                     </LineChart>
                 </ResponsiveContainer>
@@ -52,4 +56,3 @@ export default function BigChart() {
         </Widget>
     )
 }
-
