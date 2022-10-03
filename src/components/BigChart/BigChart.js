@@ -29,13 +29,10 @@ export default function BigChart({ data }) {
             {activeUsersData ? <div style={{ direction: "ltr" }}>
                 <ResponsiveContainer height={300}>
                     <LineChart
-                        width={500}
-                        height={300}
                         data={activeUsersData}
                         margin={{
-                            top: 5,
+                            top: 10,
                             right: 30,
-                            left: 20,
                             bottom: 5,
                         }}
                     >
