@@ -19,6 +19,7 @@ import BACK_ROUTES from '../../data/back_routes';
 import CACHED_DATA_ROUTES from '../../data/cached_data_routes';
 import LISTENER from '../../data/listener';
 import Toast from '../../utils/useToast'
+import GetRole from '../../hooks/GetRole'
 //Service
 import { _get } from '../../API/service'
 import { CircularProgress } from '@mui/material';
@@ -28,6 +29,7 @@ const AGTable = ({ display, action, setExportToExcel, options }) => {
     const gridRef = useRef();
 
     const dispatch = useDispatch()
+    const role = GetRole()
 
     const tableChanged = useSelector(state => state.mainReducer.tableChanged)
     const area = useSelector(s => s.mainRememberReducer.area)
@@ -140,7 +142,7 @@ const AGTable = ({ display, action, setExportToExcel, options }) => {
     const onGridReady = useCallback(() => {
         if (gridRef.current.api !== undefined) {
             if (pageData.data.length > 0) {
-                let cols = Cols(pageData.data[0], ignore, display);
+                let cols = Cols(pageData.data[0], ignore, display, role);
                 let keys = Keys(cols, idOptions, display, onUpdate, options);
                 setColumnDefs(keys);
             }

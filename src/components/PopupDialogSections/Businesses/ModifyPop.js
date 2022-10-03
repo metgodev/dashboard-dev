@@ -33,8 +33,7 @@ const ModifyPop = ({ handleClose, type, open }) => {
     //Global
     const { area } = useSelector((state) => state.mainRememberReducer);
     const businessData = useSelector(s => s.mainReducer.editTabData)
-    const userDetails = useSelector(s => s.userReducer.userDetails)
-    const role = GetRole(userDetails)
+    const role = GetRole()
     //Local
     const [tab, setTab] = useState(0);
     const [picker, setPicker] = useState(Picker)

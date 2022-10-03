@@ -3,9 +3,13 @@ import term from '../../terms';
 import BACK_ROUTES from '../../data/back_routes';
 import ENTITY_STATUS from '../../data/entity_status';
 import ROLES from '../../data/roles';
-import client from '../../API/metro'
 
-export const Cols = (cols, ignore, display) => {
+export const Cols = (cols, ignore, display, role) => {
+    if (role === ROLES.VIEWER) {
+        return (
+            ['status', 'name', 'address', 'authority', 'description', 'shortDescription', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'youtubePageUrl', 'relevantTo', 'tags', 'currency', 'free', 'price',]
+        )
+    }
     if (display === BACK_ROUTES.USERS) {
         return (
             ['email', 'roles', 'createdAt', 'updatedAt']

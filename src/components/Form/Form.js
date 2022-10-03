@@ -23,6 +23,8 @@ import Toast from "../../utils/useToast";
 import ERRORS from "../../data/errors";
 import Helper from "./FormFields/Helper";
 import GetPermissions from "../../hooks/GetPermissions";
+import GetRole from "../../hooks/GetRole";
+import ROLES from "../../data/roles";
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -34,16 +36,19 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
   const { REACT_APP_GOOGLE_API_KEY } = process.env
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
   const permissions = GetPermissions()
+  const role = GetRole()
 
   const [resizableText, setResizableText] = useState("")
   const [times, setTimes] = useState({})
   const [chosenImage, setChosenImage] = useState(null)
   const [tagsPickerItems, setTagsPickerItems] = useState({})
+  const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     setResizableText(data.description)
     setTimes(data.openingHours)
     setChosenImage(data.coverImageFileId)
+    setDisabled(role === ROLES.VIEWER ? true : false)
     setTagsPickerItems(() => {
       return (
         {
@@ -222,7 +227,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                   orientation === 'rtl' ?
                     classes.submitButtonLeft : classes.submitButtonRight
                 }>
-                  <Button variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
+                  <Button disabled={disabled} variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
                 </Box>
               </form >
             )
