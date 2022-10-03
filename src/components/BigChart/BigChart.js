@@ -9,6 +9,7 @@ import BigChartHeader from "./BigChartHeader";
 import { getFormattedData } from "./config";
 import { useEffect } from "react";
 import term from "../../terms";
+import { CircularProgress } from "@material-ui/core";
 
 export default function BigChart({ data }) {
 
@@ -25,7 +26,7 @@ export default function BigChart({ data }) {
 
     return (
         <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'370px'}>
-            <div style={{ direction: "ltr" }}>
+            {activeUsersData ? <div style={{ direction: "ltr" }}>
                 <ResponsiveContainer height={300}>
                     <LineChart
                         width={500}
@@ -53,6 +54,11 @@ export default function BigChart({ data }) {
                     </LineChart>
                 </ResponsiveContainer>
             </div>
+                :
+                <div style={{ width: '100%', height: '30vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <CircularProgress />
+                </div>
+            }
         </Widget>
     )
 }
