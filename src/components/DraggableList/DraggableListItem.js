@@ -9,7 +9,7 @@ const DraggableListItem = ({ item, index, disabled }) => {
     const classes = useStyles();
 
     return (
-        <Draggable draggableId={item?.id} index={index}>
+        <Draggable draggableId={item?.id} index={index} isDragDisabled={disabled}>
             {(provided, snapshot) => (
                 <ListItem
                     ref={provided.innerRef}
