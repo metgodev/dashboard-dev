@@ -23,7 +23,7 @@ function UsersTable() {
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const { area } = useSelector(s => s.mainRememberReducer)
-    const { width, height } = getWindowSize();
+    const { width } = getWindowSize();
 
     const roles = useGetService(BACK_ROUTES.ROLES, CACHED_DATA_ROUTES.ROLES, { areaId: area.id }, area, false)
 

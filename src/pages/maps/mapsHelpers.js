@@ -35,6 +35,8 @@ export const sortDataByCategory = (data, setData) => {
             case "Lodging":
                 lodging.push({ location: item.location, icon: lodgingIcon, name: item.name, description: item.description })
                 break;
+            default:
+                break;
         }
     })
 

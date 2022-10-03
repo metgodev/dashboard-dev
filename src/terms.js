@@ -17,11 +17,6 @@ const active_lexicon = {
         he: 'לא',
         ar: 'رقم',
     },
-    yes: {
-        en: 'Yes',
-        he: 'כן',
-        ar: 'نعم',
-    },
     terms: {
         en: 'Terms and conditions',
         he: 'תקנון',
@@ -1563,11 +1558,6 @@ const active_lexicon = {
         he: 'מיקום',
         ar: 'الموقع',
     },
-    last_name: {
-        en: 'Last name',
-        he: 'שם משפחה',
-        ar: 'اللقب',
-    },
     first_name: {
         en: 'First name',
         he: 'שם פרטי',
@@ -1612,11 +1602,6 @@ const active_lexicon = {
         en: 'Images',
         he: 'תמונות',
         ar: 'الصور',
-    },
-    files: {
-        en: 'Files',
-        he: 'קבצים',
-        ar: 'الملفات',
     },
     videos: {
         en: 'Videos',
@@ -1867,11 +1852,6 @@ const active_lexicon = {
         en: 'Added this month',
         he: 'נוספו החודש',
         ar: 'أضيف هذا الشهر'
-    },
-    tracks: {
-        en: 'Tracks',
-        he: 'מסלולים',
-        ar: 'المسارات'
     },
     added_this_week: {
         en: 'Added this week',
@@ -2299,11 +2279,6 @@ const active_lexicon = {
         he: 'אנא הזן כתובת',
         ar: 'يرجى إدخال عنوان'
     },
-    hour: {
-        en: 'Hour',
-        he: 'שעה',
-        ar: 'ساعة'
-    },
     email_is_invalid_or_taken: {
         en: 'Email is invalid or taken',
         he: 'כתובת אימייל לא חוקית או תפוסה',
@@ -2383,11 +2358,6 @@ const active_lexicon = {
         en: 'Please choose one extra role per user',
         he: 'אנא בחר תפקיד אחד נוסף למשתמש',
         ar: 'الرجاء اختيار دور إضافي واحد لكل مستخدم'
-    },
-    hour: {
-        en: 'Hour',
-        he: 'שעה',
-        ar: 'ساعة'
     },
     guest: {
         en: 'Guest',
@@ -2528,11 +2498,6 @@ const active_lexicon = {
         en: 'Please enter the contact persons name',
         he: 'אנא הכנס את שם איש הקשר',
         ar: 'الرجاء إدخال اسم جهة الاتصال'
-    },
-    please_enter_a_valid_phone_number: {
-        en: 'Please enter a valid phone number',
-        he: 'אנא הכנס מספר חוקי',
-        ar: 'من فضلك أدخل رقما صالحا'
     },
     please_select_a_reservation_option: {
         en: 'Please select a reservation option',

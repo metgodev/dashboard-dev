@@ -4,6 +4,7 @@ import { Calendar } from 'react-native-big-calendar'
 import getWindowSize from '../../hooks/useGetWindowSize'
 import 'dayjs/locale/he'
 import { MOBILE_WIDTH } from '../../data/constants'
+
 function BigCalendar({ events }) {
 
     const { width, height } = getWindowSize()

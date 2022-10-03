@@ -24,9 +24,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const loginWithEmailAndPassword = async (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password).catch((error) => {
-    const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
-  });
+  return signInWithEmailAndPassword(auth, email, password)
 };
 
 const resetPassword = async (email) => {
@@ -40,9 +38,7 @@ const resetPassword = async (email) => {
 }
 
 const registerUserWithEmailAndPassword = async (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-    const errorCode = error.code.replace(/\//g, "_").replace(/-/g, "_");
-  });
+  return createUserWithEmailAndPassword(auth, email, password)
 };
 
 const loginWithPhoneNumber = (phoneNumber) => {

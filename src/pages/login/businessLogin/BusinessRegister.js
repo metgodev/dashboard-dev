@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, IconButton } from "@material-ui/core";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { CircularProgress, Typography, Button, TextField } from "@material-ui/core";
 import term from "../../../terms";
-import { Auth } from '../../../API/metro';
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../../REDUX/actions/main.actions';
 import { loginWithPhoneNumber } from '../../../API/firebase';
@@ -12,13 +9,12 @@ import { set_user_details } from '../../../REDUX/actions/user.actions'
 // styles
 import useStyles from "../styles";
 import LISTENER from '../../../data/listener';
-import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes';
+import { BUSINESS_OWNER_ROUTES } from '../../../data/routes';
 import Toast from '../../../utils/useToast';
 import ERRORS from '../../../data/errors';
 import ROLES from '../../../data/roles';
 import client from '../../../API/metro'
 import BACK_ROUTES from '../../../data/back_routes';
-import { RecaptchaVerifier } from 'firebase/auth';
 
 function Register() {
 
