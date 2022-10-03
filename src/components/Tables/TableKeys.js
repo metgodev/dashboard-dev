@@ -14,9 +14,25 @@ export const Cols = (cols, ignore, display, role) => {
         return (
             ['email', 'roles', 'createdAt', 'updatedAt']
         )
-    } else if (display === BACK_ROUTES.BUSINESS) {
+    }
+    else if (display === BACK_ROUTES.BUSINESS) {
         return (
             ['status', 'name', 'address', 'authority', 'isPremium', 'contactPersonName', 'contactPersonPhoneNumber', 'createdAt', 'description', 'emailAddress', 'facebookPageUrl', 'instagramPageUrl', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'phoneNumber', 'relevantTo', 'shortDescription', 'tags', 'updatedAt', 'websitesUrl', 'youtubePageUrl']
+        )
+    }
+    else if (display === BACK_ROUTES.EVENTS) {
+        return (
+            ['status', 'name', 'address', 'authority', 'createdAt', 'currency', 'description', 'endDate', 'free', 'locationName', 'online', 'onlineMeetingURL', 'openHour', 'price', 'registrationLink', 'relevantTo', 'reservationCenterEmail', 'reservationCenterPhone', 'shortDescription', 'startDate', 'tags', 'updatedAt', 'websitesUrl', 'shortDescription', 'tags', 'updatedAt', 'youtubePageUrl']
+        )
+    }
+    else if (display === BACK_ROUTES.POINTS) {
+        return (
+            ['status', 'name', 'activitiesInPlace', 'address', 'arrivalRecommendations', 'authority', 'createdAt', 'description', 'relevantTo', 'inPlace', 'isAccessable', 'locationName', 'phoneNumber', 'prefferedSeason', 'exclusiveFor', 'shady', 'shortDescription', 'tags', 'tip', 'updatedAt', 'websitesUrl']
+        )
+    }
+    else if (display === BACK_ROUTES.TRACKS) {
+        return (
+            ['status', 'name', 'createdAt', 'description', 'isHidden', 'isRecommended', 'shortDescription', 'time', 'updatedAt']
         )
     }
     return (
