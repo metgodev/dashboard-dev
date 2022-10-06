@@ -162,7 +162,9 @@ export const Keys = (cols, idOptions, display, onUpdate, options) => cols.map(ke
                 filter: 'agSetColumnFilter',
                 filterParams: {
                     values: [...options.roles.map(role => role._id)],
-                    valueFormatter: (params) => roleValueFormatter(params, options.roles)
+                    valueFormatter: (params) => {
+                        return roleValueFormatter(params, options.roles)
+                    }
                 }
             }
         case "startDate":
@@ -309,7 +311,4 @@ const statusValueFormatter = (params) => {
 
 const roleValueFormatter = (params, roles) => {
     return term(roles.find(role => role._id === params.value).name.toLowerCase())
-    // if (params.value === null) return
-    // const role = params.value
-    // return term(role.toLowerCase())
 }

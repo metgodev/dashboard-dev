@@ -5,7 +5,7 @@ export default makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
-        maxHeight: '250px',
+        maxHeight: '300px',
         width: '100%',
     },
     eventContainer: {
@@ -14,7 +14,10 @@ export default makeStyles(theme => ({
         margin: '0px 5px',
         color: 'rgba(0,0,0,0.8)',
         marginTop: '7px',
-        backgroundColor: 'rgba(0,0,0,0.03)'
+        backgroundColor: 'rgba(0,0,0,0.03)',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column'
     },
     eventsContainer: {
         overflowY: 'scroll',

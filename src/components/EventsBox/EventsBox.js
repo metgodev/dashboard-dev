@@ -10,9 +10,6 @@ function EventsBox({ events }) {
 
     return (
         <Box className={classes.container}>
-            <p className={classes.header}>
-                {term('events')}
-            </p>
             <Box className={classes.eventsContainer}>
                 <Box>
                     {events.length > 0 ?

@@ -268,10 +268,10 @@ export const SubmitBusiness = async (area, user, values, permissions, type, hand
         handleClose(false)
       }
       else {
-        await client.service("business").patch(values['_id'], valuesToSend)
+        await client.service(BACK_ROUTES.BUSINESS).patch(values._id, valuesToSend)
         handleClose(false)
       }
-      return ({ newUserDetails })
+      return (newUserDetails)
     }
     else {
       Toast(term('you_dont_have_permission'))

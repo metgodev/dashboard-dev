@@ -39,10 +39,10 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const handleSetValues = (init) => setValues(init);
 
     const submitValues = async () => {
-        const { newUserDetails } = await SubmitBusiness(area, user, values, permissions, type, handleClose)
+        const res = await SubmitBusiness(area, user, values, permissions, type, handleClose)
         dispatch(set_table_changed(type))
-        if (newUserDetails) {
-            dispatch(set_user_details(newUserDetails.data[0]))
+        if (res) {
+            dispatch(set_user_details(res.data[0]))
             Toast(term('business_use_new_business_text'), { position: 'top-center', style: { fontWeight: 'bold', fontSize: '16px' } })
         }
     }
