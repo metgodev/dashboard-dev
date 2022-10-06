@@ -12,6 +12,8 @@ import { GetValuesForForm } from "../../CategoryConfig";
 import GetPermissions from "../../../../hooks/GetPermissions";
 import { set_user_details } from "../../../../REDUX/actions/user.actions";
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
+import Toast from "../../../../utils/useToast";
+import term from "../../../../terms";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
@@ -29,7 +31,6 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const formData = GetValuesForForm(values, areaSpecificData.tagsIds)
 
     useEffect(() => {
-        console.log(init)
         handleSetValues(init)
         setStep(0)
         setOrientation(get_orientation(lang))
@@ -39,10 +40,11 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
 
     const submitValues = async () => {
         const { newUserDetails } = await SubmitBusiness(area, user, values, permissions, type, handleClose)
+        dispatch(set_table_changed(type))
         if (newUserDetails) {
             dispatch(set_user_details(newUserDetails.data[0]))
+            Toast(term('business_use_new_business_text'), { position: 'top-center', style: { fontWeight: 'bold', fontSize: '16px' } })
         }
-        dispatch(set_table_changed(type))
     }
 
     const handleValues = (formValues) => {

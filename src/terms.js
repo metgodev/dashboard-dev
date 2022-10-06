@@ -597,6 +597,11 @@ const active_lexicon = {
         he: 'ציבורי',
         ar: 'عام',
     },
+    business_use_new_business_text: {
+        en: 'The business has been registered, we will inform you when it is approved',
+        he: 'העסק נכנס למערכת, נודיע לך כאשר הוא יאושר',
+        ar: 'تم تسجيل العمل ، وسنبلغك عندما تتم الموافقة عليه',
+    },
     approve_content: {
         en: 'I approve email texts and whatsapp messages from MetroNegev',
         he: 'אני מאשר/ת קבלת דיוור, סמס והודעות וואטסאפ מחברת מטרונגב',

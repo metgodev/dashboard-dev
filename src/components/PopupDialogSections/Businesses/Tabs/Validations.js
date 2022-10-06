@@ -3,7 +3,6 @@ import { removeSpacesFromBeginingAndEndOfString } from '../../../../utils/string
 import { validateIsraelPhoneNumber } from '../../../../utils/validate_phone';
 const MAXIMUM_BUSINESS_NAME_LENGTH = 30
 const MAXIMUM_AMMOUNT_OF_WORDS_SHORT_DESCRIPTION = 4
-const MAXIMUM_AMMOUNT_OF_TAGS = 5
 
 export async function validateFirstFormPart(values) {
     if (!values.name) {
