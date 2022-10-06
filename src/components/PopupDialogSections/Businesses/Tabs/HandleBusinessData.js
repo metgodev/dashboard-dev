@@ -4,6 +4,10 @@ import term from "../../../../terms";
 import Form from '../../../Form/Form'
 import { UploadMediaTab } from "../../uploadMediaTab";
 import useStyles from './styles'
+import client from '../../../../API/metro'
+import BACK_ROUTES from "../../../../data/back_routes";
+import Toast from "../../../../utils/useToast";
+import ROLES from "../../../../data/roles";
 
 export const initialState = (area, user) => {
   return (
@@ -201,4 +205,79 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
   ]
 
   return forms
+}
+
+export const SubmitBusiness = async (area, user, values, permissions, type, handleClose) => {
+
+  const configurationValues = initialState(area, user)
+
+  const valuesToSend = {
+    name: values.name,
+    tagsIds: values.tags.map(tag => tag.value),
+    description: values.description,
+    authorityId: values.authorityId,
+    address: values.address,
+    locationName: values.locationName,
+    phoneNumber: values.phoneNumber,
+    contactPersonName: values.contactPersonName,
+    contactPersonPhoneNumber: values.contactPersonPhoneNumber,
+    websitesUrl: values.websitesUrl,
+    emailAddress: values.emailAddress,
+    relevantTo: values.relevantTo.map(value => value.value),
+    facebookPageUrl: values.facebookPageUrl,
+    instagramPageUrl: values.instagramPageUrl,
+    youtubePageUrl: values.youtubePageUrl,
+    openingHours: values.open24Hours ? {} : values.openingHours,
+    open24Hours: values.open24Hours,
+    openOnWeekend: values.openOnWeekend,
+    isKosher: values.isKosher,
+    isAccessable: values.isAccessable,
+    shortDescription: values.shortDescription,
+    areaId: configurationValues.areaId,
+    userId: configurationValues.userId,
+    status: configurationValues.status,
+    whatsAppPhoneNumber: values.whatsAppPhoneNumber,
+    locationInfo: {
+      type: "Point",
+      coordinates: values.locationInfo.coordinates
+    },
+    location: {
+      type: "Point",
+      coordinates: values.locationInfo.coordinates
+    },
+    reservations: values.reservations,
+    approveContent: values.approveContent,
+    isPremium: values.isPremium
+  }
+  try {
+    if (permissions.edit) {
+
+      let newUserDetails;
+
+      if (type === "add") {
+        const userBusinessRole = await client.service(BACK_ROUTES.USER_ROLES).find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
+        if (userBusinessRole.data.length === 1) {
+          const roleId = userBusinessRole.data[0]._id
+          const businessRes = await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
+          await client.service(BACK_ROUTES.USER_ROLES).patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, businessRes._id] })
+          newUserDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
+        } else {
+          await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
+          Toast()
+        }
+        handleClose(false)
+      }
+      else {
+        await client.service("business").patch(values['_id'], valuesToSend)
+        handleClose(false)
+      }
+      return ({ newUserDetails })
+    }
+    else {
+      Toast(term('you_dont_have_permission'))
+    }
+  } catch (e) {
+    console.log('modifyTab', e)
+    Toast()
+  }
 }

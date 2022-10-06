@@ -105,7 +105,7 @@ export const exportToExcellFunction = (gridRef, display) => {
 
 export const getSortingParams = (params) => {
     if (params === undefined || params?.sortModel?.length === 0) {
-        return { createdAt: -1 }
+        return { updatedAt: -1 }
     } else {
         switch (params?.sortModel[0].sort) {
             case 'asc':
