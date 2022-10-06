@@ -19,8 +19,6 @@ import useWindowSize from '../../hooks/useGetWindowSize';
 
 export default function Calendar({ type, warp, disableHelpers, events }) {
 
-    let classes = useStyles();
-
     const { lang } = useSelector(state => state.mainRememberReducer)
     const { height, width } = useWindowSize()
 
