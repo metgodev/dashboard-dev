@@ -597,6 +597,16 @@ const active_lexicon = {
         he: 'ציבורי',
         ar: 'عام',
     },
+    register: {
+        en: 'Register',
+        he: 'הרשם',
+        ar: 'تسجيل',
+    },
+    enter_phone_number_of_business_owner: {
+        en: 'Enter the phone number of the business owner',
+        he: 'אנא הכנס מספר נייד של בעל העסק',
+        ar: 'أدخل رقم هاتف صاحب العمل',
+    },
     business_use_new_business_text: {
         en: 'The business has been registered, we will inform you when it is approved',
         he: 'העסק נכנס למערכת, נודיע לך כאשר הוא יאושר',
@@ -2369,6 +2379,11 @@ const active_lexicon = {
         he: 'אורח',
         ar: 'زائر'
     },
+    please_enter_a_mobile_number_without_spaces_or_dashes: {
+        en: 'Please enter a mobile phone number with no dashes or spaces',
+        he: 'אנא הכנס מספר נייד בלי רווחים או מקפים',
+        ar: 'الرجاء إدخال رقم هاتف محمول بدون شرطات أو مسافات'
+    },
     send_mail: {
         en: 'Send mail',
         he: 'שלח מייל',
@@ -2521,7 +2536,7 @@ const active_lexicon = {
     },
     password_must_be_at_least_6_characters_long_helper: {
         en: 'The password must be at least 6 characters long',
-        he: 'הסיסמה חייבת להיות באורך של 6 תווים לפחות',
+        he: 'אנא הכנס סיסמא באורך 6 תווים לפחות',
         ar: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل'
     },
     registration_link_helper: {
