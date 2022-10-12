@@ -1,0 +1,7 @@
+steps:
+  - name: "metgo/install"
+    args: ["npm", "install"]
+  - name: "metgo/build"
+    args: ["npm", "run", "build:dev"]
+  - name: "metgo/deploy"
+    args: ["firebase", "deploy", "--token", "$_FIREBASE_TOKEN"]

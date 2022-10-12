@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "metro-travel-dev"
-  }
+    "default": "metro-travel-dev",
+    "development": "metgo-dev"
+  },
+  "targets": {}
 }
