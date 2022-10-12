@@ -5,6 +5,7 @@
   "dependencies": {
     "@ag-grid-community/client-side-row-model": "^27.3.0",
     "@date-io/date-fns": "^1.3.13",
+    "@emotion/styled": "^11.10.4",
     "@feathersjs/authentication-client": "^4.5.11",
     "@feathersjs/client": "^4.5.11",
     "@feathersjs/feathers": "^4.5.11",
