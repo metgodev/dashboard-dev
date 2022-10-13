@@ -7,7 +7,7 @@ import useStyles from "./styles";
 import SingleDayTime from './SingleDayTime';
 import ChangeAllDays from './ChangeAllDays';
 
-const TimePicker = ({ title, realData, setTimes }) => {
+const TimePicker = ({ title, realData, setTimes, disabled }) => {
 
     const [open, setOpen] = useState(false)
     const [data, setData] = useState({})
@@ -30,7 +30,11 @@ const TimePicker = ({ title, realData, setTimes }) => {
 
     return (
         <div>
-            <Button variant="outlined" sx={{ color: 'rgba(0,0,0,0.6)', borderColor: 'rgba(0,0,0,0.3)', height: '50px' }} onClick={() => setOpen(prev => !prev)} style={{ width: '100%' }}>
+            <Button disabled={disabled} variant="outlined" sx={{ color: 'rgba(0,0,0,0.6)', borderColor: 'rgba(0,0,0,0.3)', height: '50px' }} onClick={() => {
+                if (!disabled) {
+                    setOpen(prev => !prev)
+                }
+            }} style={{ width: '100%' }}>
                 {title}
                 {open ? <ExpandLess /> : <ExpandMore />}
             </Button>

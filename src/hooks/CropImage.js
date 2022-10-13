@@ -21,19 +21,13 @@ const CropImage = ({ src, onClick, style }) => {
         <div className={style}>
             <Cropper
                 style={{ width: '30%', margin: "auto", display: "block" }}
-                highlight={false}
-                zoomTo={0.5}
+                zoomTo={1}
                 src={src}
-                viewMode={1}
-                minCropBoxHeight={10}
-                minCropBoxWidth={10}
-                background={true}
-                responsive={true}
-                autoCropArea={1}
+                viewMode={0}
+                aspectRatio={16 / 9}
                 onInitialized={(instance) => {
                     setCropper(instance);
                 }}
-                guides={true}
             />
             <Button
                 style={{ width: 150, marginTop: '5px' }}

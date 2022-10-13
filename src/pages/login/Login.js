@@ -4,7 +4,7 @@ import { Grid, Typography, Tabs, Tab } from "@material-ui/core";
 import useStyles from "./styles";
 
 // logo
-import logo from "../../Assets/svgs/MTN.svg";
+import logo from "../../Assets/images/metroLogo.png";
 import Register from "./adminLogin/Register";
 import SignIn from "./adminLogin/SignIn";
 import term from "../../terms"

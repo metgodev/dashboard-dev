@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Typography, Button, TextField, Fade, InputAdornment, IconButton } from "@material-ui/core";
+import { CircularProgress, Typography, Button, TextField, InputAdornment, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // styles
@@ -28,7 +28,6 @@ function SignIn() {
     let dispatch = useDispatch();
     // local
     let [isLoading, setIsLoading] = useState(false);
-    let [error, setError] = useState(null);
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -55,7 +54,6 @@ function SignIn() {
             Auth(res.user.accessToken).then(res => {
                 if (res.error) {
                     window.localStorage.clear()
-                    setError(res.error)
                     Toast(ERRORS.WRONG_DETAILS)
                 }
                 else if ((res.roles.length < 2) || (res.roles[1].roleName !== ROLES.SUPER_ADMIN && res.roles[1].roleName !== ROLES.ADMIN && res.roles[1].roleName !== ROLES.VIEWER)) {
@@ -108,11 +106,6 @@ function SignIn() {
             <Typography variant="h1" className={classes.greeting}>
                 {term('met_go')}
             </Typography>
-            <Fade in={error}>
-                <Typography color="secondary" className={classes.errorMessage}>
-                    {term('something_went_wrong')}
-                </Typography>
-            </Fade>
             <TextField
                 variant="outlined"
                 id="email"

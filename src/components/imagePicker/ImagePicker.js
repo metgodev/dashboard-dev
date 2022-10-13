@@ -7,7 +7,7 @@ import useStyles from './styles'
 //Constants
 const NUMBER_OF_COLUMNS_IN_IMAGE_LIST = 4
 
-const ImagePicker = ({ title, data, setChosenImage, chosenImage }) => {
+const ImagePicker = ({ title, data, setChosenImage, chosenImage, disabled }) => {
 
     const classes = useStyles()
 
@@ -15,7 +15,7 @@ const ImagePicker = ({ title, data, setChosenImage, chosenImage }) => {
 
     return (
         <Box>
-            <Button variant="outlined" sx={{ marginBottom: '20px' }} className={classes.toggleButton} onClick={() => setOpen(prev => !prev)} style={{ width: '100%' }}>
+            <Button disabled={disabled} variant="outlined" sx={{ marginBottom: '20px' }} className={classes.toggleButton} onClick={() => setOpen(prev => !prev)} style={{ width: '100%' }}>
                 {title}
                 {open ? <ExpandLess /> : <ExpandMore />}
             </Button>

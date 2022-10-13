@@ -56,10 +56,16 @@ export default function MyImageList({ type, media, tab, setLoadingImage, id, set
                                         src={item.file.url}
                                         loading="lazy"
                                         className={classes.image}
+                                        disabled={!permissions.edit}
                                     />
                                 </a>
                                 <Box className={classes.deleteWrapper}>
-                                    <DeleteOutlineOutlinedIcon onClick={() => deleteItem({ item })} />
+                                    <DeleteOutlineOutlinedIcon onClick={() => {
+                                        if (permissions.edit) {
+                                            deleteItem({ item })
+                                        }
+                                    }}
+                                    />
                                 </Box>
                             </ImageListItem>
                         )

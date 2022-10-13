@@ -50,3 +50,14 @@ export const uploadImageToFirebase = async (formData, areaId) => {
         console.log(e)
     }
 }
+
+export const getApplicationActiveUsersByDate = async (startDate, endDate) => {
+    try {
+        const res = await axios.post(`https://us-central1-metro-travel-dev.cloudfunctions.net/amplitude-get-number-of-users-by-dates`, { startDate, endDate })
+        if (res && res.data) {
+            return res.data
+        }
+    } catch (e) {
+
+    }
+}

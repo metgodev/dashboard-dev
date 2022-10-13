@@ -22,6 +22,9 @@ import DraggableListWithImages from "./FormFields/DraggableListWithImages";
 import Toast from "../../utils/useToast";
 import ERRORS from "../../data/errors";
 import Helper from "./FormFields/Helper";
+import GetPermissions from "../../hooks/GetPermissions";
+import GetRole from "../../hooks/GetRole";
+import ROLES from "../../data/roles";
 
 //Constants
 const IMAGE_PICKER_TITLE = term('choose_a_theme_image')
@@ -32,16 +35,20 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
 
   const { REACT_APP_GOOGLE_API_KEY } = process.env
   const { isLoaded } = useJsApiLoader({ libraries: ["places"], id: 'google-map-script', googleMapsApiKey: REACT_APP_GOOGLE_API_KEY })
+  const permissions = GetPermissions()
+  const role = GetRole()
 
   const [resizableText, setResizableText] = useState("")
   const [times, setTimes] = useState({})
   const [chosenImage, setChosenImage] = useState(null)
   const [tagsPickerItems, setTagsPickerItems] = useState({})
+  const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     setResizableText(data.description)
     setTimes(data.openingHours)
     setChosenImage(data.coverImageFileId)
+    setDisabled(role === ROLES.VIEWER ? true : false)
     setTagsPickerItems(() => {
       return (
         {
@@ -109,11 +116,11 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                       {type === "textfield" && (
                         <Box>
                           {tooltip && <Helper tooltip={tooltip} />}
-                          <TextField label={title} name={field} tooltip={tooltip} />
+                          <TextField disabled={!permissions.edit} label={title} name={field} tooltip={tooltip} />
                         </Box>
                       )}
                       {type === "number" && (
-                        <TextField label={title} name={field} type={'number'} />
+                        <TextField disabled={!permissions.edit} label={title} name={field} type={'number'} />
                       )}
                       {type === 'divider' && (
                         <Divider />
@@ -127,13 +134,13 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                         <Text title={title} />
                       )}
                       {type === "picker" && (
-                        <Picker title={title} field={field} options={options} />
+                        <Picker disabled={!permissions.edit} title={title} field={field} options={options} />
                       )}
                       {type === 'datePicker' &&
-                        <DatePicker title={title} field={field} />
+                        <DatePicker disabled={!permissions.edit} title={title} field={field} />
                       }
                       {type === 'timePicker' &&
-                        <TimePicker title={title} field={field} />
+                        <TimePicker disabled={!permissions.edit} title={title} field={field} />
                       }
                       {type === "tagsPicker" && options[field].length > 0 && Boolean(Object.keys(tagsPickerItems).length) && tagsPickerItems[field].length > 0 && (
                         <TagsPicker
@@ -143,6 +150,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           values={tagsPickerItems[field]}
                           setValues={setTagsPickerItems}
                           tooltip={tooltip}
+                          disabled={!permissions.edit}
                         />
                       )}
                       {type === "tagsPicker" && options[field].length > 0 && Boolean(Object.keys(tagsPickerItems).length) && tagsPickerItems[field].length === 0 && (
@@ -153,22 +161,23 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           values={[]}
                           setValues={setTagsPickerItems}
                           tooltip={tooltip}
+                          disabled={!permissions.edit}
                         />
                       )}
                       {type === "checkbox" && (
-                        <Checkbox field={field} title={title} />
+                        <Checkbox field={field} title={title} disabled={!permissions.edit} />
                       )}
                       {type === "googleAutocomplete" && (
-                        <GoogleAutocomplete setFatherValue={setExternalValues} text={text} />
+                        <GoogleAutocomplete disabled={!permissions.edit} setFatherValue={setExternalValues} text={text} />
                       )}
                       {type === "MapPicker" && (
                         <Map field={field} setExternalValues={setExternalValues} data={data} isLoaded={isLoaded} />
                       )}
                       {type === 'timesPicker' && (
-                        <TimesPicker title={title} realData={times} setTimes={(newTimes) => { setTimes(newTimes) }} />
+                        <TimesPicker disabled={!permissions.edit} title={title} realData={times} setTimes={(newTimes) => { setTimes(newTimes) }} />
                       )}
                       {type === 'textAreaSizeable' && (
-                        <SizableText tooltip={tooltip} field={field} classes={classes} resizableText={resizableText} setResizableText={setResizableText} />
+                        <SizableText disabled={!permissions.edit} tooltip={tooltip} field={field} classes={classes} resizableText={resizableText} setResizableText={setResizableText} />
                       )}
                       {type === 'imagePicker' && (
                         <ImagePicker
@@ -176,7 +185,21 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           pictures={values[field]}
                           setChosenImage={setChosenImage}
                           chosenImage={chosenImage}
+                          disabled={!permissions.edit}
                         />
+                      )}
+                      {type === 'send_mail_button' && (
+                        <Button
+                          variant={"contained"}
+                          style={{ width: '100%', textAlign: 'center' }}
+                          onClick={() => {
+                            window.location.href =
+                              `mailto:${data.email}`
+                          }}
+                          disabled={data.email ? false : true}
+                        >
+                          {title}
+                        </Button>
                       )}
                       {type === 'draggableListWithPickerAndImages' && options[field].length > 0 && tagsPickerItems[field] && values && (
                         <DraggableListWithImages
@@ -188,6 +211,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                           setChosenImage={setChosenImage}
                           setItemsToSend={setTagsPickerItems}
                           itemsToSend={tagsPickerItems[field]}
+                          disabled={!permissions.edit}
                           valuesForPicker={tagsPickerItems[field].map(object => {
                             return (
                               { label: options[field].find(tag => tag.id === object)?.title, value: options[field].find(tag => tag.id === object)?._id }
@@ -203,7 +227,7 @@ const MyForm = React.memo(({ fields, data, options, submitFunction, validiationF
                   orientation === 'rtl' ?
                     classes.submitButtonLeft : classes.submitButtonRight
                 }>
-                  <Button variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
+                  <Button disabled={disabled} variant="contained" type="submit">{isPartOfStepper ? term('next') : term('submit')}</Button>
                 </Box>
               </form >
             )

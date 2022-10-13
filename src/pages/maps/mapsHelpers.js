@@ -5,7 +5,7 @@ import localIcon from '../../Assets/images/icons/local.png'
 import lodgingIcon from '../../Assets/images/icons/lodging.png'
 import travelIcon from '../../Assets/images/icons/travel.png'
 
-export const requestParams = { $limit: 1000, $select: ['_id', 'location', 'locationInfo', 'tags', 'tagsIds', 'createdAt', 'name', 'shortDescription'] }
+export const requestParams = { $limit: 1000, $select: ['status', 'shortDescription', 'price', 'locationName', 'openHour', 'startDate', '_id', 'location', 'locationInfo', 'tags', 'tagsIds', 'createdAt', 'name', 'shortDescription', 'gallery', 'galleryFileIds', 'authority'] }
 
 export const sortDataByCategory = (data, setData) => {
     let culture = []
@@ -34,6 +34,8 @@ export const sortDataByCategory = (data, setData) => {
                 break;
             case "Lodging":
                 lodging.push({ location: item.location, icon: lodgingIcon, name: item.name, description: item.description })
+                break;
+            default:
                 break;
         }
     })

@@ -9,7 +9,7 @@ import { apiOptions, textStyle } from "./config";
 
 const { REACT_APP_GOOGLE_API_KEY } = process.env
 
-const Component = ({ setFatherValue, text }) => {
+const Component = ({ setFatherValue, text, disabled }) => {
 
   const [value, setValue] = useState(null);
 
@@ -38,6 +38,7 @@ const Component = ({ setFatherValue, text }) => {
       <GooglePlacesAutocomplete
         apiKey={REACT_APP_GOOGLE_API_KEY}
         apiOptions={apiOptions}
+        disabled={disabled}
         selectProps={{
           onChange: setValue,
           styles: {

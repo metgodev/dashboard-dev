@@ -3,7 +3,7 @@ import { TextareaAutosize } from '@mui/material'
 import term from '../../../terms'
 import Helper from './Helper'
 
-function SizableText({ field, classes, resizableText, setResizableText, tooltip }) {
+function SizableText({ field, classes, resizableText, setResizableText, tooltip, disabled }) {
 
     return (
         <>
@@ -16,6 +16,7 @@ function SizableText({ field, classes, resizableText, setResizableText, tooltip 
                 value={resizableText}
                 minRows={3}
                 onChange={(e) => { setResizableText(e.target.value) }}
+                disabled={disabled}
             />
         </>
     )

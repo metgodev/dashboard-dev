@@ -17,11 +17,6 @@ const active_lexicon = {
         he: 'לא',
         ar: 'رقم',
     },
-    yes: {
-        en: 'Yes',
-        he: 'כן',
-        ar: 'نعم',
-    },
     terms: {
         en: 'Terms and conditions',
         he: 'תקנון',
@@ -146,6 +141,16 @@ const active_lexicon = {
         en: 'Daily Line Chart',
         he: 'תרשים יומי',
         ar: 'الرسم البياني الخطي اليومي',
+    },
+    application_users: {
+        en: 'Application users',
+        he: 'משתמשים באפליקציה',
+        ar: 'مستخدمو التطبيق',
+    },
+    weekly_line_chart: {
+        en: 'Weekly line chart',
+        he: 'תרשים שבועי',
+        ar: 'مخطط خطي أسبوعي',
     },
     tablet: {
         en: 'Tablet',
@@ -591,6 +596,21 @@ const active_lexicon = {
         en: 'public',
         he: 'ציבורי',
         ar: 'عام',
+    },
+    register: {
+        en: 'Register',
+        he: 'הרשם',
+        ar: 'تسجيل',
+    },
+    enter_phone_number_of_business_owner: {
+        en: 'Enter the phone number of the business owner',
+        he: 'אנא הכנס מספר נייד של בעל העסק',
+        ar: 'أدخل رقم هاتف صاحب العمل',
+    },
+    business_use_new_business_text: {
+        en: 'The business has been registered, we will inform you when it is approved',
+        he: 'העסק נכנס למערכת, נודיע לך כאשר הוא יאושר',
+        ar: 'تم تسجيل العمل ، وسنبلغك عندما تتم الموافقة عليه',
     },
     approve_content: {
         en: 'I approve email texts and whatsapp messages from MetroNegev',
@@ -1553,11 +1573,6 @@ const active_lexicon = {
         he: 'מיקום',
         ar: 'الموقع',
     },
-    last_name: {
-        en: 'Last name',
-        he: 'שם משפחה',
-        ar: 'اللقب',
-    },
     first_name: {
         en: 'First name',
         he: 'שם פרטי',
@@ -1602,11 +1617,6 @@ const active_lexicon = {
         en: 'Images',
         he: 'תמונות',
         ar: 'الصور',
-    },
-    files: {
-        en: 'Files',
-        he: 'קבצים',
-        ar: 'الملفات',
     },
     videos: {
         en: 'Videos',
@@ -1857,11 +1867,6 @@ const active_lexicon = {
         en: 'Added this month',
         he: 'נוספו החודש',
         ar: 'أضيف هذا الشهر'
-    },
-    tracks: {
-        en: 'Tracks',
-        he: 'מסלולים',
-        ar: 'المسارات'
     },
     added_this_week: {
         en: 'Added this week',
@@ -2289,11 +2294,6 @@ const active_lexicon = {
         he: 'אנא הזן כתובת',
         ar: 'يرجى إدخال عنوان'
     },
-    hour: {
-        en: 'Hour',
-        he: 'שעה',
-        ar: 'ساعة'
-    },
     email_is_invalid_or_taken: {
         en: 'Email is invalid or taken',
         he: 'כתובת אימייל לא חוקית או תפוסה',
@@ -2374,15 +2374,20 @@ const active_lexicon = {
         he: 'אנא בחר תפקיד אחד נוסף למשתמש',
         ar: 'الرجاء اختيار دور إضافي واحد لكل مستخدم'
     },
-    hour: {
-        en: 'Hour',
-        he: 'שעה',
-        ar: 'ساعة'
-    },
     guest: {
         en: 'Guest',
         he: 'אורח',
         ar: 'زائر'
+    },
+    please_enter_a_mobile_number_without_spaces_or_dashes: {
+        en: 'Please enter a mobile phone number with no dashes or spaces',
+        he: 'אנא הכנס מספר נייד בלי רווחים או מקפים',
+        ar: 'الرجاء إدخال رقم هاتف محمول بدون شرطات أو مسافات'
+    },
+    send_mail: {
+        en: 'Send mail',
+        he: 'שלח מייל',
+        ar: 'ارسل بريد'
     },
     verify_phone_number: {
         en: 'Verify phone number',
@@ -2514,11 +2519,6 @@ const active_lexicon = {
         he: 'אנא הכנס את שם איש הקשר',
         ar: 'الرجاء إدخال اسم جهة الاتصال'
     },
-    please_enter_a_valid_phone_number: {
-        en: 'Please enter a valid phone number',
-        he: 'אנא הכנס מספר חוקי',
-        ar: 'من فضلك أدخل رقما صالحا'
-    },
     please_select_a_reservation_option: {
         en: 'Please select a reservation option',
         he: 'אנא בחר אפשרות הזמנה',
@@ -2536,7 +2536,7 @@ const active_lexicon = {
     },
     password_must_be_at_least_6_characters_long_helper: {
         en: 'The password must be at least 6 characters long',
-        he: 'הסיסמה חייבת להיות באורך של 6 תווים לפחות',
+        he: 'אנא הכנס סיסמא באורך 6 תווים לפחות',
         ar: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل'
     },
     registration_link_helper: {

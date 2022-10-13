@@ -4,7 +4,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { reorder } from './helpers'
 import useStyles from './styles'
 
-const DraggableList = React.memo(({ names, setItemsToSend, itemsToSend }) => {
+const DraggableList = React.memo(({ names, setItemsToSend, itemsToSend, disabled }) => {
 
     const classes = useStyles()
 
@@ -26,6 +26,7 @@ const DraggableList = React.memo(({ names, setItemsToSend, itemsToSend }) => {
                                         item={names.filter(fullItem => fullItem.id === item)[0]}
                                         index={index}
                                         key={item}
+                                        disabled={disabled}
                                     />
                                 )
                             )

@@ -3,9 +3,9 @@ import { MenuItem } from '@mui/material'
 import { Select } from 'mui-rff'
 import term from '../../../terms'
 
-function Picker({ title, field, options }) {
+function Picker({ title, field, options, disabled }) {
     return (
-        <Select label={title} name={field} required={true}>
+        <Select disabled={disabled} label={title} name={field} required={true}>
             {options && options[field].map((item) => (
                 <MenuItem key={item.value} value={item.value}>{term(item.name)}</MenuItem>
             ))}

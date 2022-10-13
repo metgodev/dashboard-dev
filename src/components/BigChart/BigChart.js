@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/styles";
 import { ResponsiveContainer, Line, YAxis, XAxis, Tooltip, CartesianGrid, LineChart, Legend } from "recharts";
 // styles
@@ -6,28 +6,33 @@ import useStyles from "./styles";
 // components
 import Widget from "../Widget/Widget";
 import BigChartHeader from "./BigChartHeader";
-import { lineChartData } from "./config";
-import useGetWindowSize from '../../hooks/useGetWindowSize'
+import { getFormattedData } from "./config";
+import { useEffect } from "react";
+import term from "../../terms";
+import { CircularProgress } from "@material-ui/core";
 
-export default function BigChart() {
+export default function BigChart({ data }) {
 
     let classes = useStyles();
     let theme = useTheme();
 
-    const { height, width } = useGetWindowSize()
+    const [activeUsersData, setActiveUsersData] = useState(null);
+
+    useEffect(() => {
+        if (data) {
+            setActiveUsersData(getFormattedData(data))
+        }
+    }, [data])
 
     return (
-        <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'42vh'}>
-            <div style={{ direction: "ltr" }}>
-                <ResponsiveContainer width="100%" height={height / 3.2}>
+        <Widget bodyClass={classes.mainChartBody} header={<BigChartHeader />} height={'370px'}>
+            {activeUsersData ? <div style={{ direction: "ltr" }}>
+                <ResponsiveContainer height={300}>
                     <LineChart
-                        width={500}
-                        height={300}
-                        data={lineChartData}
+                        data={activeUsersData}
                         margin={{
-                            top: 5,
+                            top: 10,
                             right: 30,
-                            left: 20,
                             bottom: 5,
                         }}
                     >
@@ -39,20 +44,18 @@ export default function BigChart() {
                         <Line
                             type="monotone"
                             dataKey="pv"
-                            name="צפיות"
+                            name={term('users')}
                             stroke={theme.palette.graphlineorange.main}
                             activeDot={{ r: 8 }}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="uv"
-                            name="משתמשים"
-                            stroke={theme.palette.graphlinegreen.main}
                         />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
+                :
+                <div style={{ width: '100%', height: '30vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <CircularProgress />
+                </div>
+            }
         </Widget>
     )
 }
-

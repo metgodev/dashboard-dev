@@ -48,6 +48,14 @@ export const proccessCellToExport = (params) => {
                 return ''
             }
             return params.value ? term(params?.value?.toLowerCase()) : ''
+        case 'roles':
+            let roles = ''
+            if (params.value) {
+                for (let i = 0; i < params.value.length; i++) {
+                    roles = roles + ` ${term(params.value[i].roleName.toLowerCase())}`
+                }
+            }
+            return roles
         case 'authority':
             return params.value.name
         case "contactPersonPhoneNumber":
@@ -97,7 +105,7 @@ export const exportToExcellFunction = (gridRef, display) => {
 
 export const getSortingParams = (params) => {
     if (params === undefined || params?.sortModel?.length === 0) {
-        return { createdAt: -1 }
+        return { updatedAt: -1 }
     } else {
         switch (params?.sortModel[0].sort) {
             case 'asc':

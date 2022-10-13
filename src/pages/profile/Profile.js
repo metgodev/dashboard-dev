@@ -78,7 +78,7 @@ function Profile() {
                         return
                     } else {
                         setLoading(true)
-                        const res = await _patch(BACK_ROUTES.USERS, userDetails._id, { email: email, firstName: firstName, lastName: lastName })
+                        await _patch(BACK_ROUTES.USERS, userDetails._id, { email: email, firstName: firstName, lastName: lastName })
                         setLoading(false)
                     }
                 }

@@ -13,7 +13,7 @@ import Download from "../../components/Download/Download";
 //Service
 import useGetService from '../../hooks/useGetService'
 //Helper
-import { headerBtns, requestParams } from "./dashboardHelpers";
+import { getWeeklyActiveUsers, headerBtns, requestParams } from "./dashboardHelpers";
 import { sortDataForMap } from "../maps/mapsHelpers";
 import BACK_ROUTES from '../../data/back_routes'
 import CACHED_DATA_ROUTES from '../../data/cached_data_routes'
@@ -36,13 +36,13 @@ export default function Dashboard() {
   })
 
   const [tagCategoriesData, setTagCategoriesData] = useState(null)
-  const { height, width } = useGetWindowSize()
+  const [users, setUsers] = useState(null)
+  const { width } = useGetWindowSize()
 
   const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.DASH_MAP_BUSINESSES, requestParams)
   const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.DASH_MAP_EVENTS, requestParams)
   const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.DASH_MAP_POINTS, requestParams)
   const tracks = useGetService(BACK_ROUTES.TRACKS, CACHED_DATA_ROUTES.DASH_MAP_TRACKS, requestParams)
-  const products = useGetService(BACK_ROUTES.PRODUCTS, CACHED_DATA_ROUTES.PRODUCTS_MAP_TRACKS, requestParams)
 
   useEffect(() => {
     if (!businesses.loading && !events.loading && !points.loading && !tracks.loading) {
@@ -51,19 +51,28 @@ export default function Dashboard() {
     }
   }, [businesses, events, points, tracks])
 
+  useEffect(() => {
+    (async () => {
+      const getUsers = await getWeeklyActiveUsers()
+      if (getUsers && getUsers.data) {
+        setUsers(getUsers)
+      }
+    })()
+  }, [])
+
   return (
     <Box style={{ width: '100%', height: 'calc(100% - 70px)', display: 'flex', flexDirection: 'column' }}>
       {permissions?.adminNotification &&
         <AdminNotifications open={adminNotification} />
       }
-      <PageTitle calendar title={term('dashboard')} buttonGroup={{ btns: headerBtns }} />
+      <PageTitle title={term('dashboard')} />
       <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', gap: 5, height: '100%' }}>
         <Grid spacing={1} container style={{ display: 'flex', flexDirection: 'row', justifyContent: width > 1280 ? 'space-between' : 'center', width: '100%' }}>
           <Grid item style={{ width: '50%' }} xs={12} lg={6}>
             <Calendar events={events} type={1} warp={true} />
           </Grid>
           <Grid item style={{ width: '50%' }} xs={12} lg={6}>
-            <BigChart />
+            <BigChart data={users} />
           </Grid>
         </Grid>
         <Grid container spacing={1}>

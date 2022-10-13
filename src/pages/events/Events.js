@@ -23,7 +23,7 @@ function Events() {
     const [exportToExcel, setExportToExcel] = useState(() => { })
 
     const dispatch = useDispatch();
-    const { width, height } = getWindowSize();
+    const { width } = getWindowSize();
 
     const openDialog = (data) => {
         if (data) {

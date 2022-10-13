@@ -18,7 +18,6 @@ import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes'
 import { set_admin_notification } from "../../../REDUX/actions/main.actions";
 import AdminNotifications from "../../AdminNotifications/AdminNotifications";
 import GetPermissions from "../../../hooks/GetPermissions";
-import GetRole from "../../../hooks/GetRole";
 import { PLACEHOLDER_PROFILE_IMAGE } from '../../../data/constants'
 
 function ProfileMenu() {

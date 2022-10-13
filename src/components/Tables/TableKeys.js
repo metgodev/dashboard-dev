@@ -3,16 +3,36 @@ import term from '../../terms';
 import BACK_ROUTES from '../../data/back_routes';
 import ENTITY_STATUS from '../../data/entity_status';
 import ROLES from '../../data/roles';
-import client from '../../API/metro'
 
-export const Cols = (cols, ignore, display) => {
+export const Cols = (cols, ignore, display, role) => {
+    if (role === ROLES.VIEWER) {
+        return (
+            ['status', 'name', 'address', 'authority', 'description', 'shortDescription', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'youtubePageUrl', 'relevantTo', 'tags', 'currency', 'free', 'price',]
+        )
+    }
     if (display === BACK_ROUTES.USERS) {
         return (
             ['email', 'roles', 'createdAt', 'updatedAt']
         )
-    } else if (display === BACK_ROUTES.BUSINESS) {
+    }
+    else if (display === BACK_ROUTES.BUSINESS) {
         return (
             ['status', 'name', 'address', 'authority', 'isPremium', 'contactPersonName', 'contactPersonPhoneNumber', 'createdAt', 'description', 'emailAddress', 'facebookPageUrl', 'instagramPageUrl', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'phoneNumber', 'relevantTo', 'shortDescription', 'tags', 'updatedAt', 'websitesUrl', 'youtubePageUrl']
+        )
+    }
+    else if (display === BACK_ROUTES.EVENTS) {
+        return (
+            ['status', 'name', 'address', 'authority', 'createdAt', 'currency', 'description', 'endDate', 'free', 'locationName', 'online', 'onlineMeetingURL', 'openHour', 'price', 'registrationLink', 'relevantTo', 'reservationCenterEmail', 'reservationCenterPhone', 'shortDescription', 'startDate', 'tags', 'updatedAt', 'websitesUrl', 'shortDescription', 'tags', 'updatedAt', 'youtubePageUrl']
+        )
+    }
+    else if (display === BACK_ROUTES.POINTS) {
+        return (
+            ['status', 'name', 'activitiesInPlace', 'address', 'arrivalRecommendations', 'authority', 'createdAt', 'description', 'relevantTo', 'inPlace', 'isAccessable', 'locationName', 'phoneNumber', 'prefferedSeason', 'exclusiveFor', 'shady', 'shortDescription', 'tags', 'tip', 'updatedAt', 'websitesUrl']
+        )
+    }
+    else if (display === BACK_ROUTES.TRACKS) {
+        return (
+            ['status', 'name', 'createdAt', 'description', 'isHidden', 'isRecommended', 'shortDescription', 'time', 'updatedAt']
         )
     }
     return (
@@ -142,7 +162,9 @@ export const Keys = (cols, idOptions, display, onUpdate, options) => cols.map(ke
                 filter: 'agSetColumnFilter',
                 filterParams: {
                     values: [...options.roles.map(role => role._id)],
-                    valueFormatter: (params) => roleValueFormatter(params, options.roles)
+                    valueFormatter: (params) => {
+                        return roleValueFormatter(params, options.roles)
+                    }
                 }
             }
         case "startDate":
@@ -289,7 +311,4 @@ const statusValueFormatter = (params) => {
 
 const roleValueFormatter = (params, roles) => {
     return term(roles.find(role => role._id === params.value).name.toLowerCase())
-    // if (params.value === null) return
-    // const role = params.value
-    // return term(role.toLowerCase())
 }

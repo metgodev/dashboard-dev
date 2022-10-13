@@ -7,14 +7,14 @@ import ERRORS from '../../../data/errors'
 import Toast from '../../../utils/useToast'
 import Helper from './Helper';
 
-function TagsPicker({ title, field, options, values, setValues, tooltip }) {
+function TagsPicker({ title, field, options, values, setValues, tooltip, disabled }) {
 
     const handleRenderTags = (tagValue, getTagProps, y) => {
         return tagValue.map((option, index) => {
             return (
                 <Chip
                     style={{
-                        border: index === 0 ? `2px solid #01A1FC` : `1px solid grey`,
+                        border: index === 0 && field === 'tags' ? `2px solid #01A1FC` : `1px solid grey`,
                         padding: '10px',
                         backgroundColor: GetTagColor(option.category),
                     }}
@@ -97,6 +97,7 @@ function TagsPicker({ title, field, options, values, setValues, tooltip }) {
             getOptionLabel={(option) => option.label}
             disableCloseOnSelect={true}
             renderOption={handleRenderOption}
+            disabled={disabled}
         />
     )
 }
