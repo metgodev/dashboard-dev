@@ -21,7 +21,7 @@ function AdminNotifications({ open }) {
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { width, height } = getWindowSize()
+    const { width } = getWindowSize()
 
     const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.NOTIFICATION_BUSINESSES, requestParams)
     const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.NOTIFICATION_EVENTS, requestParams)

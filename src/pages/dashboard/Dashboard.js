@@ -37,13 +37,12 @@ export default function Dashboard() {
 
   const [tagCategoriesData, setTagCategoriesData] = useState(null)
   const [users, setUsers] = useState(null)
-  const { height, width } = useGetWindowSize()
+  const { width } = useGetWindowSize()
 
   const businesses = useGetService(BACK_ROUTES.BUSINESS, CACHED_DATA_ROUTES.DASH_MAP_BUSINESSES, requestParams)
   const events = useGetService(BACK_ROUTES.EVENTS, CACHED_DATA_ROUTES.DASH_MAP_EVENTS, requestParams)
   const points = useGetService(BACK_ROUTES.POINTS, CACHED_DATA_ROUTES.DASH_MAP_POINTS, requestParams)
   const tracks = useGetService(BACK_ROUTES.TRACKS, CACHED_DATA_ROUTES.DASH_MAP_TRACKS, requestParams)
-  const products = useGetService(BACK_ROUTES.PRODUCTS, CACHED_DATA_ROUTES.PRODUCTS_MAP_TRACKS, requestParams)
 
   useEffect(() => {
     if (!businesses.loading && !events.loading && !points.loading && !tracks.loading) {

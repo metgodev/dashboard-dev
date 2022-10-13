@@ -59,10 +59,11 @@ function Register() {
         try {
             const register = await registerUserWithEmailAndPassword(email, password)
             if (!register) {
-                Toast(ERRORS.INVALID_EMAIL)
+                Toast()
                 setIsLoading(false);
                 return
-            } else {
+            }
+            else {
                 const authenticate = await Auth(register.user.accessToken)
                 if (authenticate.error) {
                     setIsLoading(false);
@@ -76,7 +77,11 @@ function Register() {
                 }
             }
         } catch (e) {
-            Toast()
+            if (e.code === 'auth/email-already-in-use') {
+                Toast(term('email_is_invalid_or_taken'))
+            } else {
+                Toast()
+            }
             setIsLoading(false);
         }
     }

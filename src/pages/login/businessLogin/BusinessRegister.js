@@ -97,6 +97,7 @@ function Register() {
                             id: authenticate._id
                         }
                         await client.service(BACK_ROUTES.USER_ROLES).create({ userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID })
+                        await client.service(BACK_ROUTES.USERS).patch(user.id, { phoneNumber: phoneNumber })
                         const userDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
                         dispatch(set_user(user));
                         dispatch(set_user_details(userDetails.data[0]))
