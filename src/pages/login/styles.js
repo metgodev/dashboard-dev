@@ -147,4 +147,21 @@ export default makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  loginChoceButtonsContainer: {
+    display: 'flex',
+    gap: 5
+  },
+  loginChoiceContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '90vh'
+  },
+  loginChoiceGraphicsContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  }
 }));
