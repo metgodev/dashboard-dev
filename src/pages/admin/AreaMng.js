@@ -37,7 +37,7 @@ function AreaMng() {
 
     return (
         <Box>
-            <PageTitle title={term('authorities')} />
+            <PageTitle title={term('area')} />
             {width > MOBILE_WIDTH && <AGTable display={BACK_ROUTES.AREA} action={openDialog} />}
             {width <= MOBILE_WIDTH && <MobileTable display={BACK_ROUTES.AREA} action={openDialog} />}
             <PopupDialog open={areaOpen} setOpen={setAreaOpen} type={dialogType} title={term('area')} tabs={MODAL_TYPES.AREA} maxWidth={'sm'} />

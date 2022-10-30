@@ -30,10 +30,10 @@ function Login() {
             centered
           >
             <Tab label={term("log_in")} classes={{ root: classes.tab }} />
-            <Tab label={term("sign_up")} classes={{ root: classes.tab }} />
+            {!currentHref.split('/').includes('business') && <Tab label={term("sign_up")} classes={{ root: classes.tab }} />}
           </Tabs>
-          {activeTabId === 0 && (currentHref.split('/').includes('business') ? <BusinessLogin /> : <SignIn />)}
-          {activeTabId === 1 && (currentHref.split('/').includes('business') ? <BusinessRegister /> : <Register />)}
+          {activeTabId === 0 && (currentHref.split('/').includes('business')) ? <BusinessRegister /> : <SignIn />}
+          {activeTabId === 1 && <Register />}
         </div>
       </div>
       <div className={classes.logotypeContainer}>

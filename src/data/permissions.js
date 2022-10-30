@@ -1,11 +1,11 @@
 const PERMISSIONS = {
     METRO_MEMBER: {
         main: true,
-        dashboard: true,
+        dashboard: false,
         verification: true,
-        business: false,
+        business: true,
         events: false,
-        locations: true,
+        locations: false,
         routes: false,
         vouchers: true,
         users: true,
@@ -26,8 +26,8 @@ const PERMISSIONS = {
         status_change: false,
         adminNotification: false,
         profile: true,
-        edit: false,
-        area: false
+        edit: true,
+        area: false,
     },
     METRO_AREA_OWNER: {
         role: 'metro area owner'
@@ -37,7 +37,7 @@ const PERMISSIONS = {
     },
     METRO_BUSINESS_OWNER: {
         main: true,
-        dashboard: true,
+        dashboard: false,
         verification: false,
         business: true,
         events: true,

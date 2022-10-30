@@ -218,7 +218,7 @@ export default function Calendar({ type, warp, disableHelpers, events }) {
         <Warp
           title={term("calendar")}
           uppertitle
-          height={width > 500 ? "42vh" : "80vh"}
+          height={width > 500 ? "49vh" : "80vh"}
         >
           <Box
             sx={{

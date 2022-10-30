@@ -1,6 +1,11 @@
+import ROLES from "../../data/roles";
+
 const DATA_LIMIT = 1
 
-export const requestParams = (area) => {
+export const requestParams = (area, userDetails) => {
+    if (userDetails.roles.length === 2 && userDetails.roles[1].roleName === ROLES.BUSINESS_OWNER) {
+        return { $limit: DATA_LIMIT }
+    }
     return (
         { areaId: area.id.toString(), $limit: DATA_LIMIT }
     )

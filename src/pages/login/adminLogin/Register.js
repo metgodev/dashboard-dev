@@ -71,7 +71,7 @@ function Register() {
                     const userDetails = await client.service(BACK_ROUTES.USERS).patch(authenticate._id, { firstName: firstName, lastName: lastName })
                     let user = { e: authenticate.email, v: authenticate.isVerified, id: authenticate._id }
                     dispatch(set_user(user));
-                    dispatch(set_user_details(userDetails.data[0]))
+                    dispatch(set_user_details(userDetails.data))
                     navigate(ROUTES.DASHBOARD)
                     setIsLoading(false);
                 }

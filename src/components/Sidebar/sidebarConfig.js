@@ -79,7 +79,7 @@ const businessOwnerLinks = [
 
 export const getLink = (user) => {
     if (user.roles.length === 1) {
-        return adminLinks
+        return businessOwnerLinks
     }
     else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.BUSINESS_OWNER) {
         return businessOwnerLinks

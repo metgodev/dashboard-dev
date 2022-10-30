@@ -19,6 +19,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     //global
     const init = useSelector((s) => s.mainReducer.editTabData);
     const { area, user, lang } = useSelector((s) => s.mainRememberReducer);
+    const userDetails = useSelector(s => s.userReducer.userDetails)
     const permissions = GetPermissions()
     const dispatch = useDispatch()
     //local
@@ -41,9 +42,8 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const submitValues = async () => {
         const res = await SubmitBusiness(area, user, values, permissions, type, handleClose)
         dispatch(set_table_changed(type))
-        if (res) {
-            dispatch(set_user_details(res.data[0]))
-            Toast(term('business_use_new_business_text'), { position: 'top-center', style: { fontWeight: 'bold', fontSize: '16px' } })
+        if (userDetails.roles.length === 1) {
+            window.location.reload()
         }
     }
 

@@ -24,6 +24,9 @@ const GetPermissions = () => {
             else if (user.roles.length === 2 && user.roles[1].roleName === ROLES.VIEWER) {
                 setPermissions(PERMISSIONS.METRO_VIEWER)
             }
+            else {
+                setPermissions(PERMISSIONS.METRO_MEMBER)
+            }
         } else {
             setPermissions(PERMISSIONS.METRO_MEMBER)
         }

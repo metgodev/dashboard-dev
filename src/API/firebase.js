@@ -41,7 +41,7 @@ const registerUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password)
 };
 
-const loginWithPhoneNumber = (phoneNumber) => {
+const loginWithPhoneNumber = async (phoneNumber) => {
   window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', { 'size': 'invisible', }, auth);
   const rever = window.recaptchaVerifier
   return signInWithPhoneNumber(auth, phoneNumber, rever);

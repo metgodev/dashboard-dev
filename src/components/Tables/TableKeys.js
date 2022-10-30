@@ -1,4 +1,5 @@
 import StatusMenu from './StatusMenu';
+import ImpactValue from './ImpactValue'
 import term from '../../terms';
 import BACK_ROUTES from '../../data/back_routes';
 import ENTITY_STATUS from '../../data/entity_status';
@@ -7,7 +8,7 @@ import ROLES from '../../data/roles';
 export const Cols = (cols, ignore, display, role) => {
     if (role === ROLES.VIEWER) {
         return (
-            ['status', 'name', 'address', 'authority', 'description', 'shortDescription', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'youtubePageUrl', 'relevantTo', 'tags', 'currency', 'free', 'price',]
+            ['name', 'address', 'authority', 'description', 'shortDescription', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'youtubePageUrl', 'relevantTo', 'tags', 'currency', 'free', 'price',]
         )
     }
     if (display === BACK_ROUTES.USERS) {
@@ -17,22 +18,22 @@ export const Cols = (cols, ignore, display, role) => {
     }
     else if (display === BACK_ROUTES.BUSINESS) {
         return (
-            ['status', 'name', 'address', 'authority', 'isPremium', 'contactPersonName', 'contactPersonPhoneNumber', 'createdAt', 'description', 'emailAddress', 'facebookPageUrl', 'instagramPageUrl', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'phoneNumber', 'relevantTo', 'shortDescription', 'tags', 'updatedAt', 'websitesUrl', 'youtubePageUrl']
+            ['status', 'impact', 'name', 'address', 'authority', 'isPremium', 'contactPersonName', 'contactPersonPhoneNumber', 'createdAt', 'description', 'emailAddress', 'facebookPageUrl', 'instagramPageUrl', 'isAccessable', 'isKosher', 'locationName', 'open24Hours', 'openOnWeekend', 'openingHours', 'phoneNumber', 'relevantTo', 'shortDescription', 'tags', 'updatedAt', 'websitesUrl', 'youtubePageUrl']
         )
     }
     else if (display === BACK_ROUTES.EVENTS) {
         return (
-            ['status', 'name', 'address', 'authority', 'createdAt', 'currency', 'description', 'endDate', 'free', 'locationName', 'online', 'onlineMeetingURL', 'openHour', 'price', 'registrationLink', 'relevantTo', 'reservationCenterEmail', 'reservationCenterPhone', 'shortDescription', 'startDate', 'tags', 'updatedAt', 'websitesUrl', 'shortDescription', 'tags', 'updatedAt', 'youtubePageUrl']
+            ['status', 'impact', 'name', 'address', 'authority', 'createdAt', 'currency', 'description', 'endDate', 'free', 'locationName', 'online', 'onlineMeetingURL', 'openHour', 'price', 'registrationLink', 'relevantTo', 'reservationCenterEmail', 'reservationCenterPhone', 'shortDescription', 'startDate', 'tags', 'updatedAt', 'websitesUrl', 'shortDescription', 'tags', 'updatedAt', 'youtubePageUrl']
         )
     }
     else if (display === BACK_ROUTES.POINTS) {
         return (
-            ['status', 'name', 'activitiesInPlace', 'address', 'arrivalRecommendations', 'authority', 'createdAt', 'description', 'relevantTo', 'inPlace', 'isAccessable', 'locationName', 'phoneNumber', 'prefferedSeason', 'exclusiveFor', 'shady', 'shortDescription', 'tags', 'tip', 'updatedAt', 'websitesUrl']
+            ['status', 'impact', 'name', 'activitiesInPlace', 'address', 'arrivalRecommendations', 'authority', 'createdAt', 'description', 'relevantTo', 'inPlace', 'isAccessable', 'locationName', 'phoneNumber', 'prefferedSeason', 'exclusiveFor', 'shady', 'shortDescription', 'tags', 'tip', 'updatedAt', 'websitesUrl']
         )
     }
     else if (display === BACK_ROUTES.TRACKS) {
         return (
-            ['status', 'name', 'createdAt', 'description', 'isHidden', 'isRecommended', 'shortDescription', 'time', 'updatedAt']
+            ['status', 'impact', 'name', 'createdAt', 'description', 'isHidden', 'isRecommended', 'shortDescription', 'time', 'updatedAt']
         )
     }
     return (
@@ -58,6 +59,13 @@ export const Keys = (cols, idOptions, display, onUpdate, options) => cols.map(ke
                     valueFormatter: statusValueFormatter
                 }
             }
+        case 'impact':
+            return {
+                headerName: term(key),
+                field: key,
+                pinned: 'right',
+                cellRenderer: ImpactValue,
+            }
         case 'openingHours':
             return {
                 headerName: term(key),
@@ -78,7 +86,11 @@ export const Keys = (cols, idOptions, display, onUpdate, options) => cols.map(ke
         case 'relevantTo':
             return {
                 headerName: term(key),
-                valueFormatter: (params) => params?.data?.relevantTo?.map(x => term(x.toLowerCase())),
+                valueFormatter: (params) => {
+                    return (
+                        params?.data?.relevantTo?.type === undefined ? params?.data?.relevantTo?.map(x => term(x.toLowerCase())) : ""
+                    )
+                },
                 editable: false,
                 sortable: false,
                 filterable: false,

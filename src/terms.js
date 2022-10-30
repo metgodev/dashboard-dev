@@ -92,6 +92,11 @@ const active_lexicon = {
         he: 'משימות',
         ar: 'مهام',
     },
+    sign_in: {
+        en: 'Sign in',
+        he: 'התחבר',
+        ar: 'الاتصال',
+    },
     profile: {
         en: 'Profile',
         he: 'פרופיל',
@@ -1918,6 +1923,11 @@ const active_lexicon = {
         he: 'בקרוב',
         ar: 'هكذا'
     },
+    too_many_requests: {
+        en: 'Too many requests, please try again in a few minutes',
+        he: 'יותר מידי בקשות, אנא נסה שוב עוד כמה דקןות',
+        ar: 'طلبات كثيرة جدًا ، يرجى المحاولة مرة أخرى في غضون بضع دقائق'
+    },
     businesses_requesting_premium: {
         en: 'Businesses to review for premium status',
         he: 'עסקים שממתינים לאישור פרימיום',
@@ -1993,6 +2003,11 @@ const active_lexicon = {
         he: 'מלתחות',
         ar: 'حجرة إيداع'
     },
+    enters: {
+        en: 'Enters',
+        he: 'כניסות',
+        ar: 'المداخل'
+    },
     beach_shower: {
         en: 'Beach shower',
         he: 'מקלחות חוף',
@@ -2052,6 +2067,21 @@ const active_lexicon = {
         en: 'Link',
         he: 'קישור',
         ar: 'رابط'
+    },
+    share: {
+        en: 'Share',
+        he: 'שיתוף',
+        ar: 'مشاركة'
+    },
+    get_otp: {
+        en: 'Get code',
+        he: 'שלח קוד לנייד',
+        ar: 'إرسال رمز إلى الهاتف المحمول'
+    },
+    social_media: {
+        en: 'Social Media',
+        he: 'מדיה חברתית',
+        ar: 'وسائل التواصل الاجتماعي'
     },
     // ----helpers----
     location_name_helper: {
@@ -2313,6 +2343,11 @@ const active_lexicon = {
         en: 'Approved',
         he: 'מאושר',
         ar: 'وافق'
+    },
+    first_time_business_owner: {
+        en: `Welcome to MetGo, to register your business please press on the 'add' button`,
+        he: `ברוך הבא למטגו, כדי להתחיל אנא לחץ על 'הוספה'`,
+        ar: 'مرحبًا بك في MetGo ، لتسجيل عملك ، يرجى الضغط على زر "إضافة" "'
     },
     unapproved_businesses: {
         en: 'businesses waiting for approval',

@@ -5,15 +5,11 @@ import TabPanel from '../../TabPanel/TabPanel'
 import { ModalTabs } from './popConfig';
 import { ModifyTab } from './Tabs/ModifyTab';
 import { StatisticsTab } from './Tabs/StatisticsTab';
-import { CircularProgress } from '@material-ui/core'
 import { UploadMediaTab } from '../uploadMediaTab'
 import term from '../../../terms';
 import { mediaTabConfig } from './popConfig'
 import { Tabs } from '@mui/material';
 import AddProductsTab from './Tabs/AddProductsTab';
-import chat from '../../../Assets/placeholders/contact_bussines.png'
-import comments from '../../../Assets/placeholders/comments.png'
-import promotions from '../../../Assets/placeholders/promotions.png'
 import AdminPremiumTab from './Tabs/AdminPremiumTab';
 //styles
 import useStyles from "../styles";

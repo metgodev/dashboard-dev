@@ -7,9 +7,9 @@ import { BUSINESS_OWNER_ROUTES, ROUTES } from '../data/routes';
 const GetHeaderAndSideBar = () => {
 
     let location = useLocation();
-    const { user } = useSelector(state => state.mainRememberReducer)
+    const userDetails = useSelector(state => state.userReducer.userDetails)
 
-    if (location?.pathname === ROUTES.LOGIN || location?.pathname === BUSINESS_OWNER_ROUTES.LOGIN || Object.keys(user).length === 0 || window.localStorage.getItem('metgo-jwt') === null) {
+    if (location?.pathname === ROUTES.LOGIN || location?.pathname === BUSINESS_OWNER_ROUTES.LOGIN || Object.keys(userDetails).length === 0 || window.localStorage.getItem('metgo-jwt') === null) {
         return <></>
     }
     return (

@@ -19,7 +19,7 @@ export const updateFunction = async (params, display) => {
     }
 }
 
-export const useGetParams = (display, user) => {
+export const useGetParams = (display, user, area) => {
     if (user?.roles === undefined) return {}
     let paramsToSend = {}
     if (display === 'users') {
@@ -29,6 +29,12 @@ export const useGetParams = (display, user) => {
         user.roles[1].resourceIds.length > 0 ? paramsToSend._id = {
             $in: user.roles[1].resourceIds
         } : paramsToSend._id = FAKE_ID
+    }
+    if (user.roles.length === 1 && user.roles[0].roleName === ROLES.MEMBER) {
+        paramsToSend._id = FAKE_ID
+    }
+    if (user.roles.length === 2 && user.roles[1].roleName !== ROLES.BUSINESS_OWNER) {
+        paramsToSend.areaId = area.id
     }
     return paramsToSend
 }

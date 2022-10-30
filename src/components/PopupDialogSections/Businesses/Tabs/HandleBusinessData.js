@@ -251,27 +251,15 @@ export const SubmitBusiness = async (area, user, values, permissions, type, hand
   }
   try {
     if (permissions.edit) {
-
-      let newUserDetails;
-
       if (type === "add") {
-        const userBusinessRole = await client.service(BACK_ROUTES.USER_ROLES).find({ query: { userId: user.id, roleId: ROLES.BUSINESS_ROLE_ID } })
-        if (userBusinessRole.data.length === 1) {
-          const roleId = userBusinessRole.data[0]._id
-          const businessRes = await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
-          await client.service(BACK_ROUTES.USER_ROLES).patch(roleId, { resourceIds: [...userBusinessRole.data[0].resourceIds, businessRes._id] })
-          newUserDetails = await client.service(BACK_ROUTES.USERS).find({ query: { _id: user.id } })
-        } else {
-          await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
-          Toast()
-        }
+        await client.service(BACK_ROUTES.BUSINESS).create(valuesToSend)
+        Toast()
         handleClose(false)
       }
       else {
         await client.service(BACK_ROUTES.BUSINESS).patch(values._id, valuesToSend)
         handleClose(false)
       }
-      return (newUserDetails)
     }
     else {
       Toast(term('you_dont_have_permission'))

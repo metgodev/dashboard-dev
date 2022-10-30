@@ -35,10 +35,10 @@ const AGTable = ({ display, action, setExportToExcel, options }) => {
     const area = useSelector(s => s.mainRememberReducer.area)
     const preferences = useSelector(s => s.mainRememberReducer[`${display}TablePreferences`])
 
-    let pageData = useGetService(display, display, requestParams(area), area, false)
-    const authorities = useGetService(BACK_ROUTES.AUTHORITIES, CACHED_DATA_ROUTES.AUTHORITIES, { areaId: area.id }, area, false)
     const userDetails = useSelector(s => s.userReducer.userDetails)
-    const additionalParams = useCallback(useGetParams(display, userDetails), [userDetails])
+    let pageData = useGetService(display, display, requestParams(area, userDetails), area, false)
+    const authorities = useGetService(BACK_ROUTES.AUTHORITIES, CACHED_DATA_ROUTES.AUTHORITIES, { areaId: area.id }, area, false)
+    const additionalParams = useCallback(useGetParams(display, userDetails, area), [userDetails])
 
     const [columnDefs, setColumnDefs] = useState([]);
     const [totalNumber, setTotalNumber] = useState(0)
@@ -117,7 +117,6 @@ const AGTable = ({ display, action, setExportToExcel, options }) => {
         const filterParams = getFilterParams(params.filterModel, authorities)
         const skip = params.startRow === 0 ? {} : { $skip: params.startRow }
         let valuesToSend = Object.assign({}, filterParams, {
-            areaId: area.id.toString(),
             isAnonymous: false,
             $limit: params.endRow - params.startRow,
             $sort: getSortingParams(params),
