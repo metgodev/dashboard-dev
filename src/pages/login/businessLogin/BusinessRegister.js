@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Typography, Button, TextField, InputAdornment, IconButton } from "@material-ui/core";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { CircularProgress, Typography, IconButton } from "@material-ui/core";
 import term from "../../../terms";
 import { useDispatch } from 'react-redux';
 import { set_user } from '../../../REDUX/actions/main.actions';
 import { loginWithPhoneNumber } from '../../../API/firebase';
 import { set_user_details } from '../../../REDUX/actions/user.actions'
-import { registerUserWithEmailAndPassword } from '../../../API/firebase';
 import { Auth } from '../../../API/metro';
 // styles
 import useStyles from "../styles";
-import LISTENER from '../../../data/listener';
-import { BUSINESS_OWNER_ROUTES, ROUTES } from '../../../data/routes';
+import { BUSINESS_OWNER_ROUTES } from '../../../data/routes';
 import Toast from '../../../utils/useToast';
-import ERRORS from '../../../data/errors';
-import ROLES from '../../../data/roles';
-import client from '../../../API/metro'
+import { Box, Modal, Button, TextField } from '@mui/material';
+import getWindowSize from '../../../hooks/useGetWindowSize'
 import BACK_ROUTES from '../../../data/back_routes';
+import client from '../../../API/metro'
 
 function Register() {
 
@@ -26,11 +22,15 @@ function Register() {
 
     let navigate = useNavigate()
     let classes = useStyles();
+    const { width } = getWindowSize()
 
     const [isLoading, setIsLoading] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("");
     const [otp, setOtp] = useState(null)
     const [final, setFinal] = useState(null)
+    const [enterEmailAndNameModal, setEnterEmailAndNameModal] = useState(false)
+    const [email, setEmail] = useState(null)
+    const [otpResult, setOtpResult] = useState(null)
 
     const signInWithOtp = async () => {
         if (otp === null || final === null)
@@ -38,6 +38,7 @@ function Register() {
         try {
             setIsLoading(true)
             const res = await final.confirm(otp)
+            setOtpResult(res)
             if (res) {
                 const authenticate = await Auth(res.user.accessToken)
                 if (authenticate.error) {
@@ -46,7 +47,11 @@ function Register() {
                     let user = { v: authenticate._v, id: authenticate._id }
                     dispatch(set_user(user));
                     dispatch(set_user_details(authenticate))
-                    navigate(BUSINESS_OWNER_ROUTES.BUSINESSES)
+                    if (authenticate.email !== undefined) {
+                        navigate(BUSINESS_OWNER_ROUTES.BUSINESSES)
+                    } else {
+                        setEnterEmailAndNameModal(true)
+                    }
                     setIsLoading(false);
                 }
             }
@@ -77,9 +82,47 @@ function Register() {
         }
     }
 
+    const buttonClicked = async () => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            const authenticate = await Auth(otpResult.user.accessToken)
+            const updateEmail = await client.service(BACK_ROUTES.USERS).patch(authenticate._id, { email: email })
+            if (authenticate.error || updateEmail.error) {
+                setIsLoading(false);
+            } else {
+                let user = { v: authenticate._v, id: authenticate._id }
+                dispatch(set_user(user));
+                dispatch(set_user_details(updateEmail))
+                navigate(BUSINESS_OWNER_ROUTES.BUSINESSES)
+                setIsLoading(false);
+            }
+        } else {
+            Toast(term('auth_invalid_email'))
+        }
+    }
+
     return (
         <div>
             <>
+                <Modal
+                    open={enterEmailAndNameModal}
+                    onClose={() => {
+                        setEnterEmailAndNameModal(false)
+                    }}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ borderRadius: '10px', flexDirection: 'column', paddingTop: '40px', display: 'flex', alignItems: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: width > 1280 ? '40vw' : '95vw', height: width > 600 ? '70%' : '90%', backgroundColor: 'white' }}>
+                            <p style={{ fontWeight: 'bold', fontSize: '25px' }}>{term('details')}</p>
+                            <Box style={{ gap: 10, width: '100%', height: '100%', padding: '5px', display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: 'center', }}>
+                                <TextField onChange={(e) => {
+                                    setEmail(e.target.value)
+                                }} id="outlined-basic" label={term('email')} variant="outlined" value={email} />
+                                <Button variant='contained' onClick={() => buttonClicked()}>{term('save')}</Button>
+                            </Box>
+                        </div>
+                    </Box >
+                </Modal >
                 <div
                     id="recaptcha-container"
                     class="justify-center flex"

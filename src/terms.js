@@ -682,6 +682,11 @@ const active_lexicon = {
         he: "הוספה",
         ar: "يضيف",
     },
+    save: {
+        en: "Save",
+        he: "שמור",
+        ar: "يضيف",
+    },
     please_add_a_short_description: {
         en: "Please add a short description",
         he: "אנא הוסף תיאור קצר",
@@ -1410,7 +1415,7 @@ const active_lexicon = {
     },
     metro_admin: {
         en: 'Metro admin',
-        he: 'מנהל',
+        he: 'מנהל מערכת',
         ar: 'آخر',
     },
     metro_banned: {
@@ -1940,7 +1945,7 @@ const active_lexicon = {
     },
     soon_you_will_be_able_to_add_products: {
         en: 'Soon you will be able to add products',
-        he: 'ותוכל להוסיף מוצרים בהקדם',
+        he: 'לאחר אישור מנהל המערכת תוכלו להוסיף מוצרים',
         ar: 'قريبا سوف تكون قادرا على إضافة المنتجات'
     },
     you_will_get_details_by_mail: {

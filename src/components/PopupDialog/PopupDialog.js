@@ -23,6 +23,11 @@ import { set_edit_tab_data } from '../../REDUX/actions/main.actions';
 import toast from 'react-hot-toast';
 import MODAL_TYPES from '../../data/modal_types';
 import { clearButtonId } from './config';
+import { useEffect, useState } from 'react';
+import BACK_ROUTES from '../../data/back_routes';
+import client from '../../API/metro'
+import term from '../../terms';
+import { useCallback } from 'react';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -34,6 +39,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
     const theme = useTheme();
     const dispatch = useDispatch();
     const entityDetails = useSelector(s => s.mainReducer.editTabData)
+    const [businessName, setBusinessName] = useState(null)
 
     const handleClose = () => {
         toast.dismiss()
@@ -42,6 +48,34 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
         setOpen(false);
         dispatch(set_edit_tab_data({}))
     }
+
+    useEffect(() => {
+        (async () => {
+            if (title === term('products')) {
+                const businessNameForProduct = await client.service(BACK_ROUTES.BUSINESS).find({ query: { _id: entityDetails.businessId } })
+                if (businessNameForProduct.data.length > 0) {
+                    setBusinessName(businessNameForProduct.data[0].name)
+                }
+            }
+        })()
+    }, [entityDetails])
+
+    const getModalTitle = useCallback(() => {
+        let nameToReturn = ''
+
+        if (entityDetails.name && businessName !== null) {
+            nameToReturn = `${entityDetails.name} - ${businessName}`
+        }
+        else if (businessName === null) {
+            nameToReturn = `${entityDetails.name}`
+        }
+        else {
+            nameToReturn = title
+        }
+
+        return nameToReturn
+
+    }, [entityDetails, businessName])
 
     return (
         <Box>
@@ -57,7 +91,7 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
                 maxWidth={maxWidth || "xl"}
             >
                 <DialogTitle className={classes.dialogHeader}>
-                    {entityDetails?.name ? entityDetails.name : title}
+                    {getModalTitle()}
                     <IconButton onClick={handleClose}>
                         < CloseOutlinedIcon />
                     </IconButton>

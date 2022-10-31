@@ -78,7 +78,7 @@ function PremiumTab({ handleClose }) {
                     </Box>
                     <p>{`* ${term('mail_for_receipts')}`}</p>
                     <Box className={classes.termsContainer}>
-                        <p>{term('terms')}</p>
+                        <a target='_blank' href="https://docs.google.com/document/d/1vNk44xX6BgkyY2Ke9BPCBEyAqp-xnXJP/edit">{term('terms')}</a>
                     </Box >
                     <FormGroup>
                         <FormControlLabel
@@ -150,7 +150,6 @@ function PremiumTab({ handleClose }) {
                 <Box className={classes.waitingForPremiumContainer}>
                     <Box className={classes.premiumInnerContainer}>
                         <span>{term('details_received')}</span>
-                        <span>{term('you_will_get_details_by_mail')}</span>
                         <span>{term('soon_you_will_be_able_to_add_products')}</span>
                     </Box>
                 </Box>
