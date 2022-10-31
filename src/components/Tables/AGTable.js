@@ -38,7 +38,7 @@ const AGTable = ({ display, action, setExportToExcel, options }) => {
     const userDetails = useSelector(s => s.userReducer.userDetails)
     let pageData = useGetService(display, display, requestParams(area, userDetails), area, false)
     const authorities = useGetService(BACK_ROUTES.AUTHORITIES, CACHED_DATA_ROUTES.AUTHORITIES, { areaId: area.id }, area, false)
-    const additionalParams = useCallback(useGetParams(display, userDetails, area), [userDetails])
+    const additionalParams = useCallback(useGetParams(display, userDetails, area), [userDetails, area])
 
     const [columnDefs, setColumnDefs] = useState([]);
     const [totalNumber, setTotalNumber] = useState(0)
