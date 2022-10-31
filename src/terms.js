@@ -1923,6 +1923,11 @@ const active_lexicon = {
         he: 'בקרוב',
         ar: 'هكذا'
     },
+    user_menu: {
+        en: 'User menu',
+        he: 'תפריט משתמש',
+        ar: 'قائمة المستخدم'
+    },
     too_many_requests: {
         en: 'Too many requests, please try again in a few minutes',
         he: 'יותר מידי בקשות, אנא נסה שוב עוד כמה דקןות',

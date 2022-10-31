@@ -100,7 +100,7 @@ function AreaMenu() {
                 :
                 Object.keys(userDetails).length > 0 ?
                     <p className={classes.welcomeText}>
-                        {`${term('welcome')} - ${userDetails.firstName ? userDetails.firstName : term('guest')}`}
+                        {`${term('welcome')}`}
                     </p>
                     :
                     <></>

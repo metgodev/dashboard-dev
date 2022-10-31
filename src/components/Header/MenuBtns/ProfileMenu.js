@@ -87,7 +87,7 @@ function ProfileMenu() {
             >
                 <div className={classes.profileMenuUser}>
                     <Typography variant="h4" weight="medium">
-                        {`${user.fn} ${user.ln}`}
+                        {term('user_menu')}
                     </Typography>
                 </div>
                 <MenuItem
