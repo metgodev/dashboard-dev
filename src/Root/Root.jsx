@@ -18,6 +18,7 @@ import UseGetHeaderAndSideBar from './UseGetHeaderAndSideBar'
 //Navigation
 import getInternetStatus from '../utils/checkInternetStatus';
 import NetworkError from '../pages/networkError/NetworkError';
+import Toast from '../utils/useToast';
 
 const Root = () => {
 
@@ -35,7 +36,9 @@ const Root = () => {
                     dispatch(set_user_details(user))
                 }
             } catch (e) {
-
+                if (e.code !== 401) {
+                    Toast()
+                }
             }
         })()
     }, [])

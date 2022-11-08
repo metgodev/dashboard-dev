@@ -207,9 +207,16 @@ export const GetProductFormFields = (productFields, formData, areaSpecificData, 
   return forms
 }
 
+const GetAreaByAuthority = async (authorityId) => {
+  const authority = await client.service(BACK_ROUTES.AUTHORITIES).find({ query: { _id: authorityId } })
+  const area = await client.service(BACK_ROUTES.AREA).find({ query: { _id: authority.data[0].areaId } })
+  return area.data[0]._id
+}
+
 export const SubmitBusiness = async (area, user, values, permissions, type, handleClose) => {
 
   const configurationValues = initialState(area, user)
+  const areaId = await GetAreaByAuthority(values.authorityId)
 
   const valuesToSend = {
     name: values.name,
@@ -233,7 +240,7 @@ export const SubmitBusiness = async (area, user, values, permissions, type, hand
     isKosher: values.isKosher,
     isAccessable: values.isAccessable,
     shortDescription: values.shortDescription,
-    areaId: configurationValues.areaId,
+    areaId: areaId,
     userId: configurationValues.userId,
     status: configurationValues.status,
     whatsAppPhoneNumber: values.whatsAppPhoneNumber,

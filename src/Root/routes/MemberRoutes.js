@@ -10,7 +10,6 @@ import FAQ from '../../pages/FAQ/FAQ'
 import UsersTable from '../../pages/userstable/UsersTable'
 import Profile from '../../pages/profile/Profile'
 import Businesses from '../../pages/businesses/Businesses'
-import BusinessRegister from '../../pages/login/businessLogin/BusinessRegister'
 
 function MemberRoutes({ permissions, user }) {
     return (
