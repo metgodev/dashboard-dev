@@ -1383,6 +1383,11 @@ const active_lexicon = {
         he: 'שלח',
         ar: 'إرسال',
     },
+    new: {
+        en: 'New',
+        he: 'חדש',
+        ar: 'جديد',
+    },
     resend_verification_code: {
         en: 'Resend verification code',
         he: 'שלח קוד אימות מחדש',

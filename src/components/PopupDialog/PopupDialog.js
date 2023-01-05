@@ -61,10 +61,14 @@ export default function PopupDialog({ tabs, title, open, setOpen, type, maxWidth
     }, [entityDetails])
 
     const getModalTitle = useCallback(() => {
+
         let nameToReturn = ''
 
         if (entityDetails.name && businessName !== null) {
             nameToReturn = `${entityDetails.name} - ${businessName}`
+        }
+        else if (businessName === null && Object.keys(entityDetails).length === 0) {
+            nameToReturn = term('new')
         }
         else if (businessName === null) {
             nameToReturn = `${entityDetails.name}`
