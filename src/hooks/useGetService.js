@@ -1,15 +1,16 @@
 import { useMemo, useReducer, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { _get } from '../API/service';
+import ROLES from '../data/roles';
 import { set_app_data } from '../REDUX/actions/data.actions';
-
+import GetRole from './GetRole';
 
 const useGetService = (url, name, query, area, reload) => {
     // global
     const _dispatch = useDispatch();
     let _data = useSelector(s => s.dataReducer.app_data);
     let dataChanged = useSelector(s => s.mainReducer.tableChanged)
-
+    const role = GetRole()
     // Used to prevent state update if the component is unmounted
     let cancelRequest = useRef(false)
 
@@ -50,7 +51,8 @@ const useGetService = (url, name, query, area, reload) => {
                 return
             }
             try {
-                const res = await _get(url, query);
+                const fixedQuery = role === ROLES.BUSINESS_OWNER ? {} : query
+                const res = await _get(url, fixedQuery);
                 if (!res.total) {
                     dispatch({ type: 'error', payload: 'No data found' })
                     return
@@ -72,7 +74,7 @@ const useGetService = (url, name, query, area, reload) => {
             cancelRequest.current = true
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, area, dataChanged])
+    }, [name, area, dataChanged, role])
 
     return state
 }

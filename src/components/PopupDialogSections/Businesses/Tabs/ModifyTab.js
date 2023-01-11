@@ -10,10 +10,7 @@ import { validateFirstFormPart, validateSeconsFormPart, validateThirdFormPart } 
 import { GetFormFields, SubmitBusiness } from './HandleBusinessData'
 import { GetValuesForForm } from "../../CategoryConfig";
 import GetPermissions from "../../../../hooks/GetPermissions";
-import { set_user_details } from "../../../../REDUX/actions/user.actions";
 import { set_table_changed } from "../../../../REDUX/actions/main.actions";
-import Toast from "../../../../utils/useToast";
-import term from "../../../../terms";
 
 export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) => {
     //global
