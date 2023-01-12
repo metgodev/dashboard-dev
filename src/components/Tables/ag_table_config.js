@@ -6,9 +6,13 @@ export const requestParams = (area, userDetails) => {
     if (userDetails.roles.length === 2 && userDetails.roles[1].roleName === ROLES.BUSINESS_OWNER) {
         return { $limit: DATA_LIMIT }
     }
-    return (
-        { areaId: area.id.toString(), $limit: DATA_LIMIT }
-    )
+    if (Object.keys(area).length > 0) {
+        return (
+            { areaId: area.id.toString(), $limit: DATA_LIMIT }
+        )
+    } else {
+        return {}
+    }
 }
 
 export const AG_GRID_LOCALE_HE = {

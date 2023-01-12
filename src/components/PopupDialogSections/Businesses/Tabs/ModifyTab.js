@@ -37,7 +37,7 @@ export const ModifyTab = React.memo(({ type, areaSpecificData, handleClose }) =>
     const handleSetValues = (init) => setValues(init);
 
     const submitValues = async () => {
-        const res = await SubmitBusiness(area, user, values, permissions, type, handleClose)
+        await SubmitBusiness(area, user, values, permissions, type, handleClose)
         dispatch(set_table_changed(type))
         if (userDetails.roles.length === 1) {
             window.location.reload()
