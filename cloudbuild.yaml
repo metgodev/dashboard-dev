@@ -1,10 +1,10 @@
 steps:
   - name: 'node:14'  # Use Node.js 14 image to install npm@9.8.1 globally
     entrypoint: 'npm'
-    args: ['install', '-g', 'npm@9.8.1', '--legacy-peer-deps']
+    args: ['install', '-g', 'npm@9.8.1']
 
   - name: "metgo/add-react-drag-drop-files"
-    args: ["npm", "install", "react-drag-drop-files@X.X.X", "--save", "--legacy-peer-deps"]
+    args: ["npm", "install", "react-drag-drop-files@2.3.10", "--save", "--legacy-peer-deps"]
 
   - name: 'node:14'  # Use Node.js 14 image to install dependencies and run the build command
     entrypoint: 'npm'
