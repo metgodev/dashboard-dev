@@ -1,13 +1,18 @@
 steps:
-  - name: 'node:14'  # Use Node.js 14 image to install dependencies and update npm
+  - name: 'node:14'  # Use Node.js 14 image to install npm@9.8.1 globally
     entrypoint: 'npm'
     args: ['install', '-g', 'npm@9.8.1', '--legacy-peer-deps']
+
   - name: "metgo/add-react-drag-drop-files"
     args: ["npm", "install", "react-drag-drop-files@X.X.X", "--save", "--legacy-peer-deps"]
-  # - name: "metgo/install"
-  #   args: ["npm", "install"]
+
+  - name: 'node:14'  # Use Node.js 14 image to install dependencies and run the build command
+    entrypoint: 'npm'
+    args: ['install', '--legacy-peer-deps']
+
   - name: 'node:14'  # Use Node.js 14 image to run the build command
     entrypoint: 'npm'
     args: ['run', 'build:dev']
+
   - name: "metgo/deploy"
     args: ["firebase", "deploy", "--token", "$_FIREBASE_TOKEN"]
