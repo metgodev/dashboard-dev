@@ -1,9 +1,9 @@
 steps:
-  - name: "metgo/install"
-    args: ["npm", "install"]
-  - name: "metgo/build"
-    args: ["npm", "run", "build:dev"]
   - name: "metgo/add-react-drag-drop-files"
     args: ["npm", "install", "react-drag-drop-files@X.X.X", "--save", "--legacy-peer-deps"]
+  # - name: "metgo/install"
+  #   args: ["npm", "install"]
+  - name: "metgo/build"
+    args: ["npm", "run", "build:dev"]
   - name: "metgo/deploy"
     args: ["firebase", "deploy", "--token", "$_FIREBASE_TOKEN"]
