@@ -60,7 +60,7 @@
     "restart": "rm -rf node_modules && npm install",
     "start:prod": "env.prod-cmd -f react-scripts start",
     "build:prod": "REACT_APP_ENV=production npm run build",
-    "build": "CI=false && BUILD_PATH='./dist' sh -ac '. ./.env.${REACT_APP_ENV}; react-scripts build'",
+    "build": "CI=false && BUILD_PATH='./dist' sh -ac '. ./.env.development; react-scripts build'",
     "build:dev": "REACT_APP_ENV=development npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
