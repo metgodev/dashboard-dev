@@ -1,7 +1,11 @@
 steps:
   - name: "metgo/install"
     args: ["npm", "install"]
+  - name: "metgo/update-npm"
+    args: ["npm", "install", "-g", "npm@latest"]
   - name: "metgo/build"
-    args: ["npm", "run", "build:dev"]
+    args: ["npm", "ci", "--legacy-peer-deps"]
+  - name: "metgo/clear-cache"
+    args: ["npm", "cache", "clean", "--force"]
   - name: "metgo/deploy"
     args: ["firebase", "deploy", "--token", "$_FIREBASE_TOKEN"]
