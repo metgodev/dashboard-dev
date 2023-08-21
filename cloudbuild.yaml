@@ -1,7 +1,7 @@
 steps:
-  - name: 'node:14'  # Use Node.js 14 image to install dependencies
+  - name: 'node:14'  # Use Node.js 14 image to install dependencies and update npm
     entrypoint: 'npm'
-    args: ['install', '--legacy-peer-deps']
+    args: ['install', '-g', 'npm@9.8.1', '--legacy-peer-deps']
   - name: "metgo/add-react-drag-drop-files"
     args: ["npm", "install", "react-drag-drop-files@X.X.X", "--save", "--legacy-peer-deps"]
   # - name: "metgo/install"
