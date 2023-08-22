@@ -1,23 +1,25 @@
 # Use an official Node.js image as the base image
 FROM node:14
 
+RUN mkdir -p /dahboard-dev
+
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /dahboard-dev
 
 # Copy package.json and package-lock.json into the container
-COPY package*.json ./
+COPY package*.json ./dahboard-dev
 
 # Install dependencies
 RUN npm install
 
-# Update the version of react to 18.0.0 or higher
-RUN npm install react@^18.0.0
+# # Update the version of react to 18.0.0 or higher
+# RUN npm install react@^18.0.0
 
-# Install the required Babel plugin
-RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object
+# # Install the required Babel plugin
+# RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
 # Copy the rest of the application code into the container
-COPY . .
+COPY . ./dahboard-dev
 
 # Build the React app
 RUN npm run build
